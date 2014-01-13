@@ -1,0 +1,23 @@
+# depslib dependency file v1.0
+1389546262 source:/home/kristian/dev/primordial/prog/engine/main.cpp
+	"master.h"
+
+1389561858 /home/kristian/dev/primordial/prog/engine/include/master.h
+	<iostream>
+	"graphics.h"
+	"renderer.h"
+
+1389545753 /home/kristian/dev/primordial/prog/engine/include/graphics.h
+	<GL/glew.h>
+	<SFML/System.hpp>
+	<SFML/Graphics.hpp>
+
+1389562279 source:/home/kristian/dev/primordial/prog/engine/src/master.cpp
+	"master.h"
+
+1389560085 /home/kristian/dev/primordial/prog/engine/include/renderer.h
+	"graphics.h"
+
+1389559967 source:/home/kristian/dev/primordial/prog/engine/src/renderer.cpp
+	"renderer.h"
+
