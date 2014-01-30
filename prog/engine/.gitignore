@@ -26,3 +26,7 @@
 
 # Temporary files
 *~
+
+# Codeblocks binary folders
+bin/
+obj/
