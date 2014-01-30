@@ -1,7 +1,7 @@
 #ifndef OBJECT3D_H
 #define OBJECT3D_H
 
-#include <GL/glm.hpp>
+#include <glm/glm.hpp>
 #include "transform.h"
 
 using namespace std;

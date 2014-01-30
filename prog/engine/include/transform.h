@@ -12,7 +12,7 @@
 //#include "3dtypes.h"
 //#include "quaternion.h"
 #include <iostream>
-#include <GL/glm.hpp>
+#include <glm/glm.hpp>
 #include <sstream>
 
 using namespace glm;

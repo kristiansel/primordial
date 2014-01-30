@@ -1,7 +1,7 @@
 #ifndef GEOMETRY_H
 #define GEOMETRY_H
 
-#include "GL/glm.hpp"
+#include "glm/glm.hpp"
 #include <vector>
 #include <iostream>
 
