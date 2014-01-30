@@ -1,5 +1,31 @@
-README
+PROGRAMMING
 
-This project is currently in a very early stage!
+You need Code::Blocks to compile, it should work under both linux and windows,
+only tested on Windows so far
 
-So far, all it includes are some art assets
+Controls...
+Move: WASD
+Rotate camera: Arrow keys
+
+The most important code is lines 19-22 in file "src/mechanics.cpp":
+
+    ///                 Model,      Position,               Direction
+    scene->addProp(     "sphere",   vec3(0.0, 0.0, -2.0),   vec3(0.0, 0.0, -1.0));
+    scene->addProp(     "quad",     vec3(3.0, 0.0, -2.0),   vec3(0.0, 0.0, -1.0));
+    scene->addProp(     "quad",     vec3(-3.0, 0.0, -2.0),   vec3(0.0, 0.0, -1.0));
+	
+Coming up:
+Materials and Textures,
+Mouse-look,
+using the F-keys to load/unload scene props,
+Skeletal animation
+
+ART
+
+The most interesting art asset is "mdl_human_male.blend" which is a "makehuman"-model
+with a few animations.
+
+Coming up:
+Idle combat animation,
+more combat animations!
+
