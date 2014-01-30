@@ -24,7 +24,7 @@ public:
     Prop();
     virtual ~Prop();
 
-    void attachMesh(weak_ptr<Mesh> mesh_ptr_in);
+    void attachBatch(weak_ptr<Mesh> mesh_ptr_in);
 
 //        list<weak_ptr<Mesh>> mesh_ptrs; /// non_owning pointers, unable to delete
     list<RenderBatch> render_batches;

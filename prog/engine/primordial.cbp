@@ -98,6 +98,7 @@
 		<Unit filename="include/resourcemanager.h" />
 		<Unit filename="include/scene.h" />
 		<Unit filename="include/shader.h" />
+		<Unit filename="include/texture.h" />
 		<Unit filename="include/transform.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/camera.cpp" />
@@ -112,6 +113,7 @@
 		<Unit filename="src/resourcemanager.cpp" />
 		<Unit filename="src/scene.cpp" />
 		<Unit filename="src/shader.cpp" />
+		<Unit filename="src/texture.cpp" />
 		<Unit filename="src/transform.cpp" />
 		<Extensions>
 			<code_completion />

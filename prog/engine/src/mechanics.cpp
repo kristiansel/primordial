@@ -16,10 +16,14 @@ void Mechanics::init(Scene &scene_in, float &dt_in)
     dt = &dt_in;
 
     /// Load some resources (should be moved)
-    ///                 Model,      Position,               Direction
-    scene->addProp(     "sphere",   vec3(0.0, 0.0, -2.0),   vec3(0.0, 0.0, -1.0));
-    scene->addProp(     "quad",     vec3(3.0, 0.0, -2.0),   vec3(0.0, 0.0, -1.0));
-    scene->addProp(     "quad",     vec3(-3.0, 0.0, -2.0),   vec3(0.0, 0.0, -1.0));
+    ///                 Model,      Texture,    Position,               Direction
+    scene->addProp(     "sphere",   "checkers", vec3(0.0, 0.0, -2.0),   vec3(0.0, 0.0, -1.0));
+    scene->addProp(     "quad",     "checkers", vec3(3.0, 0.0, -2.0),   vec3(0.0, 0.0, -1.0));
+    scene->addProp(     "quad",     "checkers", vec3(-3.0, 0.0, -2.0),   vec3(0.0, 0.0, -1.0));
+
+    auto prop4 = scene->addProp(     "sphere",   "checkers", vec3(0.0, 0.0, 2.0),   vec3(0.0, 0.0, 1.0));
+    scene->addProp(     "quad",     "checkers", vec3(3.0, 0.0, 2.0),   vec3(0.0, 0.0, 1.0));
+    scene->addProp(     "quad",     "checkers", vec3(-3.0, 0.0, 2.0),   vec3(0.0, 0.0, 1.0));
 }
 
 string Mechanics::debugInfo()

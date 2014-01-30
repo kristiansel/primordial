@@ -24,7 +24,9 @@ public:
     Camera camera;
 
 
-    list<Prop>::iterator addProp(string mesh_key, vec3 pos, vec3 dir); /// Update specification later
+    list<Prop>::iterator addProp(string mesh_key, string tex_key, vec3 pos, vec3 dir); /// Update specification later
+//    shared_ptr<Prop> addProp(string mesh_key, string tex_key, vec3 pos, vec3 dir); /// why doesn't this work?
+
 //        void delProp(list<Prop>::iterator it_in);
 //
 //        list<Actor>::iterator addActor(some actor specification...);

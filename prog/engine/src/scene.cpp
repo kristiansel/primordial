@@ -24,22 +24,27 @@ string Scene::debugInfo()
 }
 
 
-list<Prop>::iterator Scene::addProp(string mesh_key, vec3 pos, vec3 dir)
+list<Prop>::iterator Scene::addProp(string mesh_key, string tex_key, vec3 pos, vec3 dir)
+//shared_ptr<Prop> Scene::addProp(string mesh_key, string tex_key, vec3 pos, vec3 dir)
 {
     /// Add a new prop to the list and capture
     /// reference and iterator
     props.push_back(Prop());
-    Prop &new_prop = props.back();
-    list<Prop>::iterator prop_it = --props.end();
+    list<Prop>::iterator new_prop_it = --props.end();
 
-    new_prop.pos = pos;         /// configure position
-    new_prop.dir = dir;         /// configure direction
+    new_prop_it->pos = pos;         /// configure position
+    new_prop_it->dir = dir;         /// configure direction
 
     /// attach the mesh
-    weak_ptr<Mesh> mesh_ptr = resourcemanager.getMeshptrFromKey(mesh_key);
-    new_prop.attachMesh(mesh_ptr);
+    weak_ptr<Mesh>      mesh_ptr    = resourcemanager.getMeshptrFromKey (mesh_key);
+    weak_ptr<Texture>   tex_ptr     = resourcemanager.getTexptrFromKey  (tex_key);
+    new_prop_it->attachBatch(mesh_ptr);
 
+    return new_prop_it;
 
+//    return shared_ptr<Prop>(&(*new_prop_it)); /// This results in SEGFAULT because
+//    /// if not captured, then this will be the last instance of this pointer, and
+//    /// will automatically delete the new prop????
 }
 
 //void Scene::delProp(list<Prop>::iterator it_in)
