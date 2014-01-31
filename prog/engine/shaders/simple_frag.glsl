@@ -69,8 +69,8 @@ void main (void)
                 //light_cols_att = light_cols[i]*1/(pow(length(mypos - position),1)); // attenuate
 //                light_cols_att = vec4(1.0, 1.0, 1.0, 1.0);
                 light_cols_att = light_cols[i];
-                float light_dist = ((light_posns[0].x - mypos.x) * (light_posns[0].x - mypos.x) + (light_posns[0].y  - mypos.y)* (light_posns[0].y  - mypos.y)+ (light_posns[0].z  - mypos.z)* (light_posns[0].z - mypos.z));
-                light_cols_att = vec4(light_cols[i].r/light_dist, light_cols[i].g/light_dist, light_cols[i].b/light_dist, 1.0);
+                // float light_dist = ((light_posns[0].x - mypos.x) * (light_posns[0].x - mypos.x) + (light_posns[0].y  - mypos.y)* (light_posns[0].y  - mypos.y)+ (light_posns[0].z  - mypos.z)* (light_posns[0].z - mypos.z));
+                // light_cols_att = vec4(light_cols[i].r/light_dist, light_cols[i].g/light_dist, light_cols[i].b/light_dist, 1.0);
                 lightdirection = normalize (position - mypos);
             }
             else
