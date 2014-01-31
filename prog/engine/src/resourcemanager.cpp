@@ -31,13 +31,13 @@ weak_ptr<Mesh> ResourceManager::getMeshptrFromKey(string mesh_key_in)      /// M
 
         mesh_ptr->fromFile(filepath);
 
-        cout << "inserted for " << mesh_key_in << "\n";
+//        cout << "inserted for " << mesh_key_in << "\n";
     }
 
     /// Important: Count another reference to the resource
     mesh_counter->counter++;
 
-    cout << "mesh count for " << mesh_key_in << ": " << mesh_counter->counter << "\n";
+//    cout << "mesh count for " << mesh_key_in << ": " << mesh_counter->counter << "\n";
 
     return weak_ptr<Mesh>(mesh_ptr);
 }
@@ -56,7 +56,7 @@ weak_ptr<Texture> ResourceManager::getTexptrFromKey(string tex_key_in)      /// 
     if (inserted)
     {
         /// construct the tex filepath from the key
-        string filepath = basefolder + "/" + modelfolder + "/" + tex_key_in + ".obj";
+        string filepath = basefolder + "/" + texturefolder + "/" + tex_key_in + ".png";
 
         tex_ptr->fromFile(filepath);
 

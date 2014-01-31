@@ -8,8 +8,8 @@ varying vec2 mytexco ;
 attribute vec3 InNormal ;
 attribute vec4 InVertex ;
 attribute vec2 InTexCoord ;
-attribute vec3 bone_index ;
-attribute vec3 bone_weight ;
+// attribute vec3 bone_index ;
+// attribute vec3 bone_weight ;
 
 uniform mat4 mv_mat;
 

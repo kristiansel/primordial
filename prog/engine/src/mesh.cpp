@@ -32,7 +32,7 @@ Mesh::Mesh() : filepath("")
 
 Mesh::~Mesh()
 {
-    cout << "WARNING: DELETING MESH\n";
+//    cout << "WARNING: DELETING MESH\n";
     /// release RAM pointers
     delete [] vertices;
     delete [] triangles;
@@ -41,7 +41,7 @@ Mesh::~Mesh()
     glBindBuffer(GL_ARRAY_BUFFER, 0); // do you really need this?
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
-    cout << "Deleting Buffers: " << vbo_id << " & " << ibo_id << "\n";
+//    cout << "Deleting Buffers: " << vbo_id << " & " << ibo_id << "\n";
     glDeleteBuffers(1, &vbo_id); // is this really sufficient
     glDeleteBuffers(1, &ibo_id);
 

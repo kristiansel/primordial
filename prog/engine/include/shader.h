@@ -45,7 +45,7 @@ private:
     GLuint emission;        /// set by shader
 
 //        GLuint hasTexture;      /// set by shader
-//        GLuint tex;             /// set by shader. NOT SET YET (SEGFAULT)   AVOIDABLE
+        GLuint tex;             /// set by shader. NOT SET YET (SEGFAULT)   AVOIDABLE
 //        GLuint tex2;            /// set by shader. NOT SET YET (SEGFAULT)   AVOIDABLE
 //        GLuint time;            /// set by shader
 //        GLuint bone_mat;        /// set by shader.

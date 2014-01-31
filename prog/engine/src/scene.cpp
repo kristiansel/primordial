@@ -38,7 +38,7 @@ list<Prop>::iterator Scene::addProp(string mesh_key, string tex_key, vec3 pos, v
     /// attach the mesh
     weak_ptr<Mesh>      mesh_ptr    = resourcemanager.getMeshptrFromKey (mesh_key);
     weak_ptr<Texture>   tex_ptr     = resourcemanager.getTexptrFromKey  (tex_key);
-    new_prop_it->attachBatch(mesh_ptr);
+    new_prop_it->attachBatch(mesh_ptr, tex_ptr);
 
     return new_prop_it;
 

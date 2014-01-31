@@ -12,5 +12,49 @@ Texture::~Texture()
 
 bool Texture::fromFile(string filepath_in)
 {
+    if (!(image.loadFromFile(filepath_in)))
+    {
+        cout << "unable to load texture: " << filepath_in << "\n";
+    }
+    else
+    {
+        //            std::cout << "loaded!\n";
 
+        glGenTextures(1, &tbo_id);
+        //        cout<<"texture id: "<<tbo_id<<"\n";
+
+        //glActiveTexture( GL_TEXTURE0 );
+        glBindTexture(GL_TEXTURE_2D, tbo_id);
+        glTexEnvf( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE );
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+        glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+        glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+        sf::Vector2u tsize = image.getSize();
+        //        std::cout<<"texture size = "<<size.x<<", "<<size.y<<"\n";
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, tsize.x, tsize.y, 0, GL_RGBA, GL_UNSIGNED_BYTE, image.getPixelsPtr() );
+    //    glGenerateMipmap(GL_TEXTURE_2D)
+
+    //    gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA, size.x, size.y,
+    //                      GL_RGBA, GL_UNSIGNED_BYTE, texture.getPixelsPtr());
+
+        glBindTexture(GL_TEXTURE_2D, 0);
+
+//        GLenum errCode;
+//        const GLubyte *errString;
+
+//        if ((errCode = glGetError()) != GL_NO_ERROR) {
+//        errString = gluErrorString(errCode);
+//        fprintf (stderr, "OpenGL Error: %s\n", errString);
+
+        cout << "loading texture file " << filepath_in << "\n";
+        cout << "ID is " << tbo_id << "\n";
+    }
+
+}
+
+GLuint Texture::getTBOid()
+{
+    return tbo_id;
 }

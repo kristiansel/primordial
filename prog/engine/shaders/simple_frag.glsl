@@ -9,6 +9,10 @@ uniform int num_lights ; // are we lighting.
 uniform vec4 light_posns[10];
 uniform vec4 light_cols[10];
 
+
+/// With texture
+uniform sampler2D tex; // the active texture
+
 uniform mat4 nrm_mat;
 uniform mat4 mv_mat;
 
@@ -85,9 +89,15 @@ void main (void)
             SUM = SUM + term;
         }
 
+		vec4 amb = vec4(0.05, 0.05, 0.05, 1.0);
 //            vec4 amb = ambient;
-        vec4 amb = vec4(0.05, 0.05, 0.05, 1.0);
-        gl_FragColor = amb + emission + SUM ;//+ ct; // gl_FragColor = ambient + emmisive + SUM ;
+		/// Without texture
+        // gl_FragColor = amb + emission + SUM ;//+ ct; // gl_FragColor = ambient + emmisive + SUM ;
+		
+		/// With texture
+		vec4 color = amb + emission + SUM ;
+		vec4 texel = texture2D(tex, mytexco.st);
+		gl_FragColor = vec4(texel.rgb * color.rgb, 1);
 
     }
 }

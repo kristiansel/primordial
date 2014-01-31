@@ -36,8 +36,8 @@ void Shader::load(string vertex_shader, string fragment_shader)
     emission = glGetUniformLocation(program_id,"emission") ;
 
 //    hasTexture = glGetUniformLocation(program_id, "hasTexture") ;
-//    tex = glGetUniformLocation(program_id, "tex");
-//    glUniform1i(tex, 0);
+    tex = glGetUniformLocation(program_id, "tex");
+    glUniform1i(tex, 0);
 
 //    time = glGetUniformLocation(program_id, "time");
 
@@ -197,6 +197,7 @@ void Shader::draw(Prop &prop, mat4 mv)
     {
 //        Mesh &mesh = *shared_ptr<Mesh>(*mesh_ptr_it); /// deref the it to ptr, from ptr to mesh
         shared_ptr<Mesh> mesh_ptr = shared_ptr<Mesh>(rb_it->mesh_ptr);
+        shared_ptr<Texture> tex_ptr = shared_ptr<Texture>(rb_it->tex_ptr);
         /// send some clean bone matrices
         //    mat4 clearMatrix = mat4(1.0);
         //    glUniformMatrix4fv(bone_mat, 1, true, &clearMatrix[0][0]); // <-- THIS!
@@ -241,9 +242,9 @@ void Shader::draw(Prop &prop, mat4 mv)
 
         //    if (hasTexture)
         //    {
-        //        glActiveTexture(GL_TEXTURE0);
-        //        glBindTexture(GL_TEXTURE_2D, tbo_id);
-        ////        cout<<"binding texture "<<tbo_id<<" to  channel 0"<<"\n";
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, tex_ptr->getTBOid());
+//                cout<<"binding texture "<<tex_ptr->getTBOid()<<" to  channel 0"<<"\n";
         //    }
 
         /// Bind vertex data
@@ -264,7 +265,7 @@ void Shader::draw(Prop &prop, mat4 mv)
         /// Not sure if this is necessary unless other code is badly written
         glBindBuffer(GL_ARRAY_BUFFER, 0);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-        //    glBindTexture(GL_TEXTURE_2D, 0);
+        glBindTexture(GL_TEXTURE_2D, 0);
     }
 }
 

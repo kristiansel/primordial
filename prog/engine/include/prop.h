@@ -5,6 +5,7 @@
 #include <memory>
 #include "object3d.h"
 #include "mesh.h"
+#include "texture.h"
 
 using namespace std;
 
@@ -13,7 +14,7 @@ using namespace std;
 struct RenderBatch
 {
     weak_ptr<Mesh> mesh_ptr;      /// non_owning, points to resource manager's (owner) unique_ptr
-    // Texture* tex_ptr ///
+    weak_ptr<Texture> tex_ptr; ///
     // BumpMap* bpm_ptr ///
     /// Add as many uniforms, and uniform samplers as needed
 };
@@ -24,7 +25,7 @@ public:
     Prop();
     virtual ~Prop();
 
-    void attachBatch(weak_ptr<Mesh> mesh_ptr_in);
+    void attachBatch(weak_ptr<Mesh> mesh_ptr_in, weak_ptr<Texture> tex_ptr_in);
 
 //        list<weak_ptr<Mesh>> mesh_ptrs; /// non_owning pointers, unable to delete
     list<RenderBatch> render_batches;
