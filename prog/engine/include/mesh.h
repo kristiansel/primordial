@@ -23,7 +23,7 @@ using namespace std;
 /// Object3d, consider making getter/setter pos and dir
 
 
-class Mesh /// To be uninherited from Object3d (Prop is object3d)
+class Mesh : public Object3d /// 3d coordinates local in Prop/Actor coordinate system
 {
 public:
     /// Public subclass

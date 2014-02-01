@@ -12,7 +12,7 @@ class Texture
 {
     public:
         Texture();
-        virtual ~Texture();
+        virtual ~Texture(); /// Need to flesh out this
 
         bool fromFile(string filepath_in);
 

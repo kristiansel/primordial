@@ -2,7 +2,7 @@
 *.slo
 *.lo
 *.o
-*.obj
+# *.obj the .obj extension is used for 3d geometry files
 
 # Compiled Dynamic libraries
 *.so

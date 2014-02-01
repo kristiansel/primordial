@@ -7,7 +7,14 @@ Texture::Texture()
 
 Texture::~Texture()
 {
-    //dtor
+    /// release RAM pointers
+    /// Assume sf::Image releases itself
+
+    /// release video RAM buffers
+    glBindTexture(GL_TEXTURE_2D, 0); /// Really this should not be necessary
+
+//    cout << "Deleting Buffers: " << vbo_id << " & " << ibo_id << "\n";
+    glDeleteTextures(1, &tbo_id);
 }
 
 bool Texture::fromFile(string filepath_in)

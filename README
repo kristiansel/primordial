@@ -8,14 +8,9 @@ Move: WASD
 Rotate camera: Arrow keys
 
 The most important code is lines 19-22 in file "src/mechanics.cpp":
-
-    ///                 Model,      Position,               Direction
-    scene->addProp(     "sphere",   vec3(0.0, 0.0, -2.0),   vec3(0.0, 0.0, -1.0));
-    scene->addProp(     "quad",     vec3(3.0, 0.0, -2.0),   vec3(0.0, 0.0, -1.0));
-    scene->addProp(     "quad",     vec3(-3.0, 0.0, -2.0),   vec3(0.0, 0.0, -1.0));
 	
 Coming up:
-Materials and Textures,
+Materials
 Mouse-look,
 using the F-keys to load/unload scene props,
 Skeletal animation
