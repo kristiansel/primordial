@@ -25,30 +25,32 @@ public:
     virtual ~Master();
 protected:
 private:
-    /// Methods
+    /// Primary Methods
     void init();
     void loadResources();
     void mainLoop();
     void cleanUp();
 
+    /// Secondary Methods
     bool handleInput();
 
     /// Members
-    sf::Window window;      /// Input from the window signals the game mechanics
-    Mechanics mechanics;    /// the game mechanics takes the input and transforms the scene
-    Scene scene;            /// the scene acts as an interface between the game and the renderer
-    Renderer renderer;      /// the renderer draws the current scene using OpenGL
+    sf::Window  window;     /// Input from the window signals the game mechanics
+    Mechanics   mechanics;  /// the game mechanics takes the input and transforms the scene
+    World       world;      /// struct like class - Contains the game state
+    //Culler      culler;      /// process oriented class, scene = culler.stage(&world)
+    Scene       scene;      /// the scene is an interface between the world and the renderer
+    Renderer    renderer;   /// the renderer draws the scene: renderer.draw(&scene)
 
     /// replace by settings
     unsigned int scr_width_px;
     unsigned int scr_height_px;
 
 
-    sf::Clock clock; // helper
-    float dt; // frame time in seconds
+    sf::Clock clock;    // helper
+    float     dt;       // frame time in seconds
 
-    bool has_focus; // helper
-
+    bool has_focus;     // helper
 };
 
 #endif // MASTER_H

@@ -2,7 +2,7 @@
 
 Renderer::Renderer()
 {
-    scene = nullptr;
+//    scene = nullptr;
 }
 
 Renderer::~Renderer()
@@ -10,11 +10,8 @@ Renderer::~Renderer()
     //dtor
 }
 
-void Renderer::init(Scene &scene_in, unsigned int scr_width_in, unsigned int scr_height_in)
+void Renderer::init(unsigned int scr_width_in, unsigned int scr_height_in)
 {
-    /// set the scene (scene contains camera, actors, terrain etc)
-    scene = &scene_in;
-
     cout << "Status: Using OpenGL " << glGetString(GL_VERSION) << "\n";
 
     GLenum err = glewInit();
@@ -53,7 +50,7 @@ void Renderer::init(Scene &scene_in, unsigned int scr_width_in, unsigned int scr
 //    scene->meshes.back().pos = vec3(3.0, 0.0, -2.0);
 }
 
-void Renderer::draw()
+void Renderer::draw(Scene &scene)
 {
     /// switch to main shader
     main_shader.switchTo();
@@ -62,7 +59,7 @@ void Renderer::draw()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     /// prepare for perspective drawing
-    mat4 mv = scene->camera.getModelViewMatrix();
+    mat4 mv = scene.camera.getModelViewMatrix();
 
     /// lights
     main_shader.setLights(mv);
@@ -74,7 +71,7 @@ void Renderer::draw()
 //        main_shader.draw(*it, mv);
 //    }
 
-    for (auto it = scene->props.begin(); it!=scene->props.end(); it++)
+    for (auto it = scene.props.begin(); it!=scene.props.end(); it++)
     {
         main_shader.draw(*it, mv);
     }
@@ -96,9 +93,11 @@ void Renderer::resizeWindow(int w, int h, bool real)
     mat4 prj ; // just like for lookat
 
     glMatrixMode(GL_PROJECTION);
-    scene->camera.aspect = w / (float) h;
+    //scene->perspective.aspect = w / (float) h;
+    perspective.aspect = w / (float) h;
 //        mv = Transform::perspective(fovy,aspect,nearz,farz) ;
-    prj = Transform::perspective(scene->camera.fovy, scene->camera.aspect, scene->camera.nearz, scene->camera.farz) ;
+    //prj = Transform::perspective(scene->perspective.fovy, scene->perspective.aspect, scene->perspective.nearz, scene->perspective.farz) ;
+    prj = Transform::perspective(perspective.fovy, perspective.aspect, perspective.nearz, perspective.farz) ;
     prj = glm::transpose(prj) ; // accounting for row major
     glLoadMatrixf(&prj[0][0]) ;
 
@@ -112,3 +111,35 @@ void Renderer::resizeWindow(int w, int h, bool real)
         */
 }
 
+Renderer::Perspective::Perspective()
+{
+    fovy = 40; // field of vertical view
+    aspect = 1; // Ahhh! Where is this used?
+    nearz = 0.1; // near z clipping plane
+    farz = 200; // far z clipping plane
+}
+
+Renderer::Perspective::~Perspective()
+{
+
+}
+
+Renderer::Perspective::Perspective(float fovy, float aspect, float nearz, float farz)
+{
+    setPerspective(fovy, aspect, nearz, farz);
+}
+
+void Renderer::Perspective::setPerspective(float fovy_in, float aspect_in, float nearz_in, float farz_in)
+{
+    fovy = fovy_in;
+    aspect = aspect_in;
+    nearz = nearz_in;
+    farz = farz_in;
+}
+
+//mat4 Renderer::Perspective::getModelViewMatrix()
+//{
+//    mat4 mv = Transform::lookAt(pos, dir, up) ;
+//    mv = glm::transpose(mv) ;
+//    return mv;
+//}

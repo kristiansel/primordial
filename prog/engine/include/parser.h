@@ -13,7 +13,7 @@ public:
     Parser();
     virtual ~Parser();
 
-    static void parseSimpleObj(string filepath, Vertex*& vertices, Triangle*& triangles, GLuint& vertex_num, GLuint& triangle_num);
+    static bool parseSimpleObj(string filepath, Vertex*& vertices, Triangle*& triangles, GLuint& vertex_num, GLuint& triangle_num);
 
     // static void parseObjFile(string filename, Vertex*& vertices, Triangle*& triangles, GLuint& vertex_num, GLuint& triangle_num, Skeleton* skeleton);
     // static void parseObj(string filename, Vertex*& vertices, Triangle*& triangles, GLuint& vertex_num, GLuint& triangle_num, Skeleton* skeleton); // works

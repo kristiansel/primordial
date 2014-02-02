@@ -1,0 +1,1124 @@
+<?xml version="1.0"?>
+
+<valgrindoutput>
+
+<protocolversion>4</protocolversion>
+<protocoltool>memcheck</protocoltool>
+
+<preamble>
+  <line>Memcheck, a memory error detector</line>
+  <line>Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.</line>
+  <line>Using Valgrind-3.9.0 and LibVEX; rerun with -h for copyright info</line>
+  <line>Command: /home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial </line>
+</preamble>
+
+<pid>4050</pid>
+<ppid>792</ppid>
+<tool>memcheck</tool>
+
+<args>
+  <vargv>
+    <exe>/usr/bin/valgrind</exe>
+    <arg>--leak-check=full</arg>
+    <arg>--track-origins=yes</arg>
+    <arg>--xml=yes</arg>
+    <arg>--xml-file=/home/kristian/dev/git/repo/primordial/prog/engine/ValgrindOut.xml</arg>
+  </vargv>
+  <argv>
+    <exe>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</exe>
+    <arg></arg>
+  </argv>
+</args>
+
+<status>
+  <state>RUNNING</state>
+  <time>00:00:00:00.041 </time>
+</status>
+
+<error>
+  <unique>0x4</unique>
+  <tid>1</tid>
+  <kind>UninitCondition</kind>
+  <what>Conditional jump or move depends on uninitialised value(s)</what>
+  <stack>
+    <frame>
+      <ip>0x8943D29</ip>
+      <obj>/usr/lib/libnvidia-glcore.so.331.20</obj>
+    </frame>
+    <frame>
+      <ip>0x413F51</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>Texture::~Texture()</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine/src</dir>
+      <file>texture.cpp</file>
+      <line>18</line>
+    </frame>
+    <frame>
+      <ip>0x4100CD</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>std::_Sp_counted_ptr&lt;Texture*, (__gnu_cxx::_Lock_policy)2&gt;::_M_dispose()</fn>
+    </frame>
+    <frame>
+      <ip>0x40CBD1</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>std::_Sp_counted_base&lt;(__gnu_cxx::_Lock_policy)2&gt;::_M_release()</fn>
+      <dir>/usr/include/c++/4.8.2/bits</dir>
+      <file>shared_ptr_base.h</file>
+      <line>144</line>
+    </frame>
+    <frame>
+      <ip>0x40C34A</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>std::__shared_count&lt;(__gnu_cxx::_Lock_policy)2&gt;::~__shared_count()</fn>
+      <dir>/usr/include/c++/4.8.2/bits</dir>
+      <file>shared_ptr_base.h</file>
+      <line>546</line>
+    </frame>
+    <frame>
+      <ip>0x40BD49</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>std::__shared_ptr&lt;Texture, (__gnu_cxx::_Lock_policy)2&gt;::~__shared_ptr()</fn>
+      <dir>/usr/include/c++/4.8.2/bits</dir>
+      <file>shared_ptr_base.h</file>
+      <line>781</line>
+    </frame>
+    <frame>
+      <ip>0x40BD63</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>std::shared_ptr&lt;Texture&gt;::~shared_ptr()</fn>
+      <dir>/usr/include/c++/4.8.2/bits</dir>
+      <file>shared_ptr.h</file>
+      <line>93</line>
+    </frame>
+    <frame>
+      <ip>0x40BF5D</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>ResourceManager&lt;Texture&gt;::getResptrFromKey(std::string)</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine/include</dir>
+      <file>resourcemanager.h</file>
+      <line>125</line>
+    </frame>
+    <frame>
+      <ip>0x40B375</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>Scene::addProp(std::string, std::string, glm::detail::tvec3&lt;float&gt;, glm::detail::tvec3&lt;float&gt;)</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine/src</dir>
+      <file>scene.cpp</file>
+      <line>43</line>
+    </frame>
+    <frame>
+      <ip>0x4055D4</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>Mechanics::init(Scene&amp;, float&amp;)</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine/src</dir>
+      <file>mechanics.cpp</file>
+      <line>22</line>
+    </frame>
+    <frame>
+      <ip>0x404AA6</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>Master::init()</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine/src</dir>
+      <file>master.cpp</file>
+      <line>40</line>
+    </frame>
+    <frame>
+      <ip>0x404807</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>Master::Master()</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine/src</dir>
+      <file>master.cpp</file>
+      <line>6</line>
+    </frame>
+  </stack>
+  <auxwhat>Uninitialised value was created by a heap allocation</auxwhat>
+  <stack>
+    <frame>
+      <ip>0x4C27CC2</ip>
+      <obj>/usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so</obj>
+      <fn>operator new(unsigned long)</fn>
+    </frame>
+    <frame>
+      <ip>0x40BE0E</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>ResourceManager&lt;Texture&gt;::getResptrFromKey(std::string)</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine/include</dir>
+      <file>resourcemanager.h</file>
+      <line>99</line>
+    </frame>
+    <frame>
+      <ip>0x40B375</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>Scene::addProp(std::string, std::string, glm::detail::tvec3&lt;float&gt;, glm::detail::tvec3&lt;float&gt;)</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine/src</dir>
+      <file>scene.cpp</file>
+      <line>43</line>
+    </frame>
+    <frame>
+      <ip>0x4055D4</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>Mechanics::init(Scene&amp;, float&amp;)</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine/src</dir>
+      <file>mechanics.cpp</file>
+      <line>22</line>
+    </frame>
+    <frame>
+      <ip>0x404AA6</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>Master::init()</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine/src</dir>
+      <file>master.cpp</file>
+      <line>40</line>
+    </frame>
+    <frame>
+      <ip>0x404807</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>Master::Master()</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine/src</dir>
+      <file>master.cpp</file>
+      <line>6</line>
+    </frame>
+    <frame>
+      <ip>0x403C57</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>main</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine</dir>
+      <file>main.cpp</file>
+      <line>7</line>
+    </frame>
+  </stack>
+</error>
+
+<error>
+  <unique>0x5</unique>
+  <tid>1</tid>
+  <kind>UninitCondition</kind>
+  <what>Conditional jump or move depends on uninitialised value(s)</what>
+  <stack>
+    <frame>
+      <ip>0x88EE9AB</ip>
+      <obj>/usr/lib/libnvidia-glcore.so.331.20</obj>
+    </frame>
+    <frame>
+      <ip>0x413F51</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>Texture::~Texture()</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine/src</dir>
+      <file>texture.cpp</file>
+      <line>18</line>
+    </frame>
+    <frame>
+      <ip>0x4100CD</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>std::_Sp_counted_ptr&lt;Texture*, (__gnu_cxx::_Lock_policy)2&gt;::_M_dispose()</fn>
+    </frame>
+    <frame>
+      <ip>0x40CBD1</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>std::_Sp_counted_base&lt;(__gnu_cxx::_Lock_policy)2&gt;::_M_release()</fn>
+      <dir>/usr/include/c++/4.8.2/bits</dir>
+      <file>shared_ptr_base.h</file>
+      <line>144</line>
+    </frame>
+    <frame>
+      <ip>0x40C34A</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>std::__shared_count&lt;(__gnu_cxx::_Lock_policy)2&gt;::~__shared_count()</fn>
+      <dir>/usr/include/c++/4.8.2/bits</dir>
+      <file>shared_ptr_base.h</file>
+      <line>546</line>
+    </frame>
+    <frame>
+      <ip>0x40BD49</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>std::__shared_ptr&lt;Texture, (__gnu_cxx::_Lock_policy)2&gt;::~__shared_ptr()</fn>
+      <dir>/usr/include/c++/4.8.2/bits</dir>
+      <file>shared_ptr_base.h</file>
+      <line>781</line>
+    </frame>
+    <frame>
+      <ip>0x40BD63</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>std::shared_ptr&lt;Texture&gt;::~shared_ptr()</fn>
+      <dir>/usr/include/c++/4.8.2/bits</dir>
+      <file>shared_ptr.h</file>
+      <line>93</line>
+    </frame>
+    <frame>
+      <ip>0x40BF5D</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>ResourceManager&lt;Texture&gt;::getResptrFromKey(std::string)</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine/include</dir>
+      <file>resourcemanager.h</file>
+      <line>125</line>
+    </frame>
+    <frame>
+      <ip>0x40B375</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>Scene::addProp(std::string, std::string, glm::detail::tvec3&lt;float&gt;, glm::detail::tvec3&lt;float&gt;)</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine/src</dir>
+      <file>scene.cpp</file>
+      <line>43</line>
+    </frame>
+    <frame>
+      <ip>0x4055D4</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>Mechanics::init(Scene&amp;, float&amp;)</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine/src</dir>
+      <file>mechanics.cpp</file>
+      <line>22</line>
+    </frame>
+    <frame>
+      <ip>0x404AA6</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>Master::init()</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine/src</dir>
+      <file>master.cpp</file>
+      <line>40</line>
+    </frame>
+    <frame>
+      <ip>0x404807</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>Master::Master()</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine/src</dir>
+      <file>master.cpp</file>
+      <line>6</line>
+    </frame>
+  </stack>
+  <auxwhat>Uninitialised value was created by a heap allocation</auxwhat>
+  <stack>
+    <frame>
+      <ip>0x4C27CC2</ip>
+      <obj>/usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so</obj>
+      <fn>operator new(unsigned long)</fn>
+    </frame>
+    <frame>
+      <ip>0x40BE0E</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>ResourceManager&lt;Texture&gt;::getResptrFromKey(std::string)</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine/include</dir>
+      <file>resourcemanager.h</file>
+      <line>99</line>
+    </frame>
+    <frame>
+      <ip>0x40B375</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>Scene::addProp(std::string, std::string, glm::detail::tvec3&lt;float&gt;, glm::detail::tvec3&lt;float&gt;)</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine/src</dir>
+      <file>scene.cpp</file>
+      <line>43</line>
+    </frame>
+    <frame>
+      <ip>0x4055D4</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>Mechanics::init(Scene&amp;, float&amp;)</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine/src</dir>
+      <file>mechanics.cpp</file>
+      <line>22</line>
+    </frame>
+    <frame>
+      <ip>0x404AA6</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>Master::init()</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine/src</dir>
+      <file>master.cpp</file>
+      <line>40</line>
+    </frame>
+    <frame>
+      <ip>0x404807</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>Master::Master()</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine/src</dir>
+      <file>master.cpp</file>
+      <line>6</line>
+    </frame>
+    <frame>
+      <ip>0x403C57</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>main</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine</dir>
+      <file>main.cpp</file>
+      <line>7</line>
+    </frame>
+  </stack>
+</error>
+
+<error>
+  <unique>0x6</unique>
+  <tid>1</tid>
+  <kind>UninitCondition</kind>
+  <what>Conditional jump or move depends on uninitialised value(s)</what>
+  <stack>
+    <frame>
+      <ip>0x54EB295</ip>
+      <obj>/usr/lib/nvidia/libGL.so.331.20</obj>
+    </frame>
+    <frame>
+      <ip>0xC6C64C7</ip>
+    </frame>
+    <frame>
+      <ip>0xC6C64C7</ip>
+    </frame>
+  </stack>
+  <auxwhat>Uninitialised value was created by a heap allocation</auxwhat>
+  <stack>
+    <frame>
+      <ip>0x4C27730</ip>
+      <obj>/usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so</obj>
+      <fn>malloc</fn>
+    </frame>
+    <frame>
+      <ip>0x55419E8</ip>
+      <obj>/usr/lib/nvidia/libGL.so.331.20</obj>
+    </frame>
+    <frame>
+      <ip>0x1100</ip>
+    </frame>
+    <frame>
+      <ip>0xD9EE03F</ip>
+    </frame>
+    <frame>
+      <ip>0xBE0B22F</ip>
+    </frame>
+    <frame>
+      <ip>0x54EB440</ip>
+      <obj>/usr/lib/nvidia/libGL.so.331.20</obj>
+    </frame>
+    <frame>
+      <ip>0x1100</ip>
+    </frame>
+    <frame>
+      <ip>0x40517FF</ip>
+    </frame>
+    <frame>
+      <ip>0x1100</ip>
+    </frame>
+    <frame>
+      <ip>0x40517FF</ip>
+    </frame>
+    <frame>
+      <ip>0x27</ip>
+    </frame>
+    <frame>
+      <ip>0x5541DDB</ip>
+      <obj>/usr/lib/nvidia/libGL.so.331.20</obj>
+    </frame>
+  </stack>
+</error>
+
+<error>
+  <unique>0xa</unique>
+  <tid>1</tid>
+  <kind>UninitCondition</kind>
+  <what>Conditional jump or move depends on uninitialised value(s)</what>
+  <stack>
+    <frame>
+      <ip>0x8943DA1</ip>
+      <obj>/usr/lib/libnvidia-glcore.so.331.20</obj>
+    </frame>
+    <frame>
+      <ip>0xEA710B7</ip>
+    </frame>
+    <frame>
+      <ip>0xEA710B7</ip>
+    </frame>
+    <frame>
+      <ip>0xEA710B7</ip>
+    </frame>
+    <frame>
+      <ip>0xEA710B7</ip>
+    </frame>
+    <frame>
+      <ip>0xEA710B7</ip>
+    </frame>
+    <frame>
+      <ip>0xEA710B7</ip>
+    </frame>
+    <frame>
+      <ip>0xEA3F3DF</ip>
+    </frame>
+    <frame>
+      <ip>0xEA3F3DF</ip>
+    </frame>
+  </stack>
+  <auxwhat>Uninitialised value was created by a heap allocation</auxwhat>
+  <stack>
+    <frame>
+      <ip>0x4C27CC2</ip>
+      <obj>/usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so</obj>
+      <fn>operator new(unsigned long)</fn>
+    </frame>
+    <frame>
+      <ip>0x40BE0E</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>ResourceManager&lt;Texture&gt;::getResptrFromKey(std::string)</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine/include</dir>
+      <file>resourcemanager.h</file>
+      <line>99</line>
+    </frame>
+    <frame>
+      <ip>0x40B375</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>Scene::addProp(std::string, std::string, glm::detail::tvec3&lt;float&gt;, glm::detail::tvec3&lt;float&gt;)</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine/src</dir>
+      <file>scene.cpp</file>
+      <line>43</line>
+    </frame>
+    <frame>
+      <ip>0x405B48</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>Mechanics::func(int)</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine/src</dir>
+      <file>mechanics.cpp</file>
+      <line>94</line>
+    </frame>
+    <frame>
+      <ip>0x404DEE</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>Master::handleInput()</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine/src</dir>
+      <file>master.cpp</file>
+      <line>136</line>
+    </frame>
+    <frame>
+      <ip>0x404B1C</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>Master::mainLoop()</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine/src</dir>
+      <file>master.cpp</file>
+      <line>61</line>
+    </frame>
+    <frame>
+      <ip>0x40481F</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>Master::Master()</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine/src</dir>
+      <file>master.cpp</file>
+      <line>12</line>
+    </frame>
+    <frame>
+      <ip>0x403C57</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>main</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine</dir>
+      <file>main.cpp</file>
+      <line>7</line>
+    </frame>
+  </stack>
+</error>
+
+<error>
+  <unique>0x114a</unique>
+  <tid>1</tid>
+  <kind>UninitCondition</kind>
+  <what>Conditional jump or move depends on uninitialised value(s)</what>
+  <stack>
+    <frame>
+      <ip>0x8943E9F</ip>
+      <obj>/usr/lib/libnvidia-glcore.so.331.20</obj>
+    </frame>
+    <frame>
+      <ip>0xEA710B7</ip>
+    </frame>
+    <frame>
+      <ip>0xEA710B7</ip>
+    </frame>
+    <frame>
+      <ip>0xEA710B7</ip>
+    </frame>
+    <frame>
+      <ip>0xEA710B7</ip>
+    </frame>
+    <frame>
+      <ip>0xEA710B7</ip>
+    </frame>
+    <frame>
+      <ip>0xEA710B7</ip>
+    </frame>
+    <frame>
+      <ip>0xEA3F3DF</ip>
+    </frame>
+    <frame>
+      <ip>0xEA3F3DF</ip>
+    </frame>
+    <frame>
+      <ip>0x1128</ip>
+    </frame>
+    <frame>
+      <ip>0x108937396</ip>
+    </frame>
+    <frame>
+      <ip>0x3992685E3992685D</ip>
+    </frame>
+  </stack>
+  <auxwhat>Uninitialised value was created by a heap allocation</auxwhat>
+  <stack>
+    <frame>
+      <ip>0x4C27CC2</ip>
+      <obj>/usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so</obj>
+      <fn>operator new(unsigned long)</fn>
+    </frame>
+    <frame>
+      <ip>0x40BE0E</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>ResourceManager&lt;Texture&gt;::getResptrFromKey(std::string)</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine/include</dir>
+      <file>resourcemanager.h</file>
+      <line>99</line>
+    </frame>
+    <frame>
+      <ip>0x40B375</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>Scene::addProp(std::string, std::string, glm::detail::tvec3&lt;float&gt;, glm::detail::tvec3&lt;float&gt;)</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine/src</dir>
+      <file>scene.cpp</file>
+      <line>43</line>
+    </frame>
+    <frame>
+      <ip>0x405B48</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>Mechanics::func(int)</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine/src</dir>
+      <file>mechanics.cpp</file>
+      <line>94</line>
+    </frame>
+    <frame>
+      <ip>0x404DEE</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>Master::handleInput()</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine/src</dir>
+      <file>master.cpp</file>
+      <line>136</line>
+    </frame>
+    <frame>
+      <ip>0x404B1C</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>Master::mainLoop()</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine/src</dir>
+      <file>master.cpp</file>
+      <line>61</line>
+    </frame>
+    <frame>
+      <ip>0x40481F</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>Master::Master()</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine/src</dir>
+      <file>master.cpp</file>
+      <line>12</line>
+    </frame>
+    <frame>
+      <ip>0x403C57</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>main</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine</dir>
+      <file>main.cpp</file>
+      <line>7</line>
+    </frame>
+  </stack>
+</error>
+
+<error>
+  <unique>0x1152</unique>
+  <tid>1</tid>
+  <kind>UninitCondition</kind>
+  <what>Conditional jump or move depends on uninitialised value(s)</what>
+  <stack>
+    <frame>
+      <ip>0x8943EE4</ip>
+      <obj>/usr/lib/libnvidia-glcore.so.331.20</obj>
+    </frame>
+    <frame>
+      <ip>0xEA710B7</ip>
+    </frame>
+    <frame>
+      <ip>0xEA710B7</ip>
+    </frame>
+    <frame>
+      <ip>0xEA710B7</ip>
+    </frame>
+    <frame>
+      <ip>0xEA710B7</ip>
+    </frame>
+    <frame>
+      <ip>0xEA710B7</ip>
+    </frame>
+    <frame>
+      <ip>0xEA710B7</ip>
+    </frame>
+    <frame>
+      <ip>0xEA3F3DF</ip>
+    </frame>
+    <frame>
+      <ip>0xEA3F3DF</ip>
+    </frame>
+    <frame>
+      <ip>0x1128</ip>
+    </frame>
+    <frame>
+      <ip>0x108937396</ip>
+    </frame>
+    <frame>
+      <ip>0x3992685E3992685D</ip>
+    </frame>
+  </stack>
+  <auxwhat>Uninitialised value was created by a heap allocation</auxwhat>
+  <stack>
+    <frame>
+      <ip>0x4C27CC2</ip>
+      <obj>/usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so</obj>
+      <fn>operator new(unsigned long)</fn>
+    </frame>
+    <frame>
+      <ip>0x40BE0E</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>ResourceManager&lt;Texture&gt;::getResptrFromKey(std::string)</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine/include</dir>
+      <file>resourcemanager.h</file>
+      <line>99</line>
+    </frame>
+    <frame>
+      <ip>0x40B375</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>Scene::addProp(std::string, std::string, glm::detail::tvec3&lt;float&gt;, glm::detail::tvec3&lt;float&gt;)</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine/src</dir>
+      <file>scene.cpp</file>
+      <line>43</line>
+    </frame>
+    <frame>
+      <ip>0x405B48</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>Mechanics::func(int)</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine/src</dir>
+      <file>mechanics.cpp</file>
+      <line>94</line>
+    </frame>
+    <frame>
+      <ip>0x404DEE</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>Master::handleInput()</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine/src</dir>
+      <file>master.cpp</file>
+      <line>136</line>
+    </frame>
+    <frame>
+      <ip>0x404B1C</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>Master::mainLoop()</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine/src</dir>
+      <file>master.cpp</file>
+      <line>61</line>
+    </frame>
+    <frame>
+      <ip>0x40481F</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>Master::Master()</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine/src</dir>
+      <file>master.cpp</file>
+      <line>12</line>
+    </frame>
+    <frame>
+      <ip>0x403C57</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>main</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine</dir>
+      <file>main.cpp</file>
+      <line>7</line>
+    </frame>
+  </stack>
+</error>
+
+<error>
+  <unique>0x1153</unique>
+  <tid>1</tid>
+  <kind>UninitCondition</kind>
+  <what>Conditional jump or move depends on uninitialised value(s)</what>
+  <stack>
+    <frame>
+      <ip>0x88EE9AB</ip>
+      <obj>/usr/lib/libnvidia-glcore.so.331.20</obj>
+    </frame>
+    <frame>
+      <ip>0xFFEFFFF7F</ip>
+    </frame>
+    <frame>
+      <ip>0x4C29812</ip>
+      <obj>/usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so</obj>
+      <fn>calloc</fn>
+    </frame>
+    <frame>
+      <ip>0x11CFC7A57</ip>
+    </frame>
+    <frame>
+      <ip>0xEA00FFF</ip>
+      <obj>/usr/lib/libXfixes.so.3.1.0</obj>
+    </frame>
+    <frame>
+      <ip>0x1102</ip>
+    </frame>
+    <frame>
+      <ip>0x3802166F</ip>
+      <obj>/usr/lib/valgrind/memcheck-amd64-linux</obj>
+    </frame>
+    <frame>
+      <ip>0x100000001</ip>
+    </frame>
+    <frame>
+      <ip>0xC1E0FBF</ip>
+    </frame>
+  </stack>
+  <auxwhat>Uninitialised value was created by a heap allocation</auxwhat>
+  <stack>
+    <frame>
+      <ip>0x4C27CC2</ip>
+      <obj>/usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so</obj>
+      <fn>operator new(unsigned long)</fn>
+    </frame>
+    <frame>
+      <ip>0x40BE0E</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>ResourceManager&lt;Texture&gt;::getResptrFromKey(std::string)</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine/include</dir>
+      <file>resourcemanager.h</file>
+      <line>99</line>
+    </frame>
+    <frame>
+      <ip>0x40B375</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>Scene::addProp(std::string, std::string, glm::detail::tvec3&lt;float&gt;, glm::detail::tvec3&lt;float&gt;)</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine/src</dir>
+      <file>scene.cpp</file>
+      <line>43</line>
+    </frame>
+    <frame>
+      <ip>0x405B48</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>Mechanics::func(int)</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine/src</dir>
+      <file>mechanics.cpp</file>
+      <line>94</line>
+    </frame>
+    <frame>
+      <ip>0x404DEE</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>Master::handleInput()</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine/src</dir>
+      <file>master.cpp</file>
+      <line>136</line>
+    </frame>
+    <frame>
+      <ip>0x404B1C</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>Master::mainLoop()</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine/src</dir>
+      <file>master.cpp</file>
+      <line>61</line>
+    </frame>
+    <frame>
+      <ip>0x40481F</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>Master::Master()</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine/src</dir>
+      <file>master.cpp</file>
+      <line>12</line>
+    </frame>
+    <frame>
+      <ip>0x403C57</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>main</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine</dir>
+      <file>main.cpp</file>
+      <line>7</line>
+    </frame>
+  </stack>
+</error>
+
+<error>
+  <unique>0x1154</unique>
+  <tid>1</tid>
+  <kind>UninitCondition</kind>
+  <what>Conditional jump or move depends on uninitialised value(s)</what>
+  <stack>
+    <frame>
+      <ip>0x88EE9CA</ip>
+      <obj>/usr/lib/libnvidia-glcore.so.331.20</obj>
+    </frame>
+    <frame>
+      <ip>0xFFEFFFF7F</ip>
+    </frame>
+    <frame>
+      <ip>0x4C29812</ip>
+      <obj>/usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so</obj>
+      <fn>calloc</fn>
+    </frame>
+    <frame>
+      <ip>0x11CFC7A57</ip>
+    </frame>
+    <frame>
+      <ip>0xEA00FFF</ip>
+      <obj>/usr/lib/libXfixes.so.3.1.0</obj>
+    </frame>
+    <frame>
+      <ip>0x1102</ip>
+    </frame>
+    <frame>
+      <ip>0x3802166F</ip>
+      <obj>/usr/lib/valgrind/memcheck-amd64-linux</obj>
+    </frame>
+    <frame>
+      <ip>0x100000001</ip>
+    </frame>
+    <frame>
+      <ip>0xC1E0FBF</ip>
+    </frame>
+  </stack>
+  <auxwhat>Uninitialised value was created by a heap allocation</auxwhat>
+  <stack>
+    <frame>
+      <ip>0x4C27CC2</ip>
+      <obj>/usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so</obj>
+      <fn>operator new(unsigned long)</fn>
+    </frame>
+    <frame>
+      <ip>0x40BE0E</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>ResourceManager&lt;Texture&gt;::getResptrFromKey(std::string)</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine/include</dir>
+      <file>resourcemanager.h</file>
+      <line>99</line>
+    </frame>
+    <frame>
+      <ip>0x40B375</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>Scene::addProp(std::string, std::string, glm::detail::tvec3&lt;float&gt;, glm::detail::tvec3&lt;float&gt;)</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine/src</dir>
+      <file>scene.cpp</file>
+      <line>43</line>
+    </frame>
+    <frame>
+      <ip>0x405B48</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>Mechanics::func(int)</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine/src</dir>
+      <file>mechanics.cpp</file>
+      <line>94</line>
+    </frame>
+    <frame>
+      <ip>0x404DEE</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>Master::handleInput()</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine/src</dir>
+      <file>master.cpp</file>
+      <line>136</line>
+    </frame>
+    <frame>
+      <ip>0x404B1C</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>Master::mainLoop()</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine/src</dir>
+      <file>master.cpp</file>
+      <line>61</line>
+    </frame>
+    <frame>
+      <ip>0x40481F</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>Master::Master()</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine/src</dir>
+      <file>master.cpp</file>
+      <line>12</line>
+    </frame>
+    <frame>
+      <ip>0x403C57</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>main</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine</dir>
+      <file>main.cpp</file>
+      <line>7</line>
+    </frame>
+  </stack>
+</error>
+
+<error>
+  <unique>0x1155</unique>
+  <tid>1</tid>
+  <kind>UninitCondition</kind>
+  <what>Conditional jump or move depends on uninitialised value(s)</what>
+  <stack>
+    <frame>
+      <ip>0x88EEA61</ip>
+      <obj>/usr/lib/libnvidia-glcore.so.331.20</obj>
+    </frame>
+    <frame>
+      <ip>0xFFEFFFF7F</ip>
+    </frame>
+    <frame>
+      <ip>0x4C29812</ip>
+      <obj>/usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so</obj>
+      <fn>calloc</fn>
+    </frame>
+    <frame>
+      <ip>0xFFFFFFFF</ip>
+    </frame>
+    <frame>
+      <ip>0xEA00FFF</ip>
+      <obj>/usr/lib/libXfixes.so.3.1.0</obj>
+    </frame>
+    <frame>
+      <ip>0x1102</ip>
+    </frame>
+    <frame>
+      <ip>0x3802166F</ip>
+      <obj>/usr/lib/valgrind/memcheck-amd64-linux</obj>
+    </frame>
+    <frame>
+      <ip>0x3992685E00000001</ip>
+    </frame>
+    <frame>
+      <ip>0x3992685E</ip>
+    </frame>
+  </stack>
+  <auxwhat>Uninitialised value was created by a heap allocation</auxwhat>
+  <stack>
+    <frame>
+      <ip>0x4C27CC2</ip>
+      <obj>/usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so</obj>
+      <fn>operator new(unsigned long)</fn>
+    </frame>
+    <frame>
+      <ip>0x40BE0E</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>ResourceManager&lt;Texture&gt;::getResptrFromKey(std::string)</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine/include</dir>
+      <file>resourcemanager.h</file>
+      <line>99</line>
+    </frame>
+    <frame>
+      <ip>0x40B375</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>Scene::addProp(std::string, std::string, glm::detail::tvec3&lt;float&gt;, glm::detail::tvec3&lt;float&gt;)</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine/src</dir>
+      <file>scene.cpp</file>
+      <line>43</line>
+    </frame>
+    <frame>
+      <ip>0x405B48</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>Mechanics::func(int)</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine/src</dir>
+      <file>mechanics.cpp</file>
+      <line>94</line>
+    </frame>
+    <frame>
+      <ip>0x404DEE</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>Master::handleInput()</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine/src</dir>
+      <file>master.cpp</file>
+      <line>136</line>
+    </frame>
+    <frame>
+      <ip>0x404B1C</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>Master::mainLoop()</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine/src</dir>
+      <file>master.cpp</file>
+      <line>61</line>
+    </frame>
+    <frame>
+      <ip>0x40481F</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>Master::Master()</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine/src</dir>
+      <file>master.cpp</file>
+      <line>12</line>
+    </frame>
+    <frame>
+      <ip>0x403C57</ip>
+      <obj>/home/kristian/dev/git/repo/primordial/prog/engine/bin/Debug_linux/primordial</obj>
+      <fn>main</fn>
+      <dir>/home/kristian/dev/git/repo/primordial/prog/engine</dir>
+      <file>main.cpp</file>
+      <line>7</line>
+    </frame>
+  </stack>
+</error>
+
+
+<status>
+  <state>FINISHED</state>
+  <time>00:00:00:19.961 </time>
+</status>
+
+<error>
+  <unique>0x22e0</unique>
+  <tid>1</tid>
+  <kind>Leak_DefinitelyLost</kind>
+  <xwhat>
+    <text>12,048 bytes in 2 blocks are definitely lost in loss record 62 of 62</text>
+    <leakedbytes>12048</leakedbytes>
+    <leakedblocks>2</leakedblocks>
+  </xwhat>
+  <stack>
+    <frame>
+      <ip>0x4C29860</ip>
+      <obj>/usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so</obj>
+      <fn>calloc</fn>
+    </frame>
+    <frame>
+      <ip>0x55542DE</ip>
+      <obj>/usr/lib/nvidia/libGL.so.331.20</obj>
+    </frame>
+  </stack>
+</error>
+
+<errorcounts>
+  <pair>
+    <count>2</count>
+    <unique>0x1155</unique>
+  </pair>
+  <pair>
+    <count>2</count>
+    <unique>0x1154</unique>
+  </pair>
+  <pair>
+    <count>2</count>
+    <unique>0x1153</unique>
+  </pair>
+  <pair>
+    <count>2</count>
+    <unique>0x1152</unique>
+  </pair>
+  <pair>
+    <count>16</count>
+    <unique>0x114a</unique>
+  </pair>
+  <pair>
+    <count>8832</count>
+    <unique>0xa</unique>
+  </pair>
+  <pair>
+    <count>4</count>
+    <unique>0x4</unique>
+  </pair>
+  <pair>
+    <count>2</count>
+    <unique>0x5</unique>
+  </pair>
+  <pair>
+    <count>1</count>
+    <unique>0x6</unique>
+  </pair>
+</errorcounts>
+
+<suppcounts>
+  <pair>
+    <count>2</count>
+    <name>X on SUSE11 writev uninit padding</name>
+  </pair>
+  <pair>
+    <count>2</count>
+    <name>dl-hack3-cond-1</name>
+  </pair>
+</suppcounts>
+
+</valgrindoutput>
+

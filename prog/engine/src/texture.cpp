@@ -19,6 +19,8 @@ Texture::~Texture()
 
 bool Texture::fromFile(string filepath_in)
 {
+    filepath_in = "assets_raw/textures/"+filepath_in+".png";
+
     if (!(image.loadFromFile(filepath_in)))
     {
         cout << "unable to load texture: " << filepath_in << "\n";
@@ -55,8 +57,8 @@ bool Texture::fromFile(string filepath_in)
 //        errString = gluErrorString(errCode);
 //        fprintf (stderr, "OpenGL Error: %s\n", errString);
 
-        cout << "loading texture file " << filepath_in << "\n";
-        cout << "ID is " << tbo_id << "\n";
+//        cout << "loading texture file " << filepath_in << "\n";
+//        cout << "ID is " << tbo_id << "\n";
     }
 
 }

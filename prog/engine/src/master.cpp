@@ -34,7 +34,7 @@ void Master::init()
     window.create(sf::VideoMode(scr_width_px, scr_height_px), "Primordial", sf::Style::Default, sf::ContextSettings(32, 0, 0, 4, 4));
     window.setVerticalSyncEnabled(true);
 
-    renderer.init(scene, scr_width_px, scr_height_px);
+    renderer.init(scr_width_px, scr_height_px);
 
     /// Initialize the game module
     mechanics.init(scene, dt);
@@ -60,8 +60,14 @@ void Master::mainLoop()
         /// handle user input
         running = handleInput();
 
+        /// Step the simulation
+        mechanics.step(world, dt);
+
+        /// Choose what to render
+        //culler.stage(scene, world) /// stage the scene from the world
+
         /// draw...
-        renderer.draw();
+        renderer.draw(scene);
 
         /// end the current frame (internally swaps the front and back buffers)
         window.display();
@@ -125,6 +131,42 @@ bool Master::handleInput()
             case sf::Keyboard::R:
                 cout << scene.debugInfo();
                 cout << mechanics.debugInfo();
+                break;
+            case sf::Keyboard::F1:
+                mechanics.func(1);
+                break;
+            case sf::Keyboard::F2:
+                mechanics.func(2);
+                break;
+            case sf::Keyboard::F3:
+                // do
+                break;
+            case sf::Keyboard::F4:
+                // do
+                break;
+            case sf::Keyboard::F5:
+                // do
+                break;
+            case sf::Keyboard::F6:
+                // do
+                break;
+            case sf::Keyboard::F7:
+                // do
+                break;
+            case sf::Keyboard::F8:
+                // do
+                break;
+            case sf::Keyboard::F9:
+                // do
+                break;
+            case sf::Keyboard::F10:
+                // do
+                break;
+            case sf::Keyboard::F11:
+                // do
+                break;
+            case sf::Keyboard::F12:
+                // do
                 break;
             default:
                 break;

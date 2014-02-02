@@ -7,19 +7,18 @@ class Camera: public Object3d
 {
 public:
     Camera();
-    Camera(float fovy_in, float aspect_in, float nearz_in, float farz_in);
+//    Camera(float fovy_in, float aspect_in, float nearz_in, float farz_in);
     virtual ~Camera();
 
-    void loadDefault();
-    void setPerspective(float fovy_in, float aspect_in, float nearz_in, float farz_in);
-    void setSpeed(float speed);
+ //   void setPerspective(float fovy_in, float aspect_in, float nearz_in, float farz_in);
+ //   void setSpeed(float speed);
 
     mat4 getModelViewMatrix();
-
-    float fovy;
-    float aspect;
-    float nearz;
-    float farz;
+//
+//    float fovy;
+//    float aspect;
+//    float nearz;
+//    float farz;
 
 protected:
 private:

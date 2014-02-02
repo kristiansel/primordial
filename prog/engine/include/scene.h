@@ -14,28 +14,27 @@ using namespace std;
 class Scene
 {
 public:
+    class Reader;
+    class Writer;
+public:
     Scene();
     virtual ~Scene();
 
     string debugInfo();
 
+    /// Modifying methods
+    list<Prop>::iterator addProp(string mesh_key, string tex_key, vec3 pos, vec3 dir); /// Update specification later
+    void delProp(list<Prop>::iterator prop_it_in);
 
     /// Some way of making this private
     Camera camera;
 
-
-    list<Prop>::iterator addProp(string mesh_key, string tex_key, vec3 pos, vec3 dir); /// Update specification later
-//    shared_ptr<Prop> addProp(string mesh_key, string tex_key, vec3 pos, vec3 dir); /// why doesn't this work?
-
-//        void delProp(list<Prop>::iterator it_in);
-//
-//        list<Actor>::iterator addActor(some actor specification...);
-//        void delActor(list<Actor>::iterator it_in);
+    /// background color
+    vec4 bg_color;
 
 
 
     /// to be removed
-    list<Mesh> meshes;
     list<Prop> props;
 
 protected:
@@ -45,7 +44,10 @@ private:
     // list<Actor> actors;
     // Terrain terrain;
 
-    ResourceManager resourcemanager;
+    //ResourceManager resourcemanager;
+
+    ResourceManager<Mesh>    mesh_manager;
+    ResourceManager<Texture> tex_manager;
 
 };
 

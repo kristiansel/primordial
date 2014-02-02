@@ -1,7 +1,6 @@
 #include "mesh.h"
 
-Mesh::Mesh() : filepath("")
-              ,vertex_num(0), triangle_num(0)
+Mesh::Mesh() : vertex_num(0), triangle_num(0)
               ,vertices(nullptr), triangles(nullptr)
 {
     //ctor
@@ -54,10 +53,12 @@ Mesh::Mesh(string filepath)
 
 void Mesh::fromFile(string filepath)
 {
-    this->filepath = filepath;
+    filepath = "assets_raw/models/"+filepath+".obj";
+//    this->filepath = filepath;
 //    cout << filepath << "\n";
 
-    Parser::parseSimpleObj(filepath, vertices, triangles, vertex_num, triangle_num); /// calls "new" on pointers
+    bool res = Parser::parseSimpleObj(filepath, vertices, triangles, vertex_num, triangle_num); /// calls "new" on pointers
+    if (!res) cout << "unable to load mesh " << filepath << "\n";
 
     load_stage = 1;
 

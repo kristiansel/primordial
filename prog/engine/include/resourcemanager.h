@@ -1,24 +1,21 @@
 #ifndef RESOURCEMANAGER_H
 #define RESOURCEMANAGER_H
 
-#include "mesh.h"
-#include "texture.h"
-
 #include <unordered_map>
 #include <memory>
 #include <string>
 
-
 using namespace std; /// STL
 
-class ResourceManager
+
+template <class ResType> class ResourceManager
 {
 public:
-    template <class Type> struct ResCounter
+    struct ResCounter
     {
         ResCounter() : counter(0) {};
-        ResCounter(shared_ptr<Type> res_ptr_in) : counter(0) { res_ptr = res_ptr_in; };
-        shared_ptr<Type> res_ptr;
+        ResCounter(shared_ptr<ResType> res_ptr_in) : counter(0) { res_ptr = res_ptr_in; };
+        shared_ptr<ResType> res_ptr;
         int counter;
     };
 
@@ -26,17 +23,110 @@ public:
     ResourceManager();
     virtual ~ResourceManager();
 
-    weak_ptr<Mesh>          getMeshptrFromKey(  string mesh_key_in  );
-    weak_ptr<Texture>       getTexptrFromKey(   string tex_key_in   );
+    weak_ptr<ResType> getResptrFromKey(  string res_key_in  );
 
 protected:
 private:
-    const string basefolder;
-    const string modelfolder;
-    const string texturefolder;
-    unordered_map<string, ResCounter<Mesh>>             meshes;
-//    unordered_map<string, shared_ptr<Mesh>>             meshes;
-    unordered_map<string, ResCounter<Texture>>      textures;
+    unordered_map<string, ResCounter> resources;
 };
 
+/// SEE DEFINITIONS FURTHER DOWN
+///                          |
+///                          |
+///                          |
+///                          |
+///                          |
+///                          |
+///                          |
+///                          |
+///                          |
+///                          |
+///                          |
+///                          |
+///                          |
+///                          V
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/// DEFINITIONS
+
+template <class ResType> ResourceManager<ResType>::ResourceManager()
+{
+
+}
+
+template <class ResType> ResourceManager<ResType>::~ResourceManager()
+{
+
+}
+
+template <class ResType> weak_ptr<ResType> ResourceManager<ResType>::getResptrFromKey(string res_key_in)      /// MESH
+{
+
+    shared_ptr<ResType> new_resource(new ResType);
+
+    auto emplace_result = resources.emplace(res_key_in, ResCounter(new_resource));
+    /// Type = pair<unordered_map<string, ResCounter<ResType>>::iterator, bool>
+
+    auto pair_it = emplace_result.first; /// unordered_map<string, ResCounter<ResType>>::iterator
+
+    bool inserted   = emplace_result.second;
+    auto resource_counter = &(pair_it->second);
+    auto resource_ptr   = resource_counter->res_ptr;
+
+    if (inserted)
+    {
+        /// construct the resourc filepath from the key
+        //string filepath = basefolder + "/" + modelfolder + "/" + res_key_in + ".obj";
+
+        resource_ptr->fromFile(res_key_in);
+
+//        cout << "inserted for " << resourc_key_in << "\n";
+    }
+
+    /// Important: Count another reference to the resource
+    resource_counter->counter++;
+
+//    cout << "resourc count for " << resourc_key_in << ": " << resourc_counter->counter << "\n";
+
+    return weak_ptr<ResType>(resource_ptr);
+}
+
+
+
+
 #endif // RESOURCEMANAGER_H
+

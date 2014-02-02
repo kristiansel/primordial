@@ -10,7 +10,7 @@ Parser::~Parser()
     //dtor
 }
 
-void Parser::parseSimpleObj(string filepath, Vertex*& vertices, Triangle*& triangles, GLuint& vertex_num, GLuint& triangle_num)
+bool Parser::parseSimpleObj(string filepath, Vertex*& vertices, Triangle*& triangles, GLuint& vertex_num, GLuint& triangle_num)
 {
     vector<vec3> temp_verts;
     vector<vec3> temp_norms;
@@ -23,7 +23,11 @@ void Parser::parseSimpleObj(string filepath, Vertex*& vertices, Triangle*& trian
     string str, ret = "", cmd;
     ifstream in ;
     in.open(filepath.c_str()) ;
-    if (in.is_open())
+    if (!in.is_open())
+    {
+        return false;
+    }
+    else
     {
         getline (in, str) ;
         while (in)
@@ -143,6 +147,7 @@ void Parser::parseSimpleObj(string filepath, Vertex*& vertices, Triangle*& trian
                 vertices[vert_ind].bone_weights[0] = 1.0;
             }
         }
+        return true;
     }
 }
 //

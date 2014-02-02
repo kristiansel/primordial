@@ -16,11 +16,26 @@ using namespace std;
 class Renderer
 {
 public:
+    struct Perspective
+    {
+        Perspective();
+        ~Perspective();
+        Perspective(float fovy, float aspect, float nearz, float farz);
+
+        void setPerspective(float fovy_in, float aspect_in, float nearz_in, float farz_in);
+        mat4 getModelViewMatrix();
+
+        float fovy;
+        float aspect;
+        float nearz;
+        float farz;
+    };
+public:
     Renderer();
     virtual ~Renderer();
 
-    void init(Scene &scene_in, unsigned int scr_width_in, unsigned int scr_height_in); // depends on an OpenGL context, therefore public
-    void draw();
+    void init(unsigned int scr_width_in, unsigned int scr_height_in); // depends on an OpenGL context, therefore public
+    void draw(Scene &scene);
     void resizeWindow(int w, int h, bool real = true);
 
 protected:
@@ -28,7 +43,8 @@ private:
     Shader main_shader;
 
     /// Scene items, to be re-arranged later
-    Scene *scene;
+    //Scene *scene;
+    Perspective perspective;
 
 
 };

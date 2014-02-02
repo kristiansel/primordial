@@ -56,7 +56,7 @@ public:
 
 protected:
 private:
-    string filepath;
+   // string filepath;
 
     unsigned int vertex_num;
     unsigned int triangle_num;

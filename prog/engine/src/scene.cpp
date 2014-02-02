@@ -1,6 +1,6 @@
 #include "scene.h"
 
-Scene::Scene()
+Scene::Scene() : bg_color(vec4(0.0, 0.0, 0.0, 1.0))
 {
     //ctor
 }
@@ -36,8 +36,12 @@ list<Prop>::iterator Scene::addProp(string mesh_key, string tex_key, vec3 pos, v
     new_prop_it->dir = dir;         /// configure direction
 
     /// attach the mesh
-    weak_ptr<Mesh>      mesh_ptr    = resourcemanager.getMeshptrFromKey (mesh_key);
-    weak_ptr<Texture>   tex_ptr     = resourcemanager.getTexptrFromKey  (tex_key);
+    //weak_ptr<Mesh>      mesh_ptr    = resourcemanager.getMeshptrFromKey (mesh_key);
+    //weak_ptr<Texture>   tex_ptr     = resourcemanager.getTexptrFromKey  (tex_key);
+
+    weak_ptr<Mesh>      mesh_ptr    = mesh_manager.getResptrFromKey (mesh_key);
+    weak_ptr<Texture>   tex_ptr     = tex_manager.getResptrFromKey  (tex_key);
+
     new_prop_it->attachBatch(mesh_ptr, tex_ptr);
 
     return new_prop_it;
@@ -47,10 +51,10 @@ list<Prop>::iterator Scene::addProp(string mesh_key, string tex_key, vec3 pos, v
 //    /// will automatically delete the new prop????
 }
 
-//void Scene::delProp(list<Prop>::iterator it_in)
-//{
-//
-//}
+void Scene::delProp(list<Prop>::iterator prop_it_in)
+{
+    if (!props.empty()) props.erase(prop_it_in);
+}
 
 
 
