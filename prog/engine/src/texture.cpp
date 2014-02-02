@@ -22,6 +22,7 @@ bool Texture::fromFile(string filepath_in)
     if (!(image.loadFromFile(filepath_in)))
     {
         cout << "unable to load texture: " << filepath_in << "\n";
+        return false;
     }
     else
     {
@@ -57,6 +58,9 @@ bool Texture::fromFile(string filepath_in)
 
         cout << "loading texture file " << filepath_in << "\n";
         cout << "ID is " << tbo_id << "\n";
+
+        //assuming loading went well if we get here
+        return true;
     }
 
 }
