@@ -19,7 +19,7 @@ void Mechanics::init(Scene &scene_in, float &dt_in)
     ///                 Model,      Texture,    Position,               Direction
     scene->addProp(     "mdl_uv_sphere",   "grass_equal", vec3(0.0, 0.0, -2.0),   vec3(0.0, 0.0, -1.0));
     scene->addProp(     "quad",     "checkers", vec3(3.0, 0.0, -2.0),   vec3(0.0, 0.0, -1.0));
-    scene->addProp(     "asdasdas",     "checkers", vec3(-3.0, 0.0, -2.0),   vec3(0.0, 0.0, -1.0));
+    scene->addProp(     "quad",     "asdasdasd", vec3(-3.0, 0.0, -2.0),   vec3(0.0, 0.0, -1.0));
 
     //auto prop4 = scene->addProp(     "mdl_uv_sphere",   "checkers", vec3(0.0, 0.0, 2.0),   vec3(0.0, 0.0, 1.0));
     //scene->addProp(     "quad",     "checkers", vec3(3.0, 0.0, 2.0),   vec3(0.0, 0.0, 1.0));

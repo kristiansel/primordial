@@ -5,6 +5,7 @@
 #include <memory.h>
 
 #include "obstacle.h"
+#include "resourcemanager.h"
 
 using namespace std;
 
@@ -24,7 +25,8 @@ class World
 
     protected:
     private:
-
+        ResourceManager<Mesh>    mesh_manager;
+        ResourceManager<Texture> tex_manager;
 
 };
 
