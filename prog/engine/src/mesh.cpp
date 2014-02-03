@@ -31,8 +31,8 @@ Mesh::~Mesh()
 {
 //    cout << "WARNING: DELETING MESH\n";
     /// release RAM pointers
-//    delete [] vertices;
-//    delete [] triangles;
+    delete [] vertices;
+    delete [] triangles;
 
     /// release video RAM buffers
     glBindBuffer(GL_ARRAY_BUFFER, 0); // do you really need this?
