@@ -114,7 +114,7 @@ bool Parser::parseSimpleObj(string filepath, Vertex*& vertices, Triangle*& trian
         vertices = new Vertex [vertex_num]; // this function does NOT own the pointers, but fills them
         triangles = new Triangle [triangle_num]; // this function does NOT own the pointers, but fills them
 
-        for (int i = 0; i<triangle_num; i++)
+        for (unsigned int i = 0; i<triangle_num; i++)
         {
             for (int k = 0; k<3; k++)
             {
@@ -139,7 +139,7 @@ bool Parser::parseSimpleObj(string filepath, Vertex*& vertices, Triangle*& trian
 
                 vertices[vert_ind].normal = temp_norms[norm_ind];
 
-                for (int yy = 0; yy<MAX_BONE_INFLUENCES; yy++ )
+                for (unsigned int yy = 0; yy<MAX_BONE_INFLUENCES; yy++ )
                 {
                     vertices[vert_ind].bone_indices[yy] = 0;
                     vertices[vert_ind].bone_weights[yy] = 0;
