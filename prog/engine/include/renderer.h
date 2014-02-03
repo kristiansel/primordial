@@ -7,12 +7,6 @@
 #include "shader.h"
 #include "scene.h"
 
-///// to be re-evaluated
-////#include "mesh.h"
-////#include "camera.h"
-
-using namespace std;
-
 class Renderer
 {
 public:
@@ -20,7 +14,7 @@ public:
     {
         Perspective();
         ~Perspective();
-        Perspective(float fovy, float aspect, float nearz, float farz);
+        explicit Perspective(float fovy, float aspect, float nearz, float farz);
 
         void setPerspective(float fovy_in, float aspect_in, float nearz_in, float farz_in);
         mat4 getModelViewMatrix();

@@ -11,13 +11,15 @@
 
 #include "prop.h"
 
-using namespace std;
+using std::shared_ptr;
+using std::string;
+using std::cerr;
 
 class Shader
 {
 public:
     Shader();
-    Shader(string vertex_shader, string fragment_shader);
+    explicit Shader(string vertex_shader, string fragment_shader);
     virtual ~Shader();
 
     void load(string vertex_shader, string fragment_shader);
@@ -25,6 +27,7 @@ public:
     void setLights(mat4 mv); /// tobe refactored
 //        void draw(Mesh &mesh, mat4 mv); /// Soon to be deleted/refactored
     void draw(Prop &prop, mat4 mv);
+    void draw(shared_ptr<Prop> prop, mat4 mv);
     /// void draw(Actor &actor, mat4 mv);
     /// void draw(Terrain &terrain, mat4 mv);
 

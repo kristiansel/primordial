@@ -5,9 +5,6 @@
 #include <vector>
 #include <iostream>
 
-using namespace std;
-using namespace glm;
-
 const unsigned int MAX_BONE_INFLUENCES = 3;
 
 struct Vertex // 60 bytes
@@ -15,8 +12,8 @@ struct Vertex // 60 bytes
 //    Vertex();
 //    static Vertex lerp(Vertex v1, Vertex v2);
 //    static Vertex lerp(vector<Vertex> &verts_in);
-    vec4 position; //X,Y,Z coordinates -----16bytes
-    vec3 normal; //Vertex normals; -----12bytes
+    glm::vec4 position; //X,Y,Z coordinates -----16bytes
+    glm::vec3 normal; //Vertex normals; -----12bytes
 //    vec2 tex_coords; //Texture coordinates u, v -----8 bytes
     float tex_coords[2];
     int bone_indices[MAX_BONE_INFLUENCES]; // 3*4 = 12 bytes

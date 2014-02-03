@@ -7,14 +7,12 @@
 #include "mesh.h"
 #include "texture.h"
 
-using namespace std;
-
 /// START BY IMPLEMENTING RENDERBATCHES FOR JUST MESH
 
 struct RenderBatch
 {
-    weak_ptr<Mesh> mesh_ptr;      /// non_owning, points to resource manager's (owner) unique_ptr
-    weak_ptr<Texture> tex_ptr; ///
+    std::weak_ptr<Mesh> mesh_ptr;      /// non_owning, points to resource manager's (owner) unique_ptr
+    std::weak_ptr<Texture> tex_ptr; ///
     // BumpMap* bpm_ptr ///
     /// Add as many uniforms, and uniform samplers as needed
 };
@@ -25,10 +23,10 @@ public:
     Prop();
     virtual ~Prop();
 
-    void attachBatch(weak_ptr<Mesh> mesh_ptr_in, weak_ptr<Texture> tex_ptr_in);
+    void attachBatch(std::weak_ptr<Mesh> mesh_ptr_in, std::weak_ptr<Texture> tex_ptr_in);
 
 //        list<weak_ptr<Mesh>> mesh_ptrs; /// non_owning pointers, unable to delete
-    list<RenderBatch> render_batches;
+    std::list<RenderBatch> render_batches;
 
 protected:
 private:

@@ -5,17 +5,14 @@
 #include <memory>
 #include <string>
 
-using namespace std; /// STL
-
-
 template <class ResType> class ResourceManager
 {
 public:
     struct ResCounter
     {
         ResCounter() : counter(0) {};
-        ResCounter(shared_ptr<ResType> res_ptr_in) : counter(0) { res_ptr = res_ptr_in; };
-        shared_ptr<ResType> res_ptr;
+        explicit ResCounter(std::shared_ptr<ResType> res_ptr_in) : counter(0) { res_ptr = res_ptr_in; };
+        std::shared_ptr<ResType> res_ptr;
         int counter;
     };
 
@@ -23,11 +20,11 @@ public:
     ResourceManager();
     virtual ~ResourceManager();
 
-    weak_ptr<ResType> getResptrFromKey(  string res_key_in  );
+    std::weak_ptr<ResType> getResptrFromKey(  std::string res_key_in  );
 
 protected:
 private:
-    unordered_map<string, ResCounter> resources;
+    std::unordered_map<std::string, ResCounter> resources;
 };
 
 /// SEE DEFINITIONS FURTHER DOWN
@@ -93,10 +90,10 @@ template <class ResType> ResourceManager<ResType>::~ResourceManager()
 
 }
 
-template <class ResType> weak_ptr<ResType> ResourceManager<ResType>::getResptrFromKey(string res_key_in)      /// MESH
+template <class ResType> std::weak_ptr<ResType> ResourceManager<ResType>::getResptrFromKey(std::string res_key_in)      /// MESH
 {
 
-    shared_ptr<ResType> new_resource(new ResType);
+    std::shared_ptr<ResType> new_resource(new ResType);
 
     auto emplace_result = resources.emplace(res_key_in, ResCounter(new_resource));
     /// Type = pair<unordered_map<string, ResCounter<ResType>>::iterator, bool>
@@ -122,7 +119,7 @@ template <class ResType> weak_ptr<ResType> ResourceManager<ResType>::getResptrFr
 
 //    cout << "resourc count for " << resourc_key_in << ": " << resourc_counter->counter << "\n";
 
-    return weak_ptr<ResType>(resource_ptr);
+    return std::weak_ptr<ResType>(resource_ptr);
 }
 
 

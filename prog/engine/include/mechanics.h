@@ -2,7 +2,6 @@
 #define MECHANICS_H
 
 #include <sstream>
-#include "scene.h"
 #include "world.h"
 
 class Mechanics
@@ -11,7 +10,7 @@ public:
     Mechanics();
     virtual ~Mechanics();
 
-    void init(Scene &scene_in, float &dt_in); /// remove the dt after a while
+    void init(World &world_in, float &dt_in); /// remove the dt after a while
     void step(World &world_in, float dt_in);
 
     string debugInfo();
@@ -31,14 +30,14 @@ public:
     void func(int num_in);
 protected:
 private:
-    Scene *scene;
+    World *world;
     float* dt; /// refactor away
 
     const float speed;          /// 1.0/s
     const float camTurnSpeed;   /// deg/s
 
     /// Temporary
-    list<Prop>::iterator prop_it;
+    list<shared_ptr<Obstacle>>::iterator obstacle_ptr_it;
 };
 
 #endif // MECHANICS_H

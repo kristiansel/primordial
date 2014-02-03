@@ -15,7 +15,10 @@
 #include <glm/glm.hpp>
 #include <sstream>
 
-using namespace glm;
+using glm::mat3;
+using glm::mat4;
+using glm::vec3;
+using glm::vec4;
 
 // glm provides vector, matrix classes like glsl
 // Typedefs to make code more readable

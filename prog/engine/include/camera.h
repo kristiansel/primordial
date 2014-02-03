@@ -3,27 +3,16 @@
 
 #include "object3d.h"
 
+/// Beware! The camera perspective properties are handled by the Renderer class
+/// This "Camera" is meant only as a world component
+
 class Camera: public Object3d
 {
 public:
     Camera();
-//    Camera(float fovy_in, float aspect_in, float nearz_in, float farz_in);
     virtual ~Camera();
 
- //   void setPerspective(float fovy_in, float aspect_in, float nearz_in, float farz_in);
- //   void setSpeed(float speed);
-
     mat4 getModelViewMatrix();
-//
-//    float fovy;
-//    float aspect;
-//    float nearz;
-//    float farz;
-
-protected:
-private:
-    // perspective properties
-
 };
 
 #endif // CAMERA_H

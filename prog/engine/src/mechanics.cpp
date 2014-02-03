@@ -10,16 +10,16 @@ Mechanics::~Mechanics()
     //dtor
 }
 
-void Mechanics::init(Scene &scene_in, float &dt_in)
+void Mechanics::init(World &world_in, float &dt_in)
 {
-    scene = &scene_in;
+    world = &world_in;
     dt = &dt_in;
 
     /// Load some resources (should be moved)
     ///                 Model,      Texture,    Position,               Direction
-    scene->addProp(     "mdl_uv_sphere",   "grass_equal", vec3(0.0, 0.0, -2.0),   vec3(0.0, 0.0, -1.0));
-    scene->addProp(     "quad",     "checkers", vec3(3.0, 0.0, -2.0),   vec3(0.0, 0.0, -1.0));
-    scene->addProp(     "quad",     "asdasdasd", vec3(-3.0, 0.0, -2.0),   vec3(0.0, 0.0, -1.0));
+    world->addObstacle(     "sphere",   "grass_equal", vec3(0.0, 0.0, -2.0),   vec3(0.0, 0.0, -1.0));
+    world->addObstacle(     "quad",     "checkers", vec3(3.0, 0.0, -2.0),   vec3(0.0, 0.0, -1.0));
+    world->addObstacle(     "quad",     "asdasdasd", vec3(-3.0, 0.0, -2.0),   vec3(0.0, 0.0, -1.0));
 
     //auto prop4 = scene->addProp(     "mdl_uv_sphere",   "checkers", vec3(0.0, 0.0, 2.0),   vec3(0.0, 0.0, 1.0));
     //scene->addProp(     "quad",     "checkers", vec3(3.0, 0.0, 2.0),   vec3(0.0, 0.0, 1.0));
@@ -27,7 +27,7 @@ void Mechanics::init(Scene &scene_in, float &dt_in)
 
 
     /// remove later
-    prop_it = scene->props.begin();
+    obstacle_ptr_it = world->obstacles.begin();
 }
 
 void Mechanics::step(World &world_in, float dt_in)
@@ -47,52 +47,61 @@ string Mechanics::debugInfo()
 /// move
 void Mechanics::playerMoveForward()
 {
-    scene->camera.moveForward((*dt)*speed);
+    world->camera->moveForward((*dt)*speed);
 }
 
 void Mechanics::playerMoveBackward()
 {
-    scene->camera.moveForward(-(*dt)*speed);
+    world->camera->moveForward(-(*dt)*speed);
 }
 
 void Mechanics::playerMoveLeft()
 {
-    scene->camera.strafeLeft((*dt)*speed);
+    world->camera->strafeLeft((*dt)*speed);
 }
 
 void Mechanics::playerMoveRight()
 {
-    scene->camera.strafeLeft(-(*dt)*speed);
+    world->camera->strafeLeft(-(*dt)*speed);
 }
 
 
 /// rotate
 void Mechanics::playerRotateUp()
 {
-    scene->camera.panUp((*dt)*camTurnSpeed);
+    world->camera->panUp((*dt)*camTurnSpeed);
 }
 
 void Mechanics::playerRotateDown()
 {
-    scene->camera.panUp(-(*dt)*camTurnSpeed);
+    world->camera->panUp(-(*dt)*camTurnSpeed);
 }
 
 void Mechanics::playerRotateLeft()
 {
-    scene->camera.panLeft((*dt)*camTurnSpeed);
+    world->camera->panLeft((*dt)*camTurnSpeed);
 }
 
 void Mechanics::playerRotateRight()
 {
-    scene->camera.panLeft(-(*dt)*camTurnSpeed);
+    world->camera->panLeft(-(*dt)*camTurnSpeed);
 }
 
 void Mechanics::func(int num_in)
 {
     switch (num_in)
     {
-    case 1:     scene->addProp(     "mdl_uv_sphere",   "grass_equal", scene->camera.pos + 2.f*scene->camera.dir,   scene->camera.dir); break;
-    case 2:     scene->delProp(prop_it); prop_it = scene->props.begin(); break;
+    case 1:
+        if (world->obstacles.empty())
+        {
+            obstacle_ptr_it = world->addObstacle(     "sphere",   "grass_equal", world->camera->pos + 2.f*world->camera->dir,   world->camera->dir);
+        }
+        else
+        {
+            world->addObstacle(     "sphere",   "grass_equal", world->camera->pos + 2.f*world->camera->dir,   world->camera->dir);
+        }
+        break;
+    case 2:     world->delObstacle(obstacle_ptr_it); obstacle_ptr_it = world->obstacles.begin(); break;
     default:    break;
     }
 }

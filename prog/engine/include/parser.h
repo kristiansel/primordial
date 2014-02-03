@@ -7,6 +7,10 @@
 # include <string.h>
 # include <stdlib.h>
 
+using std::string;
+using std::vector;
+using std::ifstream;
+
 class Parser
 {
 public:

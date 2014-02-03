@@ -12,14 +12,14 @@ Parser::~Parser()
 
 bool Parser::parseSimpleObj(string filepath, Vertex*& vertices, Triangle*& triangles, GLuint& vertex_num, GLuint& triangle_num)
 {
-    vector<vec3> temp_verts;
-    vector<vec3> temp_norms;
-    vector<vec2> temp_texcos;
+    vector<glm::vec3> temp_verts;
+    vector<glm::vec3> temp_norms;
+    vector<glm::vec2> temp_texcos;
     vector<Triangle> temp_tris;
     vector<Triangle> temp_texco_inds;
     vector<Triangle> temp_norm_inds;
     // vector<string> temp_b_names;
-    // vector<vec3> temp_b_weights;
+    // vector<glm::vec3> temp_b_weights;
     string str, ret = "", cmd;
     ifstream in ;
     in.open(filepath.c_str()) ;
@@ -39,7 +39,7 @@ bool Parser::parseSimpleObj(string filepath, Vertex*& vertices, Triangle*& trian
 
                 if (cmd=="v")
                 {
-                    vec3 vert;
+                    glm::vec3 vert;
                     vert.x = atof(strtok(NULL, " "));
                     vert.y = atof(strtok(NULL, " "));
                     vert.z = atof(strtok(NULL, " "));
@@ -47,7 +47,7 @@ bool Parser::parseSimpleObj(string filepath, Vertex*& vertices, Triangle*& trian
                 }
                 if (cmd=="vn")
                 {
-                    vec3 norm;
+                    glm::vec3 norm;
                     norm.x = atof(strtok(NULL, " "));
                     norm.y = atof(strtok(NULL, " "));
                     norm.z = atof(strtok(NULL, " "));
@@ -55,7 +55,7 @@ bool Parser::parseSimpleObj(string filepath, Vertex*& vertices, Triangle*& trian
                 }
                 if (cmd=="vt")
                 {
-                    vec2 vt;
+                    glm::vec2 vt;
                     vt[0] = atof(strtok(NULL, " "));
                     vt[1] = 1-atof(strtok(NULL, " "));
                     temp_texcos.push_back(vt);
@@ -91,7 +91,7 @@ bool Parser::parseSimpleObj(string filepath, Vertex*& vertices, Triangle*& trian
 //                    char* name = strtok(NULL, " :()");
 //                    string bone_names = "";
 //                    int i = 0;
-//                    vec3 w = vec3(0, 0, 0);
+//                    glm::vec3 w = glm::vec3(0, 0, 0);
 //                    while (name != NULL && i<3)
 //                    {
 //                        string name_str = name;
@@ -124,7 +124,7 @@ bool Parser::parseSimpleObj(string filepath, Vertex*& vertices, Triangle*& trian
 //
                 triangles[i].indices[k] = vert_ind;
 
-                vertices[vert_ind].position = vec4(temp_verts[vert_ind].x, temp_verts[vert_ind].y, temp_verts[vert_ind].z, 1.0);
+                vertices[vert_ind].position = glm::vec4(temp_verts[vert_ind].x, temp_verts[vert_ind].y, temp_verts[vert_ind].z, 1.0);
 
                 if (temp_texcos.size()>0)
                 {
@@ -154,14 +154,14 @@ bool Parser::parseSimpleObj(string filepath, Vertex*& vertices, Triangle*& trian
 //// Called from mesh.cpp
 //void Parser::parseObjFile(string filename, Vertex*& vertices, Triangle*& triangles, GLuint& vertex_num, GLuint& triangle_num, Skeleton* skeleton)
 //{
-//    vector<vec3> temp_verts;
-//    vector<vec3> temp_norms;
-//    vector<vec2> temp_texcos;
+//    vector<glm::vec3> temp_verts;
+//    vector<glm::vec3> temp_norms;
+//    vector<glm::vec2> temp_texcos;
 //    vector<Triangle> temp_tris;
 //    vector<Triangle> temp_texco_inds;
 //    vector<Triangle> temp_norm_inds;
 //    vector<string> temp_b_names;
-//    vector<vec3> temp_b_weights;
+//    vector<glm::vec3> temp_b_weights;
 //    string str, ret = "", cmd;
 //    ifstream in ;
 //    in.open(filename.c_str()) ;
@@ -177,7 +177,7 @@ bool Parser::parseSimpleObj(string filepath, Vertex*& vertices, Triangle*& trian
 //
 //                if (cmd=="v")
 //                {
-//                    vec3 vert;
+//                    glm::vec3 vert;
 //                    vert.x = atof(strtok(NULL, " "));
 //                    vert.y = atof(strtok(NULL, " "));
 //                    vert.z = atof(strtok(NULL, " "));
@@ -185,7 +185,7 @@ bool Parser::parseSimpleObj(string filepath, Vertex*& vertices, Triangle*& trian
 //                }
 //                if (cmd=="vn")
 //                {
-//                    vec3 norm;
+//                    glm::vec3 norm;
 //                    norm.x = atof(strtok(NULL, " "));
 //                    norm.y = atof(strtok(NULL, " "));
 //                    norm.z = atof(strtok(NULL, " "));
@@ -193,7 +193,7 @@ bool Parser::parseSimpleObj(string filepath, Vertex*& vertices, Triangle*& trian
 //                }
 //                if (cmd=="vt")
 //                {
-//                    vec2 vt;
+//                    glm::vec2 vt;
 //                    vt[0] = atof(strtok(NULL, " "));
 //                    vt[1] = 1-atof(strtok(NULL, " "));
 //                    temp_texcos.push_back(vt);
@@ -226,7 +226,7 @@ bool Parser::parseSimpleObj(string filepath, Vertex*& vertices, Triangle*& trian
 //                    char* name = strtok(NULL, " :()");
 //                    string bone_names = "";
 //                    int i = 0;
-//                    vec3 w = vec3(0, 0, 0);
+//                    glm::vec3 w = glm::vec3(0, 0, 0);
 //                    while (name != NULL && i<3)
 //                    {
 //                        string name_str = name;
@@ -259,7 +259,7 @@ bool Parser::parseSimpleObj(string filepath, Vertex*& vertices, Triangle*& trian
 ////
 //                triangles[i].indices[k] = vert_ind;
 //
-//                vertices[vert_ind].position = vec4(temp_verts[vert_ind].x, temp_verts[vert_ind].y, temp_verts[vert_ind].z, 1.0);
+//                vertices[vert_ind].position = glm::vec4(temp_verts[vert_ind].x, temp_verts[vert_ind].y, temp_verts[vert_ind].z, 1.0);
 ////                if (filename == "resources/models/quad_big_tex.obj")
 ////                {
 ////                    cout<<"tri("<<i<<"/"<<triangle_num-1<<"):"<<k<<","<<vert_ind<<"/"<<vertex_num-1<<", "<<texco_ind<<"/"<<temp_texcos.size()-1<<", "<<norm_ind<<"/"<<temp_norms.size()-1<<"\n";
@@ -354,13 +354,13 @@ bool Parser::parseSimpleObj(string filepath, Vertex*& vertices, Triangle*& trian
 //// Called from mesh.cpp
 //void Parser::parseObj(string filename, Vertex*& vertices, Triangle*& triangles, GLuint& vertex_num, GLuint& triangle_num, Skeleton* skeleton)
 //{
-//    vector<vec3> temp_verts;
-//    vector<vec3> temp_norms;
+//    vector<glm::vec3> temp_verts;
+//    vector<glm::vec3> temp_norms;
 //    vector<string> temp_b_names;
-//    vector<vec3> temp_b_weights;
+//    vector<glm::vec3> temp_b_weights;
 //    vector<Triangle> temp_tris;
 ////    vector<int> texco_inds;
-//    vector<vec2> texcos;
+//    vector<glm::vec2> texcos;
 //
 //    string str, ret = "", cmd;
 //    ifstream in ;
@@ -377,7 +377,7 @@ bool Parser::parseSimpleObj(string filepath, Vertex*& vertices, Triangle*& trian
 //
 //                if (cmd=="v")
 //                {
-//                    vec3 vert;
+//                    glm::vec3 vert;
 //                    vert.x = atof(strtok(NULL, " "));
 //                    vert.y = atof(strtok(NULL, " "));
 //                    vert.z = atof(strtok(NULL, " "));
@@ -386,7 +386,7 @@ bool Parser::parseSimpleObj(string filepath, Vertex*& vertices, Triangle*& trian
 //                }
 //                if (cmd=="n")
 //                {
-//                    vec3 norm;
+//                    glm::vec3 norm;
 //                    norm.x = atof(strtok(NULL, " "));
 //                    norm.z = atof(strtok(NULL, " "));
 //                    norm.y = -atof(strtok(NULL, " "));
@@ -394,7 +394,7 @@ bool Parser::parseSimpleObj(string filepath, Vertex*& vertices, Triangle*& trian
 //                }
 //                if (cmd=="vt")
 //                {
-//                    vec2 vt;
+//                    glm::vec2 vt;
 //                    vt[0] = atof(strtok(NULL, " "));
 //                    vt[1] = atof(strtok(NULL, " "));
 //                    texcos.push_back(vt);
@@ -418,7 +418,7 @@ bool Parser::parseSimpleObj(string filepath, Vertex*& vertices, Triangle*& trian
 //                    char* name = strtok(NULL, " :()");
 //                    string bone_names = "";
 //                    int i = 0;
-//                    vec3 w = vec3(0, 0, 0);
+//                    glm::vec3 w = glm::vec3(0, 0, 0);
 //                    while (name != NULL && i<3)
 //                    {
 //                        string name_str = name;
@@ -458,7 +458,7 @@ bool Parser::parseSimpleObj(string filepath, Vertex*& vertices, Triangle*& trian
 //
 //        for (int h = 0; h<vertex_num; h++)
 //        {
-//            vertices[h].position = vec4(temp_verts[h].x, temp_verts[h].y, temp_verts[h].z, 1.0);
+//            vertices[h].position = glm::vec4(temp_verts[h].x, temp_verts[h].y, temp_verts[h].z, 1.0);
 //            vertices[h].normal = temp_norms[h];
 ////            vertices[h].tex_coords = // THIS IS WHERE IT ALL BREAKS DOWN. INDICES OF TEX-COORDS TO NOT MATCH INDICES OF VERTICES
 //            for (int yy = 0; yy<MAX_BONE_INFLUENCES; yy++ )
@@ -528,7 +528,7 @@ bool Parser::parseSimpleObj(string filepath, Vertex*& vertices, Triangle*& trian
 //    }
 //    else
 //    {
-//        cout<<"unable to open file: "<<filename<<"\n";
+//        cerr<<"unable to open file: "<<filename<<"\n";
 //    }
 //
 ////        cout<<"gets out of loop";
@@ -613,11 +613,11 @@ bool Parser::parseSimpleObj(string filepath, Vertex*& vertices, Triangle*& trian
 //    }
 //    else
 //    {
-//        cout << "couldn't find file: " << filename << "\n";
+//        cerr << "couldn't find file: " << filename << "\n";
 //    }
 //}
 //
-//void Parser::parseMaterial(string filename, vec4& ambient, vec4& diffuse, vec4& specular, float& shininess, vec4& emission, GLuint& tbo_id, int& hasTexture)
+//void Parser::parseMaterial(string filename, glm::vec4& ambient, glm::vec4& diffuse, glm::vec4& specular, float& shininess, glm::vec4& emission, GLuint& tbo_id, int& hasTexture)
 //{
 //    string str, ret = "", cmd, esc = " :()";  // esc is symbols ignored by the tokenizer
 //    string texture_path = "none" ;
@@ -675,7 +675,7 @@ bool Parser::parseSimpleObj(string filepath, Vertex*& vertices, Triangle*& trian
 //    }
 //    else
 //    {
-//        cout << "couldn't find file: " << filename << "\n";
+//        cerr << "couldn't find file: " << filename << "\n";
 //    }
 //
 //    if (texture_path != "none")
@@ -685,7 +685,7 @@ bool Parser::parseSimpleObj(string filepath, Vertex*& vertices, Triangle*& trian
 //        sf::Image texture;
 //        if (!(texture.loadFromFile(texture_path)))
 //        {
-//            std::cout << "unable to load\n";
+//            std::cerr << "unable to load\n";
 //        }
 //        else
 //        {
@@ -796,7 +796,7 @@ bool Parser::parseSimpleObj(string filepath, Vertex*& vertices, Triangle*& trian
 //    }
 //    else
 //    {
-//        cout << "couldn't find file: " << filename << "\n";
+//        cerr << "couldn't find file: " << filename << "\n";
 //    }
 //}
 

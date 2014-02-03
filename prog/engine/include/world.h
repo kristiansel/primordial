@@ -6,8 +6,12 @@
 
 #include "obstacle.h"
 #include "resourcemanager.h"
+#include "camera.h"
 
-using namespace std;
+using std::list;
+using std::shared_ptr;
+using std::weak_ptr;
+using std::string;
 
 class World
 {
@@ -15,11 +19,17 @@ class World
         World();
         virtual ~World();
 
-        list<Obstacle>::iterator addObstacle(string mesh_key, string tex_key, vec3 pos, vec3 dir); /// Update specification later
-        void delObstacle(list<Obstacle>::iterator obst_it_in);
+        /// Why not return a shared pointer? The iterator can be used to erase from list
+        /// the shared pointer has to be searched for first
+        list<shared_ptr<Obstacle>>::iterator addObstacle(string mesh_key, string tex_key, vec3 pos, vec3 dir);
+        void delObstacle(list<shared_ptr<Obstacle>>::iterator obst_it_in);
 
-        /// find a way to privatise this?
-        list<Obstacle> obstacles;
+        /// Contents (could with benefit be private?)
+        list<shared_ptr<Obstacle>> obstacles; /// Why not use shared pointer here? Storing iterators to
+        /// is tedious, and iterators are needed for efficient deletion from list.
+
+        shared_ptr<Camera> camera; /// Shared pointer here, because we do not want other shared
+        /// pointers to accidentally delete the camera.
 
         // void forAllObstacles( void (*f) (Obstacle&) );
 

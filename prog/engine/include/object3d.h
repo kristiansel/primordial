@@ -4,15 +4,12 @@
 #include <glm/glm.hpp>
 #include "transform.h"
 
-using namespace std;
-
 class Object3d
 {
 public:
     Object3d();
     virtual ~Object3d();
 
-    // statics
     vec3 pos;
     vec3 dir;
     vec3 up;

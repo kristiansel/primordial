@@ -10,7 +10,8 @@
 #include "parser.h"
 #include "object3d.h"
 
-using namespace std;
+using std::string;
+using std::cout;
 
 /// Should consider a getDrawInfo function that returns some sort of struct
 /// at the same time checking if it is video loaded, if not video load
@@ -27,7 +28,7 @@ class Mesh : public Object3d /// 3d coordinates local in Prop/Actor coordinate s
 {
 public:
     /// Public subclass
-    struct Material
+    struct Material /// This shouldn't belong to mesh, mesh should only be geometry
     {
         vec4 ambient;
         vec4 diffuse;
@@ -41,7 +42,7 @@ public:
 public:
     /// Constructor/Destructor
     Mesh();
-    Mesh(string filepath);
+    explicit Mesh(string filepath);
     virtual ~Mesh();
 
     /// Public member functions
@@ -72,7 +73,6 @@ private:
     ///  0: "Not loaded (file on disk)"              use filename
     ///  1: "loaded to RAM (file on RAM)"            use vertex/tri pointer
     ///  2: "loaded to video (file on video card)"   use vbo_id/ibo_id
-    unsigned int load_stage;
 
     /// Current number in use by graphics card;
 

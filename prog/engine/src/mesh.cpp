@@ -15,8 +15,6 @@ Mesh::Mesh() : vertex_num(0), triangle_num(0)
     vbo_id  = 99999;
     ibo_id  = 99999;
 
-    load_stage = -1;
-
     /// Change this at a later stage
     // set the materials <-- change this
     material.ambient = vec4(0.2, 0.2, 0.1, 1.0);
@@ -33,8 +31,8 @@ Mesh::~Mesh()
 {
 //    cout << "WARNING: DELETING MESH\n";
     /// release RAM pointers
-    delete [] vertices;
-    delete [] triangles;
+//    delete [] vertices;
+//    delete [] triangles;
 
     /// release video RAM buffers
     glBindBuffer(GL_ARRAY_BUFFER, 0); // do you really need this?
@@ -58,9 +56,9 @@ void Mesh::fromFile(string filepath)
 //    cout << filepath << "\n";
 
     bool res = Parser::parseSimpleObj(filepath, vertices, triangles, vertex_num, triangle_num); /// calls "new" on pointers
-    if (!res) cout << "unable to load mesh " << filepath << "\n";
+    if (!res) std::cerr << "unable to load mesh " << filepath << "\n";
 
-    load_stage = 1;
+//    load_stage = 1;
 
     /// send directly to graphics card
     glGenBuffers(1, &vbo_id); //must come after glewinit
@@ -77,33 +75,10 @@ void Mesh::fromFile(string filepath)
 //    cout << "Vertex number at load-time: " << vertex_num << "\n";
 //    cout << "VBO id at load-time " << vbo_id << "\n";
 //    cout << "IBO id at load-time: " << ibo_id << "\n";
-    load_stage = 2;
+//    load_stage = 2;
 
 }
 
-//void Mesh::setStageLevel(int stage)
-//{
-//    ///complete after rendering complete
-////    if (stage > load_stage)
-////    {
-////        switch load_stage
-////        {
-////        case -1:
-////        case  0:
-////        case  1:
-////        case  2:
-////        }
-////    }
-////    else if (stage > load_stage)
-////    {
-////
-////    }
-////    else /// we are done
-////    {
-////
-////    }
-//
-//}
 Mesh::Material Mesh::getMaterial()
 {
     return material;

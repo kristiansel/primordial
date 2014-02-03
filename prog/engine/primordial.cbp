@@ -89,6 +89,7 @@
 		<Unit filename="include/actor.h" />
 		<Unit filename="include/animatable.h" />
 		<Unit filename="include/camera.h" />
+		<Unit filename="include/culler.h" />
 		<Unit filename="include/dynamicbody.h" />
 		<Unit filename="include/geometry.h" />
 		<Unit filename="include/master.h" />
@@ -110,6 +111,7 @@
 		<Unit filename="src/actor.cpp" />
 		<Unit filename="src/animatable.cpp" />
 		<Unit filename="src/camera.cpp" />
+		<Unit filename="src/culler.cpp" />
 		<Unit filename="src/dynamicbody.cpp" />
 		<Unit filename="src/geometry.cpp" />
 		<Unit filename="src/master.cpp" />

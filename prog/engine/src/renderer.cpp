@@ -18,7 +18,7 @@ void Renderer::init(unsigned int scr_width_in, unsigned int scr_height_in)
     if (GLEW_OK != err)
     {
         /// Problem: glewInit failed, something is seriously wrong.
-        cout << "Error: " << glewGetErrorString(err) << "\n";
+        cerr << "Error: " << glewGetErrorString(err) << "\n";
     }
     cout << "Status: Using GLEW " << glewGetString(GLEW_VERSION) << "\n";
 
@@ -59,7 +59,7 @@ void Renderer::draw(Scene &scene)
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     /// prepare for perspective drawing
-    mat4 mv = scene.camera.getModelViewMatrix();
+    mat4 mv = scene.camera->getModelViewMatrix();
 
     /// lights
     main_shader.setLights(mv);

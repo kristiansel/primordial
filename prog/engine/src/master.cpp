@@ -37,7 +37,7 @@ void Master::init()
     renderer.init(scr_width_px, scr_height_px);
 
     /// Initialize the game module
-    mechanics.init(scene, dt);
+    mechanics.init(world, dt);
 
 
 }
@@ -64,7 +64,7 @@ void Master::mainLoop()
         mechanics.step(world, dt);
 
         /// Choose what to render
-        //culler.stage(scene, world) /// stage the scene from the world
+        culler.stage(scene, world); /// stage the scene from the world THIS breaks everything since non-shared shared pointers go out of scope
 
         /// draw...
         renderer.draw(scene);
@@ -129,8 +129,7 @@ bool Master::handleInput()
                 running = false;
                 break;
             case sf::Keyboard::R:
-                cout << scene.debugInfo();
-                cout << mechanics.debugInfo();
+                // do something
                 break;
             case sf::Keyboard::F1:
                 mechanics.func(1);
