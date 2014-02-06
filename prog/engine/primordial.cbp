@@ -87,7 +87,6 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="include/actor.h" />
-		<Unit filename="include/animatable.h" />
 		<Unit filename="include/camera.h" />
 		<Unit filename="include/culler.h" />
 		<Unit filename="include/dynamicbody.h" />
@@ -103,13 +102,13 @@
 		<Unit filename="include/resourcemanager.h" />
 		<Unit filename="include/scene.h" />
 		<Unit filename="include/shader.h" />
+		<Unit filename="include/skeleton.h" />
 		<Unit filename="include/staticbody.h" />
 		<Unit filename="include/texture.h" />
 		<Unit filename="include/transform.h" />
 		<Unit filename="include/world.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/actor.cpp" />
-		<Unit filename="src/animatable.cpp" />
 		<Unit filename="src/camera.cpp" />
 		<Unit filename="src/culler.cpp" />
 		<Unit filename="src/dynamicbody.cpp" />
@@ -124,6 +123,7 @@
 		<Unit filename="src/renderer.cpp" />
 		<Unit filename="src/scene.cpp" />
 		<Unit filename="src/shader.cpp" />
+		<Unit filename="src/skeleton.cpp" />
 		<Unit filename="src/staticbody.cpp" />
 		<Unit filename="src/texture.cpp" />
 		<Unit filename="src/transform.cpp" />

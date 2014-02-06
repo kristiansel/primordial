@@ -1,10 +1,11 @@
 #ifndef ACTOR_H
 #define ACTOR_H
 
-#include "animatable.h"
+#include "skeleton.h"
+#include "prop.h"
 
 
-class Actor : protected Animatable
+class Actor : public Skeleton, public Prop
 {
     public:
         Actor();

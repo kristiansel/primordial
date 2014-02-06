@@ -6,14 +6,17 @@ only tested on Windows so far
 Controls...
 Move: WASD
 Rotate camera: Arrow keys
-
-The most important code is lines 19-22 in file "src/mechanics.cpp":
+Insert grass-sphere: F1
+Delete oldest prop: F2
 	
 Coming up:
 Materials
 Mouse-look,
-using the F-keys to load/unload scene props,
 Skeletal animation
+
+special note:
+	This program uses std::unordered_map; there is a bug GCC 4.7 that makes inserts slow
+	ref: http://stackoverflow.com/questions/11614106/is-gcc-stdunordered-map-implementation-slow-if-so-why
 
 ART
 
@@ -23,4 +26,3 @@ with a few animations.
 Coming up:
 Idle combat animation,
 more combat animations!
-

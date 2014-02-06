@@ -18,7 +18,7 @@ void Mechanics::init(World &world_in, float &dt_in)
     /// Load some resources (should be moved)
     ///                 Model,      Texture,    Position,               Direction
     world->addObstacle(     "sphere",   "grass_equal", vec3(0.0, 0.0, -2.0),   vec3(0.0, 0.0, -1.0));
-    world->addObstacle(     "quad",     "checkers", vec3(3.0, 0.0, -2.0),   vec3(0.0, 0.0, -1.0));
+    world->addObstacle(     "anim_test",     "checkers", vec3(3.0, 0.0, -2.0),   vec3(0.0, 0.0, -1.0));
     world->addObstacle(     "quad",     "asdasdasd", vec3(-3.0, 0.0, -2.0),   vec3(0.0, 0.0, -1.0));
 
     //auto prop4 = scene->addProp(     "mdl_uv_sphere",   "checkers", vec3(0.0, 0.0, 2.0),   vec3(0.0, 0.0, 1.0));

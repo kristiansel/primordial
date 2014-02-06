@@ -1,0 +1,30 @@
+current work flow is terrible: Here is what needs to be done to get 
+a model from blender to produce a game-compatible file:
+
+1. Animate
+2. make a copy of .blend file and bake using "constraintbake.py"
+3. go into blender and add keyframes to all channels to
+   all frames containing key-frames
+4. import "bones_export_test.py" and change the action name 
+   in the script to correspond with the model.
+5. Copy and rename the produced file into resources/animations
+   directory.
+
+suggestions for improvement: Make the game handle different
+keyframe locations for different channels. 
+
+Models:
+
+1. Apply transforms, finish skinning, recalculate normals etc
+2. Make a copy and triangulate all faces
+3. run the script "export_verts.py" on it (edit the names to match
+   in the script)
+5. Make sure the model is in rest pose
+4. Export as OBJ, make sure to include 
+   normals and texture coordinates (keep vertex order! for weights)
+   also make sure "Triangulate" is checked.
+5. Open the output of "export_verts.py" ("Cube.obj") and copy-paste
+   all lines starting with "w" to the output .obj file from running
+   blender obj export (anywhere should do)
+6. Finally copy the .obj file to the game resource directory for 
+   models
