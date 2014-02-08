@@ -22,7 +22,8 @@ Models:
 5. Make sure the model is in rest pose
 4. Export as OBJ, make sure to include 
    normals and texture coordinates (keep vertex order! for weights)
-   also make sure "Triangulate" is checked.
+   also make sure "Triangulate" is checked, and only export ONE 
+   MESH per .obj file
 5. Open the output of "export_verts.py" ("Cube.obj") and copy-paste
    all lines starting with "w" to the output .obj file from running
    blender obj export (anywhere should do)

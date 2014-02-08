@@ -10,7 +10,7 @@
 // Include the helper glm library, including matrix transform extensions
 
 //#include "3dtypes.h"
-//#include "quaternion.h"
+#include "quaternion.h"
 #include <iostream>
 #include <glm/glm.hpp>
 #include <sstream>
@@ -110,7 +110,7 @@ public:
     static void up(float degrees, vec3& eye, vec3& up);
     static void forward(float speed, vec3& eye, vec3 &dir, vec3& up);
     static void strafe_left(float speed, vec3& eye, vec3 &dir, vec3& up);
-//    static mat4 quatRot(Quat local_rotation);
+    static mat4 quatRot(Quat local_rotation);
     static mat4 objectRot(vec3 up, vec3 dir);
     static mat4 lookAt(const vec3& eye, const vec3 &dir, const vec3& up);
     static mat4 perspective(float fovy, float aspect, float zNear, float zFar);

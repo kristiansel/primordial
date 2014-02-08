@@ -17,7 +17,7 @@ struct RenderBatch
     /// Add as many uniforms, and uniform samplers as needed
 };
 
-class Prop : public Object3d
+class Prop : virtual public Object3d
 {
 public:
     Prop();

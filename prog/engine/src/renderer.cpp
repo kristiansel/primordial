@@ -60,6 +60,7 @@ void Renderer::draw(Scene &scene)
 
     /// prepare for perspective drawing
     mat4 mv = scene.camera->getModelViewMatrix();
+    // mat4 mv = getModelViewMatrix(scene.camera);
 
     /// lights
     main_shader.setLights(mv);
@@ -73,7 +74,12 @@ void Renderer::draw(Scene &scene)
 
     for (auto it = scene.props.begin(); it!=scene.props.end(); it++)
     {
-        main_shader.draw(*it, mv);
+        main_shader.drawProp(*it, mv);
+    }
+
+    for (auto it = scene.actors.begin(); it!=scene.actors.end(); it++)
+    {
+        main_shader.drawActor(*it, mv);
     }
 }
 

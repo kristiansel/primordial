@@ -5,15 +5,17 @@
 #include <memory.h>
 
 #include "obstacle.h"
+#include "creature.h"
 #include "resourcemanager.h"
 #include "camera.h"
+
 
 using std::list;
 using std::shared_ptr;
 using std::weak_ptr;
 using std::string;
 
-class World
+class World /// Consider merging Culling functionality into World Class
 {
     public:
         World();
@@ -24,9 +26,16 @@ class World
         list<shared_ptr<Obstacle>>::iterator addObstacle(string mesh_key, string tex_key, vec3 pos, vec3 dir);
         void delObstacle(list<shared_ptr<Obstacle>>::iterator obst_it_in);
 
-        /// Contents (could with benefit be private?)
-        list<shared_ptr<Obstacle>> obstacles; /// Why not use shared pointer here? Storing iterators to
-        /// is tedious, and iterators are needed for efficient deletion from list.
+        list<shared_ptr<Creature>>::iterator addCreature(string mesh_key, string tex_key, vec3 pos, vec3 dir);
+        void delCreature(list<shared_ptr<Creature>>::iterator creature_it_in);
+
+        /// "Physical" Contents (could with benefit be private?)
+        list<shared_ptr<Obstacle>>    obstacles;
+        list<shared_ptr<Creature>>    creatures;
+        /// list<shared_ptr<Light>>       lights; // For future
+        /// Terrain                       terrain; // For future
+
+
 
         shared_ptr<Camera> camera; /// Shared pointer here, because we do not want other shared
         /// pointers to accidentally delete the camera.

@@ -12,7 +12,9 @@ public:
     Camera();
     virtual ~Camera();
 
-    mat4 getModelViewMatrix();
+    mat4 getModelViewMatrix(); /// Consider eliminating the camera class
+                               /// altogether, make a method within renderer to
+                               /// compute a modelview matrix from a (pos, dir)
 };
 
 #endif // CAMERA_H

@@ -10,8 +10,13 @@ class Actor : public Skeleton, public Prop
     public:
         Actor();
         virtual ~Actor();
+
+        /// Add some high level animation functionality later
+        /// for now use Skeleton::startAnimation(Anum enum)
+
     protected:
     private:
+
 };
 
 #endif // ACTOR_H

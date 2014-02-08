@@ -17,7 +17,6 @@ public:
         explicit Perspective(float fovy, float aspect, float nearz, float farz);
 
         void setPerspective(float fovy_in, float aspect_in, float nearz_in, float farz_in);
-        mat4 getModelViewMatrix();
 
         float fovy;
         float aspect;
@@ -33,6 +32,9 @@ public:
     void resizeWindow(int w, int h, bool real = true);
 
 protected:
+    /// Helper functions
+    static mat4 getModelViewMatrix(Object3d o3d_in);
+
 private:
     Shader main_shader;
 

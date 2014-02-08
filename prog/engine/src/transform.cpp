@@ -68,39 +68,39 @@ void Transform::strafe_left(float speed, vec3& eye, vec3 &dir, vec3& up)
     eye +=(speed)*left;
 };
 
-//mat4 Transform::quatRot(Quat local_rotation)
-//{
-//    Quat q = local_rotation.ret_normalized();
-//    mat4 R4;
-//    float w2 = q.w*q.w;
-//    float xw = q.x*q.w;
-//    float x2 = q.x*q.x;
-//    float yw = q.y*q.w;
-//    float yx = q.y*q.x;
-//    float y2 = q.y*q.y;
-//    float zw = q.z*q.w;
-//    float zx = q.z*q.x;
-//    float zy = q.z*q.y;
-//    float z2 = q.z*q.z;
-//
-//    R4[0][0]=1-2*y2-2*z2;
-//    R4[0][1]=2*yx-2*zw;
-//    R4[0][2]=2*zx+2*yw;
-//    R4[0][3]=0;
-//    R4[1][0]=2*yx+2*zw;
-//    R4[1][1]=1-2*x2-2*z2;
-//    R4[1][2]=2*zy-2*xw;
-//    R4[1][3]=0;
-//    R4[2][0]=2*zx-2*yw;
-//    R4[2][1]=2*zy+2*xw;
-//    R4[2][2]=1-2*x2-2*y2;
-//    R4[2][3]=0;
-//    R4[3][0]=0;
-//    R4[3][1]=0;
-//    R4[3][2]=0;
-//    R4[3][3]=1;
-//    return R4; // NEEDS TESTING
-//};
+mat4 Transform::quatRot(Quat local_rotation)
+{
+    Quat q = local_rotation.ret_normalized();
+    mat4 R4;
+    float w2 = q.w*q.w;
+    float xw = q.x*q.w;
+    float x2 = q.x*q.x;
+    float yw = q.y*q.w;
+    float yx = q.y*q.x;
+    float y2 = q.y*q.y;
+    float zw = q.z*q.w;
+    float zx = q.z*q.x;
+    float zy = q.z*q.y;
+    float z2 = q.z*q.z;
+
+    R4[0][0]=1-2*y2-2*z2;
+    R4[0][1]=2*yx-2*zw;
+    R4[0][2]=2*zx+2*yw;
+    R4[0][3]=0;
+    R4[1][0]=2*yx+2*zw;
+    R4[1][1]=1-2*x2-2*z2;
+    R4[1][2]=2*zy-2*xw;
+    R4[1][3]=0;
+    R4[2][0]=2*zx-2*yw;
+    R4[2][1]=2*zy+2*xw;
+    R4[2][2]=1-2*x2-2*y2;
+    R4[2][3]=0;
+    R4[3][0]=0;
+    R4[3][1]=0;
+    R4[3][2]=0;
+    R4[3][3]=1;
+    return R4; // NEEDS TESTING
+};
 
 mat4 Transform::objectRot(vec3 up, vec3 dir)
 {

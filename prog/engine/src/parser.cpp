@@ -18,8 +18,8 @@ bool Parser::parseSimpleObj(string filepath, Vertex*& vertices, Triangle*& trian
     vector<Triangle> temp_tris;
     vector<Triangle> temp_texco_inds;
     vector<Triangle> temp_norm_inds;
-    // vector<string> temp_b_names;
-    // vector<glm::vec3> temp_b_weights;
+    vector<string> temp_b_names;
+    vector<glm::vec3> temp_b_weights;
     string str, ret = "", cmd;
     ifstream in ;
     in.open(filepath.c_str()) ;
@@ -86,25 +86,25 @@ bool Parser::parseSimpleObj(string filepath, Vertex*& vertices, Triangle*& trian
                     temp_norm_inds.push_back(norm_tri);
 
                 }
-//                if (cmd=="w")
-//                {
-//                    char* name = strtok(NULL, " :()");
-//                    string bone_names = "";
-//                    int i = 0;
-//                    glm::vec3 w = glm::vec3(0, 0, 0);
-//                    while (name != NULL && i<3)
-//                    {
-//                        string name_str = name;
-//                        bone_names +=name_str+" ";
-//                        w[i] = atof(strtok(NULL, " :()"));
-//                        name = strtok (NULL, " :()");
-//                        i++;
-//                    }
-//                    w = glm::normalize(w); //! UNSURE ABOUT THIS
-//
-//                    temp_b_names.push_back(bone_names);
-//                    temp_b_weights.push_back(w);
-//                }
+                if (cmd=="w")
+                {
+                    char* name = strtok(NULL, " :()");
+                    string bone_names = "";
+                    int i = 0;
+                    glm::vec3 w = glm::vec3(0, 0, 0);
+                    while (name != NULL && i<3)
+                    {
+                        string name_str = name;
+                        bone_names +=name_str+" ";
+                        w[i] = atof(strtok(NULL, " :()"));
+                        name = strtok (NULL, " :()");
+                        i++;
+                    }
+                    w = glm::normalize(w); //! UNSURE ABOUT THIS
+
+                    temp_b_names.push_back(bone_names);
+                    temp_b_weights.push_back(w);
+                }
             }
             getline (in, str) ;
         } // while there are more lines
@@ -145,8 +145,57 @@ bool Parser::parseSimpleObj(string filepath, Vertex*& vertices, Triangle*& trian
                     vertices[vert_ind].bone_weights[yy] = 0;
                 }
                 vertices[vert_ind].bone_weights[0] = 1.0;
-            }
-        }
+            }   // for k<3
+        }   // for i<triangle_num
+
+//        /// Skeletal animation specific
+//        if (temp_b_names.size()>0)
+//        {
+//            for (int h = 0; h<vertex_num; h++)
+//            {
+//                char* name = strtok(&(temp_b_names[h])[0], " ");
+//                for (int i = 0; i<3; i++)
+//                {
+//                    if (name != NULL)
+//                    {
+//                        string name_str = name;
+//                        int index_candidate = -1; // means no bone
+//
+//                        for (int j = 0; j<skeleton->numBones; j++)
+//                        {
+//                            if (skeleton->bones_rest[j].name==name_str)
+//                            {
+//                                index_candidate = j;
+//                            }
+//                        }
+//                        vertices[h].bone_indices[i] = index_candidate;
+//                        if (index_candidate!=-1)
+//                        {
+//                            vertices[h].bone_weights[i] = temp_b_weights[h][i];
+//                        }
+//                        else
+//                        {
+//                            vertices[h].bone_weights[i] = 0;
+//                        }
+//                    }
+//                    name = strtok(NULL, " ");
+//                }
+//                float sum_weights = vertices[h].bone_weights[0] + vertices[h].bone_weights[1] + vertices[h].bone_weights[2];
+//                if (sum_weights>0.0001)
+//                {
+//                    vertices[h].bone_weights[0] = vertices[h].bone_weights[0]/sum_weights;
+//                    vertices[h].bone_weights[1] = vertices[h].bone_weights[1]/sum_weights;
+//                    vertices[h].bone_weights[2] = vertices[h].bone_weights[2]/sum_weights;
+//                }
+//                else
+//                {
+//                    cout<<"wierd vertex weights "<<h<<"\n";
+//                    vertices[h].bone_weights[0] = 1.0;
+//                    vertices[h].bone_weights[1] = 0.0;
+//                    vertices[h].bone_weights[2] = 0.0;
+//                } // for (int i = 0; i<3; i++)
+//            } // for (int h = 0; h<vertex_num; h++)
+//        } // if (temp_b_names.size()>0)
         return true;
     }
 }

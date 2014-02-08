@@ -88,6 +88,7 @@
 		</Compiler>
 		<Unit filename="include/actor.h" />
 		<Unit filename="include/camera.h" />
+		<Unit filename="include/creature.h" />
 		<Unit filename="include/culler.h" />
 		<Unit filename="include/dynamicbody.h" />
 		<Unit filename="include/geometry.h" />
@@ -98,6 +99,7 @@
 		<Unit filename="include/obstacle.h" />
 		<Unit filename="include/parser.h" />
 		<Unit filename="include/prop.h" />
+		<Unit filename="include/quaternion.h" />
 		<Unit filename="include/renderer.h" />
 		<Unit filename="include/resourcemanager.h" />
 		<Unit filename="include/scene.h" />
@@ -110,6 +112,7 @@
 		<Unit filename="main.cpp" />
 		<Unit filename="src/actor.cpp" />
 		<Unit filename="src/camera.cpp" />
+		<Unit filename="src/creature.cpp" />
 		<Unit filename="src/culler.cpp" />
 		<Unit filename="src/dynamicbody.cpp" />
 		<Unit filename="src/geometry.cpp" />
@@ -120,6 +123,7 @@
 		<Unit filename="src/obstacle.cpp" />
 		<Unit filename="src/parser.cpp" />
 		<Unit filename="src/prop.cpp" />
+		<Unit filename="src/quaternion.cpp" />
 		<Unit filename="src/renderer.cpp" />
 		<Unit filename="src/scene.cpp" />
 		<Unit filename="src/shader.cpp" />

@@ -10,6 +10,7 @@
 #include <stdexcept>
 
 #include "prop.h"
+#include "actor.h"
 
 using std::shared_ptr;
 using std::string;
@@ -26,8 +27,9 @@ public:
     void switchTo();
     void setLights(mat4 mv); /// tobe refactored
 //        void draw(Mesh &mesh, mat4 mv); /// Soon to be deleted/refactored
-    void draw(Prop &prop, mat4 mv);
-    void draw(shared_ptr<Prop> prop, mat4 mv);
+    // void draw(Prop &prop, mat4 mv);
+    void drawActor(shared_ptr<Actor> actor, mat4 mv);
+    void drawProp(shared_ptr<Prop> prop, mat4 mv);
     /// void draw(Actor &actor, mat4 mv);
     /// void draw(Terrain &terrain, mat4 mv);
 
