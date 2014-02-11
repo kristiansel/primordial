@@ -17,9 +17,9 @@ void Culler::stage(Scene &scene_in, World &world_in)
     scene_in.props.clear(); /// rebuild the render list
     scene_in.actors.clear(); /// rebuild the render list
 
-    for (auto obstacle : world_in.obstacles)
+    for (auto worldobject : world_in.worldobjects)
     {
-        scene_in.props.push_back(obstacle);
+        scene_in.props.push_back(worldobject);
     }
 
     for (auto creature : world_in.creatures)

@@ -10,16 +10,17 @@ World::~World()
     //dtor
 }
 
-list<shared_ptr<Obstacle>>::iterator World::addObstacle(string mesh_key, string tex_key, vec3 pos, vec3 dir)
-//shared_ptr<Obstacle> World::addObstacle(string mesh_key, string tex_key, vec3 pos, vec3 dir)
+list<shared_ptr<WorldObject>>::iterator World::addWorldObject(string mesh_key, string tex_key, vec3 pos, vec3 dir)
+//shared_ptr<WorldObject> World::addWorldObject(string mesh_key, string tex_key, vec3 pos, vec3 dir)
 {
-    /// Add a new obstacle to the list and capture
+    /// Add a new worldobject to the list and capture
     /// reference and iterator
-    obstacles.push_back(shared_ptr<Obstacle>(new Obstacle()));
-    list<shared_ptr<Obstacle>>::iterator new_obstacle_it = --obstacles.end();
+    worldobjects.push_back(shared_ptr<WorldObject>(new WorldObject()));
+    list<shared_ptr<WorldObject>>::iterator new_worldobject_it = --worldobjects.end();
 
-    (*new_obstacle_it)->pos = pos;         /// configure position
-    (*new_obstacle_it)->dir = dir;         /// configure direction
+    (*new_worldobject_it)->pos = pos;         /// configure position
+    (*new_worldobject_it)->dir = dir;         /// configure direction
+    addPhysicsObject( (*new_worldobject_it).get() );
 
     /// attach the mesh
     //weak_ptr<Mesh>      mesh_ptr    = resourcemanager.getMeshptrFromKey (mesh_key);
@@ -28,18 +29,18 @@ list<shared_ptr<Obstacle>>::iterator World::addObstacle(string mesh_key, string 
     weak_ptr<Mesh>      mesh_ptr    = mesh_manager.getResptrFromKey (mesh_key);
     weak_ptr<Texture>   tex_ptr     = tex_manager.getResptrFromKey  (tex_key);
 
-    (*new_obstacle_it)->attachBatch(mesh_ptr, tex_ptr);
+    (*new_worldobject_it)->attachBatch(mesh_ptr, tex_ptr);
 
-    return new_obstacle_it;
+    return new_worldobject_it;
 
-//    return shared_ptr<Obstacle>(&(*new_obstacle_it)); /// This results in SEGFAULT because
+//    return shared_ptr<WorldObject>(&(*new_worldobject_it)); /// This results in SEGFAULT because
 //    /// if not captured, then this will be the last instance of this pointer, and
-//    /// will automatically delete the new obstacle????
+//    /// will automatically delete the new worldobject????
 }
 
-void World::delObstacle(list<shared_ptr<Obstacle>>::iterator obstacle_it_in)
+void World::delWorldObject(list<shared_ptr<WorldObject>>::iterator worldobject_it_in)
 {
-    if (!obstacles.empty()) obstacles.erase(obstacle_it_in);
+    if (!worldobjects.empty()) worldobjects.erase(worldobject_it_in);
 }
 
 list<shared_ptr<Creature>>::iterator World::addCreature(string mesh_key, string tex_key, vec3 pos, vec3 dir)
@@ -54,14 +55,11 @@ list<shared_ptr<Creature>>::iterator World::addCreature(string mesh_key, string 
     (*new_creature_it)->dir = dir;         /// configure direction
 
     /// attach the mesh
-    //weak_ptr<Mesh>      mesh_ptr    = resourcemanager.getMeshptrFromKey (mesh_key);
-    //weak_ptr<Texture>   tex_ptr     = resourcemanager.getTexptrFromKey  (tex_key);
-
     weak_ptr<Mesh>      mesh_ptr    = mesh_manager.getResptrFromKey (mesh_key);
     weak_ptr<Texture>   tex_ptr     = tex_manager.getResptrFromKey  (tex_key);
 
     (*new_creature_it)->attachBatch(mesh_ptr, tex_ptr);
-    (*new_creature_it)->loadFromBNS("assets_raw/skeletons/" + mesh_key + ".bns"); /// Move this to a resourcemanager as well
+//    (*new_creature_it)->loadFromBNS("assets_raw/skeletons/" + mesh_key + ".bns"); /// Move this to a resourcemanager as well
 
     return new_creature_it;
 
@@ -73,4 +71,13 @@ list<shared_ptr<Creature>>::iterator World::addCreature(string mesh_key, string 
 void World::delCreature(list<shared_ptr<Creature>>::iterator creature_it_in)
 {
     if (!creatures.empty()) creatures.erase(creature_it_in);
+}
+
+void World::step(float dt_in)
+{
+    physicsStep(dt_in);
+    for (shared_ptr<WorldObject> wObject : worldobjects)
+    {
+        wObject->updateTransformation();
+    }
 }

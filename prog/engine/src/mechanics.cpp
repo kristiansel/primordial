@@ -17,15 +17,15 @@ void Mechanics::init(World &world_in, float &dt_in)
 
     /// Load some resources (should be moved)
     ///                     Model,          Texture,        Position,               Direction
-    /// Obstacles:
-    world->addObstacle(     "sphere",       "grass_equal",  vec3(-2.0, 0.0, -4.0),   vec3(0.0, 0.0, -1.0));
-    world->addObstacle(     "quad",         "nicewall",     vec3(3.0, 0.0, -2.0),   vec3(0.0, 0.0, -1.0));
+    /// WorldObjects:
+    world->addWorldObject(     "sphere",       "grass_equal",  vec3(-2.0, 0.0, -4.0),   vec3(0.0, 0.0, -1.0));
+    world->addWorldObject(     "ground",         "nicewall",     vec3(3.0, -2.0, -2.0),   vec3(0.0, 0.0, -1.0));
 
     /// Creatures
     world->addCreature(     "anim_test",    "checkers",     vec3(0.0, -1.0, -4.0),  vec3(0.0, 0.0, -1.0));
     //world->addCreature(     "sphere",       "asdasdasd",    vec3(-3.0, 0.0, -2.0),  vec3(0.0, 0.0, -1.0));
 
-    /// world->addObstacle(     "mdl_human_male",     "tex_human_male", vec3(-3.0, 0.0, -2.0),   vec3(0.0, 0.0, -1.0));
+    // world->addWorldObject(     "mdl_human_male",     "tex_human_male", vec3(-3.0, 0.0, -2.0),   vec3(0.0, 0.0, -1.0));
 
     //auto prop4 = scene->addProp(     "mdl_uv_sphere",   "checkers", vec3(0.0, 0.0, 2.0),   vec3(0.0, 0.0, 1.0));
     //scene->addProp(     "quad",     "checkers", vec3(3.0, 0.0, 2.0),   vec3(0.0, 0.0, 1.0));
@@ -33,12 +33,12 @@ void Mechanics::init(World &world_in, float &dt_in)
 
 
     /// remove later
-    obstacle_ptr_it = world->obstacles.begin();
+    worldobject_ptr_it = world->worldobjects.begin();
 }
 
 void Mechanics::step(World &world_in, float dt_in)
 {
-
+    world_in.step(dt_in);
 }
 
 string Mechanics::debugInfo()
@@ -98,16 +98,16 @@ void Mechanics::func(int num_in)
     switch (num_in)
     {
     case 1:
-        if (world->obstacles.empty())
+        if (world->worldobjects.empty())
         {
-            obstacle_ptr_it = world->addObstacle(     "sphere",   "grass_equal", world->camera->pos + 2.f*world->camera->dir,   world->camera->dir);
+            worldobject_ptr_it = world->addWorldObject(     "sphere",   "grass_equal", world->camera->pos + 2.f*world->camera->dir,   world->camera->dir);
         }
         else
         {
-            world->addObstacle(     "sphere",   "grass_equal", world->camera->pos + 2.f*world->camera->dir,   world->camera->dir);
+            world->addWorldObject(     "sphere",   "grass_equal", world->camera->pos + 2.f*world->camera->dir,   world->camera->dir);
         }
         break;
-    case 2:     world->delObstacle(obstacle_ptr_it); obstacle_ptr_it = world->obstacles.begin(); break;
+    case 2:     world->delWorldObject(worldobject_ptr_it); worldobject_ptr_it = world->worldobjects.begin(); break;
     default:    break;
     }
 }

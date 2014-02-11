@@ -41,7 +41,7 @@ bool Texture::fromFile(std::string filepath_in)
         glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
         glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,  GL_LINEAR_MIPMAP_LINEAR); /// TRILINEAR FILTERING
 //        glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,  GL_LINEAR_MIPMAP_NEAREST); /// BILINEAR FILTERING
-//        glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,  GL_NEAREST); /// NEAREST NEIGHBOR FILTERING
+        //glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,  GL_NEAREST); /// NEAREST NEIGHBOR FILTERING
 
 
         sf::Vector2u tsize = image.getSize();

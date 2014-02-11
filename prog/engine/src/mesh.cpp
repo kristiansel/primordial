@@ -55,7 +55,11 @@ void Mesh::fromFile(string filepath)
 //    this->filepath = filepath;
 //    cout << filepath << "\n";
 
+    //Skeleton* skeleton;
+    //skeleton->loadFromBNS(filepath); /// The wierdest and unsafest code ever...
+
     bool res = Parser::parseSimpleObj(filepath, vertices, triangles, vertex_num, triangle_num); /// calls "new" on pointers
+    /// bool res = Parser::parseSkinnedObj(filepath, vertices, triangles, vertex_num, triangle_num, skeleton); /// calls "new" on pointers
     if (!res) std::cerr << "unable to load mesh " << filepath << "\n";
 
 //    load_stage = 1;
@@ -76,6 +80,7 @@ void Mesh::fromFile(string filepath)
 //    cout << "VBO id at load-time " << vbo_id << "\n";
 //    cout << "IBO id at load-time: " << ibo_id << "\n";
 //    load_stage = 2;
+///    delete skeleton;
 
 }
 

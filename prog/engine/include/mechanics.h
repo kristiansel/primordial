@@ -37,7 +37,7 @@ private:
     const float camTurnSpeed;   /// deg/s
 
     /// Temporary
-    list<shared_ptr<Obstacle>>::iterator obstacle_ptr_it;
+    list<shared_ptr<WorldObject>>::iterator worldobject_ptr_it;
 };
 
 #endif // MECHANICS_H

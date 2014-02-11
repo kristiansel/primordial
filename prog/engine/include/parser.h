@@ -2,6 +2,7 @@
 #define PARSER_H
 
 # include "geometry.h"
+# include "skeleton.h"
 # include <GL/gl.h>
 # include <fstream>
 # include <string.h>
@@ -10,6 +11,7 @@
 using std::string;
 using std::vector;
 using std::ifstream;
+using std::cerr;
 
 class Parser
 {
@@ -18,6 +20,8 @@ public:
     virtual ~Parser();
 
     static bool parseSimpleObj(string filepath, Vertex*& vertices, Triangle*& triangles, GLuint& vertex_num, GLuint& triangle_num);
+    static bool parseSkinnedObj(string filepath, Vertex*& vertices, Triangle*& triangles, GLuint& vertex_num, GLuint& triangle_num, Skeleton*& skeleton);
+
 
     // static void parseObjFile(string filename, Vertex*& vertices, Triangle*& triangles, GLuint& vertex_num, GLuint& triangle_num, Skeleton* skeleton);
     // static void parseObj(string filename, Vertex*& vertices, Triangle*& triangles, GLuint& vertex_num, GLuint& triangle_num, Skeleton* skeleton); // works

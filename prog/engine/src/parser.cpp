@@ -86,9 +86,199 @@ bool Parser::parseSimpleObj(string filepath, Vertex*& vertices, Triangle*& trian
                     temp_norm_inds.push_back(norm_tri);
 
                 }
+//                if (cmd=="w")
+//                {
+//                    char* name = strtok(NULL, " :()");
+//                    string bone_names = "";
+//                    int i = 0;
+//                    glm::vec3 w = glm::vec3(0, 0, 0);
+//                    while (name != NULL && i<3)
+//                    {
+//                        string name_str = name;
+//                        bone_names +=name_str+" ";
+//                        w[i] = atof(strtok(NULL, " :()"));
+//                        name = strtok (NULL, " :()");
+//                        i++;
+//                    }
+//                    w = glm::normalize(w); //! UNSURE ABOUT THIS
+//
+//                    temp_b_names.push_back(bone_names);
+//                    temp_b_weights.push_back(w);
+//                }
+            }
+            getline (in, str) ;
+        } // while there are more lines
+        triangle_num = temp_tris.size();
+        vertex_num = temp_verts.size();
+
+        vertices = new Vertex [vertex_num]; // this function does NOT own the pointers, but fills them
+        triangles = new Triangle [triangle_num]; // this function does NOT own the pointers, but fills them
+
+        for (unsigned int i = 0; i<triangle_num; i++)
+        {
+            for (int k = 0; k<3; k++)
+            {
+                int vert_ind = temp_tris[i].indices[k];
+                int texco_ind = temp_texco_inds[i].indices[k];
+                int norm_ind = temp_norm_inds[i].indices[k];
+//
+                triangles[i].indices[k] = vert_ind;
+
+                vertices[vert_ind].position = glm::vec4(temp_verts[vert_ind].x, temp_verts[vert_ind].y, temp_verts[vert_ind].z, 1.0);
+
+                if (temp_texcos.size()>0)
+                {
+                    vertices[vert_ind].tex_coords[0] = temp_texcos[texco_ind][0];
+                    vertices[vert_ind].tex_coords[1] = temp_texcos[texco_ind][1];
+                }
+                else
+                {
+                    vertices[vert_ind].tex_coords[0] = 0.0;
+                    vertices[vert_ind].tex_coords[1] = 0.0;
+                }
+
+                vertices[vert_ind].normal = temp_norms[norm_ind];
+
+                for (unsigned int yy = 0; yy<MAX_BONE_INFLUENCES; yy++ )
+                {
+                    vertices[vert_ind].bone_indices[yy] = 0;
+                    vertices[vert_ind].bone_weights[yy] = 0;
+                }
+                vertices[vert_ind].bone_weights[0] = 1.0;
+            }   // for k<3
+        }   // for i<triangle_num
+
+//        /// Skeletal animation specific
+//        if (temp_b_names.size()>0)
+//        {
+//            for (int h = 0; h<vertex_num; h++)
+//            {
+//                char* name = strtok(&(temp_b_names[h])[0], " ");
+//                for (int i = 0; i<3; i++)
+//                {
+//                    if (name != NULL)
+//                    {
+//                        string name_str = name;
+//                        int index_candidate = -1; // means no bone
+//
+//                        for (int j = 0; j<skeleton->numBones; j++)
+//                        {
+//                            if (skeleton->bones_rest[j].name==name_str)
+//                            {
+//                                index_candidate = j;
+//                            }
+//                        }
+//                        vertices[h].bone_indices[i] = index_candidate;
+//                        if (index_candidate!=-1)
+//                        {
+//                            vertices[h].bone_weights[i] = temp_b_weights[h][i];
+//                        }
+//                        else
+//                        {
+//                            vertices[h].bone_weights[i] = 0;
+//                        }
+//                    }
+//                    name = strtok(NULL, " ");
+//                }
+//                float sum_weights = vertices[h].bone_weights[0] + vertices[h].bone_weights[1] + vertices[h].bone_weights[2];
+//                if (sum_weights>0.0001)
+//                {
+//                    vertices[h].bone_weights[0] = vertices[h].bone_weights[0]/sum_weights;
+//                    vertices[h].bone_weights[1] = vertices[h].bone_weights[1]/sum_weights;
+//                    vertices[h].bone_weights[2] = vertices[h].bone_weights[2]/sum_weights;
+//                }
+//                else
+//                {
+//                    cout<<"wierd vertex weights "<<h<<"\n";
+//                    vertices[h].bone_weights[0] = 1.0;
+//                    vertices[h].bone_weights[1] = 0.0;
+//                    vertices[h].bone_weights[2] = 0.0;
+//                } // for (int i = 0; i<3; i++)
+//            } // for (int h = 0; h<vertex_num; h++)
+//        } // if (temp_b_names.size()>0)
+        return true;
+    }
+}
+//
+bool Parser::parseSkinnedObj(string filepath, Vertex*& vertices, Triangle*& triangles, GLuint& vertex_num, GLuint& triangle_num, Skeleton*& skeleton)
+{
+    vector<glm::vec3> temp_verts;
+    vector<glm::vec3> temp_norms;
+    vector<glm::vec2> temp_texcos;
+    vector<Triangle> temp_tris;
+    vector<Triangle> temp_texco_inds;
+    vector<Triangle> temp_norm_inds;
+    vector<string> temp_b_names;
+    vector<glm::vec3> temp_b_weights;
+    string str, ret = "", cmd;
+    ifstream in ;
+    in.open(filepath.c_str()) ;
+    if (!in.is_open())
+    {
+        return false;
+    }
+    else
+    {
+        getline (in, str) ;
+        while (in)
+        {
+            if (!((str.substr(0,1)=="#") || (str=="")))
+            {
+                //cout << str << "\n";
+                cmd = strtok(&str[0], " ");
+
+                if (cmd=="v")
+                {
+                    glm::vec3 vert;
+                    vert.x = atof(strtok(NULL, " "));
+                    vert.y = atof(strtok(NULL, " "));
+                    vert.z = atof(strtok(NULL, " "));
+                    temp_verts.push_back(vert);
+                }
+                if (cmd=="vn")
+                {
+                    glm::vec3 norm;
+                    norm.x = atof(strtok(NULL, " "));
+                    norm.y = atof(strtok(NULL, " "));
+                    norm.z = atof(strtok(NULL, " "));
+                    temp_norms.push_back(norm);
+                }
+                if (cmd=="vt")
+                {
+                    glm::vec2 vt;
+                    vt[0] = atof(strtok(NULL, " "));
+                    vt[1] = 1-atof(strtok(NULL, " "));
+                    temp_texcos.push_back(vt);
+                }
+                if (cmd=="f")
+                {
+                    Triangle tri;
+                    Triangle texco_tri;
+                    Triangle norm_tri;
+
+                    tri.indices[0] = atoi(strtok(NULL, " /"))-1;
+                    if (temp_texcos.size()>0) texco_tri.indices[0] = atoi(strtok(NULL, " /"))-1;
+                    else texco_tri.indices[0] = 0.0;
+                    norm_tri.indices[0] = atoi(strtok(NULL, " /"))-1;
+
+                    tri.indices[1] = atoi(strtok(NULL, " /"))-1;
+                    if (temp_texcos.size()>0) texco_tri.indices[1] = atoi(strtok(NULL, " /"))-1;
+                    else texco_tri.indices[0] = 0.0;
+                    norm_tri.indices[1] = atoi(strtok(NULL, " /"))-1;
+
+                    tri.indices[2] = atoi(strtok(NULL, " /"))-1;
+                    if (temp_texcos.size()>0) texco_tri.indices[2] = atoi(strtok(NULL, " /"))-1;
+                    else texco_tri.indices[0] = 0.0;
+                    norm_tri.indices[2] = atoi(strtok(NULL, " /"))-1;
+
+                    temp_tris.push_back(tri);
+                    temp_texco_inds.push_back(texco_tri);
+                    temp_norm_inds.push_back(norm_tri);
+
+                }
                 if (cmd=="w")
                 {
-                    char* name = strtok(NULL, " :()");
+                    char* name = strtok(NULL, " :()"); /// Shouldn't this be deleted?
                     string bone_names = "";
                     int i = 0;
                     glm::vec3 w = glm::vec3(0, 0, 0);
@@ -189,7 +379,7 @@ bool Parser::parseSimpleObj(string filepath, Vertex*& vertices, Triangle*& trian
 //                }
 //                else
 //                {
-//                    cout<<"wierd vertex weights "<<h<<"\n";
+//                    cerr<<"wierd vertex weights "<<h<<"\n";
 //                    vertices[h].bone_weights[0] = 1.0;
 //                    vertices[h].bone_weights[1] = 0.0;
 //                    vertices[h].bone_weights[2] = 0.0;

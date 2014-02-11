@@ -54,11 +54,16 @@
 					<Add option="-DSFML_STATIC" />
 					<Add option="-DGLEW_STATIC" />
 					<Add directory="include" />
+					<Add directory="dependencies/bullet/src" />
 				</Compiler>
 				<Linker>
 					<Add library="sfml-graphics-s-d" />
 					<Add library="sfml-window-s-d" />
 					<Add library="sfml-system-s-d" />
+					<Add library="BulletDynamics" />
+					<Add library="BulletCollision" />
+					<Add library="LinearMath" />
+					<Add directory="dependencies/bullet/lib" />
 				</Linker>
 			</Target>
 			<Target title="Release_windows">
@@ -72,12 +77,17 @@
 					<Add option="-DSFML_STATIC" />
 					<Add option="-DGLEW_STATIC" />
 					<Add directory="include" />
+					<Add directory="dependencies/bullet/src" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
 					<Add library="sfml-graphics-s-d" />
 					<Add library="sfml-window-s-d" />
 					<Add library="sfml-system-s-d" />
+					<Add library="BulletDynamics" />
+					<Add library="BulletCollision" />
+					<Add library="LinearMath" />
+					<Add directory="dependencies/bullet/lib" />
 				</Linker>
 			</Target>
 		</Build>
@@ -98,6 +108,7 @@
 		<Unit filename="include/object3d.h" />
 		<Unit filename="include/obstacle.h" />
 		<Unit filename="include/parser.h" />
+		<Unit filename="include/physicsworld.h" />
 		<Unit filename="include/prop.h" />
 		<Unit filename="include/quaternion.h" />
 		<Unit filename="include/renderer.h" />
@@ -122,6 +133,7 @@
 		<Unit filename="src/object3d.cpp" />
 		<Unit filename="src/obstacle.cpp" />
 		<Unit filename="src/parser.cpp" />
+		<Unit filename="src/physicsworld.cpp" />
 		<Unit filename="src/prop.cpp" />
 		<Unit filename="src/quaternion.cpp" />
 		<Unit filename="src/renderer.cpp" />

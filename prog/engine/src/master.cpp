@@ -63,6 +63,8 @@ void Master::mainLoop()
         /// Step the simulation
         mechanics.step(world, dt);
 
+        // cout << "dt = " << dt << "\n";
+
         /// Choose what to render
         culler.stage(scene, world); /// stage the scene from the world THIS breaks everything since non-shared shared pointers go out of scope
 

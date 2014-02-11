@@ -12,6 +12,7 @@
 
 using std::string;
 using std::cout;
+using std::shared_ptr;
 
 /// Should consider a getDrawInfo function that returns some sort of struct
 /// at the same time checking if it is video loaded, if not video load
