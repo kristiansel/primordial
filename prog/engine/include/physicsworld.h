@@ -3,6 +3,7 @@
 
 #include "btBulletDynamicsCommon.h"
 #include "rigidbody.h"
+#include "quaternion.h"
 #include "glm/glm.hpp"
 
 
@@ -19,14 +20,17 @@ class PhysicsWorld
         /// addPhysicsObject(CollShape shape, float mass, vec3 position)
         /// addPhysicsObject(Sphere(1.0), 1.0, vec3(1.0, 2.0, -1.0))
         // void addPhysicsObject(RigidBody::Collision shape, par1=0, par2=0, par3=0, par4=0);
-        void addPhysicsObject(RigidBody* rigidbody);
+        void addPhysicsDynamic(RigidBody* rigidbody);
+        void addPhysicsStatic(RigidBody* rigidbody);
+
+        void removePhysicsObject(RigidBody* rigidbody);
 
     private:
         ///collision configuration contains default setup for memory, collision setup. Advanced users can create their own configuration.
         btDefaultCollisionConfiguration* collisionConfiguration;
 
         ///use the default collision dispatcher. For parallel processing you can use a diffent dispatcher (see Extras/BulletMultiThreaded)
-        btCollisionDispatcher* dispatcher;;
+        btCollisionDispatcher* dispatcher;
 
         ///btDbvtBroadphase is a good general purpose broadphase. You can also try out btAxis3Sweep.
         btBroadphaseInterface* overlappingPairCache;

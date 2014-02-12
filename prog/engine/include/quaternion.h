@@ -8,6 +8,7 @@
 #include "glm/glm.hpp"
 
 using glm::vec3;
+using std::abs;
 
 struct Quat
 {
@@ -15,6 +16,8 @@ public:
     Quat();
     Quat(float w, float x, float y, float z);
     Quat(vec3 axis, float angle_deg);
+    Quat(vec3 dir, vec3 ref_dir); /// get quaternion from direction
+
     float magnitude();
     void normalize();
     Quat ret_normalized();
@@ -88,6 +91,9 @@ public:
 
     virtual ~Quat();
 protected:
+    void fromWXYZ(float w, float x, float y, float z);
+    void fromAxisAngle(vec3 axis, float angle_deg);
+    void fromDirAndRef(vec3 dir, vec3 ref_dir);
 private:
 };
 #endif // QUATERNION_H
