@@ -115,7 +115,6 @@
 		<Unit filename="include/scene.h" />
 		<Unit filename="include/shader.h" />
 		<Unit filename="include/skeleton.h" />
-		<Unit filename="include/staticbody.h" />
 		<Unit filename="include/texture.h" />
 		<Unit filename="include/transform.h" />
 		<Unit filename="include/world.h" />
