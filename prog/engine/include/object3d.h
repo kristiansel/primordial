@@ -2,7 +2,15 @@
 #define OBJECT3D_H
 
 #include <glm/glm.hpp>
-#include "transform.h"
+#include <glm/gtx/transform.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/quaternion.hpp>
+//#include "transform.h"
+// #include "quaternion.h"
+
+using glm::vec3;
+using glm::vec4;
+using glm::mat4;
 
 class Object3d
 {
@@ -11,11 +19,16 @@ public:
     virtual ~Object3d();
 
     vec3 pos;
-    vec3 dir;
-    vec3 up;
+//    vec3 dir;
+//    vec3 up;
+    glm::quat rot;
+    //Quat rot;
+
 
     vec3 scale;
 
+    vec3 getDir();
+    void setDir();
 
     void moveForward(float speed);
     void strafeLeft(float speed);

@@ -95,6 +95,7 @@
 			<Add option="-std=c++11" />
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
+			<Add option="-DGLM_FORCE_RADIANS" />
 		</Compiler>
 		<Unit filename="include/actor.h" />
 		<Unit filename="include/camera.h" />
@@ -108,7 +109,6 @@
 		<Unit filename="include/parser.h" />
 		<Unit filename="include/physicsworld.h" />
 		<Unit filename="include/prop.h" />
-		<Unit filename="include/quaternion.h" />
 		<Unit filename="include/renderer.h" />
 		<Unit filename="include/resourcemanager.h" />
 		<Unit filename="include/rigidbody.h" />
@@ -116,7 +116,6 @@
 		<Unit filename="include/shader.h" />
 		<Unit filename="include/skeleton.h" />
 		<Unit filename="include/texture.h" />
-		<Unit filename="include/transform.h" />
 		<Unit filename="include/world.h" />
 		<Unit filename="include/worldobject.h" />
 		<Unit filename="main.cpp" />
@@ -132,14 +131,12 @@
 		<Unit filename="src/parser.cpp" />
 		<Unit filename="src/physicsworld.cpp" />
 		<Unit filename="src/prop.cpp" />
-		<Unit filename="src/quaternion.cpp" />
 		<Unit filename="src/renderer.cpp" />
 		<Unit filename="src/rigidbody.cpp" />
 		<Unit filename="src/scene.cpp" />
 		<Unit filename="src/shader.cpp" />
 		<Unit filename="src/skeleton.cpp" />
 		<Unit filename="src/texture.cpp" />
-		<Unit filename="src/transform.cpp" />
 		<Unit filename="src/world.cpp" />
 		<Unit filename="src/worldobject.cpp" />
 		<Extensions>

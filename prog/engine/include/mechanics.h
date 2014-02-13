@@ -4,6 +4,12 @@
 #include <sstream>
 #include "world.h"
 
+/// For testing
+#include <glm/glm.hpp>
+#include <glm/gtx/transform.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+//#include "transform.h"
+
 class Mechanics
 {
 public:

@@ -77,12 +77,15 @@ void PhysicsWorld::addPhysicsDynamic(RigidBody* rigidbody)
     if (isDynamic)
         colShape->calculateLocalInertia(mass,localInertia);
 
-    /// All these lines, just to convert quaternions
-    Quat start_quat = Quat(rigidbody->dir, glm::vec3(0.0, 0.0, -1.0));
-    btQuaternion bt_start_quat = btQuaternion(btScalar(start_quat.w),
-                                              btScalar(start_quat.x),
-                                              btScalar(start_quat.y),
-                                              btScalar(start_quat.z));
+//    /// All these lines, just to convert quaternions
+//    Quat start_quat = Quat(rigidbody->dir, glm::vec3(0.0, 0.0, -1.0));
+//    btQuaternion bt_start_quat = btQuaternion(btScalar(start_quat.w),
+//                                              btScalar(start_quat.x),
+//                                              btScalar(start_quat.y),
+//                                              btScalar(start_quat.z));
+
+    btQuaternion bt_start_quat = btQuaternion(rigidbody->rot.w, rigidbody->rot.x,
+                                              rigidbody->rot.y, rigidbody->rot.z);
 
     //std::cout << "sq(" << start_quat.w << ", " << start_quat.x << ", " << start_quat.y << ", " << start_quat.z << ")\n";
 
@@ -95,6 +98,7 @@ void PhysicsWorld::addPhysicsDynamic(RigidBody* rigidbody)
     btDefaultMotionState* myMotionState = new btDefaultMotionState(startTransform);
     btRigidBody::btRigidBodyConstructionInfo rbInfo(mass,myMotionState,colShape,localInertia);
     rbInfo.m_restitution = btScalar(0.6f);
+    rbInfo.m_friction = btScalar(0.4f);
     btRigidBody* body = new btRigidBody(rbInfo);
 
     rigidbody->setBody(body);
@@ -131,6 +135,7 @@ void PhysicsWorld::addPhysicsStatic(RigidBody* rigidbody)
     btDefaultMotionState* myMotionState = new btDefaultMotionState(startTransform);
     btRigidBody::btRigidBodyConstructionInfo rbInfo(mass,myMotionState,colShape,localInertia);
     rbInfo.m_restitution = btScalar(0.99f);
+    rbInfo.m_friction = btScalar(0.99f);
     btRigidBody* body = new btRigidBody(rbInfo);
 
     rigidbody->setBody(body);

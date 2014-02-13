@@ -11,7 +11,7 @@ World::~World()
 }
 
 
-list<shared_ptr<WorldObject>>::iterator World::addStaticObject(string mesh_key, string tex_key, vec3 pos, vec3 dir)
+list<shared_ptr<WorldObject>>::iterator World::addStaticObject(string mesh_key, string tex_key, vec3 pos)
 //shared_ptr<WorldObject> World::addWorldObject(string mesh_key, string tex_key, vec3 pos, vec3 dir)
 {
     /// Add a new worldobject to the list and capture
@@ -20,7 +20,7 @@ list<shared_ptr<WorldObject>>::iterator World::addStaticObject(string mesh_key, 
     list<shared_ptr<WorldObject>>::iterator new_worldobject_it = --worldobjects.end();
 
     (*new_worldobject_it)->pos = pos;         /// configure position
-    (*new_worldobject_it)->dir = dir;         /// configure direction
+//    (*new_worldobject_it)->dir = dir;         /// configure direction
     addPhysicsStatic( (*new_worldobject_it).get() );
 
     /// attach the mesh
@@ -40,7 +40,7 @@ list<shared_ptr<WorldObject>>::iterator World::addStaticObject(string mesh_key, 
 }
 
 
-list<shared_ptr<WorldObject>>::iterator World::addDynamicObject(string mesh_key, string tex_key, vec3 pos, vec3 dir)
+list<shared_ptr<WorldObject>>::iterator World::addDynamicObject(string mesh_key, string tex_key, vec3 pos)
 //shared_ptr<WorldObject> World::addWorldObject(string mesh_key, string tex_key, vec3 pos, vec3 dir)
 {
     /// Add a new worldobject to the list and capture
@@ -49,7 +49,7 @@ list<shared_ptr<WorldObject>>::iterator World::addDynamicObject(string mesh_key,
     list<shared_ptr<WorldObject>>::iterator new_worldobject_it = --worldobjects.end();
 
     (*new_worldobject_it)->pos = pos;         /// configure position
-    (*new_worldobject_it)->dir = dir;         /// configure direction
+//    (*new_worldobject_it)->dir = dir;         /// configure direction
     addPhysicsDynamic( (*new_worldobject_it).get() );
 
     /// attach the mesh
@@ -79,7 +79,7 @@ void World::delWorldObject(list<shared_ptr<WorldObject>>::iterator worldobject_i
     }
 }
 
-list<shared_ptr<Creature>>::iterator World::addCreature(string mesh_key, string tex_key, vec3 pos, vec3 dir)
+list<shared_ptr<Creature>>::iterator World::addCreature(string mesh_key, string tex_key, vec3 pos)
 //shared_ptr<Creature> World::addCreature(string mesh_key, string tex_key, vec3 pos, vec3 dir)
 {
     /// Add a new creature to the list and capture
@@ -88,7 +88,7 @@ list<shared_ptr<Creature>>::iterator World::addCreature(string mesh_key, string 
     list<shared_ptr<Creature>>::iterator new_creature_it = --creatures.end();
 
     (*new_creature_it)->pos = pos;         /// configure position
-    (*new_creature_it)->dir = dir;         /// configure direction
+//    (*new_creature_it)->dir = dir;         /// configure direction
 
     /// attach the mesh
     weak_ptr<Mesh>      mesh_ptr    = mesh_manager.getResptrFromKey (mesh_key);

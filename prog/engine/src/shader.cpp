@@ -220,10 +220,13 @@ void Shader::drawProp(shared_ptr<Prop> prop, mat4 mv)
 
         //    int a;
         /// set the modelview matrix for this model
-        mat4 tr = glm::transpose(Transform::translate(prop->pos.x, prop->pos.y, prop->pos.z));
-        mat4 rt = glm::transpose(Transform::objectRot(prop->up, prop->dir));
+        mat4 tr = glm::translate(mat4(1.0), prop->pos);
+        //mat4 tr = glm::transpose(Transform::translate(prop->pos.x, prop->pos.y, prop->pos.z));
+//        mat4 rt = glm::transpose(Transform::objectRot(prop->up, prop->dir));
+        mat4 rt = glm::mat4_cast(prop->rot);
         // mat4 rt_spec = glm::transpose(matrix); // a matrix transform modifier for a mesh
-        mat4 sc = glm::transpose(Transform::scale(prop->scale.x, prop->scale.y, prop->scale.z));
+        mat4 sc = glm::scale(mat4(1.0), prop->scale);
+        // mat4 sc = glm::transpose(Transform::scale(prop->scale.x, prop->scale.y, prop->scale.z));
         mat4 vertex_matrix  = mv * tr * rt * sc; // scale, then translate, then lookat.
         glUniformMatrix4fv(mv_mat, 1, false, &vertex_matrix[0][0]);
         // mm::matPrint(vertex_matrix);

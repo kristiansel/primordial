@@ -103,8 +103,9 @@ void Renderer::resizeWindow(int w, int h, bool real)
     perspective.aspect = w / (float) h;
 //        mv = Transform::perspective(fovy,aspect,nearz,farz) ;
     //prj = Transform::perspective(scene->perspective.fovy, scene->perspective.aspect, scene->perspective.nearz, scene->perspective.farz) ;
-    prj = Transform::perspective(perspective.fovy, perspective.aspect, perspective.nearz, perspective.farz) ;
-    prj = glm::transpose(prj) ; // accounting for row major
+//    prj = Transform::perspective(perspective.fovy, perspective.aspect, perspective.nearz, perspective.farz) ;
+//    prj = glm::transpose(prj) ; // accounting for row major
+    prj = glm::perspective(3.14159265f*perspective.fovy/180.f, perspective.aspect, perspective.nearz, perspective.farz);
     glLoadMatrixf(&prj[0][0]) ;
 
     glViewport(0, 0, w, h);

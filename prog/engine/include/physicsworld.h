@@ -3,7 +3,6 @@
 
 #include "btBulletDynamicsCommon.h"
 #include "rigidbody.h"
-#include "quaternion.h"
 #include "glm/glm.hpp"
 
 

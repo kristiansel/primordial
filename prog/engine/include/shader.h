@@ -8,6 +8,7 @@
 #include <cstring>
 #include <string>
 #include <stdexcept>
+#include <glm/gtx/transform.hpp>
 
 #include "prop.h"
 #include "actor.h"
