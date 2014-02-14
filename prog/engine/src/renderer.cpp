@@ -43,11 +43,11 @@ void Renderer::init(unsigned int scr_width_in, unsigned int scr_height_in)
     /// loading a mesh (TO BE REMOVED)
 //    scene->meshes.push_back(Mesh());
 //    scene->meshes.back().fromFile("assets_raw/models/sphere.obj");
-//    scene->meshes.back().pos = vec3(0.0, 0.0, -2.0);
+//    scene->meshes.back().pos = glm::vec3(0.0, 0.0, -2.0);
 //
 //    scene->meshes.push_back(Mesh());
 //    scene->meshes.back().fromFile("assets_raw/models/quad.obj");
-//    scene->meshes.back().pos = vec3(3.0, 0.0, -2.0);
+//    scene->meshes.back().pos = glm::vec3(3.0, 0.0, -2.0);
 }
 
 void Renderer::draw(Scene &scene)
@@ -59,8 +59,8 @@ void Renderer::draw(Scene &scene)
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     /// prepare for perspective drawing
-    mat4 mv = scene.camera->getModelViewMatrix();
-    // mat4 mv = getModelViewMatrix(scene.camera);
+    glm::mat4 mv = scene.camera->getModelViewMatrix();
+    // glm::mat4 mv = getModelViewMatrix(scene.camera);
 
     /// lights
     main_shader.setLights(mv);
@@ -96,7 +96,7 @@ void Renderer::resizeWindow(int w, int h, bool real)
 
     }
     */
-    mat4 prj ; // just like for lookat
+    glm::mat4 prj ; // just like for lookat
 
     glMatrixMode(GL_PROJECTION);
     //scene->perspective.aspect = w / (float) h;
@@ -144,9 +144,9 @@ void Renderer::Perspective::setPerspective(float fovy_in, float aspect_in, float
     farz = farz_in;
 }
 
-//mat4 Renderer::Perspective::getModelViewMatrix()
+//glm::mat4 Renderer::Perspective::getModelViewMatrix()
 //{
-//    mat4 mv = Transform::lookAt(pos, dir, up) ;
+//    glm::mat4 mv = Transform::lookAt(pos, dir, up) ;
 //    mv = glm::transpose(mv) ;
 //    return mv;
 //}

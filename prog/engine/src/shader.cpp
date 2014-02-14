@@ -84,10 +84,10 @@ void Shader::unload()
 
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
 
-const unsigned short normalOffset = 1*sizeof(vec4);
-const unsigned short texCoord0Offset = 1*sizeof(vec4)+1*sizeof(vec3);
-const unsigned short bone_indexOffset = 1*sizeof(vec4)+1*sizeof(vec3)+2*sizeof(float);
-const unsigned short bone_weightOffset = 1*sizeof(vec4)+1*sizeof(vec3)+2*sizeof(float)+MAX_BONE_INFLUENCES*sizeof(int);
+const unsigned short normalOffset = 1*sizeof(glm::vec4);
+const unsigned short texCoord0Offset = 1*sizeof(glm::vec4)+1*sizeof(glm::vec3);
+const unsigned short bone_indexOffset = 1*sizeof(glm::vec4)+1*sizeof(glm::vec3)+2*sizeof(float);
+const unsigned short bone_weightOffset = 1*sizeof(glm::vec4)+1*sizeof(glm::vec3)+2*sizeof(float)+MAX_BONE_INFLUENCES*sizeof(int);
 
 
 void Shader::switchTo()
@@ -99,13 +99,13 @@ void Shader::switchTo()
     else cerr << "Tried to use shader program before it was loaded\n";
 }
 
-void Shader::setLights(mat4 mv)
+void Shader::setLights(glm::mat4 mv)
 {
     /// transform light to eye coordinates
-    vec4 light_pos_trans = mv * vec4(1.0, 1.0, 1.0, 1.0);
+    glm::vec4 light_pos_trans = mv * glm::vec4(1.0, 1.0, 1.0, 1.0);
 
     /// set light color
-    vec4 light_col = vec4(1.0, 1.0, 1.0, 1.0);
+    glm::vec4 light_col = glm::vec4(1.0, 1.0, 1.0, 1.0);
 
     /// send uniforms
     glUniform1i(num_lights, 1) ;
@@ -113,96 +113,13 @@ void Shader::setLights(mat4 mv)
     glUniform4fv(light_cols,  1, &(light_col[0]));
 
 }
-//
-//void Shader::draw(Prop &prop, mat4 mv)
-//{
-//    /// This is very dirty... TODO: Get transformation info from prop,
-//    /// and the rest from each mesh. Put things into private and make getter
-//    /// functions! Could make custom lambda-iterators as well, returning the info for each
-//    /// mesh instead of each mesh
-////    for (auto mesh_ptr_it = prop.mesh_ptrs.begin(); mesh_ptr_it!= prop.mesh_ptrs.end(); mesh_ptr_it++)
-//    for (auto rb_it = prop.render_batches.begin(); rb_it!= prop.render_batches.end(); rb_it++)
-//    {
-////        Mesh &mesh = *shared_ptr<Mesh>(*mesh_ptr_it); /// deref the it to ptr, from ptr to mesh
-//        shared_ptr<Mesh> mesh_ptr = shared_ptr<Mesh>(rb_it->mesh_ptr);
-//        shared_ptr<Texture> tex_ptr = shared_ptr<Texture>(rb_it->tex_ptr);
-//        /// send some clean bone matrices
-//        //    mat4 clearMatrix = mat4(1.0);
-//        //    glUniformMatrix4fv(bone_mat, 1, true, &clearMatrix[0][0]); // <-- THIS!
-//
-//        //    int a;
-//        /// set the modelview matrix for this model
-//        mat4 tr = glm::transpose(Transform::translate(prop.pos.x, prop.pos.y, prop.pos.z));
-//        mat4 rt = glm::transpose(Transform::objectRot(prop.up, prop.dir));
-//        // mat4 rt_spec = glm::transpose(matrix); // a matrix transform modifier for a mesh
-//        mat4 sc = glm::transpose(Transform::scale(prop.scale.x, prop.scale.y, prop.scale.z));
-//        mat4 vertex_matrix  = mv * tr * rt * sc; // scale, then translate, then lookat.
-//        glUniformMatrix4fv(mv_mat, 1, false, &vertex_matrix[0][0]);
-//        // mm::matPrint(vertex_matrix);
-//
-//        /// normal matrix
-//        mat4 normal_matrix = glm::inverse(glm::transpose(vertex_matrix));
-//        glUniformMatrix4fv(nrm_mat, 1, false, &normal_matrix[0][0]);
-//        // mm::matPrint(normal_matrix);
-//
-//        //    // debug by printing all info being sent to shader:
-//        //    cout<<"numbones = "<<skeleton.numBones<<"\n";
-//        //    for (int i = 0; i<skeleton.numBones; i++) {
-//        //        mm::matPrint(skeleton.bone_matrices[i]);
-//        //    }
-//        //    // looks good
-//        // /// send bone specific info
-//        // glUniformMatrix4fv(shader->bone_matLoc, skeleton.numBones, true, &skeleton.bone_matrices[0][0][0]); // <-- THIS!
-//        // glUniformMatrix4fv(shader->nobo_matLoc, skeleton.numBones, true, &skeleton.norm_matrices[0][0][0]);
-//
-//
-//        Mesh::Material mat = mesh_ptr->getMaterial();
-//
-//        /// send mesh_ptr->specific uniforms to shader (materials)
-//        glUniform4fv(ambient,   1,  &(mat.ambient[0])     ) ;
-//        glUniform4fv(diffuse,   1,  &(mat.diffuse[0])     ) ;
-//        glUniform4fv(specular,  1,  &(mat.specular[0])    ) ;
-//        glUniform1fv(shininess, 1,  &(mat.shininess)      ) ;
-//        glUniform4fv(emission,  1,  &(mat.emission[0])    ) ;
-//
-//        //    glUniform1i(hasTexture, mat.hasTexture);
-//
-//
-//        //    if (hasTexture)
-//        //    {
-//        glActiveTexture(GL_TEXTURE0);
-//        glBindTexture(GL_TEXTURE_2D, tex_ptr->getTBOid());
-////                cout<<"binding texture "<<tex_ptr->getTBOid()<<" to  channel 0"<<"\n";
-//        //    }
-//
-//        /// Bind vertex data
-//        glBindBuffer(GL_ARRAY_BUFFER, mesh_ptr->getVBOid());
-//        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh_ptr->getIBOid());
-//
-//        /// Apparently, the below is buffer specific? It needs to be here at least. Look into VAO
-//        /// Or separate buffers for each attribute (corresponds better to the .obj 3d format)
-//        glVertexAttribPointer(vertex,       4, GL_FLOAT,    GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(0)                      );
-//        glVertexAttribPointer(normal,       3, GL_FLOAT,    GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(normalOffset)           );
-//        glVertexAttribPointer(texCoord0,    2, GL_FLOAT,    GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(texCoord0Offset)        );
-//        //    glVertexAttribPointer(bone_index,   3, GL_INT,      GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(bone_indexOffset)       );
-//        //    glVertexAttribPointer(bone_weight,  3, GL_FLOAT,    GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(bone_weightOffset)      );
-//
-//        /// Draw call
-//        glDrawElements(GL_TRIANGLES, 3*mesh_ptr->getTriNum(), GL_UNSIGNED_SHORT, BUFFER_OFFSET(0));
-//
-//        /// Not sure if this is necessary unless other code is badly written
-//        glBindBuffer(GL_ARRAY_BUFFER, 0);
-//        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-//        glBindTexture(GL_TEXTURE_2D, 0);
-//    }
-//}
 
-void Shader::drawActor(shared_ptr<Actor> actor, mat4 mv)
+void Shader::drawActor(shared_ptr<Actor> actor, glm::mat4 mv)
 {
     drawProp(actor, mv);
 }
 
-void Shader::drawProp(shared_ptr<Prop> prop, mat4 mv)
+void Shader::drawProp(shared_ptr<Prop> prop, glm::mat4 mv)
 {
     /// This is very dirty... TODO: Get transformation info from prop,
     /// and the rest from each mesh. Put things into private and make getter
@@ -220,19 +137,15 @@ void Shader::drawProp(shared_ptr<Prop> prop, mat4 mv)
 
         //    int a;
         /// set the modelview matrix for this model
-        mat4 tr = glm::translate(mat4(1.0), prop->pos);
-        //mat4 tr = glm::transpose(Transform::translate(prop->pos.x, prop->pos.y, prop->pos.z));
-//        mat4 rt = glm::transpose(Transform::objectRot(prop->up, prop->dir));
-        mat4 rt = glm::mat4_cast(prop->rot);
-        // mat4 rt_spec = glm::transpose(matrix); // a matrix transform modifier for a mesh
-        mat4 sc = glm::scale(mat4(1.0), prop->scale);
-        // mat4 sc = glm::transpose(Transform::scale(prop->scale.x, prop->scale.y, prop->scale.z));
-        mat4 vertex_matrix  = mv * tr * rt * sc; // scale, then translate, then lookat.
+        glm::mat4 tr = glm::translate(glm::mat4(1.0), prop->pos);
+        glm::mat4 rt = glm::mat4_cast(prop->rot);
+        glm::mat4 sc = glm::scale(glm::mat4(1.0), prop->scale);
+
+        glm::mat4 vertex_matrix  = mv * tr * rt * sc; // scale, then translate, then lookat.
         glUniformMatrix4fv(mv_mat, 1, false, &vertex_matrix[0][0]);
-        // mm::matPrint(vertex_matrix);
 
         /// normal matrix
-        mat4 normal_matrix = glm::inverse(glm::transpose(vertex_matrix));
+        glm::mat4 normal_matrix = glm::inverse(glm::transpose(vertex_matrix));
         glUniformMatrix4fv(nrm_mat, 1, false, &normal_matrix[0][0]);
         // mm::matPrint(normal_matrix);
 

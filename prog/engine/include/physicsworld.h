@@ -16,10 +16,10 @@ class PhysicsWorld
 
     protected:
         /// Should aim for something like
-        /// addPhysicsObject(CollShape shape, float mass, vec3 position)
-        /// addPhysicsObject(Sphere(1.0), 1.0, vec3(1.0, 2.0, -1.0))
+        /// addPhysicsObject(CollShape shape, float mass, glm::vec3 position)
+        /// addPhysicsObject(Sphere(1.0), 1.0, glm::vec3(1.0, 2.0, -1.0))
         // void addPhysicsObject(RigidBody::Collision shape, par1=0, par2=0, par3=0, par4=0);
-        void addPhysicsDynamic(RigidBody* rigidbody);
+        void addPhysicsDynamic(RigidBody* rigidbody, btCollisionShape* shape);
         void addPhysicsStatic(RigidBody* rigidbody);
 
         void removePhysicsObject(RigidBody* rigidbody);

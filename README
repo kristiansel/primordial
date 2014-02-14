@@ -1,12 +1,12 @@
 PROGRAMMING
 
-You need Code::Blocks to compile, it should work under both linux and windows,
-only tested on Windows so far
+You need Code::Blocks to compile, it should work under both Linux and Windows,
+mostly tested on Windows
 
 Controls...
 Move: WASD
 Rotate camera: Arrow keys
-Insert grass-sphere: F1
+Insert Cube: F1
 Delete oldest prop: F2
 	
 Coming up:
@@ -26,3 +26,8 @@ with a few animations.
 Coming up:
 Idle combat animation,
 more combat animations!
+
+Known issues:
+		When deleting the "floor", objects which rested
+		on it do not fall down, since they are not "activated"
+		by the physics engine.

@@ -11,8 +11,8 @@ World::~World()
 }
 
 
-list<shared_ptr<WorldObject>>::iterator World::addStaticObject(string mesh_key, string tex_key, vec3 pos)
-//shared_ptr<WorldObject> World::addWorldObject(string mesh_key, string tex_key, vec3 pos, vec3 dir)
+list<shared_ptr<WorldObject>>::iterator World::addStaticObject(string mesh_key, string tex_key, glm::vec3 pos)
+//shared_ptr<WorldObject> World::addWorldObject(string mesh_key, string tex_key, glm::vec3 pos, glm::vec3 dir)
 {
     /// Add a new worldobject to the list and capture
     /// reference and iterator
@@ -40,8 +40,47 @@ list<shared_ptr<WorldObject>>::iterator World::addStaticObject(string mesh_key, 
 }
 
 
-list<shared_ptr<WorldObject>>::iterator World::addDynamicObject(string mesh_key, string tex_key, vec3 pos)
-//shared_ptr<WorldObject> World::addWorldObject(string mesh_key, string tex_key, vec3 pos, vec3 dir)
+//list<shared_ptr<WorldObject>>::iterator World::addDynamicObject(string mesh_key, string tex_key, glm::vec3 pos)
+////shared_ptr<WorldObject> World::addWorldObject(string mesh_key, string tex_key, glm::vec3 pos, glm::vec3 dir)
+//{
+//    /// Add a new worldobject to the list and capture
+//    /// reference and iterator
+//    worldobjects.push_back(shared_ptr<WorldObject>(new WorldObject()));
+//    list<shared_ptr<WorldObject>>::iterator new_worldobject_it = --worldobjects.end();
+//
+//    (*new_worldobject_it)->pos = pos;         /// configure position
+////    (*new_worldobject_it)->dir = dir;         /// configure direction
+//    addPhysicsDynamic( (*new_worldobject_it).get() );
+//
+//    /// attach the mesh
+//    //weak_ptr<Mesh>      mesh_ptr    = resourcemanager.getMeshptrFromKey (mesh_key);
+//    //weak_ptr<Texture>   tex_ptr     = resourcemanager.getTexptrFromKey  (tex_key);
+//
+//    weak_ptr<Mesh>      mesh_ptr    = mesh_manager.getResptrFromKey (mesh_key);
+//    weak_ptr<Texture>   tex_ptr     = tex_manager.getResptrFromKey  (tex_key);
+//
+//    (*new_worldobject_it)->attachBatch(mesh_ptr, tex_ptr);
+//
+//    return new_worldobject_it;
+//
+////    return shared_ptr<WorldObject>(&(*new_worldobject_it)); /// This results in SEGFAULT because
+////    /// if not captured, then this will be the last instance of this pointer, and
+////    /// will automatically delete the new worldobject????
+//}
+        /// WorldObject is defined by:
+        /// Model               GFX             string/enum
+        /// Texture             GFX             string/enum
+        /// Material            GFX             (Material)
+        /// position            GFX/PHY         vec3
+        /// rotation            GFX/PHY         (quat <- should be otional)
+        /// scale               GFX             (vec3 <- consider )
+        /// Collision shape     PHY             enum
+
+list<shared_ptr<WorldObject>>::iterator World::addDynamicObject(string mesh_key,
+                                                                string tex_key,
+                                                                glm::vec3 pos,
+                                                                btCollisionShape* shape)
+//shared_ptr<WorldObject> World::addWorldObject(string mesh_key, string tex_key, glm::vec3 pos, glm::vec3 dir)
 {
     /// Add a new worldobject to the list and capture
     /// reference and iterator
@@ -50,7 +89,7 @@ list<shared_ptr<WorldObject>>::iterator World::addDynamicObject(string mesh_key,
 
     (*new_worldobject_it)->pos = pos;         /// configure position
 //    (*new_worldobject_it)->dir = dir;         /// configure direction
-    addPhysicsDynamic( (*new_worldobject_it).get() );
+    addPhysicsDynamic( (*new_worldobject_it).get(), shape);
 
     /// attach the mesh
     //weak_ptr<Mesh>      mesh_ptr    = resourcemanager.getMeshptrFromKey (mesh_key);
@@ -79,8 +118,8 @@ void World::delWorldObject(list<shared_ptr<WorldObject>>::iterator worldobject_i
     }
 }
 
-list<shared_ptr<Creature>>::iterator World::addCreature(string mesh_key, string tex_key, vec3 pos)
-//shared_ptr<Creature> World::addCreature(string mesh_key, string tex_key, vec3 pos, vec3 dir)
+list<shared_ptr<Creature>>::iterator World::addCreature(string mesh_key, string tex_key, glm::vec3 pos)
+//shared_ptr<Creature> World::addCreature(string mesh_key, string tex_key, glm::vec3 pos, glm::vec3 dir)
 {
     /// Add a new creature to the list and capture
     /// reference and iterator

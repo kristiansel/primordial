@@ -31,11 +31,11 @@ public:
     /// Public subclass
     struct Material /// This shouldn't belong to mesh, mesh should only be geometry
     {
-        vec4 ambient;
-        vec4 diffuse;
-        vec4 specular;
+        glm::vec4 ambient;
+        glm::vec4 diffuse;
+        glm::vec4 specular;
         float shininess;
-        vec4 emission;
+        glm::vec4 emission;
 
         // texture?
         bool hasTexture; // <--- CHANGE THIS

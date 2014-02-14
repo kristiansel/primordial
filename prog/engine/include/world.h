@@ -22,11 +22,21 @@ class World : public PhysicsWorld /// Consider merging Culling functionality int
         World();
         virtual ~World();
 
-        list<shared_ptr<WorldObject>>::iterator addStaticObject(string mesh_key, string tex_key, vec3 pos);
-        list<shared_ptr<WorldObject>>::iterator addDynamicObject(string mesh_key, string tex_key, vec3 pos);
+        list<shared_ptr<WorldObject>>::iterator addStaticObject(string mesh_key,
+                                                                string tex_key,
+                                                                glm::vec3 pos);
+
+        list<shared_ptr<WorldObject>>::iterator addDynamicObject(string mesh_key,
+                                                                 string tex_key,
+                                                                 glm::vec3 pos,
+                                                                 btCollisionShape* shape);
+
         void delWorldObject(list<shared_ptr<WorldObject>>::iterator obst_it_in);
 
-        list<shared_ptr<Creature>>::iterator addCreature(string mesh_key, string tex_key, vec3 pos);
+        list<shared_ptr<Creature>>::iterator addCreature(string mesh_key,
+                                                         string tex_key,
+                                                         glm::vec3 pos);
+
         void delCreature(list<shared_ptr<Creature>>::iterator creature_it_in);
 
 //        /// Step

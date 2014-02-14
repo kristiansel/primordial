@@ -17,11 +17,11 @@ Mesh::Mesh() : vertex_num(0), triangle_num(0)
 
     /// Change this at a later stage
     // set the materials <-- change this
-    material.ambient = vec4(0.2, 0.2, 0.1, 1.0);
-    material.diffuse = vec4(0.4, 0.8, 0.4, 1.0);
-    material.specular = vec4(0.7, 0.8, 1.0, 1.0);
+    material.ambient = glm::vec4(0.2, 0.2, 0.1, 1.0);
+    material.diffuse = glm::vec4(0.4, 0.8, 0.4, 1.0);
+    material.specular = glm::vec4(0.7, 0.8, 1.0, 1.0);
     material.shininess = 2;
-    material.emission = vec4(0.0, 0.0, 0.0, 1.0);
+    material.emission = glm::vec4(0.0, 0.0, 0.0, 1.0);
 
     // texture?
     material.hasTexture = 0; // <--- CHANGE THIS

@@ -8,9 +8,9 @@
 //#include "transform.h"
 // #include "quaternion.h"
 
-using glm::vec3;
-using glm::vec4;
-using glm::mat4;
+//using glm::vec3;
+//using glm::vec4;
+//using glm::mat4;
 
 class Object3d
 {
@@ -18,16 +18,13 @@ public:
     Object3d();
     virtual ~Object3d();
 
-    vec3 pos;
-//    vec3 dir;
-//    vec3 up;
+    glm::vec3 pos;
+
     glm::quat rot;
-    //Quat rot;
 
+    glm::vec3 scale;
 
-    vec3 scale;
-
-    vec3 getDir();
+    glm::vec3 getDir();
     void setDir();
 
     void moveForward(float speed);
@@ -37,8 +34,8 @@ public:
 
     /// DONT USE THESE
 //    void rotateLeft(float degrees);
-//    void rotateLeft(float degrees, vec3 point);
-//    void rotateUp(float degrees, vec3 point);
+//    void rotateLeft(float degrees, glm::vec3 point);
+//    void rotateUp(float degrees, glm::vec3 point);
 
 protected:
 private:

@@ -19,49 +19,16 @@ PhysicsWorld::PhysicsWorld()
 
     /// Set gravity
 	dynamicsWorld->setGravity(btVector3(0,-9.81,0));
-
-//	/// ADD THE GROUND (LATER DELEGATE THIS TO SOMETHING ELSE)
-//    ///create a few basic rigid bodies
-//	btCollisionShape* groundShape = new btBoxShape(btVector3(btScalar(50.),btScalar(50.),btScalar(50.)));
-//
-//	//keep track of the shapes, we release memory at exit.
-//	//make sure to re-use collision shapes among rigid bodies whenever possible!
-//
-//	collisionShapes.push_back(groundShape);
-//
-//	btTransform groundTransform;
-//	groundTransform.setIdentity();
-//	groundTransform.setOrigin(btVector3(0,-56,0)); /// Translate the box
-//
-//	/// Under construction
-//
-//	{
-//		btScalar mass(0.);
-//
-//		//rigidbody is dynamic if and only if mass is non zero, otherwise static
-//		bool isDynamic = (mass != 0.f);
-//
-//		btVector3 localInertia(0,0,0);
-//		if (isDynamic)
-//			groundShape->calculateLocalInertia(mass,localInertia);
-//
-//		//using motionstate is recommended, it provides interpolation capabilities, and only synchronizes 'active' objects
-//		btDefaultMotionState* myMotionState = new btDefaultMotionState(groundTransform);
-//		btRigidBody::btRigidBodyConstructionInfo rbInfo(mass,myMotionState,groundShape,localInertia);
-//		btRigidBody* body = new btRigidBody(rbInfo);
-//
-//		//add the body to the dynamics world
-//		dynamicsWorld->addRigidBody(body);
-//	}
 }
 
 // void PhysicsWorld::addPhysicsObject(RigidBody::Collision shape, par1=0, par2=0, par3=0, par4=0)
-void PhysicsWorld::addPhysicsDynamic(RigidBody* rigidbody)
+void PhysicsWorld::addPhysicsDynamic(RigidBody* rigidbody, btCollisionShape* shape)
 {
     //create a dynamic rigidbody
 
     //btCollisionShape* colShape = new btBoxShape(btVector3(1,1,1));
-    btCollisionShape* colShape = new btSphereShape(btScalar(1.));
+    // btCollisionShape* colShape = new btSphereShape(btScalar(1.));
+    btCollisionShape* colShape = shape;
     collisionShapes.push_back(colShape);
 
     /// Create Dynamic Objects
@@ -77,27 +44,19 @@ void PhysicsWorld::addPhysicsDynamic(RigidBody* rigidbody)
     if (isDynamic)
         colShape->calculateLocalInertia(mass,localInertia);
 
-//    /// All these lines, just to convert quaternions
-//    Quat start_quat = Quat(rigidbody->dir, glm::vec3(0.0, 0.0, -1.0));
-//    btQuaternion bt_start_quat = btQuaternion(btScalar(start_quat.w),
-//                                              btScalar(start_quat.x),
-//                                              btScalar(start_quat.y),
-//                                              btScalar(start_quat.z));
-
+    /// Set starting rotation
     btQuaternion bt_start_quat = btQuaternion(rigidbody->rot.w, rigidbody->rot.x,
                                               rigidbody->rot.y, rigidbody->rot.z);
-
-    //std::cout << "sq(" << start_quat.w << ", " << start_quat.x << ", " << start_quat.y << ", " << start_quat.z << ")\n";
-
-    /// Currently there is a bug where rotations cause adding and deleting from scene to break
     startTransform.setRotation( bt_start_quat ) ;
+
+    /// Set starting translation
     startTransform.setOrigin(btVector3(rigidbody->pos.x, rigidbody->pos.y, rigidbody->pos.z));
 
 
     //using motionstate is recommended, it provides interpolation capabilities, and only synchronizes 'active' objects
     btDefaultMotionState* myMotionState = new btDefaultMotionState(startTransform);
     btRigidBody::btRigidBodyConstructionInfo rbInfo(mass,myMotionState,colShape,localInertia);
-    rbInfo.m_restitution = btScalar(0.6f);
+    rbInfo.m_restitution = btScalar(0.33f);
     rbInfo.m_friction = btScalar(0.4f);
     btRigidBody* body = new btRigidBody(rbInfo);
 

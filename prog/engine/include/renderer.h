@@ -34,7 +34,7 @@ public:
 
 protected:
     /// Helper functions
-    static mat4 getModelViewMatrix(Object3d o3d_in);
+    static glm::mat4 getModelViewMatrix(Object3d o3d_in);
 
 private:
     Shader main_shader;

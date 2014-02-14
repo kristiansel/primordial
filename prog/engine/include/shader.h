@@ -26,13 +26,13 @@ public:
 
     void load(string vertex_shader, string fragment_shader);
     void switchTo();
-    void setLights(mat4 mv); /// tobe refactored
-//        void draw(Mesh &mesh, mat4 mv); /// Soon to be deleted/refactored
-    // void draw(Prop &prop, mat4 mv);
-    void drawActor(shared_ptr<Actor> actor, mat4 mv);
-    void drawProp(shared_ptr<Prop> prop, mat4 mv);
-    /// void draw(Actor &actor, mat4 mv);
-    /// void draw(Terrain &terrain, mat4 mv);
+    void setLights(glm::mat4 mv); /// tobe refactored
+//        void draw(Mesh &mesh, glm::mat4 mv); /// Soon to be deleted/refactored
+    // void draw(Prop &prop, glm::mat4 mv);
+    void drawActor(shared_ptr<Actor> actor, glm::mat4 mv);
+    void drawProp(shared_ptr<Prop> prop, glm::mat4 mv);
+    /// void draw(Actor &actor, glm::mat4 mv);
+    /// void draw(Terrain &terrain, glm::mat4 mv);
 
 protected:
 private:
