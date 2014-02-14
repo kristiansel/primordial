@@ -140,34 +140,34 @@ bool Master::handleInput()
                 mechanics.func(2);
                 break;
             case sf::Keyboard::F3:
-                // do
+                mechanics.func(3);
                 break;
             case sf::Keyboard::F4:
-                // do
+                mechanics.func(4);
                 break;
             case sf::Keyboard::F5:
-                // do
+                mechanics.func(5);
                 break;
             case sf::Keyboard::F6:
-                // do
+                mechanics.func(6);
                 break;
             case sf::Keyboard::F7:
-                // do
+                mechanics.func(7);
                 break;
             case sf::Keyboard::F8:
-                // do
+                mechanics.func(8);
                 break;
             case sf::Keyboard::F9:
-                // do
+                mechanics.func(9);
                 break;
             case sf::Keyboard::F10:
-                // do
+                mechanics.func(10);
                 break;
             case sf::Keyboard::F11:
-                // do
+                mechanics.func(11);
                 break;
             case sf::Keyboard::F12:
-                // do
+                mechanics.func(12);
                 break;
             default:
                 break;

@@ -13,68 +13,122 @@
 #include <list>
 #include <unordered_map>
 #include <glm/glm.hpp>
+#include <glm/gtc/quaternion.hpp>
+#include <glm/gtx/transform.hpp>
 
-class Skeleton
+class Skeleton /// This is a resource (store one copy)
 {
 public:
-    class Bone;
-    class Pose;
-    class Animation;
+    /// Struct used for output interpolation output
+    struct Pose;
 public:
     Skeleton();
     virtual ~Skeleton();
+
+    void fromFile(std::string filepath);
+
+    int getNumBones() {return num_bones; };
 protected:
 
 private:
-    std::shared_ptr<Bone> root_bone; /// Supports skeletons with one root bone for now
+    /// Parts of the Skeleton structure
+    class Bone;
+    class Animation;
 
-    std::unordered_map<std::string, std::shared_ptr<Animation>> animations; /// Unordered map is really useful, but is it performant?
-    /// could consider to change the unordered map to a vector or array based on indices and enumerators if it proves too bad.
+
+    /// This does not use fancy STL because the data
+    /// will be sent to GPU
+
+    int num_bones;
+    Bone* bones;
+
+    int num_anims;
+    Animation* animations;
 };
 
-class Skeleton::Bone
+class Skeleton::Bone /// This is part of a resource (store one copy)
 {
 public:
-    struct Channels
-    {
-        /// Location/Translation    (Most often used for the root bone)
-        float loc_x;           /// [0]
-        float loc_y;           /// [1]
-        float loc_z;           /// [2]
+    Bone() {};
+    ~Bone() {};
 
-        /// Rotation
-        float quat_rot_w;      /// [3]
-        float quat_rot_x;      /// [4]
-        float quat_rot_y;      /// [5]
-        float quat_rot_z;      /// [6]
+    glm::mat4 getRestMatrix() {return rest_matrix;};
+private:
+    glm::mat4 rest_matrix; /// Transform to move
+                           /// something from parent origin
+                           /// To this origin and orientation
+                           /// in "rest"/"bind" pose
+};
 
-        /// Scale (Rarely used)
-        float scale_x;         /// [7]
-        float scale_y;         /// [8]
-        float scale_z;         /// [9]
-    };
+class Skeleton::Animation /// This is part of a resource (store one copy)
+{
 public:
-    Bone();
-    virtual ~Bone();
+    class Channel; /// Each channel corresponds to a bone
+public:
+    Animation();
+    ~Animation();
 
-    std::string getName();
-protected:
+    int getNumChannels() {return num_channels;};
+
+    float getStartTime() {return start_time;};
+    float getEndTime() {return end_time;};
 
 private:
-    std::list<std::shared_ptr<Bone>> child_bones; /// Variable number of child bones
+    int num_channels;
+    Channel* channels;
 
-    Channels tr_chnls; /// Transform channles
-
-    std::string name;
-
-    /// Positional information
-
+    float start_time; /// Seconds
+    float end_time; /// Seconds
 };
 
-class Skeleton::Pose
+class Skeleton::Animation::Channel ///
 {
+public:
+    struct TimePosPair {float time; glm::vec3 pos; }; /// Consider making argument-less constructor private
+    struct TimeRotPair {float time; glm::quat rot; };
+    struct TimeScaPair {float time; glm::vec3 sca; };
+public:
+    Channel();
+    ~Channel();
 
+    int getBoneIndex() {return bone_index;};
+
+    int getNumPosKeys() {return num_pos_keys; };
+    int getNumRotKeys() {return num_rot_keys; };
+    int getNumScaKeys() {return num_sca_keys; };
+protected:
+    int bone_index; /// Each channel corresponds to a bone
+
+    int num_pos_keys;
+    int num_rot_keys;
+    int num_sca_keys;
+
+    TimePosPair* pos_keys;
+    TimeRotPair* rot_keys;
+    TimeScaPair* sca_keys;
 };
+
+/// Output form data structure
+//struct Skeleton::Pose
+//{
+//public:
+//    struct Transform /// Corresponding to bone/channel
+//    {
+//        glm::vec3 pos;
+//        glm::quat rot;
+//        glm::vec3 sca;
+//    };
+//public:
+//    Pose();
+//    ~Pose();
+//
+//    explicit Pose(int num_transforms);
+//    explicit Pose(Skeleton* skel);
+//
+//    num_transforms;
+//    Transform* transforms;
+//
+//};
 
 /// END PROPOSED NEW IMPLEMENTATION
 //

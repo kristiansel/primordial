@@ -112,7 +112,7 @@ void Mechanics::func(int num_in)
 {
     switch (num_in)
     {
-    case 1:
+    case 1:    /// ADD CUBE
         if (world->worldobjects.empty())
         {
             worldobject_ptr_it = world->addDynamicObject( "cube",
@@ -128,7 +128,24 @@ void Mechanics::func(int num_in)
                                      RigidBody::Box(0.5f, 0.5f, 0.5f)  );
         }
         break;
-    case 2:     world->delWorldObject(worldobject_ptr_it); worldobject_ptr_it = world->worldobjects.begin(); break;
+
+    case 2:     /// ADD SPHERE
+        if (world->worldobjects.empty())
+        {
+            worldobject_ptr_it = world->addDynamicObject( "sphere",
+                                                          "nicewall",
+                                                          world->camera->pos + 2.f*world->camera->getDir(),
+                                                          RigidBody::Sphere(1.0));
+        }
+        else
+        {
+            world->addDynamicObject( "sphere",
+                                     "nicewall",
+                                     world->camera->pos + 2.f*world->camera->getDir(),
+                                     RigidBody::Sphere(1.0)  );
+        }
+        break;
+    case 3:     world->delWorldObject(worldobject_ptr_it); worldobject_ptr_it = world->worldobjects.begin(); break;
     default:    break;
     }
 }

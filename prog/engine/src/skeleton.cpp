@@ -3,15 +3,72 @@
 
 #include "skeleton.h"
 
-Skeleton::Skeleton()
+Skeleton::Skeleton() : num_bones(0),
+                       bones(nullptr),
+                       num_anims(0),
+                       animations(nullptr)
 {
     //ctor
 }
 
 Skeleton::~Skeleton()
 {
-    //dtor
+    delete [] bones;
+    delete [] animations;
 }
+
+void Skeleton::fromFile(std::string filepath)
+{
+
+}
+
+Skeleton::Animation::Animation() : num_channels(0),
+                                   channels(nullptr)
+{
+    //ctor
+}
+
+Skeleton::Animation::~Animation()
+{
+    delete [] channels;
+}
+
+Skeleton::Animation::Channel::Channel() : num_pos_keys(0),
+                                          pos_keys(nullptr),
+                                          num_rot_keys(0),
+                                          rot_keys(nullptr),
+                                          num_sca_keys(0),
+                                          sca_keys(nullptr)
+{
+    //ctor
+}
+
+Skeleton::Animation::Channel::~Channel()
+{
+    delete [] pos_keys;
+    delete [] rot_keys;
+    delete [] sca_keys;
+}
+
+//Pose();
+//~Pose();
+//
+//explicit Pose(int num_transforms);
+//explicit Pose(Skeleton* skel);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //
 //#include "skeleton.h"
