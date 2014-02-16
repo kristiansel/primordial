@@ -1,0 +1,221 @@
+ : Scene
+ : num_children : 4
+ : num_meshes : 0
+ : transformation :
+   {{1,0,0,0},
+   {0,0,1,0},
+   {0,-1,0,0},
+   {0,0,0,1}}
+  : Camera
+  : num_children : 0
+  : num_meshes : 0
+  : transformation :
+    {{0.685881,-0.31737,0.654862,7.48113},
+    {0.727634,0.312469,-0.610666,-6.50764},
+    {-0.0108168,0.895343,0.445245,5.34367},
+    {0,0,0,1}}
+  : Lamp
+  : num_children : 0
+  : num_meshes : 0
+  : transformation :
+    {{-0.290864,-0.771101,0.566393,4.07624},
+    {0.955171,-0.199883,0.218391,1.00545},
+    {-0.0551891,0.604525,0.794672,5.90386},
+    {0,0,0,1}}
+  : MyArmature
+  : num_children : 1
+  : num_meshes : 0
+  : transformation :
+    {{1,0,0,0},
+    {0,1,0,0},
+    {0,0,1,0},
+    {0,0,0,1}}
+   : Base
+   : num_children : 2
+   : num_meshes : 0
+   : transformation :
+     {{1,0,0,0},
+     {0,0,-1,0},
+     {0,1,0,0.138165},
+     {0,0,0,1}}
+    : Mid
+    : num_children : 1
+    : num_meshes : 0
+    : transformation :
+      {{-0.41398,0.76552,-0.492545,0},
+      {0.492545,0.643412,0.586021,0.253756},
+      {0.76552,0,-0.643412,0},
+      {0,0,0,1}}
+     : Top
+     : num_children : 0
+     : num_meshes : 0
+     : transformation :
+       {{-0.426037,0.488542,0.761459,0},
+       {0.759263,0.650743,0.00730075,0.610739},
+       {-0.491947,0.581258,-0.648172,0},
+       {0,0,0,1}}
+    : BaseSide
+    : num_children : 0
+    : num_meshes : 0
+    : transformation :
+      {{-1,0,0,0},
+      {0,0,1,0},
+      {0,1,0,0},
+      {0,0,0,1}}
+  : Model1
+  : num_children : 0
+  : num_meshes : 1
+  : transformation :
+    {{1,0,0,0},
+    {0,1,0,0},
+    {0,0,1,0},
+    {0,0,0,1}}
+HasAnimations = 1
+mNumAnimations = 1
+animation duration = 0.833333 s 
+animation name =  
+numBoneChannels = 4 
+numMeshChannels = 0 
+numTicksPerSecond = 1 
+ANIM_CHANNELS = 1 
+   CHANNEL = 0 
+   name = Base 
+   numPositionKeys = 3 
+   numRotationKeys = 3 
+   numScalingKeys = 3 
+   PostState = 0 
+       PosKeys = 0 
+       mTime = 0 
+       value = {0, 0, 0.138165}
+       PosKeys = 1 
+       mTime = 0.416667 
+       value = {0, 0, 0.138165}
+       PosKeys = 2 
+       mTime = 0.833333 
+       value = {0, 0, 0.138165}
+       RotKeys = 0 
+       mTime = 0 
+       value = {0.707107, 0.707107, 0, 0}
+       RotKeys = 1 
+       mTime = 0.416667 
+       value = {0.707107, 0.707107, 0, 0}
+       RotKeys = 2 
+       mTime = 0.833333 
+       value = {0.707107, 0.707107, 0, 0}
+       ScaleKeys = 0 
+       mTime = 0 
+       ScaleKeys = 1 
+       mTime = 0.416667 
+       ScaleKeys = 2 
+       mTime = 0.833333 
+   CHANNEL = 1 
+   name = Mid 
+   numPositionKeys = 3 
+   numRotationKeys = 3 
+   numScalingKeys = 3 
+   PostState = 0 
+       PosKeys = 0 
+       mTime = 0 
+       value = {0, 0.253756, -8.88178e-016}
+       PosKeys = 1 
+       mTime = 0.416667 
+       value = {0, 0.253756, -8.88178e-016}
+       PosKeys = 2 
+       mTime = 0.833333 
+       value = {0, 0.253756, -8.88178e-016}
+       RotKeys = 0 
+       mTime = 0 
+       value = {-0.38276, 0.38276, 0.821706, 0.178294}
+       RotKeys = 1 
+       mTime = 0.416667 
+       value = {-0.419669, -0.100045, 0.900942, -0.0466017}
+       RotKeys = 2 
+       mTime = 0.833333 
+       value = {-0.38276, 0.38276, 0.821706, 0.178294}
+       ScaleKeys = 0 
+       mTime = 0 
+       ScaleKeys = 1 
+       mTime = 0.416667 
+       ScaleKeys = 2 
+       mTime = 0.833333 
+   CHANNEL = 2 
+   name = Top 
+   numPositionKeys = 3 
+   numRotationKeys = 3 
+   numScalingKeys = 3 
+   PostState = 0 
+       PosKeys = 0 
+       mTime = 0 
+       value = {-1.49012e-008, 0.610739, -1.49012e-008}
+       PosKeys = 1 
+       mTime = 0.416667 
+       value = {-1.49012e-008, 0.610739, -1.49012e-008}
+       PosKeys = 2 
+       mTime = 0.833333 
+       value = {-1.49012e-008, 0.610739, -1.49012e-008}
+       RotKeys = 0 
+       mTime = 0 
+       value = {0.379649, 0.377952, 0.825372, 0.178271}
+       RotKeys = 1 
+       mTime = 0.416667 
+       value = {0.379649, 0.377952, 0.825372, 0.178271}
+       RotKeys = 2 
+       mTime = 0.833333 
+       value = {0.379649, 0.377952, 0.825372, 0.178271}
+       ScaleKeys = 0 
+       mTime = 0 
+       ScaleKeys = 1 
+       mTime = 0.416667 
+       ScaleKeys = 2 
+       mTime = 0.833333 
+   CHANNEL = 3 
+   name = BaseSide 
+   numPositionKeys = 3 
+   numRotationKeys = 3 
+   numScalingKeys = 3 
+   PostState = 0 
+       PosKeys = 0 
+       mTime = 0 
+       value = {0, 0, -1.9158e-008}
+       PosKeys = 1 
+       mTime = 0.416667 
+       value = {0, 0, -1.9158e-008}
+       PosKeys = 2 
+       mTime = 0.833333 
+       value = {0, 0, -1.9158e-008}
+       RotKeys = 0 
+       mTime = 0 
+       value = {3.09086e-008, 3.09086e-008, 0.707107, 0.707107}
+       RotKeys = 1 
+       mTime = 0.416667 
+       value = {3.09086e-008, 3.09086e-008, 0.707107, 0.707107}
+       RotKeys = 2 
+       mTime = 0.833333 
+       value = {3.09086e-008, 3.09086e-008, 0.707107, 0.707107}
+       ScaleKeys = 0 
+       mTime = 0 
+       ScaleKeys = 1 
+       mTime = 0.416667 
+       ScaleKeys = 2 
+       mTime = 0.833333 
+Cube
+   BaseSide
+     {{-1,0,0,0},
+     {0,-1,0,0},
+     {0,0,1,-0.138165},
+     {0,0,0,1}}
+   Base
+     {{1,0,0,0},
+     {0,0,1,-0.138165},
+     {0,-1,0,0},
+     {0,0,0,1}}
+   Mid
+     {{-0.41398,-0.76552,0.492545,-0.193039},
+     {0.76552,0,0.643412,-0.252167},
+     {-0.492545,0.643412,0.586021,-0.229674},
+     {0,0,0,1}}
+   Top
+     {{0.999907,0.00961488,-0.00961453,-0.459943},
+     {0.00961494,0,0.999954,-0.789337},
+     {0.00961453,-0.999954,-9.26265e-005,-0.00442243},
+     {0,0,0,1}}

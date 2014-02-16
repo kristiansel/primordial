@@ -129,6 +129,9 @@ list<shared_ptr<Creature>>::iterator World::addCreature(string mesh_key, string 
     (*new_creature_it)->pos = pos;         /// configure position
 //    (*new_creature_it)->dir = dir;         /// configure direction
 
+    /// load bones and animation
+    (*new_creature_it)->fromFile("../tools/primordial_asset_importer/test_anims.bbns");
+
     /// attach the mesh
     weak_ptr<Mesh>      mesh_ptr    = mesh_manager.getResptrFromKey (mesh_key);
     weak_ptr<Texture>   tex_ptr     = tex_manager.getResptrFromKey  (tex_key);

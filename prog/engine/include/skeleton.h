@@ -15,6 +15,9 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/quaternion.hpp>
 #include <glm/gtx/transform.hpp>
+#include <fstream>
+#include <iostream> /// For debugging
+#include <cstring>
 
 class Skeleton /// This is a resource (store one copy)
 {
@@ -49,15 +52,21 @@ private:
 class Skeleton::Bone /// This is part of a resource (store one copy)
 {
 public:
-    Bone() {};
-    ~Bone() {};
+    Bone() : rest_matrix(glm::mat4(1.0)),
+             num_children(0),
+             child_indices(nullptr){};
 
-    glm::mat4 getRestMatrix() {return rest_matrix;};
-private:
+    ~Bone() {delete[] child_indices;};
+
     glm::mat4 rest_matrix; /// Transform to move
                            /// something from parent origin
                            /// To this origin and orientation
                            /// in "rest"/"bind" pose
+    int num_children;
+    int* child_indices;
+    std::string name;
+
+
 };
 
 class Skeleton::Animation /// This is part of a resource (store one copy)
@@ -68,17 +77,11 @@ public:
     Animation();
     ~Animation();
 
-    int getNumChannels() {return num_channels;};
-
-    float getStartTime() {return start_time;};
-    float getEndTime() {return end_time;};
-
-private:
     int num_channels;
     Channel* channels;
 
-    float start_time; /// Seconds
-    float end_time; /// Seconds
+    float duration; /// Seconds
+
 };
 
 class Skeleton::Animation::Channel ///
@@ -91,12 +94,6 @@ public:
     Channel();
     ~Channel();
 
-    int getBoneIndex() {return bone_index;};
-
-    int getNumPosKeys() {return num_pos_keys; };
-    int getNumRotKeys() {return num_rot_keys; };
-    int getNumScaKeys() {return num_sca_keys; };
-protected:
     int bone_index; /// Each channel corresponds to a bone
 
     int num_pos_keys;
@@ -109,26 +106,60 @@ protected:
 };
 
 /// Output form data structure
-//struct Skeleton::Pose
-//{
-//public:
-//    struct Transform /// Corresponding to bone/channel
-//    {
-//        glm::vec3 pos;
-//        glm::quat rot;
-//        glm::vec3 sca;
-//    };
-//public:
-//    Pose();
-//    ~Pose();
-//
-//    explicit Pose(int num_transforms);
-//    explicit Pose(Skeleton* skel);
-//
-//    num_transforms;
-//    Transform* transforms;
-//
-//};
+struct Skeleton::Pose
+{
+public:
+    struct Transform /// Corresponding to bone/channel
+    {
+        Transform() : pos(glm::vec3(0.0, 0.0, 0.0)),
+                      rot(glm::quat(1.0, 0.0, 0.0, 0.0)),
+                      sca(glm::vec3(0.0, 0.0, 0.0)) {};
+        glm::vec3 pos;
+        glm::quat rot;
+        glm::vec3 sca;
+    };
+public:
+    Pose();
+    ~Pose();
+
+    explicit Pose(int num_transforms_in);
+    explicit Pose(Skeleton* skel);
+
+    int num_transforms;
+    Transform* transforms;
+
+private:
+    void allocate(int num_transforms_in);
+
+};
+
+class MemFuncOb /// This could be useful for anything that reads from memory blob
+{
+public:
+    MemFuncOb(const char * memblock_in, int offset_in, int memsize_in)
+             : memblock(memblock_in),
+               offset(offset_in),
+               memsize(memsize_in) {};
+    ~MemFuncOb() {};
+
+    void chomp (void * dest, size_t size_in)
+    {
+        if (offset < memsize || size_in == size_t(0))
+        {
+            memcpy(dest, &memblock[offset], size_in);
+            offset += size_in/sizeof(char);
+        }
+        else
+        {
+            std::cerr << "Error: tried to read outside memory block\n";
+        }
+
+    }
+private:
+    const char * memblock;
+    int offset;
+    int memsize;
+};
 
 /// END PROPOSED NEW IMPLEMENTATION
 //
