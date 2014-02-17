@@ -11,8 +11,16 @@
 
 struct RenderBatch
 {
+    RenderBatch(std::weak_ptr<Mesh> mesh_ptr_in,
+                std::weak_ptr<Texture> tex_ptr_in,
+                glm::mat4 transf_mat_in) :
+                    mesh_ptr(mesh_ptr_in),
+                    tex_ptr(tex_ptr_in),
+                    transf_mat(transf_mat_in) {};
+
     std::weak_ptr<Mesh> mesh_ptr;      /// non_owning, points to resource manager's (owner) unique_ptr
     std::weak_ptr<Texture> tex_ptr; ///
+    glm::mat4 transf_mat;
     // BumpMap* bpm_ptr ///
     /// Add as many uniforms, and uniform samplers as needed
 };
@@ -23,7 +31,9 @@ public:
     Prop();
     virtual ~Prop();
 
-    void attachBatch(std::weak_ptr<Mesh> mesh_ptr_in, std::weak_ptr<Texture> tex_ptr_in);
+    void attachBatch(std::weak_ptr<Mesh> mesh_ptr_in,
+                     std::weak_ptr<Texture> tex_ptr_in,
+                     glm::mat4 transf_mat_in = glm::mat4(1.0));
 
 //        list<weak_ptr<Mesh>> mesh_ptrs; /// non_owning pointers, unable to delete
     std::list<RenderBatch> render_batches;

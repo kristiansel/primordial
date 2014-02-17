@@ -131,6 +131,7 @@ void Shader::drawProp(shared_ptr<Prop> prop, glm::mat4 mv)
 //        Mesh &mesh = *shared_ptr<Mesh>(*mesh_ptr_it); /// deref the it to ptr, from ptr to mesh
         shared_ptr<Mesh> mesh_ptr = shared_ptr<Mesh>(rb_it->mesh_ptr);
         shared_ptr<Texture> tex_ptr = shared_ptr<Texture>(rb_it->tex_ptr);
+        glm::mat4 transf_mat = rb_it->transf_mat;
         /// send some clean bone matrices
         //    mat4 clearMatrix = mat4(1.0);
         //    glUniformMatrix4fv(bone_mat, 1, true, &clearMatrix[0][0]); // <-- THIS!
@@ -141,7 +142,7 @@ void Shader::drawProp(shared_ptr<Prop> prop, glm::mat4 mv)
         glm::mat4 rt = glm::mat4_cast(prop->rot);
         glm::mat4 sc = glm::scale(glm::mat4(1.0), prop->scale);
 
-        glm::mat4 vertex_matrix  = mv * tr * rt * sc; // scale, then translate, then lookat.
+        glm::mat4 vertex_matrix  = mv * tr * rt * sc * transf_mat; // scale, then translate, then lookat.
         glUniformMatrix4fv(mv_mat, 1, false, &vertex_matrix[0][0]);
 
         /// normal matrix

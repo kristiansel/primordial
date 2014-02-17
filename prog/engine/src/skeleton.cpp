@@ -199,6 +199,92 @@ void Skeleton::fromFile(std::string filepath)
     }
 }
 
+void Skeleton::poseMatrices(glm::mat4* matrices,
+                            int anim_index,
+                            float time,
+                            int bone_index,
+                            glm::mat4 parent_mat)
+{
+    if (anim_index<num_anims && anim_index > -1 && num_bones > 0)
+    {
+        Animation* animation = &animations[anim_index];
+
+        Bone* bone = &bones[bone_index];
+        Animation::Channel* channel = &(animation->channels[bone_index]);
+
+        /// For now just return the first key
+        glm::vec3 key_pos = channel->pos_keys[0].pos;
+        glm::quat key_rot = channel->rot_keys[0].rot;
+        glm::vec3 key_sca = channel->sca_keys[0].sca;
+
+
+        std::cout << "bone index: " << bone_index << " 0key:\n" ;
+        std::cout << "pos: [" << key_pos.x << "\t"
+                              << key_pos.y << "\t"
+                              << key_pos.z << "]\n";
+
+        std::cout << "rot: [" << key_rot.w << "\t"
+                              << key_rot.x << "\t"
+                              << key_rot.y << "\t"
+                              << key_rot.z << "]\n";
+
+        std::cout << "sca: [" << key_sca.x << "\t"
+                              << key_sca.y << "\t"
+                              << key_sca.z << "]\n";
+
+        glm::mat4 trans_mat = glm::translate(glm::mat4(1.0),
+                                             key_pos);
+        glm::mat4 rot_mat = glm::mat4_cast(key_rot);
+        glm::mat4 sca_mat = glm::scale(glm::mat4(1.0),
+                                       key_sca);
+
+        glm::mat4 local_mat = trans_mat * rot_mat * sca_mat;
+
+        glm::mat4 pose_mat = parent_mat * local_mat;
+
+        matrices[bone_index] = pose_mat;
+
+        std::cout << "bone index: " << bone_index << " local_mat:\n" ;
+        for (int i = 0; i<4; i++)
+        {
+            for (int j = 0; j<4; j++)
+            {
+                std::cout << local_mat[j][i] << "\t";
+            }
+            std::cout << "\n";
+        }
+        std::cout << "bone index: " << bone_index << " rest_mat:\n" ;
+        for (int i = 0; i<4; i++)
+        {
+            for (int j = 0; j<4; j++)
+            {
+                std::cout << bones[bone_index].rest_matrix[j][i] << "\t";
+            }
+            std::cout << "\n";
+        }
+
+        for (int i_child=0; i_child<bone->num_children; i_child++)
+        {
+            poseMatrices(matrices,
+                         anim_index,
+                         time,
+                         bone->child_indices[i_child],
+                         pose_mat);
+        }
+
+    }
+    else
+    {
+        std::cerr << "invalid skeleton pose call\n";
+        std::cerr << "setting all bone matrices to rest\n";
+        for (int i=0; i<num_bones; i++)
+        {
+            matrices[i] = bones[i].rest_matrix;
+        }
+    }
+
+}
+
 
 ///---------------------------------------------------
 

@@ -29,11 +29,18 @@ public:
     virtual ~Skeleton();
 
     void fromFile(std::string filepath);
+    void poseMatrices(glm::mat4* matrices,
+                      int anim_index,
+                      float time,
+                      int bone_index = 0,
+                      glm::mat4 parent_mat = glm::mat4(1.0));
 
     int getNumBones() {return num_bones; };
 protected:
 
-private:
+public: /// private: // public for debugging
+    /// Some recursive function to apply bone transforms
+
     /// Parts of the Skeleton structure
     class Bone;
     class Animation;

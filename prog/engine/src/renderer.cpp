@@ -23,7 +23,7 @@ void Renderer::init(unsigned int scr_width_in, unsigned int scr_height_in)
     cout << "Status: Using GLEW " << glewGetString(GLEW_VERSION) << "\n";
 
     /// Set clear values
-    glClearColor(0.0, 0.0, 1.0, 0.0);
+    glClearColor(0.0, 0.0, 0.0, 0.0);
     glClearDepth(1.0);
 
     /// Enable depth testing
@@ -98,13 +98,15 @@ void Renderer::resizeWindow(int w, int h, bool real)
     */
     glm::mat4 prj ; // just like for lookat
 
+
+    /// 2 issues:
+    /// 1) Should really resizing change the perspective?
+    /// 2) This is the last bit of fixed functionality used
+    ///    Definitly need to revamp this
     glMatrixMode(GL_PROJECTION);
-    //scene->perspective.aspect = w / (float) h;
+
     perspective.aspect = w / (float) h;
-//        mv = Transform::perspective(fovy,aspect,nearz,farz) ;
-    //prj = Transform::perspective(scene->perspective.fovy, scene->perspective.aspect, scene->perspective.nearz, scene->perspective.farz) ;
-//    prj = Transform::perspective(perspective.fovy, perspective.aspect, perspective.nearz, perspective.farz) ;
-//    prj = glm::transpose(prj) ; // accounting for row major
+
     prj = glm::perspective(3.14159265f*perspective.fovy/180.f, perspective.aspect, perspective.nearz, perspective.farz);
     glLoadMatrixf(&prj[0][0]) ;
 

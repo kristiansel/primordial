@@ -6,8 +6,9 @@
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
 #include <glm/glm.hpp>
-
-#include "include/skeleton.h"
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/quaternion.hpp>
+//#include "include/skeleton.h"
 
 
 /// Forward declaration of helper function
@@ -15,16 +16,22 @@
 void node_rec(aiNode* node,
               std::ofstream& file,
               std::vector<std::string> &bone_names,
-              glm::mat4 parent_mat = glm::mat4(1.0));
+              glm::mat4 parent_mat,
+              glm::mat4 &rig_transf,
+              bool rig_transf_found = false);
 
 int get_bone_index(std::string bone_name_in,
                    std::vector<std::string> &bone_names);
 
 glm::mat4 aiMat2glmMat4(aiMatrix4x4 aiMat);
 
+aiMatrix4x4 glm2aiMat4(glm::mat4 glmMat);
+
 void printMat(glm::mat4 mat_in);
 
 float* mat2floatArr(glm::mat4 mat_in);
+
+//void matDecompToTRS(glm::mat4 mat, glm::vec3& trans, glm::quat& rot, glm::vec3& sca);
 
 /// Main function
 bool animPackBin(std::string filepath, std::string outputpath)
@@ -86,7 +93,28 @@ bool animPackBin(std::string filepath, std::string outputpath)
         // here
         // multiply matrices as they go to get opengl coordinates
         // scene/root node contains the blender->opengl transformation
-        node_rec(scene->mRootNode, myFile, boneNames);
+        glm::mat4 rig_transf(1.0);
+        node_rec(scene->mRootNode, myFile, boneNames, glm::mat4(1.0), rig_transf);
+
+        /// mat = trans * rot * sca
+        /// Here decompose the rig_transf matrix
+        /// Apply decomposed transform on all keyframes
+        /// Of the root bone
+
+//        aiMatrix4x4 ai_rig_transf = glm2aiMat4(rig_transf);
+        aiVector3D unused_pos;
+        aiQuaternion unused_rot;
+        aiVector3D unused_sca;
+//
+//        ai_rig_transf.Decompose(rig_sca, rig_rot, rig_pos); /// Magic!
+
+//        glm::vec3 rig_pos = vec3(ai_position.x, ai_position.y, ai_position.z);
+//        glm::vec3 rig_rot = vec3(ai_rotation.w, ai_rotation.x, ai_rotation.y, ai_rotation.z);
+//        glm::vec3 rig_sca = vec3(ai_scaling.x, ai_scaling.y, ai_scaling.z);
+
+
+//        std::cout << "rig_transf: \n";
+//        printMat(rig_transf);
 
         /// animation number, just all animations for now
         int numAnimations = scene->mNumAnimations;
@@ -132,6 +160,15 @@ bool animPackBin(std::string filepath, std::string outputpath)
                     /// SHIT: THESE VALUES ARE NOT YET TRANSFORMED
                     /// TO OPENGL SPACE
                     aiVector3D posVec = posKey.mValue;
+                    if (index==0)
+                    {
+                        glm::vec4 pos_vec = glm::vec4(posVec.x, posVec.y, posVec.z, 1.0);
+                        glm::vec4 pos_vec_rt = rig_transf * pos_vec;
+                        posVec.x = pos_vec_rt.x;
+                        posVec.y = pos_vec_rt.y;
+                        posVec.z = pos_vec_rt.z;
+
+                    }
                     float posArr[3] = { posVec.x, posVec.y, posVec.z };
                     myFile.write ( (char*) &posArr[0], 3*sizeof(float));
                 }
@@ -152,6 +189,17 @@ bool animPackBin(std::string filepath, std::string outputpath)
                     /// SHIT: THESE VALUES ARE NOT YET TRANSFORMED
                     /// TO OPENGL SPACE
                     aiQuaternion rotQuat = rotKey.mValue;
+                    if (index==0)
+                    {
+                        glm::quat rot_quat = glm::quat(rotQuat.w,
+                                                       rotQuat.x,
+                                                       rotQuat.y,
+                                                       rotQuat.z);
+                        glm::mat4 rot_mat = glm::mat4_cast(rot_quat);
+                        glm::mat4 rot_mat_rt = rig_transf * rot_mat;
+                        aiMatrix4x4 aiMat = glm2aiMat4(rot_mat_rt);
+                        aiMat.Decompose(unused_sca, rotQuat, unused_pos);
+                    }
                     float rotArr[4] = { rotQuat.w, rotQuat.x, rotQuat.y, rotQuat.z };
                     myFile.write ( (char*) &rotArr[0], 4*sizeof(float));
                 }
@@ -172,6 +220,17 @@ bool animPackBin(std::string filepath, std::string outputpath)
                     /// SHIT: THESE VALUES ARE NOT YET TRANSFORMED
                     /// TO OPENGL SPACE
                     aiVector3D scaVec = scaKey.mValue;
+                    if (index==0)
+                    {
+                        glm::vec3 sca_vec = glm::vec3(scaVec.x,
+                                                      scaVec.y,
+                                                      scaVec.z );
+                        glm::mat4 sca_mat = glm::scale(glm::mat4(1.0),
+                                                       sca_vec);
+                        glm::mat4 sca_mat_rt = rig_transf * sca_mat;
+                        aiMatrix4x4 aiMat = glm2aiMat4(sca_mat_rt);
+                        aiMat.Decompose(scaVec, unused_rot, unused_pos);
+                    }
                     float scaArr[3] = { scaVec.x, scaVec.y, scaVec.z };
                     myFile.write ( (char*) &scaArr[0], 3*sizeof(float));
                 }
@@ -195,7 +254,9 @@ bool animPackBin(std::string filepath, std::string outputpath)
 void node_rec(aiNode* node,
               std::ofstream& file,
               std::vector<std::string> &bone_names,
-              glm::mat4 parent_mat)
+              glm::mat4 parent_mat,
+              glm::mat4 &rig_transf,
+              bool rig_transf_found)
 {
     int node_index = get_bone_index(node->mName.C_Str(), bone_names);
 
@@ -204,6 +265,11 @@ void node_rec(aiNode* node,
 
     if (-1 != node_index) /// found an index
     {
+        if (!rig_transf_found)
+        {
+            rig_transf = parent_mat;
+            rig_transf_found = true;
+        }
         // Do if a bone
 //        std::cout << "found bone " << node->mName.C_Str() << "\n";
         /// Write the bone index
@@ -236,7 +302,11 @@ void node_rec(aiNode* node,
 
     for (int i = 0; i<node->mNumChildren; i++)
     {
-        node_rec(node->mChildren[i], file, bone_names, abs_mat);
+        node_rec(node->mChildren[i],
+                 file, bone_names,
+                 abs_mat,
+                 rig_transf,
+                 rig_transf_found);
     }
 }
 
@@ -256,15 +326,33 @@ int get_bone_index(std::string bone_name_in,
 
 glm::mat4 aiMat2glmMat4(aiMatrix4x4 aiMat)
 {
+    /// GLM matrix is COLUMN major (retarded)
+    /// 00 10 20 30
+    /// 01 11 21 31
+    /// 02 12 22 32
+    /// 03 13 23 33
     glm::mat4 glmMat;
     for (int i = 0; i<4; i++)
     {
         for (int j = 0; j<4; j++)
         {
-            glmMat[i][j] = aiMat[i][j];
+            glmMat[j][i] = aiMat[i][j];
         }
     }
     return glmMat;
+}
+
+aiMatrix4x4 glm2aiMat4(glm::mat4 glmMat)
+{
+    aiMatrix4x4 aiMat;
+    for (int i = 0; i<4; i++)
+    {
+        for (int j = 0; j<4; j++)
+        {
+            aiMat[j][i] = glmMat[i][j];
+        }
+    }
+    return aiMat;
 }
 
 void printMat(glm::mat4 mat_in)
@@ -291,3 +379,17 @@ float* mat2floatArr(glm::mat4 mat_in)
     }
     return out;
 }
+
+//void matDecompToTRS(glm::mat4 mat, glm::vec3& trans, glm::quat& rot, glm::vec3& sca)
+//{
+//    /// Assume the matrix is on the form:
+//    /// mat4(trans) * mat4(rot) * mat4(sca)
+//
+//    /// Translation is then easily extracted:
+//    trans = vec3(mat[3][0], mat[3][1], mat[3][2], mat[3][3]);
+//    mat[3][0] = 0.0; mat[3][1] = 0.0; mat[3][2] = 0.0; mat[3][3] = 0.0;
+//
+//    /// The matrix is now on the form:
+//    /// mat4(rot) * mat4(sca)
+//    /// Utilizing the fact that mat4(rot)^T = mat4(rot)^-1
+//}
