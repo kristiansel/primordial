@@ -18,6 +18,8 @@
 #include <fstream>
 #include <iostream> /// For debugging
 #include <cstring>
+#include <cmath>
+#include <chtimevaluearray.hpp>
 
 class Skeleton /// This is a resource (store one copy)
 {
@@ -28,7 +30,7 @@ public:
     Skeleton();
     virtual ~Skeleton();
 
-    void fromFile(std::string filepath);
+    void fromFile(std::string skel_key);
     void poseMatrices(glm::mat4* matrices,
                       int anim_index,
                       float time,
@@ -101,6 +103,12 @@ public:
     Channel();
     ~Channel();
 
+    /// Seek function that returns the previous frame
+    /// to the time
+    int seekPrevPos(float time, int hint = -1);
+    int seekPrevRot(float time, int hint = -1);
+    int seekPrevSca(float time, int hint = -1);
+
     int bone_index; /// Each channel corresponds to a bone
 
     int num_pos_keys;
@@ -110,7 +118,10 @@ public:
     TimePosPair* pos_keys;
     TimeRotPair* rot_keys;
     TimeScaPair* sca_keys;
-};
+
+    /// Helper vars
+    float ch_duration;
+    };
 
 /// Output form data structure
 struct Skeleton::Pose

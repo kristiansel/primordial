@@ -18,6 +18,7 @@ struct RenderBatch
                     tex_ptr(tex_ptr_in),
                     transf_mat(transf_mat_in) {};
 
+    /// Change to shared_ptr one day
     std::weak_ptr<Mesh> mesh_ptr;      /// non_owning, points to resource manager's (owner) unique_ptr
     std::weak_ptr<Texture> tex_ptr; ///
     glm::mat4 transf_mat;

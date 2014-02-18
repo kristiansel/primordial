@@ -47,7 +47,7 @@ public:
     virtual ~Mesh();
 
     /// Public member functions
-    void fromFile(string filepath);
+    void fromFile(string mesh_key);
     // void setStageLevel(int stage);
     Material getMaterial();             // called by shader
     GLuint getVBOid();                  // called by shader

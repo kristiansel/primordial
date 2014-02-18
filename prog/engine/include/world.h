@@ -64,6 +64,7 @@ class World : public PhysicsWorld /// Consider merging Culling functionality int
     private:
         ResourceManager<Mesh>    mesh_manager;
         ResourceManager<Texture> tex_manager;
+        ResourceManager<Skeleton> skel_manager;
 
 };
 

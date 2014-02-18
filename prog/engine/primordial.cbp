@@ -55,6 +55,7 @@
 					<Add option="-DGLEW_STATIC" />
 					<Add directory="include" />
 					<Add directory="dependencies/bullet/src" />
+					<Add directory="dependencies" />
 				</Compiler>
 				<Linker>
 					<Add library="sfml-graphics-s-d" />

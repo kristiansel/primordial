@@ -43,7 +43,7 @@ void Mechanics::init(World &world_in, float &dt_in)
     /// Creatures
     world->addCreature( "anim_test",
                         "checkers",
-                        glm::vec3(0.0, 2.0, -4.0) );
+                        glm::vec3(0.0, 1.0, -4.0) );
 
 
     /// remove later

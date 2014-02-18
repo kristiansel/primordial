@@ -49,9 +49,9 @@ Mesh::Mesh(string filepath)
     fromFile(filepath);
 }
 
-void Mesh::fromFile(string filepath)
+void Mesh::fromFile(string mesh_key)
 {
-    filepath = "assets_raw/models/"+filepath+".obj";
+    string filepath = "assets_raw/models/"+mesh_key+".obj";
 //    this->filepath = filepath;
 //    cout << filepath << "\n";
 
