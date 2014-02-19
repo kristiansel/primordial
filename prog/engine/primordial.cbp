@@ -98,6 +98,8 @@
 			<Add option="-fexceptions" />
 			<Add option="-DGLM_FORCE_RADIANS" />
 		</Compiler>
+		<Unit filename="dependencies/memstreamer.hpp" />
+		<Unit filename="dependencies/timeseries.hpp" />
 		<Unit filename="include/actor.h" />
 		<Unit filename="include/camera.h" />
 		<Unit filename="include/creature.h" />
