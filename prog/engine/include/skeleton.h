@@ -97,28 +97,14 @@ public:
 class Skeleton::Animation::Channel ///
 {
 public:
-    struct TimePosPair {float time; glm::vec3 pos; }; /// Consider making argument-less constructor private
-    struct TimeRotPair {float time; glm::quat rot; };
-    struct TimeScaPair {float time; glm::vec3 sca; };
-public:
     Channel();
     ~Channel();
 
-    /// Seek function that returns the previous frame
-    /// to the time
-    int seekPrevPos(float time, int hint = -1);
-    int seekPrevRot(float time, int hint = -1);
-    int seekPrevSca(float time, int hint = -1);
-
     int bone_index; /// Each channel corresponds to a bone
 
-    int num_pos_keys;
-    int num_rot_keys;
-    int num_sca_keys;
-
-    TimePosPair* pos_keys;
-    TimeRotPair* rot_keys;
-    TimeScaPair* sca_keys;
+    TimeSeries<glm::vec3> pos_series;
+    TimeSeries<glm::quat> rot_series;
+    TimeSeries<glm::vec3> sca_series;
 
     /// Helper vars
     float ch_duration;

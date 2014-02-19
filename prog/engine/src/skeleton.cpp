@@ -132,64 +132,67 @@ void Skeleton::fromFile(std::string skel_key)
                 channel->bone_index = channel_index_c;
 
                 /// Read number of position keys
-                reader.chomp(&channel->num_pos_keys,       1*sizeof(int));
-                channel->pos_keys = new Animation::Channel::TimePosPair [channel->num_pos_keys];
-                if (debug) std::cout << "num pos keys: " << channel->num_pos_keys << "\n";
+                reader.chomp(&channel->pos_series.num_keys,       1*sizeof(int));
+                channel->pos_series.keys = new TimeValuePair<glm::vec3> [channel->pos_series.num_keys];
+                channel->pos_series.duration = anim->duration;
+                if (debug) std::cout << "num pos keys: " << channel->pos_series.num_keys << "\n";
 
-                for (int k = 0; k<channel->num_pos_keys; k++)
+                for (int k = 0; k<channel->pos_series.num_keys; k++)
                 {
                     /// Time
-                    Animation::Channel::TimePosPair* timePosPair = &channel->pos_keys[k];
+                    TimeValuePair<glm::vec3>* timePosPair = &channel->pos_series.keys[k];
                     reader.chomp(&timePosPair->time, 1*sizeof(float));
                     if (debug) std::cout << "time: " << timePosPair->time << "\n";
 
                     /// Vector
-                    reader.chomp(&(timePosPair->pos[0]), 3*sizeof(float));
-                    if (debug) std::cout << "pos: [" << timePosPair->pos.x << "\t"
-                                          << timePosPair->pos.y << "\t"
-                                          << timePosPair->pos.z << "]\n";
+                    reader.chomp(&(timePosPair->value[0]), 3*sizeof(float));
+                    if (debug) std::cout << "pos: [" << timePosPair->value.x << "\t"
+                                          << timePosPair->value.y << "\t"
+                                          << timePosPair->value.z << "]\n";
                 }
 
                 /// Read number of rotation keys
-                reader.chomp(&channel->num_rot_keys,       1*sizeof(int));
-                channel->rot_keys = new Animation::Channel::TimeRotPair [channel->num_rot_keys];
-                if (debug) std::cout << "num rot keys: " << channel->num_rot_keys << "\n";
+                reader.chomp(&channel->rot_series.num_keys,       1*sizeof(int));
+                channel->rot_series.keys = new TimeValuePair<glm::quat> [channel->rot_series.num_keys];
+                channel->rot_series.duration = anim->duration;
+                if (debug) std::cout << "num rot keys: " << channel->rot_series.num_keys << "\n";
 
-                for (int k = 0; k<channel->num_rot_keys; k++)
+                for (int k = 0; k<channel->rot_series.num_keys; k++)
                 {
                     /// Time
-                    Animation::Channel::TimeRotPair* timeRotPair = &channel->rot_keys[k];
+                    TimeValuePair<glm::quat>* timeRotPair = &channel->rot_series.keys[k];
                     reader.chomp(&timeRotPair->time, 1*sizeof(float));
                     if (debug) std::cout << "time: " << timeRotPair->time << "\n";
 
                     /// Quaternion
-                    reader.chomp(&(timeRotPair->rot.w), 1*sizeof(float));
-                    reader.chomp(&(timeRotPair->rot.x), 1*sizeof(float));
-                    reader.chomp(&(timeRotPair->rot.y), 1*sizeof(float));
-                    reader.chomp(&(timeRotPair->rot.z), 1*sizeof(float));
-                    if (debug) std::cout << "rot: [" << timeRotPair->rot.w << "\t"
-                                          << timeRotPair->rot.x << "\t"
-                                          << timeRotPair->rot.y << "\t"
-                                          << timeRotPair->rot.z << "]\n";
+                    reader.chomp(&(timeRotPair->value.w), 1*sizeof(float));
+                    reader.chomp(&(timeRotPair->value.x), 1*sizeof(float));
+                    reader.chomp(&(timeRotPair->value.y), 1*sizeof(float));
+                    reader.chomp(&(timeRotPair->value.z), 1*sizeof(float));
+                    if (debug) std::cout << "rot: [" << timeRotPair->value.w << "\t"
+                                          << timeRotPair->value.x << "\t"
+                                          << timeRotPair->value.y << "\t"
+                                          << timeRotPair->value.z << "]\n";
                 }
 
                 /// Read number of scaling keys
-                reader.chomp(&channel->num_sca_keys,       1*sizeof(int));
-                channel->sca_keys = new Animation::Channel::TimeScaPair [channel->num_sca_keys];
-                if (debug) std::cout << "num sca keys: " << channel->num_sca_keys << "\n";
+                reader.chomp(&channel->sca_series.num_keys,       1*sizeof(int));
+                channel->sca_series.keys = new TimeValuePair<glm::vec3> [channel->sca_series.num_keys];
+                channel->sca_series.duration = anim->duration;
+                if (debug) std::cout << "num sca keys: " << channel->sca_series.num_keys << "\n";
 
-                for (int k = 0; k<channel->num_sca_keys; k++)
+                for (int k = 0; k<channel->sca_series.num_keys; k++)
                 {
                     /// Time
-                    Animation::Channel::TimeScaPair* timeScaPair = &channel->sca_keys[k];
+                    TimeValuePair<glm::vec3>* timeScaPair = &channel->sca_series.keys[k];
                     reader.chomp(&timeScaPair->time, 1*sizeof(float));
                     if (debug) std::cout << "time: " << timeScaPair->time << "\n";
 
                     /// Vector
-                    reader.chomp(&(timeScaPair->sca[0]), 3*sizeof(float));
-                    if (debug) std::cout << "sca: [" << timeScaPair->sca.x << "\t"
-                                          << timeScaPair->sca.y << "\t"
-                                          << timeScaPair->sca.z << "]\n";
+                    reader.chomp(&(timeScaPair->value[0]), 3*sizeof(float));
+                    if (debug) std::cout << "sca: [" << timeScaPair->value.x << "\t"
+                                          << timeScaPair->value.y << "\t"
+                                          << timeScaPair->value.z << "]\n";
                 }
                 /// Fill helper variable (used for seek)
                 channel->ch_duration = anim->duration;
@@ -227,9 +230,13 @@ void Skeleton::poseMatrices(glm::mat4* matrices,
 //
 //        int next_rot_key
 
-        glm::vec3 key_pos = channel->pos_keys[channel->seekPrevPos(time)].pos;
-        glm::quat key_rot = channel->rot_keys[channel->seekPrevRot(time)].rot;
-        glm::vec3 key_sca = channel->sca_keys[channel->seekPrevSca(time)].sca;
+//        glm::vec3 key_pos = channel->pos_keys[channel->seekPrevPos(time)].pos;
+//        glm::quat key_rot = channel->rot_keys[channel->seekPrevRot(time)].rot;
+//        glm::vec3 key_sca = channel->sca_keys[channel->seekPrevSca(time)].sca;
+
+        glm::vec3 key_pos = channel->pos_series.seekPrev(time)->value;
+        glm::quat key_rot = channel->rot_series.seekPrev(time)->value;
+        glm::vec3 key_sca = channel->sca_series.seekPrev(time)->value;
 
 
         if (debug) std::cout << "bone index: " << bone_index << " 0key:\n" ;
@@ -319,161 +326,14 @@ Skeleton::Animation::~Animation()
 ///---------------------------------------------------
 
 
-Skeleton::Animation::Channel::Channel() : num_pos_keys(0),
-                                          pos_keys(nullptr),
-                                          num_rot_keys(0),
-                                          rot_keys(nullptr),
-                                          num_sca_keys(0),
-                                          sca_keys(nullptr),
-                                          ch_duration(0.0)
+Skeleton::Animation::Channel::Channel()
 {
     //ctor
 }
 
 Skeleton::Animation::Channel::~Channel()
 {
-    delete [] pos_keys;
-    delete [] rot_keys;
-    delete [] sca_keys;
-}
 
-/// Should really make the channel thing a template
-int Skeleton::Animation::Channel::seekPrevPos(float time, int hint) /// Should give hint
-{
-    /// RIGHT NOW CLAMPING (COULD PERIODISE)
-    if (time < 0) /// This is clamping (might create unsmooth looping)
-        return 0; /// The first key_frame
-    if ( !(time < ch_duration) ) /// This is clamping (might create unsmooth looping)
-        return num_pos_keys - 1;
-    else
-    {
-        if (hint < 0 || !(hint < num_pos_keys)) /// If no/bad hint is given
-            hint = (int)((num_pos_keys-1) * time / ch_duration);  /// Start search by assuming uniform distribution
-            /// The above guarantees that hint is maximum num_pos_keys - 1
-
-//        std::cout << "num_pos_keys = " << num_pos_keys << "\n";
-//        std::cout << "time / ch_duration = " << time / ch_duration << "\n";
-//        std::cout << "hint = " << hint << "\n";
-        /// First check if last frame?
-        /// To eliminate complications further down
-        //if ()
-
-        int cand = hint;
-        while (true)
-        {
-//            std::cout << "cand = " << cand << "\n";
-            /// check if time is between candidate and next
-            bool timeGrCand = (time > pos_keys[cand].time-0.00000001);
-            if (timeGrCand) /// If success so far, proceed
-            {
-                if (cand==num_pos_keys-1)
-                    return cand; /// Time is greater than the last key... should not happen
-
-                /// if not returned here, this is safe
-                bool timeLsNext = (time < pos_keys[cand+1].time+0.00000001);
-                if (timeLsNext)
-                    return cand;
-                else
-                    cand+=1;
-            }
-            else /// Linear search for next (step one down)
-            {
-                cand-=1;
-            }
-        }
-    }
-}
-
-int Skeleton::Animation::Channel::seekPrevRot(float time, int hint) /// Should give hint
-{
-    /// RIGHT NOW CLAMPING (COULD PERIODISE)
-    if (time < 0) /// This is clamping (might create unsmooth looping)
-        return 0; /// The first key_frame
-    if ( !(time < ch_duration) ) /// This is clamping (might create unsmooth looping)
-        return num_rot_keys - 1;
-    else
-    {
-        if (hint < 0 || !(hint < num_rot_keys)) /// If no/bad hint is given
-            hint = (int)((num_rot_keys-1) * time / ch_duration);  /// Start search by assuming uniform distribution
-            /// The above guarantees that hint is maximum num_rot_keys - 1
-
-//        std::cout << "num_rot_keys = " << num_rot_keys << "\n";
-//        std::cout << "time / ch_duration = " << time / ch_duration << "\n";
-//        std::cout << "hint = " << hint << "\n";
-        /// First check if last frame?
-        /// To eliminate complications further down
-        //if ()
-
-        int cand = hint;
-        while (true)
-        {
-//            std::cout << "cand = " << cand << "\n";
-            /// check if time is between candidate and next
-            bool timeGrCand = (time > rot_keys[cand].time-0.00000001);
-            if (timeGrCand) /// If success so far, proceed
-            {
-                if (cand==num_rot_keys-1)
-                    return cand; /// Time is greater than the last key... should not happen
-
-                /// if not returned here, this is safe
-                bool timeLsNext = (time < rot_keys[cand+1].time+0.00000001);
-                if (timeLsNext)
-                    return cand;
-                else
-                    cand+=1;
-            }
-            else /// Linear search for next (step one down)
-            {
-                cand-=1;
-            }
-        }
-    }
-}
-
-int Skeleton::Animation::Channel::seekPrevSca(float time, int hint) /// Should give hint
-{
-    /// RIGHT NOW CLAMPING (COULD PERIODISE)
-    if (time < 0) /// This is clamping (might create unsmooth looping)
-        return 0; /// The first key_frame
-    if ( !(time < ch_duration) ) /// This is clamping (might create unsmooth looping)
-        return num_sca_keys - 1;
-    else
-    {
-        if (hint < 0 || !(hint < num_sca_keys)) /// If no/bad hint is given
-            hint = (int)((num_sca_keys-1) * time / ch_duration);  /// Start search by assuming uniform distribution
-            /// The above guarantees that hint is maximum num_sca_keys - 1
-
-//        std::cout << "num_sca_keys = " << num_sca_keys << "\n";
-//        std::cout << "time / ch_duration = " << time / ch_duration << "\n";
-//        std::cout << "hint = " << hint << "\n";
-        /// First check if last frame?
-        /// To eliminate complications further down
-        //if ()
-
-        int cand = hint;
-        while (true)
-        {
-//            std::cout << "cand = " << cand << "\n";
-            /// check if time is between candidate and next
-            bool timeGrCand = (time > sca_keys[cand].time-0.00000001);
-            if (timeGrCand) /// If success so far, proceed
-            {
-                if (cand==num_sca_keys-1)
-                    return cand; /// Time is greater than the last key... should not happen
-
-                /// if not returned here, this is safe
-                bool timeLsNext = (time < sca_keys[cand+1].time+0.00000001);
-                if (timeLsNext)
-                    return cand;
-                else
-                    cand+=1;
-            }
-            else /// Linear search for next (step one down)
-            {
-                cand-=1;
-            }
-        }
-    }
 }
 
 ///---------------------------------------------------

@@ -163,12 +163,14 @@ list<shared_ptr<Creature>>::iterator World::addCreature(string mesh_key, string 
 //                (*new_creature_it)->attachBatch(mesh_ptr, tex_ptr, matrix);
             } /// Next up, make interpolation/keyframe animations
 
-//            for (float t = -0.5; t<1.1000; t+=0.05)
-//            {
-//                std::cout << t << " : pframe : " << (*new_creature_it)->animations[0].channels[0].seekPrevPos(t) << "\n";
-//                std::cout << t << " : rframe : " << (*new_creature_it)->animations[0].channels[0].seekPrevRot(t) << "\n";
-//                std::cout << t << " : sframe : " << (*new_creature_it)->animations[0].channels[0].seekPrevSca(t) << "\n";
-//            }
+            for (float t = -0.5; t<1.1000; t+=0.05)
+            {
+                Skeleton::Animation::Channel* ch = &(*new_creature_it)->shSkelPtr()->animations[0].channels[0];
+
+                std::cout << t << " : pframe : " << ch->pos_series.seekPrev(t)->time << "\n";
+                std::cout << t << " : rframe : " << ch->rot_series.seekPrev(t)->time << "\n";
+                std::cout << t << " : sframe : " << ch->sca_series.seekPrev(t)->time << "\n";
+            }
 
 
 

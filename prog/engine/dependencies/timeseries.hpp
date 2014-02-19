@@ -3,59 +3,58 @@
 
 #include <iostream>
 
+template <class ValueType> struct TimeValuePair
+{
+    /// Uninitialized
+    float time;
+    ValueType value;
+};
+
 template <class ValueType> class TimeSeries /// Struct like
 {
     public:
-        struct TimeValuePair
-        {
-            /// Uninitialized
-            float time;
-            ValueType value;
-        };
-
         TimeSeries() : num_keys(0),
                        keys(nullptr),
-                       duration(0) {};
+                       duration(0.f) {};
         ~TimeSeries() {delete[] keys;};
 
-        void init(int num_keys, float duration)
-            {this->num_keys = num_keys;
-             delete[] keys;
-             keys = new TimeValuePair [num_keys];
-             this->duration = duration;} ;
+//        void init(int num_keys, float duration)
+//            {this->num_keys = num_keys;
+//             delete[] keys;
+//             keys = new TimeValuePair [num_keys];
+//             this->duration = duration;} ;
 
-        TimeValuePair* seekPrev(float time, int hint = -1);
+        TimeValuePair<ValueType>* seekPrev(float time, int hint = -1);
 
-        TimeValuePair getKey(int ind_in)
-        {
-            if (ind_in < 0 || !(ind_in<num_keys))
-            {
-                std::cerr << "TimeSeries error: attempted to read key out of bounds\n";
-                return {0.0, ValueType()};
-            }
-            else return keys[ind_in];
+//        TimeValuePair getKey(int ind_in)
+//        {
+//            if (ind_in < 0 || !(ind_in<num_keys))
+//            {
+//                std::cerr << "TimeSeries error: attempted to read key out of bounds\n";
+//                return {0.0, ValueType()};
+//            }
+//            else return keys[ind_in];
+//
+//        }
+//        void setKey(int ind_in, TimeValuePair key_in)
+//        {
+//            if (ind_in < 0 || !(ind_in<num_keys))
+//            {
+//                std::cerr << "TimeSeries error: attempted to write key out of bounds\n";
+//            }
+//            else keys[ind_in] = key_in;
+//        }
 
-        }
-        void setKey(int ind_in, TimeValuePair key_in)
-        {
-            if (ind_in < 0 || !(ind_in<num_keys))
-            {
-                std::cerr << "TimeSeries error: attempted to write key out of bounds\n";
-            }
-            else keys[ind_in] = key_in;
-        }
+//        int getNumKeys() {return num_keys;};
 
-        int getNumKeys() {return num_keys;};
-
-    private:
         int num_keys;
-        TimeValuePair* keys;
+        TimeValuePair<ValueType>* keys;
         float duration;
 };
 
 /// Definition of beefy functions
 template <class ValueType>                              /// Template parameters
-typename TimeSeries<ValueType>::TimeValuePair*          /// Return type
+TimeValuePair<ValueType>*                               /// Return type
 TimeSeries<ValueType>::seekPrev(float time, int hint)   /// Function signature
 {
     /// RIGHT NOW CLAMPING (COULD PERIODISE)
