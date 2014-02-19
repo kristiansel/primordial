@@ -45,7 +45,7 @@ void Skeleton::fromFile(std::string skel_key)
         int verMaj;                           /// 4 bytes     version major
         int verMin;                           /// 4 bytes     version minor
 
-        MemFuncOb reader(memblock, 0, filesize);
+        MemStreamer reader(memblock, 0, filesize);
         reader.chomp(&filetype[0],  4*sizeof(char));
         reader.chomp(&verMaj,       1*sizeof(int));
         reader.chomp(&verMin,       1*sizeof(int));
@@ -221,6 +221,12 @@ void Skeleton::poseMatrices(glm::mat4* matrices,
         Animation::Channel* channel = &(animation->channels[bone_index]);
 
         /// No interpolation, just use previous frame
+//        int prev_pos_key = channel->seekPrevPos(time);
+//        int prev_rot_key = channel->seekPrevRot(time);
+//        int prev_sca_key = channel->seekPrevSca(time);
+//
+//        int next_rot_key
+
         glm::vec3 key_pos = channel->pos_keys[channel->seekPrevPos(time)].pos;
         glm::quat key_rot = channel->rot_keys[channel->seekPrevRot(time)].rot;
         glm::vec3 key_sca = channel->sca_keys[channel->seekPrevSca(time)].sca;

@@ -19,7 +19,8 @@
 #include <iostream> /// For debugging
 #include <cstring>
 #include <cmath>
-#include <chtimevaluearray.hpp>
+#include <memstreamer.hpp>
+#include <timeseries.hpp>
 
 class Skeleton /// This is a resource (store one copy)
 {
@@ -151,33 +152,7 @@ private:
 
 };
 
-class MemFuncOb /// This could be useful for anything that reads from memory blob
-{
-public:
-    MemFuncOb(const char * memblock_in, int offset_in, int memsize_in)
-             : memblock(memblock_in),
-               offset(offset_in),
-               memsize(memsize_in) {};
-    ~MemFuncOb() {};
 
-    void chomp (void * dest, size_t size_in)
-    {
-        if (offset < memsize || size_in == size_t(0))
-        {
-            memcpy(dest, &memblock[offset], size_in);
-            offset += size_in/sizeof(char);
-        }
-        else
-        {
-            std::cerr << "Error: tried to read outside memory block\n";
-        }
-
-    }
-private:
-    const char * memblock;
-    int offset;
-    int memsize;
-};
 
 /// END PROPOSED NEW IMPLEMENTATION
 //
