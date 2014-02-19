@@ -5,13 +5,8 @@ in Master::handleInput :
 	Add mouselook
 
 General :
-	Skeletal animation: Transform animation channels 
-	by "armature matrix" (first matrix to hit a bone
-	basically) Save the matrix, decomponse into tra,
-	rot and scale, and apply it to every key frame
-	
-	After that-> interpolation -> change shading to include
-	animation!
-	
-	Then clean up, make a resource buffer for skeletons etc.
+	Outstanding in animation: Integrate geometry into the collada exporter
+	in order to consistently export vertex weights and store them in a weight-index
+	fashion using 4 bone influences per vertex: While at it, fix texture coordinate
+	seams...
 

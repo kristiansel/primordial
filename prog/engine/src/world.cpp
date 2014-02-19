@@ -148,25 +148,25 @@ list<shared_ptr<Creature>>::iterator World::addCreature(string mesh_key, string 
 
 
 
-//    /// Debugging skeleton
-//    weak_ptr<Mesh>      ax_mesh_ptr    = mesh_manager.getResptrFromKey ("axes");
-//    weak_ptr<Texture>   ax_tex_ptr     = tex_manager.getResptrFromKey  ("tricolor");
-//
-//    for (int i = 0; i<(*new_creature_it)->shSkelPtr()->num_bones; i++)
-//    {
-//        glm::mat4 matrix = (*new_creature_it)->shSkelPtr()->bones[i].rest_matrix;
-//        (*new_creature_it)->attachBatch(ax_mesh_ptr, ax_tex_ptr, matrix);
-//    }
-//
-//    for (int j = 0; j<6; j++)
-//    {
-//        (*new_creature_it)->pose(0, j*0.1);
-//
-//        for (int i = 0; i<(*new_creature_it)->shSkelPtr()->num_bones; i++)
-//        {
-//            (*new_creature_it)->attachBatch(ax_mesh_ptr, ax_tex_ptr, (*new_creature_it)->pose_matrices[i]);
-//        }
-//    }
+    /// Debugging skeleton
+    weak_ptr<Mesh>      ax_mesh_ptr    = mesh_manager.getResptrFromKey ("axes");
+    weak_ptr<Texture>   ax_tex_ptr     = tex_manager.getResptrFromKey  ("tricolor");
+
+    for (int i = 0; i<(*new_creature_it)->shSkelPtr()->num_bones; i++)
+    {
+        glm::mat4 matrix = (*new_creature_it)->shSkelPtr()->bones[i].rest_matrix;
+        (*new_creature_it)->attachBatch(ax_mesh_ptr, ax_tex_ptr, matrix);
+    }
+
+    for (int j = 0; j<6; j++)
+    {
+        (*new_creature_it)->pose(0, j*0.1);
+
+        for (int i = 0; i<(*new_creature_it)->shSkelPtr()->num_bones; i++)
+        {
+            (*new_creature_it)->attachBatch(ax_mesh_ptr, ax_tex_ptr, (*new_creature_it)->pose_matrices[i]);
+        }
+    }
 
 
 
