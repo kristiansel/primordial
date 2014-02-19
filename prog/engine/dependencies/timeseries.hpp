@@ -13,6 +13,17 @@ template <class ValueType> struct TimeValuePair
 template <class ValueType> class TimeSeries /// Struct like
 {
     public:
+        struct SeekResult
+        {
+            struct KeyWeightPair
+            {
+                TimeValuePair<ValueType>* key;
+                float weight;
+            };
+            KeyWeightPair prev;
+            KeyWeightPair next;
+        };
+    public:
         TimeSeries() : num_keys(0),
                        keys(nullptr),
                        duration(0.f) {};
@@ -24,7 +35,7 @@ template <class ValueType> class TimeSeries /// Struct like
 //             keys = new TimeValuePair [num_keys];
 //             this->duration = duration;} ;
 
-        TimeValuePair<ValueType>* seekPrev(float time, int hint = -1);
+        SeekResult seekPrev(float time, int hint = -1);
 
 //        TimeValuePair getKey(int ind_in)
 //        {
@@ -53,15 +64,26 @@ template <class ValueType> class TimeSeries /// Struct like
 };
 
 /// Definition of beefy functions
+
 template <class ValueType>                              /// Template parameters
-TimeValuePair<ValueType>*                               /// Return type
+typename TimeSeries<ValueType>::SeekResult              /// Return type
 TimeSeries<ValueType>::seekPrev(float time, int hint)   /// Function signature
 {
+    /// This function will be called a lot, so might become the bottleneck
+
+
+    TimeValuePair<ValueType>* prev = &(keys[0]);
+
     /// RIGHT NOW CLAMPING (COULD PERIODISE)
     if (time < 0) /// This is clamping (might create unsmooth looping)
-        return &(keys[0]); /// The first key_frame
-    if ( !(time < duration) ) /// This is clamping (might create unsmooth looping)
-        return &(keys[num_keys - 1]);
+    {
+        prev = &(keys[0]);
+//        return prev; /// The first key_frame
+    }
+    else if ( !(time < duration) ) /// This is clamping (might create unsmooth looping)
+    {
+        prev = &(keys[num_keys - 1]);
+    }
     else
     {
         if (hint < 0 || !(hint < num_keys)) /// If no/bad hint is given
@@ -75,8 +97,9 @@ TimeSeries<ValueType>::seekPrev(float time, int hint)   /// Function signature
         /// To eliminate complications further down
         //if ()
 
+        bool found = false;
         int cand = hint;
-        while (true)
+        while (!found)
         {
 //            std::cout << "cand = " << cand << "\n";
             /// check if time is between candidate and next
@@ -84,14 +107,22 @@ TimeSeries<ValueType>::seekPrev(float time, int hint)   /// Function signature
             if (timeGrCand) /// If success so far, proceed
             {
                 if (cand==num_keys-1)
-                    return &(keys[cand]); /// Time is greater than the last key... should not happen
-
-                /// if not returned here, this is safe
-                bool timeLsNext = (time < keys[cand+1].time+0.00000001);
-                if (timeLsNext)
-                    return &(keys[cand]);
+                {
+                    prev = &(keys[cand]); /// Time is greater than the last key... should not happen
+                    found = true;
+                }
                 else
-                    cand+=1;
+                {
+                    /// if not returned here, this is safe
+                    bool timeLsNext = (time < keys[cand+1].time+0.00000001);
+                    if (timeLsNext)
+                    {
+                        prev = &(keys[cand]);
+                        found = true;
+                    }
+                    else
+                        cand+=1;
+                }
             }
             else /// Linear search for next (step one down)
             {
@@ -99,6 +130,24 @@ TimeSeries<ValueType>::seekPrev(float time, int hint)   /// Function signature
             }
         }
     }
+
+    SeekResult res;
+    res.prev.key = prev;
+
+    if (prev==&(keys[num_keys-1]))
+    {
+        res.next.key = &(keys[0]);
+        res.next.weight = (time-prev->time)/(duration-prev->time);
+    }
+    else
+    {
+        res.next.key = &(prev[1]);
+        res.next.weight = (time-prev->time)/(res.next.key->time-prev->time);
+    }
+
+    res.prev.weight = 1.0-res.next.weight;
+    return res;
+//    return prev;
 }
 
 #endif // TIMESERIES_H

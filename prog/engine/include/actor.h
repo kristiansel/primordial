@@ -19,7 +19,9 @@ class Actor : public Prop
         /// Temporary for debugging:
         std::shared_ptr<Skeleton> shSkelPtr();
 
-        std::weak_ptr<Skeleton> skel_ptr;
+        std::shared_ptr<Skeleton> skel_ptr;
+
+        void pose(int anim_index, float time);
 
         /// could consider getter method/private for:
         int num_pose_matrices;

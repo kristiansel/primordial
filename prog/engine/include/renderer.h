@@ -37,10 +37,9 @@ protected:
     static glm::mat4 getModelViewMatrix(Object3d o3d_in);
 
 private:
+
     Shader main_shader;
 
-    /// Scene items, to be re-arranged later
-    //Scene *scene;
     Perspective perspective;
 
 

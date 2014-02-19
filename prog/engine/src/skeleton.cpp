@@ -214,7 +214,7 @@ void Skeleton::poseMatrices(glm::mat4* matrices,
                             int bone_index,
                             glm::mat4 parent_mat)
 {
-    bool debug = false;
+    bool debug = true;
 
     if (anim_index<num_anims && anim_index > -1 && num_bones > 0)
     {
@@ -234,24 +234,36 @@ void Skeleton::poseMatrices(glm::mat4* matrices,
 //        glm::quat key_rot = channel->rot_keys[channel->seekPrevRot(time)].rot;
 //        glm::vec3 key_sca = channel->sca_keys[channel->seekPrevSca(time)].sca;
 
-        glm::vec3 key_pos = channel->pos_series.seekPrev(time)->value;
-        glm::quat key_rot = channel->rot_series.seekPrev(time)->value;
-        glm::vec3 key_sca = channel->sca_series.seekPrev(time)->value;
+//        glm::vec3 key_pos = channel->pos_series.seekPrev(time)->value;
+//        glm::quat key_rot = channel->rot_series.seekPrev(time)->value;
+//        glm::vec3 key_sca = channel->sca_series.seekPrev(time)->value;
 
+        auto pos_res = channel->pos_series.seekPrev(time);
+        auto rot_res = channel->rot_series.seekPrev(time);
+        auto sca_res = channel->sca_series.seekPrev(time);
 
-        if (debug) std::cout << "bone index: " << bone_index << " 0key:\n" ;
-        if (debug) std::cout << "pos: [" << key_pos.x << "\t"
-                              << key_pos.y << "\t"
-                              << key_pos.z << "]\n";
+//        glm::vec3 key_pos = pos_res.prev.key->value;
+//        glm::quat key_rot = rot_res.prev.key->value;
+//        glm::vec3 key_sca = sca_res.prev.key->value;
 
-        if (debug) std::cout << "rot: [" << key_rot.w << "\t"
-                              << key_rot.x << "\t"
-                              << key_rot.y << "\t"
-                              << key_rot.z << "]\n";
+        glm::vec3 key_pos = glm::mix(pos_res.prev.key->value, pos_res.next.key->value, pos_res.next.weight);
+        glm::quat key_rot = glm::mix(rot_res.prev.key->value, rot_res.next.key->value, rot_res.next.weight);
+        glm::vec3 key_sca = glm::mix(sca_res.prev.key->value, sca_res.next.key->value, sca_res.next.weight);
 
-        if (debug) std::cout << "sca: [" << key_sca.x << "\t"
-                              << key_sca.y << "\t"
-                              << key_sca.z << "]\n";
+////
+//        if (debug) std::cout << "INTERPOLATED: " << bone_index << " 0key:\n" ;
+//        if (debug) std::cout << "pos: [" << key_pos.x << "\t"
+//                              << key_pos.y << "\t"
+//                              << key_pos.z << "]\n";
+//
+//        if (debug) std::cout << "rot: [" << key_rot.w << "\t"
+//                              << key_rot.x << "\t"
+//                              << key_rot.y << "\t"
+//                              << key_rot.z << "]\n";
+//
+//        if (debug) std::cout << "sca: [" << key_sca.x << "\t"
+//                              << key_sca.y << "\t"
+//                              << key_sca.z << "]\n";
 
         glm::mat4 trans_mat = glm::translate(glm::mat4(1.0),
                                              key_pos);
@@ -265,24 +277,24 @@ void Skeleton::poseMatrices(glm::mat4* matrices,
 
         matrices[bone_index] = pose_mat;
 
-        if (debug) std::cout << "bone index: " << bone_index << " local_mat:\n" ;
-        for (int i = 0; i<4; i++)
-        {
-            for (int j = 0; j<4; j++)
-            {
-                if (debug) std::cout << local_mat[j][i] << "\t";
-            }
-            if (debug) std::cout << "\n";
-        }
-        if (debug) std::cout << "bone index: " << bone_index << " rest_mat:\n" ;
-        for (int i = 0; i<4; i++)
-        {
-            for (int j = 0; j<4; j++)
-            {
-                if (debug) std::cout << bones[bone_index].rest_matrix[j][i] << "\t";
-            }
-            if (debug) std::cout << "\n";
-        }
+//        if (debug) std::cout << "bone index: " << bone_index << " local_mat:\n" ;
+//        for (int i = 0; i<4; i++)
+//        {
+//            for (int j = 0; j<4; j++)
+//            {
+//                if (debug) std::cout << local_mat[j][i] << "\t";
+//            }
+//            if (debug) std::cout << "\n";
+//        }
+//        if (debug) std::cout << "bone index: " << bone_index << " rest_mat:\n" ;
+//        for (int i = 0; i<4; i++)
+//        {
+//            for (int j = 0; j<4; j++)
+//            {
+//                if (debug) std::cout << bones[bone_index].rest_matrix[j][i] << "\t";
+//            }
+//            if (debug) std::cout << "\n";
+//        }
 
         for (int i_child=0; i_child<bone->num_children; i_child++)
         {

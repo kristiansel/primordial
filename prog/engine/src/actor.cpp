@@ -17,7 +17,7 @@ Actor::~Actor()
 void Actor::attachSkeleton(std::weak_ptr<Skeleton> skel_ptr_in)
 {
     /// Set the pointer
-    skel_ptr = skel_ptr_in;
+    skel_ptr = std::shared_ptr<Skeleton>(skel_ptr_in);
 
     // temporary working shared pointer
     auto shared_skel_ptr = std::shared_ptr<Skeleton>(skel_ptr);
@@ -37,3 +37,7 @@ std::shared_ptr<Skeleton> Actor::shSkelPtr()
     return std::shared_ptr<Skeleton>(skel_ptr);
 }
 
+void Actor::pose(int anim_index, float time)
+{
+    skel_ptr->poseMatrices(pose_matrices, anim_index, time);
+}

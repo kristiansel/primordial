@@ -126,55 +126,88 @@ list<shared_ptr<Creature>>::iterator World::addCreature(string mesh_key, string 
     creatures.push_back(shared_ptr<Creature>(new Creature()));
     list<shared_ptr<Creature>>::iterator new_creature_it = --creatures.end();
 
-    (*new_creature_it)->pos = pos;         /// configure position
+    shared_ptr<Creature> &creature = (*new_creature_it);
+
+    creature->pos = pos;         /// configure position
 //    (*new_creature_it)->dir = dir;         /// configure direction
-
-
 
     /// attach the mesh ( This is how it should be done)
     weak_ptr<Mesh>       mesh_ptr    = mesh_manager.getResptrFromKey (mesh_key);
     weak_ptr<Texture>    tex_ptr     = tex_manager.getResptrFromKey  (tex_key);
 
-    (*new_creature_it)->attachBatch(mesh_ptr, tex_ptr);
+    creature->attachBatch(mesh_ptr, tex_ptr);
 
     /// attach skeleton
     /// Use same key for skeleton and mesh for now
     string skel_key = mesh_key;
     weak_ptr<Skeleton>   skel_ptr     = skel_manager.getResptrFromKey  (skel_key);
-    (*new_creature_it)->attachSkeleton(skel_ptr);
+    creature->attachSkeleton(skel_ptr);
+
+    /// Default pose
+    creature->pose(/*anim_num=*/ 0, /*time=*/0.5f);
+
+
+
+//    /// Debugging skeleton
+//    weak_ptr<Mesh>      ax_mesh_ptr    = mesh_manager.getResptrFromKey ("axes");
+//    weak_ptr<Texture>   ax_tex_ptr     = tex_manager.getResptrFromKey  ("tricolor");
+//
+//    for (int i = 0; i<(*new_creature_it)->shSkelPtr()->num_bones; i++)
+//    {
+//        glm::mat4 matrix = (*new_creature_it)->shSkelPtr()->bones[i].rest_matrix;
+//        (*new_creature_it)->attachBatch(ax_mesh_ptr, ax_tex_ptr, matrix);
+//    }
+//
+//    for (int j = 0; j<6; j++)
+//    {
+//        (*new_creature_it)->pose(0, j*0.1);
+//
+//        for (int i = 0; i<(*new_creature_it)->shSkelPtr()->num_bones; i++)
+//        {
+//            (*new_creature_it)->attachBatch(ax_mesh_ptr, ax_tex_ptr, (*new_creature_it)->pose_matrices[i]);
+//        }
+//    }
+
+
+
+
 
     /// load bones and animation
 //    (*new_creature_it)->fromFile("anim_test");
-
-            /// For debugging: Add the bones as renderbatches instead of model
-
-            glm::mat4* matrices = new glm::mat4 [(*new_creature_it)->shSkelPtr()->num_bones];
-
-            /// void Skeleton::poseMatrices(glm::mat4* matrices, int anim_index, float time);
-            (*new_creature_it)->shSkelPtr()->poseMatrices(matrices, 0, 0.5);
-
-            for (int i = 0; i<(*new_creature_it)->shSkelPtr()->num_bones; i++)
-            {
-                weak_ptr<Mesh>      mesh_ptr    = mesh_manager.getResptrFromKey ("axes");
-                weak_ptr<Texture>   tex_ptr     = tex_manager.getResptrFromKey  ("tricolor");
-                glm::mat4 matrix = (*new_creature_it)->shSkelPtr()->bones[i].rest_matrix;
-
-                (*new_creature_it)->attachBatch(mesh_ptr, tex_ptr, matrices[i]);
+//
+//            /// For debugging: Add the bones as renderbatches instead of model
+//
+//            glm::mat4* matrices = new glm::mat4 [(*new_creature_it)->shSkelPtr()->num_bones];
+//            glm::mat4* matrices_betw = new glm::mat4 [(*new_creature_it)->shSkelPtr()->num_bones];
+//
+//            /// void Skeleton::poseMatrices(glm::mat4* matrices, int anim_index, float time);
+//            (*new_creature_it)->shSkelPtr()->poseMatrices(matrices, 0, 0.4167);
+//            (*new_creature_it)->shSkelPtr()->poseMatrices(matrices_betw, 0, 0.6000);
+//
+//            for (int i = 0; i<(*new_creature_it)->shSkelPtr()->num_bones; i++)
+//            {
+//                weak_ptr<Mesh>      mesh_ptr    = mesh_manager.getResptrFromKey ("axes");
+//                weak_ptr<Texture>   tex_ptr     = tex_manager.getResptrFromKey  ("tricolor");
+//                glm::mat4 matrix = (*new_creature_it)->shSkelPtr()->bones[i].rest_matrix;
+//
+//                (*new_creature_it)->attachBatch(mesh_ptr, tex_ptr, matrices[i]);
+//                (*new_creature_it)->attachBatch(mesh_ptr, tex_ptr, matrices_betw[i]);
 //                (*new_creature_it)->attachBatch(mesh_ptr, tex_ptr, matrix);
-            } /// Next up, make interpolation/keyframe animations
-
-            for (float t = -0.5; t<1.1000; t+=0.05)
-            {
-                Skeleton::Animation::Channel* ch = &(*new_creature_it)->shSkelPtr()->animations[0].channels[0];
-
-                std::cout << t << " : pframe : " << ch->pos_series.seekPrev(t)->time << "\n";
-                std::cout << t << " : rframe : " << ch->rot_series.seekPrev(t)->time << "\n";
-                std::cout << t << " : sframe : " << ch->sca_series.seekPrev(t)->time << "\n";
-            }
-
-
-
-            delete[] matrices;
+//            }
+//
+////            for (float t = -0.5; t<1.1000; t+=0.05)
+////            {
+////                Skeleton::Animation::Channel* ch = &(*new_creature_it)->shSkelPtr()->animations[0].channels[0];
+////
+////                std::cout << t << " : pframe : " << ch->pos_series.seekPrev(t)->time << "\n";
+////                std::cout << t << " : rframe : " << ch->rot_series.seekPrev(t)->time << "\n";
+////                std::cout << t << " : sframe : " << ch->sca_series.seekPrev(t)->time << "\n";
+////            }
+//
+//
+//
+//            delete[] matrices;
+//            delete[] matrices_betw;
 
 
     return new_creature_it;
