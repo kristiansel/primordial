@@ -13,6 +13,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
+					<Add directory="include" />
 				</Compiler>
 				<Linker>
 					<Add library="C:\Program Files (x86)\CodeBlocks\MinGW\lib\libassimp.dll.a" />
@@ -25,6 +26,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add directory="include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -38,7 +40,9 @@
 			<Add option="-fexceptions" />
 			<Add directory="../../engine" />
 		</Compiler>
-		<Unit filename="animpackbin.hpp" />
+		<Unit filename="include/animpackbin.hpp" />
+		<Unit filename="include/converter.hpp" />
+		<Unit filename="include/geopackbin.hpp" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />

@@ -276,25 +276,25 @@ bool Parser::parseSkinnedObj(string filepath, Vertex*& vertices, Triangle*& tria
                     temp_norm_inds.push_back(norm_tri);
 
                 }
-                if (cmd=="w")
-                {
-                    char* name = strtok(NULL, " :()"); /// Shouldn't this be deleted?
-                    string bone_names = "";
-                    int i = 0;
-                    glm::vec3 w = glm::vec3(0, 0, 0);
-                    while (name != NULL && i<3)
-                    {
-                        string name_str = name;
-                        bone_names +=name_str+" ";
-                        w[i] = atof(strtok(NULL, " :()"));
-                        name = strtok (NULL, " :()");
-                        i++;
-                    }
-                    w = glm::normalize(w); //! UNSURE ABOUT THIS
-
-                    temp_b_names.push_back(bone_names);
-                    temp_b_weights.push_back(w);
-                }
+//                if (cmd=="w")
+//                {
+//                    char* name = strtok(NULL, " :()");
+//                    string bone_names = "";
+//                    int i = 0;
+//                    glm::vec3 w = glm::vec3(0, 0, 0);
+//                    while (name != NULL && i<3)
+//                    {
+//                        string name_str = name;
+//                        bone_names +=name_str+" ";
+//                        w[i] = atof(strtok(NULL, " :()"));
+//                        name = strtok (NULL, " :()");
+//                        i++;
+//                    }
+//                    w = glm::normalize(w); //! UNSURE ABOUT THIS
+//
+//                    temp_b_names.push_back(bone_names);
+//                    temp_b_weights.push_back(w);
+//                }
             }
             getline (in, str) ;
         } // while there are more lines
@@ -379,7 +379,7 @@ bool Parser::parseSkinnedObj(string filepath, Vertex*& vertices, Triangle*& tria
 //                }
 //                else
 //                {
-//                    cerr<<"wierd vertex weights "<<h<<"\n";
+//                    cout<<"wierd vertex weights "<<h<<"\n";
 //                    vertices[h].bone_weights[0] = 1.0;
 //                    vertices[h].bone_weights[1] = 0.0;
 //                    vertices[h].bone_weights[2] = 0.0;

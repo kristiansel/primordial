@@ -5,7 +5,7 @@
 #include <vector>
 #include <iostream>
 
-const unsigned int MAX_BONE_INFLUENCES = 3;
+const unsigned int MAX_BONE_INFLUENCES = 4;
 
 struct Vertex // 60 bytes
 {
@@ -16,8 +16,8 @@ struct Vertex // 60 bytes
     glm::vec3 normal; //Vertex normals; -----12bytes
 //    vec2 tex_coords; //Texture coordinates u, v -----8 bytes
     float tex_coords[2];
-    int bone_indices[MAX_BONE_INFLUENCES]; // 3*4 = 12 bytes
-    float bone_weights[MAX_BONE_INFLUENCES]; // 3*4 = 12 bytes
+    int bone_indices[MAX_BONE_INFLUENCES]; // 4*4 = 16 bytes
+    float bone_weights[MAX_BONE_INFLUENCES]; // 4*4 = 16 bytes
 };
 
 struct Triangle // 12 bytes

@@ -9,6 +9,7 @@
 #include "geometry.h"
 #include "parser.h"
 #include "object3d.h"
+#include "memstreamer.hpp"
 
 using std::string;
 using std::cout;
@@ -48,6 +49,7 @@ public:
 
     /// Public member functions
     void fromFile(string mesh_key);
+    void fromFile2();
     // void setStageLevel(int stage);
     Material getMaterial();             // called by shader
     GLuint getVBOid();                  // called by shader
