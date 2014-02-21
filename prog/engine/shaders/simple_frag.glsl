@@ -53,7 +53,8 @@ void main (void)
         // Compute normal, needed for shading.
         // Simpler is vec3 normal = normalize(gl_NormalMatrix * mynormal) ;
 //        vec3 _normal = (gl_ModelViewMatrixInverseTranspose*vec4(mynormal,1.0)).xyz ;
-        vec3 _normal = (nrm_mat * vec4(mynormal, 0.0)).xyz;
+        // vec3 _normal = (nrm_mat * vec4(mynormal, 0.0)).xyz;
+        vec3 _normal = (mv_mat * vec4(mynormal, 0.0)).xyz;
 
         vec3 normal = normalize(_normal) ;
 
@@ -93,7 +94,7 @@ void main (void)
 //            vec4 amb = ambient;
 		/// Without texture
         // gl_FragColor = amb + emission + SUM ;//+ ct; // gl_FragColor = ambient + emmisive + SUM ;
-		
+
 		/// With texture
 		vec4 color = amb + emission + SUM ;
 		vec4 texel = texture2D(tex, mytexco.st);

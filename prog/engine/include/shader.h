@@ -34,6 +34,9 @@ public:
     /// void draw(Actor &actor, glm::mat4 mv);
     /// void draw(Terrain &terrain, glm::mat4 mv);
 
+    /// Should look into ridding me of this:
+    GLuint getBoneMat() {return bone_mat;};
+
 protected:
 private:
     /// opengl program id
@@ -54,17 +57,17 @@ private:
         GLuint tex;             /// set by shader. NOT SET YET (SEGFAULT)   AVOIDABLE
 //        GLuint tex2;            /// set by shader. NOT SET YET (SEGFAULT)   AVOIDABLE
 //        GLuint time;            /// set by shader
-//        GLuint bone_mat;        /// set by shader.
-//        GLuint nobo_mat;        /// set by shader. NOT SET YET (SEGFAULT)   AVOIDABLE
+        GLuint bone_mat;        /// set by shader.
+//        GLuint nobo_mat;        /// set by shader.
     GLuint mv_mat;          /// set by shader
-    GLuint nrm_mat;         /// set by shader
+    //GLuint nrm_mat;         /// set by shader
 
     /// attributes
     GLuint vertex;          /// set by shader
     GLuint normal;          /// set by shader
     GLuint texCoord0;       /// set by shader
-//        GLuint bone_index;      /// set by shader
-//        GLuint bone_weight;     /// set by shader
+    GLuint bone_index;      /// set by shader
+    GLuint bone_weight;     /// set by shader
 
     /// helper functions:
     static string textFileRead (const char * filename);

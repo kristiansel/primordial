@@ -57,12 +57,20 @@ void Mesh::fromFile(string mesh_key)
 
     //Skeleton* skeleton;
     //skeleton->loadFromBNS(filepath); /// The wierdest and unsafest code ever...
+    if (mesh_key == "anim_test") /// HOLY SHIT IT WORKED FIRST TRY
+    {
+        std::cout << "loading from bgeo:" << mesh_key << std::endl;
+        fromFile2();
+    }
+    else
+    {
+        bool res = Parser::parseSimpleObj(filepath, vertices, triangles, vertex_num, triangle_num); /// calls "new" on pointers
 
-    bool res = Parser::parseSimpleObj(filepath, vertices, triangles, vertex_num, triangle_num); /// calls "new" on pointers
+        //std::weak_ptr<Skeleton> skel_wptr = ResourceManager[mesh_key] ; /// No access to resource manager, nor should it
+        /// bool res = Parser::parseSkinnedObj(filepath, vertices, triangles, vertex_num, triangle_num, skeleton); /// calls "new" on pointers
+        if (!res) std::cerr << "unable to load mesh " << filepath << "\n";
+    }
 
-    //std::weak_ptr<Skeleton> skel_wptr = ResourceManager[mesh_key] ; /// No access to resource manager, nor should it
-    /// bool res = Parser::parseSkinnedObj(filepath, vertices, triangles, vertex_num, triangle_num, skeleton); /// calls "new" on pointers
-    if (!res) std::cerr << "unable to load mesh " << filepath << "\n";
 
 //    load_stage = 1;
 
@@ -83,11 +91,7 @@ void Mesh::fromFile(string mesh_key)
 //    cout << "IBO id at load-time: " << ibo_id << "\n";
 //    load_stage = 2;
 ///    delete skeleton;
-    if (mesh_key == "anim_test")
-    {
-        std::cout << "loading from bgeo:" << mesh_key << std::endl;
-        fromFile2();
-    }
+
 
 }
 
@@ -127,8 +131,52 @@ void Mesh::fromFile2()
         if (debug) std::cout << "version: " << verMaj << "." << verMin << "\n";
 
         reader.chomp(&vertex_num,   1*sizeof(int));
-
+        delete[] vertices;
+        vertices = new Vertex [vertex_num];
         if (debug) std::cout << "num vertices: " << vertex_num << "\n";
+
+        for (int i_verts = 0; i_verts < vertex_num; i_verts++)
+        {
+            Vertex* vert = &vertices[i_verts];
+
+            reader.chomp(&(vert->position[0]), 3*sizeof(float) );
+            vert->position[3] = 1.0; // set the fourth component
+
+            reader.chomp(&(vert->normal[0]), 3*sizeof(float) );
+            reader.chomp(&(vert->tex_coords[0]), 2*sizeof(float));
+
+            reader.chomp(&(vert->bone_indices[0]), MAX_BONE_INFLUENCES*sizeof(int));
+            reader.chomp(&(vert->bone_weights[0]), MAX_BONE_INFLUENCES*sizeof(float));
+
+//            if (debug)
+//            {
+//                std::cout << "vID: " << i_verts << "\n"
+//                          << "   p(" << vert->position.x << ", " << vert->position.y << ", " << vert->position.z << ", " << vert->position.w << ")\n"
+//                          << "   n(" << vert->normal.x << ", " << vert->normal.y << ", " << vert->normal.z << ")\n";
+//                std::cout << "   b "; for (int ibw = 0; ibw<MAX_BONE_INFLUENCES; ibw++) std::cout<<vert->bone_indices[ibw]<<"\t";
+//                std::cout << "\n";
+//                std::cout << "   w "; for (int ibw = 0; ibw<MAX_BONE_INFLUENCES; ibw++) std::cout<<vert->bone_weights[ibw]<<"\t";
+//                std::cout << "\n";
+//            }
+
+        }
+
+        /// Read triangles
+        reader.chomp(&triangle_num, 1*sizeof(unsigned int));
+        delete[] triangles;
+        triangles = new Triangle [triangle_num];
+        if (debug) std::cout << "trinum = " << triangle_num << std::endl;
+
+        for (int i_tri = 0; i_tri<triangle_num; i_tri++)
+        {
+            Triangle* triangle = &(triangles[i_tri]);
+            reader.chomp( &(triangle->indices[0]), 3*sizeof(unsigned short));
+
+            std::cout << "tID: " << i_tri << "\n"
+                      << "   i(" << triangle->indices[0] << ", " << triangle->indices[1] << ", " << triangle->indices[2] << ")\n";
+
+
+        }
 
         delete[] memblock;
 

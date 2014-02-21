@@ -72,6 +72,10 @@ void Renderer::draw(Scene &scene)
 //        main_shader.draw(*it, mv);
 //    }
 
+    /// Send default bone
+    glm::mat4 clearMatrix = glm::mat4(1.0);
+    glUniformMatrix4fv(main_shader.getBoneMat(), 1, true, &clearMatrix[0][0]); // <-- THIS!
+
     for (auto it = scene.props.begin(); it!=scene.props.end(); it++)
     {
         main_shader.drawProp(*it, mv);

@@ -275,7 +275,10 @@ void Skeleton::poseMatrices(glm::mat4* matrices,
 
         glm::mat4 pose_mat = parent_mat * local_mat;
 
-        matrices[bone_index] = pose_mat;
+
+
+
+        matrices[bone_index] = pose_mat * glm::inverse(bones[bone_index].rest_matrix);
 
 //        if (debug) std::cout << "bone index: " << bone_index << " local_mat:\n" ;
 //        for (int i = 0; i<4; i++)

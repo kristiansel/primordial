@@ -41,24 +41,24 @@ void Shader::load(string vertex_shader, string fragment_shader)
 
 //    time = glGetUniformLocation(program_id, "time");
 
-//    bone_mat = glGetUniformLocation(program_id, "bone_mat");
+    bone_mat = glGetUniformLocation(program_id, "bone_mat");
 //    nobo_mat = glGetUniformLocation(program_id, "nobo_mat");
     mv_mat = glGetUniformLocation(program_id, "mv_mat");
-    nrm_mat = glGetUniformLocation(program_id, "nrm_mat");
+    //nrm_mat = glGetUniformLocation(program_id, "nrm_mat");
 
     /// set the attribute locations
     vertex = glGetAttribLocation(program_id, "InVertex") ;
     normal = glGetAttribLocation(program_id, "InNormal") ;
     texCoord0 = glGetAttribLocation(program_id, "InTexCoord") ;
-//    bone_index = glGetAttribLocation(program_id, "bone_index") ;
-//    bone_weight = glGetAttribLocation(program_id, "bone_weight") ;
+    bone_index = glGetAttribLocation(program_id, "bone_index") ;
+    bone_weight = glGetAttribLocation(program_id, "bone_weight") ;
 
     /// activate the attributes
     glEnableVertexAttribArray(vertex);
     glEnableVertexAttribArray(normal);
     glEnableVertexAttribArray(texCoord0);
-//    glEnableVertexAttribArray(bone_index);
-//    glEnableVertexAttribArray(bone_weight);
+    glEnableVertexAttribArray(bone_index);
+    glEnableVertexAttribArray(bone_weight);
 
     loaded = true;
 }
@@ -72,8 +72,8 @@ void Shader::unload()
         glDisableVertexAttribArray(vertex);
         glDisableVertexAttribArray(normal);
         glDisableVertexAttribArray(texCoord0);
-//        glDisableVertexAttribArray(bone_index);
-//        glDisableVertexAttribArray(bone_weight);
+        glDisableVertexAttribArray(bone_index);
+        glDisableVertexAttribArray(bone_weight);
 
         /// delete the program
         glDeleteProgram(program_id);
@@ -116,6 +116,10 @@ void Shader::setLights(glm::mat4 mv)
 
 void Shader::drawActor(shared_ptr<Actor> actor, glm::mat4 mv)
 {
+    /// Set bones
+    int num = (actor->num_pose_matrices <= 50) ? actor->num_pose_matrices : 50;
+    glUniformMatrix4fv(bone_mat, num, true, &(actor->pose_matrices[0][0][0])); // <-- THIS!
+
     drawProp(actor, mv);
 }
 
@@ -125,6 +129,7 @@ void Shader::drawProp(shared_ptr<Prop> prop, glm::mat4 mv)
     /// and the rest from each mesh. Put things into private and make getter
     /// functions! Could make custom lambda-iterators as well, returning the info for each
     /// mesh instead of each mesh
+
 //    for (auto mesh_ptr_it = prop->mesh_ptrs.begin(); mesh_ptr_it!= prop->mesh_ptrs.end(); mesh_ptr_it++)
     for (auto rb_it = prop->render_batches.begin(); rb_it!= prop->render_batches.end(); rb_it++)
     {
@@ -145,9 +150,9 @@ void Shader::drawProp(shared_ptr<Prop> prop, glm::mat4 mv)
         glm::mat4 vertex_matrix  = mv * tr * rt * sc * transf_mat; // scale, then translate, then lookat.
         glUniformMatrix4fv(mv_mat, 1, false, &vertex_matrix[0][0]);
 
-        /// normal matrix
-        glm::mat4 normal_matrix = glm::inverse(glm::transpose(vertex_matrix));
-        glUniformMatrix4fv(nrm_mat, 1, false, &normal_matrix[0][0]);
+//        /// normal matrix
+//        glm::mat4 normal_matrix = glm::inverse(glm::transpose(vertex_matrix));
+//        glUniformMatrix4fv(nrm_mat, 1, false, &normal_matrix[0][0]);
         // mm::matPrint(normal_matrix);
 
         //    // debug by printing all info being sent to shader:
@@ -189,8 +194,8 @@ void Shader::drawProp(shared_ptr<Prop> prop, glm::mat4 mv)
         glVertexAttribPointer(vertex,       4, GL_FLOAT,    GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(0)                      );
         glVertexAttribPointer(normal,       3, GL_FLOAT,    GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(normalOffset)           );
         glVertexAttribPointer(texCoord0,    2, GL_FLOAT,    GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(texCoord0Offset)        );
-        //    glVertexAttribPointer(bone_index,   3, GL_INT,      GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(bone_indexOffset)       );
-        //    glVertexAttribPointer(bone_weight,  3, GL_FLOAT,    GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(bone_weightOffset)      );
+        glVertexAttribPointer(bone_index,   MAX_BONE_INFLUENCES, GL_INT,      GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(bone_indexOffset)       );
+        glVertexAttribPointer(bone_weight,  MAX_BONE_INFLUENCES, GL_FLOAT,    GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(bone_weightOffset)      );
 
         /// Draw call
         glDrawElements(GL_TRIANGLES, 3*mesh_ptr->getTriNum(), GL_UNSIGNED_SHORT, BUFFER_OFFSET(0));

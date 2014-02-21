@@ -168,6 +168,9 @@ list<shared_ptr<Creature>>::iterator World::addCreature(string mesh_key, string 
         }
     }
 
+    /// The pose rotates the wrong way...?
+    (*new_creature_it)->pose(0, 0.8);
+
 
 
 

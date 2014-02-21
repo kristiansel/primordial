@@ -128,8 +128,6 @@ bool animPackBin(const aiScene* scene, std::string outputpath)
                 myFile.write ( (char*) &time, 1*sizeof(float));
 
                 /// Write value
-                /// SHIT: THESE VALUES ARE NOT YET TRANSFORMED
-                /// TO OPENGL SPACE
                 aiVector3D posVec = posKey.mValue;
                 if (index==0)
                 {

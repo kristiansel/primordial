@@ -23,12 +23,20 @@ std::string int2str(int input) {
     return static_cast<std::ostringstream*>( &(std::ostringstream() << input) )->str();
 }
 
+void find_rig_transf(aiNode* node,
+              std::vector<std::string> &bone_names,
+              glm::mat4 parent_mat,
+              glm::mat4 &rig_transf,
+              bool rig_transf_found = false);
+
 void geoPackBin(const aiScene* scene, std::string outputpath)
 {
     for (int i_mesh = 0; i_mesh<scene->mNumMeshes; i_mesh++)
     {
         /// Bind the current mesh as an easytouse pointer;
         aiMesh* mesh = scene->mMeshes[i_mesh];
+
+        /// Probably have to apply transforms for the mesh....
 
         /// Disambiguate each output mesh
         outputpath = ( (0==i_mesh) ? outputpath : (outputpath + int2str(i_mesh)) );
@@ -59,6 +67,12 @@ void geoPackBin(const aiScene* scene, std::string outputpath)
         /// The animation exporter
         std::vector<std::string> boneNames = findBoneNames(scene);
 
+        /// Use the bone names to identify rig transform matrix (will later be applied
+        /// to written vertices
+        glm::mat4 rig_transf(1.0);
+        find_rig_transf(scene->mRootNode, boneNames, glm::mat4(1.0), rig_transf);
+        printMat(rig_transf);
+
         std::vector<std::pair<int, float>>* bone_weight_pairs;
         bone_weight_pairs = new std::vector<std::pair<int, float>> [numVerts];
 
@@ -78,56 +92,155 @@ void geoPackBin(const aiScene* scene, std::string outputpath)
             }
         }
 
-        /// Check if any vertices do not have weights
-
-
-        int** bone_indices_arr = new int* [numVerts];
-
-        for(int i_verts=0; i_verts<numVerts; i_verts++)
+        /// Preform vertex bone-weight integrity check and post process
+        for (int i_verts = 0; i_verts<numVerts; i_verts++)
         {
-            bone_indices_arr[i_verts] = new int [MAX_BONE_INFLUENCES];
-            for(int i_bone_inf=0; i_bone_inf<MAX_BONE_INFLUENCES; i_bone_inf++)
-                bone_indices_arr[i_verts][i_bone_inf] = 0; /// Initialize to 0;
+            auto bw_pair_arr = &(bone_weight_pairs[i_verts]);
+
+            /// Check that it has at least one bone
+            if (bw_pair_arr->size()<1)
+                std::cerr << "error: vertex without bone" << std::endl;
+
+            /// Check that it has at least one non-zero weight
+            bool ok = true;
+            float sumWeights = 0.0;
+            for (auto bw_pair : *bw_pair_arr)
+            {
+                sumWeights+=bw_pair.second;
+            }
+
+            if (std::abs(sumWeights)>1.01 || std::abs(sumWeights)<0.99)
+                std::cerr << "warning: sum of weights is not 1.0, "
+                          << "vertex id" << i_verts << ", sum: "
+                          << sumWeights << std::endl;
+            /// Integrity check is done
+
+            /// Now do the post-process
+            /// resize bone-weight vector to 4 and set new
+            /// element to 0: 0.0, then renormalize
+            int oldSize = bw_pair_arr->size();
+            bw_pair_arr->resize(MAX_BONE_INFLUENCES);
+
+            for (int i_new = oldSize; i_new<MAX_BONE_INFLUENCES; i_new++)
+            {
+                /// initialize the new bone_id-weight pair
+                (*bw_pair_arr)[i_new] = std::make_pair(0, 0.0);
+            }
+
+            /// renormalize
+            sumWeights = 0.0;
+            for (auto bw_pair : *bw_pair_arr) sumWeights+=bw_pair.second;
+            for (auto bw_pair : *bw_pair_arr) bw_pair.second=bw_pair.second/sumWeights;
+
+//            /// recheck
+//            sumWeights = 0.0;
+//            for (auto bw_pair : *bw_pair_arr) sumWeights+=bw_pair.second;
+//
+//            std::cout << "v_id: " << i_verts << ", ";
+//
+//            for (int i_bwp = 0; i_bwp<MAX_BONE_INFLUENCES; i_bwp++)
+//                std::cout << "(" << (*bw_pair_arr)[i_bwp].first << ", "
+//                          << (*bw_pair_arr)[i_bwp].second << "), ";
+//            std::cout << "sum: " << sumWeights;
+//            std::cout << std::endl;
+            /// Post process finished
         }
 
-        float** bone_weights_arr = new float* [numVerts];
-
-        for(int i_verts=0; i_verts<numVerts; i_verts++)
-        {
-            bone_weights_arr[i_verts] = new float [MAX_BONE_INFLUENCES];
-            for(int i_bone_wgt=0; i_bone_wgt<MAX_BONE_INFLUENCES; i_bone_wgt++)
-                bone_weights_arr[i_verts][i_bone_wgt] = 0; /// Initialize to 0.0;
-        }
-
-
-        delete[] bone_weight_pairs;
-
-
-        /// Before writing vertices (interleaved data of position,
-        /// normal, texture coordinates and bone weights) the bone
-        /// weights must be prepared in a corresponding array
+        /// mTextureCoords[i_verts] segfaults, probably because
+        /// there is one texcovecarray per triangle/face....
+        /// Write final vertices
 
         for (int i_verts = 0; i_verts<numVerts; i_verts++)
         {
+            aiVector3D pos = mesh->mVertices[i_verts];
+            aiVector3D norm = mesh->mNormals[i_verts];
+
+            /// Transform the pos and norm;
+            glm::vec4 pos4 = glm::vec4(pos.x, pos.y, pos.z, 1.0);
+            glm::vec4 norm4 = glm::vec4(norm.x, norm.y, norm.z, 0.0);
+
+            pos4 = rig_transf * pos4;
+            norm4 = glm::inverse( glm::transpose(rig_transf) ) * norm4;
+//            norm4 = (rig_transf)* norm4;
+            /// two above ways of transforming normal are equivalent when
+            /// 4th component is 0...
+
+
+            /// Get just the first UV channel (hardcoded)
+            aiVector3D txco = mesh->mTextureCoords[0][i_verts];
+            std::vector<std::pair<int, float>> bw_pairs = bone_weight_pairs[i_verts];
+
             /// Write interleaved vertices
+            myFile.write ( (char*) &pos4[0], 3*sizeof(float));
+            myFile.write ( (char*) &norm4[0], 3*sizeof(float));
+            myFile.write ( (char*) &txco[0], 2*sizeof(float));
+            for (auto bw_pair : bw_pairs) myFile.write ( (char*) &bw_pair.first, 1*sizeof(int));
+            for (auto bw_pair : bw_pairs) myFile.write ( (char*) &bw_pair.second, 1*sizeof(float));
 
         }
 
-        for(int i_verts=0; i_verts<numVerts; i_verts++)
-            delete[] bone_weights_arr[i_verts];
+        /// Write number of triangles
+        myFile.write((char*) &(mesh->mNumFaces), 1*sizeof(unsigned int));
 
-        delete[] bone_weights_arr;
+        /// Assume triangulated (only faces of size 3)
+        for (int i_tris = 0; i_tris<mesh->mNumFaces; i_tris++)
+        {
+            aiFace tri = mesh->mFaces[i_tris];
+            if (tri.mNumIndices != 3) std::cerr << "error: found non-triangle\n";
 
+            /// Write indices
+            unsigned short in0 = tri.mIndices[0];
+            unsigned short in1 = tri.mIndices[1];
+            unsigned short in2 = tri.mIndices[2];
+            myFile.write ( (char*) &(in0), 1*sizeof(unsigned short));
+            myFile.write ( (char*) &(in1), 1*sizeof(unsigned short));
+            myFile.write ( (char*) &(in2), 1*sizeof(unsigned short));
 
-        for(int i_verts=0; i_verts<numVerts; i_verts++)
-            delete[] bone_indices_arr[i_verts];
+//            std::cout << "writing tri: " << i_tris << "\n"
+//                      << "   i(" << tri.mIndices[0] << ", " << tri.mIndices[1] << ", " << tri.mIndices[2] << ")\n";
 
-        delete[] bone_indices_arr;
+            /// Write texcoords ? or is there something wrong with this idea with
+            /// regard to shaders....?
+//            mesh->mFaces.mIndices
+        }
 
+        delete[] bone_weight_pairs;
 
         /// Close file
         myFile.close();
     }
 }
+
+void find_rig_transf(aiNode* node,
+              std::vector<std::string> &bone_names,
+              glm::mat4 parent_mat,
+              glm::mat4 &rig_transf,
+              bool rig_transf_found)
+{
+    int node_index = get_bone_index(node->mName.C_Str(), bone_names);
+
+    glm::mat4 node_mat = aiMat2glmMat4(node->mTransformation);
+    glm::mat4 abs_mat = parent_mat * node_mat;
+
+    if (-1 != node_index) /// found an index
+    {
+        if (!rig_transf_found)
+        {
+            rig_transf = parent_mat;
+            rig_transf_found = true;
+            return;
+        }
+    }
+
+    for (int i = 0; i<node->mNumChildren; i++)
+    {
+        find_rig_transf(node->mChildren[i],
+                 bone_names,
+                 abs_mat,
+                 rig_transf,
+                 rig_transf_found);
+    }
+}
+
 
 #endif // GEOPACKBIN_H

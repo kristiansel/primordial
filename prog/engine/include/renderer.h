@@ -6,6 +6,7 @@
 #include <iostream>
 #include "shader.h"
 #include "scene.h"
+#include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
 class Renderer

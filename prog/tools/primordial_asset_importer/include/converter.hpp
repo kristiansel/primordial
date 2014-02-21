@@ -18,11 +18,19 @@ bool convert(std::string daeFilePath_in,
 
     const aiScene* scene;   /// Non-owner pointer
 
+//    scene = importer.ReadFile( daeFilePath_in,
+//    aiProcess_CalcTangentSpace       |
+//    aiProcess_Triangulate            |
+//    aiProcess_JoinIdenticalVertices  |
+//    aiProcess_SortByPType            |
+//    aiProcess_PreTransformVertices);
+
     scene = importer.ReadFile( daeFilePath_in,
     aiProcess_CalcTangentSpace       |
     aiProcess_Triangulate            |
     aiProcess_JoinIdenticalVertices  |
-    aiProcess_SortByPType);
+    aiProcess_SortByPType            |
+    aiProcess_ImproveCacheLocality);
 
     if( !scene) /// There were errors
     {
