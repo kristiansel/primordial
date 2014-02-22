@@ -117,7 +117,7 @@ void Shader::setLights(glm::mat4 mv)
 void Shader::drawActor(shared_ptr<Actor> actor, glm::mat4 mv)
 {
     /// Set bones
-    int num = (actor->num_pose_matrices <= 50) ? actor->num_pose_matrices : 50;
+    int num = (actor->num_pose_matrices <= MAX_BONE_NUM) ? actor->num_pose_matrices : MAX_BONE_NUM;
 
 //    /// dump bones to cout
 //    for (int i_bone = 0; i_bone<actor->num_pose_matrices; i_bone++)

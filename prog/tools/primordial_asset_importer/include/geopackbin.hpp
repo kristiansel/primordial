@@ -98,8 +98,9 @@ void geoPackBin(const aiScene* scene, std::string outputpath)
             auto bw_pair_arr = &(bone_weight_pairs[i_verts]);
 
             /// Check that it has at least one bone
-            if (bw_pair_arr->size()<1)
-                std::cerr << "error: vertex without bone" << std::endl;
+            if (bw_pair_arr->size()<1)  /// if not, then add one
+                bw_pair_arr->push_back(std::make_pair((int)0, (float)1.0));
+//                std::cerr << "warning: vertex without bone" << std::endl;
 
             /// Check that it has at least one non-zero weight
             bool ok = true;
@@ -109,10 +110,12 @@ void geoPackBin(const aiScene* scene, std::string outputpath)
                 sumWeights+=bw_pair.second;
             }
 
-            if (std::abs(sumWeights)>1.01 || std::abs(sumWeights)<0.99)
-                std::cerr << "warning: sum of weights is not 1.0, "
-                          << "vertex id" << i_verts << ", sum: "
-                          << sumWeights << std::endl;
+//            if (std::abs(sumWeights)>1.01 || std::abs(sumWeights)<0.99)
+//                bw_pair_arr->push_back(std::make_pair((int)0, (float)1.0));
+//                std::cerr << "warning: sum of weights is not 1.0, "
+//                          << "vertex id" << i_verts << ", sum: "
+//                          << sumWeights << std::endl
+//                          << "adding weight (0, 1.0)"<<std::endl;
             /// Integrity check is done
 
             /// Now do the post-process
@@ -124,7 +127,7 @@ void geoPackBin(const aiScene* scene, std::string outputpath)
             for (int i_new = oldSize; i_new<MAX_BONE_INFLUENCES; i_new++)
             {
                 /// initialize the new bone_id-weight pair
-                (*bw_pair_arr)[i_new] = std::make_pair(0, 0.0);
+                (*bw_pair_arr)[i_new] = std::make_pair((int)0, (float)0.0);
             }
 
             /// renormalize
@@ -132,10 +135,13 @@ void geoPackBin(const aiScene* scene, std::string outputpath)
             for (auto bw_pair : *bw_pair_arr) sumWeights+=bw_pair.second;
             for (auto bw_pair : *bw_pair_arr) bw_pair.second=bw_pair.second/sumWeights;
 
-//            /// recheck
-//            sumWeights = 0.0;
-//            for (auto bw_pair : *bw_pair_arr) sumWeights+=bw_pair.second;
-//
+            /// recheck
+            sumWeights = 0.0;
+            for (auto bw_pair : *bw_pair_arr) sumWeights+=bw_pair.second;
+
+            if (std::abs(sumWeights)>1.01 || std::abs(sumWeights)<0.99)
+                std::cerr << "error: vertex weights do not sum to 1"
+                          << "mesh name: " << mesh->mName.C_Str() << "\n";
 //            std::cout << "v_id: " << i_verts << ", ";
 //
 //            for (int i_bwp = 0; i_bwp<MAX_BONE_INFLUENCES; i_bwp++)
@@ -167,7 +173,12 @@ void geoPackBin(const aiScene* scene, std::string outputpath)
 
 
             /// Get just the first UV channel (hardcoded)
-            aiVector3D txco = mesh->mTextureCoords[0][i_verts];
+            aiVector3D txco;
+            if (true==mesh->HasTextureCoords(0))
+                txco = mesh->mTextureCoords[0][i_verts];
+            else
+                txco = aiVector3D(0.0, 0.0, 0.0);
+
             std::vector<std::pair<int, float>> bw_pairs = bone_weight_pairs[i_verts];
 
             /// Write interleaved vertices

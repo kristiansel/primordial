@@ -22,6 +22,8 @@
 #include <memstreamer.hpp>
 #include <timeseries.hpp>
 
+const int MAX_BONE_NUM = 100;
+
 class Skeleton /// This is a resource (store one copy)
 {
 public:

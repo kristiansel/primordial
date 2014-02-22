@@ -13,7 +13,7 @@ attribute vec4 bone_weight ;
 
 uniform mat4 mv_mat;
 
-const int MAX_BONES = 50;
+const int MAX_BONES = 100;
 uniform mat4[MAX_BONES] bone_mat;
 
 void main() {
