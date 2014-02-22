@@ -34,16 +34,28 @@ void Mechanics::init(World &world_in, float &dt_in)
                             "grass_equal",
                              glm::vec3(0.0, 0.0, 0.0) );
 
-    /// NB this also adds the ground
     world->addDynamicObject( "axes",
                             "tricolor",
                             glm::vec3(0.0, 8.0, 0.0),
                             RigidBody::Box(0.5f, 0.5f, 0.5f));
 
+    /// Having issue with human model not in the correct
+    /// place in the scene graph outputted by assimp import
+
+    world->addStaticObject( "human_male_bgeo",
+                        "tex_human_male",
+                        glm::vec3(0.0, 0.0, 0.0) );
+
+    world->addStaticObject( "mdl_human_male",
+                    "tex_human_male",
+                    glm::vec3(0.0, 0.0, 0.0) );
+
     /// Creatures
     world->addCreature( "anim_test",
                         "checkers",
                         glm::vec3(0.0, 2.0, -4.0) );
+
+
 
 
     /// remove later

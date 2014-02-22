@@ -30,7 +30,7 @@ bool convert(std::string daeFilePath_in,
     aiProcess_Triangulate            |
     aiProcess_JoinIdenticalVertices  |
     aiProcess_SortByPType            |
-    aiProcess_ImproveCacheLocality);
+    aiProcess_ImproveCacheLocality  );
 
     if( !scene) /// There were errors
     {

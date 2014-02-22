@@ -29,8 +29,41 @@ void find_rig_transf(aiNode* node,
               glm::mat4 &rig_transf,
               bool rig_transf_found = false);
 
+void findAbsMeshTransf(std::string mesh_name, aiNode* node,
+                            glm::mat4 &output_mat,
+                            bool &found,
+                            glm::mat4 parent_mat = glm::mat4(1.0));
+
+
+void nodePrint(aiNode* node, int lvl = 0, int max_lvl = 3)
+{
+    std::string tabs(lvl, '>');
+    std::cout << tabs << "node: " << node->mName.C_Str() << "\n";
+    std::cout << tabs << "numMeshes: " << node->mNumMeshes << "\n";
+    std::cout << tabs << "numChildren: " << node->mNumChildren << "\n";
+    std::cout << tabs << "transform: " << "\n";
+    for (int i = 0; i<4; i++)
+    {
+        std::cout<<tabs;
+        for (int j = 0; j<4; j++)
+        {
+            std::cout << node->mTransformation[i][j] << "\t";
+        }
+        std::cout << "\n";
+    }
+
+    if (lvl<max_lvl)
+    {
+        for(int i = 0; i<node->mNumChildren; i++)
+            nodePrint(node->mChildren[i], lvl+1, max_lvl);
+    }
+}
+
 void geoPackBin(const aiScene* scene, std::string outputpath)
 {
+    nodePrint(scene->mRootNode);
+
+
     for (int i_mesh = 0; i_mesh<scene->mNumMeshes; i_mesh++)
     {
         /// Bind the current mesh as an easytouse pointer;
@@ -53,7 +86,7 @@ void geoPackBin(const aiScene* scene, std::string outputpath)
         myFile.write( (char*) &verMaj,    1*sizeof(int) );
         myFile.write( (char*) &verMin,    1*sizeof(int) );
 
-        std::cout << "numBones: " << mesh->mNumBones << std::endl;
+//        std::cout << "numBones: " << mesh->mNumBones << std::endl;
 
 
         /// Number of vertices
@@ -69,9 +102,17 @@ void geoPackBin(const aiScene* scene, std::string outputpath)
 
         /// Use the bone names to identify rig transform matrix (will later be applied
         /// to written vertices
+
+        /// Find the mesh transform matrix
         glm::mat4 rig_transf(1.0);
         find_rig_transf(scene->mRootNode, boneNames, glm::mat4(1.0), rig_transf);
-        printMat(rig_transf);
+
+//        glm::mat4 rig_transf = glm::mat4(1.0);
+//        bool found = false;
+//        findAbsMeshTransf(mesh->mName.C_Str(), scene->mRootNode, rig_transf, found);
+//        std::cout<<"mesh transform for "<<mesh->mName.C_Str()<<"\n";
+//        std::cout<<"found mesh transf: "<<found<<"\n";
+//        printMat(rig_transf);
 
         std::vector<std::pair<int, float>>* bone_weight_pairs;
         bone_weight_pairs = new std::vector<std::pair<int, float>> [numVerts];
@@ -99,8 +140,9 @@ void geoPackBin(const aiScene* scene, std::string outputpath)
 
             /// Check that it has at least one bone
             if (bw_pair_arr->size()<1)  /// if not, then add one
-                bw_pair_arr->push_back(std::make_pair((int)0, (float)1.0));
-//                std::cerr << "warning: vertex without bone" << std::endl;
+//                {
+                    bw_pair_arr->push_back(std::make_pair((int)0, (float)1.0));
+//                std::cerr << "warning: vertex without bone" << std::endl;}
 
             /// Check that it has at least one non-zero weight
             bool ok = true;
@@ -133,7 +175,7 @@ void geoPackBin(const aiScene* scene, std::string outputpath)
             /// renormalize
             sumWeights = 0.0;
             for (auto bw_pair : *bw_pair_arr) sumWeights+=bw_pair.second;
-            for (auto bw_pair : *bw_pair_arr) bw_pair.second=bw_pair.second/sumWeights;
+            for (auto &bw_pair : *bw_pair_arr) bw_pair.second=bw_pair.second/sumWeights; /// Actually change
 
             /// recheck
             sumWeights = 0.0;
@@ -180,6 +222,11 @@ void geoPackBin(const aiScene* scene, std::string outputpath)
                 txco = aiVector3D(0.0, 0.0, 0.0);
 
             std::vector<std::pair<int, float>> bw_pairs = bone_weight_pairs[i_verts];
+
+            /// Flip
+            txco[1] = 1.0-txco[1]; /// <-- This
+
+
 
             /// Write interleaved vertices
             myFile.write ( (char*) &pos4[0], 3*sizeof(float));
@@ -253,5 +300,30 @@ void find_rig_transf(aiNode* node,
     }
 }
 
+void findAbsMeshTransf(std::string mesh_name, aiNode* node,
+                            glm::mat4 &output_mat,
+                            bool &found,
+                            glm::mat4 parent_mat)
+{
+    glm::mat4 nodeRelTransf = aiMat2glmMat4(node->mTransformation);
+    glm::mat4 nodeAbsTransf = parent_mat * nodeRelTransf;
 
+//    std::cout<<"node rel transf for"<<node->mName.C_Str()<<"\n";
+//    printMat(nodeAbsTransf);
+
+    /// Check if this node contains the mesh:
+    if (std::string(node->mName.C_Str()) == mesh_name)
+    {
+//            std::cout << "found transform\n";
+        output_mat = nodeAbsTransf;
+        found = true;
+        return;
+    }
+
+    /// If it got here, it was not this node:
+    for (int i = 0; i<node->mNumChildren; i++)
+    {
+        findAbsMeshTransf(mesh_name, node->mChildren[i], output_mat, found, nodeAbsTransf);
+    }
+}
 #endif // GEOPACKBIN_H

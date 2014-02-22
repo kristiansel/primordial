@@ -52,8 +52,8 @@ bool animPackBin(const aiScene* scene, std::string outputpath)
     /// Get the bone names from the animation channels
     std::vector<std::string> boneNames = findBoneNames(scene);
 
-    for (int i_bone = 0; i_bone<boneNames.size(); i_bone++)
-        std::cout << "bone " << i_bone << ": " << boneNames[i_bone] << std::endl;
+//    for (int i_bone = 0; i_bone<boneNames.size(); i_bone++)
+//        std::cout << "bone " << i_bone << ": " << boneNames[i_bone] << std::endl;
 
 
     /// Now that the bone names have been found, write the number

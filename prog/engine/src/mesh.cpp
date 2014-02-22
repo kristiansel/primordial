@@ -57,10 +57,10 @@ void Mesh::fromFile(string mesh_key)
 
     //Skeleton* skeleton;
     //skeleton->loadFromBNS(filepath); /// The wierdest and unsafest code ever...
-    if (mesh_key == "anim_test") /// HOLY SHIT IT WORKED FIRST TRY
+    if (mesh_key == "anim_test" || mesh_key == "human_male_bgeo") /// HOLY SHIT IT WORKED FIRST TRY
     {
         std::cout << "loading from bgeo:" << mesh_key << std::endl;
-        fromFile2();
+        fromFile2(mesh_key);
     }
     else
     {
@@ -95,12 +95,12 @@ void Mesh::fromFile(string mesh_key)
 
 }
 
-void Mesh::fromFile2()
+void Mesh::fromFile2(string mesh_key)
 {
 
-    bool debug = true;
+    bool debug = false;
 
-    string filepath = "assets_bin/models/anim_test.bgeo";
+    string filepath = "assets_bin/models/"+mesh_key+".bgeo";
 
     std::streampos filesize;
     char * memblock;

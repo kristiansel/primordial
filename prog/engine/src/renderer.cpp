@@ -2,6 +2,10 @@
 
 Renderer::Renderer()
 {
+    for (int i_cm = 0; i_cm<MAX_BONE_NUM; i_cm++)
+    {
+        clear_matrices[i_cm] = glm::mat4(1.0);
+    }
 //    scene = nullptr;
 }
 
@@ -72,9 +76,9 @@ void Renderer::draw(Scene &scene, float dt)
 //        main_shader.draw(*it, mv);
 //    }
 
-    /// Send default bone
-    glm::mat4 clearMatrix = glm::mat4(1.0);
-    glUniformMatrix4fv(main_shader.getBoneMat(), 1, true, &clearMatrix[0][0]); // <-- THIS!
+    /// Send default bone matrices
+//    glm::mat4 clearMatrix = glm::mat4(1.0);
+    glUniformMatrix4fv(main_shader.getBoneMat(), MAX_BONE_NUM, true, &clear_matrices[0][0][0]); // <-- THIS!
 
     for (auto it = scene.props.begin(); it!=scene.props.end(); it++)
     {

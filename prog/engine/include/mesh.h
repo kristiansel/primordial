@@ -49,7 +49,7 @@ public:
 
     /// Public member functions
     void fromFile(string mesh_key);
-    void fromFile2();
+    void fromFile2(string mesh_key);
     // void setStageLevel(int stage);
     Material getMaterial();             // called by shader
     GLuint getVBOid();                  // called by shader
