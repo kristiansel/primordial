@@ -22,15 +22,15 @@ void main() {
 	mytexco = InTexCoord ;
     myvertex = InVertex ;
 
-    myvertex = (bone_weight[0]*bone_mat[int(bone_index[0])]
+    myvertex =  (bone_weight[0]*bone_mat[int(bone_index[0])]
                 +bone_weight[1]*bone_mat[int(bone_index[1])]
                 +bone_weight[2]*bone_mat[int(bone_index[2])]
-                +bone_weight[3]*bone_mat[int(bone_index[3])])*myvertex;
+                +bone_weight[3]*bone_mat[int(bone_index[3])]) * myvertex;
 
     vec4 mynormal4 = (bone_weight[0]*bone_mat[int(bone_index[0])]
-                +bone_weight[1]*bone_mat[int(bone_index[1])]
-                +bone_weight[2]*bone_mat[int(bone_index[2])]
-                +bone_weight[3]*bone_mat[int(bone_index[3])])*vec4(InNormal.x, InNormal.y, InNormal.z, 0.0);
+                     +bone_weight[1]*bone_mat[int(bone_index[1])]
+                     +bone_weight[2]*bone_mat[int(bone_index[2])]
+                     +bone_weight[3]*bone_mat[int(bone_index[3])])*vec4(InNormal.x, InNormal.y, InNormal.z, 0.0);
 
     mynormal = mynormal4.xyz;
     gl_Position = gl_ProjectionMatrix * mv_mat * myvertex ;

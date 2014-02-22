@@ -72,64 +72,55 @@ TimeSeries<ValueType>::seekPrev(float time, int hint)   /// Function signature
     /// This function will be called a lot, so might become the bottleneck
 
 
+    /// Modulate time
+    time = time - int(time/duration) * duration;
+
     TimeValuePair<ValueType>* prev = &(keys[0]);
 
-    /// RIGHT NOW CLAMPING (COULD PERIODISE)
-    if (time < 0) /// This is clamping (might create unsmooth looping)
-    {
-        prev = &(keys[0]);
-//        return prev; /// The first key_frame
-    }
-    else if ( !(time < duration) ) /// This is clamping (might create unsmooth looping)
-    {
-        prev = &(keys[num_keys - 1]);
-    }
-    else
-    {
-        if (hint < 0 || !(hint < num_keys)) /// If no/bad hint is given
-            hint = (int)((num_keys-1) * time / duration);  /// Start search by assuming uniform distribution
-            /// The above guarantees that hint is maximum num_pos_keys - 1
+    if (hint < 0 || !(hint < num_keys)) /// If no/bad hint is given
+        hint = (int)((num_keys-1) * time / duration);  /// Start search by assuming uniform distribution
+        /// The above guarantees that hint is maximum num_pos_keys - 1
 
 //        std::cout << "num_pos_keys = " << num_pos_keys << "\n";
 //        std::cout << "time / ch_duration = " << time / ch_duration << "\n";
 //        std::cout << "hint = " << hint << "\n";
-        /// First check if last frame?
-        /// To eliminate complications further down
-        //if ()
+    /// First check if last frame?
+    /// To eliminate complications further down
+    //if ()
 
-        bool found = false;
-        int cand = hint;
-        while (!found)
-        {
+    bool found = false;
+    int cand = hint;
+    while (!found)
+    {
 //            std::cout << "cand = " << cand << "\n";
-            /// check if time is between candidate and next
-            bool timeGrCand = (time > keys[cand].time-0.00000001);
-            if (timeGrCand) /// If success so far, proceed
+        /// check if time is between candidate and next
+        bool timeGrCand = (time > keys[cand].time-0.00000001);
+        if (timeGrCand) /// If success so far, proceed
+        {
+            if (cand==num_keys-1)
             {
-                if (cand==num_keys-1)
+                prev = &(keys[cand]); /// Time is greater than the last key... should not happen
+                found = true;
+            }
+            else
+            {
+                /// if not returned here, this is safe
+                bool timeLsNext = (time < keys[cand+1].time+0.00000001);
+                if (timeLsNext)
                 {
-                    prev = &(keys[cand]); /// Time is greater than the last key... should not happen
+                    prev = &(keys[cand]);
                     found = true;
                 }
                 else
-                {
-                    /// if not returned here, this is safe
-                    bool timeLsNext = (time < keys[cand+1].time+0.00000001);
-                    if (timeLsNext)
-                    {
-                        prev = &(keys[cand]);
-                        found = true;
-                    }
-                    else
-                        cand+=1;
-                }
-            }
-            else /// Linear search for next (step one down)
-            {
-                cand-=1;
+                    cand+=1;
             }
         }
+        else /// Linear search for next (step one down)
+        {
+            cand-=1;
+        }
     }
+//    }
 
     SeekResult res;
     res.prev.key = prev;
@@ -149,5 +140,7 @@ TimeSeries<ValueType>::seekPrev(float time, int hint)   /// Function signature
     return res;
 //    return prev;
 }
+
+
 
 #endif // TIMESERIES_H

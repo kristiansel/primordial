@@ -69,7 +69,7 @@ void Master::mainLoop()
         culler.stage(scene, world); /// stage the scene from the world THIS breaks everything since non-shared shared pointers go out of scope
 
         /// draw...
-        renderer.draw(scene);
+        renderer.draw(scene, dt);
 
         /// end the current frame (internally swaps the front and back buffers)
         window.display();

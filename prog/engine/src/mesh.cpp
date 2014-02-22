@@ -148,16 +148,16 @@ void Mesh::fromFile2()
             reader.chomp(&(vert->bone_indices[0]), MAX_BONE_INFLUENCES*sizeof(int));
             reader.chomp(&(vert->bone_weights[0]), MAX_BONE_INFLUENCES*sizeof(float));
 
-//            if (debug)
-//            {
-//                std::cout << "vID: " << i_verts << "\n"
-//                          << "   p(" << vert->position.x << ", " << vert->position.y << ", " << vert->position.z << ", " << vert->position.w << ")\n"
-//                          << "   n(" << vert->normal.x << ", " << vert->normal.y << ", " << vert->normal.z << ")\n";
-//                std::cout << "   b "; for (int ibw = 0; ibw<MAX_BONE_INFLUENCES; ibw++) std::cout<<vert->bone_indices[ibw]<<"\t";
-//                std::cout << "\n";
-//                std::cout << "   w "; for (int ibw = 0; ibw<MAX_BONE_INFLUENCES; ibw++) std::cout<<vert->bone_weights[ibw]<<"\t";
-//                std::cout << "\n";
-//            }
+            if (debug)
+            {
+                std::cout << "vID: " << i_verts << "\n"
+                          << "   p(" << vert->position.x << ", " << vert->position.y << ", " << vert->position.z << ", " << vert->position.w << ")\n"
+                          << "   n(" << vert->normal.x << ", " << vert->normal.y << ", " << vert->normal.z << ")\n";
+                std::cout << "   b "; for (int ibw = 0; ibw<MAX_BONE_INFLUENCES; ibw++) std::cout<<vert->bone_indices[ibw]<<"\t";
+                std::cout << "\n";
+                std::cout << "   w "; for (int ibw = 0; ibw<MAX_BONE_INFLUENCES; ibw++) std::cout<<vert->bone_weights[ibw]<<"\t";
+                std::cout << "\n";
+            }
 
         }
 
@@ -172,8 +172,9 @@ void Mesh::fromFile2()
             Triangle* triangle = &(triangles[i_tri]);
             reader.chomp( &(triangle->indices[0]), 3*sizeof(unsigned short));
 
-            std::cout << "tID: " << i_tri << "\n"
-                      << "   i(" << triangle->indices[0] << ", " << triangle->indices[1] << ", " << triangle->indices[2] << ")\n";
+//            if (debug)
+//                std::cout << "tID: " << i_tri << "\n"
+//                          << "   i(" << triangle->indices[0] << ", " << triangle->indices[1] << ", " << triangle->indices[2] << ")\n";
 
 
         }

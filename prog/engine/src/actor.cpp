@@ -2,7 +2,9 @@
 
 
 Actor::Actor() : num_pose_matrices(1),
-                           pose_matrices(new glm::mat4(1.0))
+                 pose_matrices(new glm::mat4(1.0)),
+                 active_anim(0),
+                 active_anim_time(0.f)
 {
     /// Actors with no attached skeleton will have a default
     /// identity matrix, as not to crash vertex shader
@@ -40,4 +42,17 @@ std::shared_ptr<Skeleton> Actor::shSkelPtr()
 void Actor::pose(int anim_index, float time)
 {
     skel_ptr->poseMatrices(pose_matrices, anim_index, time);
+}
+
+void Actor::playAnim(int anim_index_in)
+{
+    active_anim = anim_index_in;
+    active_anim_time = 0.0;
+
+}
+
+void Actor::updateAnim(float dt)
+{
+    active_anim_time+=dt;
+    skel_ptr->poseMatrices(pose_matrices, active_anim, active_anim_time);
 }

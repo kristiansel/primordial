@@ -50,7 +50,7 @@ void Renderer::init(unsigned int scr_width_in, unsigned int scr_height_in)
 //    scene->meshes.back().pos = glm::vec3(3.0, 0.0, -2.0);
 }
 
-void Renderer::draw(Scene &scene)
+void Renderer::draw(Scene &scene, float dt)
 {
     /// switch to main shader
     main_shader.switchTo();
@@ -83,6 +83,7 @@ void Renderer::draw(Scene &scene)
 
     for (auto it = scene.actors.begin(); it!=scene.actors.end(); it++)
     {
+        (*it)->updateAnim(dt);
         main_shader.drawActor(*it, mv);
     }
 }

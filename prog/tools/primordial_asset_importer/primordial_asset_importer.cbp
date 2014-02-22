@@ -38,6 +38,7 @@
 		<Compiler>
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
+			<Add option="-DGLM_FORCE_RADIANS" />
 			<Add directory="../../engine" />
 		</Compiler>
 		<Unit filename="include/animpackbin.hpp" />

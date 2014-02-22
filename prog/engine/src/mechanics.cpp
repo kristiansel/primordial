@@ -43,7 +43,7 @@ void Mechanics::init(World &world_in, float &dt_in)
     /// Creatures
     world->addCreature( "anim_test",
                         "checkers",
-                        glm::vec3(0.0, 1.0, -4.0) );
+                        glm::vec3(0.0, 2.0, -4.0) );
 
 
     /// remove later
@@ -152,6 +152,30 @@ void Mechanics::func(int num_in)
         }
         break;
     case 3:     world->delWorldObject(worldobject_ptr_it); worldobject_ptr_it = world->worldobjects.begin(); break;
+    case 4:
+        for (auto &creature : world->creatures)
+        {
+            /// dump bones to cout
+            for (int i_bone = 0; i_bone<creature->num_pose_matrices; i_bone++)
+            {
+                std::cout<<"bone matrix "<<i_bone<<"\n";
+                std::cout<<"";
+                for (int i = 0; i<4; i++)
+                {
+                    std::cout<<"";
+                    for (int j = 0; j<4; j++)
+                    {
+                        std::cout << creature->pose_matrices[i_bone][j][i];
+                        if(j<3)std::cout<<",";
+                    }
+                    std::cout<<"";
+                    if(i<3)std::cout<<"\n";
+                }
+                std::cout<<"\n\n";
+            }
+        }
+        break;
+
     default:    break;
     }
 }

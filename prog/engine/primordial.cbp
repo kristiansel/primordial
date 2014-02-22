@@ -98,6 +98,7 @@
 			<Add option="-fexceptions" />
 			<Add option="-DGLM_FORCE_RADIANS" />
 		</Compiler>
+		<Unit filename="dependencies/matprint.hpp" />
 		<Unit filename="dependencies/memstreamer.hpp" />
 		<Unit filename="dependencies/timeseries.hpp" />
 		<Unit filename="include/actor.h" />

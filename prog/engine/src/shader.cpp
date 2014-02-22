@@ -118,6 +118,28 @@ void Shader::drawActor(shared_ptr<Actor> actor, glm::mat4 mv)
 {
     /// Set bones
     int num = (actor->num_pose_matrices <= 50) ? actor->num_pose_matrices : 50;
+
+//    /// dump bones to cout
+//    for (int i_bone = 0; i_bone<actor->num_pose_matrices; i_bone++)
+//    {
+//        std::cout<<"bone matrix "<<i_bone<<"\n";
+//        std::cout<<"";
+//        for (int i = 0; i<4; i++)
+//        {
+//            std::cout<<"";
+//            for (int j = 0; j<4; j++)
+//            {
+//                std::cout << actor->pose_matrices[i_bone][j][i];
+//                if(j<3)std::cout<<",";
+//            }
+//            std::cout<<"";
+//            if(i<3)std::cout<<"\n";
+//        }
+//        std::cout<<"\n\n";
+//    }
+//
+//    system("PAUSE");
+
     glUniformMatrix4fv(bone_mat, num, true, &(actor->pose_matrices[0][0][0])); // <-- THIS!
 
     drawProp(actor, mv);
@@ -147,7 +169,10 @@ void Shader::drawProp(shared_ptr<Prop> prop, glm::mat4 mv)
         glm::mat4 rt = glm::mat4_cast(prop->rot);
         glm::mat4 sc = glm::scale(glm::mat4(1.0), prop->scale);
 
+//        glm::mat4 vertex_matrix  = mv * tr * rt * sc;
+        /// For bone debugging
         glm::mat4 vertex_matrix  = mv * tr * rt * sc * transf_mat; // scale, then translate, then lookat.
+
         glUniformMatrix4fv(mv_mat, 1, false, &vertex_matrix[0][0]);
 
 //        /// normal matrix

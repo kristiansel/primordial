@@ -156,7 +156,7 @@ int main()
 
 //    animPackBin(pFile, "../../engine/assets_bin/skeletons/anim_test.bbns"); /// Binary Bones file
 
-    convert("test_scenes/asset_anim_test5.dae",
+    convert("test_scenes/asset_anim_test6.dae",
             "../../engine/assets_bin/models/anim_test.bgeo",
             "../../engine/assets_bin/skeletons/anim_test.bbns");
 

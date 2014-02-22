@@ -30,7 +30,7 @@ public:
     virtual ~Renderer();
 
     void init(unsigned int scr_width_in, unsigned int scr_height_in); // depends on an OpenGL context, therefore public
-    void draw(Scene &scene);
+    void draw(Scene &scene, float dt);
     void resizeWindow(int w, int h, bool real = true);
 
 protected:
