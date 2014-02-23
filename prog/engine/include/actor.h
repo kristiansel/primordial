@@ -22,8 +22,12 @@ class Actor : public Prop
         std::shared_ptr<Skeleton> skel_ptr;
 
         void pose(int anim_index, float time);
+        void poseRest();
         void playAnim(int anim_index);
         void updateAnim(float dt);
+        void pauseAnim();
+        void unPauseAnim();
+        void togglePauseAnim();
 
         /// could consider getter method/private for:
         int num_pose_matrices;
@@ -33,6 +37,7 @@ class Actor : public Prop
     private:
         int active_anim;
         float active_anim_time;
+        bool paused;
 
 };
 

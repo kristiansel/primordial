@@ -19,7 +19,7 @@ void node_rec(aiNode* node,
               std::vector<std::string> &bone_names,
               glm::mat4 parent_mat,
               glm::mat4 &rig_transf,
-              bool rig_transf_found = false);
+              bool &rig_transf_found);
 
 int get_bone_index(std::string bone_name_in,
                    std::vector<std::string> &bone_names);
@@ -68,7 +68,8 @@ bool animPackBin(const aiScene* scene, std::string outputpath)
     // multiply matrices as they go to get opengl coordinates
     // scene/root node contains the blender->opengl transformation
     glm::mat4 rig_transf(1.0);
-    node_rec(scene->mRootNode, myFile, boneNames, glm::mat4(1.0), rig_transf);
+    bool found_rig_transf = false;
+    node_rec(scene->mRootNode, myFile, boneNames, glm::mat4(1.0), rig_transf, found_rig_transf);
 
     /// mat = trans * rot * sca
     /// Here decompose the rig_transf matrix
@@ -226,7 +227,7 @@ void node_rec(aiNode* node,
               std::vector<std::string> &bone_names,
               glm::mat4 parent_mat,
               glm::mat4 &rig_transf,
-              bool rig_transf_found)
+              bool &rig_transf_found)
 {
     int node_index = get_bone_index(node->mName.C_Str(), bone_names);
 
@@ -255,9 +256,6 @@ void node_rec(aiNode* node,
         float* matarr = mat2floatArr(abs_mat);;
         file.write( (char*) matarr,    16*sizeof(float) );
         delete [] matarr;
-
-//        /// Rubbish, to test if it has effect (IT COMPLETELY CRASHES THE PROGRAM)
-//        file.write( (char*) matarr,    16*sizeof(float) );
 
         /// Write the number of children
         int numChildren = node->mNumChildren;

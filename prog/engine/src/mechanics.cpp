@@ -42,13 +42,13 @@ void Mechanics::init(World &world_in, float &dt_in)
     /// Having issue with human model not in the correct
     /// place in the scene graph outputted by assimp import
 
-    world->addStaticObject( "human_male_bgeo",
+    world->addCreature( "human_male_bgeo",
                         "tex_human_male",
                         glm::vec3(0.0, 0.0, 0.0) );
 
-    world->addStaticObject( "mdl_human_male",
-                    "tex_human_male",
-                    glm::vec3(0.0, 0.0, 0.0) );
+    //world->addStaticObject( "mdl_human_male",
+    //                "tex_human_male",
+    //                glm::vec3(0.0, 0.0, 0.0) );
 
     /// Creatures
     world->addCreature( "anim_test",
@@ -167,24 +167,7 @@ void Mechanics::func(int num_in)
     case 4:
         for (auto &creature : world->creatures)
         {
-            /// dump bones to cout
-            for (int i_bone = 0; i_bone<creature->num_pose_matrices; i_bone++)
-            {
-                std::cout<<"bone matrix "<<i_bone<<"\n";
-                std::cout<<"";
-                for (int i = 0; i<4; i++)
-                {
-                    std::cout<<"";
-                    for (int j = 0; j<4; j++)
-                    {
-                        std::cout << creature->pose_matrices[i_bone][j][i];
-                        if(j<3)std::cout<<",";
-                    }
-                    std::cout<<"";
-                    if(i<3)std::cout<<"\n";
-                }
-                std::cout<<"\n\n";
-            }
+            creature->togglePauseAnim();
         }
         break;
 

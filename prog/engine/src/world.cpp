@@ -147,39 +147,44 @@ list<shared_ptr<Creature>>::iterator World::addCreature(string mesh_key, string 
     creature->pose(/*anim_num=*/ 0, /*time=*/0.5f);
 
     /// Start animation
-    creature->playAnim(0);
+    //creature->playAnim(0);
+
+    /// Pause animation
+    //creature->pauseAnim();
+
+    //creature->poseRest();
 
 
 
     /// Debugging skeleton
-//    weak_ptr<Mesh>      ax_mesh_ptr    = mesh_manager.getResptrFromKey ("axes");
-//    weak_ptr<Texture>   ax_tex_ptr     = tex_manager.getResptrFromKey  ("tricolor");
-
-//    for (int i = 0; i<(*new_creature_it)->shSkelPtr()->num_bones; i++)
+    weak_ptr<Mesh>      ax_mesh_ptr    = mesh_manager.getResptrFromKey ("axes");
+    weak_ptr<Texture>   ax_tex_ptr     = tex_manager.getResptrFromKey  ("tricolor");
+//
+//    for (int i = 0; i<creature->shSkelPtr()->num_bones; i++)
 //    {
-//        glm::mat4 matrix = (*new_creature_it)->shSkelPtr()->bones[i].rest_matrix;
-//        (*new_creature_it)->attachBatch(ax_mesh_ptr, ax_tex_ptr, matrix);
+//        glm::mat4 matrix = creature->shSkelPtr()->bones[i].rest_matrix;
+//        creature->attachBatch(ax_mesh_ptr, ax_tex_ptr, matrix);
 //    }
 
 //    for (int j = 0; j<6; j++)
 //    {
-//        (*new_creature_it)->pose(0, j*0.1);
+//        creature->pose(0, 0.3);
 //
-//        for (int i = 0; i<(*new_creature_it)->shSkelPtr()->num_bones; i++)
+//        for (int i = 0; i<creature->shSkelPtr()->num_bones; i++)
 //        {
-//            (*new_creature_it)->attachBatch(ax_mesh_ptr, ax_tex_ptr, (*new_creature_it)->pose_matrices[i]);
+//            creature->attachBatch(ax_mesh_ptr, ax_tex_ptr, creature->pose_matrices[i]);
 //        }
 //    }
 
-//    /// The pose rotates the wrong way...?
-//    (*new_creature_it)->pose(0, 0.4);
+//
+//    creature->pose(0, 0.4);
 //
 //    glm::mat4 orig_pos = glm::translate(glm::mat4(1.0),
 //                                        glm::vec3(0.284326, 1.17341, -0.198735));
 //
-//    (*new_creature_it)->attachBatch(ax_mesh_ptr, ax_tex_ptr, orig_pos);
+//    creature->attachBatch(ax_mesh_ptr, ax_tex_ptr, orig_pos);
 //
-//    glm::mat4* bone_mat = &((*new_creature_it)->pose_matrices[0]);
+//    glm::mat4* bone_mat = &(creature->pose_matrices[0]);
 //    glm::vec4  bone_index(2, 0, 0, 0);
 //    glm::vec4  bone_weight(1, 0, 0, 0);
 //
@@ -189,7 +194,7 @@ list<shared_ptr<Creature>>::iterator World::addCreature(string mesh_key, string 
 //                +bone_weight[2]*bone_mat[int(bone_index[2])]
 //                +bone_weight[3]*bone_mat[int(bone_index[3])]) * orig_pos;
 //
-//    (*new_creature_it)->attachBatch(ax_mesh_ptr, ax_tex_ptr, new_pos); /// This is correct, why not in vertex shader?
+//    creature->attachBatch(ax_mesh_ptr, ax_tex_ptr, new_pos); /// This is correct, why not in vertex shader?
 
     /// load bones and animation
 //    (*new_creature_it)->fromFile("anim_test");

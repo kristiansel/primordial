@@ -6,7 +6,8 @@
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
-			<Target title="Debug">
+			<Target title="Debug_windows">
+				<Option platforms="Windows;" />
 				<Option output="bin/Debug/primordial_asset_importer" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
@@ -16,10 +17,11 @@
 					<Add directory="include" />
 				</Compiler>
 				<Linker>
-					<Add library="C:\Program Files (x86)\CodeBlocks\MinGW\lib\libassimp.dll.a" />
+					<Add library="C:/Program Files (x86)/CodeBlocks/MinGW/lib/libassimp.dll.a" />
 				</Linker>
 			</Target>
-			<Target title="Release">
+			<Target title="Release_windows">
+				<Option platforms="Windows;" />
 				<Option output="bin/Release/primordial_asset_importer" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
@@ -30,12 +32,41 @@
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
-					<Add library="C:\Program Files (x86)\CodeBlocks\MinGW\lib\libassimp.a" />
-					<Add library="C:\Program Files (x86)\CodeBlocks\MinGW\lib\libzlibstatic.a" />
+					<Add library="C:/Program Files (x86)/CodeBlocks/MinGW/lib/libassimp.a" />
+					<Add library="C:/Program Files (x86)/CodeBlocks/MinGW/lib/libzlibstatic.a" />
+				</Linker>
+			</Target>
+			<Target title="Debug_linux">
+				<Option platforms="Unix;" />
+				<Option output="bin/Debug/primordial_asset_importer" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+					<Add directory="include" />
+				</Compiler>
+				<Linker>
+					<Add library="assimp" />
+				</Linker>
+			</Target>
+			<Target title="Release_linux">
+				<Option platforms="Unix;" />
+				<Option output="bin/Release/primordial_asset_importer" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add directory="include" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
 				</Linker>
 			</Target>
 		</Build>
 		<Compiler>
+			<Add option="-std=c++11" />
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 			<Add option="-DGLM_FORCE_RADIANS" />
