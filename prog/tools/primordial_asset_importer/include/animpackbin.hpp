@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <fstream>
+#include <ctime>
 
 #include <assimp/scene.h>
 #include <glm/glm.hpp>
@@ -35,10 +37,16 @@ float* mat2floatArr(glm::mat4 mat_in);
 std::vector<std::string> findBoneNames(const aiScene* scene);
 
 /// Main function
-bool animPackBin(const aiScene* scene, std::string outputpath)
+bool animPackBin(const aiScene* scene, std::string outputpath, bool debug = true)
 {
     /// Open file for writing
     std::ofstream myFile (outputpath, std::ios::out | std::ios::binary);
+
+    std::fstream debugstream;
+    debugstream.open("animdebug.log", std::fstream::in | std::fstream::out | std::fstream::app);
+
+    time_t ctt = time(0);
+    debugstream << "time: " << asctime(localtime(&ctt));
 
     /// Write a file header
     char* filetype = "bbns";         /// 4 bytes     file type
@@ -52,8 +60,8 @@ bool animPackBin(const aiScene* scene, std::string outputpath)
     /// Get the bone names from the animation channels
     std::vector<std::string> boneNames = findBoneNames(scene);
 
-//    for (int i_bone = 0; i_bone<boneNames.size(); i_bone++)
-//        std::cout << "bone " << i_bone << ": " << boneNames[i_bone] << std::endl;
+    for (int i_bone = 0; i_bone<boneNames.size(); i_bone++)
+        debugstream << "bone " << i_bone << ": " << boneNames[i_bone] << std::endl;
 
 
     /// Now that the bone names have been found, write the number
@@ -119,9 +127,13 @@ bool animPackBin(const aiScene* scene, std::string outputpath)
             int index = get_bone_index(channel->mNodeName.C_Str(), boneNames);
             myFile.write ( (char*) &index, 1*sizeof(int));
 
+            if(debug) debugstream << "ch "<<index<<": " << channel->mNodeName.C_Str() << " ";
+
             /// Position keys
             int numPosKeys = channel->mNumPositionKeys;
             myFile.write ( (char*) &numPosKeys, 1*sizeof(int));
+
+            if(debug) debugstream << "p(" << numPosKeys << "), ";
 
             /// Write they keyframes, assume they are always in chron order
             for (int k = 0; k<numPosKeys; k++)
@@ -149,6 +161,8 @@ bool animPackBin(const aiScene* scene, std::string outputpath)
             /// Rotation keys
             int numRotKeys = channel->mNumRotationKeys;
             myFile.write ( (char*) &numRotKeys, 1*sizeof(int));
+
+            if(debug) debugstream << "r(" << numRotKeys << "), ";
 
             /// Write they keyframes, assume they are always in chron order
             for (int k = 0; k<numRotKeys; k++)
@@ -181,6 +195,8 @@ bool animPackBin(const aiScene* scene, std::string outputpath)
             int numScaKeys = channel->mNumScalingKeys;
             myFile.write ( (char*) &numScaKeys, 1*sizeof(int));
 
+            if(debug) debugstream << "s(" << numScaKeys << "), ";
+
             /// Write they keyframes, assume they are always in chron order
             for (int k = 0; k<numScaKeys; k++)
             {
@@ -207,8 +223,8 @@ bool animPackBin(const aiScene* scene, std::string outputpath)
                 float scaArr[3] = { scaVec.x, scaVec.y, scaVec.z };
                 myFile.write ( (char*) &scaArr[0], 3*sizeof(float));
             }
-
-        }
+        if(debug) debugstream << std::endl;
+        } // Channels
 
     }
 
@@ -217,6 +233,9 @@ bool animPackBin(const aiScene* scene, std::string outputpath)
 
     /// Close file
     myFile.close();
+
+    debugstream << std::endl;
+    debugstream.close();
 }
 
 

@@ -29,4 +29,4 @@ private:
     int memsize;
 };
 
-#endif // TIMESERIES_H
+#endif // MEMSTREAMER_H

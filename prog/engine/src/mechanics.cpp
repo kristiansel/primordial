@@ -170,6 +170,23 @@ void Mechanics::func(int num_in)
             creature->togglePauseAnim();
         }
         break;
+    case 5:
+        for (auto &creature : world->creatures)
+        {
+            if (creature->num_pose_matrices > 50)
+            {
+                std::cout << creature->getActiveAnimTimeMod() << "\n";
+                for (int i = 0; i<4; i++)
+                {
+                    for (int j = 0; j<4; j++)
+                    {
+                        std::cout << creature->pose_matrices[4][i][j] << "\t";
+                    }
+                    std::cout << "\n";
+                }
+            }
+        }
+        break;
 
     default:    break;
     }

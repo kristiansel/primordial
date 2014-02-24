@@ -58,9 +58,10 @@
 					<Add option="-g" />
 					<Add option="-DSFML_STATIC" />
 					<Add option="-DGLEW_STATIC" />
+					<Add option="-DGLM_FORCE_RADIANS" />
 					<Add directory="include" />
-					<Add directory="dependencies/bullet/src" />
 					<Add directory="dependencies" />
+					<Add directory="D:/Travel/Productivity/libraries/bullet/src" />
 				</Compiler>
 				<Linker>
 					<Add library="sfml-graphics-s-d" />
@@ -103,7 +104,7 @@
 			<Add option="-fexceptions" />
 			<Add option="-DGLM_FORCE_RADIANS" />
 		</Compiler>
-		<Unit filename="dependencies/matprint.hpp" />
+		<Unit filename="dependencies/helperfunctions.hpp" />
 		<Unit filename="dependencies/memstreamer.hpp" />
 		<Unit filename="dependencies/timeseries.hpp" />
 		<Unit filename="include/actor.h" />

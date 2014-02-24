@@ -86,3 +86,13 @@ void Actor::togglePauseAnim()
     paused = !paused;
 }
 
+float Actor::getActiveAnimTime()
+{
+    return active_anim_time;
+}
+
+float Actor::getActiveAnimTimeMod()
+{
+    float duration = skel_ptr->animations[active_anim].duration;
+    return active_anim_time-(int)(active_anim_time/duration)*duration;
+}

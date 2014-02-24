@@ -144,7 +144,29 @@ list<shared_ptr<Creature>>::iterator World::addCreature(string mesh_key, string 
     creature->attachSkeleton(skel_ptr);
 
     /// Default pose
-    creature->pose(/*anim_num=*/ 0, /*time=*/0.5f);
+    // creature->pose(/*anim_num=*/ 0, /*time=*/0.290000f);
+
+//    /// Seek debug:
+//    TimeSeries<float> my_time_series;
+//
+//    my_time_series.num_keys = 1;
+//
+//    my_time_series.keys = new TimeValuePair<float> [my_time_series.num_keys];
+//    my_time_series.keys[0] = {0.32, 2.0};
+//
+//    my_time_series.duration = 1.23f;
+//
+//    auto res = my_time_series.seek(0.15); /// Problem!
+//
+//    float pre_valu = res.prev.key->value;
+//    float pre_time = res.prev.key->time;
+//    float pre_wght = res.prev.weight;
+//    float nxt_valu = res.next.key->value;
+//    float nxt_time = res.next.key->time;
+//    float nxt_wght = res.next.weight;
+//
+//    std::cout << "prev t: " << pre_time << " v: " << pre_valu << " wt: " << pre_wght << "\n";
+//    std::cout << "next t: " << nxt_time << " v: " << nxt_valu << " wt: " << nxt_wght << "\n";
 
     /// Start animation
     //creature->playAnim(0);

@@ -29,6 +29,10 @@ class Actor : public Prop
         void unPauseAnim();
         void togglePauseAnim();
 
+        /// debug methods;
+        float getActiveAnimTime();
+        float getActiveAnimTimeMod();
+
         /// could consider getter method/private for:
         int num_pose_matrices;
         glm::mat4* pose_matrices;

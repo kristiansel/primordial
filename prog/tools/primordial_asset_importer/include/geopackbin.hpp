@@ -59,10 +59,11 @@ void nodePrint(aiNode* node, int lvl = 0, int max_lvl = 3)
     }
 }
 
-void geoPackBin(const aiScene* scene, std::string outputpath)
+void geoPackBin(const aiScene* scene, std::string outputpath, bool debug = true)
 {
     //nodePrint(scene->mRootNode);
 
+    std::ofstream debugstream ("geodebug.log");
 
     for (int i_mesh = 0; i_mesh<scene->mNumMeshes; i_mesh++)
     {
@@ -76,6 +77,7 @@ void geoPackBin(const aiScene* scene, std::string outputpath)
 
         /// Open file for writing
         std::ofstream myFile (outputpath, std::ios::out | std::ios::binary);
+
 
         /// Write a file header
         char* filetype = "bgeo";         /// 4 bytes     file type
@@ -113,7 +115,7 @@ void geoPackBin(const aiScene* scene, std::string outputpath)
 //        findAbsMeshTransf(mesh->mName.C_Str(), scene->mRootNode, rig_transf, found);
 //        std::cout<<"mesh transform for "<<mesh->mName.C_Str()<<"\n";
 //        std::cout<<"found mesh transf: "<<found<<"\n";
-        printMat(rig_transf);
+       // printMat(rig_transf);
 
         std::vector<std::pair<int, float>>* bone_weight_pairs;
         bone_weight_pairs = new std::vector<std::pair<int, float>> [numVerts];
@@ -268,6 +270,8 @@ void geoPackBin(const aiScene* scene, std::string outputpath)
         /// Close file
         myFile.close();
     }
+
+    debugstream.close();
 }
 
 void find_rig_transf(aiNode* node,
@@ -287,7 +291,7 @@ void find_rig_transf(aiNode* node,
         {
             rig_transf = parent_mat;
             rig_transf_found = true;
-            std::cout<<"found parent mat of root bone @"<<node->mName.C_Str()<<std::endl;
+            //std::cout<<"found parent mat of root bone @"<<node->mName.C_Str()<<std::endl;
             //printMat(rig_transf);
             return;
         }

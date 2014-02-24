@@ -21,6 +21,11 @@
 #include <cmath>
 #include <memstreamer.hpp>
 #include <timeseries.hpp>
+#include <sstream>
+#include <helperfunctions.hpp>
+#include <cstdlib>
+
+
 
 const int MAX_BONE_NUM = 100;
 
@@ -59,6 +64,9 @@ public: /// private: // public for debugging
 
     int num_anims;
     Animation* animations;
+
+private: /// for debuggin
+    bool triggered;
 };
 
 class Skeleton::Bone /// This is part of a resource (store one copy)
@@ -71,9 +79,13 @@ public:
     ~Bone() {delete[] child_indices;};
 
     glm::mat4 rest_matrix; /// Transform to move
-                           /// something from parent origin
-                           /// To this origin and orientation
-                           /// in "rest"/"bind" pose
+                           /// something from object coordinates
+                           /// to this bone's coordinates
+
+    /// Could perhaps in the future need to add a local
+    /// transform to be used when there are no key frames
+    /// if that is ever the case
+
     int num_children;
     int* child_indices;
     std::string name;

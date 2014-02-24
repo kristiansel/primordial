@@ -10,7 +10,7 @@
 
 int main()
 {
-    convert("test_scenes/mdl_human_male1.dae",
+    convert("test_scenes/mdl_human_male2.dae",
             "../../engine/assets_bin/models/human_male_bgeo.bgeo",
             "../../engine/assets_bin/skeletons/human_male_bgeo.bbns");
 

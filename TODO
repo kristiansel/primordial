@@ -5,8 +5,4 @@ in Master::handleInput :
 	Add mouselook
 
 General :
-	Outstanding in animation: Integrate geometry into the collada exporter
-	in order to consistently export vertex weights and store them in a weight-index
-	fashion using 4 bone influences per vertex: While at it, fix texture coordinate
-	seams...
-
+	Animation working: Except for some keyframes returning rubbish after interpolation
