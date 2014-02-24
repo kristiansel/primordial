@@ -1,6 +1,6 @@
 #include "renderer.h"
 
-Renderer::Renderer()
+Renderer::Renderer() : settings({0, 0})
 {
     for (int i_cm = 0; i_cm<MAX_BONE_NUM; i_cm++)
     {
@@ -38,73 +38,97 @@ void Renderer::init(unsigned int scr_width_in, unsigned int scr_height_in)
     glCullFace(GL_BACK);
     // glEnable(GL_CULL_FACE);
 
-    /// Initiate perspective
-    resizeWindow(scr_width_in, scr_height_in);
-
     /// Initialize shaders
     main_shader.load("shaders/simple_vert.glsl", "shaders/simple_frag.glsl");
 
-    /// loading a mesh (TO BE REMOVED)
-//    scene->meshes.push_back(Mesh());
-//    scene->meshes.back().fromFile("assets_raw/models/sphere.obj");
-//    scene->meshes.back().pos = glm::vec3(0.0, 0.0, -2.0);
-//
-//    scene->meshes.push_back(Mesh());
-//    scene->meshes.back().fromFile("assets_raw/models/quad.obj");
-//    scene->meshes.back().pos = glm::vec3(3.0, 0.0, -2.0);
+    /// Post processing init
+    render_stage.init(scr_width_in, scr_height_in);
+    blur1.init(scr_width_in/ratio, scr_height_in/ratio, "shaders/pp_pass2.frag.glsl");
+    blur2.init(scr_width_in/ratio, scr_height_in/ratio, "shaders/pp_pass2.frag.glsl");
+    comb1.init(scr_width_in, scr_height_in, "shaders/pp_comb.frag.glsl");
+
+    /// Initiate perspective (this needs to be done after post processing init for now)
+    resizeWindow(scr_width_in, scr_height_in);
 }
 
 void Renderer::draw(Scene &scene, float dt)
 {
-    /// switch to main shader
-    main_shader.switchTo();
+    /// Set render "target" to draw to frame buffer
+    render_stage.activate();
 
-    /// clear the buffers
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        /// switch to main shader
+        main_shader.switchTo();
 
-    /// prepare for perspective drawing
-    glm::mat4 mv = scene.camera->getModelViewMatrix();
-    // glm::mat4 mv = getModelViewMatrix(scene.camera);
+        /// clear the buffers
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    /// lights
-    main_shader.setLights(mv);
+        /// prepare for perspective drawing
+        glm::mat4 mv = scene.camera->getModelViewMatrix();
+        // glm::mat4 mv = getModelViewMatrix(scene.camera);
 
-    /// draw
+        /// lights
+        main_shader.setLights(mv);
 
-//    for (auto it = scene->meshes.begin(); it!=scene->meshes.end(); it++)
-//    {
-//        main_shader.draw(*it, mv);
-//    }
+        /// draw
 
-    /// Send default bone matrices
-//    glm::mat4 clearMatrix = glm::mat4(1.0);
-    glUniformMatrix4fv(main_shader.getBoneMat(), MAX_BONE_NUM, true, &clear_matrices[0][0][0]); // <-- THIS!
+    //    for (auto it = scene->meshes.begin(); it!=scene->meshes.end(); it++)
+    //    {
+    //        main_shader.draw(*it, mv);
+    //    }
 
-    for (auto it = scene.props.begin(); it!=scene.props.end(); it++)
-    {
-        main_shader.drawProp(*it, mv);
-    }
+        /// Send default bone matrices
+    //    glm::mat4 clearMatrix = glm::mat4(1.0);
+        glUniformMatrix4fv(main_shader.getBoneMat(), MAX_BONE_NUM, true, &clear_matrices[0][0][0]); // <-- THIS!
 
-    for (auto it = scene.actors.begin(); it!=scene.actors.end(); it++)
-    {
-        (*it)->updateAnim(dt);
-        main_shader.drawActor(*it, mv);
-    }
+        for (auto it = scene.props.begin(); it!=scene.props.end(); it++)
+        {
+            main_shader.drawProp(*it, mv);
+        }
+
+        for (auto it = scene.actors.begin(); it!=scene.actors.end(); it++)
+        {
+            (*it)->updateAnim(dt);
+            main_shader.drawActor(*it, mv);
+        }
+
+    /// Finished main drawing, post processing
+    render_stage.deactivate();
+
+    ////     GENERATING POST-PROCESSING IMAGES
+    resizeWindow(settings.width/ratio, settings.height/ratio, false);
+
+    blur1.activate(KERNEL_SIZE, &kernelOffsetx[0], &kernelOffsety[0]);
+    blur1.activateTextures(render_stage.fbo_texture, render_stage.fbo_depth);
+    blur1.drawb();
+
+    // removing this has no effect on performance
+    blur2.activate(KERNEL_SIZE, &kernelOffsetx[0], &kernelOffsety[0]);
+    blur2.activateTextures(blur1.fbo_texture, render_stage.fbo_depth);
+    blur2.drawb();
+
+    resizeWindow(settings.width, settings.height, false);
+
+    // is absolutely killing performance
+    comb1.activate(0.7, 0.5); // original
+//    comb1.activate(0.7, 0.5);
+    comb1.activateTextures(render_stage.fbo_texture, blur2.fbo_texture); // original
+//    comb1.activateTextures(render_stage.fbo_texture, render_stage.fbo_depth);
+    comb1.draw();
 }
 
 void Renderer::resizeWindow(int w, int h, bool real)
 {
-    /*if (real)
+    if (real)
     {
-        s.width = w;
-        s.height = h;
+        settings.width = w;
+        settings.height = h;
         // Rescale FBO and RBO as well
         render_stage.resize(w, h);
         blur1.resize(w/ratio, h/ratio);
         blur2.resize(w/ratio, h/ratio);
 
     }
-    */
+
     glm::mat4 prj ; // just like for lookat
 
 
@@ -121,12 +145,24 @@ void Renderer::resizeWindow(int w, int h, bool real)
 
     glViewport(0, 0, w, h);
 
-    /*
+
     //    post processing stuff
-        pix_tex_coord_offset[0] = 1.0/(float)w;
-        pix_tex_coord_offset[1] = 1.0/(float)h;
-        updateKernel();
-        */
+    pix_tex_coord_offset[0] = 1.0/(float)w;
+    pix_tex_coord_offset[1] = 1.0/(float)h;
+    updateKernel();
+}
+
+void Renderer::updateKernel()
+{
+    int edge = (KERNEL_SIZE-1)/2;
+    for (int i=-edge; i<edge+1; i++)
+    {
+        for (int j=-edge; j<edge+1; j++)
+        {
+            kernelOffsety[(i+edge)+KERNEL_SIZE*(j+edge)] = pix_tex_coord_offset[0]*i;
+            kernelOffsetx[(i+edge)+KERNEL_SIZE*(j+edge)] = pix_tex_coord_offset[1]*j;
+        }
+    }
 }
 
 Renderer::Perspective::Perspective()

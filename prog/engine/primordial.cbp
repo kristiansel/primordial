@@ -109,6 +109,7 @@
 		<Unit filename="dependencies/timeseries.hpp" />
 		<Unit filename="include/actor.h" />
 		<Unit filename="include/camera.h" />
+		<Unit filename="include/combinationstage.h" />
 		<Unit filename="include/creature.h" />
 		<Unit filename="include/culler.h" />
 		<Unit filename="include/geometry.h" />
@@ -118,8 +119,10 @@
 		<Unit filename="include/object3d.h" />
 		<Unit filename="include/parser.h" />
 		<Unit filename="include/physicsworld.h" />
+		<Unit filename="include/postprocstage.h" />
 		<Unit filename="include/prop.h" />
 		<Unit filename="include/renderer.h" />
+		<Unit filename="include/renderstage.h" />
 		<Unit filename="include/resourcemanager.h" />
 		<Unit filename="include/rigidbody.h" />
 		<Unit filename="include/scene.h" />
@@ -131,6 +134,7 @@
 		<Unit filename="main.cpp" />
 		<Unit filename="src/actor.cpp" />
 		<Unit filename="src/camera.cpp" />
+		<Unit filename="src/combinationstage.cpp" />
 		<Unit filename="src/creature.cpp" />
 		<Unit filename="src/culler.cpp" />
 		<Unit filename="src/geometry.cpp" />
@@ -140,8 +144,10 @@
 		<Unit filename="src/object3d.cpp" />
 		<Unit filename="src/parser.cpp" />
 		<Unit filename="src/physicsworld.cpp" />
+		<Unit filename="src/postprocstage.cpp" />
 		<Unit filename="src/prop.cpp" />
 		<Unit filename="src/renderer.cpp" />
+		<Unit filename="src/renderstage.cpp" />
 		<Unit filename="src/rigidbody.cpp" />
 		<Unit filename="src/scene.cpp" />
 		<Unit filename="src/shader.cpp" />

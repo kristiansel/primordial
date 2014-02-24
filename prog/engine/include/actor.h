@@ -23,8 +23,8 @@ class Actor : public Prop
 
         void pose(int anim_index, float time);
         void poseRest();
-        void playAnim(int anim_index);
-        void updateAnim(float dt);
+        void playAnim(int anim_index, float speed = 1.0);
+        void updateAnim(float dt); /// This is where the calculations are called
         void pauseAnim();
         void unPauseAnim();
         void togglePauseAnim();
@@ -42,6 +42,7 @@ class Actor : public Prop
         int active_anim;
         float active_anim_time;
         bool paused;
+        float speed_factor;
 
 };
 

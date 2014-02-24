@@ -1,8 +1,11 @@
-in Parser::parseSimpleObj :
-	Fix texture coordinate seams
-
 in Master::handleInput :
 	Add mouselook
 
-General :
-	Animation working: Except for some keyframes returning rubbish after interpolation
+Small things could do:				Natural followups:
+	Animation via pose					- Blending, Signaling system/input control
+	Integrate post-processing	    	- Overlays, shadow mapping
+	make a shader template class		- Make more shaders
+	try sound in sfml					- 3d sound spacialization
+	frustum culling						-
+	
+	

@@ -3,15 +3,25 @@
 
 #include <GL/glew.h>
 #include <GL/gl.h>
-#include <iostream>
-#include "shader.h"
-#include "scene.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <iostream>
+
+#include "shader.h"
+#include "scene.h"
+#include "renderstage.h"
+#include "postprocstage.h"
+#include "combinationstage.h"
+
 
 class Renderer
 {
 public:
+    struct Settings
+    {
+        int width;
+        int height;
+    };
     struct Perspective
     {
         Perspective();
@@ -38,13 +48,28 @@ protected:
     static glm::mat4 getModelViewMatrix(Object3d o3d_in);
 
 private:
-
     Shader main_shader;
 
     Perspective perspective;
 
     glm::mat4 clear_matrices[MAX_BONE_NUM];
 
+    /// For post processing
+    Settings settings;
+
+    static const unsigned short KERNEL_SIZE = 5;
+    static const int ratio = 4; // downscaling ratio used for pp
+
+    float pix_tex_coord_offset[2];
+    float kernelOffsetx[KERNEL_SIZE*KERNEL_SIZE];
+    float kernelOffsety[KERNEL_SIZE*KERNEL_SIZE];
+
+    RenderStage render_stage;
+    PostProcStage blur1;
+    PostProcStage blur2; // UNCOMMENTING THIS MAKES ONE OF THE HEAD VERTICES WEIRD...
+    CombinationStage comb1;
+
+    void updateKernel();
 
 };
 

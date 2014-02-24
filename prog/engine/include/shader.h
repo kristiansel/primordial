@@ -37,6 +37,13 @@ public:
     /// Should look into ridding me of this:
     GLuint getBoneMat() {return bone_mat;};
 
+    /// Why are these out here in public? Should be in shader baseclass
+    static GLuint initshaders (GLenum type, const char *filename);
+    static GLuint initprogram (GLuint vertexshader, GLuint fragmentshader);
+    static string textFileRead (const char * filename);
+    static void programerrors (const GLint program);
+    static void shadererrors (const GLint shader);
+
 protected:
 private:
     /// opengl program id
@@ -70,11 +77,7 @@ private:
     GLuint bone_weight;     /// set by shader
 
     /// helper functions:
-    static string textFileRead (const char * filename);
-    static void programerrors (const GLint program);
-    static void shadererrors (const GLint shader);
-    static GLuint initshaders (GLenum type, const char *filename);
-    static GLuint initprogram (GLuint vertexshader, GLuint fragmentshader);
+
     void unload();
 
     /// helper variables

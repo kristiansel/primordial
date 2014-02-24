@@ -12,8 +12,6 @@ class RigidBody : virtual public Object3d
         static btCollisionShape* Box(float a, float b, float c) {return ( new btBoxShape(btVector3(a, b, c))); };
         static btCollisionShape* Sphere(float R) {return ( new btSphereShape(btScalar(R)) ); };
 
-
-
         RigidBody();
         virtual ~RigidBody();
 

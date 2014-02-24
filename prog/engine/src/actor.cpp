@@ -5,7 +5,8 @@ Actor::Actor() : num_pose_matrices(1),
                  pose_matrices(new glm::mat4(1.0)),
                  active_anim(0),
                  active_anim_time(0.f),
-                 paused(false)
+                 paused(false),
+                 speed_factor(1.0)
 {
     /// Actors with no attached skeleton will have a default
     /// identity matrix, as not to crash vertex shader
@@ -55,10 +56,11 @@ void Actor::poseRest()
     paused = true;
 }
 
-void Actor::playAnim(int anim_index_in)
+void Actor::playAnim(int anim_index_in, float speed)
 {
     active_anim = anim_index_in;
     active_anim_time = 0.0;
+    speed_factor = speed;
     paused = false;
 }
 
@@ -66,7 +68,7 @@ void Actor::updateAnim(float dt)
 {
     if (!paused)
     {
-        active_anim_time+=dt;
+        active_anim_time+=speed_factor*dt;
         skel_ptr->poseMatrices(pose_matrices, active_anim, active_anim_time);
     }
 }

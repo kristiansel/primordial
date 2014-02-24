@@ -174,6 +174,7 @@ list<shared_ptr<Creature>>::iterator World::addCreature(string mesh_key, string 
     /// Pause animation
     //creature->pauseAnim();
 
+    /// By default, should rest-pose;
     //creature->poseRest();
 
 
@@ -215,45 +216,6 @@ list<shared_ptr<Creature>>::iterator World::addCreature(string mesh_key, string 
 //                +bone_weight[1]*bone_mat[int(bone_index[1])]
 //                +bone_weight[2]*bone_mat[int(bone_index[2])]
 //                +bone_weight[3]*bone_mat[int(bone_index[3])]) * orig_pos;
-//
-//    creature->attachBatch(ax_mesh_ptr, ax_tex_ptr, new_pos); /// This is correct, why not in vertex shader?
-
-    /// load bones and animation
-//    (*new_creature_it)->fromFile("anim_test");
-//
-//            /// For debugging: Add the bones as renderbatches instead of model
-//
-//            glm::mat4* matrices = new glm::mat4 [(*new_creature_it)->shSkelPtr()->num_bones];
-//            glm::mat4* matrices_betw = new glm::mat4 [(*new_creature_it)->shSkelPtr()->num_bones];
-//
-//            /// void Skeleton::poseMatrices(glm::mat4* matrices, int anim_index, float time);
-//            (*new_creature_it)->shSkelPtr()->poseMatrices(matrices, 0, 0.4167);
-//            (*new_creature_it)->shSkelPtr()->poseMatrices(matrices_betw, 0, 0.6000);
-//
-//            for (int i = 0; i<(*new_creature_it)->shSkelPtr()->num_bones; i++)
-//            {
-//                weak_ptr<Mesh>      mesh_ptr    = mesh_manager.getResptrFromKey ("axes");
-//                weak_ptr<Texture>   tex_ptr     = tex_manager.getResptrFromKey  ("tricolor");
-//                glm::mat4 matrix = (*new_creature_it)->shSkelPtr()->bones[i].rest_matrix;
-//
-//                (*new_creature_it)->attachBatch(mesh_ptr, tex_ptr, matrices[i]);
-//                (*new_creature_it)->attachBatch(mesh_ptr, tex_ptr, matrices_betw[i]);
-//                (*new_creature_it)->attachBatch(mesh_ptr, tex_ptr, matrix);
-//            }
-//
-////            for (float t = -0.5; t<1.1000; t+=0.05)
-////            {
-////                Skeleton::Animation::Channel* ch = &(*new_creature_it)->shSkelPtr()->animations[0].channels[0];
-////
-////                std::cout << t << " : pframe : " << ch->pos_series.seekPrev(t)->time << "\n";
-////                std::cout << t << " : rframe : " << ch->rot_series.seekPrev(t)->time << "\n";
-////                std::cout << t << " : sframe : " << ch->sca_series.seekPrev(t)->time << "\n";
-////            }
-//
-//
-//
-//            delete[] matrices;
-//            delete[] matrices_betw;
 
 
     return new_creature_it;
