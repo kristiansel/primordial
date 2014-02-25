@@ -7,5 +7,7 @@ Small things could do:				Natural followups:
 	make a shader template class		- Make more shaders
 	try sound in sfml					- 3d sound spacialization
 	frustum culling						-
+	support multiple lights				- procedural lighting/sun-moon cycle
+	Alpha blending...					- balance its worth agains deferred shading/many lights
 	
 	

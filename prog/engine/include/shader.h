@@ -12,12 +12,14 @@
 
 #include "prop.h"
 #include "actor.h"
+#include "shaderbase.h"
 
 using std::shared_ptr;
 using std::string;
 using std::cerr;
 
-class Shader
+class Shader : public ShaderBase
+//class Shader
 {
 public:
     Shader();
@@ -25,7 +27,8 @@ public:
     virtual ~Shader();
 
     void load(string vertex_shader, string fragment_shader);
-    void switchTo();
+    void unload();
+//    void switchTo();
     void setLights(glm::mat4 mv); /// tobe refactored
 //        void draw(Mesh &mesh, glm::mat4 mv); /// Soon to be deleted/refactored
     // void draw(Prop &prop, glm::mat4 mv);
@@ -38,16 +41,16 @@ public:
     GLuint getBoneMat() {return bone_mat;};
 
     /// Why are these out here in public? Should be in shader baseclass
-    static GLuint initshaders (GLenum type, const char *filename);
-    static GLuint initprogram (GLuint vertexshader, GLuint fragmentshader);
-    static string textFileRead (const char * filename);
-    static void programerrors (const GLint program);
-    static void shadererrors (const GLint shader);
+//    static GLuint initshaders (GLenum type, const char *filename);
+//    static GLuint initprogram (GLuint vertexshader, GLuint fragmentshader);
+//    static string textFileRead (const char * filename);
+//    static void programerrors (const GLint program);
+//    static void shadererrors (const GLint shader);
 
 protected:
 private:
     /// opengl program id
-    GLuint program_id;
+    //GLuint program_id;
 
     /// uniforms
     GLuint num_lights;      /// set by shader.
@@ -78,10 +81,10 @@ private:
 
     /// helper functions:
 
-    void unload();
+    //void unload();
 
     /// helper variables
-    bool loaded;
+    //bool loaded;
 
 };
 

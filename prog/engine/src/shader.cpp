@@ -4,7 +4,7 @@
 Shader::Shader()
 {
     /// default helper variables
-    loaded = false;
+//    loaded = false;
 }
 
 Shader::Shader(string vertex_shader, string fragment_shader)
@@ -19,39 +19,41 @@ Shader::~Shader()
 
 void Shader::load(string vertex_shader, string fragment_shader)
 {
+    ShaderBase::load(vertex_shader, fragment_shader);
+
     /// Init the shader program
-    GLuint vertexshader = initshaders(GL_VERTEX_SHADER, vertex_shader.c_str()) ;
-    GLuint fragmentshader = initshaders(GL_FRAGMENT_SHADER, fragment_shader.c_str()) ;
-    program_id = initprogram(vertexshader, fragmentshader) ;
+//    GLuint vertexshader = initshaders(GL_VERTEX_SHADER, vertex_shader.c_str()) ;
+//    GLuint fragmentshader = initshaders(GL_FRAGMENT_SHADER, fragment_shader.c_str()) ;
+//    program_id = initprogram(vertexshader, fragmentshader) ;
 
     /// set the uniform locations
-    num_lights = glGetUniformLocation(program_id,"num_lights") ;
-    light_posns = glGetUniformLocation(program_id,"light_posns") ;
-    light_cols = glGetUniformLocation(program_id,"light_cols") ;
+    num_lights = glGetUniformLocation(getProgramID(),"num_lights") ;
+    light_posns = glGetUniformLocation(getProgramID(),"light_posns") ;
+    light_cols = glGetUniformLocation(getProgramID(),"light_cols") ;
 
-    ambient = glGetUniformLocation(program_id,"ambient") ;
-    diffuse = glGetUniformLocation(program_id,"diffuse") ;
-    specular = glGetUniformLocation(program_id,"specular") ;
-    shininess = glGetUniformLocation(program_id,"shininess") ;
-    emission = glGetUniformLocation(program_id,"emission") ;
+    ambient = glGetUniformLocation(getProgramID(),"ambient") ;
+    diffuse = glGetUniformLocation(getProgramID(),"diffuse") ;
+    specular = glGetUniformLocation(getProgramID(),"specular") ;
+    shininess = glGetUniformLocation(getProgramID(),"shininess") ;
+    emission = glGetUniformLocation(getProgramID(),"emission") ;
 
 //    hasTexture = glGetUniformLocation(program_id, "hasTexture") ;
-    tex = glGetUniformLocation(program_id, "tex");
+    tex = glGetUniformLocation(getProgramID(), "tex");
     glUniform1i(tex, 0);
 
 //    time = glGetUniformLocation(program_id, "time");
 
-    bone_mat = glGetUniformLocation(program_id, "bone_mat");
+    bone_mat = glGetUniformLocation(getProgramID(), "bone_mat");
 //    nobo_mat = glGetUniformLocation(program_id, "nobo_mat");
-    mv_mat = glGetUniformLocation(program_id, "mv_mat");
+    mv_mat = glGetUniformLocation(getProgramID(), "mv_mat");
     //nrm_mat = glGetUniformLocation(program_id, "nrm_mat");
 
     /// set the attribute locations
-    vertex = glGetAttribLocation(program_id, "InVertex") ;
-    normal = glGetAttribLocation(program_id, "InNormal") ;
-    texCoord0 = glGetAttribLocation(program_id, "InTexCoord") ;
-    bone_index = glGetAttribLocation(program_id, "bone_index") ;
-    bone_weight = glGetAttribLocation(program_id, "bone_weight") ;
+    vertex = glGetAttribLocation(getProgramID(), "InVertex") ;
+    normal = glGetAttribLocation(getProgramID(), "InNormal") ;
+    texCoord0 = glGetAttribLocation(getProgramID(), "InTexCoord") ;
+    bone_index = glGetAttribLocation(getProgramID(), "bone_index") ;
+    bone_weight = glGetAttribLocation(getProgramID(), "bone_weight") ;
 
     /// activate the attributes
     glEnableVertexAttribArray(vertex);
@@ -60,13 +62,13 @@ void Shader::load(string vertex_shader, string fragment_shader)
     glEnableVertexAttribArray(bone_index);
     glEnableVertexAttribArray(bone_weight);
 
-    loaded = true;
+//    loaded = true;
 }
 
 void Shader::unload()
 {
     /// deleting the shader object
-    if (loaded)
+    if (isLoaded())
     {
         /// not sure if this is needed
         glDisableVertexAttribArray(vertex);
@@ -74,12 +76,9 @@ void Shader::unload()
         glDisableVertexAttribArray(texCoord0);
         glDisableVertexAttribArray(bone_index);
         glDisableVertexAttribArray(bone_weight);
-
-        /// delete the program
-        glDeleteProgram(program_id);
-
-        loaded = false;
     }
+
+    ShaderBase::unload();
 }
 
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
@@ -89,15 +88,15 @@ const unsigned short texCoord0Offset = 1*sizeof(glm::vec4)+1*sizeof(glm::vec3);
 const unsigned short bone_indexOffset = 1*sizeof(glm::vec4)+1*sizeof(glm::vec3)+2*sizeof(float);
 const unsigned short bone_weightOffset = 1*sizeof(glm::vec4)+1*sizeof(glm::vec3)+2*sizeof(float)+MAX_BONE_INFLUENCES*sizeof(int);
 
-
-void Shader::switchTo()
-{
-    if (loaded)
-    {
-        glUseProgram(program_id);
-    }
-    else cerr << "Tried to use shader program before it was loaded\n";
-}
+//
+//void Shader::switchTo()
+//{
+//    if (loaded)
+//    {
+//        glUseProgram(program_id);
+//    }
+//    else cerr << "Tried to use shader program before it was loaded\n";
+//}
 
 void Shader::setLights(glm::mat4 mv)
 {
@@ -233,94 +232,94 @@ void Shader::drawProp(shared_ptr<Prop> prop, glm::mat4 mv)
 }
 
 
-/// HELPER FUNCTIONS (DO NOT USUALLY NEED TO BE EDITED
-
-string Shader::textFileRead (const char * filename)
-{
-    string str, ret = "" ;
-    ifstream in ;
-    in.open(filename) ;
-    if (in.is_open())
-    {
-        getline (in, str) ;
-        while (in)
-        {
-            ret += str + "\n" ;
-            getline (in, str) ;
-        }
-        //    cout << "Shader below\n" << ret << "\n" ;
-        return ret ;
-    }
-    else
-    {
-        cerr << "Unable to Open File " << filename << "\n" ;
-        throw 2 ;
-    }
-}
-
-void Shader::programerrors (const GLint program)
-{
-    GLint length ;
-    GLchar * log ;
-    glGetProgramiv(program, GL_INFO_LOG_LENGTH, &length) ;
-    log = new GLchar[length+1] ;
-    glGetProgramInfoLog(program, length, &length, log) ;
-    cerr << "Compile Error, Log Below\n" << log << "\n" ;
-    delete [] log ;
-}
-void Shader::shadererrors (const GLint shader)
-{
-    GLint length ;
-    GLchar * log ;
-    glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &length) ;
-    log = new GLchar[length+1] ;
-    glGetShaderInfoLog(shader, length, &length, log) ;
-    cerr << "Compile Error, Log Below\n" << log << "\n" ;
-    delete [] log ;
-}
-
-GLuint Shader::initshaders (GLenum type, const char *filename)
-{
-    GLuint shader = glCreateShader(type) ;
-    GLint compiled ;
-    string str = textFileRead (filename) ;
-    GLchar * cstr = new GLchar[str.size()+1] ;
-    const GLchar * cstr2 = cstr ; // Weirdness to get a const char
-    strcpy(cstr,str.c_str()) ;
-    glShaderSource (shader, 1, &cstr2, NULL) ;
-    glCompileShader (shader) ;
-    glGetShaderiv (shader, GL_COMPILE_STATUS, &compiled) ;
-    if (!compiled)
-    {
-        shadererrors (shader) ;
-        throw 3 ;
-    }
-    delete [] cstr;
-//    delete [] cstr2;
-    return shader ;
-}
-
-GLuint Shader::initprogram (GLuint vertexshader, GLuint fragmentshader)
-{
-    GLuint program = glCreateProgram() ;
-    GLint linked ;
-    glAttachShader(program, vertexshader) ;
-    glAttachShader(program, fragmentshader) ;
-    glLinkProgram(program) ;
-    glGetProgramiv(program, GL_LINK_STATUS, &linked) ;
-    if (linked) glUseProgram(program) ;
-    else
-    {
-        programerrors(program) ;
-        throw 4 ;
-    }
-
-    /// When the program is created, the shaders are no longer needed
-    glDetachShader(program, vertexshader);
-    glDetachShader(program, fragmentshader);
-    glDeleteShader(vertexshader);
-    glDeleteShader(fragmentshader);
-
-    return program ;
-}
-
+///// HELPER FUNCTIONS (DO NOT USUALLY NEED TO BE EDITED
+//
+//string Shader::textFileRead (const char * filename)
+//{
+//    string str, ret = "" ;
+//    ifstream in ;
+//    in.open(filename) ;
+//    if (in.is_open())
+//    {
+//        getline (in, str) ;
+//        while (in)
+//        {
+//            ret += str + "\n" ;
+//            getline (in, str) ;
+//        }
+//        //    cout << "Shader below\n" << ret << "\n" ;
+//        return ret ;
+//    }
+//    else
+//    {
+//        cerr << "Unable to Open File " << filename << "\n" ;
+//        throw 2 ;
+//    }
+//}
+//
+//void Shader::programerrors (const GLint program)
+//{
+//    GLint length ;
+//    GLchar * log ;
+//    glGetProgramiv(program, GL_INFO_LOG_LENGTH, &length) ;
+//    log = new GLchar[length+1] ;
+//    glGetProgramInfoLog(program, length, &length, log) ;
+//    cerr << "Compile Error, Log Below\n" << log << "\n" ;
+//    delete [] log ;
+//}
+//void Shader::shadererrors (const GLint shader)
+//{
+//    GLint length ;
+//    GLchar * log ;
+//    glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &length) ;
+//    log = new GLchar[length+1] ;
+//    glGetShaderInfoLog(shader, length, &length, log) ;
+//    cerr << "Compile Error, Log Below\n" << log << "\n" ;
+//    delete [] log ;
+//}
+//
+//GLuint Shader::initshaders (GLenum type, const char *filename)
+//{
+//    GLuint shader = glCreateShader(type) ;
+//    GLint compiled ;
+//    string str = textFileRead (filename) ;
+//    GLchar * cstr = new GLchar[str.size()+1] ;
+//    const GLchar * cstr2 = cstr ; // Weirdness to get a const char
+//    strcpy(cstr,str.c_str()) ;
+//    glShaderSource (shader, 1, &cstr2, NULL) ;
+//    glCompileShader (shader) ;
+//    glGetShaderiv (shader, GL_COMPILE_STATUS, &compiled) ;
+//    if (!compiled)
+//    {
+//        shadererrors (shader) ;
+//        throw 3 ;
+//    }
+//    delete [] cstr;
+////    delete [] cstr2;
+//    return shader ;
+//}
+//
+//GLuint Shader::initprogram (GLuint vertexshader, GLuint fragmentshader)
+//{
+//    GLuint program = glCreateProgram() ;
+//    GLint linked ;
+//    glAttachShader(program, vertexshader) ;
+//    glAttachShader(program, fragmentshader) ;
+//    glLinkProgram(program) ;
+//    glGetProgramiv(program, GL_LINK_STATUS, &linked) ;
+//    if (linked) glUseProgram(program) ;
+//    else
+//    {
+//        programerrors(program) ;
+//        throw 4 ;
+//    }
+//
+//    /// When the program is created, the shaders are no longer needed
+//    glDetachShader(program, vertexshader);
+//    glDetachShader(program, fragmentshader);
+//    glDeleteShader(vertexshader);
+//    glDeleteShader(fragmentshader);
+//
+//    return program ;
+//}
+//
