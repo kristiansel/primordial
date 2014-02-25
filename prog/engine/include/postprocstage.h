@@ -9,8 +9,9 @@
 #include <GL/glew.h>
 #include <vector>
 #include "shader.h"
+#include "shaderbase.h"
 
-class PostProcStage
+class PostProcStage : public ShaderBase
 {
 public:
     PostProcStage();
@@ -31,7 +32,7 @@ public:
 
     GLuint vbo_fbo_vertices;
 
-    GLuint program_postproc;
+    //GLuint program_postproc;
     GLuint attribute_v_coord_postproc;
 
     GLuint uniform_fbo_depth;
@@ -42,7 +43,7 @@ public:
 //        std::vector<GLuint> uniforms;
 //        std::vector<GLuint> attributes;
 
-    bool loaded;
+    //bool loaded;
 
 protected:
 private:

@@ -101,7 +101,7 @@ const unsigned short bone_weightOffset = 1*sizeof(glm::vec4)+1*sizeof(glm::vec3)
 void Shader::setLights(glm::mat4 mv)
 {
     /// transform light to eye coordinates
-    glm::vec4 light_pos_trans = mv * glm::vec4(1.0, 1.0, 1.0, 1.0);
+    glm::vec4 light_pos_trans = mv * glm::vec4(1.0, 1.0, 1.0, 0.0);
 
     /// set light color
     glm::vec4 light_col = glm::vec4(1.0, 1.0, 1.0, 1.0);

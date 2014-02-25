@@ -128,6 +128,7 @@
 		<Unit filename="include/scene.h" />
 		<Unit filename="include/shader.h" />
 		<Unit filename="include/shaderbase.h" />
+		<Unit filename="include/shadowmap.h" />
 		<Unit filename="include/skeleton.h" />
 		<Unit filename="include/texture.h" />
 		<Unit filename="include/world.h" />
@@ -153,6 +154,7 @@
 		<Unit filename="src/scene.cpp" />
 		<Unit filename="src/shader.cpp" />
 		<Unit filename="src/shaderbase.cpp" />
+		<Unit filename="src/shadowmap.cpp" />
 		<Unit filename="src/skeleton.cpp" />
 		<Unit filename="src/texture.cpp" />
 		<Unit filename="src/world.cpp" />

@@ -34,9 +34,12 @@ void Renderer::init(unsigned int scr_width_in, unsigned int scr_height_in)
     glEnable(GL_DEPTH_TEST);
 
     /// Set up culling
-    glFrontFace(GL_CW);
+    glFrontFace(GL_CCW);
     glCullFace(GL_BACK);
-    // glEnable(GL_CULL_FACE);
+    glEnable(GL_CULL_FACE);
+
+    /// Initialize Shadow mapping shader
+    shadow_map.init();
 
     /// Initialize shaders
     main_shader.load("shaders/simple_vert.glsl", "shaders/simple_frag.glsl");
@@ -45,7 +48,7 @@ void Renderer::init(unsigned int scr_width_in, unsigned int scr_height_in)
     render_stage.init(scr_width_in, scr_height_in);
     blur1.init(scr_width_in/ratio, scr_height_in/ratio, "shaders/pp_pass2.frag.glsl");
     blur2.init(scr_width_in/ratio, scr_height_in/ratio, "shaders/pp_pass2.frag.glsl");
-    comb1.init(scr_width_in, scr_height_in, "shaders/pp_comb.frag.glsl");
+    comb1.init(scr_width_in, scr_height_in);
 
     /// Initiate perspective (this needs to be done after post processing init for now)
     resizeWindow(scr_width_in, scr_height_in);
@@ -53,6 +56,35 @@ void Renderer::init(unsigned int scr_width_in, unsigned int scr_height_in)
 
 void Renderer::draw(Scene &scene, float dt)
 {
+    /// First update all animations
+    /// consider moving this out...
+    for (auto it = scene.actors.begin(); it!=scene.actors.end(); it++)
+    {
+        (*it)->updateAnim(dt);
+    }
+
+    /// This should look something like this: (for now light is hardcoded
+    /// in the shadow_map.activate() method)
+    //shadow_map.setLight(scene->getShadowLight())
+
+    shadow_map.activate();
+
+        glm::mat4 mv_fake(1.0);
+
+        for (auto it = scene.props.begin(); it!=scene.props.end(); it++)
+        {
+            shadow_map.drawProp(*it, mv_fake);
+        }
+
+        for (auto it = scene.actors.begin(); it!=scene.actors.end(); it++)
+        {
+            shadow_map.drawActor(*it, mv_fake);
+        }
+
+    shadow_map.deactivate();
+
+    resizeWindow(settings.width, settings.height, false);
+
     /// Set render "target" to draw to frame buffer
     render_stage.activate();
 
@@ -71,13 +103,7 @@ void Renderer::draw(Scene &scene, float dt)
 
         /// draw
 
-    //    for (auto it = scene->meshes.begin(); it!=scene->meshes.end(); it++)
-    //    {
-    //        main_shader.draw(*it, mv);
-    //    }
-
         /// Send default bone matrices
-    //    glm::mat4 clearMatrix = glm::mat4(1.0);
         glUniformMatrix4fv(main_shader.getBoneMat(), MAX_BONE_NUM, true, &clear_matrices[0][0][0]); // <-- THIS!
 
         for (auto it = scene.props.begin(); it!=scene.props.end(); it++)
@@ -87,7 +113,7 @@ void Renderer::draw(Scene &scene, float dt)
 
         for (auto it = scene.actors.begin(); it!=scene.actors.end(); it++)
         {
-            (*it)->updateAnim(dt);
+//            (*it)->updateAnim(dt);
             main_shader.drawActor(*it, mv);
         }
 

@@ -47,6 +47,18 @@ void ShaderBase::switchTo()
     else std::cerr << "Tried to use shader program before it was loaded\n";
 }
 
+void ShaderBase::validate()
+{
+    GLint validate_ok;
+    glValidateProgram(program_id);
+    glGetProgramiv(program_id, GL_VALIDATE_STATUS, &validate_ok);
+    if (!validate_ok)
+    {
+        fprintf(stderr, "glValidateProgram:");
+        //print_log(getProgramID());
+    }
+}
+
 GLuint ShaderBase::getProgramID()
 {
     return program_id;

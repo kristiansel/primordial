@@ -3,12 +3,12 @@
 
 CombinationStage::CombinationStage()
 {
-    loaded = false;
+//    isLoaded() = false;
 };
 
 CombinationStage::~CombinationStage()
 {
-    if (loaded)
+    if (isLoaded())
     {
         cout<<"deleting combination stage buffers\n";
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -17,9 +17,11 @@ CombinationStage::~CombinationStage()
         glDeleteRenderbuffers(1, &rbo_depth);
         glDisableVertexAttribArray(attribute_v_coord_postproc);
     }
+    ShaderBase::unload();
 };
 
-void CombinationStage::init(int w, int h, char* shader_path)
+//void CombinationStage::init(int w, int h, char* shader_path)
+void CombinationStage::init(int w, int h)
 {
 
     //TEXTURE
@@ -70,48 +72,49 @@ void CombinationStage::init(int w, int h, char* shader_path)
     glBufferData(GL_ARRAY_BUFFER, sizeof(fbo_vertices), fbo_vertices, GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-    // Post-processing
-    GLuint vs, fs;
-    GLint link_ok;
-    GLint validate_ok;
-
-    vs = Shader::initshaders(GL_VERTEX_SHADER, "shaders/pp_wave.vert.glsl");
-    fs = Shader::initshaders(GL_FRAGMENT_SHADER, shader_path);
-
-    program_postproc = glCreateProgram();
-    glAttachShader(program_postproc, vs);
-    glAttachShader(program_postproc, fs);
-    glLinkProgram(program_postproc);
-    glGetProgramiv(program_postproc, GL_LINK_STATUS, &link_ok);
-    if (!link_ok)
-    {
-        fprintf(stderr, "glLinkProgram:");
-        Shader::shadererrors(program_postproc);
-        //return 0;
-    }
-    glValidateProgram(program_postproc);
-    glGetProgramiv(program_postproc, GL_VALIDATE_STATUS, &validate_ok);
-    if (!validate_ok)
-    {
-        fprintf(stderr, "glValidateProgram:");
-        //print_log(program_postproc);
-    }
+//    // Post-processing
+//    GLuint vs, fs;
+//    GLint link_ok;
+//    GLint validate_ok;
+//
+//    vs = Shader::initshaders(GL_VERTEX_SHADER, "shaders/pp_wave.vert.glsl");
+//    fs = Shader::initshaders(GL_FRAGMENT_SHADER, shader_path);
+//
+//    getProgramID() = glCreateProgram();
+//    glAttachShader(getProgramID(), vs);
+//    glAttachShader(getProgramID(), fs);
+//    glLinkProgram(getProgramID());
+//    glGetProgramiv(getProgramID(), GL_LINK_STATUS, &link_ok);
+//    if (!link_ok)
+//    {
+//        fprintf(stderr, "glLinkProgram:");
+//        Shader::shadererrors(getProgramID());
+//        //return 0;
+//    }
+//    glValidateProgram(getProgramID());
+//    glGetProgramiv(getProgramID(), GL_VALIDATE_STATUS, &validate_ok);
+//    if (!validate_ok)
+//    {
+//        fprintf(stderr, "glValidateProgram:");
+//        //print_log(getProgramID());
+//    }
+    ShaderBase::load("shaders/pp_wave.vert.glsl", "shaders/pp_comb.frag.glsl");
 
     // get/enable attribs/uniforms and everything
     char* attribute_name = "v_coord";
-    attribute_v_coord_postproc = glGetAttribLocation(program_postproc, attribute_name);
+    attribute_v_coord_postproc = glGetAttribLocation(getProgramID(), attribute_name);
     if (attribute_v_coord_postproc == -1)
     {
         fprintf(stderr, "Could not bind attribute %s\n", attribute_name);
 //        return 0;
     }
-    uniform_textures[0] = glGetUniformLocation(program_postproc, "texture0");
-    uniform_textures[1] = glGetUniformLocation(program_postproc, "texture1");
-    uniform_w = glGetUniformLocation(program_postproc, "weights");
+    uniform_textures[0] = glGetUniformLocation(getProgramID(), "texture0");
+    uniform_textures[1] = glGetUniformLocation(getProgramID(), "texture1");
+    uniform_w = glGetUniformLocation(getProgramID(), "weights");
 
     int isValid;
-    glValidateProgram(program_postproc);
-    glGetProgramiv(program_postproc, GL_VALIDATE_STATUS, &isValid);
+    glValidateProgram(getProgramID());
+    glGetProgramiv(getProgramID(), GL_VALIDATE_STATUS, &isValid);
 
 //      if (uniform_fbo_texture == -1) {
 //        fprintf(stderr, "Could not bind uniform %s\n", uniform_name);
@@ -120,12 +123,15 @@ void CombinationStage::init(int w, int h, char* shader_path)
 
     glEnableVertexAttribArray(attribute_v_coord_postproc);
 
-    loaded = true;
+//    isLoaded() = true;
 };
+
 void CombinationStage::activate(float w0, float w1)
 {
     glBindFramebuffer(GL_FRAMEBUFFER, fbo);
-    glUseProgram(program_postproc);
+    ShaderBase::switchTo();
+
+    //glUseProgram(getProgramID());
 
     float weights[2];
     weights[0]=w0;

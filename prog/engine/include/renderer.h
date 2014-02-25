@@ -9,6 +9,7 @@
 
 #include "shader.h"
 #include "scene.h"
+#include "shadowmap.h"
 #include "renderstage.h"
 #include "postprocstage.h"
 #include "combinationstage.h"
@@ -64,6 +65,7 @@ private:
     float kernelOffsetx[KERNEL_SIZE*KERNEL_SIZE];
     float kernelOffsety[KERNEL_SIZE*KERNEL_SIZE];
 
+    ShadowMap shadow_map;
     RenderStage render_stage;
     PostProcStage blur1;
     PostProcStage blur2; // UNCOMMENTING THIS MAKES ONE OF THE HEAD VERTICES WEIRD...

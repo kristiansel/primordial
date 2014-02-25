@@ -10,13 +10,15 @@
 //#include <GL/glut.h>
 #include <vector>
 #include "shader.h"
+#include "shaderbase.h"
 
-class CombinationStage
+class CombinationStage : public ShaderBase
 {
 public:
     CombinationStage();
     virtual ~CombinationStage();
-    void init(int w, int h, char* shader_path);
+//    void init(int w, int h, char* shader_path);
+    void init(int w, int h);
     void draw();
     void drawb();
 
@@ -30,14 +32,14 @@ public:
     GLuint rbo_depth;
 
     GLuint vbo_fbo_vertices;
-    GLuint program_postproc;
+//    GLuint program_postproc;
 
 
     GLuint uniform_w;
     GLuint uniform_textures[2];
     GLuint textures[2];
 
-    bool loaded;
+//    bool loaded;
 };
 
 #endif // COMBINATIONSTAGE_H

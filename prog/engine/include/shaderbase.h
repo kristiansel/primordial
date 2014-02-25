@@ -22,7 +22,7 @@ class ShaderBase
         /// call this
         void load(std::string vertex_shader, std::string fragment_shader);
         void unload();
-        //void loadCompiled()
+        void validate();
     public:
         static GLuint initshaders (GLenum type, const char *filename);
         static GLuint initprogram (GLuint vertexshader, GLuint fragmentshader);

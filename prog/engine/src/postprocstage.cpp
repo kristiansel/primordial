@@ -2,7 +2,7 @@
 
 PostProcStage::PostProcStage()
 {
-    loaded = false;
+//    isLoaded() = false;
 };
 
 void PostProcStage::init(int w, int h, char* shader_path)
@@ -53,36 +53,38 @@ void PostProcStage::init(int w, int h, char* shader_path)
         glBufferData(GL_ARRAY_BUFFER, sizeof(fbo_vertices), fbo_vertices, GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-    // Post-processing
-    GLuint vs, fs;
-    GLint link_ok;
-    GLint validate_ok;
+//    // Post-processing
+//    GLuint vs, fs;
+//    GLint link_ok;
+//    GLint validate_ok;
+//
+//    vs = Shader::initshaders(GL_VERTEX_SHADER, "shaders/pp_wave.vert.glsl");
+//    fs = Shader::initshaders(GL_FRAGMENT_SHADER, shader_path);
+//
+//    getProgramID() = glCreateProgram();
+//    glAttachShader(getProgramID(), vs);
+//    glAttachShader(getProgramID(), fs);
+//    glLinkProgram(getProgramID());
+//    glGetProgramiv(getProgramID(), GL_LINK_STATUS, &link_ok);
+//    if (!link_ok)
+//    {
+//        fprintf(stderr, "glLinkProgram:");
+//        Shader::shadererrors(getProgramID());
+//        //return 0;
+//    }
+//    glValidateProgram(getProgramID());
+//    glGetProgramiv(getProgramID(), GL_VALIDATE_STATUS, &validate_ok);
+//    if (!validate_ok)
+//    {
+//        fprintf(stderr, "glValidateProgram:");
+//        //print_log(getProgramID());
+//    }
 
-    vs = Shader::initshaders(GL_VERTEX_SHADER, "shaders/pp_wave.vert.glsl");
-    fs = Shader::initshaders(GL_FRAGMENT_SHADER, shader_path);
-
-    program_postproc = glCreateProgram();
-    glAttachShader(program_postproc, vs);
-    glAttachShader(program_postproc, fs);
-    glLinkProgram(program_postproc);
-    glGetProgramiv(program_postproc, GL_LINK_STATUS, &link_ok);
-    if (!link_ok)
-    {
-        fprintf(stderr, "glLinkProgram:");
-        Shader::shadererrors(program_postproc);
-        //return 0;
-    }
-    glValidateProgram(program_postproc);
-    glGetProgramiv(program_postproc, GL_VALIDATE_STATUS, &validate_ok);
-    if (!validate_ok)
-    {
-        fprintf(stderr, "glValidateProgram:");
-        //print_log(program_postproc);
-    }
+    ShaderBase::load("shaders/pp_wave.vert.glsl", shader_path);
 
     // get/enable attribs/uniforms and everything
     char* attribute_name = "v_coord";
-    attribute_v_coord_postproc = glGetAttribLocation(program_postproc, attribute_name);
+    attribute_v_coord_postproc = glGetAttribLocation(getProgramID(), attribute_name);
     if (attribute_v_coord_postproc == -1)
     {
         fprintf(stderr, "Could not bind attribute %s\n", attribute_name);
@@ -90,14 +92,14 @@ void PostProcStage::init(int w, int h, char* shader_path)
     }
 
     char* uniform_name = "fbo_texture";
-    uniform_fbo_texture = glGetUniformLocation(program_postproc, uniform_name);
-    uniform_fbo_depth = glGetUniformLocation(program_postproc, "rbo_DepthTexture");
-    uniform_kern_x = glGetUniformLocation(program_postproc, "x_offsets");
-    uniform_kern_y = glGetUniformLocation(program_postproc, "y_offsets");
+    uniform_fbo_texture = glGetUniformLocation(getProgramID(), uniform_name);
+    uniform_fbo_depth = glGetUniformLocation(getProgramID(), "rbo_DepthTexture");
+    uniform_kern_x = glGetUniformLocation(getProgramID(), "x_offsets");
+    uniform_kern_y = glGetUniformLocation(getProgramID(), "y_offsets");
 
     int isValid;
-    glValidateProgram(program_postproc);
-    glGetProgramiv(program_postproc, GL_VALIDATE_STATUS, &isValid);
+    glValidateProgram(getProgramID());
+    glGetProgramiv(getProgramID(), GL_VALIDATE_STATUS, &isValid);
 
     if (uniform_fbo_texture == -1)
     {
@@ -106,7 +108,7 @@ void PostProcStage::init(int w, int h, char* shader_path)
     }
 
     glEnableVertexAttribArray(attribute_v_coord_postproc);
-    loaded = true;
+//    isLoaded() = true;
 }
 
 void PostProcStage::resize(int w, int h)
@@ -123,7 +125,8 @@ void PostProcStage::resize(int w, int h)
 void PostProcStage::activate(int size, float* kern_x, float* kern_y)
 {
     glBindFramebuffer(GL_FRAMEBUFFER, fbo);
-    glUseProgram(program_postproc);
+//    glUseProgram(getProgramID());
+    ShaderBase::switchTo();
 
     glUniform1fv(uniform_kern_x, size*size, kern_x);
     glUniform1fv(uniform_kern_y, size*size, kern_y);
@@ -188,7 +191,7 @@ void PostProcStage::draw()
 
 PostProcStage::~PostProcStage()
 {
-    if (loaded)
+    if (isLoaded())
     {
         cout<<"deleting post-processing stage buffers\n";
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -197,4 +200,5 @@ PostProcStage::~PostProcStage()
         glDeleteRenderbuffers(1, &rbo_depth);
         glDisableVertexAttribArray(attribute_v_coord_postproc);
     }
+    ShaderBase::unload();
 }
