@@ -17,6 +17,17 @@ void Mechanics::init(World &world_in, float &dt_in)
 
     world->camera->pos = glm::vec3(0.0, 1.5, 0.0);
 
+    /// set the main light (sun/moon)
+    world->mainLight( glm::vec3(1.0, 1.0, 1.0),         /// From direction
+                      glm::vec3(1.0, 1.0, 1.0) );  /// Color
+
+    /// add additional lights
+//    world->addPointLight(glm::vec3(3.0, 1.0, -4.0),         /// Position
+//                         glm::vec3(1.0, 0.5, 1.0));         /// Color
+//
+//    world->addPointLight(glm::vec3(-4.0, 1.0, 3.0),         /// Position
+//                         glm::vec3(0.0, 1.0, 1.0));         /// Color
+
     /// Load some resources (should be moved)
     ///                          Model,         Texture,            Position
     /// WorldObjects:

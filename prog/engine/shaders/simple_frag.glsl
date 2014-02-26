@@ -14,7 +14,7 @@ uniform vec4 light_cols[10];
 
 /// With texture
 uniform sampler2D tex; // the active texture
-uniform sampler2D shadow_depth; // the shadow mapping depth texture
+uniform sampler2DShadow shadow_depth; // the shadow mapping depth texture
 
 uniform mat4 nrm_mat;
 uniform mat4 mv_mat;
@@ -95,33 +95,19 @@ void main (void)
             SUM = SUM + term;
         }
 
+        /// This should be changable
 		vec4 amb = vec4(0.05, 0.05, 0.05, 1.0);
-//            vec4 amb = ambient;
-		/// Without texture
-        // gl_FragColor = amb + emission + SUM ;//+ ct; // gl_FragColor = ambient + emmisive + SUM ;
 
-		/// With texture
-		// Check if in shadow
+        /// Shadow Mapping
+        float bias = 0.001; // cosTheta is dot( n,l ), clamped between 0 and 1
+        bias = clamp(bias, 0,0.1);
 
-        float bias = 0.005; // cosTheta is dot( n,l ), clamped between 0 and 1
-        bias = clamp(bias, 0,0.01);
-
-        float visibility = 1.0;
-        vec4 depthsample = texture2D(shadow_depth, shadowvertex.xy);
-        if ( depthsample.z  <  shadowvertex.z - bias){
-            visibility = 0.0;
-        }
+        float depthsample = texture( shadow_depth, vec3(shadowvertex.xy,  (shadowvertex.z-bias)/shadowvertex.w) );
+        float visibility = (depthsample  <  shadowvertex.z) ? 0.0 : 1.0;
 
         /// Partially working
 		vec4 color = amb + emission + visibility * SUM ;
-		vec4 texel = texture2D(tex, mytexco.st);
+		vec4 texel = texture(tex, mytexco.st);
 		gl_FragColor = vec4(texel.rgb * color.rgb, 1);
-
-        /// Not working
-        //gl_FragColor = depthsample;
-
-        /// Working
-		//gl_FragColor = vec4(shadowvertex.z, shadowvertex.z, shadowvertex.z, shadowvertex.z);
-
     }
 }

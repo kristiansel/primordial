@@ -6,6 +6,7 @@
 #include "prop.h"
 #include "actor.h"
 #include "camera.h"
+#include "light.h"
 
 class Scene
 {
@@ -23,6 +24,7 @@ class Scene
 
         std::shared_ptr<Camera> camera;
 
+        const DirLight* main_light;
 
     protected:
     private:

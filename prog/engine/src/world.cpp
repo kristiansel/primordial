@@ -1,6 +1,10 @@
 #include "world.h"
 
-World::World()  : camera(new Camera)
+World::World()  :
+    camera(new Camera),
+    main_light(new DirLight),
+    num_point_lights(0),
+    point_lights(new PointLight [MAX_NUM_POINT_LIGHTS])
 {
 
 }
@@ -8,6 +12,8 @@ World::World()  : camera(new Camera)
 World::~World()
 {
     //dtor
+    delete [] point_lights;
+    delete main_light;
 }
 
 
@@ -238,3 +244,9 @@ void World::delCreature(list<shared_ptr<Creature>>::iterator creature_it_in)
 //        wObject->updateTransformation();
 //    }
 //}
+
+void World::mainLight(glm::vec3 dir, glm::vec3 color)
+{
+    main_light->dir = dir;
+    main_light->color = color;
+}

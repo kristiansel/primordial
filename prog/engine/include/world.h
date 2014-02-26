@@ -9,6 +9,7 @@
 #include "resourcemanager.h"
 #include "camera.h"
 #include "physicsworld.h"
+#include "light.h"
 
 
 using std::list;
@@ -39,8 +40,11 @@ class World : public PhysicsWorld /// Consider merging Culling functionality int
 
         void delCreature(list<shared_ptr<Creature>>::iterator creature_it_in);
 
+        void mainLight(glm::vec3 dir, glm::vec3 color );
+
 //        /// Step
 //        void step(float dt_in);
+
 
 
         /// "Physical" Contents (could with benefit be private?)
@@ -49,14 +53,17 @@ class World : public PhysicsWorld /// Consider merging Culling functionality int
         /// list<shared_ptr<Light>>       lights; // For future
         /// Terrain                       terrain; // For future
 
-
-        /// WorldObject
-        /// WorldStatic
-        /// WorldCreature ?
-
-
         shared_ptr<Camera> camera; /// Shared pointer here, because we do not want other shared
         /// pointers to accidentally delete the camera.
+
+        /// Safe pointers are for wimps...
+        DirLight* main_light;
+
+        /// Point lights
+        static const int MAX_NUM_POINT_LIGHTS = 5;
+        int num_point_lights;
+        PointLight* point_lights;
+
 
         // void forAllWorldObjects( void (*f) (WorldObject&) );
 

@@ -42,6 +42,7 @@ void Renderer::init(unsigned int scr_width_in, unsigned int scr_height_in)
     shadow_map.init();
 
     /// Initialize shaders
+    /// main_shader.init(shadow_map.getDepthTex());
     main_shader.load("shaders/simple_vert.glsl", "shaders/simple_frag.glsl");
 
     /// Post processing init
@@ -63,12 +64,21 @@ void Renderer::draw(Scene &scene, float dt)
         (*it)->updateAnim(dt);
     }
 
+    /// Set all things which are shared by shaders but can change in time
+    glm::mat4 mv = scene.camera->getModelViewMatrix();
+
+    // main light (shadowing directional/sun or moon)
+
+    const DirLight* mlight = scene.main_light;
+    glm::mat4 mlight_vp = mlight->getVPmatrix();
+
     /// This should look something like this: (for now light is hardcoded
     /// in the shadow_map.activate() method)
     //shadow_map.setLight(scene->getShadowLight())
 
     shadow_map.activate();
-//    std::cout<<"shadow_map addr"<<(long)&shadow_map<<"\n";
+///    shadow_map.activate(mlight_vp);
+//    shadow_map.activateDrawContent();
 
         glm::mat4 mv_fake(1.0);
 
@@ -89,24 +99,32 @@ void Renderer::draw(Scene &scene, float dt)
     /// Set render "target" to draw to frame buffer
     render_stage.activate();
 
+
         /// prepare for perspective drawing
-        glm::mat4 mv = scene.camera->getModelViewMatrix();
+
+        ///main_shader.activate(mv, mlight_vp, mlight,
+        ///                     plights, num_plights);
+
+        /// Set depth texture ref in init;
 
         main_shader.activate(mv, shadow_map.getLightMVPmat(), shadow_map.getDepthTex());
+//        main_shader.activate(mv, shadow_map.getLightMVPmat(), blur1.fbo_texture);
 
         /// draw
 
         /// Send default bone matrices
+        ///main_shader.clearBoneMatrices(clear_matrices);
         glUniformMatrix4fv(main_shader.getBoneMat(), MAX_BONE_NUM, true, &clear_matrices[0][0][0]); // <-- THIS!
 
         for (auto it = scene.props.begin(); it!=scene.props.end(); it++)
         {
+            /// main_shader.drawProp(&**it);
             main_shader.drawProp(*it, mv);
         }
 
         for (auto it = scene.actors.begin(); it!=scene.actors.end(); it++)
         {
-//            (*it)->updateAnim(dt);
+            /// main_shader.drawActor(&**it);
             main_shader.drawActor(*it, mv);
         }
 
@@ -115,6 +133,8 @@ void Renderer::draw(Scene &scene, float dt)
 
     ////     GENERATING POST-PROCESSING IMAGES
     resizeWindow(settings.width/ratio, settings.height/ratio, false);
+
+    /// Consider managing the resizing in the post-proc-stage class
 
     blur1.activate(KERNEL_SIZE, &kernelOffsetx[0], &kernelOffsety[0]);
     blur1.activateTextures(render_stage.fbo_texture, render_stage.fbo_depth);
@@ -133,6 +153,9 @@ void Renderer::draw(Scene &scene, float dt)
     comb1.activateTextures(render_stage.fbo_texture, blur2.fbo_texture); // original
 //    comb1.activateTextures(render_stage.fbo_texture, render_stage.fbo_depth);
     comb1.draw();
+
+    /// Consider drawing lower resolution, and upscaling while applying
+    /// FXAA...
 }
 
 void Renderer::resizeWindow(int w, int h, bool real)

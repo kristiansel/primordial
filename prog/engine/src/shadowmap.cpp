@@ -7,19 +7,15 @@ ShadowMap::ShadowMap() :
     vertex(0),
     light_mvp_mat_value(glm::mat4(1.0))
 {
-//    std::cout<<"calling shadowmap constructor\n";
+
 }
 
 void ShadowMap::init()
 {
-//    std::cout<<"calling shadowmap init\n";
-     // The framebuffer, which regroups 0, 1, or more textures, and 0 or 1 depth buffer.
     fbo = 0;
     glGenFramebuffers(1, &fbo);
     glBindFramebuffer(GL_FRAMEBUFFER, fbo);
 
-    // Depth texture. Slower than a depth buffer, but you can sample it later in your shader
-//    GLuint tex_depth;
     glGenTextures(1, &tex_depth);
     glBindTexture(GL_TEXTURE_2D, tex_depth);
     glTexImage2D(GL_TEXTURE_2D, 0,GL_DEPTH_COMPONENT16, 1024, 1024, 0,GL_DEPTH_COMPONENT, GL_FLOAT, 0);
@@ -32,13 +28,10 @@ void ShadowMap::init()
 
     glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, tex_depth, 0);
 
-    // No color output in the bound framebuffer, only depth.
     glDrawBuffer(GL_NONE);
 
-    // what is a readbuffer?
-    glReadBuffer(GL_NONE); /// Why is this needed?
+    glReadBuffer(GL_NONE); // Why is this needed?
 
-    // Always check that our framebuffer is ok
     GLenum status;
     if ((status = glCheckFramebufferStatus(GL_FRAMEBUFFER)) != GL_FRAMEBUFFER_COMPLETE)
     {
@@ -54,16 +47,12 @@ void ShadowMap::init()
 
     ///Attributes
     vertex = glGetAttribLocation(getProgramID(), "InVertex");
-
-    glBindTexture(GL_TEXTURE_2D, 0);
-
 }
 
 void ShadowMap::activate()
 {
-    // Render to our framebuffer
     glBindFramebuffer(GL_FRAMEBUFFER, fbo);
-    glViewport(0,0,1024,1024); // Render on the whole framebuffer, complete from the lower left corner to the upper right
+    glViewport(0,0,1024,1024);
 
     // Clear the screen
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -122,10 +111,8 @@ void ShadowMap::drawProp(shared_ptr<Prop> prop)
         glm::mat4 rt = glm::mat4_cast(prop->rot);
         glm::mat4 sc = glm::scale(glm::mat4(1.0), prop->scale);
 
-//        glm::mat4 vertex_matrix  = mv * tr * rt * s
         glm::mat4 mv = light_mvp_mat_value;
         glm::mat4 vertex_matrix  = mv * tr * rt * sc * transf_mat; // scale, then translate, then lookat.
-//        glm::mat4 vertex_matrix  = mv * tr * rt * sc;
 
         glUniformMatrix4fv(light_mvp_mat, 1, false, &vertex_matrix[0][0]);
 
@@ -135,11 +122,7 @@ void ShadowMap::drawProp(shared_ptr<Prop> prop)
 
         /// Apparently, the below is buffer specific? It needs to be here at least. Look into VAO
         /// Or separate buffers for each attribute (corresponds better to the .obj 3d format)
-        glVertexAttribPointer(vertex,       4, GL_FLOAT,    GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(0)                      );
-////        glVertexAttribPointer(normal,       3, GL_FLOAT,    GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(normalOffset)           );
-////        glVertexAttribPointer(texCoord0,    2, GL_FLOAT,    GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(texCoord0Offset)        );
-//        glVertexAttribPointer(bone_index,   MAX_BONE_INFLUENCES, GL_INT,      GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(bone_indexOffset)       );
-//        glVertexAttribPointer(bone_weight,  MAX_BONE_INFLUENCES, GL_FLOAT,    GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(bone_weightOffset)      );
+        glVertexAttribPointer(vertex,       4, GL_FLOAT,    GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(0));
 
         /// Draw call
         glDrawElements(GL_TRIANGLES, 3*mesh_ptr->getTriNum(), GL_UNSIGNED_SHORT, BUFFER_OFFSET(0));
