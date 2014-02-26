@@ -188,6 +188,28 @@ void Mesh::fromFile2(string mesh_key)
     }
 }
 
+//void Mesh::drawVertices()
+//{
+//    /// Bind vertex data
+//    glBindBuffer(GL_ARRAY_BUFFER, vbo_id);
+//    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo_id);
+//
+////    /// Apparently, the below is buffer specific? It needs to be here at least. Look into VAO
+////    /// Or separate buffers for each attribute (corresponds better to the .obj 3d format)
+////    glVertexAttribPointer(vertex,       4, GL_FLOAT,    GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(0)                      );
+////    glVertexAttribPointer(normal,       3, GL_FLOAT,    GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(normalOffset)           );
+////    glVertexAttribPointer(texCoord0,    2, GL_FLOAT,    GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(texCoord0Offset)        );
+////    glVertexAttribPointer(bone_index,   MAX_BONE_INFLUENCES, GL_INT,      GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(bone_indexOffset)       );
+////    glVertexAttribPointer(bone_weight,  MAX_BONE_INFLUENCES, GL_FLOAT,    GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(bone_weightOffset)      );
+//
+//    /// Draw call
+//    glDrawElements(GL_TRIANGLES, 3*triangle_num, GL_UNSIGNED_SHORT, BUFFER_OFFSET(0));
+//
+//    /// Not sure if this is necessary unless other code is badly written
+//    glBindBuffer(GL_ARRAY_BUFFER, 0);
+//    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+//}
+
 Mesh::Material Mesh::getMaterial()
 {
     return material;

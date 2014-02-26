@@ -28,8 +28,10 @@ public:
 
     void load(string vertex_shader, string fragment_shader);
     void unload();
-//    void switchTo();
-    void setLights(glm::mat4 mv); /// tobe refactored
+
+    void activate(glm::mat4 mv, glm::mat4 light_mvp_mat, GLuint shadow_depth);
+
+//    void setLights(glm::mat4 mv); /// tobe refactored
 //        void draw(Mesh &mesh, glm::mat4 mv); /// Soon to be deleted/refactored
     // void draw(Prop &prop, glm::mat4 mv);
     void drawActor(shared_ptr<Actor> actor, glm::mat4 mv);
@@ -64,13 +66,16 @@ private:
     GLuint emission;        /// set by shader
 
 //        GLuint hasTexture;      /// set by shader
-        GLuint tex;             /// set by shader. NOT SET YET (SEGFAULT)   AVOIDABLE
+    GLuint tex;             /// set by shader.
+    GLuint shadow_depth;
 //        GLuint tex2;            /// set by shader. NOT SET YET (SEGFAULT)   AVOIDABLE
 //        GLuint time;            /// set by shader
-        GLuint bone_mat;        /// set by shader.
+    GLuint bone_mat;        /// set by shader.
 //        GLuint nobo_mat;        /// set by shader.
     GLuint mv_mat;          /// set by shader
     //GLuint nrm_mat;         /// set by shader
+
+    GLuint shadowmap_mvp_mat;
 
     /// attributes
     GLuint vertex;          /// set by shader
@@ -85,6 +90,10 @@ private:
 
     /// helper variables
     //bool loaded;
+
+    /// temp
+    glm::mat4 light_mvp_mat;
+    GLuint sdepth;
 
 };
 

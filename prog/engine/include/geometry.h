@@ -7,6 +7,13 @@
 
 const unsigned int MAX_BONE_INFLUENCES = 4;
 
+#define BUFFER_OFFSET(i) ((char *)NULL + (i))
+
+const unsigned short normalOffset = 1*sizeof(glm::vec4);
+const unsigned short texCoord0Offset = 1*sizeof(glm::vec4)+1*sizeof(glm::vec3);
+const unsigned short bone_indexOffset = 1*sizeof(glm::vec4)+1*sizeof(glm::vec3)+2*sizeof(float);
+const unsigned short bone_weightOffset = 1*sizeof(glm::vec4)+1*sizeof(glm::vec3)+2*sizeof(float)+MAX_BONE_INFLUENCES*sizeof(int);
+
 struct Vertex // 60 bytes
 {
 //    Vertex();

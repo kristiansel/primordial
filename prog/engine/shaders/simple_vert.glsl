@@ -1,8 +1,10 @@
-# version 120
+# version 330 core
 
-varying vec3 mynormal ;
-varying vec4 myvertex ;
+varying vec3 mynormal ; /// Model space coordinates
+varying vec4 myvertex ;  /// Model space coordinates
 varying vec2 mytexco ;
+
+varying vec4 shadowvertex ;
 
 
 attribute vec3 InNormal ;
@@ -12,6 +14,7 @@ attribute vec4 bone_index ;
 attribute vec4 bone_weight ;
 
 uniform mat4 mv_mat;
+uniform mat4 shadowmap_mvp_mat;
 
 const int MAX_BONES = 100;
 uniform mat4[MAX_BONES] bone_mat;
@@ -33,6 +36,9 @@ void main() {
                      +bone_weight[3]*bone_mat[int(bone_index[3])])*vec4(InNormal.x, InNormal.y, InNormal.z, 0.0);
 
     mynormal = mynormal4.xyz;
+
+    shadowvertex = shadowmap_mvp_mat * myvertex;
+
     gl_Position = gl_ProjectionMatrix * mv_mat * myvertex ;
 }
 

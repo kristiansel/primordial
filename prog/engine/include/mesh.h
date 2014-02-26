@@ -56,6 +56,8 @@ public:
     GLuint getIBOid();                  // called by shader
     unsigned int getTriNum();           // called by shader
 
+//    void drawVertices(); /// draws the mesh vertices (does not affect uniforms)
+
 
 
 protected:

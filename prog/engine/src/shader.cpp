@@ -37,16 +37,18 @@ void Shader::load(string vertex_shader, string fragment_shader)
     shininess = glGetUniformLocation(getProgramID(),"shininess") ;
     emission = glGetUniformLocation(getProgramID(),"emission") ;
 
-//    hasTexture = glGetUniformLocation(program_id, "hasTexture") ;
     tex = glGetUniformLocation(getProgramID(), "tex");
-    glUniform1i(tex, 0);
+    glUniform1i(tex, 0);            /// ALWAYS CHANNEL 0
+
+    shadow_depth = glGetUniformLocation(getProgramID(), "shadow_depth");
+    glUniform1i(shadow_depth, 1);   /// ALWAYS CHANNEL 1
 
 //    time = glGetUniformLocation(program_id, "time");
 
     bone_mat = glGetUniformLocation(getProgramID(), "bone_mat");
-//    nobo_mat = glGetUniformLocation(program_id, "nobo_mat");
     mv_mat = glGetUniformLocation(getProgramID(), "mv_mat");
-    //nrm_mat = glGetUniformLocation(program_id, "nrm_mat");
+
+    shadowmap_mvp_mat = glGetUniformLocation(getProgramID(), "shadowmap_mvp_mat");
 
     /// set the attribute locations
     vertex = glGetAttribLocation(getProgramID(), "InVertex") ;
@@ -81,25 +83,18 @@ void Shader::unload()
     ShaderBase::unload();
 }
 
-#define BUFFER_OFFSET(i) ((char *)NULL + (i))
 
-const unsigned short normalOffset = 1*sizeof(glm::vec4);
-const unsigned short texCoord0Offset = 1*sizeof(glm::vec4)+1*sizeof(glm::vec3);
-const unsigned short bone_indexOffset = 1*sizeof(glm::vec4)+1*sizeof(glm::vec3)+2*sizeof(float);
-const unsigned short bone_weightOffset = 1*sizeof(glm::vec4)+1*sizeof(glm::vec3)+2*sizeof(float)+MAX_BONE_INFLUENCES*sizeof(int);
-
-//
-//void Shader::switchTo()
-//{
-//    if (loaded)
-//    {
-//        glUseProgram(program_id);
-//    }
-//    else cerr << "Tried to use shader program before it was loaded\n";
-//}
-
-void Shader::setLights(glm::mat4 mv)
+void Shader::activate(glm::mat4 mv, glm::mat4 light_mvp_mat, GLuint shadow_depth)
 {
+    /// switch to main shader
+    ShaderBase::switchTo();
+
+    /// clear the buffers
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    /// lights
+//    main_shader.setLights(mv);
+
     /// transform light to eye coordinates
     glm::vec4 light_pos_trans = mv * glm::vec4(1.0, 1.0, 1.0, 0.0);
 
@@ -111,7 +106,29 @@ void Shader::setLights(glm::mat4 mv)
     glUniform4fv(light_posns, 1, &(light_pos_trans[0]));
     glUniform4fv(light_cols,  1, &(light_col[0]));
 
+    /// All read from the same depth tex
+    glActiveTexture(GL_TEXTURE1);
+    glBindTexture(GL_TEXTURE_2D, shadow_depth);
+
+//    glUniform1i(shadow_depth, 1);   /// ALWAYS CHANNEL 1
+
+    this->light_mvp_mat =  light_mvp_mat; /// Store for reuse when drawing each..
 }
+
+//void Shader::setLights(glm::mat4 mv)
+//{
+//    /// transform light to eye coordinates
+//    glm::vec4 light_pos_trans = mv * glm::vec4(1.0, 1.0, 1.0, 0.0);
+//
+//    /// set light color
+//    glm::vec4 light_col = glm::vec4(1.0, 1.0, 1.0, 1.0);
+//
+//    /// send uniforms
+//    glUniform1i(num_lights, 1) ;
+//    glUniform4fv(light_posns, 1, &(light_pos_trans[0]));
+//    glUniform4fv(light_cols,  1, &(light_col[0]));
+//
+//}
 
 void Shader::drawActor(shared_ptr<Actor> actor, glm::mat4 mv)
 {
@@ -168,11 +185,23 @@ void Shader::drawProp(shared_ptr<Prop> prop, glm::mat4 mv)
         glm::mat4 rt = glm::mat4_cast(prop->rot);
         glm::mat4 sc = glm::scale(glm::mat4(1.0), prop->scale);
 
-//        glm::mat4 vertex_matrix  = mv * tr * rt * sc;
-        /// For bone debugging
+//        glm::mat4 vertex_matrix  = mv * tr * rt * s
         glm::mat4 vertex_matrix  = mv * tr * rt * sc * transf_mat; // scale, then translate, then lookat.
 
         glUniformMatrix4fv(mv_mat, 1, false, &vertex_matrix[0][0]);
+
+
+
+        /// Shadowmap related
+        glm::mat4 biasMatrix(
+                    0.5, 0.0, 0.0, 0.0,
+                    0.0, 0.5, 0.0, 0.0,
+                    0.0, 0.0, 0.5, 0.0,
+                    0.5, 0.5, 0.5, 1.0
+                    );
+
+        glm::mat4 light_mvp_mat_refable  = biasMatrix * light_mvp_mat * tr * rt * sc * transf_mat;
+        glUniformMatrix4fv(shadowmap_mvp_mat, 1, false, &light_mvp_mat_refable[0][0]);
 
 //        /// normal matrix
 //        glm::mat4 normal_matrix = glm::inverse(glm::transpose(vertex_matrix));
@@ -227,6 +256,8 @@ void Shader::drawProp(shared_ptr<Prop> prop, glm::mat4 mv)
         /// Not sure if this is necessary unless other code is badly written
         glBindBuffer(GL_ARRAY_BUFFER, 0);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+//        mesh_ptr->drawVertices();
+
         glBindTexture(GL_TEXTURE_2D, 0);
     }
 }

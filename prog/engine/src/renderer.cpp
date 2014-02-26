@@ -68,17 +68,18 @@ void Renderer::draw(Scene &scene, float dt)
     //shadow_map.setLight(scene->getShadowLight())
 
     shadow_map.activate();
+//    std::cout<<"shadow_map addr"<<(long)&shadow_map<<"\n";
 
         glm::mat4 mv_fake(1.0);
 
         for (auto it = scene.props.begin(); it!=scene.props.end(); it++)
         {
-            shadow_map.drawProp(*it, mv_fake);
+            shadow_map.drawProp(*it);
         }
 
         for (auto it = scene.actors.begin(); it!=scene.actors.end(); it++)
         {
-            shadow_map.drawActor(*it, mv_fake);
+            shadow_map.drawActor(*it);
         }
 
     shadow_map.deactivate();
@@ -88,18 +89,10 @@ void Renderer::draw(Scene &scene, float dt)
     /// Set render "target" to draw to frame buffer
     render_stage.activate();
 
-        /// switch to main shader
-        main_shader.switchTo();
-
-        /// clear the buffers
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
         /// prepare for perspective drawing
         glm::mat4 mv = scene.camera->getModelViewMatrix();
-        // glm::mat4 mv = getModelViewMatrix(scene.camera);
 
-        /// lights
-        main_shader.setLights(mv);
+        main_shader.activate(mv, shadow_map.getLightMVPmat(), shadow_map.getDepthTex());
 
         /// draw
 
