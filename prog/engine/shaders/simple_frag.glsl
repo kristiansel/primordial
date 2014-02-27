@@ -19,6 +19,7 @@ uniform sampler2D tex; // the active texture
 uniform sampler2DShadow shadow_depth; // the shadow mapping depth texture
 
 uniform mat4 mv_mat;
+uniform mat4 to_world_space_mat;
 
 uniform mat4 shadowmap_mvp_mat;
 

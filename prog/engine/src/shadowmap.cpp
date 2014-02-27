@@ -7,7 +7,10 @@ ShadowMap::ShadowMap() :
     attributes({0}),
     light_vp_value(glm::mat4(1.0))
 {
-
+    for (int i_cm = 0; i_cm<MAX_BONE_NUM; i_cm++)
+    {
+        clear_matrices[i_cm] = glm::mat4(1.0);
+    }
 }
 
 void ShadowMap::init()
@@ -44,9 +47,17 @@ void ShadowMap::init()
 
     ///Uniforms
     uniforms.light_mvp_mat  = glGetUniformLocation(getProgramID(), "depthMVP");
+    uniforms.bone_mat = glGetUniformLocation(getProgramID(), "bone_mat");
 
     ///Attributes
     attributes.vertex = glGetAttribLocation(getProgramID(), "InVertex");
+    attributes.bone_index = glGetAttribLocation(getProgramID(), "bone_index");
+    attributes.bone_weight = glGetAttribLocation(getProgramID(), "bone_weight");
+
+    /// activate the attributes, why is this not needed here???
+//    glEnableVertexAttribArray(attributes.vertex);
+//    glEnableVertexAttribArray(attributes.bone_index);
+//    glEnableVertexAttribArray(attributes.bone_weight);
 }
 
 void ShadowMap::activate(const glm::mat4 &light_vp)
@@ -64,6 +75,11 @@ void ShadowMap::activate(const glm::mat4 &light_vp)
     light_vp_value = light_vp;
 }
 
+void ShadowMap::clearBoneMatrices()
+{
+    glUniformMatrix4fv(uniforms.bone_mat, MAX_BONE_NUM, true, &clear_matrices[0][0][0]); // <-- THIS!
+}
+
 void ShadowMap::deactivate()
 {
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -71,7 +87,12 @@ void ShadowMap::deactivate()
 
 void ShadowMap::drawActor(shared_ptr<Actor> actor)
 {
+    /// Set bones
+    int num = (actor->num_pose_matrices <= MAX_BONE_NUM) ? actor->num_pose_matrices : MAX_BONE_NUM;
 
+    glUniformMatrix4fv(uniforms.bone_mat, num, true, &(actor->pose_matrices[0][0][0])); // <-- THIS!
+
+    drawProp(actor);
 }
 
 void ShadowMap::drawProp(shared_ptr<Prop> prop)
@@ -99,6 +120,9 @@ void ShadowMap::drawProp(shared_ptr<Prop> prop)
         /// Apparently, the below is buffer specific? It needs to be here at least. Look into VAO
         /// Or separate buffers for each attribute (corresponds better to the .obj 3d format)
         glVertexAttribPointer(attributes.vertex,       4, GL_FLOAT,    GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(0));
+        glVertexAttribPointer(attributes.bone_index,   MAX_BONE_INFLUENCES, GL_INT,      GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(bone_indexOffset)       );
+        glVertexAttribPointer(attributes.bone_weight,  MAX_BONE_INFLUENCES, GL_FLOAT,    GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(bone_weightOffset)      );
+
 
         /// Draw call
         glDrawElements(GL_TRIANGLES, 3*mesh_ptr->getTriNum(), GL_UNSIGNED_SHORT, BUFFER_OFFSET(0));

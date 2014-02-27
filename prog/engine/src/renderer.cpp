@@ -75,6 +75,8 @@ void Renderer::draw(Scene &scene, float dt)
 //    shadow_map.activate();
     shadow_map.activate(mlight_vp);
 //    shadow_map.activateDrawContent();
+        /// Draw props (non-animated)
+        shadow_map.clearBoneMatrices();
 
         for (auto it = scene.props.begin(); it!=scene.props.end(); it++)
         {

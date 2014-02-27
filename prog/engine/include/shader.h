@@ -69,6 +69,11 @@ private:
         /// model view matrix
         GLuint mv_mat;
 
+        /// Object to world space matrix
+        /// can later use the world space y value for fog
+        /// computations!
+        GLuint to_world_space_mat;
+
         /// light model view projection matrix
         GLuint shadowmap_mvp_mat;
     } uniforms;

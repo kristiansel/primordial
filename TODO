@@ -10,3 +10,6 @@ Small things could do:				Natural followups:
 	PCF filter on shadowmap
 	apply shadowmapping to animated
 	
+In importer:
+	check for maxbones consistency (100 bones)
+	

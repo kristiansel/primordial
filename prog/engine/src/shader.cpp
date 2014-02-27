@@ -46,6 +46,8 @@ void Shader::init(GLuint shadowmap_depth_texture)
 
     uniforms.mv_mat = glGetUniformLocation(getProgramID(), "mv_mat");
 
+    uniforms.to_world_space_mat = glGetUniformLocation(getProgramID(), "to_world_space_mat");
+
     uniforms.shadowmap_mvp_mat = glGetUniformLocation(getProgramID(), "shadowmap_mvp_mat");
 
     /// set the attribute locations
@@ -124,8 +126,6 @@ void Shader::activate(const glm::mat4 &mv, const glm::mat4 &light_mvp_mat, const
 
 void Shader::clearBoneMatrices()
 {
-    /// Send default bone matrices
-    ///main_shader.clearBoneMatrices(clear_matrices);
     glUniformMatrix4fv(uniforms.bone_mat, MAX_BONE_NUM, true, &clear_matrices[0][0][0]); // <-- THIS!
 }
 
@@ -152,9 +152,11 @@ void Shader::drawProp(shared_ptr<Prop> prop)
         glm::mat4 rt = glm::mat4_cast(prop->rot);
         glm::mat4 sc = glm::scale(glm::mat4(1.0), prop->scale);
 
-        glm::mat4 vertex_matrix  = vp_mat * tr * rt * sc * transf_mat; // scale, then translate, then lookat.
+        glm::mat4 obj_to_world_space_mat = tr * rt * sc * transf_mat;
+        glm::mat4 vertex_matrix  = vp_mat * obj_to_world_space_mat; // scale, then translate, then lookat.
 
         glUniformMatrix4fv(uniforms.mv_mat, 1, false, &vertex_matrix[0][0]);
+        glUniformMatrix4fv(uniforms.to_world_space_mat, 1, false, &obj_to_world_space_mat[0][0]);
 
 
 
