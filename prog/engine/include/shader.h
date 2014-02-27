@@ -86,7 +86,7 @@ private:
     /// Internally stored, so they do not have to be
     /// passed as arguments every single draw call
     glm::vec3 main_light_dir;
-    glm::vec3 main_light_color;
+    glm::vec4 main_light_color;
     glm::mat4 main_light_mvp_mat;
     glm::mat4 vp_mat; /// For now this is just a view matrix
 

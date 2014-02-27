@@ -245,7 +245,7 @@ void World::delCreature(list<shared_ptr<Creature>>::iterator creature_it_in)
 //    }
 //}
 
-void World::mainLight(glm::vec3 dir, glm::vec3 color)
+void World::mainLight(glm::vec3 dir, glm::vec4 color)
 {
     main_light->dir = dir;
     main_light->color = color;

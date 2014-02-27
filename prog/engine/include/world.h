@@ -40,7 +40,7 @@ class World : public PhysicsWorld /// Consider merging Culling functionality int
 
         void delCreature(list<shared_ptr<Creature>>::iterator creature_it_in);
 
-        void mainLight(glm::vec3 dir, glm::vec3 color );
+        void mainLight(glm::vec3 dir, glm::vec4 color );
 
 //        /// Step
 //        void step(float dt_in);

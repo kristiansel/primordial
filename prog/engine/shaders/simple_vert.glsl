@@ -6,7 +6,6 @@ varying vec2 mytexco ;
 
 varying vec4 shadowvertex ;
 
-
 attribute vec3 InNormal ;
 attribute vec4 InVertex ;
 attribute vec2 InTexCoord ;

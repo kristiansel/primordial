@@ -2,7 +2,7 @@
 
 DirLight::DirLight() :
     dir(glm::vec3(1.0, 1.0, 1.0)),
-    color(glm::vec3(1.0, 1.0, 1.0)) {};
+    color(glm::vec4(1.0, 1.0, 1.0, 1.0)) {};
 
 glm::mat4 DirLight::getVPmatrix() const
 {
@@ -14,4 +14,4 @@ glm::mat4 DirLight::getVPmatrix() const
 
 PointLight::PointLight() :
     pos(glm::vec3(0.0, 0.0, 0.0)),
-    color(glm::vec3(1.0, 1.0, 1.0)) {};
+    color(glm::vec4(1.0, 1.0, 1.0, 1.0)) {};

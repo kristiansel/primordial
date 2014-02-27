@@ -12,7 +12,7 @@ struct DirLight
 
     /// Members
     glm::vec3 dir;
-    glm::vec3 color;
+    glm::vec4 color;
 };
 
 struct PointLight
@@ -23,7 +23,7 @@ struct PointLight
 
     /// Members
     glm::vec3 pos;
-    glm::vec3 color;
+    glm::vec4 color;
 };
 
 #endif // LIGHT_H

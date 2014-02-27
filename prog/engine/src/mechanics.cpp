@@ -19,7 +19,7 @@ void Mechanics::init(World &world_in, float &dt_in)
 
     /// set the main light (sun/moon)
     world->mainLight( glm::vec3(1.0, 1.0, 1.0),         /// From direction
-                      glm::vec3(1.0, 1.0, 1.0) );  /// Color
+                      glm::vec4(1.0, 1.0, 1.0, 1.0) );  /// Color
 
     /// add additional lights
 //    world->addPointLight(glm::vec3(3.0, 1.0, -4.0),         /// Position

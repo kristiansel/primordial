@@ -12,6 +12,9 @@ uniform vec4 light_posns[10];
 uniform vec4 light_cols[10];
 
 
+//uniform vec3 main_light_pos;
+//uniform vec4 main_light_color;
+
 /// With texture
 uniform sampler2D tex; // the active texture
 uniform sampler2DShadow shadow_depth; // the shadow mapping depth texture
