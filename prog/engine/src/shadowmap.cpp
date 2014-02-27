@@ -64,45 +64,6 @@ void ShadowMap::activate(const glm::mat4 &light_vp)
     light_vp_value = light_vp;
 }
 
-void ShadowMap::activate()
-{
-    glBindFramebuffer(GL_FRAMEBUFFER, fbo);
-    glViewport(0,0,1024,1024);
-
-    // Clear the screen
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-    ShaderBase::switchTo();
-
-    glm::vec3 lightInvDir(1.0, 1.0, 1.0);
-
-    // Compute the MVP matrix from the light's point of view
-    glm::mat4 depthProjectionMatrix = glm::ortho<float>(-10,10,-10,10,-10,20);
-    glm::mat4 depthViewMatrix = glm::lookAt(lightInvDir, glm::vec3(0,0,0), glm::vec3(0,1,0));
-
-    light_vp_value = depthProjectionMatrix * depthViewMatrix;
-
-//    std::cout << "tex_depth = " << tex_depth << "\n";
-}
-
-void ShadowMap::activateDrawContent()
-{
-    glViewport(0,0,1024,1024); // Render on the whole framebuffer, complete from the lower left corner to the upper right
-
-    // Clear the screen
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-    ShaderBase::switchTo();
-
-    glm::vec3 lightInvDir(1.0, 1.0, 1.0);
-
-    // Compute the MVP matrix from the light's point of view
-    glm::mat4 depthProjectionMatrix = glm::ortho<float>(-10,10,-10,10,-10,20);
-    glm::mat4 depthViewMatrix = glm::lookAt(lightInvDir, glm::vec3(0,0,0), glm::vec3(0,1,0));
-
-    light_vp_value = depthProjectionMatrix * depthViewMatrix;
-}
-
 void ShadowMap::deactivate()
 {
     glBindFramebuffer(GL_FRAMEBUFFER, 0);

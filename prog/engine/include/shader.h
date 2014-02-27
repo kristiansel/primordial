@@ -46,9 +46,11 @@ private:
     struct Uniforms
     {
         /// light uniforms
-        GLuint num_lights;
-        GLuint light_posns;
-        GLuint light_cols;
+//        GLuint num_lights;
+//        GLuint light_posns;
+//        GLuint light_cols;
+        GLuint main_light_dir;
+        GLuint main_light_color;
 
         /// material uniforms
         GLuint ambient;
@@ -85,7 +87,7 @@ private:
 
     /// Internally stored, so they do not have to be
     /// passed as arguments every single draw call
-    glm::vec3 main_light_dir;
+    glm::vec4 main_light_dir;
     glm::vec4 main_light_color;
     glm::mat4 main_light_mvp_mat;
     glm::mat4 vp_mat; /// For now this is just a view matrix

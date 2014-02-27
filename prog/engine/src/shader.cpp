@@ -24,9 +24,11 @@ void Shader::init(GLuint shadowmap_depth_texture)
     ShaderBase::load("shaders/simple_vert.glsl", "shaders/simple_frag.glsl");
 
     /// set the uniform locations
-    uniforms.num_lights = glGetUniformLocation(getProgramID(),"num_lights") ;
-    uniforms.light_posns = glGetUniformLocation(getProgramID(),"light_posns") ;
-    uniforms.light_cols = glGetUniformLocation(getProgramID(),"light_cols") ;
+//    uniforms.num_lights = glGetUniformLocation(getProgramID(),"num_lights") ;
+//    uniforms.light_posns = glGetUniformLocation(getProgramID(),"light_posns") ;
+//    uniforms.light_cols = glGetUniformLocation(getProgramID(),"light_cols") ;
+    uniforms.main_light_dir = glGetUniformLocation(getProgramID(), "main_light_dir");
+    uniforms.main_light_color = glGetUniformLocation(getProgramID(), "main_light_color");
 
     uniforms.ambient = glGetUniformLocation(getProgramID(),"ambient") ;
     uniforms.diffuse = glGetUniformLocation(getProgramID(),"diffuse") ;
@@ -90,11 +92,6 @@ void Shader::activate(const glm::mat4 &mv, const glm::mat4 &light_mvp_mat, const
     /// clear the buffers
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-
-//    /// Update the light
-//    this->main_light_dir = main_light.dir;
-//    this->main_light_color = main_light.color;
-
     /// All read from the same depth tex
     glActiveTexture(GL_TEXTURE1);
     glBindTexture(GL_TEXTURE_2D, shadowmap_depth_texture);
@@ -103,16 +100,24 @@ void Shader::activate(const glm::mat4 &mv, const glm::mat4 &light_mvp_mat, const
     this->vp_mat = mv;
     this->main_light_mvp_mat = light_mvp_mat;
 
-    /// transform light to eye coordinates
-    glm::vec4 light_pos_trans = mv * glm::vec4(1.0, 1.0, 1.0, 0.0);
+    /// Update the light
+    this->main_light_dir = vp_mat * glm::vec4(main_light.dir, 0.0);
+    this->main_light_color = main_light.color;
 
-    /// set light color
-    glm::vec4 light_col = glm::vec4(1.0, 1.0, 1.0, 1.0);
+    /// Send light uniforms
+    glUniform3fv(uniforms.main_light_dir, 1, &(this->main_light_dir[0]));
+    glUniform4fv(uniforms.main_light_color,  1, &(this->main_light_color[0]));
 
-    /// send uniforms
-    glUniform1i(uniforms.num_lights, 1) ;
-    glUniform4fv(uniforms.light_posns, 1, &(light_pos_trans[0]));
-    glUniform4fv(uniforms.light_cols,  1, &(light_col[0]));
+//    /// transform light to eye coordinates
+//    glm::vec4 light_pos_trans = mv * glm::vec4(1.0, 1.0, 1.0, 0.0);
+//
+//    /// set light color
+//    glm::vec4 light_col = glm::vec4(1.0, 1.0, 1.0, 1.0);
+//
+//    /// send uniforms
+//    glUniform1i(uniforms.num_lights, 1) ;
+//    glUniform4fv(uniforms.light_posns, 1, &(light_pos_trans[0]));
+//    glUniform4fv(uniforms.light_cols,  1, &(light_col[0]));
 
 
 }
