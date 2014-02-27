@@ -2,10 +2,6 @@
 
 Renderer::Renderer() : settings({0, 0})
 {
-    for (int i_cm = 0; i_cm<MAX_BONE_NUM; i_cm++)
-    {
-        clear_matrices[i_cm] = glm::mat4(1.0);
-    }
 //    scene = nullptr;
 }
 
@@ -42,8 +38,8 @@ void Renderer::init(unsigned int scr_width_in, unsigned int scr_height_in)
     shadow_map.init();
 
     /// Initialize shaders
-    /// main_shader.init(shadow_map.getDepthTex());
-    main_shader.load("shaders/simple_vert.glsl", "shaders/simple_frag.glsl");
+    main_shader.init(shadow_map.getDepthTex());
+//    main_shader.load("shaders/simple_vert.glsl", "shaders/simple_frag.glsl");
 
     /// Post processing init
     render_stage.init(scr_width_in, scr_height_in);
@@ -69,18 +65,16 @@ void Renderer::draw(Scene &scene, float dt)
 
     // main light (shadowing directional/sun or moon)
 
-    const DirLight* mlight = scene.main_light;
-    glm::mat4 mlight_vp = mlight->getVPmatrix();
+    const DirLight &mlight = (*scene.main_light);
+    glm::mat4 mlight_vp = mlight.getVPmatrix();
 
     /// This should look something like this: (for now light is hardcoded
     /// in the shadow_map.activate() method)
     //shadow_map.setLight(scene->getShadowLight())
 
-    shadow_map.activate();
-///    shadow_map.activate(mlight_vp);
+//    shadow_map.activate();
+    shadow_map.activate(mlight_vp);
 //    shadow_map.activateDrawContent();
-
-        glm::mat4 mv_fake(1.0);
 
         for (auto it = scene.props.begin(); it!=scene.props.end(); it++)
         {
@@ -100,32 +94,27 @@ void Renderer::draw(Scene &scene, float dt)
     render_stage.activate();
 
 
-        /// prepare for perspective drawing
-
-        ///main_shader.activate(mv, mlight_vp, mlight,
-        ///                     plights, num_plights);
-
-        /// Set depth texture ref in init;
-
-        main_shader.activate(mv, shadow_map.getLightMVPmat(), shadow_map.getDepthTex());
-//        main_shader.activate(mv, shadow_map.getLightMVPmat(), blur1.fbo_texture);
+        /// Set the values of the uniforms which are updated
+        /// per-frame and switch to main shader
+        main_shader.activate(mv, mlight_vp, mlight/*, plights, num_plights*/);
 
         /// draw
 
-        /// Send default bone matrices
-        ///main_shader.clearBoneMatrices(clear_matrices);
-        glUniformMatrix4fv(main_shader.getBoneMat(), MAX_BONE_NUM, true, &clear_matrices[0][0][0]); // <-- THIS!
+
+        /// Draw props (non-animated)
+        main_shader.clearBoneMatrices();
 
         for (auto it = scene.props.begin(); it!=scene.props.end(); it++)
         {
             /// main_shader.drawProp(&**it);
-            main_shader.drawProp(*it, mv);
+            main_shader.drawProp(*it);
         }
 
+        /// Draw actors;
         for (auto it = scene.actors.begin(); it!=scene.actors.end(); it++)
         {
             /// main_shader.drawActor(&**it);
-            main_shader.drawActor(*it, mv);
+            main_shader.drawActor(*it);
         }
 
     /// Finished main drawing, post processing

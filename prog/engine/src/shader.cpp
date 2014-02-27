@@ -3,7 +3,10 @@
 
 Shader::Shader()
 {
-
+    for (int i_cm = 0; i_cm<MAX_BONE_NUM; i_cm++)
+    {
+        clear_matrices[i_cm] = glm::mat4(1.0);
+    }
 }
 
 Shader::Shader(string vertex_shader, string fragment_shader)
@@ -16,47 +19,52 @@ Shader::~Shader()
     unload();
 }
 
-void Shader::load(string vertex_shader, string fragment_shader)
+void Shader::init(GLuint shadowmap_depth_texture)
 {
-    ShaderBase::load(vertex_shader, fragment_shader);
+    ShaderBase::load("shaders/simple_vert.glsl", "shaders/simple_frag.glsl");
 
     /// set the uniform locations
-    num_lights = glGetUniformLocation(getProgramID(),"num_lights") ;
-    light_posns = glGetUniformLocation(getProgramID(),"light_posns") ;
-    light_cols = glGetUniformLocation(getProgramID(),"light_cols") ;
+    uniforms.num_lights = glGetUniformLocation(getProgramID(),"num_lights") ;
+    uniforms.light_posns = glGetUniformLocation(getProgramID(),"light_posns") ;
+    uniforms.light_cols = glGetUniformLocation(getProgramID(),"light_cols") ;
 
-    ambient = glGetUniformLocation(getProgramID(),"ambient") ;
-    diffuse = glGetUniformLocation(getProgramID(),"diffuse") ;
-    specular = glGetUniformLocation(getProgramID(),"specular") ;
-    shininess = glGetUniformLocation(getProgramID(),"shininess") ;
-    emission = glGetUniformLocation(getProgramID(),"emission") ;
+    uniforms.ambient = glGetUniformLocation(getProgramID(),"ambient") ;
+    uniforms.diffuse = glGetUniformLocation(getProgramID(),"diffuse") ;
+    uniforms.specular = glGetUniformLocation(getProgramID(),"specular") ;
+    uniforms.shininess = glGetUniformLocation(getProgramID(),"shininess") ;
+    uniforms.emission = glGetUniformLocation(getProgramID(),"emission") ;
 
-    tex = glGetUniformLocation(getProgramID(), "tex");
-    glUniform1i(tex, 0);            /// ALWAYS CHANNEL 0
+    uniforms.tex = glGetUniformLocation(getProgramID(), "tex");
+    glUniform1i(uniforms.tex, 0);            /// ALWAYS CHANNEL 0
 
-    shadow_depth = glGetUniformLocation(getProgramID(), "shadow_depth");
-    glUniform1i(shadow_depth, 1);   /// ALWAYS CHANNEL 1
+    uniforms.shadow_depth = glGetUniformLocation(getProgramID(), "shadow_depth");
+    glUniform1i(uniforms.shadow_depth, 1);   /// ALWAYS CHANNEL 1
 
-    bone_mat = glGetUniformLocation(getProgramID(), "bone_mat");
+    uniforms.bone_mat = glGetUniformLocation(getProgramID(), "bone_mat");
 
-    mv_mat = glGetUniformLocation(getProgramID(), "mv_mat");
+    uniforms.mv_mat = glGetUniformLocation(getProgramID(), "mv_mat");
 
-    shadowmap_mvp_mat = glGetUniformLocation(getProgramID(), "shadowmap_mvp_mat");
+    uniforms.shadowmap_mvp_mat = glGetUniformLocation(getProgramID(), "shadowmap_mvp_mat");
 
     /// set the attribute locations
-    vertex = glGetAttribLocation(getProgramID(), "InVertex") ;
-    normal = glGetAttribLocation(getProgramID(), "InNormal") ;
-    texCoord0 = glGetAttribLocation(getProgramID(), "InTexCoord") ;
-    bone_index = glGetAttribLocation(getProgramID(), "bone_index") ;
-    bone_weight = glGetAttribLocation(getProgramID(), "bone_weight") ;
+    attributes.vertex = glGetAttribLocation(getProgramID(), "InVertex") ;
+    attributes.normal = glGetAttribLocation(getProgramID(), "InNormal") ;
+    attributes.texCoord0 = glGetAttribLocation(getProgramID(), "InTexCoord") ;
+    attributes.bone_index = glGetAttribLocation(getProgramID(), "bone_index") ;
+    attributes.bone_weight = glGetAttribLocation(getProgramID(), "bone_weight") ;
 
     /// activate the attributes
-    glEnableVertexAttribArray(vertex);
-    glEnableVertexAttribArray(normal);
-    glEnableVertexAttribArray(texCoord0);
-    glEnableVertexAttribArray(bone_index);
-    glEnableVertexAttribArray(bone_weight);
+    glEnableVertexAttribArray(attributes.vertex);
+    glEnableVertexAttribArray(attributes.normal);
+    glEnableVertexAttribArray(attributes.texCoord0);
+    glEnableVertexAttribArray(attributes.bone_index);
+    glEnableVertexAttribArray(attributes.bone_weight);
+
+    /// Store the shadow map depth texture
+    /// internally. This will not change over time
+    this->shadowmap_depth_texture = shadowmap_depth_texture;
 }
+
 
 void Shader::unload()
 {
@@ -64,24 +72,36 @@ void Shader::unload()
     if (isLoaded())
     {
         /// not sure if this is needed
-        glDisableVertexAttribArray(vertex);
-        glDisableVertexAttribArray(normal);
-        glDisableVertexAttribArray(texCoord0);
-        glDisableVertexAttribArray(bone_index);
-        glDisableVertexAttribArray(bone_weight);
+        glDisableVertexAttribArray(attributes.vertex);
+        glDisableVertexAttribArray(attributes.normal);
+        glDisableVertexAttribArray(attributes.texCoord0);
+        glDisableVertexAttribArray(attributes.bone_index);
+        glDisableVertexAttribArray(attributes.bone_weight);
     }
 
     ShaderBase::unload();
 }
 
-
-void Shader::activate(glm::mat4 mv, glm::mat4 light_mvp_mat, GLuint shadow_depth)
+void Shader::activate(const glm::mat4 &mv, const glm::mat4 &light_mvp_mat, const DirLight &main_light)
 {
     /// switch to main shader
     ShaderBase::switchTo();
 
     /// clear the buffers
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+
+//    /// Update the light
+//    this->main_light_dir = main_light.dir;
+//    this->main_light_color = main_light.color;
+
+    /// All read from the same depth tex
+    glActiveTexture(GL_TEXTURE1);
+    glBindTexture(GL_TEXTURE_2D, shadowmap_depth_texture);
+
+    /// Set view matrix and light matrix
+    this->vp_mat = mv;
+    this->main_light_mvp_mat = light_mvp_mat;
 
     /// transform light to eye coordinates
     glm::vec4 light_pos_trans = mv * glm::vec4(1.0, 1.0, 1.0, 0.0);
@@ -90,29 +110,31 @@ void Shader::activate(glm::mat4 mv, glm::mat4 light_mvp_mat, GLuint shadow_depth
     glm::vec4 light_col = glm::vec4(1.0, 1.0, 1.0, 1.0);
 
     /// send uniforms
-    glUniform1i(num_lights, 1) ;
-    glUniform4fv(light_posns, 1, &(light_pos_trans[0]));
-    glUniform4fv(light_cols,  1, &(light_col[0]));
+    glUniform1i(uniforms.num_lights, 1) ;
+    glUniform4fv(uniforms.light_posns, 1, &(light_pos_trans[0]));
+    glUniform4fv(uniforms.light_cols,  1, &(light_col[0]));
 
-    /// All read from the same depth tex
-    glActiveTexture(GL_TEXTURE1);
-    glBindTexture(GL_TEXTURE_2D, shadow_depth);
 
-    /// Change this
-    this->light_mvp_mat =  light_mvp_mat; /// Store for reuse when drawing each..
 }
 
-void Shader::drawActor(shared_ptr<Actor> actor, glm::mat4 mv)
+void Shader::clearBoneMatrices()
+{
+    /// Send default bone matrices
+    ///main_shader.clearBoneMatrices(clear_matrices);
+    glUniformMatrix4fv(uniforms.bone_mat, MAX_BONE_NUM, true, &clear_matrices[0][0][0]); // <-- THIS!
+}
+
+void Shader::drawActor(shared_ptr<Actor> actor)
 {
     /// Set bones
     int num = (actor->num_pose_matrices <= MAX_BONE_NUM) ? actor->num_pose_matrices : MAX_BONE_NUM;
 
-    glUniformMatrix4fv(bone_mat, num, true, &(actor->pose_matrices[0][0][0])); // <-- THIS!
+    glUniformMatrix4fv(uniforms.bone_mat, num, true, &(actor->pose_matrices[0][0][0])); // <-- THIS!
 
-    drawProp(actor, mv);
+    drawProp(actor);
 }
 
-void Shader::drawProp(shared_ptr<Prop> prop, glm::mat4 mv)
+void Shader::drawProp(shared_ptr<Prop> prop)
 {
     for (auto rb_it = prop->render_batches.begin(); rb_it!= prop->render_batches.end(); rb_it++)
     {
@@ -125,9 +147,9 @@ void Shader::drawProp(shared_ptr<Prop> prop, glm::mat4 mv)
         glm::mat4 rt = glm::mat4_cast(prop->rot);
         glm::mat4 sc = glm::scale(glm::mat4(1.0), prop->scale);
 
-        glm::mat4 vertex_matrix  = mv * tr * rt * sc * transf_mat; // scale, then translate, then lookat.
+        glm::mat4 vertex_matrix  = vp_mat * tr * rt * sc * transf_mat; // scale, then translate, then lookat.
 
-        glUniformMatrix4fv(mv_mat, 1, false, &vertex_matrix[0][0]);
+        glUniformMatrix4fv(uniforms.mv_mat, 1, false, &vertex_matrix[0][0]);
 
 
 
@@ -139,17 +161,17 @@ void Shader::drawProp(shared_ptr<Prop> prop, glm::mat4 mv)
                     0.5, 0.5, 0.5, 1.0
                     );
 
-        glm::mat4 light_mvp_mat_refable  = biasMatrix * light_mvp_mat * tr * rt * sc * transf_mat;
-        glUniformMatrix4fv(shadowmap_mvp_mat, 1, false, &light_mvp_mat_refable[0][0]);
+        glm::mat4 light_mvp_mat_refable  = biasMatrix * main_light_mvp_mat * tr * rt * sc * transf_mat;
+        glUniformMatrix4fv(uniforms.shadowmap_mvp_mat, 1, false, &light_mvp_mat_refable[0][0]);
 
         Mesh::Material mat = mesh_ptr->getMaterial();
 
         /// send mesh_ptr->specific uniforms to shader (materials)
-        glUniform4fv(ambient,   1,  &(mat.ambient[0])     ) ;
-        glUniform4fv(diffuse,   1,  &(mat.diffuse[0])     ) ;
-        glUniform4fv(specular,  1,  &(mat.specular[0])    ) ;
-        glUniform1fv(shininess, 1,  &(mat.shininess)      ) ;
-        glUniform4fv(emission,  1,  &(mat.emission[0])    ) ;
+        glUniform4fv(uniforms.ambient,   1,  &(mat.ambient[0])     ) ;
+        glUniform4fv(uniforms.diffuse,   1,  &(mat.diffuse[0])     ) ;
+        glUniform4fv(uniforms.specular,  1,  &(mat.specular[0])    ) ;
+        glUniform1fv(uniforms.shininess, 1,  &(mat.shininess)      ) ;
+        glUniform4fv(uniforms.emission,  1,  &(mat.emission[0])    ) ;
 
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, tex_ptr->getTBOid());
@@ -160,11 +182,11 @@ void Shader::drawProp(shared_ptr<Prop> prop, glm::mat4 mv)
 
         /// Apparently, the below is buffer specific? It needs to be here at least. Look into VAO
         /// Or separate buffers for each attribute (corresponds better to the .obj 3d format)
-        glVertexAttribPointer(vertex,       4, GL_FLOAT,    GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(0)                      );
-        glVertexAttribPointer(normal,       3, GL_FLOAT,    GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(normalOffset)           );
-        glVertexAttribPointer(texCoord0,    2, GL_FLOAT,    GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(texCoord0Offset)        );
-        glVertexAttribPointer(bone_index,   MAX_BONE_INFLUENCES, GL_INT,      GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(bone_indexOffset)       );
-        glVertexAttribPointer(bone_weight,  MAX_BONE_INFLUENCES, GL_FLOAT,    GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(bone_weightOffset)      );
+        glVertexAttribPointer(attributes.vertex,       4, GL_FLOAT,    GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(0)                      );
+        glVertexAttribPointer(attributes.normal,       3, GL_FLOAT,    GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(normalOffset)           );
+        glVertexAttribPointer(attributes.texCoord0,    2, GL_FLOAT,    GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(texCoord0Offset)        );
+        glVertexAttribPointer(attributes.bone_index,   MAX_BONE_INFLUENCES, GL_INT,      GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(bone_indexOffset)       );
+        glVertexAttribPointer(attributes.bone_weight,  MAX_BONE_INFLUENCES, GL_FLOAT,    GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(bone_weightOffset)      );
 
         /// Draw call
         glDrawElements(GL_TRIANGLES, 3*mesh_ptr->getTriNum(), GL_UNSIGNED_SHORT, BUFFER_OFFSET(0));

@@ -53,8 +53,6 @@ private:
 
     Perspective perspective;
 
-    glm::mat4 clear_matrices[MAX_BONE_NUM];
-
     /// For post processing
     Settings settings;
 

@@ -12,6 +12,7 @@
 #include "prop.h"
 #include "actor.h"
 #include "shaderbase.h"
+#include "light.h"
 
 using std::shared_ptr;
 using std::string;
@@ -25,50 +26,73 @@ public:
     explicit Shader(string vertex_shader, string fragment_shader);
     virtual ~Shader();
 
-    void load(string vertex_shader, string fragment_shader);
+    void init(GLuint shadowmap_depth_texture);
     void unload();
 
-    void activate(glm::mat4 mv, glm::mat4 light_mvp_mat, GLuint shadow_depth);
+    void activate(const glm::mat4 &mv, const glm::mat4 &light_mvp_mat, const DirLight &main_light);
+    void clearBoneMatrices();
 
-    void drawActor(shared_ptr<Actor> actor, glm::mat4 mv);
-    void drawProp(shared_ptr<Prop> prop, glm::mat4 mv);
+    void drawActor(shared_ptr<Actor> actor);
+    void drawProp(shared_ptr<Prop> prop);
     /// void draw(Terrain &terrain, glm::mat4 mv);
 
     /// Should look into ridding me of this:
-    GLuint getBoneMat() {return bone_mat;};
+    GLuint getBoneMat() {return uniforms.bone_mat;};
 
 protected:
 private:
+
     /// uniforms
-    GLuint num_lights;
-    GLuint light_posns;
-    GLuint light_cols;
+    struct Uniforms
+    {
+        /// light uniforms
+        GLuint num_lights;
+        GLuint light_posns;
+        GLuint light_cols;
 
-    GLuint ambient;
-    GLuint diffuse;
-    GLuint specular;
-    GLuint shininess;
-    GLuint emission;
+        /// material uniforms
+        GLuint ambient;
+        GLuint diffuse;
+        GLuint specular;
+        GLuint shininess;
+        GLuint emission;
 
-    GLuint tex;
-    GLuint shadow_depth;    /// Uniform
+        /// "sampler" uniforms
+        GLuint tex;
+        GLuint shadow_depth;
 
-    GLuint bone_mat;
+        /// bone matrices
+        GLuint bone_mat;
 
-    GLuint mv_mat;
+        /// model view matrix
+        GLuint mv_mat;
 
-    GLuint shadowmap_mvp_mat;
+        /// light model view projection matrix
+        GLuint shadowmap_mvp_mat;
+    } uniforms;
+
 
     /// attributes
-    GLuint vertex;
-    GLuint normal;
-    GLuint texCoord0;
-    GLuint bone_index;
-    GLuint bone_weight;     /// set by shader
+    struct Attributes
+    {
+        GLuint vertex;
+        GLuint normal;
+        GLuint texCoord0;
+        GLuint bone_index;
+        GLuint bone_weight;
+    } attributes;
 
-    /// temp
-    glm::mat4 light_mvp_mat;
-    GLuint sdepth;          /// Texture
+
+    /// Internally stored, so they do not have to be
+    /// passed as arguments every single draw call
+    glm::vec3 main_light_dir;
+    glm::vec3 main_light_color;
+    glm::mat4 main_light_mvp_mat;
+    glm::mat4 vp_mat; /// For now this is just a view matrix
+
+    /// Updated on initialization
+    GLuint shadowmap_depth_texture;              /// Texture
+    glm::mat4 clear_matrices[MAX_BONE_NUM];
 
 };
 
