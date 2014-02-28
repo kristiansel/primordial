@@ -7,8 +7,8 @@ Small things could do:				Natural followups:
 	frustum culling						-
 	support multiple lights				- procedural lighting/sun-moon cycle
 	Alpha blending...					- balance its worth agains deferred shading/many lights
-	PCF filter on shadowmap
-	apply shadowmapping to animated
+	utilize call to float texture(sampler2DShadow ... better (returns interpolated 4 bools as float)
+	blur distance based on variance of shadow depth map to create penumbra
 	
 In importer:
 	check for maxbones consistency (100 bones)
