@@ -130,6 +130,15 @@ void Mechanics::playerRotateUp()
     world->camera->panUp((*dt)*camTurnSpeed);
 }
 
+void Mechanics::camRotateUp(float val)
+{
+    world->camera->panUp(val);
+}
+
+void Mechanics::camRotateLeft(float val)
+{
+    world->camera->panLeft(val);
+}
 void Mechanics::playerRotateDown()
 {
     world->camera->panUp(-(*dt)*camTurnSpeed);

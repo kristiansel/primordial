@@ -1,6 +1,11 @@
 #include "master.h"
 
-Master::Master()
+Master::Master() :
+    dt(0.0),
+    has_focus(true),
+    rmb_down(false),
+    press_pos_x(0),
+    press_pos_y(0)
 {
     /// initiate
     init();
@@ -22,10 +27,6 @@ Master::~Master()
 
 void Master::init()
 {
-    /// internal initialization
-    dt = 0.0;
-    has_focus = true;
-
     /// to be loaded from settings
     scr_width_px = 1400;
     scr_height_px = 900;
@@ -124,6 +125,33 @@ bool Master::handleInput()
         case sf::Event::GainedFocus:
             has_focus = true;
             break;
+        case sf::Event::MouseButtonPressed:
+            switch (event.mouseButton.button)
+            {
+            case sf::Mouse::Right:
+                {
+                    window.setMouseCursorVisible (false);
+                    sf::Vector2i mouse_pos = sf::Mouse::getPosition(window);
+                    press_pos_x = mouse_pos.x;
+                    press_pos_y = mouse_pos.y;
+                    rmb_down = true;
+                } break;
+            case sf::Mouse::Left: break;
+            case sf::Mouse::Middle: break;
+            default: break;
+            } break;
+        case sf::Event::MouseButtonReleased:
+            switch (event.mouseButton.button)
+            {
+            case sf::Mouse::Right:
+                {
+                    window.setMouseCursorVisible (true);            // SELF
+                    rmb_down = false;
+                } break;
+            case sf::Mouse::Left: break;
+            case sf::Mouse::Middle: break;
+            default: break;
+            } break;
         case sf::Event::KeyPressed:
             switch (event.key.code)
             {
@@ -177,6 +205,24 @@ bool Master::handleInput()
             break;
         }
 
+    }
+
+    if(rmb_down)
+    {
+//        if (camera_mode == FREE)
+//        {
+        //std::cout<<", ms";
+        sf::Vector2i mouse_pos = sf::Mouse::getPosition(window);
+        int new_posx = mouse_pos.x;
+        int new_posy = mouse_pos.y;
+        int xoffset = new_posx - press_pos_x;
+        int yoffset = new_posy - press_pos_y;
+        //        cout<<" by "<<xoffset<<" and "<<yoffset;
+
+        mechanics.camRotateLeft(-xoffset/2.0);
+        mechanics.camRotateUp(-yoffset/2.0);
+        mouse_pos = sf::Vector2i(press_pos_x, press_pos_y);
+        sf::Mouse::setPosition(mouse_pos, window);
     }
 
     return running;

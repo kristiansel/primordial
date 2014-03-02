@@ -47,7 +47,11 @@ private:
     sf::Clock clock;    // helper
     float     dt;       // frame time in seconds
 
+    /// Internal variable signals
     bool has_focus;     // helper
+    bool rmb_down;
+    int press_pos_x;
+    int press_pos_y;
 };
 
 #endif // MASTER_H

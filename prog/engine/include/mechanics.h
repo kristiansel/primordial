@@ -45,6 +45,9 @@ public:
     void playerRotateRight();
     void playerRotateLeft();
 
+    void camRotateUp(float val);
+    void camRotateLeft(float val);
+
     /// Testing
     void func(int num_in);
 protected:
