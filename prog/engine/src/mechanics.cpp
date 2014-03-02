@@ -50,6 +50,10 @@ void Mechanics::init(World &world_in, float &dt_in)
                             "grass_equal",
                              glm::vec3(0.0, 0.0, 0.0) );
 
+    world->addStaticObject( "terrain",
+                            "grass_equal",
+                             glm::vec3(0.0, 0.0, 0.0) );
+
     world->addDynamicObject( "axes",
                             "tricolor",
                             glm::vec3(0.0, 8.0, 0.0));

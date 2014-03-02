@@ -19,13 +19,13 @@ public:
     virtual ~Object3d();
 
     glm::vec3 pos;
-
     glm::quat rot;
-
     glm::vec3 scale;
 
     glm::vec3 getDir();
     void setDir();
+
+    glm::mat4 getTransformMatrix() const;
 
     void moveForward(float speed);
     void strafeLeft(float speed);

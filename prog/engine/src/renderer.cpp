@@ -66,8 +66,9 @@ void Renderer::draw(Scene &scene, float dt)
     }
 
     /// Set all things which are shared by shaders but can change in time
-    glm::mat4 mv = scene.camera->getModelViewMatrix();
-    setPerspective(settings.width, settings.height);
+    glm::mat4 view_mat = scene.camera->getViewMatrix();
+    glm::mat4 proj_mat = scene.camera->getProjectionMatrix();
+//    setPerspective(settings.width, settings.height);
 
     /// The above should be replaced by:
 //    glm::mat4 vp_mat = scene.camera->getViewProjectionMatrix();
@@ -99,6 +100,9 @@ void Renderer::draw(Scene &scene, float dt)
 
     resizeWindow(settings.width, settings.height, false);
 
+//    glm::vec4 fog_color = glm::vec4(1.0, 0.6, 0.8, 0.0);
+    glm::vec4 fog_color = glm::vec4(1.0, 1.0, 1.0, 1.0);
+
     /// Set render "target" to draw to frame buffer
     render_stage.activate();
 
@@ -106,7 +110,10 @@ void Renderer::draw(Scene &scene, float dt)
 
         /// Set the values of the uniforms which are updated
         /// per-frame and switch to main shader
-        main_shader.activate(mv, mlight_vp, mlight/*, plights, num_plights, scene.fog_color*/);
+        main_shader.activate(*(scene.camera),
+                             fog_color,
+                             mlight_vp,
+                             mlight/*, plights, num_plights, scene.fog_color*/);
 
         /// draw
 
@@ -128,11 +135,10 @@ void Renderer::draw(Scene &scene, float dt)
         }
 
         /// Draw "sky quad" following the camera
-        glm::vec4 fog_color = glm::vec4(1.0, 1.0, 1.0, 0.0);
-        glm::vec4 sky_color = glm::vec4(0.f/255.f, 80.f/255.f, 186.f/255.f, 0.0);
+        glm::vec4 sky_color = glm::vec4(0.f/255.f, 80.f/255.f, 186.f/255.f, 1.0);
 
         /// activate and draw in the same call
-        sky_shader.drawSkyQuad((*(scene.camera)), fog_color, sky_color);
+        sky_shader.drawSkyQuad((*(scene.camera)), sky_color, fog_color);
 
     /// Finished main drawing, post processing
     render_stage.deactivate();
@@ -180,34 +186,14 @@ void Renderer::resizeWindow(int w, int h, bool real)
 
     }
 
-
-
-
+    /// This inside each "stage"
     glViewport(0, 0, w, h);
 
+    /// Update this inside each "post-proc-stage"
     //    post processing stuff
     pix_tex_coord_offset[0] = 1.0/(float)w;
     pix_tex_coord_offset[1] = 1.0/(float)h;
     updateKernel();
-}
-
-void Renderer::setPerspective(int w, int h)
-{
-    /// 2 issues:
-    /// 1) Should really resizing change the perspective?
-    /// 2) This is the last bit of fixed functionality used
-    ///    Definitly need to revamp this
-
-    glm::mat4 prj ; // just like for lookat
-
-
-    glMatrixMode(GL_PROJECTION);
-
-    perspective.aspect = w / (float) h;
-
-    prj = glm::perspective(3.14159265f*perspective.fovy/180.f, perspective.aspect, perspective.nearz, perspective.farz);
-    glLoadMatrixf(&prj[0][0]) ;
-
 }
 
 void Renderer::updateKernel()

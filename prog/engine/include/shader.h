@@ -13,6 +13,7 @@
 #include "actor.h"
 #include "shaderbase.h"
 #include "light.h"
+#include "camera.h"
 
 using std::shared_ptr;
 using std::string;
@@ -29,7 +30,11 @@ public:
     void init(GLuint shadowmap_depth_texture);
     void unload();
 
-    void activate(const glm::mat4 &mv, const glm::mat4 &light_mvp_mat, const DirLight &main_light);
+    void activate(const Camera &cam_in,
+                  const glm::vec4 fog_color,
+                  const glm::mat4 &light_mvp_mat,
+                  const DirLight &main_light);
+
     void clearBoneMatrices();
 
     void drawActor(shared_ptr<Actor> actor);
@@ -70,16 +75,19 @@ private:
         /// model view matrix
         GLuint mv_mat;
 
+        /// projection matrix
+        GLuint proj_mat;
+
         /// Object to world space matrix
-        /// can later use the world space y value for fog
-        /// computations!
+        /// for fog computations
         GLuint to_world_space_mat;
+
+        /// Other fog uniforms
+        GLuint fog_color;
+        GLuint zfar;
 
         /// light model view projection matrix
         GLuint shadowmap_mvp_mat;
-
-        /// Fog color
-        //GLuint fog_color;
 
     } uniforms;
 
@@ -100,7 +108,7 @@ private:
     glm::vec4 main_light_dir;
     glm::vec4 main_light_color;
     glm::mat4 main_light_mvp_mat;
-    glm::mat4 vp_mat; /// For now this is just a view matrix
+    glm::mat4 view_mat;
 
     /// Updated on initialization
     GLuint shadowmap_depth_texture;              /// Texture

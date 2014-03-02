@@ -43,14 +43,13 @@ void Shader::init(GLuint shadowmap_depth_texture)
     glUniform1i(uniforms.shadow_depth, 1);   /// ALWAYS CHANNEL 1
 
     uniforms.bone_mat = glGetUniformLocation(getProgramID(), "bone_mat");
-
     uniforms.mv_mat = glGetUniformLocation(getProgramID(), "mv_mat");
-
+    uniforms.proj_mat = glGetUniformLocation(getProgramID(), "proj_mat");
     uniforms.to_world_space_mat = glGetUniformLocation(getProgramID(), "to_world_space_mat");
-
     uniforms.shadowmap_mvp_mat = glGetUniformLocation(getProgramID(), "shadowmap_mvp_mat");
 
-//    uniforms.fog_color = glGetUniformLocation(getProgramID(), "fog_color");
+    uniforms.fog_color = glGetUniformLocation(getProgramID(), "fog_color");
+    uniforms.zfar = glGetUniformLocation(getProgramID(), "zfar");
 
     /// set the attribute locations
     attributes.vertex = glGetAttribLocation(getProgramID(), "InVertex") ;
@@ -88,7 +87,10 @@ void Shader::unload()
     ShaderBase::unload();
 }
 
-void Shader::activate(const glm::mat4 &mv, const glm::mat4 &light_mvp_mat, const DirLight &main_light)
+void Shader::activate(const Camera &cam_in,
+                      const glm::vec4 fog_color,
+                      const glm::mat4 &light_mvp_mat,
+                      const DirLight &main_light)
 {
     /// switch to main shader
     ShaderBase::switchTo();
@@ -100,17 +102,25 @@ void Shader::activate(const glm::mat4 &mv, const glm::mat4 &light_mvp_mat, const
     glActiveTexture(GL_TEXTURE1);
     glBindTexture(GL_TEXTURE_2D, shadowmap_depth_texture);
 
+    /// Send projection matrix:
+    glm::mat4 p = cam_in.getProjectionMatrix();
+    glUniformMatrix4fv(uniforms.proj_mat, 1, false, &p[0][0] );
+
     /// Set view matrix and light matrix
-    this->vp_mat = mv;
-    this->main_light_mvp_mat = light_mvp_mat;
+    view_mat = cam_in.getViewMatrix();
+    main_light_mvp_mat = light_mvp_mat;
 
     /// Update the light
-    this->main_light_dir = vp_mat * glm::vec4(main_light.dir, 0.0);
-    this->main_light_color = main_light.color;
+    main_light_dir = view_mat * glm::vec4(main_light.dir, 0.0);
+    main_light_color = main_light.color;
 
     /// Send light uniforms
     glUniform3fv(uniforms.main_light_dir, 1, &(this->main_light_dir[0]));
     glUniform4fv(uniforms.main_light_color,  1, &(this->main_light_color[0]));
+
+    /// Fog uniforms
+    glUniform4fv(uniforms.fog_color, 1, &fog_color[0]);
+    glUniform1f(uniforms.zfar, cam_in.farz);
 
 //    /// transform light to eye coordinates
 //    glm::vec4 light_pos_trans = mv * glm::vec4(1.0, 1.0, 1.0, 0.0);
@@ -155,7 +165,7 @@ void Shader::drawProp(shared_ptr<Prop> prop)
         glm::mat4 sc = glm::scale(glm::mat4(1.0), prop->scale);
 
         glm::mat4 obj_to_world_space_mat = tr * rt * sc * transf_mat;
-        glm::mat4 vertex_matrix  = vp_mat * obj_to_world_space_mat; // scale, then translate, then lookat.
+        glm::mat4 vertex_matrix  = view_mat * obj_to_world_space_mat; // scale, then translate, then lookat.
 
         glUniformMatrix4fv(uniforms.mv_mat, 1, false, &vertex_matrix[0][0]);
         glUniformMatrix4fv(uniforms.to_world_space_mat, 1, false, &obj_to_world_space_mat[0][0]);

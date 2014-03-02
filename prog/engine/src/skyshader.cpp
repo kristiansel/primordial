@@ -19,6 +19,8 @@ void SkyShader::init()
     uniforms.sky_color = glGetUniformLocation(getProgramID(), "sky_color");
     uniforms.fog_color = glGetUniformLocation(getProgramID(), "fog_color");
 
+    uniforms.zfar = glGetUniformLocation(getProgramID(), "zfar");
+
     /// bind attributes
     attributes.vertex = glGetAttribLocation(getProgramID(), "vertex") ;
 
@@ -65,12 +67,40 @@ void SkyShader::drawSkyQuad(const Camera &cam_in,
     /// update quad position and scale based on vp_mat_in
     /// could take the camera as argument as well for ease of
     /// calculation
-    glm::mat4 mvp_mat = glm::mat4(1.0);
+    glm::mat4 proj_mat = cam_in.getProjectionMatrix();
 
-//    glm::mat4 t = glm::translate(glm::mat4(1.0), cam_in.)
+    glm::mat4 t = glm::translate( glm::mat4(1.0),
+                                  glm::vec3(0.0, 0.0, -(cam_in.farz-0.1)) );
 
-    /// send world matrix
-    /// mvp matrix
+    glm::mat4 s = glm::scale( glm::mat4(1.0),
+                              glm::vec3(cam_in.aspect*cam_in.farz, cam_in.farz, 1.0) );
+
+    glm::mat4 mvp_mat = proj_mat * t * s;
+    glUniformMatrix4fv(uniforms.mvp_matrix, 1, false, &mvp_mat[0][0]);
+
+    glm::mat4 world_mat = cam_in.getTransformMatrix() * t * s;
+    glUniformMatrix4fv(uniforms.world_matrix, 1, false, &world_mat[0][0]);
+
+    glUniform4fv(uniforms.sky_color, 1, &sky_color_in[0]);
+    glUniform4fv(uniforms.fog_color, 1, &fog_color_in[0]);
+
+    glUniform1f(uniforms.zfar, cam_in.farz);
+
+    /// Bind vertex data
+    glBindBuffer(GL_ARRAY_BUFFER, sky_quad->getVBOid());
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, sky_quad->getIBOid());
+
+    /// Apparently, the below is buffer specific? It needs to be here at least. Look into VAO
+    /// Or separate buffers for each attribute (corresponds better to the .obj 3d format)
+    glVertexAttribPointer(attributes.vertex,       4, GL_FLOAT,    GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(0)                      );
+
+    /// Draw call
+    glDrawElements(GL_TRIANGLES, 3*sky_quad->getTriNum(), GL_UNSIGNED_SHORT, BUFFER_OFFSET(0));
+
+    /// Not sure if this is necessary unless other code is badly written
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
 }
 
 SkyShader::~SkyShader()

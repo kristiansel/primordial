@@ -12,6 +12,15 @@ Object3d::~Object3d()
     //dtor
 }
 
+glm::mat4 Object3d::getTransformMatrix() const
+{
+    glm::mat4 pos_mat = glm::translate(glm::mat4(1.0), pos);
+    glm::mat4 rot_mat = glm::mat4_cast(rot);
+    glm::mat4 sca_mat = glm::scale(glm::mat4(1.0), scale);
+
+    return pos_mat * rot_mat * sca_mat;
+}
+
 void Object3d::moveForward(float speed)
 {
     pos +=(speed)*getDir();

@@ -13,6 +13,7 @@ attribute vec4 bone_index ;
 attribute vec4 bone_weight ;
 
 uniform mat4 mv_mat;
+uniform mat4 proj_mat;
 uniform mat4 shadowmap_mvp_mat;
 
 const int MAX_BONES = 100;
@@ -38,6 +39,6 @@ void main() {
 
     shadowvertex = shadowmap_mvp_mat * myvertex;
 
-    gl_Position = gl_ProjectionMatrix * mv_mat * myvertex ;
+    gl_Position = proj_mat * mv_mat * myvertex ;
 }
 

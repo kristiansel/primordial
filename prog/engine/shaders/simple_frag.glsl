@@ -21,6 +21,9 @@ uniform sampler2DShadow shadow_depth; // the shadow mapping depth texture
 uniform mat4 mv_mat;
 uniform mat4 to_world_space_mat;
 
+uniform vec4 fog_color;
+uniform float zfar;
+
 uniform mat4 shadowmap_mvp_mat;
 
 uniform vec4 ambient ;
@@ -154,5 +157,18 @@ void main (void)
 
     vec4 color = amb + emission + visibility * SUM ;
     vec4 texel = texture(tex, mytexco.st);
-    gl_FragColor = vec4(texel.rgb * color.rgb, 1);
+    vec4 local_color = vec4(texel.rgb * color.rgb, 1);
+
+    vec4 world_pos = to_world_space_mat * myvertex;
+
+    float fog_weight = exp(-abs(world_pos.y)/60.0) * exp(-5.0*(mypos.z/zfar+1.0))  ;
+
+    fog_weight = clamp(fog_weight, 0, 1.0);
+
+//    fog_weight = 0.0;
+
+    gl_FragColor = (1.0-fog_weight) * local_color + fog_weight * fog_color;
+//
+//    gl_Frag
+
 }

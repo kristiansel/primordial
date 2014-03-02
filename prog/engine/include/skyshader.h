@@ -28,6 +28,9 @@ class SkyShader : public ShaderBase
             GLuint sky_color;
             GLuint fog_color;
 
+            /// Other parameters
+            GLuint zfar;
+
         } uniforms;
 
         struct Attributes

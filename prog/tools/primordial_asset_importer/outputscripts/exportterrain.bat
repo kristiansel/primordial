@@ -1,0 +1,1 @@
+..\bin\debug\prconvert_debug.exe -I../test_scenes/terrain.dae -G../../../engine/assets/models/terrain.bgeo
