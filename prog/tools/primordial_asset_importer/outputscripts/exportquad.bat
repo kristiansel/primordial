@@ -1,0 +1,1 @@
+..\bin\debug\prconvert_debug.exe -I../test_scenes/quad.dae -G../../../engine/assets/models/quad.bgeo

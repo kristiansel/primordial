@@ -50,6 +50,8 @@ void Shader::init(GLuint shadowmap_depth_texture)
 
     uniforms.shadowmap_mvp_mat = glGetUniformLocation(getProgramID(), "shadowmap_mvp_mat");
 
+//    uniforms.fog_color = glGetUniformLocation(getProgramID(), "fog_color");
+
     /// set the attribute locations
     attributes.vertex = glGetAttribLocation(getProgramID(), "InVertex") ;
     attributes.normal = glGetAttribLocation(getProgramID(), "InNormal") ;

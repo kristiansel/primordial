@@ -36,24 +36,28 @@ void Mechanics::init(World &world_in, float &dt_in)
                              glm::vec3(-2.0, 10.0, -4.0),
                              RigidBody::Sphere(1.0) );
 
+//    world->addDynamicObject( "cube",
     world->addDynamicObject( "cube",
                              "nicewall",
                              glm::vec3(2.0, 10.0, -4.0),
                              RigidBody::Box(0.5f, 0.5f, 0.5f) );
 
-    world->addStaticObject( "ground",
+    world->addDynamicObject( "rabbit",
+                             "rabbit_d",
+                             glm::vec3(2.0, 10.0, -4.0));
+
+    world->addStaticObject( "quad",
                             "grass_equal",
                              glm::vec3(0.0, 0.0, 0.0) );
 
     world->addDynamicObject( "axes",
                             "tricolor",
-                            glm::vec3(0.0, 8.0, 0.0),
-                            RigidBody::Box(0.5f, 0.5f, 0.5f));
+                            glm::vec3(0.0, 8.0, 0.0));
 
     /// Having issue with human model not in the correct
     /// place in the scene graph outputted by assimp import
 
-    world->addCreature( "human_male_bgeo",
+    world->addCreature( "humale",
                         "tex_human_male",
                         glm::vec3(0.0, 0.0, 0.0) );
 
@@ -144,17 +148,19 @@ void Mechanics::func(int num_in)
     case 1:    /// ADD CUBE
         if (world->worldobjects.empty())
         {
-            worldobject_ptr_it = world->addDynamicObject( "cube",
-                                                          "nicewall",
-                                                          world->camera->pos + 2.f*world->camera->getDir(),
-                                                          RigidBody::Box(0.5f, 0.5f, 0.5f) );
+//            worldobject_ptr_it = world->addDynamicObject( "rabbit",
+//                                                          "rabbit_d",
+//                                                          world->camera->pos + 2.f*world->camera->getDir(),
+//                                                          RigidBody::Box(0.5f, 0.5f, 0.5f) );
+              worldobject_ptr_it = world->addDynamicObject( "rabbit",
+                                                          "rabbit_d",
+                                                          world->camera->pos + 2.f*world->camera->getDir());
         }
         else
         {
-            world->addDynamicObject( "cube",
-                                     "nicewall",
-                                     world->camera->pos + 2.f*world->camera->getDir(),
-                                     RigidBody::Box(0.5f, 0.5f, 0.5f)  );
+              worldobject_ptr_it = world->addDynamicObject( "rabbit",
+                                                          "rabbit_d",
+                                                          world->camera->pos + 2.f*world->camera->getDir());
         }
         break;
 

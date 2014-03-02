@@ -30,7 +30,7 @@ class World : public PhysicsWorld /// Consider merging Culling functionality int
         list<shared_ptr<WorldObject>>::iterator addDynamicObject(string mesh_key,
                                                                  string tex_key,
                                                                  glm::vec3 pos,
-                                                                 btCollisionShape* shape);
+                                                                 btCollisionShape* shape = nullptr);
 
         void delWorldObject(list<shared_ptr<WorldObject>>::iterator obst_it_in);
 

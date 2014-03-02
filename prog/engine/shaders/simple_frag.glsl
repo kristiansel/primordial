@@ -125,7 +125,7 @@ void main (void)
 
     /// Shadow Mapping
     float bias = 0.0025; // cosTheta is dot( n,l ), clamped between 0 and 1
-//    float bias = 0.005*tan(acos(nDotL));
+//    float bias = 0.001*tan(acos(nDotL));
 //    bias = clamp(bias, 0, 0.1);
 
 

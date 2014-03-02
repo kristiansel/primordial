@@ -53,33 +53,6 @@ void PostProcStage::init(int w, int h, char* shader_path)
         glBufferData(GL_ARRAY_BUFFER, sizeof(fbo_vertices), fbo_vertices, GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-//    // Post-processing
-//    GLuint vs, fs;
-//    GLint link_ok;
-//    GLint validate_ok;
-//
-//    vs = Shader::initshaders(GL_VERTEX_SHADER, "shaders/pp_wave.vert.glsl");
-//    fs = Shader::initshaders(GL_FRAGMENT_SHADER, shader_path);
-//
-//    getProgramID() = glCreateProgram();
-//    glAttachShader(getProgramID(), vs);
-//    glAttachShader(getProgramID(), fs);
-//    glLinkProgram(getProgramID());
-//    glGetProgramiv(getProgramID(), GL_LINK_STATUS, &link_ok);
-//    if (!link_ok)
-//    {
-//        fprintf(stderr, "glLinkProgram:");
-//        Shader::shadererrors(getProgramID());
-//        //return 0;
-//    }
-//    glValidateProgram(getProgramID());
-//    glGetProgramiv(getProgramID(), GL_VALIDATE_STATUS, &validate_ok);
-//    if (!validate_ok)
-//    {
-//        fprintf(stderr, "glValidateProgram:");
-//        //print_log(getProgramID());
-//    }
-
     ShaderBase::load("shaders/pp_wave.vert.glsl", shader_path);
 
     // get/enable attribs/uniforms and everything
@@ -120,6 +93,8 @@ void PostProcStage::resize(int w, int h)
     glBindRenderbuffer(GL_RENDERBUFFER, rbo_depth);
     glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT32, w, h);
     glBindRenderbuffer(GL_RENDERBUFFER, 0);
+
+    glViewport(0, 0, w, h);
 }
 
 void PostProcStage::activate(int size, float* kern_x, float* kern_y)

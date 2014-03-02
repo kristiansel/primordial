@@ -51,29 +51,13 @@ Mesh::Mesh(string filepath)
 
 void Mesh::fromFile(string mesh_key)
 {
-    string filepath = "assets_raw/models/"+mesh_key+".obj";
-//    this->filepath = filepath;
-//    cout << filepath << "\n";
+    fromFile2(mesh_key);
 
-    //Skeleton* skeleton;
-    //skeleton->loadFromBNS(filepath); /// The wierdest and unsafest code ever...
-    if (mesh_key == "anim_test" || mesh_key == "human_male_bgeo") /// HOLY SHIT IT WORKED FIRST TRY
-    {
-        std::cout << "loading from bgeo:" << mesh_key << std::endl;
-        fromFile2(mesh_key);
-    }
-    else
-    {
-        bool res = Parser::parseSimpleObj(filepath, vertices, triangles, vertex_num, triangle_num); /// calls "new" on pointers
+    geomToVRAM();
+}
 
-        //std::weak_ptr<Skeleton> skel_wptr = ResourceManager[mesh_key] ; /// No access to resource manager, nor should it
-        /// bool res = Parser::parseSkinnedObj(filepath, vertices, triangles, vertex_num, triangle_num, skeleton); /// calls "new" on pointers
-        if (!res) std::cerr << "unable to load mesh " << filepath << "\n";
-    }
-
-
-//    load_stage = 1;
-
+void Mesh::geomToVRAM()
+{
     /// send directly to graphics card
     glGenBuffers(1, &vbo_id); //must come after glewinit
     glBindBuffer(GL_ARRAY_BUFFER, vbo_id);
@@ -84,15 +68,6 @@ void Mesh::fromFile(string mesh_key)
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo_id);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, triangle_num*(sizeof(Triangle)), triangles, GL_STATIC_DRAW);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-
-//    cout << "Triangle number at load-time: " << triangle_num << "\n";
-//    cout << "Vertex number at load-time: " << vertex_num << "\n";
-//    cout << "VBO id at load-time " << vbo_id << "\n";
-//    cout << "IBO id at load-time: " << ibo_id << "\n";
-//    load_stage = 2;
-///    delete skeleton;
-
-
 }
 
 void Mesh::fromFile2(string mesh_key)
@@ -100,7 +75,7 @@ void Mesh::fromFile2(string mesh_key)
 
     bool debug = false;
 
-    string filepath = "assets_bin/models/"+mesh_key+".bgeo";
+    string filepath = "assets/models/"+mesh_key+".bgeo";
 
     std::streampos filesize;
     char * memblock;
@@ -188,27 +163,25 @@ void Mesh::fromFile2(string mesh_key)
     }
 }
 
-//void Mesh::drawVertices()
-//{
-//    /// Bind vertex data
-//    glBindBuffer(GL_ARRAY_BUFFER, vbo_id);
-//    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo_id);
-//
-////    /// Apparently, the below is buffer specific? It needs to be here at least. Look into VAO
-////    /// Or separate buffers for each attribute (corresponds better to the .obj 3d format)
-////    glVertexAttribPointer(vertex,       4, GL_FLOAT,    GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(0)                      );
-////    glVertexAttribPointer(normal,       3, GL_FLOAT,    GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(normalOffset)           );
-////    glVertexAttribPointer(texCoord0,    2, GL_FLOAT,    GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(texCoord0Offset)        );
-////    glVertexAttribPointer(bone_index,   MAX_BONE_INFLUENCES, GL_INT,      GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(bone_indexOffset)       );
-////    glVertexAttribPointer(bone_weight,  MAX_BONE_INFLUENCES, GL_FLOAT,    GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(bone_weightOffset)      );
-//
-//    /// Draw call
-//    glDrawElements(GL_TRIANGLES, 3*triangle_num, GL_UNSIGNED_SHORT, BUFFER_OFFSET(0));
-//
-//    /// Not sure if this is necessary unless other code is badly written
-//    glBindBuffer(GL_ARRAY_BUFFER, 0);
-//    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-//}
+void Mesh::fromMemory(Vertex* const &vertices_in,
+                int num_vertices_in,
+                Triangle* const &triangles_in,
+                int num_triangles_in)
+{
+    vertex_num = num_vertices_in;
+    triangle_num = num_triangles_in;
+
+    delete [] vertices;
+    delete [] triangles;
+
+    vertices = new Vertex [vertex_num];
+    triangles = new Triangle [triangle_num];
+
+    memcpy(&vertices[0], &vertices_in[0], vertex_num*sizeof(Vertex));
+    memcpy(&triangles[0], &triangles_in[0], triangle_num*sizeof(Triangle));
+
+    geomToVRAM();
+}
 
 Mesh::Material Mesh::getMaterial()
 {

@@ -1,0 +1,1 @@
+..\bin\debug\prconvert_debug.exe -I../test_scenes/mdl_human_male2.dae -G../../../engine/assets/models/humale.bgeo -B../../../engine/assets/skeletons/humale.bbns

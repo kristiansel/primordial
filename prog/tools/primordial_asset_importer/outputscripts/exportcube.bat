@@ -1,0 +1,1 @@
+..\bin\debug\prconvert_debug.exe -I../test_scenes/cube.dae -G../../../engine/assets/models/cube.bgeo

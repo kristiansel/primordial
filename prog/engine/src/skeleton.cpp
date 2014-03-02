@@ -24,7 +24,7 @@ void Skeleton::fromFile(std::string skel_key)
 {
     bool debug = false;
 
-    std::string filepath = "assets_bin/skeletons/"+skel_key+".bbns";
+    std::string filepath = "assets/skeletons/"+skel_key+".bbns";
 
     std::streampos filesize;
     char * memblock;

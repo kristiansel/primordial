@@ -69,6 +69,8 @@ void RenderStage::resize(int w, int h)
     glBindTexture(GL_TEXTURE_2D, fbo_depth);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32, w, h, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
     glBindTexture(GL_TEXTURE_2D, 0);
+
+    glViewport(0, 0, w, h);
 }
 
 void RenderStage::activate()

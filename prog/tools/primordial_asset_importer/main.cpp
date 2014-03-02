@@ -4,19 +4,57 @@
 
 #include "converter.hpp"
 
-#include <assimp/Importer.hpp>
-#include <assimp/scene.h>
-#include <assimp/postprocess.h>
-
-int main()
+int main(int argc, char* argv[])
 {
-    convert("test_scenes/mdl_human_male2.dae",
-            "../../engine/assets_bin/models/human_male_bgeo.bgeo",
-            "../../engine/assets_bin/skeletons/human_male_bgeo.bbns");
+    std::string usage = std::string("usage: ")
+                       +std::string("prconvert -Ifilepath -Ggeometryoutfile [-Bbonesoutfile]\n")
+                       +std::string("\tfilepath is the path of the input file\n")
+                       +std::string("\tgeometryoutfile is the path of the .bgeo file to generate\n")
+                       +std::string("\tbonesoutfile is the path of the .bbsn file to generate\n");
 
-    convert("test_scenes/asset_anim_test6.dae",
-            "../../engine/assets_bin/models/anim_test.bgeo",
-            "../../engine/assets_bin/skeletons/anim_test.bbns");
+    std::string inputfile = "";
+    std::string outputfile_geo = "";
+    std::string outputfile_bns = "";
+
+//    std::cout << "numargs " << argc << "\n";
+//
+//    for (int i = 0; i<argc; i++)
+//    {
+//        std::cout << argv[i] << "\n";
+//    }
+
+    if (argc > 2 && argc < 5)
+    {
+        for (int i = 0; i<argc; i++)
+        {
+            std::string in = argv[i];
+            std::string first = "";
+            if (in.length() > 2)
+            {
+                if (in.substr(0, 2) == "-I") inputfile = in.substr(2, in.length()-2);
+                if (in.substr(0, 2) == "-G") outputfile_geo = in.substr(2, in.length()-2);
+                if (in.substr(0, 2) == "-B") outputfile_bns = in.substr(2, in.length()-2);
+            }
+        }
+    }
+    else
+    {
+        std::cerr << "error: wrong number of input arguments\n";
+        std::cout << usage;
+        return -1;
+    }
+
+    if (!inputfile.empty() && !outputfile_geo.empty())
+    {
+        convert(inputfile,
+                outputfile_geo,
+                outputfile_bns);
+    }
+    else
+    {
+        std::cerr << "error: unable to parse input arguments\n";
+        return -2;
+    }
 
     return 0;
 }

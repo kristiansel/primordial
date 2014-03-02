@@ -23,7 +23,7 @@ void Renderer::init(unsigned int scr_width_in, unsigned int scr_height_in)
     cout << "Status: Using GLEW " << glewGetString(GLEW_VERSION) << "\n";
 
     /// Set clear values
-    glClearColor(0.0, 0.0, 0.0, 0.0);
+    glClearColor(0.f/255.f, 80.f/255.f, 186.f/255.f, 0.0);
     glClearDepth(1.0);
 
     /// Enable depth testing
@@ -39,7 +39,7 @@ void Renderer::init(unsigned int scr_width_in, unsigned int scr_height_in)
 
     /// Initialize shaders
     main_shader.init(shadow_map.getDepthTex());
-//    main_shader.load("shaders/simple_vert.glsl", "shaders/simple_frag.glsl");
+    sky_shader.init();
 
     /// Post processing init
     render_stage.init(scr_width_in, scr_height_in);
@@ -49,12 +49,17 @@ void Renderer::init(unsigned int scr_width_in, unsigned int scr_height_in)
 
     /// Initiate perspective (this needs to be done after post processing init for now)
     resizeWindow(scr_width_in, scr_height_in);
+
 }
 
 void Renderer::draw(Scene &scene, float dt)
 {
+
     /// First update all animations
     /// consider moving this out...
+    /// Or: Should update the time in animations somewhere else, then
+    /// in Renderer, only calculate the matrices of those in view.
+    /// Do this as doing blending etc
     for (auto it = scene.actors.begin(); it!=scene.actors.end(); it++)
     {
         (*it)->updateAnim(dt);
@@ -62,8 +67,10 @@ void Renderer::draw(Scene &scene, float dt)
 
     /// Set all things which are shared by shaders but can change in time
     glm::mat4 mv = scene.camera->getModelViewMatrix();
+    setPerspective(settings.width, settings.height);
 
-    // main light (shadowing directional/sun or moon)
+    /// The above should be replaced by:
+//    glm::mat4 vp_mat = scene.camera->getViewProjectionMatrix();
 
     const DirLight &mlight = (*scene.main_light);
     glm::mat4 mlight_vp = mlight.getVPmatrix();
@@ -96,9 +103,10 @@ void Renderer::draw(Scene &scene, float dt)
     render_stage.activate();
 
 
+
         /// Set the values of the uniforms which are updated
         /// per-frame and switch to main shader
-        main_shader.activate(mv, mlight_vp, mlight/*, plights, num_plights*/);
+        main_shader.activate(mv, mlight_vp, mlight/*, plights, num_plights, scene.fog_color*/);
 
         /// draw
 
@@ -119,14 +127,24 @@ void Renderer::draw(Scene &scene, float dt)
             main_shader.drawActor(*it);
         }
 
+        /// Draw "sky quad" following the camera
+        glm::vec4 fog_color = glm::vec4(1.0, 1.0, 1.0, 0.0);
+        glm::vec4 sky_color = glm::vec4(0.f/255.f, 80.f/255.f, 186.f/255.f, 0.0);
+
+        /// activate and draw in the same call
+        sky_shader.drawSkyQuad((*(scene.camera)), fog_color, sky_color);
+
     /// Finished main drawing, post processing
     render_stage.deactivate();
+
+    // should be
+//    blur1.activate(render_stage.fbo_texture, render_stage.fbo_depth);
+//    blur1.drawb();
 
     ////     GENERATING POST-PROCESSING IMAGES
     resizeWindow(settings.width/ratio, settings.height/ratio, false);
 
     /// Consider managing the resizing in the post-proc-stage class
-
     blur1.activate(KERNEL_SIZE, &kernelOffsetx[0], &kernelOffsety[0]);
     blur1.activateTextures(render_stage.fbo_texture, render_stage.fbo_depth);
     blur1.drawb();
@@ -139,7 +157,7 @@ void Renderer::draw(Scene &scene, float dt)
     resizeWindow(settings.width, settings.height, false);
 
     // is absolutely killing performance
-    comb1.activate(0.7, 0.5); // original
+    comb1.activate(0.585, 0.415); // original
 //    comb1.activate(0.7, 0.5);
     comb1.activateTextures(render_stage.fbo_texture, blur2.fbo_texture); // original
 //    comb1.activateTextures(render_stage.fbo_texture, render_stage.fbo_depth);
@@ -162,13 +180,27 @@ void Renderer::resizeWindow(int w, int h, bool real)
 
     }
 
-    glm::mat4 prj ; // just like for lookat
 
 
+
+    glViewport(0, 0, w, h);
+
+    //    post processing stuff
+    pix_tex_coord_offset[0] = 1.0/(float)w;
+    pix_tex_coord_offset[1] = 1.0/(float)h;
+    updateKernel();
+}
+
+void Renderer::setPerspective(int w, int h)
+{
     /// 2 issues:
     /// 1) Should really resizing change the perspective?
     /// 2) This is the last bit of fixed functionality used
     ///    Definitly need to revamp this
+
+    glm::mat4 prj ; // just like for lookat
+
+
     glMatrixMode(GL_PROJECTION);
 
     perspective.aspect = w / (float) h;
@@ -176,13 +208,6 @@ void Renderer::resizeWindow(int w, int h, bool real)
     prj = glm::perspective(3.14159265f*perspective.fovy/180.f, perspective.aspect, perspective.nearz, perspective.farz);
     glLoadMatrixf(&prj[0][0]) ;
 
-    glViewport(0, 0, w, h);
-
-
-    //    post processing stuff
-    pix_tex_coord_offset[0] = 1.0/(float)w;
-    pix_tex_coord_offset[1] = 1.0/(float)h;
-    updateKernel();
 }
 
 void Renderer::updateKernel()

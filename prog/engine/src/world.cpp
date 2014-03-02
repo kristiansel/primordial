@@ -95,7 +95,7 @@ list<shared_ptr<WorldObject>>::iterator World::addDynamicObject(string mesh_key,
 
     (*new_worldobject_it)->pos = pos;         /// configure position
 //    (*new_worldobject_it)->dir = dir;         /// configure direction
-    addPhysicsDynamic( (*new_worldobject_it).get(), shape);
+
 
     /// attach the mesh
     //weak_ptr<Mesh>      mesh_ptr    = resourcemanager.getMeshptrFromKey (mesh_key);
@@ -105,6 +105,12 @@ list<shared_ptr<WorldObject>>::iterator World::addDynamicObject(string mesh_key,
     weak_ptr<Texture>   tex_ptr     = tex_manager.getResptrFromKey  (tex_key);
 
     (*new_worldobject_it)->attachBatch(mesh_ptr, tex_ptr);
+
+    /// Add the collision shape if specified, if not, make a convex hull
+    if (shape)
+        addPhysicsDynamic( (*new_worldobject_it).get(), shape);
+    else
+        addPhysicsDynamic( (*new_worldobject_it).get(), RigidBody::ConvexHull(*(shared_ptr<Mesh>(mesh_ptr))));
 
     return new_worldobject_it;
 

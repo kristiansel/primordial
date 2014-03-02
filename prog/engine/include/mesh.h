@@ -5,6 +5,7 @@
 #include <GL/gl.h>
 #include <string>
 #include <memory>
+#include <algorithm>
 
 #include "geometry.h"
 #include "parser.h"
@@ -50,17 +51,25 @@ public:
     /// Public member functions
     void fromFile(string mesh_key);
     void fromFile2(string mesh_key);
+    void fromMemory(Vertex* const &vertices_in,
+                    int num_vertices_in,
+                    Triangle* const &triangles_in,
+                    int num_triangles_in);
     // void setStageLevel(int stage);
     Material getMaterial();             // called by shader
     GLuint getVBOid();                  // called by shader
     GLuint getIBOid();                  // called by shader
     unsigned int getTriNum();           // called by shader
 
+    float* getVertsPtr() const {return &vertices[0].position[0];};
+    unsigned int getVertsNum() const {return vertex_num;};
+
 //    void drawVertices(); /// draws the mesh vertices (does not affect uniforms)
 
 
 
 protected:
+    void geomToVRAM();
 private:
    // string filepath;
 

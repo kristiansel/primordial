@@ -19,7 +19,7 @@ Texture::~Texture()
 
 bool Texture::fromFile(std::string filepath_in)
 {
-    filepath_in = "assets_raw/textures/"+filepath_in+".png";
+    filepath_in = "assets/textures/"+filepath_in+".png";
 
     if (!(image.loadFromFile(filepath_in)))
     {

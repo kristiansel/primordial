@@ -1,0 +1,1 @@
+..\bin\debug\prconvert_debug.exe -I../test_scenes/axes.dae -G../../../engine/assets/models/axes.bgeo

@@ -1,0 +1,1096 @@
+time: Fri Feb 28 17:40:42 2014
+
+time: Fri Feb 28 17:48:12 2014
+
+time: Fri Feb 28 17:49:55 2014
+
+time: Fri Feb 28 17:51:30 2014
+
+time: Fri Feb 28 18:29:20 2014
+
+time: Fri Feb 28 18:32:36 2014
+
+time: Fri Feb 28 18:32:56 2014
+
+time: Fri Feb 28 18:35:39 2014
+
+time: Fri Feb 28 18:39:11 2014
+
+time: Fri Feb 28 18:39:11 2014
+
+time: Fri Feb 28 18:39:11 2014
+
+time: Fri Feb 28 18:39:11 2014
+
+time: Fri Feb 28 18:39:13 2014
+bone 0: Master
+bone 1: Root
+bone 2: Hips
+bone 3: UpLeg_L
+bone 4: LoLeg_L
+bone 5: UpLeg_R
+bone 6: LoLeg_R
+bone 7: Spine1
+bone 8: Spine2
+bone 9: Spine3
+bone 10: Neck
+bone 11: Head
+bone 12: Jaw
+bone 13: TongueBase
+bone 14: TongueMid
+bone 15: TongueTip
+bone 16: Eye_R
+bone 17: Eye_L
+bone 18: UpLid_R
+bone 19: LoLid_R
+bone 20: UpLid_L
+bone 21: LoLid_L
+bone 22: Clavicle_L
+bone 23: UpArm_L
+bone 24: LoArm_L
+bone 25: Hand_L
+bone 26: Wrist-1_L
+bone 27: Palm-2_L
+bone 28: Finger-2-1_L
+bone 29: Finger-2-2_L
+bone 30: Finger-2-3_L
+bone 31: Palm-3_L
+bone 32: Finger-3-1_L
+bone 33: Finger-3-2_L
+bone 34: Finger-3-3_L
+bone 35: Wrist-2_L
+bone 36: Palm-4_L
+bone 37: Finger-4-1_L
+bone 38: Finger-4-2_L
+bone 39: Finger-4-3_L
+bone 40: Palm-5_L
+bone 41: Finger-5-1_L
+bone 42: Finger-5-2_L
+bone 43: Finger-5-3_L
+bone 44: Palm-1_L
+bone 45: Finger-1-1_L
+bone 46: Finger-1-2_L
+bone 47: Finger-1-3_L
+bone 48: Clavicle_R
+bone 49: UpArm_R
+bone 50: LoArm_R
+bone 51: Hand_R
+bone 52: Wrist-1_R
+bone 53: Palm-2_R
+bone 54: Finger-2-1_R
+bone 55: Finger-2-2_R
+bone 56: Finger-2-3_R
+bone 57: Palm-3_R
+bone 58: Finger-3-1_R
+bone 59: Finger-3-2_R
+bone 60: Finger-3-3_R
+bone 61: Wrist-2_R
+bone 62: Palm-4_R
+bone 63: Finger-4-1_R
+bone 64: Finger-4-2_R
+bone 65: Finger-4-3_R
+bone 66: Palm-5_R
+bone 67: Finger-5-1_R
+bone 68: Finger-5-2_R
+bone 69: Finger-5-3_R
+bone 70: Palm-1_R
+bone 71: Finger-1-1_R
+bone 72: Finger-1-2_R
+bone 73: Finger-1-3_R
+bone 74: LegHandle_L
+bone 75: Foot_L
+bone 76: Toe_L
+bone 77: LegHandle_R
+bone 78: Foot_R
+bone 79: Toe_R
+bone 80: Knee_L
+bone 81: Knee_R
+bone 82: simple2
+bone 83: sword
+ch 0: Master p(24), r(24), s(24), 
+ch 1: Root p(24), r(24), s(24), 
+ch 2: Hips p(24), r(24), s(24), 
+ch 3: UpLeg_L p(24), r(24), s(24), 
+ch 4: LoLeg_L p(24), r(24), s(24), 
+ch 5: UpLeg_R p(24), r(24), s(24), 
+ch 6: LoLeg_R p(24), r(24), s(24), 
+ch 7: Spine1 p(24), r(24), s(24), 
+ch 8: Spine2 p(24), r(24), s(24), 
+ch 9: Spine3 p(24), r(24), s(24), 
+ch 10: Neck p(24), r(24), s(24), 
+ch 11: Head p(24), r(24), s(24), 
+ch 12: Jaw p(24), r(24), s(24), 
+ch 13: TongueBase p(24), r(24), s(24), 
+ch 14: TongueMid p(24), r(24), s(24), 
+ch 15: TongueTip p(24), r(24), s(24), 
+ch 16: Eye_R p(24), r(24), s(24), 
+ch 17: Eye_L p(24), r(24), s(24), 
+ch 18: UpLid_R p(24), r(24), s(24), 
+ch 19: LoLid_R p(24), r(24), s(24), 
+ch 20: UpLid_L p(24), r(24), s(24), 
+ch 21: LoLid_L p(24), r(24), s(24), 
+ch 22: Clavicle_L p(24), r(24), s(24), 
+ch 23: UpArm_L p(24), r(24), s(24), 
+ch 24: LoArm_L p(24), r(24), s(24), 
+ch 25: Hand_L p(24), r(24), s(24), 
+ch 26: Wrist-1_L p(24), r(24), s(24), 
+ch 27: Palm-2_L p(24), r(24), s(24), 
+ch 28: Finger-2-1_L p(24), r(24), s(24), 
+ch 29: Finger-2-2_L p(24), r(24), s(24), 
+ch 30: Finger-2-3_L p(24), r(24), s(24), 
+ch 31: Palm-3_L p(24), r(24), s(24), 
+ch 32: Finger-3-1_L p(24), r(24), s(24), 
+ch 33: Finger-3-2_L p(24), r(24), s(24), 
+ch 34: Finger-3-3_L p(24), r(24), s(24), 
+ch 35: Wrist-2_L p(24), r(24), s(24), 
+ch 36: Palm-4_L p(24), r(24), s(24), 
+ch 37: Finger-4-1_L p(24), r(24), s(24), 
+ch 38: Finger-4-2_L p(24), r(24), s(24), 
+ch 39: Finger-4-3_L p(24), r(24), s(24), 
+ch 40: Palm-5_L p(24), r(24), s(24), 
+ch 41: Finger-5-1_L p(24), r(24), s(24), 
+ch 42: Finger-5-2_L p(24), r(24), s(24), 
+ch 43: Finger-5-3_L p(24), r(24), s(24), 
+ch 44: Palm-1_L p(24), r(24), s(24), 
+ch 45: Finger-1-1_L p(24), r(24), s(24), 
+ch 46: Finger-1-2_L p(24), r(24), s(24), 
+ch 47: Finger-1-3_L p(24), r(24), s(24), 
+ch 48: Clavicle_R p(24), r(24), s(24), 
+ch 49: UpArm_R p(24), r(24), s(24), 
+ch 50: LoArm_R p(24), r(24), s(24), 
+ch 51: Hand_R p(24), r(24), s(24), 
+ch 52: Wrist-1_R p(24), r(24), s(24), 
+ch 53: Palm-2_R p(24), r(24), s(24), 
+ch 54: Finger-2-1_R p(24), r(24), s(24), 
+ch 55: Finger-2-2_R p(24), r(24), s(24), 
+ch 56: Finger-2-3_R p(24), r(24), s(24), 
+ch 57: Palm-3_R p(24), r(24), s(24), 
+ch 58: Finger-3-1_R p(24), r(24), s(24), 
+ch 59: Finger-3-2_R p(24), r(24), s(24), 
+ch 60: Finger-3-3_R p(24), r(24), s(24), 
+ch 61: Wrist-2_R p(24), r(24), s(24), 
+ch 62: Palm-4_R p(24), r(24), s(24), 
+ch 63: Finger-4-1_R p(24), r(24), s(24), 
+ch 64: Finger-4-2_R p(24), r(24), s(24), 
+ch 65: Finger-4-3_R p(24), r(24), s(24), 
+ch 66: Palm-5_R p(24), r(24), s(24), 
+ch 67: Finger-5-1_R p(24), r(24), s(24), 
+ch 68: Finger-5-2_R p(24), r(24), s(24), 
+ch 69: Finger-5-3_R p(24), r(24), s(24), 
+ch 70: Palm-1_R p(24), r(24), s(24), 
+ch 71: Finger-1-1_R p(24), r(24), s(24), 
+ch 72: Finger-1-2_R p(24), r(24), s(24), 
+ch 73: Finger-1-3_R p(24), r(24), s(24), 
+ch 74: LegHandle_L p(24), r(24), s(24), 
+ch 75: Foot_L p(24), r(24), s(24), 
+ch 76: Toe_L p(24), r(24), s(24), 
+ch 77: LegHandle_R p(24), r(24), s(24), 
+ch 78: Foot_R p(24), r(24), s(24), 
+ch 79: Toe_R p(24), r(24), s(24), 
+ch 80: Knee_L p(24), r(24), s(24), 
+ch 81: Knee_R p(24), r(24), s(24), 
+ch 82: simple2 p(9), r(9), s(9), 
+ch 83: sword p(1), r(1), s(1), 
+
+time: Fri Feb 28 18:40:55 2014
+
+time: Fri Feb 28 18:40:55 2014
+
+time: Fri Feb 28 18:40:55 2014
+
+time: Fri Feb 28 18:40:55 2014
+
+time: Fri Feb 28 18:40:56 2014
+bone 0: Master
+bone 1: Root
+bone 2: Hips
+bone 3: UpLeg_L
+bone 4: LoLeg_L
+bone 5: UpLeg_R
+bone 6: LoLeg_R
+bone 7: Spine1
+bone 8: Spine2
+bone 9: Spine3
+bone 10: Neck
+bone 11: Head
+bone 12: Jaw
+bone 13: TongueBase
+bone 14: TongueMid
+bone 15: TongueTip
+bone 16: Eye_R
+bone 17: Eye_L
+bone 18: UpLid_R
+bone 19: LoLid_R
+bone 20: UpLid_L
+bone 21: LoLid_L
+bone 22: Clavicle_L
+bone 23: UpArm_L
+bone 24: LoArm_L
+bone 25: Hand_L
+bone 26: Wrist-1_L
+bone 27: Palm-2_L
+bone 28: Finger-2-1_L
+bone 29: Finger-2-2_L
+bone 30: Finger-2-3_L
+bone 31: Palm-3_L
+bone 32: Finger-3-1_L
+bone 33: Finger-3-2_L
+bone 34: Finger-3-3_L
+bone 35: Wrist-2_L
+bone 36: Palm-4_L
+bone 37: Finger-4-1_L
+bone 38: Finger-4-2_L
+bone 39: Finger-4-3_L
+bone 40: Palm-5_L
+bone 41: Finger-5-1_L
+bone 42: Finger-5-2_L
+bone 43: Finger-5-3_L
+bone 44: Palm-1_L
+bone 45: Finger-1-1_L
+bone 46: Finger-1-2_L
+bone 47: Finger-1-3_L
+bone 48: Clavicle_R
+bone 49: UpArm_R
+bone 50: LoArm_R
+bone 51: Hand_R
+bone 52: Wrist-1_R
+bone 53: Palm-2_R
+bone 54: Finger-2-1_R
+bone 55: Finger-2-2_R
+bone 56: Finger-2-3_R
+bone 57: Palm-3_R
+bone 58: Finger-3-1_R
+bone 59: Finger-3-2_R
+bone 60: Finger-3-3_R
+bone 61: Wrist-2_R
+bone 62: Palm-4_R
+bone 63: Finger-4-1_R
+bone 64: Finger-4-2_R
+bone 65: Finger-4-3_R
+bone 66: Palm-5_R
+bone 67: Finger-5-1_R
+bone 68: Finger-5-2_R
+bone 69: Finger-5-3_R
+bone 70: Palm-1_R
+bone 71: Finger-1-1_R
+bone 72: Finger-1-2_R
+bone 73: Finger-1-3_R
+bone 74: LegHandle_L
+bone 75: Foot_L
+bone 76: Toe_L
+bone 77: LegHandle_R
+bone 78: Foot_R
+bone 79: Toe_R
+bone 80: Knee_L
+bone 81: Knee_R
+bone 82: simple2
+bone 83: sword
+ch 0: Master p(24), r(24), s(24), 
+ch 1: Root p(24), r(24), s(24), 
+ch 2: Hips p(24), r(24), s(24), 
+ch 3: UpLeg_L p(24), r(24), s(24), 
+ch 4: LoLeg_L p(24), r(24), s(24), 
+ch 5: UpLeg_R p(24), r(24), s(24), 
+ch 6: LoLeg_R p(24), r(24), s(24), 
+ch 7: Spine1 p(24), r(24), s(24), 
+ch 8: Spine2 p(24), r(24), s(24), 
+ch 9: Spine3 p(24), r(24), s(24), 
+ch 10: Neck p(24), r(24), s(24), 
+ch 11: Head p(24), r(24), s(24), 
+ch 12: Jaw p(24), r(24), s(24), 
+ch 13: TongueBase p(24), r(24), s(24), 
+ch 14: TongueMid p(24), r(24), s(24), 
+ch 15: TongueTip p(24), r(24), s(24), 
+ch 16: Eye_R p(24), r(24), s(24), 
+ch 17: Eye_L p(24), r(24), s(24), 
+ch 18: UpLid_R p(24), r(24), s(24), 
+ch 19: LoLid_R p(24), r(24), s(24), 
+ch 20: UpLid_L p(24), r(24), s(24), 
+ch 21: LoLid_L p(24), r(24), s(24), 
+ch 22: Clavicle_L p(24), r(24), s(24), 
+ch 23: UpArm_L p(24), r(24), s(24), 
+ch 24: LoArm_L p(24), r(24), s(24), 
+ch 25: Hand_L p(24), r(24), s(24), 
+ch 26: Wrist-1_L p(24), r(24), s(24), 
+ch 27: Palm-2_L p(24), r(24), s(24), 
+ch 28: Finger-2-1_L p(24), r(24), s(24), 
+ch 29: Finger-2-2_L p(24), r(24), s(24), 
+ch 30: Finger-2-3_L p(24), r(24), s(24), 
+ch 31: Palm-3_L p(24), r(24), s(24), 
+ch 32: Finger-3-1_L p(24), r(24), s(24), 
+ch 33: Finger-3-2_L p(24), r(24), s(24), 
+ch 34: Finger-3-3_L p(24), r(24), s(24), 
+ch 35: Wrist-2_L p(24), r(24), s(24), 
+ch 36: Palm-4_L p(24), r(24), s(24), 
+ch 37: Finger-4-1_L p(24), r(24), s(24), 
+ch 38: Finger-4-2_L p(24), r(24), s(24), 
+ch 39: Finger-4-3_L p(24), r(24), s(24), 
+ch 40: Palm-5_L p(24), r(24), s(24), 
+ch 41: Finger-5-1_L p(24), r(24), s(24), 
+ch 42: Finger-5-2_L p(24), r(24), s(24), 
+ch 43: Finger-5-3_L p(24), r(24), s(24), 
+ch 44: Palm-1_L p(24), r(24), s(24), 
+ch 45: Finger-1-1_L p(24), r(24), s(24), 
+ch 46: Finger-1-2_L p(24), r(24), s(24), 
+ch 47: Finger-1-3_L p(24), r(24), s(24), 
+ch 48: Clavicle_R p(24), r(24), s(24), 
+ch 49: UpArm_R p(24), r(24), s(24), 
+ch 50: LoArm_R p(24), r(24), s(24), 
+ch 51: Hand_R p(24), r(24), s(24), 
+ch 52: Wrist-1_R p(24), r(24), s(24), 
+ch 53: Palm-2_R p(24), r(24), s(24), 
+ch 54: Finger-2-1_R p(24), r(24), s(24), 
+ch 55: Finger-2-2_R p(24), r(24), s(24), 
+ch 56: Finger-2-3_R p(24), r(24), s(24), 
+ch 57: Palm-3_R p(24), r(24), s(24), 
+ch 58: Finger-3-1_R p(24), r(24), s(24), 
+ch 59: Finger-3-2_R p(24), r(24), s(24), 
+ch 60: Finger-3-3_R p(24), r(24), s(24), 
+ch 61: Wrist-2_R p(24), r(24), s(24), 
+ch 62: Palm-4_R p(24), r(24), s(24), 
+ch 63: Finger-4-1_R p(24), r(24), s(24), 
+ch 64: Finger-4-2_R p(24), r(24), s(24), 
+ch 65: Finger-4-3_R p(24), r(24), s(24), 
+ch 66: Palm-5_R p(24), r(24), s(24), 
+ch 67: Finger-5-1_R p(24), r(24), s(24), 
+ch 68: Finger-5-2_R p(24), r(24), s(24), 
+ch 69: Finger-5-3_R p(24), r(24), s(24), 
+ch 70: Palm-1_R p(24), r(24), s(24), 
+ch 71: Finger-1-1_R p(24), r(24), s(24), 
+ch 72: Finger-1-2_R p(24), r(24), s(24), 
+ch 73: Finger-1-3_R p(24), r(24), s(24), 
+ch 74: LegHandle_L p(24), r(24), s(24), 
+ch 75: Foot_L p(24), r(24), s(24), 
+ch 76: Toe_L p(24), r(24), s(24), 
+ch 77: LegHandle_R p(24), r(24), s(24), 
+ch 78: Foot_R p(24), r(24), s(24), 
+ch 79: Toe_R p(24), r(24), s(24), 
+ch 80: Knee_L p(24), r(24), s(24), 
+ch 81: Knee_R p(24), r(24), s(24), 
+ch 82: simple2 p(9), r(9), s(9), 
+ch 83: sword p(1), r(1), s(1), 
+
+time: Fri Feb 28 18:46:04 2014
+
+time: Fri Feb 28 18:46:04 2014
+
+time: Fri Feb 28 18:46:04 2014
+
+time: Fri Feb 28 18:46:04 2014
+
+time: Fri Feb 28 18:46:05 2014
+bone 0: Master
+bone 1: Root
+bone 2: Hips
+bone 3: UpLeg_L
+bone 4: LoLeg_L
+bone 5: UpLeg_R
+bone 6: LoLeg_R
+bone 7: Spine1
+bone 8: Spine2
+bone 9: Spine3
+bone 10: Neck
+bone 11: Head
+bone 12: Jaw
+bone 13: TongueBase
+bone 14: TongueMid
+bone 15: TongueTip
+bone 16: Eye_R
+bone 17: Eye_L
+bone 18: UpLid_R
+bone 19: LoLid_R
+bone 20: UpLid_L
+bone 21: LoLid_L
+bone 22: Clavicle_L
+bone 23: UpArm_L
+bone 24: LoArm_L
+bone 25: Hand_L
+bone 26: Wrist-1_L
+bone 27: Palm-2_L
+bone 28: Finger-2-1_L
+bone 29: Finger-2-2_L
+bone 30: Finger-2-3_L
+bone 31: Palm-3_L
+bone 32: Finger-3-1_L
+bone 33: Finger-3-2_L
+bone 34: Finger-3-3_L
+bone 35: Wrist-2_L
+bone 36: Palm-4_L
+bone 37: Finger-4-1_L
+bone 38: Finger-4-2_L
+bone 39: Finger-4-3_L
+bone 40: Palm-5_L
+bone 41: Finger-5-1_L
+bone 42: Finger-5-2_L
+bone 43: Finger-5-3_L
+bone 44: Palm-1_L
+bone 45: Finger-1-1_L
+bone 46: Finger-1-2_L
+bone 47: Finger-1-3_L
+bone 48: Clavicle_R
+bone 49: UpArm_R
+bone 50: LoArm_R
+bone 51: Hand_R
+bone 52: Wrist-1_R
+bone 53: Palm-2_R
+bone 54: Finger-2-1_R
+bone 55: Finger-2-2_R
+bone 56: Finger-2-3_R
+bone 57: Palm-3_R
+bone 58: Finger-3-1_R
+bone 59: Finger-3-2_R
+bone 60: Finger-3-3_R
+bone 61: Wrist-2_R
+bone 62: Palm-4_R
+bone 63: Finger-4-1_R
+bone 64: Finger-4-2_R
+bone 65: Finger-4-3_R
+bone 66: Palm-5_R
+bone 67: Finger-5-1_R
+bone 68: Finger-5-2_R
+bone 69: Finger-5-3_R
+bone 70: Palm-1_R
+bone 71: Finger-1-1_R
+bone 72: Finger-1-2_R
+bone 73: Finger-1-3_R
+bone 74: LegHandle_L
+bone 75: Foot_L
+bone 76: Toe_L
+bone 77: LegHandle_R
+bone 78: Foot_R
+bone 79: Toe_R
+bone 80: Knee_L
+bone 81: Knee_R
+bone 82: simple2
+bone 83: sword
+ch 0: Master p(24), r(24), s(24), 
+ch 1: Root p(24), r(24), s(24), 
+ch 2: Hips p(24), r(24), s(24), 
+ch 3: UpLeg_L p(24), r(24), s(24), 
+ch 4: LoLeg_L p(24), r(24), s(24), 
+ch 5: UpLeg_R p(24), r(24), s(24), 
+ch 6: LoLeg_R p(24), r(24), s(24), 
+ch 7: Spine1 p(24), r(24), s(24), 
+ch 8: Spine2 p(24), r(24), s(24), 
+ch 9: Spine3 p(24), r(24), s(24), 
+ch 10: Neck p(24), r(24), s(24), 
+ch 11: Head p(24), r(24), s(24), 
+ch 12: Jaw p(24), r(24), s(24), 
+ch 13: TongueBase p(24), r(24), s(24), 
+ch 14: TongueMid p(24), r(24), s(24), 
+ch 15: TongueTip p(24), r(24), s(24), 
+ch 16: Eye_R p(24), r(24), s(24), 
+ch 17: Eye_L p(24), r(24), s(24), 
+ch 18: UpLid_R p(24), r(24), s(24), 
+ch 19: LoLid_R p(24), r(24), s(24), 
+ch 20: UpLid_L p(24), r(24), s(24), 
+ch 21: LoLid_L p(24), r(24), s(24), 
+ch 22: Clavicle_L p(24), r(24), s(24), 
+ch 23: UpArm_L p(24), r(24), s(24), 
+ch 24: LoArm_L p(24), r(24), s(24), 
+ch 25: Hand_L p(24), r(24), s(24), 
+ch 26: Wrist-1_L p(24), r(24), s(24), 
+ch 27: Palm-2_L p(24), r(24), s(24), 
+ch 28: Finger-2-1_L p(24), r(24), s(24), 
+ch 29: Finger-2-2_L p(24), r(24), s(24), 
+ch 30: Finger-2-3_L p(24), r(24), s(24), 
+ch 31: Palm-3_L p(24), r(24), s(24), 
+ch 32: Finger-3-1_L p(24), r(24), s(24), 
+ch 33: Finger-3-2_L p(24), r(24), s(24), 
+ch 34: Finger-3-3_L p(24), r(24), s(24), 
+ch 35: Wrist-2_L p(24), r(24), s(24), 
+ch 36: Palm-4_L p(24), r(24), s(24), 
+ch 37: Finger-4-1_L p(24), r(24), s(24), 
+ch 38: Finger-4-2_L p(24), r(24), s(24), 
+ch 39: Finger-4-3_L p(24), r(24), s(24), 
+ch 40: Palm-5_L p(24), r(24), s(24), 
+ch 41: Finger-5-1_L p(24), r(24), s(24), 
+ch 42: Finger-5-2_L p(24), r(24), s(24), 
+ch 43: Finger-5-3_L p(24), r(24), s(24), 
+ch 44: Palm-1_L p(24), r(24), s(24), 
+ch 45: Finger-1-1_L p(24), r(24), s(24), 
+ch 46: Finger-1-2_L p(24), r(24), s(24), 
+ch 47: Finger-1-3_L p(24), r(24), s(24), 
+ch 48: Clavicle_R p(24), r(24), s(24), 
+ch 49: UpArm_R p(24), r(24), s(24), 
+ch 50: LoArm_R p(24), r(24), s(24), 
+ch 51: Hand_R p(24), r(24), s(24), 
+ch 52: Wrist-1_R p(24), r(24), s(24), 
+ch 53: Palm-2_R p(24), r(24), s(24), 
+ch 54: Finger-2-1_R p(24), r(24), s(24), 
+ch 55: Finger-2-2_R p(24), r(24), s(24), 
+ch 56: Finger-2-3_R p(24), r(24), s(24), 
+ch 57: Palm-3_R p(24), r(24), s(24), 
+ch 58: Finger-3-1_R p(24), r(24), s(24), 
+ch 59: Finger-3-2_R p(24), r(24), s(24), 
+ch 60: Finger-3-3_R p(24), r(24), s(24), 
+ch 61: Wrist-2_R p(24), r(24), s(24), 
+ch 62: Palm-4_R p(24), r(24), s(24), 
+ch 63: Finger-4-1_R p(24), r(24), s(24), 
+ch 64: Finger-4-2_R p(24), r(24), s(24), 
+ch 65: Finger-4-3_R p(24), r(24), s(24), 
+ch 66: Palm-5_R p(24), r(24), s(24), 
+ch 67: Finger-5-1_R p(24), r(24), s(24), 
+ch 68: Finger-5-2_R p(24), r(24), s(24), 
+ch 69: Finger-5-3_R p(24), r(24), s(24), 
+ch 70: Palm-1_R p(24), r(24), s(24), 
+ch 71: Finger-1-1_R p(24), r(24), s(24), 
+ch 72: Finger-1-2_R p(24), r(24), s(24), 
+ch 73: Finger-1-3_R p(24), r(24), s(24), 
+ch 74: LegHandle_L p(24), r(24), s(24), 
+ch 75: Foot_L p(24), r(24), s(24), 
+ch 76: Toe_L p(24), r(24), s(24), 
+ch 77: LegHandle_R p(24), r(24), s(24), 
+ch 78: Foot_R p(24), r(24), s(24), 
+ch 79: Toe_R p(24), r(24), s(24), 
+ch 80: Knee_L p(24), r(24), s(24), 
+ch 81: Knee_R p(24), r(24), s(24), 
+ch 82: simple2 p(9), r(9), s(9), 
+ch 83: sword p(1), r(1), s(1), 
+
+time: Fri Feb 28 18:49:05 2014
+
+time: Fri Feb 28 18:49:05 2014
+
+time: Fri Feb 28 18:49:05 2014
+
+time: Fri Feb 28 18:49:05 2014
+
+time: Fri Feb 28 18:49:06 2014
+bone 0: Master
+bone 1: Root
+bone 2: Hips
+bone 3: UpLeg_L
+bone 4: LoLeg_L
+bone 5: UpLeg_R
+bone 6: LoLeg_R
+bone 7: Spine1
+bone 8: Spine2
+bone 9: Spine3
+bone 10: Neck
+bone 11: Head
+bone 12: Jaw
+bone 13: TongueBase
+bone 14: TongueMid
+bone 15: TongueTip
+bone 16: Eye_R
+bone 17: Eye_L
+bone 18: UpLid_R
+bone 19: LoLid_R
+bone 20: UpLid_L
+bone 21: LoLid_L
+bone 22: Clavicle_L
+bone 23: UpArm_L
+bone 24: LoArm_L
+bone 25: Hand_L
+bone 26: Wrist-1_L
+bone 27: Palm-2_L
+bone 28: Finger-2-1_L
+bone 29: Finger-2-2_L
+bone 30: Finger-2-3_L
+bone 31: Palm-3_L
+bone 32: Finger-3-1_L
+bone 33: Finger-3-2_L
+bone 34: Finger-3-3_L
+bone 35: Wrist-2_L
+bone 36: Palm-4_L
+bone 37: Finger-4-1_L
+bone 38: Finger-4-2_L
+bone 39: Finger-4-3_L
+bone 40: Palm-5_L
+bone 41: Finger-5-1_L
+bone 42: Finger-5-2_L
+bone 43: Finger-5-3_L
+bone 44: Palm-1_L
+bone 45: Finger-1-1_L
+bone 46: Finger-1-2_L
+bone 47: Finger-1-3_L
+bone 48: Clavicle_R
+bone 49: UpArm_R
+bone 50: LoArm_R
+bone 51: Hand_R
+bone 52: Wrist-1_R
+bone 53: Palm-2_R
+bone 54: Finger-2-1_R
+bone 55: Finger-2-2_R
+bone 56: Finger-2-3_R
+bone 57: Palm-3_R
+bone 58: Finger-3-1_R
+bone 59: Finger-3-2_R
+bone 60: Finger-3-3_R
+bone 61: Wrist-2_R
+bone 62: Palm-4_R
+bone 63: Finger-4-1_R
+bone 64: Finger-4-2_R
+bone 65: Finger-4-3_R
+bone 66: Palm-5_R
+bone 67: Finger-5-1_R
+bone 68: Finger-5-2_R
+bone 69: Finger-5-3_R
+bone 70: Palm-1_R
+bone 71: Finger-1-1_R
+bone 72: Finger-1-2_R
+bone 73: Finger-1-3_R
+bone 74: LegHandle_L
+bone 75: Foot_L
+bone 76: Toe_L
+bone 77: LegHandle_R
+bone 78: Foot_R
+bone 79: Toe_R
+bone 80: Knee_L
+bone 81: Knee_R
+bone 82: simple2
+bone 83: sword
+ch 0: Master p(24), r(24), s(24), 
+ch 1: Root p(24), r(24), s(24), 
+ch 2: Hips p(24), r(24), s(24), 
+ch 3: UpLeg_L p(24), r(24), s(24), 
+ch 4: LoLeg_L p(24), r(24), s(24), 
+ch 5: UpLeg_R p(24), r(24), s(24), 
+ch 6: LoLeg_R p(24), r(24), s(24), 
+ch 7: Spine1 p(24), r(24), s(24), 
+ch 8: Spine2 p(24), r(24), s(24), 
+ch 9: Spine3 p(24), r(24), s(24), 
+ch 10: Neck p(24), r(24), s(24), 
+ch 11: Head p(24), r(24), s(24), 
+ch 12: Jaw p(24), r(24), s(24), 
+ch 13: TongueBase p(24), r(24), s(24), 
+ch 14: TongueMid p(24), r(24), s(24), 
+ch 15: TongueTip p(24), r(24), s(24), 
+ch 16: Eye_R p(24), r(24), s(24), 
+ch 17: Eye_L p(24), r(24), s(24), 
+ch 18: UpLid_R p(24), r(24), s(24), 
+ch 19: LoLid_R p(24), r(24), s(24), 
+ch 20: UpLid_L p(24), r(24), s(24), 
+ch 21: LoLid_L p(24), r(24), s(24), 
+ch 22: Clavicle_L p(24), r(24), s(24), 
+ch 23: UpArm_L p(24), r(24), s(24), 
+ch 24: LoArm_L p(24), r(24), s(24), 
+ch 25: Hand_L p(24), r(24), s(24), 
+ch 26: Wrist-1_L p(24), r(24), s(24), 
+ch 27: Palm-2_L p(24), r(24), s(24), 
+ch 28: Finger-2-1_L p(24), r(24), s(24), 
+ch 29: Finger-2-2_L p(24), r(24), s(24), 
+ch 30: Finger-2-3_L p(24), r(24), s(24), 
+ch 31: Palm-3_L p(24), r(24), s(24), 
+ch 32: Finger-3-1_L p(24), r(24), s(24), 
+ch 33: Finger-3-2_L p(24), r(24), s(24), 
+ch 34: Finger-3-3_L p(24), r(24), s(24), 
+ch 35: Wrist-2_L p(24), r(24), s(24), 
+ch 36: Palm-4_L p(24), r(24), s(24), 
+ch 37: Finger-4-1_L p(24), r(24), s(24), 
+ch 38: Finger-4-2_L p(24), r(24), s(24), 
+ch 39: Finger-4-3_L p(24), r(24), s(24), 
+ch 40: Palm-5_L p(24), r(24), s(24), 
+ch 41: Finger-5-1_L p(24), r(24), s(24), 
+ch 42: Finger-5-2_L p(24), r(24), s(24), 
+ch 43: Finger-5-3_L p(24), r(24), s(24), 
+ch 44: Palm-1_L p(24), r(24), s(24), 
+ch 45: Finger-1-1_L p(24), r(24), s(24), 
+ch 46: Finger-1-2_L p(24), r(24), s(24), 
+ch 47: Finger-1-3_L p(24), r(24), s(24), 
+ch 48: Clavicle_R p(24), r(24), s(24), 
+ch 49: UpArm_R p(24), r(24), s(24), 
+ch 50: LoArm_R p(24), r(24), s(24), 
+ch 51: Hand_R p(24), r(24), s(24), 
+ch 52: Wrist-1_R p(24), r(24), s(24), 
+ch 53: Palm-2_R p(24), r(24), s(24), 
+ch 54: Finger-2-1_R p(24), r(24), s(24), 
+ch 55: Finger-2-2_R p(24), r(24), s(24), 
+ch 56: Finger-2-3_R p(24), r(24), s(24), 
+ch 57: Palm-3_R p(24), r(24), s(24), 
+ch 58: Finger-3-1_R p(24), r(24), s(24), 
+ch 59: Finger-3-2_R p(24), r(24), s(24), 
+ch 60: Finger-3-3_R p(24), r(24), s(24), 
+ch 61: Wrist-2_R p(24), r(24), s(24), 
+ch 62: Palm-4_R p(24), r(24), s(24), 
+ch 63: Finger-4-1_R p(24), r(24), s(24), 
+ch 64: Finger-4-2_R p(24), r(24), s(24), 
+ch 65: Finger-4-3_R p(24), r(24), s(24), 
+ch 66: Palm-5_R p(24), r(24), s(24), 
+ch 67: Finger-5-1_R p(24), r(24), s(24), 
+ch 68: Finger-5-2_R p(24), r(24), s(24), 
+ch 69: Finger-5-3_R p(24), r(24), s(24), 
+ch 70: Palm-1_R p(24), r(24), s(24), 
+ch 71: Finger-1-1_R p(24), r(24), s(24), 
+ch 72: Finger-1-2_R p(24), r(24), s(24), 
+ch 73: Finger-1-3_R p(24), r(24), s(24), 
+ch 74: LegHandle_L p(24), r(24), s(24), 
+ch 75: Foot_L p(24), r(24), s(24), 
+ch 76: Toe_L p(24), r(24), s(24), 
+ch 77: LegHandle_R p(24), r(24), s(24), 
+ch 78: Foot_R p(24), r(24), s(24), 
+ch 79: Toe_R p(24), r(24), s(24), 
+ch 80: Knee_L p(24), r(24), s(24), 
+ch 81: Knee_R p(24), r(24), s(24), 
+ch 82: simple2 p(9), r(9), s(9), 
+ch 83: sword p(1), r(1), s(1), 
+
+time: Fri Feb 28 18:56:42 2014
+
+time: Fri Feb 28 18:56:42 2014
+
+time: Fri Feb 28 18:56:42 2014
+
+time: Fri Feb 28 18:56:42 2014
+
+time: Fri Feb 28 18:56:43 2014
+bone 0: Master
+bone 1: Root
+bone 2: Hips
+bone 3: UpLeg_L
+bone 4: LoLeg_L
+bone 5: UpLeg_R
+bone 6: LoLeg_R
+bone 7: Spine1
+bone 8: Spine2
+bone 9: Spine3
+bone 10: Neck
+bone 11: Head
+bone 12: Jaw
+bone 13: TongueBase
+bone 14: TongueMid
+bone 15: TongueTip
+bone 16: Eye_R
+bone 17: Eye_L
+bone 18: UpLid_R
+bone 19: LoLid_R
+bone 20: UpLid_L
+bone 21: LoLid_L
+bone 22: Clavicle_L
+bone 23: UpArm_L
+bone 24: LoArm_L
+bone 25: Hand_L
+bone 26: Wrist-1_L
+bone 27: Palm-2_L
+bone 28: Finger-2-1_L
+bone 29: Finger-2-2_L
+bone 30: Finger-2-3_L
+bone 31: Palm-3_L
+bone 32: Finger-3-1_L
+bone 33: Finger-3-2_L
+bone 34: Finger-3-3_L
+bone 35: Wrist-2_L
+bone 36: Palm-4_L
+bone 37: Finger-4-1_L
+bone 38: Finger-4-2_L
+bone 39: Finger-4-3_L
+bone 40: Palm-5_L
+bone 41: Finger-5-1_L
+bone 42: Finger-5-2_L
+bone 43: Finger-5-3_L
+bone 44: Palm-1_L
+bone 45: Finger-1-1_L
+bone 46: Finger-1-2_L
+bone 47: Finger-1-3_L
+bone 48: Clavicle_R
+bone 49: UpArm_R
+bone 50: LoArm_R
+bone 51: Hand_R
+bone 52: Wrist-1_R
+bone 53: Palm-2_R
+bone 54: Finger-2-1_R
+bone 55: Finger-2-2_R
+bone 56: Finger-2-3_R
+bone 57: Palm-3_R
+bone 58: Finger-3-1_R
+bone 59: Finger-3-2_R
+bone 60: Finger-3-3_R
+bone 61: Wrist-2_R
+bone 62: Palm-4_R
+bone 63: Finger-4-1_R
+bone 64: Finger-4-2_R
+bone 65: Finger-4-3_R
+bone 66: Palm-5_R
+bone 67: Finger-5-1_R
+bone 68: Finger-5-2_R
+bone 69: Finger-5-3_R
+bone 70: Palm-1_R
+bone 71: Finger-1-1_R
+bone 72: Finger-1-2_R
+bone 73: Finger-1-3_R
+bone 74: LegHandle_L
+bone 75: Foot_L
+bone 76: Toe_L
+bone 77: LegHandle_R
+bone 78: Foot_R
+bone 79: Toe_R
+bone 80: Knee_L
+bone 81: Knee_R
+bone 82: simple2
+bone 83: sword
+ch 0: Master p(24), r(24), s(24), 
+ch 1: Root p(24), r(24), s(24), 
+ch 2: Hips p(24), r(24), s(24), 
+ch 3: UpLeg_L p(24), r(24), s(24), 
+ch 4: LoLeg_L p(24), r(24), s(24), 
+ch 5: UpLeg_R p(24), r(24), s(24), 
+ch 6: LoLeg_R p(24), r(24), s(24), 
+ch 7: Spine1 p(24), r(24), s(24), 
+ch 8: Spine2 p(24), r(24), s(24), 
+ch 9: Spine3 p(24), r(24), s(24), 
+ch 10: Neck p(24), r(24), s(24), 
+ch 11: Head p(24), r(24), s(24), 
+ch 12: Jaw p(24), r(24), s(24), 
+ch 13: TongueBase p(24), r(24), s(24), 
+ch 14: TongueMid p(24), r(24), s(24), 
+ch 15: TongueTip p(24), r(24), s(24), 
+ch 16: Eye_R p(24), r(24), s(24), 
+ch 17: Eye_L p(24), r(24), s(24), 
+ch 18: UpLid_R p(24), r(24), s(24), 
+ch 19: LoLid_R p(24), r(24), s(24), 
+ch 20: UpLid_L p(24), r(24), s(24), 
+ch 21: LoLid_L p(24), r(24), s(24), 
+ch 22: Clavicle_L p(24), r(24), s(24), 
+ch 23: UpArm_L p(24), r(24), s(24), 
+ch 24: LoArm_L p(24), r(24), s(24), 
+ch 25: Hand_L p(24), r(24), s(24), 
+ch 26: Wrist-1_L p(24), r(24), s(24), 
+ch 27: Palm-2_L p(24), r(24), s(24), 
+ch 28: Finger-2-1_L p(24), r(24), s(24), 
+ch 29: Finger-2-2_L p(24), r(24), s(24), 
+ch 30: Finger-2-3_L p(24), r(24), s(24), 
+ch 31: Palm-3_L p(24), r(24), s(24), 
+ch 32: Finger-3-1_L p(24), r(24), s(24), 
+ch 33: Finger-3-2_L p(24), r(24), s(24), 
+ch 34: Finger-3-3_L p(24), r(24), s(24), 
+ch 35: Wrist-2_L p(24), r(24), s(24), 
+ch 36: Palm-4_L p(24), r(24), s(24), 
+ch 37: Finger-4-1_L p(24), r(24), s(24), 
+ch 38: Finger-4-2_L p(24), r(24), s(24), 
+ch 39: Finger-4-3_L p(24), r(24), s(24), 
+ch 40: Palm-5_L p(24), r(24), s(24), 
+ch 41: Finger-5-1_L p(24), r(24), s(24), 
+ch 42: Finger-5-2_L p(24), r(24), s(24), 
+ch 43: Finger-5-3_L p(24), r(24), s(24), 
+ch 44: Palm-1_L p(24), r(24), s(24), 
+ch 45: Finger-1-1_L p(24), r(24), s(24), 
+ch 46: Finger-1-2_L p(24), r(24), s(24), 
+ch 47: Finger-1-3_L p(24), r(24), s(24), 
+ch 48: Clavicle_R p(24), r(24), s(24), 
+ch 49: UpArm_R p(24), r(24), s(24), 
+ch 50: LoArm_R p(24), r(24), s(24), 
+ch 51: Hand_R p(24), r(24), s(24), 
+ch 52: Wrist-1_R p(24), r(24), s(24), 
+ch 53: Palm-2_R p(24), r(24), s(24), 
+ch 54: Finger-2-1_R p(24), r(24), s(24), 
+ch 55: Finger-2-2_R p(24), r(24), s(24), 
+ch 56: Finger-2-3_R p(24), r(24), s(24), 
+ch 57: Palm-3_R p(24), r(24), s(24), 
+ch 58: Finger-3-1_R p(24), r(24), s(24), 
+ch 59: Finger-3-2_R p(24), r(24), s(24), 
+ch 60: Finger-3-3_R p(24), r(24), s(24), 
+ch 61: Wrist-2_R p(24), r(24), s(24), 
+ch 62: Palm-4_R p(24), r(24), s(24), 
+ch 63: Finger-4-1_R p(24), r(24), s(24), 
+ch 64: Finger-4-2_R p(24), r(24), s(24), 
+ch 65: Finger-4-3_R p(24), r(24), s(24), 
+ch 66: Palm-5_R p(24), r(24), s(24), 
+ch 67: Finger-5-1_R p(24), r(24), s(24), 
+ch 68: Finger-5-2_R p(24), r(24), s(24), 
+ch 69: Finger-5-3_R p(24), r(24), s(24), 
+ch 70: Palm-1_R p(24), r(24), s(24), 
+ch 71: Finger-1-1_R p(24), r(24), s(24), 
+ch 72: Finger-1-2_R p(24), r(24), s(24), 
+ch 73: Finger-1-3_R p(24), r(24), s(24), 
+ch 74: LegHandle_L p(24), r(24), s(24), 
+ch 75: Foot_L p(24), r(24), s(24), 
+ch 76: Toe_L p(24), r(24), s(24), 
+ch 77: LegHandle_R p(24), r(24), s(24), 
+ch 78: Foot_R p(24), r(24), s(24), 
+ch 79: Toe_R p(24), r(24), s(24), 
+ch 80: Knee_L p(24), r(24), s(24), 
+ch 81: Knee_R p(24), r(24), s(24), 
+ch 82: simple2 p(9), r(9), s(9), 
+ch 83: sword p(1), r(1), s(1), 
+
+time: Fri Feb 28 22:24:45 2014
+
+time: Fri Feb 28 22:30:30 2014
+
+time: Fri Feb 28 22:33:32 2014
+
+time: Fri Feb 28 22:34:32 2014
+
+time: Fri Feb 28 23:05:07 2014
+
+time: Fri Feb 28 23:12:05 2014
+
+time: Fri Feb 28 23:12:05 2014
+
+time: Fri Feb 28 23:12:05 2014
+
+time: Fri Feb 28 23:12:05 2014
+
+time: Fri Feb 28 23:12:06 2014
+bone 0: Master
+bone 1: Root
+bone 2: Hips
+bone 3: UpLeg_L
+bone 4: LoLeg_L
+bone 5: UpLeg_R
+bone 6: LoLeg_R
+bone 7: Spine1
+bone 8: Spine2
+bone 9: Spine3
+bone 10: Neck
+bone 11: Head
+bone 12: Jaw
+bone 13: TongueBase
+bone 14: TongueMid
+bone 15: TongueTip
+bone 16: Eye_R
+bone 17: Eye_L
+bone 18: UpLid_R
+bone 19: LoLid_R
+bone 20: UpLid_L
+bone 21: LoLid_L
+bone 22: Clavicle_L
+bone 23: UpArm_L
+bone 24: LoArm_L
+bone 25: Hand_L
+bone 26: Wrist-1_L
+bone 27: Palm-2_L
+bone 28: Finger-2-1_L
+bone 29: Finger-2-2_L
+bone 30: Finger-2-3_L
+bone 31: Palm-3_L
+bone 32: Finger-3-1_L
+bone 33: Finger-3-2_L
+bone 34: Finger-3-3_L
+bone 35: Wrist-2_L
+bone 36: Palm-4_L
+bone 37: Finger-4-1_L
+bone 38: Finger-4-2_L
+bone 39: Finger-4-3_L
+bone 40: Palm-5_L
+bone 41: Finger-5-1_L
+bone 42: Finger-5-2_L
+bone 43: Finger-5-3_L
+bone 44: Palm-1_L
+bone 45: Finger-1-1_L
+bone 46: Finger-1-2_L
+bone 47: Finger-1-3_L
+bone 48: Clavicle_R
+bone 49: UpArm_R
+bone 50: LoArm_R
+bone 51: Hand_R
+bone 52: Wrist-1_R
+bone 53: Palm-2_R
+bone 54: Finger-2-1_R
+bone 55: Finger-2-2_R
+bone 56: Finger-2-3_R
+bone 57: Palm-3_R
+bone 58: Finger-3-1_R
+bone 59: Finger-3-2_R
+bone 60: Finger-3-3_R
+bone 61: Wrist-2_R
+bone 62: Palm-4_R
+bone 63: Finger-4-1_R
+bone 64: Finger-4-2_R
+bone 65: Finger-4-3_R
+bone 66: Palm-5_R
+bone 67: Finger-5-1_R
+bone 68: Finger-5-2_R
+bone 69: Finger-5-3_R
+bone 70: Palm-1_R
+bone 71: Finger-1-1_R
+bone 72: Finger-1-2_R
+bone 73: Finger-1-3_R
+bone 74: LegHandle_L
+bone 75: Foot_L
+bone 76: Toe_L
+bone 77: LegHandle_R
+bone 78: Foot_R
+bone 79: Toe_R
+bone 80: Knee_L
+bone 81: Knee_R
+bone 82: simple2
+bone 83: sword
+ch 0: Master p(24), r(24), s(24), 
+ch 1: Root p(24), r(24), s(24), 
+ch 2: Hips p(24), r(24), s(24), 
+ch 3: UpLeg_L p(24), r(24), s(24), 
+ch 4: LoLeg_L p(24), r(24), s(24), 
+ch 5: UpLeg_R p(24), r(24), s(24), 
+ch 6: LoLeg_R p(24), r(24), s(24), 
+ch 7: Spine1 p(24), r(24), s(24), 
+ch 8: Spine2 p(24), r(24), s(24), 
+ch 9: Spine3 p(24), r(24), s(24), 
+ch 10: Neck p(24), r(24), s(24), 
+ch 11: Head p(24), r(24), s(24), 
+ch 12: Jaw p(24), r(24), s(24), 
+ch 13: TongueBase p(24), r(24), s(24), 
+ch 14: TongueMid p(24), r(24), s(24), 
+ch 15: TongueTip p(24), r(24), s(24), 
+ch 16: Eye_R p(24), r(24), s(24), 
+ch 17: Eye_L p(24), r(24), s(24), 
+ch 18: UpLid_R p(24), r(24), s(24), 
+ch 19: LoLid_R p(24), r(24), s(24), 
+ch 20: UpLid_L p(24), r(24), s(24), 
+ch 21: LoLid_L p(24), r(24), s(24), 
+ch 22: Clavicle_L p(24), r(24), s(24), 
+ch 23: UpArm_L p(24), r(24), s(24), 
+ch 24: LoArm_L p(24), r(24), s(24), 
+ch 25: Hand_L p(24), r(24), s(24), 
+ch 26: Wrist-1_L p(24), r(24), s(24), 
+ch 27: Palm-2_L p(24), r(24), s(24), 
+ch 28: Finger-2-1_L p(24), r(24), s(24), 
+ch 29: Finger-2-2_L p(24), r(24), s(24), 
+ch 30: Finger-2-3_L p(24), r(24), s(24), 
+ch 31: Palm-3_L p(24), r(24), s(24), 
+ch 32: Finger-3-1_L p(24), r(24), s(24), 
+ch 33: Finger-3-2_L p(24), r(24), s(24), 
+ch 34: Finger-3-3_L p(24), r(24), s(24), 
+ch 35: Wrist-2_L p(24), r(24), s(24), 
+ch 36: Palm-4_L p(24), r(24), s(24), 
+ch 37: Finger-4-1_L p(24), r(24), s(24), 
+ch 38: Finger-4-2_L p(24), r(24), s(24), 
+ch 39: Finger-4-3_L p(24), r(24), s(24), 
+ch 40: Palm-5_L p(24), r(24), s(24), 
+ch 41: Finger-5-1_L p(24), r(24), s(24), 
+ch 42: Finger-5-2_L p(24), r(24), s(24), 
+ch 43: Finger-5-3_L p(24), r(24), s(24), 
+ch 44: Palm-1_L p(24), r(24), s(24), 
+ch 45: Finger-1-1_L p(24), r(24), s(24), 
+ch 46: Finger-1-2_L p(24), r(24), s(24), 
+ch 47: Finger-1-3_L p(24), r(24), s(24), 
+ch 48: Clavicle_R p(24), r(24), s(24), 
+ch 49: UpArm_R p(24), r(24), s(24), 
+ch 50: LoArm_R p(24), r(24), s(24), 
+ch 51: Hand_R p(24), r(24), s(24), 
+ch 52: Wrist-1_R p(24), r(24), s(24), 
+ch 53: Palm-2_R p(24), r(24), s(24), 
+ch 54: Finger-2-1_R p(24), r(24), s(24), 
+ch 55: Finger-2-2_R p(24), r(24), s(24), 
+ch 56: Finger-2-3_R p(24), r(24), s(24), 
+ch 57: Palm-3_R p(24), r(24), s(24), 
+ch 58: Finger-3-1_R p(24), r(24), s(24), 
+ch 59: Finger-3-2_R p(24), r(24), s(24), 
+ch 60: Finger-3-3_R p(24), r(24), s(24), 
+ch 61: Wrist-2_R p(24), r(24), s(24), 
+ch 62: Palm-4_R p(24), r(24), s(24), 
+ch 63: Finger-4-1_R p(24), r(24), s(24), 
+ch 64: Finger-4-2_R p(24), r(24), s(24), 
+ch 65: Finger-4-3_R p(24), r(24), s(24), 
+ch 66: Palm-5_R p(24), r(24), s(24), 
+ch 67: Finger-5-1_R p(24), r(24), s(24), 
+ch 68: Finger-5-2_R p(24), r(24), s(24), 
+ch 69: Finger-5-3_R p(24), r(24), s(24), 
+ch 70: Palm-1_R p(24), r(24), s(24), 
+ch 71: Finger-1-1_R p(24), r(24), s(24), 
+ch 72: Finger-1-2_R p(24), r(24), s(24), 
+ch 73: Finger-1-3_R p(24), r(24), s(24), 
+ch 74: LegHandle_L p(24), r(24), s(24), 
+ch 75: Foot_L p(24), r(24), s(24), 
+ch 76: Toe_L p(24), r(24), s(24), 
+ch 77: LegHandle_R p(24), r(24), s(24), 
+ch 78: Foot_R p(24), r(24), s(24), 
+ch 79: Toe_R p(24), r(24), s(24), 
+ch 80: Knee_L p(24), r(24), s(24), 
+ch 81: Knee_R p(24), r(24), s(24), 
+ch 82: simple2 p(9), r(9), s(9), 
+ch 83: sword p(1), r(1), s(1), 
+
+time: Fri Feb 28 23:12:06 2014
+

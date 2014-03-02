@@ -2,6 +2,7 @@
 #define RIGIDBODY_H
 
 #include "object3d.h"
+#include "mesh.h"
 #include "btBulletDynamicsCommon.h"
 #include "glm/glm.hpp"
 
@@ -11,6 +12,9 @@ class RigidBody : virtual public Object3d
         class Shape;
         static btCollisionShape* Box(float a, float b, float c) {return ( new btBoxShape(btVector3(a, b, c))); };
         static btCollisionShape* Sphere(float R) {return ( new btSphereShape(btScalar(R)) ); };
+        static btCollisionShape* ConvexHull(const Mesh &mesh) {return new btConvexHullShape(mesh.getVertsPtr(),
+                                                                                        mesh.getVertsNum(),
+                                                                                        sizeof(Vertex)); };
 
         RigidBody();
         virtual ~RigidBody();

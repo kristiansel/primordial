@@ -34,6 +34,7 @@ public:
 
     void drawActor(shared_ptr<Actor> actor);
     void drawProp(shared_ptr<Prop> prop);
+
     /// void draw(Terrain &terrain, glm::mat4 mv);
 
     /// Should look into ridding me of this:
@@ -76,6 +77,10 @@ private:
 
         /// light model view projection matrix
         GLuint shadowmap_mvp_mat;
+
+        /// Fog color
+        //GLuint fog_color;
+
     } uniforms;
 
 
@@ -100,7 +105,6 @@ private:
     /// Updated on initialization
     GLuint shadowmap_depth_texture;              /// Texture
     glm::mat4 clear_matrices[MAX_BONE_NUM];
-
 };
 
 #endif // SHADER_H
