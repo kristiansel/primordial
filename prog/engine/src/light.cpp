@@ -2,7 +2,7 @@
 
 DirLight::DirLight() :
     dir(glm::vec3(1.0, 1.0, 1.0)),
-    color(glm::vec4(1.0, 1.0, 1.0, 1.0)) {};
+    color(glm::vec4(1.0, 0.8, 0.6, 1.0)) {};
 
 glm::mat4 DirLight::getVPmatrix() const
 {

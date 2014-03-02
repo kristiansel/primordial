@@ -19,7 +19,7 @@ void main (void)
     vec4 world_pos = world_mat * myvertex;
 
 //    float fog_weight = 1.0-abs(world_pos.y)/60.0;
-    float fog_weight = exp(-abs(world_pos.y)/60.0);
+    float fog_weight = exp(-abs(world_pos.y)/90.0);
     fog_weight = clamp(fog_weight, 0, 1.0);
 
     gl_FragColor = (1.0-fog_weight) * sky_color + fog_weight * fog_color;

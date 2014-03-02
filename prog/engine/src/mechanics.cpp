@@ -1,6 +1,6 @@
 #include "mechanics.h"
 
-Mechanics::Mechanics() : speed(2.5), camTurnSpeed(60.0)
+Mechanics::Mechanics() : speed(20.5), camTurnSpeed(80.0)
 {
     //ctor
 }

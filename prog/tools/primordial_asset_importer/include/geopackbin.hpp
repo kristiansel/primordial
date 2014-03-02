@@ -35,6 +35,11 @@ void findAbsMeshTransf(std::string mesh_name, aiNode* node,
                             bool &found,
                             glm::mat4 parent_mat = glm::mat4(1.0));
 
+void findAbsMeshTransf(int mesh_index, aiNode* node,
+                            glm::mat4 &output_mat,
+                            bool &found,
+                            glm::mat4 parent_mat = glm::mat4(1.0));
+
 
 void nodePrint(aiNode* node, int lvl = 0, int max_lvl = 3)
 {
@@ -74,8 +79,6 @@ void geoPackBin(const aiScene* scene, std::string outputpath, bool debug = true)
         aiMesh* mesh = scene->mMeshes[i_mesh];
 
         debugstream << "exporting mesh: " << mesh->mName.C_Str() << "\n";
-
-        /// Probably have to apply transforms for the mesh....
 
         /// Disambiguate each output mesh filename
         outputpath = ( (0==i_mesh) ? outputpath : (outputpath + int2str(i_mesh)) );
@@ -117,7 +120,8 @@ void geoPackBin(const aiScene* scene, std::string outputpath, bool debug = true)
         if (mesh->HasBones())
             find_rig_transf(scene->mRootNode, boneNames, glm::mat4(1.0), rig_transf, rig_transf_found);
         else
-            findAbsMeshTransf(mesh->mName.C_Str(), scene->mRootNode, rig_transf, rig_transf_found);
+            //findAbsMeshTransf(mesh->mName.C_Str(), scene->mRootNode, rig_transf, rig_transf_found);
+            findAbsMeshTransf(i_mesh, scene->mRootNode, rig_transf, rig_transf_found);
 
         if (!rig_transf_found)
         {
@@ -331,6 +335,44 @@ void findAbsMeshTransf(std::string mesh_name, aiNode* node, /// This is flawed a
     for (int i = 0; i<node->mNumChildren; i++)
     {
         findAbsMeshTransf(mesh_name, node->mChildren[i], output_mat, found, nodeAbsTransf);
+    }
+}
+
+void findAbsMeshTransf(int mesh_index, aiNode* node, /// This is flawed at the moment
+                            glm::mat4 &output_mat,
+                            bool &found,
+                            glm::mat4 parent_mat)
+{
+    glm::mat4 nodeRelTransf = aiMat2glmMat4(node->mTransformation);
+    glm::mat4 nodeAbsTransf = parent_mat * nodeRelTransf;
+
+//    std::cout<<"node rel transf for"<<node->mName.C_Str()<<"\n";
+//    printMat(nodeAbsTransf);
+
+    /// Check if this node contains the mesh:
+    bool mesh_found_in_node = false;
+    for (int i = 0; i<node->mNumMeshes; i++)
+    {
+        if (node->mMeshes[i] == mesh_index)
+        {
+            mesh_found_in_node = true;
+        }
+    }
+
+    if (mesh_found_in_node)
+    /// more robust here: search the node meshes array to look for the
+    /// index
+    {
+//            std::cout << "found transform\n";
+        output_mat = nodeAbsTransf;
+        found = true;
+        return;
+    }
+
+    /// If it got here, it was not this node:
+    for (int i = 0; i<node->mNumChildren; i++)
+    {
+        findAbsMeshTransf(mesh_index, node->mChildren[i], output_mat, found, nodeAbsTransf);
     }
 }
 #endif // GEOPACKBIN_H

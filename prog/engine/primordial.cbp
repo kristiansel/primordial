@@ -143,6 +143,8 @@
 		<Unit filename="shaders/shadow_map_vert.glsl" />
 		<Unit filename="shaders/simple_frag.glsl" />
 		<Unit filename="shaders/simple_vert.glsl" />
+		<Unit filename="shaders/sky_frag.glsl" />
+		<Unit filename="shaders/sky_vert.glsl" />
 		<Unit filename="src/actor.cpp" />
 		<Unit filename="src/camera.cpp" />
 		<Unit filename="src/combinationstage.cpp" />
