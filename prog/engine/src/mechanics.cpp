@@ -1,6 +1,6 @@
 #include "mechanics.h"
 
-Mechanics::Mechanics() : speed(20.5), camTurnSpeed(80.0)
+Mechanics::Mechanics() : speed(4.5), camTurnSpeed(80.0)
 {
     //ctor
 }
@@ -36,12 +36,6 @@ void Mechanics::init(World &world_in, float &dt_in)
                              glm::vec3(-2.0, 10.0, -4.0),
                              RigidBody::Sphere(1.0) );
 
-//    world->addDynamicObject( "cube",
-    world->addDynamicObject( "cube",
-                             "nicewall",
-                             glm::vec3(2.0, 10.0, -4.0),
-                             RigidBody::Box(0.5f, 0.5f, 0.5f) );
-
     world->addDynamicObject( "rabbit",
                              "rabbit_d",
                              glm::vec3(2.0, 10.0, -4.0));
@@ -65,6 +59,10 @@ void Mechanics::init(World &world_in, float &dt_in)
                         "tex_human_male",
                         glm::vec3(0.0, 0.0, 0.0) );
 
+    world->addCreature( "humale_idle",
+                        "tex_human_male",
+                        glm::vec3(-3.0, 0.0, 2.0) );
+
     //world->addStaticObject( "mdl_human_male",
     //                "tex_human_male",
     //                glm::vec3(0.0, 0.0, 0.0) );
@@ -74,7 +72,10 @@ void Mechanics::init(World &world_in, float &dt_in)
                         "checkers",
                         glm::vec3(0.0, 2.0, -4.0) );
 
-
+    world->addDynamicObject( "cube",
+                             "nicewall_alpha",
+                             glm::vec3(2.0, 10.0, -4.0),
+                             RigidBody::Box(0.5f, 0.5f, 0.5f) );
 
 
     /// remove later

@@ -1,0 +1,1 @@
+..\bin\debug\prconvert_debug.exe -I../test_scenes/mdl_human_male_idle_comb.dae -G../../../engine/assets/models/humale_idle.bgeo -B../../../engine/assets/skeletons/humale_idle.bbns -A../test_scenes/human_idle_animconf

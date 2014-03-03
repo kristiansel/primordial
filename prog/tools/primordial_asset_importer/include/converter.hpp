@@ -11,7 +11,8 @@
 
 bool convert(std::string daeFilePath_in,
              std::string geoFilePath_out,
-             std::string bnsFilePath_out)
+             std::string bnsFilePath_out,
+             std::string aniSpecPath_in)
 {
 
     Assimp::Importer importer;
@@ -39,7 +40,7 @@ bool convert(std::string daeFilePath_in,
     }
     else /// import went smoothly
     {
-        animPackBin(scene, bnsFilePath_out);
+        animPackBin(scene, bnsFilePath_out, aniSpecPath_in);
         geoPackBin(scene, geoFilePath_out);
     }
 

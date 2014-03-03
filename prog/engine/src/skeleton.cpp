@@ -262,6 +262,9 @@ void Skeleton::poseMatrices(glm::mat4* matrices,
         /// Recursively pose child bone matrices
         for (int i_child=0; i_child<bone->num_children; i_child++)
         {
+//            std::cout << "bone_num: " << bone_index << "\n";
+//            std::cout << "num_children: " << bone->num_children << "\n";
+//            std::cout << "child #: " << i_child << " = "<<bone->child_indices[i_child] << "\n";
             poseMatrices(matrices,
                          anim_index,
                          time,

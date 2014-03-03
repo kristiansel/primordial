@@ -157,7 +157,7 @@ void main (void)
 
     vec4 color = amb + emission + visibility * SUM ;
     vec4 texel = texture(tex, mytexco.st);
-    vec4 local_color = vec4(texel.rgb * color.rgb, 1);
+    vec4 local_color = vec4(texel.rgb * color.rgb, texel.a);
 
     vec4 world_pos = to_world_space_mat * myvertex;
 
@@ -175,6 +175,7 @@ void main (void)
     vec4 final_fog_color = (1.0-distance_fallof)*vec4(0.0, 0.0, 1.0, 1.0) + distance_fallof * fog_color;
 
     gl_FragColor = (1.0-fog_weight) * local_color + fog_weight * final_fog_color;
+
 //
 //    gl_Frag
 

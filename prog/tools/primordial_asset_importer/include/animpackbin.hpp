@@ -6,6 +6,7 @@
 #include <iostream>
 #include <fstream>
 #include <ctime>
+#include <sstream>
 
 #include <assimp/scene.h>
 #include <glm/glm.hpp>
@@ -37,8 +38,40 @@ float* mat2floatArr(glm::mat4 mat_in);
 std::vector<std::string> findBoneNames(const aiScene* scene);
 
 /// Main function
-bool animPackBin(const aiScene* scene, std::string outputpath, bool debug = true)
+bool animPackBin(const aiScene* scene, std::string outputpath, std::string animconfigpath = "", bool debug = true)
 {
+    /// read the config "if present"
+    std::ifstream configFile;
+    configFile.open(animconfigpath);
+
+    float duration_corrected = -1.0;
+
+    struct AniSpec {
+        AniSpec() : specified(false) {};
+        int anim_to_create;
+        int anim_create_from;
+        float time_start;
+        float time_end;
+        bool specified;
+    };
+
+    AniSpec anispec;
+
+    std::string line;
+    while (std::getline(configFile, line))
+    {
+        std::istringstream is(line);
+        std::string anim, from, duration, to;
+
+        is >> anim >> anispec.anim_to_create >> from >> anispec.anim_create_from
+           >> duration >> anispec.time_start >> to >> anispec.time_end;
+
+        anispec.specified = true;
+//
+//
+//        std::cout << anispec.time_end << "\n";
+    }
+
     /// Open file for writing
     std::ofstream myFile (outputpath, std::ios::out | std::ios::binary);
 
@@ -105,6 +138,8 @@ bool animPackBin(const aiScene* scene, std::string outputpath, bool debug = true
 
     for (int i = 0; i<numAnimations; i++)
     {
+        debugstream << "animation #: " << i << "/" << numAnimations << "\n";
+
         /// animation data, index and name
         aiAnimation* anim = scene->mAnimations[i];
 
@@ -114,7 +149,13 @@ bool animPackBin(const aiScene* scene, std::string outputpath, bool debug = true
         /// Write duration
         // Ticks / ( ticks/second ) = seconds
         float duration = anim->mDuration / anim->mTicksPerSecond;
+        if (anispec.specified) duration = anispec.time_end-anispec.time_start;
         myFile.write( (char*) &duration, 1*sizeof(float));
+
+
+        debugstream << "#ticks: " << anim->mDuration << "\n";
+        debugstream << "#ticks/sec: " << anim->mTicksPerSecond << "\n";
+        debugstream << "duration: " << duration << "\n";
 
         /// Write number of channels
         int numChannels = anim->mNumChannels;
@@ -276,16 +317,31 @@ void node_rec(aiNode* node,
         file.write( (char*) matarr,    16*sizeof(float) );
         delete [] matarr;
 
-        /// Write the number of children
-        int numChildren = node->mNumChildren;
+        /// Write the number of bone children
+        int numChildren = 0;
+        for (int i = 0; i<node->mNumChildren; i++)
+        {
+            int childBoneIndex = get_bone_index(node->mChildren[i]->mName.C_Str(), bone_names);
+            if (-1!=childBoneIndex) numChildren++;
+        }
+
         file.write( (char*) &numChildren,    1*sizeof(int) );
 
         /// Write the array of children
         int* child_indices = new int [numChildren];
-        for (int i = 0; i<numChildren; i++)
+        int boneChildCounter = 0;
+        int nodeChildCounter = 0;
+        while (nodeChildCounter<node->mNumChildren)
         {
-            child_indices[i] = get_bone_index(node->mChildren[i]->mName.C_Str(), bone_names);
+            int childBoneIndex = get_bone_index(node->mChildren[nodeChildCounter]->mName.C_Str(), bone_names);
+            if (-1!=childBoneIndex)
+            {
+                child_indices[boneChildCounter] = childBoneIndex;
+                boneChildCounter++;
+            }
+            nodeChildCounter++;
         }
+
         file.write((char*) child_indices,  numChildren*sizeof(int));
         delete [] child_indices;
     }

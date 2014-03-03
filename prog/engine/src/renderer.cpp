@@ -29,6 +29,10 @@ void Renderer::init(unsigned int scr_width_in, unsigned int scr_height_in)
     /// Enable depth testing
     glEnable(GL_DEPTH_TEST);
 
+    /// Set up alpha blending
+//    glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+//    glEnable( GL_BLEND );
+
     /// Set up culling
     glFrontFace(GL_CCW);
     glCullFace(GL_BACK);
