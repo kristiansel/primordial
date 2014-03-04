@@ -59,7 +59,7 @@ void Mechanics::init(World &world_in, float &dt_in)
                         "tex_human_male",
                         glm::vec3(0.0, 0.0, 0.0) );
 
-    world->addCreature( "humale_idle",
+    world->addCreature( "humale_1hswing",
                         "tex_human_male",
                         glm::vec3(-3.0, 0.0, 2.0) );
 

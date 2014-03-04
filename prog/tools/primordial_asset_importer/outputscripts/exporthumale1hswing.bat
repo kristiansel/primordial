@@ -1,0 +1,1 @@
+..\bin\debug\prconvert_debug.exe -I../test_scenes/mdl_human_male_1h_swing.dae -G../../../engine/assets/models/humale_1hswing.bgeo -B../../../engine/assets/skeletons/humale_1hswing.bbns -A../test_scenes/human_1h_swing_animconf
