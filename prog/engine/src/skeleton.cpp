@@ -216,6 +216,9 @@ void Skeleton::poseMatrices(glm::mat4* matrices,
                             glm::mat4 parent_mat)
 {
     bool debug = true;
+//    std::cout << "anim_index = " << anim_index << "\n";
+//    std::cout << "num_anims = " << num_anims << "\n";
+//    std::cout << "num_bones = " << num_bones << "\n";
 
     if (anim_index<num_anims && anim_index > -1 && num_bones > 0)
     {

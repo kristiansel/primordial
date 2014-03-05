@@ -6,7 +6,8 @@ Actor::Actor() : num_pose_matrices(1),
                  active_anim(0),
                  active_anim_time(0.f),
                  paused(false),
-                 speed_factor(1.0)
+                 speed_factor(1.0),
+                 skel_ptr(nullptr) /// Really should start doing this more....
 {
     /// Actors with no attached skeleton will have a default
     /// identity matrix, as not to crash vertex shader
@@ -29,11 +30,18 @@ void Actor::attachSkeleton(std::weak_ptr<Skeleton> skel_ptr_in)
     /// Delete old matrices
     delete [] pose_matrices;
 
-    /// Set num_pose_matrices
-    num_pose_matrices = shared_skel_ptr->getNumBones();
+//    /// Set num_pose_matrices
+//    num_pose_matrices = shared_skel_ptr->getNumBones();
+//
+//    /// Initialize the matrices to the same number of bones as the skel
+//    pose_matrices = new glm::mat4 [num_pose_matrices];
 
-    /// Initialize the matrices to the same number of bones as the skel
-    pose_matrices = new glm::mat4 [num_pose_matrices];
+    /// THREAD SAFE ALTERNATIVE:
+    int num_bones = shared_skel_ptr->getNumBones();
+
+    pose_matrices = new glm::mat4 [num_bones];
+
+    num_pose_matrices = num_bones;
 }
 
 std::shared_ptr<Skeleton> Actor::shSkelPtr()
@@ -43,7 +51,9 @@ std::shared_ptr<Skeleton> Actor::shSkelPtr()
 
 void Actor::pose(int anim_index, float time)
 {
-    skel_ptr->poseMatrices(pose_matrices, anim_index, time);
+    /// Checking for null here. Is it performant?
+
+    if (skel_ptr) skel_ptr->poseMatrices(pose_matrices, anim_index, time);
 }
 
 void Actor::poseRest()
@@ -69,7 +79,7 @@ void Actor::updateAnim(float dt)
     if (!paused)
     {
         active_anim_time+=speed_factor*dt;
-        skel_ptr->poseMatrices(pose_matrices, active_anim, active_anim_time);
+        if (skel_ptr) skel_ptr->poseMatrices(pose_matrices, active_anim, active_anim_time);
     }
 }
 
@@ -95,6 +105,7 @@ float Actor::getActiveAnimTime()
 
 float Actor::getActiveAnimTimeMod()
 {
-    float duration = skel_ptr->animations[active_anim].duration;
+    float duration = 0;
+    if (skel_ptr) duration = skel_ptr->animations[active_anim].duration;
     return active_anim_time-(int)(active_anim_time/duration)*duration;
 }

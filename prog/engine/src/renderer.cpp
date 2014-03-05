@@ -58,6 +58,8 @@ void Renderer::init(unsigned int scr_width_in, unsigned int scr_height_in)
 
 void Renderer::draw(Scene &scene, float dt)
 {
+//    /// instead of passing dt... sample dt from the clock
+//    dt = 1.f/60.f;
 
     /// First update all animations
     /// consider moving this out...
@@ -67,6 +69,7 @@ void Renderer::draw(Scene &scene, float dt)
     for (auto it = scene.actors.begin(); it!=scene.actors.end(); it++)
     {
         (*it)->updateAnim(dt);
+        /// The above is not thread safe if the actor is in the process of loading
     }
 
     /// Set all things which are shared by shaders but can change in time

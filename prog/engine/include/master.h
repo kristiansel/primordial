@@ -6,6 +6,7 @@
 #include "mechanics.h"
 #include "renderer.h"
 #include "culler.h"
+#include "threadingwrapper.hpp"
 
 /**
     Philosophy of the Master class: Handles technicalities
@@ -23,10 +24,13 @@ public:
 protected:
 private:
     /// Primary Methods
-    void init();
+//    void init();
+    void initWindow();
     void loadResources();
     void mainLoop();
     void cleanUp();
+    void renderTasks();
+//    void testThreadTasks();
 
     /// Secondary Methods
     bool handleInput();
@@ -43,9 +47,20 @@ private:
     unsigned int scr_width_px;
     unsigned int scr_height_px;
 
+    /// Time-related
 
     sf::Clock clock;    // helper
+    sf::Clock absClock; // never reset
     float     dt;       // frame time in seconds
+    float      t;
+    bool running;
+
+    /// Threads
+    Thread render_thread;
+//    Thread test_thread;
+
+    /// Thread wait flags
+    bool render_thread_loaded;
 
     /// Internal variable signals
     bool has_focus;     // helper

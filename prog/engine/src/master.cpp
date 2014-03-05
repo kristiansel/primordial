@@ -5,13 +5,28 @@ Master::Master() :
     has_focus(true),
     rmb_down(false),
     press_pos_x(0),
-    press_pos_y(0)
+    press_pos_y(0),
+    running(true),
+    render_thread_loaded(false)
 {
-    /// initiate
-    init();
+//    /// initiate
+//    init();
+//    /// initiate
+//    init();
 
     /// load resources
     loadResources();
+
+    /// Start window in main thread...
+    initWindow();
+
+    /// Launch threads
+    render_thread = Thread(&Master::renderTasks, this);
+    //test_thread = Thread(&Master::testThreadTasks, this);
+
+    /// Wait for render_thread to load fully
+    std::cout << "waiting for render thread\n";
+    while (!render_thread_loaded) {} /// WAIT
 
     /// main loop
     mainLoop();
@@ -25,7 +40,7 @@ Master::~Master()
     /// dtor
 }
 
-void Master::init()
+void Master::initWindow()
 {
     /// to be loaded from settings
     scr_width_px = 1400;
@@ -33,15 +48,32 @@ void Master::init()
 
     /// create the window and OpenGL context
     window.create(sf::VideoMode(scr_width_px, scr_height_px), "Primordial", sf::Style::Default, sf::ContextSettings(32, 0, 0, 4, 4));
-    window.setVerticalSyncEnabled(true);
+    window.setVerticalSyncEnabled(false); /// This forces frame rate to 60 FPS?
 
-    renderer.init(scr_width_px, scr_height_px);
-
-    /// Initialize the game module
-    mechanics.init(world, dt);
-
-
+    window.setActive(false);
 }
+
+//void Master::init()
+//{
+////    /// to be loaded from settings
+////    scr_width_px = 1400;
+////    scr_height_px = 900;
+////
+////    /// create the window and OpenGL context
+////    window.create(sf::VideoMode(scr_width_px, scr_height_px), "Primordial", sf::Style::Default, sf::ContextSettings(32, 0, 0, 4, 4));
+////    window.setVerticalSyncEnabled(true);
+////
+////    window.setActive(false);
+////    /// Deactivate window in current thread
+////    window.setActive(true);
+////
+////    renderer.init(scr_width_px, scr_height_px);
+////
+////    /// Initialize the game module
+////    mechanics.init(world, dt);
+//
+//
+//}
 
 void Master::loadResources()
 {
@@ -50,9 +82,11 @@ void Master::loadResources()
 
 void Master::mainLoop()
 {
-    /// run the main loop
-    bool running = true;
+    /// Initialize the game module
+    mechanics.init(world, dt);
 
+
+    /// run the main loop
     while (running)
     {
         /// start the watch
@@ -66,14 +100,14 @@ void Master::mainLoop()
 
         // cout << "dt = " << dt << "\n";
 
-        /// Choose what to render
-        culler.stage(scene, world); /// stage the scene from the world THIS breaks everything since non-shared shared pointers go out of scope
-
-        /// draw...
-        renderer.draw(scene, dt);
-
-        /// end the current frame (internally swaps the front and back buffers)
-        window.display();
+//        /// Choose what to render
+//        culler.stage(scene, world); /// stage the scene from the world THIS breaks everything since non-shared shared pointers go out of scope
+//
+//        /// draw...
+//        renderer.draw(scene, dt);
+//
+//        /// end the current frame (internally swaps the front and back buffers)
+//        window.display();
 
         /// record the time
         dt = clock.getElapsedTime().asSeconds();
@@ -83,9 +117,60 @@ void Master::mainLoop()
     }
 }
 
+void Master::renderTasks()
+{
+//    /// to be loaded from settings
+//    scr_width_px = 1400;
+//    scr_height_px = 900;
+//
+//    /// create the window and OpenGL context
+//    window.create(sf::VideoMode(scr_width_px, scr_height_px), "Primordial", sf::Style::Default, sf::ContextSettings(32, 0, 0, 4, 4));
+//    window.setVerticalSyncEnabled(true);
+
+    /// Activate the window in the current thread
+    window.setActive(true);
+
+    renderer.init(scr_width_px, scr_height_px);
+
+///// Initialize the game module
+//    mechanics.init(world, dt);
+
+    render_thread_loaded = true;
+
+    float timeRenderLast = absClock.getElapsedTime().asSeconds();
+    float timeRenderNew = timeRenderLast;
+    float dtRender = 0.0;
+
+    while (running)
+    {
+        /// Choose what to render
+        culler.stage(scene, world); /// stage the scene from the world THIS breaks everything since non-shared shared pointers go out of scope
+
+        /// calculate dtRender
+        timeRenderNew = absClock.getElapsedTime().asSeconds();
+        dtRender = timeRenderNew-timeRenderLast;
+        timeRenderLast = timeRenderNew;
+
+        /// draw
+        renderer.draw(scene, dtRender);
+
+        /// end the current frame (internally swaps the front and back buffers)
+        window.display();
+    }
+}
+
+//void Master::testThreadTasks()
+//{
+//    while (running)
+//    {
+//        std::cout << "slowing down your program?\n";
+//    }
+//}
+
 void Master::cleanUp()
 {
-
+    /// join threads
+    render_thread.join();
 }
 
 bool Master::handleInput()

@@ -13,3 +13,7 @@ Small things could do:				Natural followups:
 In importer:
 	check for maxbones consistency (100 bones)
 	
+Did some threading tests...
+	Issues: All functions dealing with OpenGL must use the same context
+			This means that creation of context/loading of tex/geom
+			etc... must happen in the current OpenGL thread....
