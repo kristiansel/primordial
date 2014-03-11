@@ -34,22 +34,22 @@ glm::mat4 Camera::getViewProjectionMatrix() const
     return proj_mat * view_mat;
 }
 //
-void Camera::moveForward(float amount)
-{
-    Object3d::moveForward(amount);
-}
-
-void Camera::moveLeft(float amount)
-{
-    Object3d::moveLeft(amount);
-}
-
-void Camera::rotateUp(float amount)
-{
-
-}
-
-void Camera::rotateLeft(float amount)
-{
-
-}
+//void Camera::moveForward(float amount)
+//{
+//    Object3d::moveForward(amount);
+//}
+//
+//void Camera::moveLeft(float amount)
+//{
+//    Object3d::moveLeft(amount);
+//}
+//
+//void Camera::rotateUp(float amount)
+//{
+//    Object3d::rotateUp(amount);
+//}
+//
+//void Camera::rotateLeft(float amount)
+//{
+//    Object3d::rotateLeft(amount);
+//}

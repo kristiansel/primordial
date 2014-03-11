@@ -53,10 +53,14 @@ class World : public PhysicsWorld /// Consider merging Culling functionality int
         /// list<shared_ptr<Light>>       lights; // For future
         /// Terrain                       terrain; // For future
 
-        shared_ptr<Camera> camera; /// Shared pointer here, because we do not want other shared
+        //shared_ptr<Camera> camera; /// Shared pointer here, because we do not want other shared
         /// pointers to accidentally delete the camera.
 
         /// Safe pointers are for wimps...
+        Camera *freecam;    /// Owning pointer
+        Camera *chasecam;   /// Owning pointer
+        Camera const *active_cam; /// Non-owning pointer (points to either above)
+
         DirLight* main_light;
 
         /// Point lights

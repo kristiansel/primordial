@@ -22,7 +22,8 @@ class Scene
         std::list<std::shared_ptr<Prop>> props;
         std::list<std::shared_ptr<Actor>> actors;
 
-        std::shared_ptr<Camera> camera;
+        //std::shared_ptr<Camera> camera;
+        Camera const *camera;
 
         const DirLight* main_light;
 

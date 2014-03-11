@@ -8,7 +8,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtx/transform.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-//#include "transform.h"
+#include "signals.h"
 
 class Mechanics
 {
@@ -56,12 +56,10 @@ private:
     World *world;
     float* dt; /// refactor away
 
+    /// Controls related
     const float speed;          /// 1.0/s
     const float camTurnSpeed;   /// deg/s
-
-//    class MovableAbsBase;
-//    MovableAbsBase *lookmode;
-
+    MoveSignalReceiver* controlled;
 
     /// Temporary for testing deletion
     list<shared_ptr<WorldObject>>::iterator worldobject_ptr_it;

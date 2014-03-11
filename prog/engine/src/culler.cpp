@@ -12,7 +12,8 @@ Culler::~Culler()
 
 void Culler::stage(Scene &scene_in, World &world_in)
 {
-    scene_in.camera = world_in.camera;
+//    scene_in.camera = world_in.camera;
+    scene_in.camera = world_in.active_cam;
     scene_in.main_light = world_in.main_light;
 
     scene_in.props.clear(); /// rebuild the render list

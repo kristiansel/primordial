@@ -1,6 +1,7 @@
 #include "mechanics.h"
 
-Mechanics::Mechanics() : speed(24.5), camTurnSpeed(80.0)
+Mechanics::Mechanics() : speed(24.5), camTurnSpeed(80.0),
+    controlled(nullptr)
 {
 
 }
@@ -15,10 +16,12 @@ void Mechanics::init(World &world_in, float &dt_in)
     world = &world_in;
     dt = &dt_in;
 
-//    freeLook.assignWorld(&world_in);
-//    thirdPerson.assignWorld(&world_in);
+    // Set the input to control the camera
+    //controlled = world->camera.get();
+    controlled = world->freecam;
 
-    world->camera->pos = glm::vec3(0.0, 1.5, 0.0);
+    //world->camera->pos = glm::vec3(0.0, 1.5, 0.0);
+    world->freecam->pos = glm::vec3(0.0, 1.5, 0.0);
 
     /// set the main light (sun/moon)
     world->mainLight( glm::vec3(1.0, 1.0, 1.0),         /// From direction
@@ -58,13 +61,13 @@ void Mechanics::init(World &world_in, float &dt_in)
     /// Having issue with human model not in the correct
     /// place in the scene graph outputted by assimp import
 
-    world->addCreature( "humale",
-                        "tex_human_male",
-                        glm::vec3(0.0, 0.0, 0.0) );
-
     world->addCreature( "human_all_anim",
                         "tex_human_male",
                         glm::vec3(3.0, 0.0, 2.0) );
+
+    world->addCreature( "humale",
+                        "tex_human_male",
+                        glm::vec3(0.0, 0.0, 0.0) );
 
     world->addCreature( "humale_1hswing",
                         "tex_human_male",
@@ -110,109 +113,57 @@ string Mechanics::debugInfo()
     return output.str();
 }
 
-///// move
-//void Mechanics::playerMoveForward()
-//{
-//    lookmode->moveForward();
-//}
-//
-//void Mechanics::playerMoveBackward()
-//{
-//    lookmode->moveBackward();
-//}
-//
-//void Mechanics::playerMoveLeft()
-//{
-//    lookmode->moveLeft();
-//}
-//
-//void Mechanics::playerMoveRight()
-//{
-//    lookmode->moveRight();
-//}
-//
-//
-///// rotate
-//void Mechanics::playerRotateUp()
-//{
-//    lookmode->rotateUp();
-//}
-//
-//void Mechanics::playerRotateUpVal(float val)
-//{
-//    lookmode->rotateUpVal(val);
-//}
-//
-//void Mechanics::playerRotateLeftVal(float val)
-//{
-//    lookmode->rotateLeftVal(val);
-//}
-//void Mechanics::playerRotateDown()
-//{
-//    lookmode->rotateDown();
-//}
-//
-//void Mechanics::playerRotateLeft()
-//{
-//    lookmode->rotateLeft();
-//}
-//
-//void Mechanics::playerRotateRight()
-//{
-//    lookmode->rotateRight();
-//}
-
-
 /// move
 void Mechanics::playerMoveForward()
 {
-    world->camera->moveForward((*dt)*speed);
+    if (controlled) controlled->moveForward((*dt)*speed);
 }
 
 void Mechanics::playerMoveBackward()
 {
-    world->camera->moveForward(-(*dt)*speed);
+    if (controlled) controlled->moveForward(-(*dt)*speed);
 }
 
 void Mechanics::playerMoveLeft()
 {
-    world->camera->strafeLeft((*dt)*speed);
+    if (controlled) controlled->moveLeft((*dt)*speed);
 }
 
 void Mechanics::playerMoveRight()
 {
-    world->camera->strafeLeft(-(*dt)*speed);
+    if (controlled) controlled->moveLeft(-(*dt)*speed);
 }
 
 
 /// rotate
 void Mechanics::playerRotateUp()
 {
-    world->camera->panUp((*dt)*camTurnSpeed);
+    if (controlled) controlled->rotateUp((*dt)*camTurnSpeed);
 }
 
-void Mechanics::playerRotateUpVal(float val)
-{
-    world->camera->panUp(val);
-}
-
-void Mechanics::playerRotateLeftVal(float val)
-{
-    world->camera->panLeft(val);
-}
 void Mechanics::playerRotateDown()
 {
-    world->camera->panUp(-(*dt)*camTurnSpeed);
+    if (controlled) controlled->rotateUp(-(*dt)*camTurnSpeed);
 }
 
 void Mechanics::playerRotateLeft()
 {
-    world->camera->panLeft((*dt)*camTurnSpeed);
+    if (controlled) controlled->rotateLeft((*dt)*camTurnSpeed);
 }
 
 void Mechanics::playerRotateRight()
 {
-    world->camera->panLeft(-(*dt)*camTurnSpeed);
+    if (controlled) controlled->rotateLeft(-(*dt)*camTurnSpeed);
+}
+
+void Mechanics::playerRotateUpVal(float val)
+{
+    if (controlled) controlled->rotateUp(val);
+}
+
+void Mechanics::playerRotateLeftVal(float val)
+{
+    if (controlled) controlled->rotateLeft(val);
 }
 
 void Mechanics::func(int num_in)
@@ -222,19 +173,17 @@ void Mechanics::func(int num_in)
     case 1:    /// ADD CUBE
         if (world->worldobjects.empty())
         {
-//            worldobject_ptr_it = world->addDynamicObject( "rabbit",
-//                                                          "rabbit_d",
-//                                                          world->camera->pos + 2.f*world->camera->getDir(),
-//                                                          RigidBody::Box(0.5f, 0.5f, 0.5f) );
               worldobject_ptr_it = world->addDynamicObject( "rabbit",
                                                           "rabbit_d",
-                                                          world->camera->pos + 2.f*world->camera->getDir());
+                                                          world->freecam->pos + 2.f*world->freecam->getDir());
+                                                          //world->camera->pos + 2.f*world->camera->getDir());
         }
         else
         {
               worldobject_ptr_it = world->addDynamicObject( "rabbit",
                                                           "rabbit_d",
-                                                          world->camera->pos + 2.f*world->camera->getDir());
+                                                          world->freecam->pos + 2.f*world->freecam->getDir());
+                                                          //world->camera->pos + 2.f*world->camera->getDir());
         }
         break;
 
@@ -243,14 +192,16 @@ void Mechanics::func(int num_in)
         {
             worldobject_ptr_it = world->addDynamicObject( "sphere",
                                                           "nicewall",
-                                                          world->camera->pos + 2.f*world->camera->getDir(),
+                                                          world->freecam->pos + 2.f*world->freecam->getDir(),
+                                                          /*world->camera->pos + 2.f*world->camera->getDir(),*/
                                                           RigidBody::Sphere(1.0));
         }
         else
         {
             world->addDynamicObject( "sphere",
                                      "nicewall",
-                                     world->camera->pos + 2.f*world->camera->getDir(),
+                                     world->freecam->pos + 2.f*world->freecam->getDir(),
+                                     /*world->camera->pos + 2.f*world->camera->getDir(),*/
                                      RigidBody::Sphere(1.0)  );
         }
         break;
@@ -272,23 +223,26 @@ void Mechanics::func(int num_in)
             {
                 creature->playAnim(0);
             }
-//            creature->togglePauseAnim();
         }
-//        for (auto &creature : world->creatures)
-//        {
-//            if (creature->num_pose_matrices > 50)
-//            {
-//                std::cout << creature->getActiveAnimTimeMod() << "\n";
-//                for (int i = 0; i<4; i++)
-//                {
-//                    for (int j = 0; j<4; j++)
-//                    {
-//                        std::cout << creature->pose_matrices[4][i][j] << "\t";
-//                    }
-//                    std::cout << "\n";
-//                }
-//            }
-//        }
+        break;
+    case 6:
+        if (controlled == world->freecam)
+        {
+            if (world->creatures.size() > 0)
+                controlled = world->creatures.begin()->get();
+        }
+        else
+        {
+            controlled = world->freecam;
+        }
+        break;
+    case 7:
+        if (world->active_cam == world->freecam)
+            world->active_cam = world->chasecam;
+        else
+            world->active_cam = world->freecam;
+
+
         break;
 
     default:    break;

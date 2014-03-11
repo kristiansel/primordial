@@ -68,10 +68,22 @@ void Actor::poseRest()
 
 void Actor::playAnim(int anim_index_in, float speed)
 {
-    active_anim = anim_index_in;
-    active_anim_time = 0.0;
-    speed_factor = speed;
-    paused = false;
+    if (anim_index_in < skel_ptr->getNumAnims())
+    {
+        if (active_anim != anim_index_in) // If not currently playing
+        {
+            active_anim = anim_index_in; // change to new animation
+            active_anim_time = 0.0;
+        }
+
+        speed_factor = speed;
+        paused = false;
+    }
+    else
+    {
+        std::cerr << "anim_index_in > number of animtions" << std::endl;
+    }
+
 }
 
 void Actor::updateAnim(float dt)

@@ -1,7 +1,10 @@
 #include "world.h"
 
 World::World()  :
-    camera(new Camera),
+    //camera(new Camera),
+    freecam(new Camera),
+    chasecam(new Camera),
+    active_cam(freecam),
     main_light(new DirLight),
     num_point_lights(0),
     point_lights(new PointLight [MAX_NUM_POINT_LIGHTS])
@@ -12,6 +15,9 @@ World::World()  :
 World::~World()
 {
     //dtor
+    delete freecam;
+    delete chasecam;
+
     delete [] point_lights;
     delete main_light;
 }

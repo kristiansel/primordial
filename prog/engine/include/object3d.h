@@ -14,35 +14,27 @@
 
 #include "signals.h"
 
-class Object3d : public MoveSignalReceiver
+class Object3d : virtual public MoveSignalReceiver
 {
 public:
     Object3d();
     virtual ~Object3d();
-
-    glm::vec3 pos;
-    glm::quat rot;
-    glm::vec3 scale;
 
     glm::vec3 getDir();
     void setDir(glm::vec3 u);
 
     glm::mat4 getTransformMatrix() const;
 
-    void moveForward(float speed);
-    void strafeLeft(float speed);
-    void panUp(float degrees);
-    void panLeft(float degrees);
+    // Object3d implementation of MoveSignalReceiver
+    void moveForward(float meters);
+    void moveLeft(float meters);
+    void rotateUp(float degrees);
+    void rotateLeft(float degrees);
 
-//    void moveForward(float amount);
-    void moveLeft(float amount);
-    void rotateUp(float amount);
-    void rotateLeft(float amount);
-
-    /// DONT USE THESE
-//    void rotateLeft(float degrees);
-//    void rotateLeft(float degrees, glm::vec3 point);
-//    void rotateUp(float degrees, glm::vec3 point);
+public:
+    glm::vec3 pos;
+    glm::quat rot;
+    glm::vec3 scale;
 
 protected:
 private:

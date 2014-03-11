@@ -106,8 +106,10 @@ public:
     Channel* channels;
 
     float duration; /// Seconds
-
 };
+
+//// Alias Skeleton::Animation as just Animation
+//using Animation = Skeleton::Animation;
 
 class Skeleton::Animation::Channel ///
 {
