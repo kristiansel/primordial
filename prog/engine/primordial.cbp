@@ -135,6 +135,7 @@
 		<Unit filename="include/shader.h" />
 		<Unit filename="include/shaderbase.h" />
 		<Unit filename="include/shadowmap.h" />
+		<Unit filename="include/signals.h" />
 		<Unit filename="include/skeleton.h" />
 		<Unit filename="include/skyshader.h" />
 		<Unit filename="include/texture.h" />
