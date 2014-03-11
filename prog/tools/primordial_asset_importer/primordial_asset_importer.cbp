@@ -12,7 +12,7 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
-				<Option parameters="-Itest_scenes/mdl_human_male2.dae -G../../engine/assets_bin/models/human_male_bgeo.bgeo -B../../engine/assets_bin/skeletons/human_male_bgeo.bbns -Atest_scenes/human_idle_animconf" />
+				<Option parameters="-Iall_animations_0/dodge_b.dae -G../../engine/assets/models/human_all_anim.bgeo -B../../engine/assets/skeletons/human_all_anim.bbns -Aall_animations_0/animconfig" />
 				<Compiler>
 					<Add option="-g" />
 					<Add directory="include" />

@@ -170,6 +170,7 @@ void Renderer::draw(Scene &scene, float dt)
     resizeWindow(settings.width, settings.height, false);
 
     // is absolutely killing performance
+//    comb1.activate(1.000, 0.00); // original
     comb1.activate(0.585, 0.415); // original
 //    comb1.activate(0.7, 0.5);
     comb1.activateTextures(render_stage.fbo_texture, blur2.fbo_texture); // original

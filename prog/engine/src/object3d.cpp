@@ -21,10 +21,10 @@ glm::mat4 Object3d::getTransformMatrix() const
     return pos_mat * rot_mat * sca_mat;
 }
 
-void Object3d::moveForward(float speed)
-{
-    pos +=(speed)*getDir();
-}
+//void Object3d::moveForward(float speed)
+//{
+//    pos +=(speed)*getDir();
+//}
 
 void Object3d::strafeLeft(float speed)
 {
@@ -53,7 +53,40 @@ glm::vec3 Object3d::getDir()
 }
 
 
-void Object3d::setDir()
+void Object3d::setDir(glm::vec3 u) /// Trust that u is normalized
 {
-  /// Fill out if needed
+    /// no rotation vector
+    glm::vec3 v = glm::vec3(0.0, 0.0, -1.0);
+
+    /// study this! (might have to reverse cross order)
+    glm::vec3 w = glm::cross(u, v);
+    glm::quat q = glm::quat(1.f + glm::dot(u, v), w.x, w.y, w.z);
+
+    /// Set rotation
+    rot = glm::normalize(q);
+}
+
+void Object3d::moveForward(float speed)
+{
+    pos +=(speed)*getDir();
+}
+
+void Object3d::moveLeft(float speed)
+{
+    pos -=(speed)*glm::normalize(glm::cross(getDir(), glm::vec3(0.0, 1.0, 0.0)) );
+}
+
+void Object3d::rotateUp(float degrees)
+{
+    /// There might be a more efficient way of doing this if this
+    /// ever becomes a bottle-neck (suggest: quaternion mult)
+    rot = glm::rotate(rot, 3.14159265f*degrees/180.f, glm::vec3(1.0, 0.0, 0.0));
+}
+
+void Object3d::rotateLeft(float degrees)
+{
+    /// There might be a more efficient way of doing this if this
+    /// ever becomes a bottle-neck (suggest: quaternion mult)
+    glm::vec3 axis = glm::inverse(glm::mat3_cast(rot)) * glm::vec3(0.0, 1.0, 0.0);
+    rot = glm::rotate(rot, 3.14159265f*degrees/180.f, axis);
 }

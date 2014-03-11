@@ -1,8 +1,8 @@
 #include "mechanics.h"
 
-Mechanics::Mechanics() : speed(4.5), camTurnSpeed(80.0)
+Mechanics::Mechanics() : speed(24.5), camTurnSpeed(80.0)
 {
-    //ctor
+
 }
 
 Mechanics::~Mechanics()
@@ -14,6 +14,9 @@ void Mechanics::init(World &world_in, float &dt_in)
 {
     world = &world_in;
     dt = &dt_in;
+
+//    freeLook.assignWorld(&world_in);
+//    thirdPerson.assignWorld(&world_in);
 
     world->camera->pos = glm::vec3(0.0, 1.5, 0.0);
 
@@ -59,6 +62,10 @@ void Mechanics::init(World &world_in, float &dt_in)
                         "tex_human_male",
                         glm::vec3(0.0, 0.0, 0.0) );
 
+    world->addCreature( "human_all_anim",
+                        "tex_human_male",
+                        glm::vec3(3.0, 0.0, 2.0) );
+
     world->addCreature( "humale_1hswing",
                         "tex_human_male",
                         glm::vec3(-3.0, 0.0, 2.0) );
@@ -73,7 +80,7 @@ void Mechanics::init(World &world_in, float &dt_in)
                         glm::vec3(0.0, 2.0, -4.0) );
 
     world->addDynamicObject( "cube",
-                             "nicewall_alpha",
+                             "nicewall",
                              glm::vec3(2.0, 10.0, -4.0),
                              RigidBody::Box(0.5f, 0.5f, 0.5f) );
 
@@ -103,6 +110,59 @@ string Mechanics::debugInfo()
     return output.str();
 }
 
+///// move
+//void Mechanics::playerMoveForward()
+//{
+//    lookmode->moveForward();
+//}
+//
+//void Mechanics::playerMoveBackward()
+//{
+//    lookmode->moveBackward();
+//}
+//
+//void Mechanics::playerMoveLeft()
+//{
+//    lookmode->moveLeft();
+//}
+//
+//void Mechanics::playerMoveRight()
+//{
+//    lookmode->moveRight();
+//}
+//
+//
+///// rotate
+//void Mechanics::playerRotateUp()
+//{
+//    lookmode->rotateUp();
+//}
+//
+//void Mechanics::playerRotateUpVal(float val)
+//{
+//    lookmode->rotateUpVal(val);
+//}
+//
+//void Mechanics::playerRotateLeftVal(float val)
+//{
+//    lookmode->rotateLeftVal(val);
+//}
+//void Mechanics::playerRotateDown()
+//{
+//    lookmode->rotateDown();
+//}
+//
+//void Mechanics::playerRotateLeft()
+//{
+//    lookmode->rotateLeft();
+//}
+//
+//void Mechanics::playerRotateRight()
+//{
+//    lookmode->rotateRight();
+//}
+
+
 /// move
 void Mechanics::playerMoveForward()
 {
@@ -131,12 +191,12 @@ void Mechanics::playerRotateUp()
     world->camera->panUp((*dt)*camTurnSpeed);
 }
 
-void Mechanics::camRotateUp(float val)
+void Mechanics::playerRotateUpVal(float val)
 {
     world->camera->panUp(val);
 }
 
-void Mechanics::camRotateLeft(float val)
+void Mechanics::playerRotateLeftVal(float val)
 {
     world->camera->panLeft(val);
 }
@@ -204,19 +264,31 @@ void Mechanics::func(int num_in)
     case 5:
         for (auto &creature : world->creatures)
         {
-            if (creature->num_pose_matrices > 50)
+            if (creature->getActiveAnimIndex() < (creature->getNumAnims()-1))
             {
-                std::cout << creature->getActiveAnimTimeMod() << "\n";
-                for (int i = 0; i<4; i++)
-                {
-                    for (int j = 0; j<4; j++)
-                    {
-                        std::cout << creature->pose_matrices[4][i][j] << "\t";
-                    }
-                    std::cout << "\n";
-                }
+                creature->playAnim(creature->getActiveAnimIndex()+1);
             }
+            else
+            {
+                creature->playAnim(0);
+            }
+//            creature->togglePauseAnim();
         }
+//        for (auto &creature : world->creatures)
+//        {
+//            if (creature->num_pose_matrices > 50)
+//            {
+//                std::cout << creature->getActiveAnimTimeMod() << "\n";
+//                for (int i = 0; i<4; i++)
+//                {
+//                    for (int j = 0; j<4; j++)
+//                    {
+//                        std::cout << creature->pose_matrices[4][i][j] << "\t";
+//                    }
+//                    std::cout << "\n";
+//                }
+//            }
+//        }
         break;
 
     default:    break;

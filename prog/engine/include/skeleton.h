@@ -46,6 +46,7 @@ public:
                       glm::mat4 parent_mat = glm::mat4(1.0));
 
     int getNumBones() {return num_bones; };
+    int getNumAnims() {return num_anims; };
 protected:
 
 public: /// private: // public for debugging

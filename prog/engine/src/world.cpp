@@ -132,10 +132,18 @@ void World::delWorldObject(list<shared_ptr<WorldObject>>::iterator worldobject_i
 {
     if (!worldobjects.empty())
     {
-        /// assume worldobject_it_in is a valid iterator
-        removePhysicsObject( (*worldobject_it_in).get() );
+        /// In case another thread attempts to access the object
+        /// while it is being deconstructed, it must be made sure
+        /// that worldobjects no longer points to it
+        shared_ptr<WorldObject> obj_to_del = *worldobject_it_in;
 
         worldobjects.erase(worldobject_it_in);
+
+        /// deconstruct the object
+        removePhysicsObject( obj_to_del.get() );
+
+        /// The last pointer to the object goes out of scope here
+        /// So it should be destructed
     }
 }
 

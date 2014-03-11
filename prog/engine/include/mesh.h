@@ -6,6 +6,7 @@
 #include <string>
 #include <memory>
 #include <algorithm>
+#include <threadingwrapper.hpp>
 
 #include "geometry.h"
 #include "parser.h"
@@ -95,6 +96,8 @@ private:
     /// To be separated out at a later stage
     // set the materials <-- change this
     Material material;
+
+    Mutex sharedContextLoading;
 
 
 };

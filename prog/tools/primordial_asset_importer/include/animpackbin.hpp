@@ -37,42 +37,17 @@ float* mat2floatArr(glm::mat4 mat_in);
 
 std::vector<std::string> findBoneNames(const aiScene* scene);
 
+void writeAnimation(const aiScene *scene,
+                    unsigned int index,
+                    std::ofstream &myFile,
+                    std::vector<std::string> &boneNames,
+                    std::fstream &debugstream,
+                    bool debug);
+
 /// Main function
 bool animPackBin(const aiScene* scene, std::string outputpath, std::string animconfigpath = "", bool debug = true)
 {
-    /// read the config "if present"
-    std::ifstream configFile;
-    configFile.open(animconfigpath);
-
-    float duration_corrected = -1.0;
-
-    struct AniSpec {
-        AniSpec() : specified(false) {};
-        int anim_to_create;
-        int anim_create_from;
-        float time_start;
-        float time_end;
-        bool specified;
-    };
-
-    AniSpec anispec;
-
-    std::string line;
-    while (std::getline(configFile, line))
-    {
-        std::istringstream is(line);
-        std::string anim, from, duration, to;
-
-        is >> anim >> anispec.anim_to_create >> from >> anispec.anim_create_from
-           >> duration >> anispec.time_start >> to >> anispec.time_end;
-
-        anispec.specified = true;
-//
-//
-//        std::cout << anispec.time_end << "\n";
-    }
-
-    /// Open file for writing
+    /// Open debug log file for writing
     std::ofstream myFile (outputpath, std::ios::out | std::ios::binary);
 
     std::fstream debugstream;
@@ -80,6 +55,53 @@ bool animPackBin(const aiScene* scene, std::string outputpath, std::string animc
 
     time_t ctt = time(0);
     debugstream << "time: " << asctime(localtime(&ctt));
+
+
+    /// read the config "if present"
+    std::ifstream configFile;
+    configFile.open(animconfigpath);
+
+    /// get the directory of the animconfigpath
+    std::string configDir = animconfigpath.substr(0, animconfigpath.find_last_of("/\\"));
+
+//    std::cout << configDir << "\n";
+
+    float duration_corrected = -1.0;
+    bool use_config = configFile.is_open();
+//
+//    Assimp::Importer importer; // used later for importing additional animation files
+
+    struct AniSpec {
+        AniSpec() : specified(false) {};
+        int anim_to_create;
+        std::string anim_create_from;
+        float time_start;
+        float time_end;
+        bool specified;
+    };
+
+    std::vector<AniSpec> anispecs;
+
+    std::string line;
+    while (std::getline(configFile, line))
+    {
+        AniSpec anispec;
+
+        std::istringstream is(line);
+        std::string anim, from, duration, to;
+
+        is >> anim >> anispec.anim_to_create >> from >> anispec.anim_create_from
+           >> duration >> anispec.time_start >> to >> anispec.time_end;
+
+        // Need to prepend directory of the anispec file to the anispec.anim_create_from
+        anispec.anim_create_from = configDir + "/" + anispec.anim_create_from;
+
+        anispec.specified = true;
+
+        anispecs.push_back(anispec);
+
+//        std::cout << anispec.time_end << "\n";
+    }
 
     /// Write a file header
     char* filetype = "bbns";         /// 4 bytes     file type
@@ -132,16 +154,49 @@ bool animPackBin(const aiScene* scene, std::string outputpath, std::string animc
 //        std::cout << "rig_transf: \n";
 //        printMat(rig_transf);
 
+
     /// animation number, just all animations for now
     int numAnimations = scene->mNumAnimations;
+    if (use_config) numAnimations = anispecs.size();
     myFile.write( (char*) &numAnimations,    1*sizeof(int) );
 
     for (int i = 0; i<numAnimations; i++)
     {
-        debugstream << "animation #: " << i << "/" << numAnimations << "\n";
+        debugstream << "animation #: " << i << "\n";
+
+        Assimp::Importer importer;
+
+        if (use_config)
+        {
+            std::string ani_filename = anispecs[i].anim_create_from;
+
+            std::cout << "creating animation " << i << " from file " << ani_filename << "\n";
+
+            scene = importer.ReadFile( ani_filename,
+                                    aiProcess_CalcTangentSpace       |
+                                    aiProcess_Triangulate            |
+                                    aiProcess_JoinIdenticalVertices  |
+                                    aiProcess_SortByPType            |
+                                    aiProcess_ImproveCacheLocality  );
+
+            /// Should assert that there are at least one animation
+            if( !scene) /// There were errors
+            {
+                std::cerr << importer.GetErrorString() << "\n";
+                return false;
+            }
+
+            if (scene->mNumAnimations < 1)
+            {
+                std::cerr << "could not find animation in file " << ani_filename << "\n";
+                return false;
+            }
+        }
 
         /// animation data, index and name
-        aiAnimation* anim = scene->mAnimations[i];
+        int scene_anim_index = i;
+        if (use_config) scene_anim_index = 0;
+        aiAnimation* anim = scene->mAnimations[scene_anim_index];
 
         /// Write index
         myFile.write( (char*) &i,    1*sizeof(int) );
@@ -149,7 +204,7 @@ bool animPackBin(const aiScene* scene, std::string outputpath, std::string animc
         /// Write duration
         // Ticks / ( ticks/second ) = seconds
         float duration = anim->mDuration / anim->mTicksPerSecond;
-        if (anispec.specified) duration = anispec.time_end-anispec.time_start;
+        if (use_config) duration = anispecs[i].time_end-anispecs[i].time_start;
         myFile.write( (char*) &duration, 1*sizeof(float));
 
 
@@ -265,11 +320,9 @@ bool animPackBin(const aiScene* scene, std::string outputpath, std::string animc
                 myFile.write ( (char*) &scaArr[0], 3*sizeof(float));
             }
         if(debug) debugstream << std::endl;
-        } // Channels
+        }  // Channels
 
-    }
-
-    // here
+    } // Animations
 
 
     /// Close file
@@ -278,8 +331,6 @@ bool animPackBin(const aiScene* scene, std::string outputpath, std::string animc
     debugstream << std::endl;
     debugstream.close();
 }
-
-
 
 /// Helper function for saving bones
 void node_rec(aiNode* node,
@@ -446,6 +497,17 @@ std::vector<std::string> findBoneNames(const aiScene* scene)
     return boneNamesOut;
 }
 
+/// Write animation i=index of the scene to file:
+void writeAnimation(const aiScene *scene,
+                    unsigned int i,
+                    std::ofstream &myFile,
+                    std::vector<std::string> &boneNames,
+                    std::fstream &debugstream,
+                    bool debug)
+{
+
+
+}
 
 
 #endif

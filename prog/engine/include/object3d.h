@@ -12,7 +12,9 @@
 //using glm::vec4;
 //using glm::mat4;
 
-class Object3d
+#include "signals.h"
+
+class Object3d : public MoveSignalReceiver
 {
 public:
     Object3d();
@@ -23,7 +25,7 @@ public:
     glm::vec3 scale;
 
     glm::vec3 getDir();
-    void setDir();
+    void setDir(glm::vec3 u);
 
     glm::mat4 getTransformMatrix() const;
 
@@ -31,6 +33,11 @@ public:
     void strafeLeft(float speed);
     void panUp(float degrees);
     void panLeft(float degrees);
+
+//    void moveForward(float amount);
+    void moveLeft(float amount);
+    void rotateUp(float amount);
+    void rotateLeft(float amount);
 
     /// DONT USE THESE
 //    void rotateLeft(float degrees);

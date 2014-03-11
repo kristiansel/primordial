@@ -11,6 +11,10 @@ Texture::~Texture()
     /// Assume sf::Image releases itself
 
     /// release video RAM buffers
+    // in order to mitigate another buffer being accidentally
+    // bound in render thread
+    LockGuard lock(sharedContextLoading);
+
     glBindTexture(GL_TEXTURE_2D, 0); /// Really this should not be necessary
 
 //    cout << "Deleting Buffers: " << vbo_id << " & " << ibo_id << "\n";
@@ -28,6 +32,10 @@ bool Texture::fromFile(std::string filepath_in)
     }
     else
     {
+        // in order to mitigate another buffer being accidentally
+        // bound in render thread
+        LockGuard lock(sharedContextLoading);
+
         //            std::cout << "loaded!\n";
 
         glGenTextures(1, &tbo_id);

@@ -34,6 +34,10 @@ Mesh::~Mesh()
     delete [] vertices;
     delete [] triangles;
 
+    // in order to mitigate another buffer being accidentally
+    // bound in render thread
+    LockGuard lock(sharedContextLoading);
+
     /// release video RAM buffers
     glBindBuffer(GL_ARRAY_BUFFER, 0); // do you really need this?
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
@@ -58,6 +62,10 @@ void Mesh::fromFile(string mesh_key)
 
 void Mesh::geomToVRAM()
 {
+    // in order to mitigate another buffer being accidentally
+    // bound in render thread
+    LockGuard lock(sharedContextLoading);
+
     /// send directly to graphics card
     glGenBuffers(1, &vbo_id); //must come after glewinit
     glBindBuffer(GL_ARRAY_BUFFER, vbo_id);

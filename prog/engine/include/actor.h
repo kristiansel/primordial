@@ -30,8 +30,10 @@ class Actor : public Prop
         void togglePauseAnim();
 
         /// debug methods;
-        float getActiveAnimTime();
-        float getActiveAnimTimeMod();
+        float getActiveAnimTime() const;
+        float getActiveAnimTimeMod()  const;
+        int getActiveAnimIndex() const;
+        int getNumAnims() const;
 
         /// could consider getter method/private for:
         int num_pose_matrices;

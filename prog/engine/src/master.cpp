@@ -304,8 +304,8 @@ bool Master::handleInput()
         int yoffset = new_posy - press_pos_y;
         //        cout<<" by "<<xoffset<<" and "<<yoffset;
 
-        mechanics.camRotateLeft(-xoffset/4.0);
-        mechanics.camRotateUp(-yoffset/4.0);
+        mechanics.playerRotateLeftVal(-xoffset/4.0);
+        mechanics.playerRotateUpVal(-yoffset/4.0);
         mouse_pos = sf::Vector2i(press_pos_x, press_pos_y);
         sf::Mouse::setPosition(mouse_pos, window);
     }

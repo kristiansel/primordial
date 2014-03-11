@@ -2,8 +2,9 @@
 #define CAMERA_H
 
 #include "object3d.h"
+#include "signals.h"
 
-class Camera: public Object3d
+class Camera: public Object3d, public MoveSignalReceiver
 {
 public:
     Camera();
@@ -14,11 +15,18 @@ public:
     glm::mat4 getProjectionMatrix() const;
     glm::mat4 getViewProjectionMatrix() const;
 
+    // Move signal functions overload
+    void moveForward(float amount);
+    void moveLeft(float amount);
+    void rotateUp(float amount);
+    void rotateLeft(float amount);
 
     float fovy;
     float aspect;
     float nearz;
     float farz;
+
+
 };
 
 #endif // CAMERA_H
