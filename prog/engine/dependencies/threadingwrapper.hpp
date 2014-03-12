@@ -12,6 +12,7 @@ using LockGuard = boost::lock_guard<boost::mutex>;
 #else // NOT WINDOWS
 
 #include <thread>
+#include <mutex>
 
 using Thread = std::thread;
 using Mutex = std::mutex;
