@@ -1,7 +1,8 @@
 #include "mechanics.h"
 
 Mechanics::Mechanics() : speed(24.5), camTurnSpeed(80.0),
-    controlled(nullptr)
+    controlled(nullptr),
+    player(nullptr)
 {
 
 }
@@ -61,13 +62,15 @@ void Mechanics::init(World &world_in, float &dt_in)
     /// Having issue with human model not in the correct
     /// place in the scene graph outputted by assimp import
 
-    world->addCreature( "human_all_anim",
+    auto playerCreature = world->addCreature( "human_all_anim",
                         "tex_human_male",
                         glm::vec3(3.0, 0.0, 2.0) );
 
-    world->addCreature( "humale",
-                        "tex_human_male",
-                        glm::vec3(0.0, 0.0, 0.0) );
+    player = (*playerCreature).get();
+
+//    world->addCreature( "humale_old",
+//                        "tex_human_male",
+//                        glm::vec3(0.0, 0.0, 0.0) );
 
     world->addCreature( "humale_1hswing",
                         "tex_human_male",
@@ -102,6 +105,9 @@ void Mechanics::step(World &world_in, float dt_in)
     {
         wObject->updateTransformation();
     }
+
+    // Make the chase cam chase the player
+
 }
 
 string Mechanics::debugInfo()
@@ -116,54 +122,54 @@ string Mechanics::debugInfo()
 /// move
 void Mechanics::playerMoveForward()
 {
-    if (controlled) controlled->moveForward((*dt)*speed);
+    if (controlled) controlled->moveForward((*dt)*speed, *dt);
 }
 
 void Mechanics::playerMoveBackward()
 {
-    if (controlled) controlled->moveForward(-(*dt)*speed);
+    if (controlled) controlled->moveForward(-(*dt)*speed, *dt);
 }
 
 void Mechanics::playerMoveLeft()
 {
-    if (controlled) controlled->moveLeft((*dt)*speed);
+    if (controlled) controlled->moveLeft((*dt)*speed, *dt);
 }
 
 void Mechanics::playerMoveRight()
 {
-    if (controlled) controlled->moveLeft(-(*dt)*speed);
+    if (controlled) controlled->moveLeft(-(*dt)*speed, *dt);
 }
 
 
 /// rotate
 void Mechanics::playerRotateUp()
 {
-    if (controlled) controlled->rotateUp((*dt)*camTurnSpeed);
+    if (controlled) controlled->rotateUp((*dt)*camTurnSpeed, *dt);
 }
 
 void Mechanics::playerRotateDown()
 {
-    if (controlled) controlled->rotateUp(-(*dt)*camTurnSpeed);
+    if (controlled) controlled->rotateUp(-(*dt)*camTurnSpeed, *dt);
 }
 
 void Mechanics::playerRotateLeft()
 {
-    if (controlled) controlled->rotateLeft((*dt)*camTurnSpeed);
+    if (controlled) controlled->rotateLeft((*dt)*camTurnSpeed, *dt);
 }
 
 void Mechanics::playerRotateRight()
 {
-    if (controlled) controlled->rotateLeft(-(*dt)*camTurnSpeed);
+    if (controlled) controlled->rotateLeft(-(*dt)*camTurnSpeed, *dt);
 }
 
 void Mechanics::playerRotateUpVal(float val)
 {
-    if (controlled) controlled->rotateUp(val);
+    if (controlled) controlled->rotateUp(val, *dt);
 }
 
 void Mechanics::playerRotateLeftVal(float val)
 {
-    if (controlled) controlled->rotateLeft(val);
+    if (controlled) controlled->rotateLeft(val, *dt);
 }
 
 void Mechanics::func(int num_in)

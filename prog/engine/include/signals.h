@@ -7,11 +7,11 @@
 
 struct MoveSignalReceiver
 {
-    virtual void moveForward(float gain) = 0;
-    virtual void moveLeft(float gain) = 0;
+    virtual void moveForward(float speed, float dt) = 0;
+    virtual void moveLeft(float speed, float dt) = 0;
 
-    virtual void rotateUp(float gain) = 0;
-    virtual void rotateLeft(float gain) = 0;
+    virtual void rotateUp(float speed, float dt) = 0;
+    virtual void rotateLeft(float speed, float dt) = 0;
 };
 
 #endif // SIGNALS_H

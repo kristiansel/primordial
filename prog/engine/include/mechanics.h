@@ -60,63 +60,11 @@ private:
     const float speed;          /// 1.0/s
     const float camTurnSpeed;   /// deg/s
     MoveSignalReceiver* controlled;
+    Creature const * player;    // the creature chased by chase-cam
+
 
     /// Temporary for testing deletion
     list<shared_ptr<WorldObject>>::iterator worldobject_ptr_it;
-
-    /// Some tricks:
-//    class MovableAbstrBase
-//    {
-//    public:
-//        virtual void moveForward() = 0;
-//        virtual void moveBackward() = 0;
-//        virtual void moveLeft() = 0;
-//        virtual void moveRight() = 0;
-//
-//        virtual void rotateUp() = 0;
-//        virtual void rotateDown() = 0;
-//        virtual void rotateRight() = 0;
-//        virtual void rotateLeft() = 0;
-//
-//        virtual void rotateUpVal(float) = 0;
-//        virtual void rotateLeftVal(float) = 0;
-//    };
-//
-//    class CamMover : public MovableAbsBase
-//    {
-//        friend Mechanics
-//        void moveForward();
-//        void moveBackward();
-//        void moveLeft();
-//        void moveRight();
-//
-//        void rotateUp();
-//        void rotateDown();
-//        void rotateRight();
-//        void rotateLeft();
-//
-//        void rotateUpVal(float);
-//        void rotateLeftVal(float);
-//    } freeLook;
-//
-//    class ThirdPerson : public MovableAbsBase
-//    {
-//        ThirdPerson(Mechanics* mech_in) {this->mech = mech_in;};
-//        void moveForward();
-//        void moveBackward();
-//        void moveLeft();
-//        void moveRight();
-//
-//        void rotateUp();
-//        void rotateDown();
-//        void rotateRight();
-//        void rotateLeft();
-//
-//        void rotateUpVal(float);
-//        void rotateLeftVal(float);
-//
-//        Mechanics* mech;
-//    } thirdPerson;
 };
 
 #endif // MECHANICS_H

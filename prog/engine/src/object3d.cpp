@@ -40,24 +40,24 @@ void Object3d::setDir(glm::vec3 u) /// Trust that u is normalized
     rot = glm::normalize(q);
 }
 
-void Object3d::moveForward(float meters)
+void Object3d::moveForward(float meters, float dt_unused)
 {
     pos +=(meters)*getDir();
 }
 
-void Object3d::moveLeft(float meters)
+void Object3d::moveLeft(float meters, float dt_unused)
 {
     pos -=(meters)*glm::normalize(glm::cross(getDir(), glm::vec3(0.0, 1.0, 0.0)) );
 }
 
-void Object3d::rotateUp(float degrees)
+void Object3d::rotateUp(float degrees, float dt_unused)
 {
     /// There might be a more efficient way of doing this if this
     /// ever becomes a bottle-neck (suggest: quaternion mult)
     rot = glm::rotate(rot, 3.14159265f*degrees/180.f, glm::vec3(1.0, 0.0, 0.0));
 }
 
-void Object3d::rotateLeft(float degrees)
+void Object3d::rotateLeft(float degrees, float dt_unused)
 {
     /// There might be a more efficient way of doing this if this
     /// ever becomes a bottle-neck (suggest: quaternion mult)

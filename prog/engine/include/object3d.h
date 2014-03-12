@@ -26,10 +26,10 @@ public:
     glm::mat4 getTransformMatrix() const;
 
     // Object3d implementation of MoveSignalReceiver
-    void moveForward(float meters);
-    void moveLeft(float meters);
-    void rotateUp(float degrees);
-    void rotateLeft(float degrees);
+    void moveForward(float meters, float dt_unused);
+    void moveLeft(float meters, float dt_unused);
+    void rotateUp(float degrees, float dt_unused);
+    void rotateLeft(float degrees, float dt_unused);
 
 public:
     glm::vec3 pos;

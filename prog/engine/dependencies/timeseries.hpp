@@ -166,99 +166,109 @@ template <class ValueType>                              /// Template parameters
 typename TimeSeries<ValueType>::SeekResult              /// Return type
 TimeSeries<ValueType>::seek(float time, int hint)   /// Function signature
 {
-    /// This function will be called a lot, so might become the bottleneck
-
-
-    /// Modulate time
-    time = time - int(time/duration) * duration;
-
-//    std::cout << "seeking t = " << time << " s (duration = "<<duration<<" s)\n";
-
-    TimeValuePair<ValueType>* prev = &(keys[0]);
-
-    if (hint < 0 || !(hint < num_keys)) /// If no/bad hint is given
-        hint = (int)((num_keys-1) * time / duration);  /// Start search by assuming uniform distribution
-        /// The above guarantees that hint is maximum num_pos_keys - 1
-
-//        std::cout << "num_pos_keys = " << num_pos_keys << "\n";
-//        std::cout << "time / ch_duration = " << time / ch_duration << "\n";
-//        std::cout << "hint = " << hint << "\n";
-    /// First check if last frame?
-    /// To eliminate complications further down
-    //if ()
-
-    bool found = false;
-    int cand = hint;
-
-//    std::cout << "cand_hint = " << cand << std::endl;
-
-    while (!found)
+    if (num_keys > 0)
     {
-//            std::cout << "cand = " << cand << "\n";
-        /// check if time is between candidate and next
-        bool timeGrCand = (time > keys[cand].time-0.00000001);
-        if (timeGrCand) /// If success so far, proceed
+        /// This function will be called a lot, so might become the bottleneck
+
+
+        /// Modulate time
+        time = time - int(time/duration) * duration;
+
+    //    std::cout << "seeking t = " << time << " s (duration = "<<duration<<" s)\n";
+
+        TimeValuePair<ValueType>* prev = &(keys[0]);
+
+        if (hint < 0 || !(hint < num_keys)) /// If no/bad hint is given
+            float div_duration = (duration > 0.001) ? duration : 1.0; // check for divide by 0
+            hint = (int)((num_keys-1) * time / duration);  /// Start search by assuming uniform distribution
+            /// The above guarantees that hint is maximum num_pos_keys - 1
+
+    //        std::cout << "num_pos_keys = " << num_pos_keys << "\n";
+    //        std::cout << "time / ch_duration = " << time / ch_duration << "\n";
+    //        std::cout << "hint = " << hint << "\n";
+        /// First check if last frame?
+        /// To eliminate complications further down
+        //if ()
+
+        bool found = false;
+        int cand = hint;
+
+    //    std::cout << "cand_hint = " << cand << std::endl;
+
+        while (!found)
         {
-            if (cand==num_keys-1)
+    //            std::cout << "cand = " << cand << "/" << num_keys << "\n";
+
+            /// check if time is between candidate and next
+            bool timeGrCand = (time > keys[cand].time-0.00000001);
+            if (timeGrCand) /// If success so far, proceed
             {
-                prev = &(keys[cand]); /// Time is greater than the last key... should not happen
-                found = true;
-            }
-            else
-            {
-                /// if not returned here, this is safe
-                bool timeLsNext = (time < keys[cand+1].time+0.00000001);
-                if (timeLsNext)
+                if (cand==num_keys-1)
                 {
-                    prev = &(keys[cand]);
+                    prev = &(keys[cand]); /// Time is greater than the last key... should not happen
                     found = true;
                 }
                 else
-                    cand+=1;
+                {
+                    /// if not returned here, this is safe
+                    bool timeLsNext = (time < keys[cand+1].time+0.00000001);
+                    if (timeLsNext)
+                    {
+                        prev = &(keys[cand]);
+                        found = true;
+                    }
+                    else
+                        cand+=1;
+                }
             }
-        }
-        else /// Linear search for next (step one down)
-        {
-            if (cand > 0)
-                cand-=1;
-            else
+            else /// Linear search for next (step one down)
             {
-                prev = &(keys[num_keys-1]);
-                found = true;
+                if (cand > 0)
+                    cand-=1;
+                else
+                {
+                    prev = &(keys[num_keys-1]);
+                    found = true;
+                }
             }
         }
-    }
-//    }
+    //    }
 
-    SeekResult res;
-    res.prev.key = prev;
+        SeekResult res;
+        res.prev.key = prev;
 
-//    std::cout << "cand: " << cand << std::endl;
+    //    std::cout << "cand: " << cand << std::endl;
 
-//    if (time < 0.01)
-//    {
-//        res.prev.key = &(keys[0]);
-//    }
-    /// CASE 1 --v--|------|-----|--- OR
-    /// CASE 2 -----|------|-----|-v-
-    if (prev==&(keys[num_keys-1]))
-    {
-        res.next.key = &(keys[0]);
-        float total_time = res.next.key->time+(duration-res.prev.key->time);
-        float part_time = (time>res.prev.key->time) ?        /// IF CASE 2
-                          time-res.prev.key->time :              /// CASE 2
-                          ((duration-res.prev.key->time)+time);  /// CASE 1
+    //    if (time < 0.01)
+    //    {
+    //        res.prev.key = &(keys[0]);
+    //    }
+        /// CASE 1 --v--|------|-----|--- OR
+        /// CASE 2 -----|------|-----|-v-
+        if (prev==&(keys[num_keys-1]))
+        {
+            res.next.key = &(keys[0]);
+            float total_time = res.next.key->time+(duration-res.prev.key->time);
+            float part_time = (time>res.prev.key->time) ?        /// IF CASE 2
+                              time-res.prev.key->time :              /// CASE 2
+                              ((duration-res.prev.key->time)+time);  /// CASE 1
 
-        res.next.weight = part_time/total_time;
-    }
+            res.next.weight = part_time/total_time;
+        }
+        else
+        {
+            res.next.key = &(prev[1]);
+            res.next.weight = (time-prev->time)/(res.next.key->time-prev->time);
+        }
+
+        res.prev.weight = 1.0-res.next.weight;
+        return res;
+    } // if num_keys > 0
     else
     {
-        res.next.key = &(prev[1]);
-        res.next.weight = (time-prev->time)/(res.next.key->time-prev->time);
+        std::cerr << "tried to seek timeseries with 0 keys\n";
+        return SeekResult();
     }
-
-    res.prev.weight = 1.0-res.next.weight;
-    return res;
 //    return prev;
 }
 

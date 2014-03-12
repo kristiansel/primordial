@@ -95,6 +95,10 @@ template <class ResType> std::weak_ptr<ResType> ResourceManager<ResType>::getRes
 
     std::shared_ptr<ResType> new_resource(new ResType);
 
+    /// Screw emplace:
+    /// first try to find: if not there... then see if the file can be found in file system
+    /// if not found, then return nullptr as skeleton ptr.
+
     auto emplace_result = resources.emplace(res_key_in, ResCounter(new_resource));
     /// Type = pair<unordered_map<string, ResCounter<ResType>>::iterator, bool>
 
