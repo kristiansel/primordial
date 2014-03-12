@@ -21,7 +21,7 @@ glm::mat4 Object3d::getTransformMatrix() const
     return pos_mat * rot_mat * sca_mat;
 }
 
-glm::vec3 Object3d::getDir()
+glm::vec3 Object3d::getDir() const
 {
     return glm::mat3_cast(rot) * glm::vec3(0.0, 0.0, -1.0);
 }

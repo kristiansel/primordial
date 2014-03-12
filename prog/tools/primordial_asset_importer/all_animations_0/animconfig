@@ -9,4 +9,4 @@ anim 7 from swing_lr.dae duration 0.0 to 1.041666667
 anim 8 from swing_rl.dae duration 0.0 to 1.041666667
 anim 9 from parry_l.dae duration 0.0 to 1.00
 anim 10 from parry_r.dae duration 0.0 to 1.00
-anim 10 from dodge_b.dae duration 0.0 to 1.00
+anim 11 from dodge_b.dae duration 0.0 to 1.00

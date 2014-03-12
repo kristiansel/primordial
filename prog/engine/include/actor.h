@@ -1,6 +1,8 @@
 #ifndef ACTOR_H
 #define ACTOR_H
 
+#include <vector>
+
 #include "skeleton.h"
 #include "prop.h"
 
@@ -24,6 +26,8 @@ class Actor : public Prop
         void pose(int anim_index, float time);
         void poseRest();
         void playAnim(int anim_index, float speed = 1.0);
+
+
         void updateAnim(float dt); /// This is where the calculations are called
         void pauseAnim();
         void unPauseAnim();
@@ -45,6 +49,11 @@ class Actor : public Prop
         float active_anim_time;
         bool paused;
         float speed_factor;
+
+        static unsigned int const active_anims_capacity = 10;
+        static constexpr float blend_time = 0.200; // 0.2 seconds to go from blend weight 1.0 to blend weight 0.0
+
+        std::vector<ActiveAnim> active_anims;
 
 };
 

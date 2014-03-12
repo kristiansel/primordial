@@ -20,7 +20,7 @@ public:
     Object3d();
     virtual ~Object3d();
 
-    glm::vec3 getDir();
+    glm::vec3 getDir() const;
     void setDir(glm::vec3 u);
 
     glm::mat4 getTransformMatrix() const;

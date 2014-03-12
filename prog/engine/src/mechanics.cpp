@@ -99,14 +99,23 @@ void Mechanics::init(World &world_in, float &dt_in)
 
 void Mechanics::step(World &world_in, float dt_in)
 {
-    //world_in.step(dt_in);
+    /// Resolve creature signals
+    for (shared_ptr<Creature> creature : world_in.creatures)
+    {
+        creature->resolveActionRequests();
+    }
+
     world_in.physicsStep(dt_in);
     for (shared_ptr<WorldObject> wObject : world_in.worldobjects)
     {
         wObject->updateTransformation();
     }
 
+
+
     // Make the chase cam chase the player
+    world->chasecam->pos = player->pos - 5.f * player->getDir() + glm::vec3(0.0, 2.0, 0.0);
+    world->chasecam->rot = player->rot;
 
 }
 
