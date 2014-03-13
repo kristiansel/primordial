@@ -31,6 +31,8 @@ public:
     void rotateUp(float degrees, float dt_unused);
     void rotateLeft(float degrees, float dt_unused);
 
+    void faceInDir(const glm::vec3 &dir_in);
+
 public:
     glm::vec3 pos;
     glm::quat rot;

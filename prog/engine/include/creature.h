@@ -16,10 +16,30 @@ class Creature : public Actor, virtual public MoveSignalReceiver
         void moveLeft(float check_sign, float dt);
         void rotateUp(float unused, float dt);
         void rotateLeft(float check_sign, float dt);
+
+
+        glm::vec3 getLookDir() const;
+        void setLookDir(glm::vec3 u);
+//
+        glm::quat getLookRot() const;
+//        void setLookRot(glm::quat q_in);
+//
+//        void lookInDir(const glm::vec3 &dir_in);
+//        void lookAt(const glm::vec3 &pos_in);
+
     protected:
     private:
         float movespeed;
 
+        // rotation representing look direction (different from 3d object facing direction)
+        glm::quat look_rot;
+
+
+        // signals and animation
+        // |
+        // |
+        // |
+        // V
         enum Anim
         {
             Idle = 0,

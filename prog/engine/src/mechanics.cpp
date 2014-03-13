@@ -66,7 +66,12 @@ void Mechanics::init(World &world_in, float &dt_in)
                         "tex_human_male",
                         glm::vec3(3.0, 0.0, 2.0) );
 
+    // Set player to point to the first added creature
     player = (*playerCreature).get();
+
+    // Set chase_cam to be behind the player
+    world->chasecam->pos = player->pos - 5.f * player->getLookDir() + glm::vec3(0.0, 2.0, 0.0); // Hard camera
+    world->chasecam->rot = player->getLookRot(); // Hard camera
 
 //    world->addCreature( "humale_old",
 //                        "tex_human_male",
@@ -114,9 +119,12 @@ void Mechanics::step(World &world_in, float dt_in)
 
 
     // Make the chase cam chase the player
-    world->chasecam->pos = player->pos - 5.f * player->getDir() + glm::vec3(0.0, 2.0, 0.0);
-    world->chasecam->rot = player->rot;
+    world->chasecam->pos = player->pos - 5.f * player->getLookDir() + glm::vec3(0.0, 2.0, 0.0); // Hard camera
+    world->chasecam->rot = player->getLookRot(); // Hard camera
 
+//    float cam_dist = 5.0;
+//    world->chasecam->pos = player->pos - cam_dist * player->getLookDir();
+//    world->chasecam->
 }
 
 string Mechanics::debugInfo()
