@@ -73,6 +73,12 @@ void Mechanics::init(World &world_in, float &dt_in)
     world->chasecam->pos = player->pos - 5.f * player->getLookDir() + glm::vec3(0.0, 2.0, 0.0); // Hard camera
     world->chasecam->rot = player->getLookRot(); // Hard camera
 
+    // set the player as the receiver of control signals
+    controlled = player;
+
+    // set the active camera as the chase cam
+    world->active_cam = world->chasecam;
+
 //    world->addCreature( "humale_old",
 //                        "tex_human_male",
 //                        glm::vec3(0.0, 0.0, 0.0) );
@@ -248,25 +254,39 @@ void Mechanics::func(int num_in)
             }
         }
         break;
-    case 6:
+    case 6: // switch between free-cam and chase cam
         if (controlled == world->freecam)
         {
             if (world->creatures.size() > 0)
-                controlled = world->creatures.begin()->get();
+            {
+                // set player as controlled
+                controlled = player;
+
+                // set chase cam as active
+                world->active_cam = world->chasecam;
+            }
         }
         else
         {
+            // set the freecam as controlled
             controlled = world->freecam;
-        }
-        break;
-    case 7:
-        if (world->active_cam == world->freecam)
-            world->active_cam = world->chasecam;
-        else
+
+            // set the freecam as active
             world->active_cam = world->freecam;
 
-
+            // make the freecam duplicate the chasecam
+            world->freecam->pos = world->chasecam->pos;
+            world->freecam->rot = world->chasecam->rot;
+        }
         break;
+//    case 7:
+//        if (world->active_cam == world->freecam)
+//            world->active_cam = world->chasecam;
+//        else
+//            world->active_cam = world->freecam;
+//
+//
+//        break;
 
     default:    break;
     }

@@ -60,7 +60,7 @@ private:
     const float speed;          /// 1.0/s
     const float camTurnSpeed;   /// deg/s
     MoveSignalReceiver* controlled;
-    Creature const * player;    // the creature chased by chase-cam
+    Creature * player;    // the creature chased by chase-cam
 
 
     /// Temporary for testing deletion

@@ -24,6 +24,7 @@
 #include <sstream>
 #include <helperfunctions.hpp>
 #include <cstdlib>
+#include <vector>
 
 
 
@@ -53,10 +54,10 @@ public:
                       int bone_index = 0,
                       glm::mat4 parent_mat = glm::mat4(1.0));
 
-//    void poseMatricesBlend(glm::mat4* matrices,
-//                      const std::vector<ActiveAnim> &active_anims,
-//                      int bone_index = 0,
-//                      glm::mat4 parent_mat = glm::mat4(1.0));
+    void poseMatricesBlend(glm::mat4* matrices,
+                          const std::vector<ActiveAnim> &active_anims,
+                          int bone_index = 0,
+                          glm::mat4 parent_mat = glm::mat4(1.0));
 
     int getNumBones() {return num_bones; };
     int getNumAnims() {return num_anims; };
