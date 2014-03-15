@@ -36,6 +36,9 @@ struct ActiveAnim
     float blend_weight;
     float anim_time;
     int uid;
+
+    bool operator < (const ActiveAnim &right)
+    {return blend_weight<right.blend_weight; };
 };
 
 class Skeleton /// This is a resource (store one copy)

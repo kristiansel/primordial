@@ -1,6 +1,8 @@
 #ifndef CREATURESIGNALS_H
 #define CREATURESIGNALS_H
 
+#include <functional>
+
 enum Anim
 {
     Idle = 0,
@@ -27,15 +29,51 @@ enum Anim
 
 };
 
-enum Signal
+enum sSignal
 {
-    Dodge = 4,
-    Block = 3,
-    Attack = 2,
-    Jump = 1,
-    Move = 0,
-    Nothing = -1
+    sDodge = 4,
+    sBlock = 3,
+    sAttack = 2,
+    sJump = 1,
+    sMove = 0,
+    sNothing = -1
 };
+
+namespace dirflag
+{
+    const unsigned char none = 0;         // 00000000
+
+    const unsigned char forw = 1;         // 00000001
+    const unsigned char backw = 2;        // 00000010
+    const unsigned char left = 4;         // 00000100
+    const unsigned char right = 8;       // 00001000
+}
+
+//// forward declaration of creature
+//class Creature;
+//
+//struct Signal
+//{
+//    //Signal()
+//    float amount;
+//    int priority;
+//    std::function<void(const Creature&)> modifier;
+//
+//    bool operator < (const Signal &right) // compare priorities
+//    {
+//        return priority < right.priority;
+//    }
+//
+//    bool operator==(const Signal &right) // compare addresses
+//    {
+//        return (this==&right);
+//    }
+//};
+
+//namespace Signal
+//{
+//    const Dodge
+//}
 
 
 #endif // CREATURESIGNALS_H

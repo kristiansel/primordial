@@ -38,7 +38,8 @@ class Creature : public Actor, virtual public SignalReceiver // count virtula lo
 
     protected:
     private:
-        float movespeed;
+        float walkspeed;
+        float runspeed;
 
         // rotation representing look direction (different from 3d object facing direction)
         glm::quat look_rot;
@@ -46,17 +47,17 @@ class Creature : public Actor, virtual public SignalReceiver // count virtula lo
 
         struct State // Could use bitflags for this?
         {
-//            bool isIdle;
             bool isShiftDown;
+            unsigned char dirflags; // use a bitmask to represent directions
         } state;
 
         struct Action
         {
-            Signal signal;
+            sSignal signal;
             float time;
         } doing;
 
-        std::vector<Signal> signal_stack;
+        std::vector<sSignal> signal_stack;
 
         static unsigned int const signal_stack_capacity = 20;
 };

@@ -70,7 +70,10 @@ void Actor::poseRest()
     paused = true;
 }
 
-void Actor::playAnim(int anim_index_in, bool restart, float speed)
+void Actor::playAnim(int anim_index_in,
+                     bool restart,          // If already the main one, blend with self
+//                     bool sync,             // Syncronise time with current animation
+                     float speed)           // set speed (does not support negative speed yet)
 {
     if (anim_index_in < skel_ptr->getNumAnims() && !(anim_index_in<0))
     {
@@ -78,7 +81,9 @@ void Actor::playAnim(int anim_index_in, bool restart, float speed)
 
         // If not restart, then check if the animation
         // is already playing
+
         bool found = false;
+
         if (!restart)
         {
             for (ActiveAnim &anim : active_anims)
@@ -94,14 +99,27 @@ void Actor::playAnim(int anim_index_in, bool restart, float speed)
         if (!found) // if not currently playing
         {
             // Start the animation
+            std::cout << "starting animation: " << anim_index_in << "\n";
 
             // generate a unique ID for this clip
             int uid = uid_gen.getClipUID();
 
+            // If restarting
+            float start_time = 0.0;
+
+            // If not, get the time of the currently main animation
+            if (!restart && !active_anims.empty())
+            {
+                // find element with max blend weight
+                auto main_anim = std::max_element(active_anims.begin(), active_anims.end() );
+
+                start_time = main_anim->anim_time;
+            }
+
             // add it to the list of blend animations
             active_anims.push_back( {anim_index_in, // animation index
                                      0.0,           // initial blend weight
-                                     0.0,           // initial time
+                                     start_time,    // initial time
                                      uid} );        // unique clip id
 
             // Set main clip
