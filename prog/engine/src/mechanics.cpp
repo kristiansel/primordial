@@ -62,7 +62,8 @@ void Mechanics::init(World &world_in, float &dt_in)
     /// Having issue with human model not in the correct
     /// place in the scene graph outputted by assimp import
 
-    auto playerCreature = world->addCreature( "human_all_anim",
+    auto playerCreature = world->addCreature( "human_all_anim2",
+    //auto playerCreature = world->addCreature( "human_all_anim",
                         "tex_human_male",
                         glm::vec3(3.0, 0.0, 2.0) );
 
@@ -213,6 +214,11 @@ void Mechanics::playerBlock()
 void Mechanics::playerShift()
 {
     if (controlled) controlled->shift();
+}
+
+void Mechanics::playerJump()
+{
+    if (controlled) controlled->jump();
 }
 
 void Mechanics::func(int num_in)

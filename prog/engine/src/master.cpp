@@ -260,6 +260,9 @@ bool Master::handleInput()
             case sf::Keyboard::Q:
                 mechanics.playerDodge();
                 break;
+            case sf::Keyboard::Space:
+                mechanics.playerJump();
+                break;
             case sf::Keyboard::F1:
                 mechanics.func(1);
                 break;

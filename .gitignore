@@ -37,3 +37,6 @@ prog/engine/obj/
 
 # Valgrind results
 *ValgrindOut*
+
+# Collada files
+*.dae

@@ -24,6 +24,8 @@ class Creature : public Actor, virtual public SignalReceiver // count virtula lo
         void block();
         void shift();
 
+        void jump();
+
 
         glm::vec3 getLookDir() const;
         void setLookDir(glm::vec3 u);

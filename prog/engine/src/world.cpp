@@ -171,7 +171,7 @@ list<shared_ptr<Creature>>::iterator World::addCreature(string mesh_key, string 
     weak_ptr<Texture>    tex_ptr     = tex_manager.getResptrFromKey  (tex_key);
 
     // The main "creature", the human is rotated wrong in blender
-    creature->attachBatch(mesh_ptr, tex_ptr, glm::rotate((float)(1.0*3.1415926535897), glm::vec3(0.0, 1.0, 0.0)) * glm::mat4(1.0));
+    creature->attachBatch(mesh_ptr, tex_ptr);
 //    glm::rotate()
 
     /// attach skeleton

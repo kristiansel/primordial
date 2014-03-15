@@ -21,6 +21,7 @@ struct SignalReceiver
     virtual void dodge() {std::cerr << "dodge signal received, not implemented\n";};
     virtual void block() {std::cerr << "block signal received, not implemented\n";};
     virtual void shift() {std::cerr << "shift signal received, not implemented\n";};
+    virtual void jump() {std::cerr << "jump signal received, not implemented\n";};
 };
 
 #endif // SIGNALS_H

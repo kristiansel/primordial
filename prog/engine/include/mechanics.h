@@ -55,6 +55,8 @@ public:
     void playerBlock();
     void playerShift();
 
+    void playerJump();
+
     /// Testing
     void func(int num_in);
 protected:

@@ -1,68 +1,41 @@
 #ifndef CREATURESIGNALS_H
 #define CREATURESIGNALS_H
 
-// signals and animation
-// |
-// |
-// |
-// V
 enum Anim
 {
     Idle = 0,
-    Walk = 1,
-    Run = 2,
-    Idle1H = 3,
-    Walk1H = 4,
-    StrafeLeft1H = 5,
-    StrafeRight1H = 6,
-    SwingLeftRight1H = 7,
-    SwingRightLeft1H = 8,
-    ParryLeft1H = 9,
-    ParryRight1H = 10,
-    DodgeBack = 11
-};
+    WalkForward = 1,
+    WalkLeft = 2,
+    WalkLeftDiag = 3,
+    WalkRight = 4,
+    WalkRightDiag = 5,
+    RunForward = 6,
+    RunLeft = 7,
+    RunLeftDiag = 8,
+    RunRight = 9,
+    RunRightDiag = 10,
+    Idle1H = 11,
+    WalkForward1H = 12,
+    StrafeLeft1H = 13,
+    StrafeRight1H = 14,
+    SwingRight1H = 15,
+    SwingLeft1H = 16,
+    ParryLeft1H = 17,
+    ParryRight1H = 18,
+    DodgeBack = 19,
+    JumpUp = 20
 
-enum Possibility
-{
-    None = -1,
-    Maybe = 0,
-    Yes = 1,
 };
-
-//enum Signal // Listed by priority
-//{
-//    Move = 0,
-//    Attack = 1,
-//    Dodge = 2,
-//    Block = 3,
-//    Shift = 4
-//};
 
 enum Signal
 {
-    Dodge = 3,
-    Block = 2,
-    Attack = 1,
+    Dodge = 4,
+    Block = 3,
+    Attack = 2,
+    Jump = 1,
     Move = 0,
-    Nothing = -1 // basically, always receive Idle signal
+    Nothing = -1
 };
 
-
-////enum TypeEnum
-////{
-////    Move = 0,
-////    Attack = 1,
-////    Dodge = 2,
-////    Block = 3,
-////    Shift = 4
-////};
-//
-//struct CreatureSignal
-//{
-//public:
-//
-//private:
-////    TypeEnum type;
-//};
 
 #endif // CREATURESIGNALS_H

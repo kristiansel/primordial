@@ -38,15 +38,15 @@ void Creature::resolveActionRequests(float dt)
         case Signal::Move: // most likely
             {
                 doing = {Move, 1.0/20.0}; // keep moving for a twentieth of a second
-                playAnim(Anim::Run);
+                playAnim(Anim::RunForward);
             } break;
         case Signal::Attack:
             {
                 float speed = 1.0;
 
-                doing = {Attack, getAnimDuration(Anim::SwingLeftRight1H)/speed};
+                doing = {Attack, getAnimDuration(Anim::SwingRight1H)/speed};
 
-                playAnim(Anim::SwingLeftRight1H, true, speed);
+                playAnim(Anim::SwingRight1H, true, speed);
             } break;
         case Signal::Dodge:
             {
@@ -63,6 +63,14 @@ void Creature::resolveActionRequests(float dt)
                 doing = {Block, getAnimDuration(Anim::ParryLeft1H)/speed};
 
                 playAnim(Anim::ParryLeft1H, true, speed);
+            } break;
+        case Signal::Jump:
+            {
+                float speed = 1.0;
+
+                doing = {Jump, getAnimDuration(Anim::JumpUp)/speed};
+
+                playAnim(Anim::JumpUp, true, speed);
             } break;
         }
     }
@@ -193,4 +201,9 @@ void Creature::block()
 void Creature::shift()
 {
     state.isShiftDown = true;
+}
+
+void Creature::jump()
+{
+    signal_stack.push_back(Signal::Jump);
 }
