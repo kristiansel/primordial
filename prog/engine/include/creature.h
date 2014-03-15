@@ -2,20 +2,27 @@
 #define CREATURE_H
 
 #include "actor.h"
+#include "creaturesignals.h"
 
-class Creature : public Actor, virtual public MoveSignalReceiver
+class Creature : public Actor, virtual public SignalReceiver // count virtula looms in the distance
 {
     public:
         Creature();
         virtual ~Creature();
 
-        void resolveActionRequests();
+        void resolveActionRequests(float dt);
 
         // Creature's implementation of MoveSignalReceiver
         void moveForward(float check_sign, float dt);
         void moveLeft(float check_sign, float dt);
         void rotateUp(float unused, float dt);
         void rotateLeft(float check_sign, float dt);
+
+        //void changeStance(int value);
+        void attack();
+        void dodge();
+        void block();
+        void shift();
 
 
         glm::vec3 getLookDir() const;
@@ -35,31 +42,17 @@ class Creature : public Actor, virtual public MoveSignalReceiver
         glm::quat look_rot;
 
 
-        // signals and animation
-        // |
-        // |
-        // |
-        // V
-        enum Anim
+        struct State // Could use bitflags for this?
         {
-            Idle = 0,
-            Walk = 1,
-            Run = 2,
-            Idle1H = 3,
-            Walk1H = 4,
-            StrafeLeft1H = 5,
-            StrafeRight1H = 6,
-            SwingLeftRight1H = 7,
-            SwingRightLeft1H = 8,
-            ParryLeft1H = 9,
-            ParryRight1H = 10,
-            DodgeBack = 11
-        };
+//            bool isIdle;
+            bool isShiftDown;
+        } state;
 
-        enum Signal
+        struct Action
         {
-            Move = 0
-        };
+            Signal signal;
+            float time;
+        } doing;
 
         std::vector<Signal> signal_stack;
 

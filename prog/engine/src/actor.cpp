@@ -3,11 +3,7 @@
 
 Actor::Actor() : num_pose_matrices(1),
                  pose_matrices(new glm::mat4(1.0)),
-                 // without blending
-                 // active_anim(0),
-                 // with blending
                  active_anim(-1),
-                 active_anim_time(0.f),
                  paused(true),
                  speed_factor(1.0),
                  skel_ptr(nullptr)
@@ -74,39 +70,52 @@ void Actor::poseRest()
     paused = true;
 }
 
-void Actor::playAnim(int anim_index_in, float speed)
+void Actor::playAnim(int anim_index_in, bool restart, float speed)
 {
-    if (anim_index_in < skel_ptr->getNumAnims())
+    if (anim_index_in < skel_ptr->getNumAnims() && !(anim_index_in<0))
     {
+        active_anim = anim_index_in; // change to new animation
 
-//        // No blending
-//        if (active_anim != anim_index_in) // If not currently playing
-//        {
-//            active_anim = anim_index_in; // change to new animation
-//            active_anim_time = 0.0;
-//        }
-
-        // With blending
-        if (active_anim != anim_index_in) // If not currently the main animation
+        // If not restart, then check if the animation
+        // is already playing
+        bool found = false;
+        if (!restart)
         {
-            active_anim = anim_index_in; // change to new animation
-                                    // index        blend_weight    time
-//            std::cout << "gets here\n";
-
-            bool found = false;
             for (ActiveAnim &anim : active_anims)
             {
                 if (anim.anim_index == anim_index_in)
+                {
                     found = true;
-            }
-            if (!found)
-            {
-//                std::cout << "actually adding something to active_anims...\n";
-                active_anims.push_back( {anim_index_in, 0.0,            0.0} );
+                    main_anim_uid = anim.uid;
+                }
             }
         }
 
-        speed_factor = speed;
+        if (!found) // if not currently playing
+        {
+            // Start the animation
+
+            // generate a unique ID for this clip
+            int uid = uid_gen.getClipUID();
+
+            // add it to the list of blend animations
+            active_anims.push_back( {anim_index_in, // animation index
+                                     0.0,           // initial blend weight
+                                     0.0,           // initial time
+                                     uid} );        // unique clip id
+
+            // Set main clip
+            main_anim_uid = uid;
+
+            // Set speed on animation start
+            speed_factor = speed;
+        }
+
+        // Could set speed every time playAnim is called and allow for animations to
+        // change speed under playing, however, knowing beforehand how
+        // long an animation will last simplifies the animation-transition
+        // flow logic
+
         paused = false;
     }
     else
@@ -116,13 +125,15 @@ void Actor::playAnim(int anim_index_in, float speed)
 
 }
 
+//void Actor::reStartAnim(int anim_index_in, float speed) // must blend with self... interesting
+//{
+//
+//}
+
 void Actor::updateAnim(float dt)
 {
     if (!paused)
     {
-//        // No blending
-//        active_anim_time+=speed_factor*dt;
-//        if (skel_ptr) skel_ptr->poseMatrices(pose_matrices, active_anim, active_anim_time);
 
         // With blending
         for(ActiveAnim &anim : active_anims)
@@ -131,7 +142,8 @@ void Actor::updateAnim(float dt)
             anim.anim_time+=advance_time;
 
             float weight_change = advance_time/blend_time;
-            if (anim.anim_index == active_anim) // It is the main active animation
+            // if (anim.anim_index == active_anim) // It is the main active animation
+            if (anim.uid == main_anim_uid) // It is the main active animation
             {
                 // increase blend weight
                 float new_weight = anim.blend_weight + weight_change;
@@ -178,17 +190,17 @@ void Actor::togglePauseAnim()
     paused = !paused;
 }
 
-float Actor::getActiveAnimTime() const
-{
-    return active_anim_time;
-}
+//float Actor::getActiveAnimTime() const
+//{
+//    return active_anim_time;
+//}
 
-float Actor::getActiveAnimTimeMod() const
-{
-    float duration = 0;
-    if (skel_ptr) duration = skel_ptr->animations[active_anim].duration;
-    return active_anim_time-(int)(active_anim_time/duration)*duration;
-}
+//float Actor::getActiveAnimTimeMod() const
+//{
+//    float duration = 0;
+//    if (skel_ptr) duration = skel_ptr->animations[active_anim].duration;
+//    return active_anim_time-(int)(active_anim_time/duration)*duration;
+//}
 
 int Actor::getActiveAnimIndex() const
 {
@@ -198,4 +210,9 @@ int Actor::getActiveAnimIndex() const
 int Actor::getNumAnims() const
 {
     if (skel_ptr) return skel_ptr->getNumAnims();
+}
+
+float Actor::getAnimDuration(int anim_index)
+{
+    return ( (skel_ptr) ? skel_ptr->getAnimDuration(anim_index) : 0.0 );
 }

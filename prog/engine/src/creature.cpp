@@ -3,7 +3,10 @@
 Creature::Creature() :
     movespeed(3.0), // m/s (1.5 walk, 3.0 jog, 6.0 run)
     //look_rot(glm::quat(1.0, 0.0, 0.0, 0.0))
-    look_rot(rot)
+    look_rot(rot),
+    // isIdle, isShiftDown
+    state( {false} ),
+    doing( {Signal::Nothing, 0.000})
 {
     //ctor
     signal_stack.reserve(signal_stack_capacity);
@@ -14,21 +17,83 @@ Creature::~Creature()
     //dtor
 }
 
-void Creature::resolveActionRequests()
+void Creature::resolveActionRequests(float dt)
 {
-    bool moving = false;
-//    receive
-    while (signal_stack.size() > 0)
+    // decrement the time
+    doing.time -=dt;
+    if (!signal_stack.empty())
     {
-        // get top signal
-        Signal signal = signal_stack.back();
-        signal_stack.pop_back();
+        std::sort(signal_stack.begin(), signal_stack.end());
 
-        // process signal
-        if (signal == Signal::Move) moving = true;
+        // get reference to top prioritized signal
+        Signal &top_pri = signal_stack.back();
+
+        // Gameplay decision: If singals should be hierarchical (uncomment)
+        // or the new signal should always interupt current (comment)
+        // if (top_pri > doing.signal)
+
+        // execute that signal
+        switch (top_pri)
+        {
+        case Signal::Move: // most likely
+            {
+                doing = {Move, 1.0/20.0}; // keep moving for a twentieth of a second
+                playAnim(Anim::Run);
+            } break;
+        case Signal::Attack:
+            {
+                float speed = 1.0;
+
+                doing = {Attack, getAnimDuration(Anim::SwingLeftRight1H)/speed};
+
+                playAnim(Anim::SwingLeftRight1H, true, speed);
+            } break;
+        case Signal::Dodge:
+            {
+                float speed = 1.0;
+
+                doing = {Dodge, getAnimDuration(Anim::DodgeBack)/speed};
+
+                playAnim(Anim::DodgeBack, true, speed);
+            } break;
+        case Signal::Block:
+            {
+                float speed = 1.0;
+
+                doing = {Block, getAnimDuration(Anim::ParryLeft1H)/speed};
+
+                playAnim(Anim::ParryLeft1H, true, speed);
+            } break;
+        }
+    }
+    else // No signal received
+    {
+        // Start blending into idle when only "blend time" remains
+        // if we set 0.0 here, blend-to-idle will start at 0.0, and
+        // the old animation will start replaying (for "blend time"
+        // more seconds, this does not look good, so we start blending
+        // into idle while there is still some time remaining on the old
+        // animation
+        if (doing.time < Actor::blend_time) // finished whatever was doing
+        {
+            playAnim(Anim::Idle); // pre-emptively blend into idle
+
+            if (doing.time < 0.0) // but the ACTION is not finished until time 0.0
+            {
+                // Then do nothing
+                doing = {Nothing, 0.000};
+            }
+        }
+        // else keep on playing whatever animation was playing
     }
 
-    if (!moving) playAnim(Anim::Idle);
+    // Get ready for next frame
+
+    // clear signal stack
+    signal_stack.clear();
+
+    // shift is not held down generally
+    state.isShiftDown = false;
 }
 
 /// Animations
@@ -41,14 +106,14 @@ void Creature::moveForward(float check_sign, float dt)
 
     Object3d::moveForward(amount, 0.0); // second argument unused;
 
-    // Blend into forward movement animation
-    if (check_sign>0)
-        playAnim(Anim::Run);
-    else
-        playAnim(Anim::Run, 0.5);
-        //playAnim(Anim::Run, -1.0); // Negative numbers for speed do not work so well...
-                                  // should probably look into timeseries for supporting
-                                  // backward animation playback
+//    // Blend into forward movement animation
+//    if (check_sign>0)
+//        playAnim(Anim::Run);
+//    else
+//        playAnim(Anim::Run, 0.5);
+//        //playAnim(Anim::Run, -1.0); // Negative numbers for speed do not work so well...
+//                                  // should probably look into timeseries for supporting
+//                                  // backward animation playback
 
     signal_stack.push_back(Signal::Move);
 //    setDir(look_dir_projected_xz);
@@ -109,30 +174,23 @@ glm::quat Creature::getLookRot() const
 {
     return look_rot;
 }
-//
-//void Creature::setLookRot(glm::quat q_in)
-//{
-//    look_rot = q_in;
-//};
-//
-//void Creature::lookInDir(const glm::vec3 &dir_in)
-//{
-//    // Very naive implementation...
-//    glm::vec3 no_rot_vec = glm::vec3(0.0, 0.0, -1.0);
-//    look_rot = glm::quat(1.0, 0.0, 0.0, 0.0);
-//
-//    // first rotate around y
-//    glm::vec3 dir_in_proj_xz = glm::normalize(glm::vec3(dir_in.x, 0.0, dir_in.z));
-//    float angle_rad_y = acosf(glm::dot(dir_in_proj_xz, no_rot_vec));
-//    look_rot = glm::rotate(look_rot, angle_rad_y, glm::vec3(0.0, 1.0, 0.0));
-//
-//    // then rotate around x
-//    glm::vec3 dir_in_proj_yz = glm::normalize(glm::vec3(0.0, dir_in.y, dir_in.z));
-//    float angle_rad_x = acosf(glm::dot(dir_in_proj_yz, no_rot_vec));
-//    look_rot = glm::rotate(look_rot, angle_rad_x, glm::vec3(1.0, 0.0, 0.0));
-//}
-//
-//void Creature::lookAt(const glm::vec3 &pos_in)
-//{
-//    glm::mat4
-//}
+
+void Creature::attack()
+{
+    signal_stack.push_back(Signal::Attack);
+}
+
+void Creature::dodge()
+{
+    signal_stack.push_back(Signal::Dodge);
+}
+
+void Creature::block()
+{
+    signal_stack.push_back(Signal::Block);
+}
+
+void Creature::shift()
+{
+    state.isShiftDown = true;
+}

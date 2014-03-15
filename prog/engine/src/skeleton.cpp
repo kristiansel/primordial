@@ -373,7 +373,7 @@ void Skeleton::poseMatricesBlend( glm::mat4* matrices,
                 float blend_weight_norm = anim.blend_weight/sum;
                 float this_weight = blend_weight_norm/(blend_weight_norm+spent_weight);
                 tot_key_pos = glm::mix(tot_key_pos, key_pos, this_weight);
-                tot_key_rot = glm::mix(tot_key_rot, key_rot, this_weight);
+                tot_key_rot = helper::qslerp(tot_key_rot, key_rot, this_weight);
                 tot_key_sca = glm::mix(tot_key_sca, key_sca, this_weight);
 
                 spent_weight +=blend_weight_norm;
@@ -429,6 +429,18 @@ void Skeleton::poseMatricesBlend( glm::mat4* matrices,
     }
 }
 
+float Skeleton::getAnimDuration(int anim_index)
+{
+    if (anim_index<num_anims && anim_index>=0)
+    {
+        return animations[anim_index].duration;
+    }
+    else
+    {
+        std::cerr << "error: attempted to get the duration of animtion out of bounds\n";
+        return 0.0;
+    }
+}
 
 ///---------------------------------------------------
 
@@ -459,32 +471,32 @@ Skeleton::Animation::Channel::~Channel()
 
 }
 
-///---------------------------------------------------
+/////---------------------------------------------------
 
 
-Skeleton::Pose::Pose() : num_transforms(0),
-                         transforms(nullptr)
-{
-    // ctor
-}
-
-Skeleton::Pose::~Pose()
-{
-    delete [] transforms;
-}
-
-Skeleton::Pose::Pose(int num_transforms_in)
-{
-    allocate(num_transforms_in);
-}
-
-Skeleton::Pose::Pose(Skeleton* skel)
-{
-    allocate(skel->getNumBones());
-}
-
-void Skeleton::Pose::allocate(int num_transforms_in)
-{
-    num_transforms = num_transforms_in;
-    transforms = new Transform [num_transforms];
-}
+//Skeleton::Pose::Pose() : num_transforms(0),
+//                         transforms(nullptr)
+//{
+//    // ctor
+//}
+//
+//Skeleton::Pose::~Pose()
+//{
+//    delete [] transforms;
+//}
+//
+//Skeleton::Pose::Pose(int num_transforms_in)
+//{
+//    allocate(num_transforms_in);
+//}
+//
+//Skeleton::Pose::Pose(Skeleton* skel)
+//{
+//    allocate(skel->getNumBones());
+//}
+//
+//void Skeleton::Pose::allocate(int num_transforms_in)
+//{
+//    num_transforms = num_transforms_in;
+//    transforms = new Transform [num_transforms];
+//}

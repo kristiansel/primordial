@@ -116,6 +116,7 @@
 		<Unit filename="include/camera.h" />
 		<Unit filename="include/combinationstage.h" />
 		<Unit filename="include/creature.h" />
+		<Unit filename="include/creaturesignals.h" />
 		<Unit filename="include/culler.h" />
 		<Unit filename="include/geometry.h" />
 		<Unit filename="include/light.h" />

@@ -14,7 +14,7 @@
 
 #include "signals.h"
 
-class Object3d : virtual public MoveSignalReceiver
+class Object3d : virtual public SignalReceiver
 {
 public:
     Object3d();

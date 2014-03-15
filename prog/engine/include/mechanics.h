@@ -48,6 +48,13 @@ public:
     void playerRotateUpVal(float);
     void playerRotateLeftVal(float);
 
+    /// More controls
+    //virtual void playerChangeStance();
+    void playerAttack();
+    void playerDodge();
+    void playerBlock();
+    void playerShift();
+
     /// Testing
     void func(int num_in);
 protected:
@@ -59,7 +66,7 @@ private:
     /// Controls related
     const float speed;          /// 1.0/s
     const float camTurnSpeed;   /// deg/s
-    MoveSignalReceiver* controlled;
+    SignalReceiver* controlled;
     Creature * player;    // the creature chased by chase-cam
 
 

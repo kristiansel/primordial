@@ -35,6 +35,7 @@ struct ActiveAnim
     int anim_index;
     float blend_weight;
     float anim_time;
+    int uid;
 };
 
 class Skeleton /// This is a resource (store one copy)
@@ -61,6 +62,8 @@ public:
 
     int getNumBones() {return num_bones; };
     int getNumAnims() {return num_anims; };
+
+    float getAnimDuration(int anim_index);
 protected:
 
 public: /// private: // public for debugging
@@ -141,33 +144,33 @@ public:
     float ch_duration;
     };
 
-/// Output form data structure
-struct Skeleton::Pose
-{
-public:
-    struct Transform /// Corresponding to bone/channel
-    {
-        Transform() : pos(glm::vec3(0.0, 0.0, 0.0)),
-                      rot(glm::quat(1.0, 0.0, 0.0, 0.0)),
-                      sca(glm::vec3(0.0, 0.0, 0.0)) {};
-        glm::vec3 pos;
-        glm::quat rot;
-        glm::vec3 sca;
-    };
-public:
-    Pose();
-    ~Pose();
-
-    explicit Pose(int num_transforms_in);
-    explicit Pose(Skeleton* skel);
-
-    int num_transforms;
-    Transform* transforms;
-
-private:
-    void allocate(int num_transforms_in);
-
-};
+///// Output form data structure
+//struct Skeleton::Pose
+//{
+//public:
+//    struct Transform /// Corresponding to bone/channel
+//    {
+//        Transform() : pos(glm::vec3(0.0, 0.0, 0.0)),
+//                      rot(glm::quat(1.0, 0.0, 0.0, 0.0)),
+//                      sca(glm::vec3(0.0, 0.0, 0.0)) {};
+//        glm::vec3 pos;
+//        glm::quat rot;
+//        glm::vec3 sca;
+//    };
+//public:
+//    Pose();
+//    ~Pose();
+//
+//    explicit Pose(int num_transforms_in);
+//    explicit Pose(Skeleton* skel);
+//
+//    int num_transforms;
+//    Transform* transforms;
+//
+//private:
+//    void allocate(int num_transforms_in);
+//
+//};
 
 
 

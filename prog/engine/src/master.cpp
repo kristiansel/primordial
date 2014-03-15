@@ -51,6 +51,9 @@ void Master::initWindow()
     window.setVerticalSyncEnabled(false); /// This forces frame rate to 60 FPS?
 
     window.setActive(false);
+
+    // Disable repeated key presses when holding down keys
+    window.setKeyRepeatEnabled(false);
 }
 
 //void Master::init()
@@ -187,6 +190,8 @@ bool Master::handleInput()
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))   mechanics.playerRotateDown();
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))   mechanics.playerRotateLeft();
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))  mechanics.playerRotateRight();
+
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))  mechanics.playerShift();
     }
 
     /// Slow event based input
@@ -221,7 +226,10 @@ bool Master::handleInput()
                     press_pos_y = mouse_pos.y;
                     rmb_down = true;
                 } break;
-            case sf::Mouse::Left: break;
+            case sf::Mouse::Left:
+                {
+                    mechanics.playerAttack();
+                } break;
             case sf::Mouse::Middle: break;
             default: break;
             } break;
@@ -245,6 +253,12 @@ bool Master::handleInput()
                 break;
             case sf::Keyboard::R:
                 // do something
+                break;
+            case sf::Keyboard::E:
+                mechanics.playerBlock();
+                break;
+            case sf::Keyboard::Q:
+                mechanics.playerDodge();
                 break;
             case sf::Keyboard::F1:
                 mechanics.func(1);

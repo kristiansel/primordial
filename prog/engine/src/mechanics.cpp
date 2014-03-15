@@ -113,7 +113,7 @@ void Mechanics::step(World &world_in, float dt_in)
     /// Resolve creature signals
     for (shared_ptr<Creature> creature : world_in.creatures)
     {
-        creature->resolveActionRequests();
+        creature->resolveActionRequests(dt_in);
     }
 
     world_in.physicsStep(dt_in);
@@ -193,6 +193,26 @@ void Mechanics::playerRotateUpVal(float val)
 void Mechanics::playerRotateLeftVal(float val)
 {
     if (controlled) controlled->rotateLeft(val, *dt);
+}
+
+void Mechanics::playerAttack()
+{
+    if (controlled) controlled->attack();
+}
+
+void Mechanics::playerDodge()
+{
+    if (controlled) controlled->dodge();
+}
+
+void Mechanics::playerBlock()
+{
+    if (controlled) controlled->block();
+}
+
+void Mechanics::playerShift()
+{
+    if (controlled) controlled->shift();
 }
 
 void Mechanics::func(int num_in)
