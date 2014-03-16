@@ -9,46 +9,46 @@ Master::Master() :
     running(true),
     render_thread_loaded(false)
 {
-//    /// initiate
+//    // initiate
 //    init();
-//    /// initiate
+//    // initiate
 //    init();
 
-    /// load resources
+    // load resources
     loadResources();
 
-    /// Start window in main thread...
+    // Start window in main thread...
     initWindow();
 
-    /// Launch threads
+    // Launch threads
     render_thread = Thread(&Master::renderTasks, this);
     //test_thread = Thread(&Master::testThreadTasks, this);
 
-    /// Wait for render_thread to load fully
+    // Wait for render_thread to load fully
     std::cout << "waiting for render thread\n";
-    while (!render_thread_loaded) {} /// WAIT
+    while (!render_thread_loaded) {} // WAIT
 
-    /// main loop
+    // main loop
     mainLoop();
 
-    /// cleanup
+    // cleanup
     cleanUp();
 }
 
 Master::~Master()
 {
-    /// dtor
+    // dtor
 }
 
 void Master::initWindow()
 {
-    /// to be loaded from settings
+    // to be loaded from settings
     scr_width_px = 1400;
     scr_height_px = 900;
 
-    /// create the window and OpenGL context
+    // create the window and OpenGL context
     window.create(sf::VideoMode(scr_width_px, scr_height_px), "Primordial", sf::Style::Default, sf::ContextSettings(32, 0, 0, 4, 4));
-    window.setVerticalSyncEnabled(false); /// This forces frame rate to 60 FPS?
+    window.setVerticalSyncEnabled(false); // This forces frame rate to 60 FPS?
 
     window.setActive(false);
 
@@ -58,22 +58,22 @@ void Master::initWindow()
 
 //void Master::init()
 //{
-////    /// to be loaded from settings
-////    scr_width_px = 1400;
-////    scr_height_px = 900;
-////
-////    /// create the window and OpenGL context
-////    window.create(sf::VideoMode(scr_width_px, scr_height_px), "Primordial", sf::Style::Default, sf::ContextSettings(32, 0, 0, 4, 4));
-////    window.setVerticalSyncEnabled(true);
-////
-////    window.setActive(false);
-////    /// Deactivate window in current thread
-////    window.setActive(true);
-////
-////    renderer.init(scr_width_px, scr_height_px);
-////
-////    /// Initialize the game module
-////    mechanics.init(world, dt);
+///    // to be loaded from settings
+///    scr_width_px = 1400;
+///    scr_height_px = 900;
+///
+///    // create the window and OpenGL context
+///    window.create(sf::VideoMode(scr_width_px, scr_height_px), "Primordial", sf::Style::Default, sf::ContextSettings(32, 0, 0, 4, 4));
+///    window.setVerticalSyncEnabled(true);
+///
+///    window.setActive(false);
+///    // Deactivate window in current thread
+///    window.setActive(true);
+///
+///    renderer.init(scr_width_px, scr_height_px);
+///
+///    // Initialize the game module
+///    mechanics.init(world, dt);
 //
 //
 //}
@@ -85,34 +85,34 @@ void Master::loadResources()
 
 void Master::mainLoop()
 {
-    /// Initialize the game module
+    // Initialize the game module
     mechanics.init(world, dt);
 
 
-    /// run the main loop
+    // run the main loop
     while (running)
     {
-        /// start the watch
+        // start the watch
         clock.restart();
 
-        /// handle user input
+        // handle user input
         running = handleInput();
 
-        /// Step the simulation
+        // Step the simulation
         mechanics.step(world, dt);
 
         // cout << "dt = " << dt << "\n";
 
-//        /// Choose what to render
-//        culler.stage(scene, world); /// stage the scene from the world THIS breaks everything since non-shared shared pointers go out of scope
+//        // Choose what to render
+//        culler.stage(scene, world); // stage the scene from the world THIS breaks everything since non-shared shared pointers go out of scope
 //
-//        /// draw...
+//        // draw...
 //        renderer.draw(scene, dt);
 //
-//        /// end the current frame (internally swaps the front and back buffers)
+//        // end the current frame (internally swaps the front and back buffers)
 //        window.display();
 
-        /// record the time
+        // record the time
         dt = clock.getElapsedTime().asSeconds();
 
 //        cout << "frame time = " << dt << ", FPS = " << 1.0/dt << "\n";
@@ -122,20 +122,20 @@ void Master::mainLoop()
 
 void Master::renderTasks()
 {
-//    /// to be loaded from settings
+//    // to be loaded from settings
 //    scr_width_px = 1400;
 //    scr_height_px = 900;
 //
-//    /// create the window and OpenGL context
+//    // create the window and OpenGL context
 //    window.create(sf::VideoMode(scr_width_px, scr_height_px), "Primordial", sf::Style::Default, sf::ContextSettings(32, 0, 0, 4, 4));
 //    window.setVerticalSyncEnabled(true);
 
-    /// Activate the window in the current thread
+    // Activate the window in the current thread
     window.setActive(true);
 
     renderer.init(scr_width_px, scr_height_px);
 
-///// Initialize the game module
+//// Initialize the game module
 //    mechanics.init(world, dt);
 
     render_thread_loaded = true;
@@ -146,18 +146,18 @@ void Master::renderTasks()
 
     while (running)
     {
-        /// Choose what to render
-        culler.stage(scene, world); /// stage the scene from the world THIS breaks everything since non-shared shared pointers go out of scope
+        // Choose what to render
+        culler.stage(scene, world); // stage the scene from the world THIS breaks everything since non-shared shared pointers go out of scope
 
-        /// calculate dtRender
+        // calculate dtRender
         timeRenderNew = absClock.getElapsedTime().asSeconds();
         dtRender = timeRenderNew-timeRenderLast;
         timeRenderLast = timeRenderNew;
 
-        /// draw
+        // draw
         renderer.draw(scene, dtRender);
 
-        /// end the current frame (internally swaps the front and back buffers)
+        // end the current frame (internally swaps the front and back buffers)
         window.display();
     }
 }
@@ -172,13 +172,13 @@ void Master::renderTasks()
 
 void Master::cleanUp()
 {
-    /// join threads
+    // join threads
     render_thread.join();
 }
 
 bool Master::handleInput()
 {
-    /// Process fast input
+    // Process fast input
     if (has_focus)
     {
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))      mechanics.playerMoveForward();
@@ -194,7 +194,7 @@ bool Master::handleInput()
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))  mechanics.playerShift();
     }
 
-    /// Slow event based input
+    // Slow event based input
     bool running = true;
 
     sf::Event event;
@@ -206,7 +206,7 @@ bool Master::handleInput()
             running = false;
             break;
         case sf::Event::Resized:
-            /// adjust the viewport when the window is resized
+            // adjust the viewport when the window is resized
             renderer.resizeWindow(event.size.width, event.size.height);
             break;
         case sf::Event::LostFocus:

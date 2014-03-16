@@ -15,7 +15,7 @@ Mesh::Mesh() : vertex_num(0), triangle_num(0)
     vbo_id  = 99999;
     ibo_id  = 99999;
 
-    /// Change this at a later stage
+    // Change this at a later stage
     // set the materials <-- change this
     material.ambient = glm::vec4(0.2, 0.2, 0.1, 1.0);
     material.diffuse = glm::vec4(0.4, 0.8, 0.4, 1.0);
@@ -30,7 +30,7 @@ Mesh::Mesh() : vertex_num(0), triangle_num(0)
 Mesh::~Mesh()
 {
 //    cout << "WARNING: DELETING MESH\n";
-    /// release RAM pointers
+    // release RAM pointers
     delete [] vertices;
     delete [] triangles;
 
@@ -38,7 +38,7 @@ Mesh::~Mesh()
     // bound in render thread
     LockGuard lock(sharedContextLoading);
 
-    /// release video RAM buffers
+    // release video RAM buffers
     glBindBuffer(GL_ARRAY_BUFFER, 0); // do you really need this?
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
@@ -66,7 +66,7 @@ void Mesh::geomToVRAM()
     // bound in render thread
     LockGuard lock(sharedContextLoading);
 
-    /// send directly to graphics card
+    // send directly to graphics card
     glGenBuffers(1, &vbo_id); //must come after glewinit
     glBindBuffer(GL_ARRAY_BUFFER, vbo_id);
     glBufferData(GL_ARRAY_BUFFER, vertex_num*sizeof(Vertex), vertices, GL_STATIC_DRAW);
@@ -101,9 +101,9 @@ void Mesh::fromFile2(string mesh_key)
         if (debug) std::cout << "filesize: "<< filesize << " bytes" << "\n";
 
         std::string filetype;
-        filetype.resize(4*sizeof(char));      /// 4 bytes     file type
-        int verMaj;                           /// 4 bytes     version major
-        int verMin;                           /// 4 bytes     version minor
+        filetype.resize(4*sizeof(char));      // 4 bytes     file type
+        int verMaj;                           // 4 bytes     version major
+        int verMin;                           // 4 bytes     version minor
 
         MemStreamer reader(memblock, 0, filesize);
         reader.chomp(&filetype[0],  4*sizeof(char));
@@ -144,7 +144,7 @@ void Mesh::fromFile2(string mesh_key)
 
         }
 
-        /// Read triangles
+        // Read triangles
         reader.chomp(&triangle_num, 1*sizeof(unsigned int));
         delete[] triangles;
         triangles = new Triangle [triangle_num];

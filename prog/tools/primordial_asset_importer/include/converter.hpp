@@ -17,14 +17,7 @@ bool convert(std::string daeFilePath_in,
 
     Assimp::Importer importer;
 
-    const aiScene* scene;   /// Non-owner pointer
-
-//    scene = importer.ReadFile( daeFilePath_in,
-//    aiProcess_CalcTangentSpace       |
-//    aiProcess_Triangulate            |
-//    aiProcess_JoinIdenticalVertices  |
-//    aiProcess_SortByPType            |
-//    aiProcess_PreTransformVertices);
+    const aiScene* scene;   // Non-owner pointer
 
     scene = importer.ReadFile( daeFilePath_in,
     aiProcess_CalcTangentSpace       |
@@ -33,17 +26,17 @@ bool convert(std::string daeFilePath_in,
     aiProcess_SortByPType            |
     aiProcess_ImproveCacheLocality  );
 
-    if( !scene) /// There were errors
+    if( !scene) // There were errors
     {
         std::cerr << importer.GetErrorString() << "\n";
         return false;
     }
-    else /// import went smoothly
+    else // import went smoothly
     {
         animPackBin(scene, bnsFilePath_out, aniSpecPath_in);
         geoPackBin(scene, geoFilePath_out);
     }
 
-    /// Importer deletes scene
+    // Importer deletes scene
 }
 #endif // CONVERTER_H

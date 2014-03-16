@@ -17,8 +17,8 @@ class ShadowMap : public ShaderBase
 
         void init();
 
-        void activate(const glm::mat4 &light_vp);                /// Draws to frame buffer object
-        //void activateDrawContent();     /// Draws directly to screen buffer, needs update in case of debug
+        void activate(const glm::mat4 &light_vp);                // Draws to frame buffer object
+        //void activateDrawContent();     // Draws directly to screen buffer, needs update in case of debug
 
         void clearBoneMatrices();
 
@@ -39,14 +39,14 @@ class ShadowMap : public ShaderBase
     protected:
     private:
 
-        /// Uniforms
+        // Uniforms
         struct Uniforms
         {
             GLuint light_mvp_mat;
             GLuint bone_mat;
         } uniforms;
 
-        /// Attributes
+        // Attributes
         struct Attributes
         {
             GLuint vertex;
@@ -54,12 +54,12 @@ class ShadowMap : public ShaderBase
             GLuint bone_weight;
         } attributes;
 
-        /// Frame buffer info
+        // Frame buffer info
         GLuint fbo;
         GLuint tex_depth;
 
-        /// Internally stored, so they do not have to be
-        /// passed as arguments every single draw call
+        // Internally stored, so they do not have to be
+        // passed as arguments every single draw call
         glm::mat4 light_vp_value;
         glm::mat4 clear_matrices[MAX_BONE_NUM];
 };

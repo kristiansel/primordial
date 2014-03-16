@@ -1,0 +1,7425 @@
+=================================================
+time: Sun Mar 16 12:44:01 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: Scene
+numMeshes: 0
+numChildren: 6
+transform: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+>node: Lamp_001
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	1.52391	
+>-0.955171	0.199884	-0.218391	-1.67053	
+>-0.0551891	0.604525	0.794672	2.22765	
+>0	0	0	1	
+>node: Camera
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>-0.771565	0.275762	-0.573274	-3.00277	
+>-0.636058	-0.349737	0.687833	3.92316	
+>-0.0108168	0.895343	0.445245	3.59832	
+>0	0	0	1	
+>node: Lamp
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	-1.37321	
+>-0.955171	0.199884	-0.218391	2.54951	
+>-0.0551891	0.604525	0.794672	2.12195	
+>0	0	0	1	
+>node: Scene_root
+>numMeshes: 0
+>numChildren: 1
+>transform: 
+>-0.1	-1.4243e-015	-8.74228e-009	0	
+>-8.74228e-009	1.62921e-008	0.1	0	
+>0	0.1	-1.62921e-008	0.8	
+>0	0	0	1	
+>>node: Dir_Master
+>>numMeshes: 0
+>>numChildren: 1
+>>transform: 
+>>0.970367	-0.0931397	-0.222965	1.11796e-006	
+>>-0.0931398	0.707255	-0.700796	3.1005	
+>>0.222965	0.700796	0.677622	0.185055	
+>>0	0	0	1	
+>>>node: Master
+>>>numMeshes: 0
+>>>numChildren: 5
+>>>transform: 
+>>>0.970367	-0.222965	-0.0931398	-0.490049	
+>>>-0.0931396	-0.700796	0.707255	-1.54026	
+>>>-0.222965	-0.677621	-0.700796	-1.48932	
+>>>0	0	0	1	
+>node: loincloth
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+>node: humale
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: sword
+using node hierarchy transform
+parent node to mesh: sword
+exporting mesh: loincloth
+using node hierarchy transform
+parent node to mesh: loincloth
+exporting mesh: humale
+using node hierarchy transform
+parent node to mesh: humale
+=================================================
+time: Sun Mar 16 13:10:51 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: Scene
+numMeshes: 0
+numChildren: 6
+transform: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+>node: Lamp_001
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	1.52391	
+>-0.955171	0.199884	-0.218391	-1.67053	
+>-0.0551891	0.604525	0.794672	2.22765	
+>0	0	0	1	
+>node: Camera
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>-0.771565	0.275762	-0.573274	-3.00277	
+>-0.636058	-0.349737	0.687833	3.92316	
+>-0.0108168	0.895343	0.445245	3.59832	
+>0	0	0	1	
+>node: Lamp
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	-1.37321	
+>-0.955171	0.199884	-0.218391	2.54951	
+>-0.0551891	0.604525	0.794672	2.12195	
+>0	0	0	1	
+>node: Scene_root
+>numMeshes: 0
+>numChildren: 1
+>transform: 
+>-0.1	-1.4243e-015	-8.74228e-009	0	
+>-8.74228e-009	1.62921e-008	0.1	0	
+>0	0.1	-1.62921e-008	0.8	
+>0	0	0	1	
+>>node: Dir_Master
+>>numMeshes: 0
+>>numChildren: 1
+>>transform: 
+>>0.970367	-0.0931397	-0.222965	1.11796e-006	
+>>-0.0931398	0.707255	-0.700796	3.1005	
+>>0.222965	0.700796	0.677622	0.185055	
+>>0	0	0	1	
+>>>node: Master
+>>>numMeshes: 0
+>>>numChildren: 5
+>>>transform: 
+>>>0.970367	-0.222965	-0.0931398	-0.490049	
+>>>-0.0931396	-0.700796	0.707255	-1.54026	
+>>>-0.222965	-0.677621	-0.700796	-1.48932	
+>>>0	0	0	1	
+>node: loincloth
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+>node: humale
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: sword
+using node hierarchy transform
+parent node to mesh: sword
+exporting mesh: loincloth
+using node hierarchy transform
+parent node to mesh: loincloth
+exporting mesh: humale
+using node hierarchy transform
+parent node to mesh: humale
+=================================================
+time: Sun Mar 16 13:37:20 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: Scene
+numMeshes: 0
+numChildren: 6
+transform: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+>node: Lamp_001
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	1.52391	
+>-0.955171	0.199884	-0.218391	-1.67053	
+>-0.0551891	0.604525	0.794672	2.22765	
+>0	0	0	1	
+>node: Camera
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>-0.771565	0.275762	-0.573274	-3.00277	
+>-0.636058	-0.349737	0.687833	3.92316	
+>-0.0108168	0.895343	0.445245	3.59832	
+>0	0	0	1	
+>node: Lamp
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	-1.37321	
+>-0.955171	0.199884	-0.218391	2.54951	
+>-0.0551891	0.604525	0.794672	2.12195	
+>0	0	0	1	
+>node: Scene_root
+>numMeshes: 0
+>numChildren: 1
+>transform: 
+>-0.1	-1.4243e-015	-8.74228e-009	0	
+>-8.74228e-009	1.62921e-008	0.1	0	
+>0	0.1	-1.62921e-008	0.8	
+>0	0	0	1	
+>>node: Dir_Master
+>>numMeshes: 0
+>>numChildren: 1
+>>transform: 
+>>0.970367	-0.0931397	-0.222965	1.11796e-006	
+>>-0.0931398	0.707255	-0.700796	3.1005	
+>>0.222965	0.700796	0.677622	0.185055	
+>>0	0	0	1	
+>>>node: Master
+>>>numMeshes: 0
+>>>numChildren: 5
+>>>transform: 
+>>>0.970367	-0.222965	-0.0931398	-0.490049	
+>>>-0.0931396	-0.700796	0.707255	-1.54026	
+>>>-0.222965	-0.677621	-0.700796	-1.48932	
+>>>0	0	0	1	
+>node: loincloth
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+>node: humale
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: sword
+using node hierarchy transform
+parent node to mesh: sword
+exporting mesh: loincloth
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+could not find root bone for mesh
+exporting mesh: humale
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+could not find root bone for mesh
+=================================================
+time: Sun Mar 16 14:01:36 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: Scene
+numMeshes: 0
+numChildren: 6
+transform: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+>node: Lamp_001
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	1.52391	
+>-0.955171	0.199884	-0.218391	-1.67053	
+>-0.0551891	0.604525	0.794672	2.22765	
+>0	0	0	1	
+>node: Camera
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>-0.771565	0.275762	-0.573274	-3.00277	
+>-0.636058	-0.349737	0.687833	3.92316	
+>-0.0108168	0.895343	0.445245	3.59832	
+>0	0	0	1	
+>node: Lamp
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	-1.37321	
+>-0.955171	0.199884	-0.218391	2.54951	
+>-0.0551891	0.604525	0.794672	2.12195	
+>0	0	0	1	
+>node: Scene_root
+>numMeshes: 0
+>numChildren: 1
+>transform: 
+>-0.1	-1.4243e-015	-8.74228e-009	0	
+>-8.74228e-009	1.62921e-008	0.1	0	
+>0	0.1	-1.62921e-008	0.8	
+>0	0	0	1	
+>>node: Dir_Master
+>>numMeshes: 0
+>>numChildren: 1
+>>transform: 
+>>0.970367	-0.0931397	-0.222965	1.11796e-006	
+>>-0.0931398	0.707255	-0.700796	3.1005	
+>>0.222965	0.700796	0.677622	0.185055	
+>>0	0	0	1	
+>>>node: Master
+>>>numMeshes: 0
+>>>numChildren: 5
+>>>transform: 
+>>>0.970367	-0.222965	-0.0931398	-0.490049	
+>>>-0.0931396	-0.700796	0.707255	-1.54026	
+>>>-0.222965	-0.677621	-0.700796	-1.48932	
+>>>0	0	0	1	
+>node: loincloth
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+>node: humale
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: sword
+using node hierarchy transform
+parent node to mesh: sword
+exporting mesh: loincloth
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Root
+10	8.9407e-007	-3.15436e-007	0	
+1.87479e-007	7.39592e-006	-10	0	
+-1.3411e-006	10	5.37932e-006	0	
+0.00300197	-9.73705	-0.341406	1	
+exporting mesh: humale
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Hips
+-10	-8.94071e-007	1.8254e-006	0	
+1.32248e-006	-7.39592e-006	10	0	
+-1.34134e-006	10	5.37932e-006	0	
+-0.00399785	-12.3496	-0.348406	1	
+=================================================
+time: Sun Mar 16 14:05:38 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: Scene
+numMeshes: 0
+numChildren: 6
+transform: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+>node: Lamp_001
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	1.52391	
+>-0.955171	0.199884	-0.218391	-1.67053	
+>-0.0551891	0.604525	0.794672	2.22765	
+>0	0	0	1	
+>node: Camera
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>-0.771565	0.275762	-0.573274	-3.00277	
+>-0.636058	-0.349737	0.687833	3.92316	
+>-0.0108168	0.895343	0.445245	3.59832	
+>0	0	0	1	
+>node: Lamp
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	-1.37321	
+>-0.955171	0.199884	-0.218391	2.54951	
+>-0.0551891	0.604525	0.794672	2.12195	
+>0	0	0	1	
+>node: Scene_root
+>numMeshes: 0
+>numChildren: 1
+>transform: 
+>-0.1	-1.4243e-015	-8.74228e-009	0	
+>-8.74228e-009	1.62921e-008	0.1	0	
+>0	0.1	-1.62921e-008	0.8	
+>0	0	0	1	
+>>node: Dir_Master
+>>numMeshes: 0
+>>numChildren: 1
+>>transform: 
+>>0.970367	-0.0931397	-0.222965	1.11796e-006	
+>>-0.0931398	0.707255	-0.700796	3.1005	
+>>0.222965	0.700796	0.677622	0.185055	
+>>0	0	0	1	
+>>>node: Master
+>>>numMeshes: 0
+>>>numChildren: 5
+>>>transform: 
+>>>0.970367	-0.222965	-0.0931398	-0.490049	
+>>>-0.0931396	-0.700796	0.707255	-1.54026	
+>>>-0.222965	-0.677621	-0.700796	-1.48932	
+>>>0	0	0	1	
+>node: loincloth
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+>node: humale
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: sword
+using node hierarchy transform
+parent node to mesh: sword
+exporting mesh: loincloth
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Root
+10	0	0	0	
+0	0	-10	0	
+0	10	0	0	
+0	-9.73705	0	1	
+exporting mesh: humale
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Hips
+-10	0	0	0	
+0	0	10	0	
+0	10	0	0	
+0	-12.3496	0	1	
+=================================================
+time: Sun Mar 16 14:09:16 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: Scene
+numMeshes: 0
+numChildren: 6
+transform: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+>node: Lamp_001
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	1.52391	
+>-0.955171	0.199884	-0.218391	-1.67053	
+>-0.0551891	0.604525	0.794672	2.22765	
+>0	0	0	1	
+>node: Camera
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>-0.771565	0.275762	-0.573274	-3.00277	
+>-0.636058	-0.349737	0.687833	3.92316	
+>-0.0108168	0.895343	0.445245	3.59832	
+>0	0	0	1	
+>node: Lamp
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	-1.37321	
+>-0.955171	0.199884	-0.218391	2.54951	
+>-0.0551891	0.604525	0.794672	2.12195	
+>0	0	0	1	
+>node: Scene_root
+>numMeshes: 0
+>numChildren: 1
+>transform: 
+>-0.1	-1.4243e-015	-8.74228e-009	0	
+>-8.74228e-009	1.62921e-008	0.1	0	
+>0	0.1	-1.62921e-008	0.8	
+>0	0	0	1	
+>>node: Dir_Master
+>>numMeshes: 0
+>>numChildren: 1
+>>transform: 
+>>0.970367	-0.0931397	-0.222965	1.11796e-006	
+>>-0.0931398	0.707255	-0.700796	3.1005	
+>>0.222965	0.700796	0.677622	0.185055	
+>>0	0	0	1	
+>>>node: Master
+>>>numMeshes: 0
+>>>numChildren: 5
+>>>transform: 
+>>>0.970367	-0.222965	-0.0931398	-0.490049	
+>>>-0.0931396	-0.700796	0.707255	-1.54026	
+>>>-0.222965	-0.677621	-0.700796	-1.48932	
+>>>0	0	0	1	
+>node: loincloth
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+>node: humale
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: sword
+using node hierarchy transform
+parent node to mesh: sword
+exporting mesh: loincloth
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Root
+-10	0	0	0	
+0	0	10	0	
+0	10	0	0	
+0	-9.73705	0	1	
+exporting mesh: humale
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Hips
+-10	0	0	0	
+0	0	10	0	
+0	10	0	0	
+0	-12.3496	0	1	
+=================================================
+time: Sun Mar 16 14:10:45 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: Scene
+numMeshes: 0
+numChildren: 6
+transform: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+>node: Lamp_001
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	1.52391	
+>-0.955171	0.199884	-0.218391	-1.67053	
+>-0.0551891	0.604525	0.794672	2.22765	
+>0	0	0	1	
+>node: Camera
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>-0.771565	0.275762	-0.573274	-3.00277	
+>-0.636058	-0.349737	0.687833	3.92316	
+>-0.0108168	0.895343	0.445245	3.59832	
+>0	0	0	1	
+>node: Lamp
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	-1.37321	
+>-0.955171	0.199884	-0.218391	2.54951	
+>-0.0551891	0.604525	0.794672	2.12195	
+>0	0	0	1	
+>node: Scene_root
+>numMeshes: 0
+>numChildren: 1
+>transform: 
+>-0.1	-1.4243e-015	-8.74228e-009	0	
+>-8.74228e-009	1.62921e-008	0.1	0	
+>0	0.1	-1.62921e-008	0.8	
+>0	0	0	1	
+>>node: Dir_Master
+>>numMeshes: 0
+>>numChildren: 1
+>>transform: 
+>>0.970367	-0.0931397	-0.222965	1.11796e-006	
+>>-0.0931398	0.707255	-0.700796	3.1005	
+>>0.222965	0.700796	0.677622	0.185055	
+>>0	0	0	1	
+>>>node: Master
+>>>numMeshes: 0
+>>>numChildren: 5
+>>>transform: 
+>>>0.970367	-0.222965	-0.0931398	-0.490049	
+>>>-0.0931396	-0.700796	0.707255	-1.54026	
+>>>-0.222965	-0.677621	-0.700796	-1.48932	
+>>>0	0	0	1	
+>node: loincloth
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+>node: humale
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: sword
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+exporting mesh: loincloth
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Root
+-10	0	0	0	
+0	0	10	0	
+0	10	0	0	
+0	-8.86852	0	1	
+exporting mesh: humale
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Hips
+-10	0	0	0	
+0	0	10	0	
+0	10	0	0	
+0	-10.1748	0	1	
+=================================================
+time: Sun Mar 16 14:16:36 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: Scene
+numMeshes: 0
+numChildren: 6
+transform: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+>node: Lamp_001
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	1.52391	
+>-0.955171	0.199884	-0.218391	-1.67053	
+>-0.0551891	0.604525	0.794672	2.22765	
+>0	0	0	1	
+>node: Camera
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>-0.771565	0.275762	-0.573274	-3.00277	
+>-0.636058	-0.349737	0.687833	3.92316	
+>-0.0108168	0.895343	0.445245	3.59832	
+>0	0	0	1	
+>node: Lamp
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	-1.37321	
+>-0.955171	0.199884	-0.218391	2.54951	
+>-0.0551891	0.604525	0.794672	2.12195	
+>0	0	0	1	
+>node: Scene_root
+>numMeshes: 0
+>numChildren: 1
+>transform: 
+>-0.1	-1.4243e-015	-8.74228e-009	0	
+>-8.74228e-009	1.62921e-008	0.1	0	
+>0	0.1	-1.62921e-008	0.8	
+>0	0	0	1	
+>>node: Dir_Master
+>>numMeshes: 0
+>>numChildren: 1
+>>transform: 
+>>0.970367	-0.0931397	-0.222965	1.11796e-006	
+>>-0.0931398	0.707255	-0.700796	3.1005	
+>>0.222965	0.700796	0.677622	0.185055	
+>>0	0	0	1	
+>>>node: Master
+>>>numMeshes: 0
+>>>numChildren: 5
+>>>transform: 
+>>>0.970367	-0.222965	-0.0931398	-0.490049	
+>>>-0.0931396	-0.700796	0.707255	-1.54026	
+>>>-0.222965	-0.677621	-0.700796	-1.48932	
+>>>0	0	0	1	
+>node: humale
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+>node: loincloth
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: sword
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+exporting mesh: humale
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Hips
+1	0	0	0	
+0	0	0	0	
+0	0	1	0	
+0	-2.1748	0	1	
+exporting mesh: loincloth
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Root
+10	0	0	0	
+0	0	-10	0	
+0	10	0	0	
+0	-8.86852	0	1	
+=================================================
+time: Sun Mar 16 14:18:00 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: Scene
+numMeshes: 0
+numChildren: 6
+transform: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+>node: Lamp_001
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	1.52391	
+>-0.955171	0.199884	-0.218391	-1.67053	
+>-0.0551891	0.604525	0.794672	2.22765	
+>0	0	0	1	
+>node: Camera
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>-0.771565	0.275762	-0.573274	-3.00277	
+>-0.636058	-0.349737	0.687833	3.92316	
+>-0.0108168	0.895343	0.445245	3.59832	
+>0	0	0	1	
+>node: Lamp
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	-1.37321	
+>-0.955171	0.199884	-0.218391	2.54951	
+>-0.0551891	0.604525	0.794672	2.12195	
+>0	0	0	1	
+>node: Scene_root
+>numMeshes: 0
+>numChildren: 1
+>transform: 
+>-0.1	-1.4243e-015	-8.74228e-009	0	
+>-8.74228e-009	1.62921e-008	0.1	0	
+>0	0.1	-1.62921e-008	0.8	
+>0	0	0	1	
+>>node: Dir_Master
+>>numMeshes: 0
+>>numChildren: 1
+>>transform: 
+>>0.970367	-0.0931397	-0.222965	1.11796e-006	
+>>-0.0931398	0.707255	-0.700796	3.1005	
+>>0.222965	0.700796	0.677622	0.185055	
+>>0	0	0	1	
+>>>node: Master
+>>>numMeshes: 0
+>>>numChildren: 5
+>>>transform: 
+>>>0.970367	-0.222965	-0.0931398	-0.490049	
+>>>-0.0931396	-0.700796	0.707255	-1.54026	
+>>>-0.222965	-0.677621	-0.700796	-1.48932	
+>>>0	0	0	1	
+>node: humale
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+>node: loincloth
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: sword
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+exporting mesh: humale
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Hips
+1	0	0	0	
+0	0	0	0	
+0	0	1	0	
+0	-2.1748	0	1	
+exporting mesh: loincloth
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Root
+10	0	0	0	
+0	0	-10	0	
+0	10	0	0	
+0	-8.86852	0	1	
+=================================================
+time: Sun Mar 16 14:28:31 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: Scene
+numMeshes: 0
+numChildren: 6
+transform: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+>node: Lamp_001
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	1.52391	
+>-0.955171	0.199884	-0.218391	-1.67053	
+>-0.0551891	0.604525	0.794672	2.22765	
+>0	0	0	1	
+>node: Camera
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>-0.771565	0.275762	-0.573274	-3.00277	
+>-0.636058	-0.349737	0.687833	3.92316	
+>-0.0108168	0.895343	0.445245	3.59832	
+>0	0	0	1	
+>node: Lamp
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	-1.37321	
+>-0.955171	0.199884	-0.218391	2.54951	
+>-0.0551891	0.604525	0.794672	2.12195	
+>0	0	0	1	
+>node: Scene_root
+>numMeshes: 0
+>numChildren: 1
+>transform: 
+>-0.1	-1.4243e-015	-8.74228e-009	0	
+>-8.74228e-009	1.62921e-008	0.1	0	
+>0	0.1	-1.62921e-008	0.8	
+>0	0	0	1	
+>>node: Dir_Master
+>>numMeshes: 0
+>>numChildren: 1
+>>transform: 
+>>0.970367	-0.0931397	-0.222965	1.11796e-006	
+>>-0.0931398	0.707255	-0.700796	3.1005	
+>>0.222965	0.700796	0.677622	0.185055	
+>>0	0	0	1	
+>>>node: Master
+>>>numMeshes: 0
+>>>numChildren: 5
+>>>transform: 
+>>>0.970367	-0.222965	-0.0931398	-0.490049	
+>>>-0.0931396	-0.700796	0.707255	-1.54026	
+>>>-0.222965	-0.677621	-0.700796	-1.48932	
+>>>0	0	0	1	
+>node: humale
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+>node: loincloth
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: sword
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+exporting mesh: humale
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Hips
+1	0	0	0	
+0	0	0	0	
+0	0	1	0	
+0	-4.3496	0	1	
+exporting mesh: loincloth
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Root
+10	0	0	0	
+0	0	-10	0	
+0	10	0	0	
+0	-10.5755	8.51453	1	
+=================================================
+time: Sun Mar 16 14:29:28 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: Scene
+numMeshes: 0
+numChildren: 6
+transform: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+>node: Lamp_001
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	1.52391	
+>-0.955171	0.199884	-0.218391	-1.67053	
+>-0.0551891	0.604525	0.794672	2.22765	
+>0	0	0	1	
+>node: Camera
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>-0.771565	0.275762	-0.573274	-3.00277	
+>-0.636058	-0.349737	0.687833	3.92316	
+>-0.0108168	0.895343	0.445245	3.59832	
+>0	0	0	1	
+>node: Lamp
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	-1.37321	
+>-0.955171	0.199884	-0.218391	2.54951	
+>-0.0551891	0.604525	0.794672	2.12195	
+>0	0	0	1	
+>node: Scene_root
+>numMeshes: 0
+>numChildren: 1
+>transform: 
+>-0.1	-1.4243e-015	-8.74228e-009	0	
+>-8.74228e-009	1.62921e-008	0.1	0	
+>0	0.1	-1.62921e-008	0.8	
+>0	0	0	1	
+>>node: Dir_Master
+>>numMeshes: 0
+>>numChildren: 1
+>>transform: 
+>>0.970367	-0.0931397	-0.222965	1.11796e-006	
+>>-0.0931398	0.707255	-0.700796	3.1005	
+>>0.222965	0.700796	0.677622	0.185055	
+>>0	0	0	1	
+>>>node: Master
+>>>numMeshes: 0
+>>>numChildren: 5
+>>>transform: 
+>>>0.970367	-0.222965	-0.0931398	-0.490049	
+>>>-0.0931396	-0.700796	0.707255	-1.54026	
+>>>-0.222965	-0.677621	-0.700796	-1.48932	
+>>>0	0	0	1	
+>node: humale
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+>node: loincloth
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: sword
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+exporting mesh: humale
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Hips
+0	0	0	0	
+0	0	0	0	
+0	0	0	0	
+0	0	0	1	
+exporting mesh: loincloth
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Root
+0	0	0	0	
+0	0	0	0	
+0	0	0	0	
+0	0	0	1	
+=================================================
+time: Sun Mar 16 14:30:31 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: Scene
+numMeshes: 0
+numChildren: 6
+transform: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+>node: Lamp_001
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	1.52391	
+>-0.955171	0.199884	-0.218391	-1.67053	
+>-0.0551891	0.604525	0.794672	2.22765	
+>0	0	0	1	
+>node: Camera
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>-0.771565	0.275762	-0.573274	-3.00277	
+>-0.636058	-0.349737	0.687833	3.92316	
+>-0.0108168	0.895343	0.445245	3.59832	
+>0	0	0	1	
+>node: Lamp
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	-1.37321	
+>-0.955171	0.199884	-0.218391	2.54951	
+>-0.0551891	0.604525	0.794672	2.12195	
+>0	0	0	1	
+>node: Scene_root
+>numMeshes: 0
+>numChildren: 1
+>transform: 
+>-0.1	-1.4243e-015	-8.74228e-009	0	
+>-8.74228e-009	1.62921e-008	0.1	0	
+>0	0.1	-1.62921e-008	0.8	
+>0	0	0	1	
+>>node: Dir_Master
+>>numMeshes: 0
+>>numChildren: 1
+>>transform: 
+>>0.970367	-0.0931397	-0.222965	1.11796e-006	
+>>-0.0931398	0.707255	-0.700796	3.1005	
+>>0.222965	0.700796	0.677622	0.185055	
+>>0	0	0	1	
+>>>node: Master
+>>>numMeshes: 0
+>>>numChildren: 5
+>>>transform: 
+>>>0.970367	-0.222965	-0.0931398	-0.490049	
+>>>-0.0931396	-0.700796	0.707255	-1.54026	
+>>>-0.222965	-0.677621	-0.700796	-1.48932	
+>>>0	0	0	1	
+>node: humale
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+>node: loincloth
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: sword
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+exporting mesh: humale
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Hips
+-0.1	0	8.74228e-009	0	
+-1.4243e-015	0.1	-1.62921e-008	0	
+-8.74228e-009	-1.62921e-008	-0.1	0	
+0	0.8	0	1	
+exporting mesh: loincloth
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Root
+-0.1	0	8.74228e-009	0	
+-1.4243e-015	0.1	-1.62921e-008	0	
+-8.74228e-009	-1.62921e-008	-0.1	0	
+0	0.8	0	1	
+=================================================
+time: Sun Mar 16 14:31:27 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: Scene
+numMeshes: 0
+numChildren: 6
+transform: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+>node: Lamp_001
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	1.52391	
+>-0.955171	0.199884	-0.218391	-1.67053	
+>-0.0551891	0.604525	0.794672	2.22765	
+>0	0	0	1	
+>node: Camera
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>-0.771565	0.275762	-0.573274	-3.00277	
+>-0.636058	-0.349737	0.687833	3.92316	
+>-0.0108168	0.895343	0.445245	3.59832	
+>0	0	0	1	
+>node: Lamp
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	-1.37321	
+>-0.955171	0.199884	-0.218391	2.54951	
+>-0.0551891	0.604525	0.794672	2.12195	
+>0	0	0	1	
+>node: Scene_root
+>numMeshes: 0
+>numChildren: 1
+>transform: 
+>-0.1	-1.4243e-015	-8.74228e-009	0	
+>-8.74228e-009	1.62921e-008	0.1	0	
+>0	0.1	-1.62921e-008	0.8	
+>0	0	0	1	
+>>node: Dir_Master
+>>numMeshes: 0
+>>numChildren: 1
+>>transform: 
+>>0.970367	-0.0931397	-0.222965	1.11796e-006	
+>>-0.0931398	0.707255	-0.700796	3.1005	
+>>0.222965	0.700796	0.677622	0.185055	
+>>0	0	0	1	
+>>>node: Master
+>>>numMeshes: 0
+>>>numChildren: 5
+>>>transform: 
+>>>0.970367	-0.222965	-0.0931398	-0.490049	
+>>>-0.0931396	-0.700796	0.707255	-1.54026	
+>>>-0.222965	-0.677621	-0.700796	-1.48932	
+>>>0	0	0	1	
+>node: humale
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+>node: loincloth
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: sword
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+exporting mesh: humale
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Hips
+0	0	0	0	
+0	0	0	0	
+0	0	0	0	
+0	0	0	1	
+exporting mesh: loincloth
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Root
+0	0	0	0	
+0	0	0	0	
+0	0	0	0	
+0	0	0	1	
+=================================================
+time: Sun Mar 16 14:32:12 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: Scene
+numMeshes: 0
+numChildren: 6
+transform: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+>node: Lamp_001
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	1.52391	
+>-0.955171	0.199884	-0.218391	-1.67053	
+>-0.0551891	0.604525	0.794672	2.22765	
+>0	0	0	1	
+>node: Camera
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>-0.771565	0.275762	-0.573274	-3.00277	
+>-0.636058	-0.349737	0.687833	3.92316	
+>-0.0108168	0.895343	0.445245	3.59832	
+>0	0	0	1	
+>node: Lamp
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	-1.37321	
+>-0.955171	0.199884	-0.218391	2.54951	
+>-0.0551891	0.604525	0.794672	2.12195	
+>0	0	0	1	
+>node: Scene_root
+>numMeshes: 0
+>numChildren: 1
+>transform: 
+>-0.1	-1.4243e-015	-8.74228e-009	0	
+>-8.74228e-009	1.62921e-008	0.1	0	
+>0	0.1	-1.62921e-008	0.8	
+>0	0	0	1	
+>>node: Dir_Master
+>>numMeshes: 0
+>>numChildren: 1
+>>transform: 
+>>0.970367	-0.0931397	-0.222965	1.11796e-006	
+>>-0.0931398	0.707255	-0.700796	3.1005	
+>>0.222965	0.700796	0.677622	0.185055	
+>>0	0	0	1	
+>>>node: Master
+>>>numMeshes: 0
+>>>numChildren: 5
+>>>transform: 
+>>>0.970367	-0.222965	-0.0931398	-0.490049	
+>>>-0.0931396	-0.700796	0.707255	-1.54026	
+>>>-0.222965	-0.677621	-0.700796	-1.48932	
+>>>0	0	0	1	
+>node: humale
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+>node: loincloth
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: sword
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+exporting mesh: humale
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Hips
+0	0	0	0	
+0	0	0	0	
+0	0	0	0	
+0	0	0	1	
+exporting mesh: loincloth
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Root
+0	0	0	0	
+0	0	0	0	
+0	0	0	0	
+0	0	0	1	
+=================================================
+time: Sun Mar 16 14:33:09 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: Scene
+numMeshes: 0
+numChildren: 6
+transform: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+>node: Lamp_001
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	1.52391	
+>-0.955171	0.199884	-0.218391	-1.67053	
+>-0.0551891	0.604525	0.794672	2.22765	
+>0	0	0	1	
+>node: Camera
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>-0.771565	0.275762	-0.573274	-3.00277	
+>-0.636058	-0.349737	0.687833	3.92316	
+>-0.0108168	0.895343	0.445245	3.59832	
+>0	0	0	1	
+>node: Lamp
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	-1.37321	
+>-0.955171	0.199884	-0.218391	2.54951	
+>-0.0551891	0.604525	0.794672	2.12195	
+>0	0	0	1	
+>node: Scene_root
+>numMeshes: 0
+>numChildren: 1
+>transform: 
+>-0.1	-1.4243e-015	-8.74228e-009	0	
+>-8.74228e-009	1.62921e-008	0.1	0	
+>0	0.1	-1.62921e-008	0.8	
+>0	0	0	1	
+>>node: Dir_Master
+>>numMeshes: 0
+>>numChildren: 1
+>>transform: 
+>>0.970367	-0.0931397	-0.222965	1.11796e-006	
+>>-0.0931398	0.707255	-0.700796	3.1005	
+>>0.222965	0.700796	0.677622	0.185055	
+>>0	0	0	1	
+>>>node: Master
+>>>numMeshes: 0
+>>>numChildren: 5
+>>>transform: 
+>>>0.970367	-0.222965	-0.0931398	-0.490049	
+>>>-0.0931396	-0.700796	0.707255	-1.54026	
+>>>-0.222965	-0.677621	-0.700796	-1.48932	
+>>>0	0	0	1	
+>node: humale
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+>node: loincloth
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: sword
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+exporting mesh: humale
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Hips
+-0.1	0	0	0	
+0	0.1	0	0	
+0	0	-0.1	0	
+0	0.8	0	1	
+exporting mesh: loincloth
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Root
+-0.1	0	0	0	
+0	0.1	0	0	
+0	0	-0.1	0	
+0	0.8	0	1	
+=================================================
+time: Sun Mar 16 14:39:39 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: Scene
+numMeshes: 0
+numChildren: 6
+transform: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+>node: Lamp_001
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	1.52391	
+>-0.955171	0.199884	-0.218391	-1.67053	
+>-0.0551891	0.604525	0.794672	2.22765	
+>0	0	0	1	
+>node: Camera
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>-0.771565	0.275762	-0.573274	-3.00277	
+>-0.636058	-0.349737	0.687833	3.92316	
+>-0.0108168	0.895343	0.445245	3.59832	
+>0	0	0	1	
+>node: Lamp
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	-1.37321	
+>-0.955171	0.199884	-0.218391	2.54951	
+>-0.0551891	0.604525	0.794672	2.12195	
+>0	0	0	1	
+>node: Scene_root
+>numMeshes: 0
+>numChildren: 1
+>transform: 
+>-0.1	-1.4243e-015	-8.74228e-009	0	
+>-8.74228e-009	1.62921e-008	0.1	0	
+>0	0.1	-1.62921e-008	0.8	
+>0	0	0	1	
+>>node: Dir_Master
+>>numMeshes: 0
+>>numChildren: 1
+>>transform: 
+>>0.970367	-0.0931397	-0.222965	1.11796e-006	
+>>-0.0931398	0.707255	-0.700796	3.1005	
+>>0.222965	0.700796	0.677622	0.185055	
+>>0	0	0	1	
+>>>node: Master
+>>>numMeshes: 0
+>>>numChildren: 5
+>>>transform: 
+>>>0.970367	-0.222965	-0.0931398	-0.490049	
+>>>-0.0931396	-0.700796	0.707255	-1.54026	
+>>>-0.222965	-0.677621	-0.700796	-1.48932	
+>>>0	0	0	1	
+>node: humale
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+>node: loincloth
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: sword
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+exporting mesh: humale
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Hips
+abs_parent_root_bone_mat
+-0.1	0	0	0	
+0	0.1	0	0	
+0	0	-0.1	0	
+0	0.8	0	1	
+supposed to be model transf
+-0.1	0	0	0	
+0	0.1	0	0	
+0	0	-0.1	0	
+-0.00399907	-3.5496	-0.348401	1	
+exporting mesh: loincloth
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Root
+abs_parent_root_bone_mat
+-0.1	0	0	0	
+0	0.1	0	0	
+0	0	-0.1	0	
+0	0.8	0	1	
+supposed to be model transf
+-1	0	0	0	
+0	0	-1	0	
+0	-1	0	0	
+0.016505	-10.5755	0.514533	1	
+=================================================
+time: Sun Mar 16 14:47:27 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: Scene
+numMeshes: 0
+numChildren: 6
+transform: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+>node: Lamp_001
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	1.52391	
+>-0.955171	0.199884	-0.218391	-1.67053	
+>-0.0551891	0.604525	0.794672	2.22765	
+>0	0	0	1	
+>node: Camera
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>-0.771565	0.275762	-0.573274	-3.00277	
+>-0.636058	-0.349737	0.687833	3.92316	
+>-0.0108168	0.895343	0.445245	3.59832	
+>0	0	0	1	
+>node: Lamp
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	-1.37321	
+>-0.955171	0.199884	-0.218391	2.54951	
+>-0.0551891	0.604525	0.794672	2.12195	
+>0	0	0	1	
+>node: Scene_root
+>numMeshes: 0
+>numChildren: 1
+>transform: 
+>-0.1	-1.4243e-015	-8.74228e-009	0	
+>-8.74228e-009	1.62921e-008	0.1	0	
+>0	0.1	-1.62921e-008	0.8	
+>0	0	0	1	
+>>node: Dir_Master
+>>numMeshes: 0
+>>numChildren: 1
+>>transform: 
+>>0.970367	-0.0931397	-0.222965	1.11796e-006	
+>>-0.0931398	0.707255	-0.700796	3.1005	
+>>0.222965	0.700796	0.677622	0.185055	
+>>0	0	0	1	
+>>>node: Master
+>>>numMeshes: 0
+>>>numChildren: 5
+>>>transform: 
+>>>0.970367	-0.222965	-0.0931398	-0.490049	
+>>>-0.0931396	-0.700796	0.707255	-1.54026	
+>>>-0.222965	-0.677621	-0.700796	-1.48932	
+>>>0	0	0	1	
+>node: loincloth
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+>node: humale
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: sword
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+exporting mesh: loincloth
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Root
+abs_parent_root_bone_mat
+-0.1	0	0	0	
+0	0.1	0	0	
+0	0	-0.1	0	
+0	0.8	0	1	
+supposed to be equal to above
+-10	0	0	0	
+0	0	10	0	
+0	10	0	0	
+0.00300197	-9.73705	-0.341406	1	
+exporting mesh: humale
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Hips
+abs_parent_root_bone_mat
+-0.1	0	0	0	
+0	0.1	0	0	
+0	0	-0.1	0	
+0	0.8	0	1	
+supposed to be equal to above
+-10	0	0	0	
+0	0	10	0	
+0	10	0	0	
+-0.00399785	-12.3496	-0.348406	1	
+=================================================
+time: Sun Mar 16 14:49:04 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: Scene
+numMeshes: 0
+numChildren: 6
+transform: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+>node: Lamp_001
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	1.52391	
+>-0.955171	0.199884	-0.218391	-1.67053	
+>-0.0551891	0.604525	0.794672	2.22765	
+>0	0	0	1	
+>node: Camera
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>-0.771565	0.275762	-0.573274	-3.00277	
+>-0.636058	-0.349737	0.687833	3.92316	
+>-0.0108168	0.895343	0.445245	3.59832	
+>0	0	0	1	
+>node: Lamp
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	-1.37321	
+>-0.955171	0.199884	-0.218391	2.54951	
+>-0.0551891	0.604525	0.794672	2.12195	
+>0	0	0	1	
+>node: Scene_root
+>numMeshes: 0
+>numChildren: 1
+>transform: 
+>-0.1	-1.4243e-015	-8.74228e-009	0	
+>-8.74228e-009	1.62921e-008	0.1	0	
+>0	0.1	-1.62921e-008	0.8	
+>0	0	0	1	
+>>node: Dir_Master
+>>numMeshes: 0
+>>numChildren: 1
+>>transform: 
+>>0.970367	-0.0931397	-0.222965	1.11796e-006	
+>>-0.0931398	0.707255	-0.700796	3.1005	
+>>0.222965	0.700796	0.677622	0.185055	
+>>0	0	0	1	
+>>>node: Master
+>>>numMeshes: 0
+>>>numChildren: 5
+>>>transform: 
+>>>0.970367	-0.222965	-0.0931398	-0.490049	
+>>>-0.0931396	-0.700796	0.707255	-1.54026	
+>>>-0.222965	-0.677621	-0.700796	-1.48932	
+>>>0	0	0	1	
+>node: loincloth
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+>node: humale
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: sword
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+exporting mesh: loincloth
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Root
+abs_parent_root_bone_mat
+-0.1	0	0	0	
+0	0.1	0	0	
+0	0	-0.1	0	
+0	0.8	0	1	
+supposed to be equal to above
+-10	0	0	0	
+0	0	10	0	
+0	10	0	0	
+0.00300197	-9.73705	-0.341406	1	
+offset_mat for bone Root
+-10	0	0	0	
+0	0	10	0	
+0	10	0	0	
+0.00150084	-8.86852	-0.170702	1	
+exporting mesh: humale
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Hips
+abs_parent_root_bone_mat
+-0.1	0	0	0	
+0	0.1	0	0	
+0	0	-0.1	0	
+0	0.8	0	1	
+supposed to be equal to above
+-10	0	0	0	
+0	0	10	0	
+0	10	0	0	
+-0.00399785	-12.3496	-0.348406	1	
+offset_mat for bone Hips
+-10	0	0	0	
+0	0	10	0	
+0	10	0	0	
+-0.00199908	-10.1748	-0.174202	1	
+=================================================
+time: Sun Mar 16 14:52:28 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: Scene
+numMeshes: 0
+numChildren: 6
+transform: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+>node: Lamp_001
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	1.52391	
+>-0.955171	0.199884	-0.218391	-1.67053	
+>-0.0551891	0.604525	0.794672	2.22765	
+>0	0	0	1	
+>node: Camera
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>-0.771565	0.275762	-0.573274	-3.00277	
+>-0.636058	-0.349737	0.687833	3.92316	
+>-0.0108168	0.895343	0.445245	3.59832	
+>0	0	0	1	
+>node: Lamp
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	-1.37321	
+>-0.955171	0.199884	-0.218391	2.54951	
+>-0.0551891	0.604525	0.794672	2.12195	
+>0	0	0	1	
+>node: Scene_root
+>numMeshes: 0
+>numChildren: 1
+>transform: 
+>-0.1	-1.4243e-015	-8.74228e-009	0	
+>-8.74228e-009	1.62921e-008	0.1	0	
+>0	0.1	-1.62921e-008	0.8	
+>0	0	0	1	
+>>node: Dir_Master
+>>numMeshes: 0
+>>numChildren: 1
+>>transform: 
+>>0.970367	-0.0931397	-0.222965	1.11796e-006	
+>>-0.0931398	0.707255	-0.700796	3.1005	
+>>0.222965	0.700796	0.677622	0.185055	
+>>0	0	0	1	
+>>>node: Master
+>>>numMeshes: 0
+>>>numChildren: 5
+>>>transform: 
+>>>0.970367	-0.222965	-0.0931398	-0.490049	
+>>>-0.0931396	-0.700796	0.707255	-1.54026	
+>>>-0.222965	-0.677621	-0.700796	-1.48932	
+>>>0	0	0	1	
+>node: loincloth
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+>node: humale
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: sword
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+exporting mesh: loincloth
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Root
+abs_parent_root_bone_mat
+-0.1	0	0	0	
+0	0.1	0	0.8	
+0	0	-0.1	0	
+0	0	0	1	
+supposed to be equal to above
+-10	0	0	0.00300197	
+0	0	10	-9.73705	
+0	10	0	-0.341406	
+0	0	0	1	
+offset_mat for bone Root
+-10	0	0	0.00150084	
+0	0	10	-8.86852	
+0	10	0	-0.170702	
+0	0	0	1	
+exporting mesh: humale
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Hips
+abs_parent_root_bone_mat
+-0.1	0	0	0	
+0	0.1	0	0.8	
+0	0	-0.1	0	
+0	0	0	1	
+supposed to be equal to above
+-10	0	0	-0.00399785	
+0	0	10	-12.3496	
+0	10	0	-0.348406	
+0	0	0	1	
+offset_mat for bone Hips
+-10	0	0	-0.00199908	
+0	0	10	-10.1748	
+0	10	0	-0.174202	
+0	0	0	1	
+=================================================
+time: Sun Mar 16 15:01:04 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: Scene
+numMeshes: 0
+numChildren: 6
+transform: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+>node: Lamp_001
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	1.52391	
+>-0.955171	0.199884	-0.218391	-1.67053	
+>-0.0551891	0.604525	0.794672	2.22765	
+>0	0	0	1	
+>node: Camera
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>-0.771565	0.275762	-0.573274	-3.00277	
+>-0.636058	-0.349737	0.687833	3.92316	
+>-0.0108168	0.895343	0.445245	3.59832	
+>0	0	0	1	
+>node: Lamp
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	-1.37321	
+>-0.955171	0.199884	-0.218391	2.54951	
+>-0.0551891	0.604525	0.794672	2.12195	
+>0	0	0	1	
+>node: Scene_root
+>numMeshes: 0
+>numChildren: 1
+>transform: 
+>-0.1	-1.4243e-015	-8.74228e-009	0	
+>-8.74228e-009	1.62921e-008	0.1	0	
+>0	0.1	-1.62921e-008	0.8	
+>0	0	0	1	
+>>node: Dir_Master
+>>numMeshes: 0
+>>numChildren: 1
+>>transform: 
+>>0.970367	-0.0931397	-0.222965	1.11796e-006	
+>>-0.0931398	0.707255	-0.700796	3.1005	
+>>0.222965	0.700796	0.677622	0.185055	
+>>0	0	0	1	
+>>>node: Master
+>>>numMeshes: 0
+>>>numChildren: 5
+>>>transform: 
+>>>0.970367	-0.222965	-0.0931398	-0.490049	
+>>>-0.0931396	-0.700796	0.707255	-1.54026	
+>>>-0.222965	-0.677621	-0.700796	-1.48932	
+>>>0	0	0	1	
+>node: loincloth
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+>node: humale
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: sword
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+exporting mesh: loincloth
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Root
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	0.886852	
+0	0	-0.1	-0.01707	
+0	0	0	1	
+abs_parent_root_bone
+-0.1	0	0	0	
+0	0.1	0	0.8	
+0	0	-0.1	0	
+0	0	0	1	
+offset_mat for bone Root
+-10	0	0	0.00150084	
+0	0	10	-8.86852	
+0	10	0	-0.170702	
+0	0	0	1	
+exporting mesh: humale
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Hips
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	1.01748	
+0	0	-0.1	-0.01742	
+0	0	0	1	
+abs_parent_root_bone
+-0.1	0	0	0	
+0	0.1	0	0.8	
+0	0	-0.1	0	
+0	0	0	1	
+offset_mat for bone Hips
+-10	0	0	-0.00199908	
+0	0	10	-10.1748	
+0	10	0	-0.174202	
+0	0	0	1	
+=================================================
+time: Sun Mar 16 15:02:39 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: Scene
+numMeshes: 0
+numChildren: 6
+transform: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+>node: Lamp_001
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	1.52391	
+>-0.955171	0.199884	-0.218391	-1.67053	
+>-0.0551891	0.604525	0.794672	2.22765	
+>0	0	0	1	
+>node: Camera
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>-0.771565	0.275762	-0.573274	-3.00277	
+>-0.636058	-0.349737	0.687833	3.92316	
+>-0.0108168	0.895343	0.445245	3.59832	
+>0	0	0	1	
+>node: Lamp
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	-1.37321	
+>-0.955171	0.199884	-0.218391	2.54951	
+>-0.0551891	0.604525	0.794672	2.12195	
+>0	0	0	1	
+>node: Scene_root
+>numMeshes: 0
+>numChildren: 1
+>transform: 
+>-0.1	-1.4243e-015	-8.74228e-009	0	
+>-8.74228e-009	1.62921e-008	0.1	0	
+>0	0.1	-1.62921e-008	0.8	
+>0	0	0	1	
+>>node: Dir_Master
+>>numMeshes: 0
+>>numChildren: 1
+>>transform: 
+>>0.970367	-0.0931397	-0.222965	1.11796e-006	
+>>-0.0931398	0.707255	-0.700796	3.1005	
+>>0.222965	0.700796	0.677622	0.185055	
+>>0	0	0	1	
+>>>node: Master
+>>>numMeshes: 0
+>>>numChildren: 5
+>>>transform: 
+>>>0.970367	-0.222965	-0.0931398	-0.490049	
+>>>-0.0931396	-0.700796	0.707255	-1.54026	
+>>>-0.222965	-0.677621	-0.700796	-1.48932	
+>>>0	0	0	1	
+>node: loincloth
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+>node: humale
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: sword
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+exporting mesh: loincloth
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Root
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	0.886852	
+0	0	-0.1	-0.01707	
+0	0	0	1	
+abs_parent_root_bone
+-0.1	0	0	0	
+0	0.1	0	0.8	
+0	0	-0.1	0	
+0	0	0	1	
+bone_transf_rel_root
+1	0	0	-0.0015004	
+0	1	0	0.868524	
+0	0	1	0.1707	
+0	0	0	1	
+offset_mat for bone Root
+-10	0	0	0.00150084	
+0	0	10	-8.86852	
+0	10	0	-0.170702	
+0	0	0	1	
+exporting mesh: humale
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Hips
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	1.01748	
+0	0	-0.1	-0.01742	
+0	0	0	1	
+abs_parent_root_bone
+-0.1	0	0	0	
+0	0.1	0	0.8	
+0	0	-0.1	0	
+0	0	0	1	
+bone_transf_rel_root
+1	0	0	0.0019997	
+0	1	0	2.1748	
+0	0	1	0.1742	
+0	0	0	1	
+offset_mat for bone Hips
+-10	0	0	-0.00199908	
+0	0	10	-10.1748	
+0	10	0	-0.174202	
+0	0	0	1	
+=================================================
+time: Sun Mar 16 15:06:09 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: Scene
+numMeshes: 0
+numChildren: 6
+transform: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+>node: Lamp_001
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	1.52391	
+>-0.955171	0.199884	-0.218391	-1.67053	
+>-0.0551891	0.604525	0.794672	2.22765	
+>0	0	0	1	
+>node: Camera
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>-0.771565	0.275762	-0.573274	-3.00277	
+>-0.636058	-0.349737	0.687833	3.92316	
+>-0.0108168	0.895343	0.445245	3.59832	
+>0	0	0	1	
+>node: Lamp
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	-1.37321	
+>-0.955171	0.199884	-0.218391	2.54951	
+>-0.0551891	0.604525	0.794672	2.12195	
+>0	0	0	1	
+>node: Scene_root
+>numMeshes: 0
+>numChildren: 1
+>transform: 
+>-0.1	-1.4243e-015	-8.74228e-009	0	
+>-8.74228e-009	1.62921e-008	0.1	0	
+>0	0.1	-1.62921e-008	0.8	
+>0	0	0	1	
+>>node: Dir_Master
+>>numMeshes: 0
+>>numChildren: 1
+>>transform: 
+>>0.970367	-0.0931397	-0.222965	1.11796e-006	
+>>-0.0931398	0.707255	-0.700796	3.1005	
+>>0.222965	0.700796	0.677622	0.185055	
+>>0	0	0	1	
+>>>node: Master
+>>>numMeshes: 0
+>>>numChildren: 5
+>>>transform: 
+>>>0.970367	-0.222965	-0.0931398	-0.490049	
+>>>-0.0931396	-0.700796	0.707255	-1.54026	
+>>>-0.222965	-0.677621	-0.700796	-1.48932	
+>>>0	0	0	1	
+>node: loincloth
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+>node: humale
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: sword
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+exporting mesh: loincloth
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Root
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	0.886852	
+0	0	-0.1	-0.01707	
+0	0	0	1	
+abs_parent_root_bone
+-0.1	0	0	0	
+0	0.1	0	0.8	
+0	0	-0.1	0	
+0	0	0	1	
+bone_transf_rel_root
+1	0	0	-0.0015004	
+0	1	0	0.868524	
+0	0	1	0.1707	
+0	0	0	1	
+something
+1	0	0	0.00150205	
+0	0	-1	-8.86853	
+0	1	0	7.8293	
+0	0	0	1	
+offset_mat for bone Root
+-10	0	0	0.00150084	
+0	0	10	-8.86852	
+0	10	0	-0.170702	
+0	0	0	1	
+exporting mesh: humale
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Hips
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	1.01748	
+0	0	-0.1	-0.01742	
+0	0	0	1	
+abs_parent_root_bone
+-0.1	0	0	0	
+0	0.1	0	0.8	
+0	0	-0.1	0	
+0	0	0	1	
+bone_transf_rel_root
+1	0	0	0.0019997	
+0	1	0	2.1748	
+0	0	1	0.1742	
+0	0	0	1	
+something
+1	0	0	-0.00199787	
+0	0	-1	-10.1748	
+0	1	0	7.8258	
+0	0	0	1	
+offset_mat for bone Hips
+-10	0	0	-0.00199908	
+0	0	10	-10.1748	
+0	10	0	-0.174202	
+0	0	0	1	
+=================================================
+time: Sun Mar 16 15:09:01 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: Scene
+numMeshes: 0
+numChildren: 6
+transform: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+>node: Lamp_001
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	1.52391	
+>-0.955171	0.199884	-0.218391	-1.67053	
+>-0.0551891	0.604525	0.794672	2.22765	
+>0	0	0	1	
+>node: Camera
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>-0.771565	0.275762	-0.573274	-3.00277	
+>-0.636058	-0.349737	0.687833	3.92316	
+>-0.0108168	0.895343	0.445245	3.59832	
+>0	0	0	1	
+>node: Lamp
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	-1.37321	
+>-0.955171	0.199884	-0.218391	2.54951	
+>-0.0551891	0.604525	0.794672	2.12195	
+>0	0	0	1	
+>node: Scene_root
+>numMeshes: 0
+>numChildren: 1
+>transform: 
+>-0.1	-1.4243e-015	-8.74228e-009	0	
+>-8.74228e-009	1.62921e-008	0.1	0	
+>0	0.1	-1.62921e-008	0.8	
+>0	0	0	1	
+>>node: Dir_Master
+>>numMeshes: 0
+>>numChildren: 1
+>>transform: 
+>>0.970367	-0.0931397	-0.222965	1.11796e-006	
+>>-0.0931398	0.707255	-0.700796	3.1005	
+>>0.222965	0.700796	0.677622	0.185055	
+>>0	0	0	1	
+>>>node: Master
+>>>numMeshes: 0
+>>>numChildren: 5
+>>>transform: 
+>>>0.970367	-0.222965	-0.0931398	-0.490049	
+>>>-0.0931396	-0.700796	0.707255	-1.54026	
+>>>-0.222965	-0.677621	-0.700796	-1.48932	
+>>>0	0	0	1	
+>node: loincloth
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+>node: humale
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: sword
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+exporting mesh: loincloth
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Root
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	0.886852	
+0	0	-0.1	-0.01707	
+0	0	0	1	
+abs_parent_root_bone
+-0.1	0	0	0	
+0	0.1	0	0.8	
+0	0	-0.1	0	
+0	0	0	1	
+bone_transf_rel_root
+1	0	0	-0.0015004	
+0	1	0	0.868524	
+0	0	1	0.1707	
+0	0	0	1	
+something
+1	0	0	0.00150205	
+0	0	-1	-8.86853	
+0	1	0	7.8293	
+0	0	0	1	
+together
+1	0	0	0.00300303	
+0	0	-1	-9.73705	
+0	1	0	7.65859	
+0	0	0	1	
+offset_mat for bone Root
+-10	0	0	0.00150084	
+0	0	10	-8.86852	
+0	10	0	-0.170702	
+0	0	0	1	
+exporting mesh: humale
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Hips
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	1.01748	
+0	0	-0.1	-0.01742	
+0	0	0	1	
+abs_parent_root_bone
+-0.1	0	0	0	
+0	0.1	0	0.8	
+0	0	-0.1	0	
+0	0	0	1	
+bone_transf_rel_root
+1	0	0	0.0019997	
+0	1	0	2.1748	
+0	0	1	0.1742	
+0	0	0	1	
+something
+1	0	0	-0.00199787	
+0	0	-1	-10.1748	
+0	1	0	7.8258	
+0	0	0	1	
+together
+1	0	0	-0.00399679	
+0	0	-1	-12.3496	
+0	1	0	7.65159	
+0	0	0	1	
+offset_mat for bone Hips
+-10	0	0	-0.00199908	
+0	0	10	-10.1748	
+0	10	0	-0.174202	
+0	0	0	1	
+=================================================
+time: Sun Mar 16 15:10:29 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: Scene
+numMeshes: 0
+numChildren: 6
+transform: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+>node: Lamp_001
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	1.52391	
+>-0.955171	0.199884	-0.218391	-1.67053	
+>-0.0551891	0.604525	0.794672	2.22765	
+>0	0	0	1	
+>node: Camera
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>-0.771565	0.275762	-0.573274	-3.00277	
+>-0.636058	-0.349737	0.687833	3.92316	
+>-0.0108168	0.895343	0.445245	3.59832	
+>0	0	0	1	
+>node: Lamp
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	-1.37321	
+>-0.955171	0.199884	-0.218391	2.54951	
+>-0.0551891	0.604525	0.794672	2.12195	
+>0	0	0	1	
+>node: Scene_root
+>numMeshes: 0
+>numChildren: 1
+>transform: 
+>-0.1	-1.4243e-015	-8.74228e-009	0	
+>-8.74228e-009	1.62921e-008	0.1	0	
+>0	0.1	-1.62921e-008	0.8	
+>0	0	0	1	
+>>node: Dir_Master
+>>numMeshes: 0
+>>numChildren: 1
+>>transform: 
+>>0.970367	-0.0931397	-0.222965	1.11796e-006	
+>>-0.0931398	0.707255	-0.700796	3.1005	
+>>0.222965	0.700796	0.677622	0.185055	
+>>0	0	0	1	
+>>>node: Master
+>>>numMeshes: 0
+>>>numChildren: 5
+>>>transform: 
+>>>0.970367	-0.222965	-0.0931398	-0.490049	
+>>>-0.0931396	-0.700796	0.707255	-1.54026	
+>>>-0.222965	-0.677621	-0.700796	-1.48932	
+>>>0	0	0	1	
+>node: loincloth
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+>node: humale
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: sword
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+exporting mesh: loincloth
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Root
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	0.886852	
+0	0	-0.1	-0.01707	
+0	0	0	1	
+abs_parent_root_bone
+-0.1	0	0	0	
+0	0.1	0	0.8	
+0	0	-0.1	0	
+0	0	0	1	
+bone_transf_rel_root
+1	0	0	-0.0015004	
+0	1	0	0.868524	
+0	0	1	0.1707	
+0	0	0	1	
+something
+1	0	0	0.00150205	
+0	0	-1	-8.86853	
+0	1	0	7.8293	
+0	0	0	1	
+together
+1	0	0	0	
+0	0	-1	-8	
+0	1	0	8	
+0	0	0	1	
+offset_mat for bone Root
+-10	0	0	0.00150084	
+0	0	10	-8.86852	
+0	10	0	-0.170702	
+0	0	0	1	
+exporting mesh: humale
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Hips
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	1.01748	
+0	0	-0.1	-0.01742	
+0	0	0	1	
+abs_parent_root_bone
+-0.1	0	0	0	
+0	0.1	0	0.8	
+0	0	-0.1	0	
+0	0	0	1	
+bone_transf_rel_root
+1	0	0	0.0019997	
+0	1	0	2.1748	
+0	0	1	0.1742	
+0	0	0	1	
+something
+1	0	0	-0.00199787	
+0	0	-1	-10.1748	
+0	1	0	7.8258	
+0	0	0	1	
+together
+1	0	0	0	
+0	0	-1	-8	
+0	1	0	8	
+0	0	0	1	
+offset_mat for bone Hips
+-10	0	0	-0.00199908	
+0	0	10	-10.1748	
+0	10	0	-0.174202	
+0	0	0	1	
+=================================================
+time: Sun Mar 16 15:13:20 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: Scene
+numMeshes: 0
+numChildren: 6
+transform: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+>node: Lamp_001
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	1.52391	
+>-0.955171	0.199884	-0.218391	-1.67053	
+>-0.0551891	0.604525	0.794672	2.22765	
+>0	0	0	1	
+>node: Camera
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>-0.771565	0.275762	-0.573274	-3.00277	
+>-0.636058	-0.349737	0.687833	3.92316	
+>-0.0108168	0.895343	0.445245	3.59832	
+>0	0	0	1	
+>node: Lamp
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	-1.37321	
+>-0.955171	0.199884	-0.218391	2.54951	
+>-0.0551891	0.604525	0.794672	2.12195	
+>0	0	0	1	
+>node: Scene_root
+>numMeshes: 0
+>numChildren: 1
+>transform: 
+>-0.1	-1.4243e-015	-8.74228e-009	0	
+>-8.74228e-009	1.62921e-008	0.1	0	
+>0	0.1	-1.62921e-008	0.8	
+>0	0	0	1	
+>>node: Dir_Master
+>>numMeshes: 0
+>>numChildren: 1
+>>transform: 
+>>0.970367	-0.0931397	-0.222965	1.11796e-006	
+>>-0.0931398	0.707255	-0.700796	3.1005	
+>>0.222965	0.700796	0.677622	0.185055	
+>>0	0	0	1	
+>>>node: Master
+>>>numMeshes: 0
+>>>numChildren: 5
+>>>transform: 
+>>>0.970367	-0.222965	-0.0931398	-0.490049	
+>>>-0.0931396	-0.700796	0.707255	-1.54026	
+>>>-0.222965	-0.677621	-0.700796	-1.48932	
+>>>0	0	0	1	
+>node: loincloth
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+>node: humale
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: sword
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+exporting mesh: loincloth
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Root
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	0.886852	
+0	0	-0.1	-0.01707	
+0	0	0	1	
+abs_parent_root_bone
+-0.1	0	0	0	
+0	0.1	0	0.8	
+0	0	-0.1	0	
+0	0	0	1	
+bone_transf_rel_root
+1	0	0	-0.0015004	
+0	1	0	0.868524	
+0	0	1	0.1707	
+0	0	0	1	
+something
+1	0	0	0.00150205	
+0	0	-1	-8.86853	
+0	1	0	7.8293	
+0	0	0	1	
+together
+1	0	0	0	
+0	0	-1	-8	
+0	1	0	8	
+0	0	0	1	
+offset_mat for bone Root
+-10	0	0	0.00150084	
+0	0	10	-8.86852	
+0	10	0	-0.170702	
+0	0	0	1	
+using node hierarchy transform
+parent node to mesh: Scene
+exporting mesh: humale
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Hips
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	1.01748	
+0	0	-0.1	-0.01742	
+0	0	0	1	
+abs_parent_root_bone
+-0.1	0	0	0	
+0	0.1	0	0.8	
+0	0	-0.1	0	
+0	0	0	1	
+bone_transf_rel_root
+1	0	0	0.0019997	
+0	1	0	2.1748	
+0	0	1	0.1742	
+0	0	0	1	
+something
+1	0	0	-0.00199787	
+0	0	-1	-10.1748	
+0	1	0	7.8258	
+0	0	0	1	
+together
+1	0	0	0	
+0	0	-1	-8	
+0	1	0	8	
+0	0	0	1	
+offset_mat for bone Hips
+-10	0	0	-0.00199908	
+0	0	10	-10.1748	
+0	10	0	-0.174202	
+0	0	0	1	
+using node hierarchy transform
+parent node to mesh: Scene
+=================================================
+time: Sun Mar 16 15:13:36 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: Scene
+numMeshes: 0
+numChildren: 6
+transform: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+>node: Lamp_001
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	1.52391	
+>-0.955171	0.199884	-0.218391	-1.67053	
+>-0.0551891	0.604525	0.794672	2.22765	
+>0	0	0	1	
+>node: Camera
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>-0.771565	0.275762	-0.573274	-3.00277	
+>-0.636058	-0.349737	0.687833	3.92316	
+>-0.0108168	0.895343	0.445245	3.59832	
+>0	0	0	1	
+>node: Lamp
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	-1.37321	
+>-0.955171	0.199884	-0.218391	2.54951	
+>-0.0551891	0.604525	0.794672	2.12195	
+>0	0	0	1	
+>node: Scene_root
+>numMeshes: 0
+>numChildren: 1
+>transform: 
+>-0.1	-1.4243e-015	-8.74228e-009	0	
+>-8.74228e-009	1.62921e-008	0.1	0	
+>0	0.1	-1.62921e-008	0.8	
+>0	0	0	1	
+>>node: Dir_Master
+>>numMeshes: 0
+>>numChildren: 1
+>>transform: 
+>>0.970367	-0.0931397	-0.222965	1.11796e-006	
+>>-0.0931398	0.707255	-0.700796	3.1005	
+>>0.222965	0.700796	0.677622	0.185055	
+>>0	0	0	1	
+>>>node: Master
+>>>numMeshes: 0
+>>>numChildren: 5
+>>>transform: 
+>>>0.970367	-0.222965	-0.0931398	-0.490049	
+>>>-0.0931396	-0.700796	0.707255	-1.54026	
+>>>-0.222965	-0.677621	-0.700796	-1.48932	
+>>>0	0	0	1	
+>node: loincloth
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+>node: humale
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: sword
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+-0.909791	-0.460638	0.0260114	0.782952	
+0.0214414	-0.0996623	-1.01498	1.38207	
+0.460873	-0.90469	0.0985685	0.189345	
+0	0	0	1	
+exporting mesh: loincloth
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Root
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	0.886852	
+0	0	-0.1	-0.01707	
+0	0	0	1	
+abs_parent_root_bone
+-0.1	0	0	0	
+0	0.1	0	0.8	
+0	0	-0.1	0	
+0	0	0	1	
+bone_transf_rel_root
+1	0	0	-0.0015004	
+0	1	0	0.868524	
+0	0	1	0.1707	
+0	0	0	1	
+something
+1	0	0	0.00150205	
+0	0	-1	-8.86853	
+0	1	0	7.8293	
+0	0	0	1	
+together
+1	0	0	0	
+0	0	-1	-8	
+0	1	0	8	
+0	0	0	1	
+offset_mat for bone Root
+-10	0	0	0.00150084	
+0	0	10	-8.86852	
+0	10	0	-0.170702	
+0	0	0	1	
+using node hierarchy transform
+parent node to mesh: Scene
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+exporting mesh: humale
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Hips
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	1.01748	
+0	0	-0.1	-0.01742	
+0	0	0	1	
+abs_parent_root_bone
+-0.1	0	0	0	
+0	0.1	0	0.8	
+0	0	-0.1	0	
+0	0	0	1	
+bone_transf_rel_root
+1	0	0	0.0019997	
+0	1	0	2.1748	
+0	0	1	0.1742	
+0	0	0	1	
+something
+1	0	0	-0.00199787	
+0	0	-1	-10.1748	
+0	1	0	7.8258	
+0	0	0	1	
+together
+1	0	0	0	
+0	0	-1	-8	
+0	1	0	8	
+0	0	0	1	
+offset_mat for bone Hips
+-10	0	0	-0.00199908	
+0	0	10	-10.1748	
+0	10	0	-0.174202	
+0	0	0	1	
+using node hierarchy transform
+parent node to mesh: Scene
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+=================================================
+time: Sun Mar 16 15:16:29 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: Scene
+numMeshes: 0
+numChildren: 6
+transform: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+>node: Lamp_001
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	1.52391	
+>-0.955171	0.199884	-0.218391	-1.67053	
+>-0.0551891	0.604525	0.794672	2.22765	
+>0	0	0	1	
+>node: Camera
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>-0.771565	0.275762	-0.573274	-3.00277	
+>-0.636058	-0.349737	0.687833	3.92316	
+>-0.0108168	0.895343	0.445245	3.59832	
+>0	0	0	1	
+>node: Lamp
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	-1.37321	
+>-0.955171	0.199884	-0.218391	2.54951	
+>-0.0551891	0.604525	0.794672	2.12195	
+>0	0	0	1	
+>node: Scene_root
+>numMeshes: 0
+>numChildren: 1
+>transform: 
+>-0.1	-1.4243e-015	-8.74228e-009	0	
+>-8.74228e-009	1.62921e-008	0.1	0	
+>0	0.1	-1.62921e-008	0.8	
+>0	0	0	1	
+>>node: Dir_Master
+>>numMeshes: 0
+>>numChildren: 1
+>>transform: 
+>>0.970367	-0.0931397	-0.222965	1.11796e-006	
+>>-0.0931398	0.707255	-0.700796	3.1005	
+>>0.222965	0.700796	0.677622	0.185055	
+>>0	0	0	1	
+>>>node: Master
+>>>numMeshes: 0
+>>>numChildren: 5
+>>>transform: 
+>>>0.970367	-0.222965	-0.0931398	-0.490049	
+>>>-0.0931396	-0.700796	0.707255	-1.54026	
+>>>-0.222965	-0.677621	-0.700796	-1.48932	
+>>>0	0	0	1	
+>node: loincloth
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+>node: humale
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: sword
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+-0.909791	-0.460638	0.0260114	0.782952	
+0.0214414	-0.0996623	-1.01498	1.38207	
+0.460873	-0.90469	0.0985685	0.189345	
+0	0	0	1	
+exporting mesh: loincloth
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Root
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	0.886852	
+0	0	-0.1	-0.01707	
+0	0	0	1	
+abs_parent_root_bone
+-0.1	0	0	0	
+0	0.1	0	0.8	
+0	0	-0.1	0	
+0	0	0	1	
+bone_transf_rel_root
+1	0	0	-0.0015004	
+0	1	0	0.868524	
+0	0	1	0.1707	
+0	0	0	1	
+something
+1	0	0	0.00150205	
+0	0	-1	-8.86853	
+0	1	0	7.8293	
+0	0	0	1	
+together
+1	0	0	0.0165066	
+0	0	-1	-7.16153	
+0	1	0	16.5145	
+0	0	0	1	
+offset_mat for bone Root
+-10	0	0	0.00150084	
+0	0	10	-8.86852	
+0	10	0	-0.170702	
+0	0	0	1	
+using node hierarchy transform
+parent node to mesh: Scene
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+exporting mesh: humale
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Hips
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	1.01748	
+0	0	-0.1	-0.01742	
+0	0	0	1	
+abs_parent_root_bone
+-0.1	0	0	0	
+0	0.1	0	0.8	
+0	0	-0.1	0	
+0	0	0	1	
+bone_transf_rel_root
+1	0	0	0.0019997	
+0	1	0	2.1748	
+0	0	1	0.1742	
+0	0	0	1	
+something
+1	0	0	-0.00199787	
+0	0	-1	-10.1748	
+0	1	0	7.8258	
+0	0	0	1	
+together
+1	0	0	-0.0219923	
+0	0	-1	-8.43281	
+0	1	0	29.5738	
+0	0	0	1	
+offset_mat for bone Hips
+-10	0	0	-0.00199908	
+0	0	10	-10.1748	
+0	10	0	-0.174202	
+0	0	0	1	
+using node hierarchy transform
+parent node to mesh: Scene
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+=================================================
+time: Sun Mar 16 15:21:56 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: Scene
+numMeshes: 0
+numChildren: 6
+transform: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+>node: Lamp_001
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	1.52391	
+>-0.955171	0.199884	-0.218391	-1.67053	
+>-0.0551891	0.604525	0.794672	2.22765	
+>0	0	0	1	
+>node: Camera
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>-0.771565	0.275762	-0.573274	-3.00277	
+>-0.636058	-0.349737	0.687833	3.92316	
+>-0.0108168	0.895343	0.445245	3.59832	
+>0	0	0	1	
+>node: Lamp
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	-1.37321	
+>-0.955171	0.199884	-0.218391	2.54951	
+>-0.0551891	0.604525	0.794672	2.12195	
+>0	0	0	1	
+>node: Scene_root
+>numMeshes: 0
+>numChildren: 1
+>transform: 
+>-0.1	-1.4243e-015	-8.74228e-009	0	
+>-8.74228e-009	1.62921e-008	0.1	0	
+>0	0.1	-1.62921e-008	0.8	
+>0	0	0	1	
+>>node: Dir_Master
+>>numMeshes: 0
+>>numChildren: 1
+>>transform: 
+>>0.970367	-0.0931397	-0.222965	1.11796e-006	
+>>-0.0931398	0.707255	-0.700796	3.1005	
+>>0.222965	0.700796	0.677622	0.185055	
+>>0	0	0	1	
+>>>node: Master
+>>>numMeshes: 0
+>>>numChildren: 5
+>>>transform: 
+>>>0.970367	-0.222965	-0.0931398	-0.490049	
+>>>-0.0931396	-0.700796	0.707255	-1.54026	
+>>>-0.222965	-0.677621	-0.700796	-1.48932	
+>>>0	0	0	1	
+>node: loincloth
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+>node: humale
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: sword
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+-0.909791	-0.460638	0.0260114	0.782952	
+0.0214414	-0.0996623	-1.01498	1.38207	
+0.460873	-0.90469	0.0985685	0.189345	
+0	0	0	1	
+exporting mesh: loincloth
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Root
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	0.886852	
+0	0	-0.1	-0.01707	
+0	0	0	1	
+abs_parent_root_bone
+-0.1	0	0	0	
+0	0.1	0	0.8	
+0	0	-0.1	0	
+0	0	0	1	
+bone_transf_rel_root
+1	0	0	-0.0015004	
+0	1	0	0.868524	
+0	0	1	0.1707	
+0	0	0	1	
+something
+1	0	0	0.00150205	
+0	0	-1	-8.86853	
+0	1	0	7.8293	
+0	0	0	1	
+together
+100	0	0	-0.03002	
+0	0	100	-105.37	
+0	-100	0	3.41407	
+0	0	0	1	
+offset_mat for bone Root
+-10	0	0	0.00150084	
+0	0	10	-8.86852	
+0	10	0	-0.170702	
+0	0	0	1	
+using node hierarchy transform
+parent node to mesh: Scene
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+exporting mesh: humale
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Hips
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	1.01748	
+0	0	-0.1	-0.01742	
+0	0	0	1	
+abs_parent_root_bone
+-0.1	0	0	0	
+0	0.1	0	0.8	
+0	0	-0.1	0	
+0	0	0	1	
+bone_transf_rel_root
+1	0	0	0.0019997	
+0	1	0	2.1748	
+0	0	1	0.1742	
+0	0	0	1	
+something
+1	0	0	-0.00199787	
+0	0	-1	-10.1748	
+0	1	0	7.8258	
+0	0	0	1	
+together
+100	0	0	0.0399782	
+0	0	100	-131.496	
+0	-100	0	3.48408	
+0	0	0	1	
+offset_mat for bone Hips
+-10	0	0	-0.00199908	
+0	0	10	-10.1748	
+0	10	0	-0.174202	
+0	0	0	1	
+using node hierarchy transform
+parent node to mesh: Scene
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+=================================================
+time: Sun Mar 16 15:24:28 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: Scene
+numMeshes: 0
+numChildren: 6
+transform: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+>node: Lamp_001
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	1.52391	
+>-0.955171	0.199884	-0.218391	-1.67053	
+>-0.0551891	0.604525	0.794672	2.22765	
+>0	0	0	1	
+>node: Camera
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>-0.771565	0.275762	-0.573274	-3.00277	
+>-0.636058	-0.349737	0.687833	3.92316	
+>-0.0108168	0.895343	0.445245	3.59832	
+>0	0	0	1	
+>node: Lamp
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	-1.37321	
+>-0.955171	0.199884	-0.218391	2.54951	
+>-0.0551891	0.604525	0.794672	2.12195	
+>0	0	0	1	
+>node: Scene_root
+>numMeshes: 0
+>numChildren: 1
+>transform: 
+>-0.1	-1.4243e-015	-8.74228e-009	0	
+>-8.74228e-009	1.62921e-008	0.1	0	
+>0	0.1	-1.62921e-008	0.8	
+>0	0	0	1	
+>>node: Dir_Master
+>>numMeshes: 0
+>>numChildren: 1
+>>transform: 
+>>0.970367	-0.0931397	-0.222965	1.11796e-006	
+>>-0.0931398	0.707255	-0.700796	3.1005	
+>>0.222965	0.700796	0.677622	0.185055	
+>>0	0	0	1	
+>>>node: Master
+>>>numMeshes: 0
+>>>numChildren: 5
+>>>transform: 
+>>>0.970367	-0.222965	-0.0931398	-0.490049	
+>>>-0.0931396	-0.700796	0.707255	-1.54026	
+>>>-0.222965	-0.677621	-0.700796	-1.48932	
+>>>0	0	0	1	
+>node: loincloth
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+>node: humale
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: sword
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+-0.909791	-0.460638	0.0260114	0.782952	
+0.0214414	-0.0996623	-1.01498	1.38207	
+0.460873	-0.90469	0.0985685	0.189345	
+0	0	0	1	
+exporting mesh: loincloth
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Root
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	0.886852	
+0	0	-0.1	-0.01707	
+0	0	0	1	
+abs_parent_root_bone
+-0.1	0	0	0	
+0	0.1	0	0.8	
+0	0	-0.1	0	
+0	0	0	1	
+bone_transf_rel_root
+1	0	0	-0.0015004	
+0	1	0	0.868524	
+0	0	1	0.1707	
+0	0	0	1	
+something
+1	0	0	0.00150205	
+0	0	-1	-8.86853	
+0	1	0	7.8293	
+0	0	0	1	
+together
+1	0	0	0	
+0	0	1	-0.173705	
+0	-1	0	0.0341407	
+0	0	0	1	
+offset_mat for bone Root
+-10	0	0	0.00150084	
+0	0	10	-8.86852	
+0	10	0	-0.170702	
+0	0	0	1	
+using node hierarchy transform
+parent node to mesh: Scene
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+exporting mesh: humale
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Hips
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	1.01748	
+0	0	-0.1	-0.01742	
+0	0	0	1	
+abs_parent_root_bone
+-0.1	0	0	0	
+0	0.1	0	0.8	
+0	0	-0.1	0	
+0	0	0	1	
+bone_transf_rel_root
+1	0	0	0.0019997	
+0	1	0	2.1748	
+0	0	1	0.1742	
+0	0	0	1	
+something
+1	0	0	-0.00199787	
+0	0	-1	-10.1748	
+0	1	0	7.8258	
+0	0	0	1	
+together
+1	0	0	0	
+0	0	1	-0.43496	
+0	-1	0	0.0348408	
+0	0	0	1	
+offset_mat for bone Hips
+-10	0	0	-0.00199908	
+0	0	10	-10.1748	
+0	10	0	-0.174202	
+0	0	0	1	
+using node hierarchy transform
+parent node to mesh: Scene
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+=================================================
+time: Sun Mar 16 15:25:58 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: Scene
+numMeshes: 0
+numChildren: 6
+transform: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+>node: Lamp_001
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	1.52391	
+>-0.955171	0.199884	-0.218391	-1.67053	
+>-0.0551891	0.604525	0.794672	2.22765	
+>0	0	0	1	
+>node: Camera
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>-0.771565	0.275762	-0.573274	-3.00277	
+>-0.636058	-0.349737	0.687833	3.92316	
+>-0.0108168	0.895343	0.445245	3.59832	
+>0	0	0	1	
+>node: Lamp
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	-1.37321	
+>-0.955171	0.199884	-0.218391	2.54951	
+>-0.0551891	0.604525	0.794672	2.12195	
+>0	0	0	1	
+>node: Scene_root
+>numMeshes: 0
+>numChildren: 1
+>transform: 
+>-0.1	-1.4243e-015	-8.74228e-009	0	
+>-8.74228e-009	1.62921e-008	0.1	0	
+>0	0.1	-1.62921e-008	0.8	
+>0	0	0	1	
+>>node: Dir_Master
+>>numMeshes: 0
+>>numChildren: 1
+>>transform: 
+>>0.970367	-0.0931397	-0.222965	1.11796e-006	
+>>-0.0931398	0.707255	-0.700796	3.1005	
+>>0.222965	0.700796	0.677622	0.185055	
+>>0	0	0	1	
+>>>node: Master
+>>>numMeshes: 0
+>>>numChildren: 5
+>>>transform: 
+>>>0.970367	-0.222965	-0.0931398	-0.490049	
+>>>-0.0931396	-0.700796	0.707255	-1.54026	
+>>>-0.222965	-0.677621	-0.700796	-1.48932	
+>>>0	0	0	1	
+>node: loincloth
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+>node: humale
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: sword
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+-0.909791	-0.460638	0.0260114	0.782952	
+0.0214414	-0.0996623	-1.01498	1.38207	
+0.460873	-0.90469	0.0985685	0.189345	
+0	0	0	1	
+exporting mesh: loincloth
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Root
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	0.886852	
+0	0	-0.1	-0.01707	
+0	0	0	1	
+abs_parent_root_bone
+-0.1	0	0	0	
+0	0.1	0	0.8	
+0	0	-0.1	0	
+0	0	0	1	
+bone_transf_rel_root
+1	0	0	-0.0015004	
+0	1	0	0.868524	
+0	0	1	0.1707	
+0	0	0	1	
+something
+1	0	0	0.00150205	
+0	0	-1	-8.86853	
+0	1	0	7.8293	
+0	0	0	1	
+together
+1	0	0	-0.0165042	
+0	0	1	-16.5145	
+0	-1	0	-7.16151	
+0	0	0	1	
+offset_mat for bone Root
+-10	0	0	0.00150084	
+0	0	10	-8.86852	
+0	10	0	-0.170702	
+0	0	0	1	
+using node hierarchy transform
+parent node to mesh: Scene
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+exporting mesh: humale
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Hips
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	1.01748	
+0	0	-0.1	-0.01742	
+0	0	0	1	
+abs_parent_root_bone
+-0.1	0	0	0	
+0	0.1	0	0.8	
+0	0	-0.1	0	
+0	0	0	1	
+bone_transf_rel_root
+1	0	0	0.0019997	
+0	1	0	2.1748	
+0	0	1	0.1742	
+0	0	0	1	
+something
+1	0	0	-0.00199787	
+0	0	-1	-10.1748	
+0	1	0	7.8258	
+0	0	0	1	
+together
+1	0	0	0.0219959	
+0	0	1	-29.5738	
+0	-1	0	-8.43279	
+0	0	0	1	
+offset_mat for bone Hips
+-10	0	0	-0.00199908	
+0	0	10	-10.1748	
+0	10	0	-0.174202	
+0	0	0	1	
+using node hierarchy transform
+parent node to mesh: Scene
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+=================================================
+time: Sun Mar 16 15:27:06 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: Scene
+numMeshes: 0
+numChildren: 6
+transform: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+>node: Lamp_001
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	1.52391	
+>-0.955171	0.199884	-0.218391	-1.67053	
+>-0.0551891	0.604525	0.794672	2.22765	
+>0	0	0	1	
+>node: Camera
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>-0.771565	0.275762	-0.573274	-3.00277	
+>-0.636058	-0.349737	0.687833	3.92316	
+>-0.0108168	0.895343	0.445245	3.59832	
+>0	0	0	1	
+>node: Lamp
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	-1.37321	
+>-0.955171	0.199884	-0.218391	2.54951	
+>-0.0551891	0.604525	0.794672	2.12195	
+>0	0	0	1	
+>node: Scene_root
+>numMeshes: 0
+>numChildren: 1
+>transform: 
+>-0.1	-1.4243e-015	-8.74228e-009	0	
+>-8.74228e-009	1.62921e-008	0.1	0	
+>0	0.1	-1.62921e-008	0.8	
+>0	0	0	1	
+>>node: Dir_Master
+>>numMeshes: 0
+>>numChildren: 1
+>>transform: 
+>>0.970367	-0.0931397	-0.222965	1.11796e-006	
+>>-0.0931398	0.707255	-0.700796	3.1005	
+>>0.222965	0.700796	0.677622	0.185055	
+>>0	0	0	1	
+>>>node: Master
+>>>numMeshes: 0
+>>>numChildren: 5
+>>>transform: 
+>>>0.970367	-0.222965	-0.0931398	-0.490049	
+>>>-0.0931396	-0.700796	0.707255	-1.54026	
+>>>-0.222965	-0.677621	-0.700796	-1.48932	
+>>>0	0	0	1	
+>node: loincloth
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+>node: humale
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: sword
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+-0.909791	-0.460638	0.0260114	0.782952	
+0.0214414	-0.0996623	-1.01498	1.38207	
+0.460873	-0.90469	0.0985685	0.189345	
+0	0	0	1	
+exporting mesh: loincloth
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Root
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	0.886852	
+0	0	-0.1	-0.01707	
+0	0	0	1	
+abs_parent_root_bone
+-0.1	0	0	0	
+0	0.1	0	0.8	
+0	0	-0.1	0	
+0	0	0	1	
+bone_transf_rel_root
+1	0	0	-0.0015004	
+0	1	0	0.868524	
+0	0	1	0.1707	
+0	0	0	1	
+something
+1	0	0	0.00150205	
+0	0	-1	-8.86853	
+0	1	0	7.8293	
+0	0	0	1	
+together
+1	0	0	0.0135044	
+0	0	1	0.855938	
+0	-1	0	-10.5755	
+0	0	0	1	
+offset_mat for bone Root
+-10	0	0	0.00150084	
+0	0	10	-8.86852	
+0	10	0	-0.170702	
+0	0	0	1	
+using node hierarchy transform
+parent node to mesh: Scene
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+exporting mesh: humale
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Hips
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	1.01748	
+0	0	-0.1	-0.01742	
+0	0	0	1	
+abs_parent_root_bone
+-0.1	0	0	0	
+0	0.1	0	0.8	
+0	0	-0.1	0	
+0	0	0	1	
+bone_transf_rel_root
+1	0	0	0.0019997	
+0	1	0	2.1748	
+0	0	1	0.1742	
+0	0	0	1	
+something
+1	0	0	-0.00199787	
+0	0	-1	-10.1748	
+0	1	0	7.8258	
+0	0	0	1	
+together
+1	0	0	-0.0179965	
+0	0	1	13.9222	
+0	-1	0	-11.9168	
+0	0	0	1	
+offset_mat for bone Hips
+-10	0	0	-0.00199908	
+0	0	10	-10.1748	
+0	10	0	-0.174202	
+0	0	0	1	
+using node hierarchy transform
+parent node to mesh: Scene
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+=================================================
+time: Sun Mar 16 15:28:10 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: Scene
+numMeshes: 0
+numChildren: 6
+transform: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+>node: Lamp_001
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	1.52391	
+>-0.955171	0.199884	-0.218391	-1.67053	
+>-0.0551891	0.604525	0.794672	2.22765	
+>0	0	0	1	
+>node: Camera
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>-0.771565	0.275762	-0.573274	-3.00277	
+>-0.636058	-0.349737	0.687833	3.92316	
+>-0.0108168	0.895343	0.445245	3.59832	
+>0	0	0	1	
+>node: Lamp
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	-1.37321	
+>-0.955171	0.199884	-0.218391	2.54951	
+>-0.0551891	0.604525	0.794672	2.12195	
+>0	0	0	1	
+>node: Scene_root
+>numMeshes: 0
+>numChildren: 1
+>transform: 
+>-0.1	-1.4243e-015	-8.74228e-009	0	
+>-8.74228e-009	1.62921e-008	0.1	0	
+>0	0.1	-1.62921e-008	0.8	
+>0	0	0	1	
+>>node: Dir_Master
+>>numMeshes: 0
+>>numChildren: 1
+>>transform: 
+>>0.970367	-0.0931397	-0.222965	1.11796e-006	
+>>-0.0931398	0.707255	-0.700796	3.1005	
+>>0.222965	0.700796	0.677622	0.185055	
+>>0	0	0	1	
+>>>node: Master
+>>>numMeshes: 0
+>>>numChildren: 5
+>>>transform: 
+>>>0.970367	-0.222965	-0.0931398	-0.490049	
+>>>-0.0931396	-0.700796	0.707255	-1.54026	
+>>>-0.222965	-0.677621	-0.700796	-1.48932	
+>>>0	0	0	1	
+>node: loincloth
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+>node: humale
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: sword
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+-0.909791	-0.460638	0.0260114	0.782952	
+0.0214414	-0.0996623	-1.01498	1.38207	
+0.460873	-0.90469	0.0985685	0.189345	
+0	0	0	1	
+exporting mesh: loincloth
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Root
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	0.886852	
+0	0	-0.1	-0.01707	
+0	0	0	1	
+abs_parent_root_bone
+-0.1	0	0	0	
+0	0.1	0	0.8	
+0	0	-0.1	0	
+0	0	0	1	
+bone_transf_rel_root
+1	0	0	-0.0015004	
+0	1	0	0.868524	
+0	0	1	0.1707	
+0	0	0	1	
+something
+1	0	0	0.00150205	
+0	0	-1	-8.86853	
+0	1	0	7.8293	
+0	0	0	1	
+should be equal for both
+-0.1	0	0	0.00165048	
+0	0	0.1	-0.851454	
+0	0.1	0	0.716152	
+0	0	0	1	
+offset_mat for bone Root
+-10	0	0	0.00150084	
+0	0	10	-8.86852	
+0	10	0	-0.170702	
+0	0	0	1	
+using node hierarchy transform
+parent node to mesh: Scene
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+exporting mesh: humale
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Hips
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	1.01748	
+0	0	-0.1	-0.01742	
+0	0	0	1	
+abs_parent_root_bone
+-0.1	0	0	0	
+0	0.1	0	0.8	
+0	0	-0.1	0	
+0	0	0	1	
+bone_transf_rel_root
+1	0	0	0.0019997	
+0	1	0	2.1748	
+0	0	1	0.1742	
+0	0	0	1	
+something
+1	0	0	-0.00199787	
+0	0	-1	-10.1748	
+0	1	0	7.8258	
+0	0	0	1	
+should be equal for both
+-0.1	0	0	-0.00219952	
+0	0	0.1	-2.15738	
+0	0.1	0	0.843279	
+0	0	0	1	
+offset_mat for bone Hips
+-10	0	0	-0.00199908	
+0	0	10	-10.1748	
+0	10	0	-0.174202	
+0	0	0	1	
+using node hierarchy transform
+parent node to mesh: Scene
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+=================================================
+time: Sun Mar 16 15:32:02 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: Scene
+numMeshes: 0
+numChildren: 6
+transform: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+>node: Lamp_001
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	1.52391	
+>-0.955171	0.199884	-0.218391	-1.67053	
+>-0.0551891	0.604525	0.794672	2.22765	
+>0	0	0	1	
+>node: Camera
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>-0.771565	0.275762	-0.573274	-3.00277	
+>-0.636058	-0.349737	0.687833	3.92316	
+>-0.0108168	0.895343	0.445245	3.59832	
+>0	0	0	1	
+>node: Lamp
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	-1.37321	
+>-0.955171	0.199884	-0.218391	2.54951	
+>-0.0551891	0.604525	0.794672	2.12195	
+>0	0	0	1	
+>node: Scene_root
+>numMeshes: 0
+>numChildren: 1
+>transform: 
+>-0.1	-1.4243e-015	-8.74228e-009	0	
+>-8.74228e-009	1.62921e-008	0.1	0	
+>0	0.1	-1.62921e-008	0.8	
+>0	0	0	1	
+>>node: Dir_Master
+>>numMeshes: 0
+>>numChildren: 1
+>>transform: 
+>>0.970367	-0.0931397	-0.222965	1.11796e-006	
+>>-0.0931398	0.707255	-0.700796	3.1005	
+>>0.222965	0.700796	0.677622	0.185055	
+>>0	0	0	1	
+>>>node: Master
+>>>numMeshes: 0
+>>>numChildren: 5
+>>>transform: 
+>>>0.970367	-0.222965	-0.0931398	-0.490049	
+>>>-0.0931396	-0.700796	0.707255	-1.54026	
+>>>-0.222965	-0.677621	-0.700796	-1.48932	
+>>>0	0	0	1	
+>node: loincloth
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+>node: humale
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: sword
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+-0.909791	-0.460638	0.0260114	0.782952	
+0.0214414	-0.0996623	-1.01498	1.38207	
+0.460873	-0.90469	0.0985685	0.189345	
+0	0	0	1	
+exporting mesh: loincloth
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Root
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	0.886852	
+0	0	-0.1	-0.01707	
+0	0	0	1	
+abs_parent_root_bone
+-0.1	0	0	0	
+0	0.1	0	0.8	
+0	0	-0.1	0	
+0	0	0	1	
+bone_transf_rel_root
+1	0	0	-0.0015004	
+0	1	0	0.868524	
+0	0	1	0.1707	
+0	0	0	1	
+something
+1	0	0	0.00150205	
+0	0	-1	-8.86853	
+0	1	0	7.8293	
+0	0	0	1	
+should be equal for both
+-0.1	0	0	0.00165048	
+0	0	0.1	-0.851454	
+0	0.1	0	0.716152	
+0	0	0	1	
+from mesh to bone Root
+-0.1	0	0	0	
+0	0	0.1	0.01707	
+0	0.1	0	0.886852	
+0	0	0	1	
+using node hierarchy transform
+parent node to mesh: Scene
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+exporting mesh: humale
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Hips
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	1.01748	
+0	0	-0.1	-0.01742	
+0	0	0	1	
+abs_parent_root_bone
+-0.1	0	0	0	
+0	0.1	0	0.8	
+0	0	-0.1	0	
+0	0	0	1	
+bone_transf_rel_root
+1	0	0	0.0019997	
+0	1	0	2.1748	
+0	0	1	0.1742	
+0	0	0	1	
+something
+1	0	0	-0.00199787	
+0	0	-1	-10.1748	
+0	1	0	7.8258	
+0	0	0	1	
+should be equal for both
+-0.1	0	0	-0.00219952	
+0	0	0.1	-2.15738	
+0	0.1	0	0.843279	
+0	0	0	1	
+from mesh to bone Hips
+-0.1	0	0	0	
+0	0	0.1	0.01742	
+0	0.1	0	1.01748	
+0	0	0	1	
+using node hierarchy transform
+parent node to mesh: Scene
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+=================================================
+time: Sun Mar 16 15:32:34 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: Scene
+numMeshes: 0
+numChildren: 6
+transform: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+>node: Lamp_001
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	1.52391	
+>-0.955171	0.199884	-0.218391	-1.67053	
+>-0.0551891	0.604525	0.794672	2.22765	
+>0	0	0	1	
+>node: Camera
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>-0.771565	0.275762	-0.573274	-3.00277	
+>-0.636058	-0.349737	0.687833	3.92316	
+>-0.0108168	0.895343	0.445245	3.59832	
+>0	0	0	1	
+>node: Lamp
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	-1.37321	
+>-0.955171	0.199884	-0.218391	2.54951	
+>-0.0551891	0.604525	0.794672	2.12195	
+>0	0	0	1	
+>node: Scene_root
+>numMeshes: 0
+>numChildren: 1
+>transform: 
+>-0.1	-1.4243e-015	-8.74228e-009	0	
+>-8.74228e-009	1.62921e-008	0.1	0	
+>0	0.1	-1.62921e-008	0.8	
+>0	0	0	1	
+>>node: Dir_Master
+>>numMeshes: 0
+>>numChildren: 1
+>>transform: 
+>>0.970367	-0.0931397	-0.222965	1.11796e-006	
+>>-0.0931398	0.707255	-0.700796	3.1005	
+>>0.222965	0.700796	0.677622	0.185055	
+>>0	0	0	1	
+>>>node: Master
+>>>numMeshes: 0
+>>>numChildren: 5
+>>>transform: 
+>>>0.970367	-0.222965	-0.0931398	-0.490049	
+>>>-0.0931396	-0.700796	0.707255	-1.54026	
+>>>-0.222965	-0.677621	-0.700796	-1.48932	
+>>>0	0	0	1	
+>node: loincloth
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+>node: humale
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: sword
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+-0.909791	-0.460638	0.0260114	0.782952	
+0.0214414	-0.0996623	-1.01498	1.38207	
+0.460873	-0.90469	0.0985685	0.189345	
+0	0	0	1	
+exporting mesh: loincloth
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Root
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	0.886852	
+0	0	-0.1	-0.01707	
+0	0	0	1	
+abs_parent_root_bone
+-0.1	0	0	0	
+0	0.1	0	0.8	
+0	0	-0.1	0	
+0	0	0	1	
+bone_transf_rel_root
+1	0	0	-0.0015004	
+0	1	0	0.868524	
+0	0	1	0.1707	
+0	0	0	1	
+something
+1	0	0	0.00150205	
+0	0	-1	-8.86853	
+0	1	0	7.8293	
+0	0	0	1	
+should be equal for both
+-10	0	0	0.00300197	
+0	0	10	-9.73705	
+0	10	0	-0.341406	
+0	0	0	1	
+from mesh to bone Root
+-0.1	0	0	0	
+0	0	0.1	0.01707	
+0	0.1	0	0.886852	
+0	0	0	1	
+using node hierarchy transform
+parent node to mesh: Scene
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+exporting mesh: humale
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Hips
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	1.01748	
+0	0	-0.1	-0.01742	
+0	0	0	1	
+abs_parent_root_bone
+-0.1	0	0	0	
+0	0.1	0	0.8	
+0	0	-0.1	0	
+0	0	0	1	
+bone_transf_rel_root
+1	0	0	0.0019997	
+0	1	0	2.1748	
+0	0	1	0.1742	
+0	0	0	1	
+something
+1	0	0	-0.00199787	
+0	0	-1	-10.1748	
+0	1	0	7.8258	
+0	0	0	1	
+should be equal for both
+-10	0	0	-0.00399785	
+0	0	10	-12.3496	
+0	10	0	-0.348406	
+0	0	0	1	
+from mesh to bone Hips
+-0.1	0	0	0	
+0	0	0.1	0.01742	
+0	0.1	0	1.01748	
+0	0	0	1	
+using node hierarchy transform
+parent node to mesh: Scene
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+=================================================
+time: Sun Mar 16 15:35:02 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: Scene
+numMeshes: 0
+numChildren: 6
+transform: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+>node: Lamp_001
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	1.52391	
+>-0.955171	0.199884	-0.218391	-1.67053	
+>-0.0551891	0.604525	0.794672	2.22765	
+>0	0	0	1	
+>node: Camera
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>-0.771565	0.275762	-0.573274	-3.00277	
+>-0.636058	-0.349737	0.687833	3.92316	
+>-0.0108168	0.895343	0.445245	3.59832	
+>0	0	0	1	
+>node: Lamp
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	-1.37321	
+>-0.955171	0.199884	-0.218391	2.54951	
+>-0.0551891	0.604525	0.794672	2.12195	
+>0	0	0	1	
+>node: Scene_root
+>numMeshes: 0
+>numChildren: 1
+>transform: 
+>-0.1	-1.4243e-015	-8.74228e-009	0	
+>-8.74228e-009	1.62921e-008	0.1	0	
+>0	0.1	-1.62921e-008	0.8	
+>0	0	0	1	
+>>node: Dir_Master
+>>numMeshes: 0
+>>numChildren: 1
+>>transform: 
+>>0.970367	-0.0931397	-0.222965	1.11796e-006	
+>>-0.0931398	0.707255	-0.700796	3.1005	
+>>0.222965	0.700796	0.677622	0.185055	
+>>0	0	0	1	
+>>>node: Master
+>>>numMeshes: 0
+>>>numChildren: 5
+>>>transform: 
+>>>0.970367	-0.222965	-0.0931398	-0.490049	
+>>>-0.0931396	-0.700796	0.707255	-1.54026	
+>>>-0.222965	-0.677621	-0.700796	-1.48932	
+>>>0	0	0	1	
+>node: loincloth
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+>node: humale
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: sword
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+-0.909791	-0.460638	0.0260114	0.782952	
+0.0214414	-0.0996623	-1.01498	1.38207	
+0.460873	-0.90469	0.0985685	0.189345	
+0	0	0	1	
+exporting mesh: loincloth
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Root
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	0.886852	
+0	0	-0.1	-0.01707	
+0	0	0	1	
+from_world_to_bone
+-0.1	0	0	0	
+0	0	0.1	0.01707	
+0	0.1	0	0.886852	
+0	0	0	1	
+using node hierarchy transform
+parent node to mesh: Scene
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+exporting mesh: humale
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Hips
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	1.01748	
+0	0	-0.1	-0.01742	
+0	0	0	1	
+from_world_to_bone
+-0.1	0	0	0	
+0	0	0.1	0.01742	
+0	0.1	0	1.01748	
+0	0	0	1	
+using node hierarchy transform
+parent node to mesh: Scene
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+=================================================
+time: Sun Mar 16 15:37:50 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: Scene
+numMeshes: 0
+numChildren: 6
+transform: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+>node: Lamp_001
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	1.52391	
+>-0.955171	0.199884	-0.218391	-1.67053	
+>-0.0551891	0.604525	0.794672	2.22765	
+>0	0	0	1	
+>node: Camera
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>-0.771565	0.275762	-0.573274	-3.00277	
+>-0.636058	-0.349737	0.687833	3.92316	
+>-0.0108168	0.895343	0.445245	3.59832	
+>0	0	0	1	
+>node: Lamp
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	-1.37321	
+>-0.955171	0.199884	-0.218391	2.54951	
+>-0.0551891	0.604525	0.794672	2.12195	
+>0	0	0	1	
+>node: Scene_root
+>numMeshes: 0
+>numChildren: 1
+>transform: 
+>-0.1	-1.4243e-015	-8.74228e-009	0	
+>-8.74228e-009	1.62921e-008	0.1	0	
+>0	0.1	-1.62921e-008	0.8	
+>0	0	0	1	
+>>node: Dir_Master
+>>numMeshes: 0
+>>numChildren: 1
+>>transform: 
+>>0.970367	-0.0931397	-0.222965	1.11796e-006	
+>>-0.0931398	0.707255	-0.700796	3.1005	
+>>0.222965	0.700796	0.677622	0.185055	
+>>0	0	0	1	
+>>>node: Master
+>>>numMeshes: 0
+>>>numChildren: 5
+>>>transform: 
+>>>0.970367	-0.222965	-0.0931398	-0.490049	
+>>>-0.0931396	-0.700796	0.707255	-1.54026	
+>>>-0.222965	-0.677621	-0.700796	-1.48932	
+>>>0	0	0	1	
+>node: loincloth
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+>node: humale
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: sword
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+-0.909791	-0.460638	0.0260114	0.782952	
+0.0214414	-0.0996623	-1.01498	1.38207	
+0.460873	-0.90469	0.0985685	0.189345	
+0	0	0	1	
+exporting mesh: loincloth
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Root
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	0.886852	
+0	0	-0.1	-0.01707	
+0	0	0	1	
+from_mesh_to_bone
+-0.1	0	0	0	
+0	0	0.1	0.01707	
+0	0.1	0	0.886852	
+0	0	0	1	
+using node hierarchy transform
+parent node to mesh: Scene
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+exporting mesh: humale
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Hips
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	1.01748	
+0	0	-0.1	-0.01742	
+0	0	0	1	
+from_mesh_to_bone
+-0.1	0	0	0	
+0	0	0.1	0.01742	
+0	0.1	0	1.01748	
+0	0	0	1	
+using node hierarchy transform
+parent node to mesh: Scene
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+=================================================
+time: Sun Mar 16 15:40:13 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: Scene
+numMeshes: 0
+numChildren: 6
+transform: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+>node: Lamp_001
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	1.52391	
+>-0.955171	0.199884	-0.218391	-1.67053	
+>-0.0551891	0.604525	0.794672	2.22765	
+>0	0	0	1	
+>node: Camera
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>-0.771565	0.275762	-0.573274	-3.00277	
+>-0.636058	-0.349737	0.687833	3.92316	
+>-0.0108168	0.895343	0.445245	3.59832	
+>0	0	0	1	
+>node: Lamp
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	-1.37321	
+>-0.955171	0.199884	-0.218391	2.54951	
+>-0.0551891	0.604525	0.794672	2.12195	
+>0	0	0	1	
+>node: Scene_root
+>numMeshes: 0
+>numChildren: 1
+>transform: 
+>-0.1	-1.4243e-015	-8.74228e-009	0	
+>-8.74228e-009	1.62921e-008	0.1	0	
+>0	0.1	-1.62921e-008	0.8	
+>0	0	0	1	
+>>node: Dir_Master
+>>numMeshes: 0
+>>numChildren: 1
+>>transform: 
+>>0.970367	-0.0931397	-0.222965	1.11796e-006	
+>>-0.0931398	0.707255	-0.700796	3.1005	
+>>0.222965	0.700796	0.677622	0.185055	
+>>0	0	0	1	
+>>>node: Master
+>>>numMeshes: 0
+>>>numChildren: 5
+>>>transform: 
+>>>0.970367	-0.222965	-0.0931398	-0.490049	
+>>>-0.0931396	-0.700796	0.707255	-1.54026	
+>>>-0.222965	-0.677621	-0.700796	-1.48932	
+>>>0	0	0	1	
+>node: loincloth
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+>node: humale
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: sword
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+-0.909791	-0.460638	0.0260114	0.782952	
+0.0214414	-0.0996623	-1.01498	1.38207	
+0.460873	-0.90469	0.0985685	0.189345	
+0	0	0	1	
+exporting mesh: loincloth
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Root
+parent node to mesh: Scene
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	0.886852	
+0	0	-0.1	-0.01707	
+0	0	0	1	
+from_mesh_to_bone
+-0.1	0	0	0	
+0	0	0.1	0.01707	
+0	0.1	0	0.886852	
+0	0	0	1	
+abs_mesh_mat
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+using node hierarchy transform
+parent node to mesh: Scene
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+exporting mesh: humale
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Hips
+parent node to mesh: Scene
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	1.01748	
+0	0	-0.1	-0.01742	
+0	0	0	1	
+from_mesh_to_bone
+-0.1	0	0	0	
+0	0	0.1	0.01742	
+0	0.1	0	1.01748	
+0	0	0	1	
+abs_mesh_mat
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+using node hierarchy transform
+parent node to mesh: Scene
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+=================================================
+time: Sun Mar 16 15:40:51 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: Scene
+numMeshes: 0
+numChildren: 6
+transform: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+>node: Lamp_001
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	1.52391	
+>-0.955171	0.199884	-0.218391	-1.67053	
+>-0.0551891	0.604525	0.794672	2.22765	
+>0	0	0	1	
+>node: Camera
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>-0.771565	0.275762	-0.573274	-3.00277	
+>-0.636058	-0.349737	0.687833	3.92316	
+>-0.0108168	0.895343	0.445245	3.59832	
+>0	0	0	1	
+>node: Lamp
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	-1.37321	
+>-0.955171	0.199884	-0.218391	2.54951	
+>-0.0551891	0.604525	0.794672	2.12195	
+>0	0	0	1	
+>node: Scene_root
+>numMeshes: 0
+>numChildren: 1
+>transform: 
+>-0.1	-1.4243e-015	-8.74228e-009	0	
+>-8.74228e-009	1.62921e-008	0.1	0	
+>0	0.1	-1.62921e-008	0.8	
+>0	0	0	1	
+>>node: Dir_Master
+>>numMeshes: 0
+>>numChildren: 1
+>>transform: 
+>>0.970367	-0.0931397	-0.222965	1.11796e-006	
+>>-0.0931398	0.707255	-0.700796	3.1005	
+>>0.222965	0.700796	0.677622	0.185055	
+>>0	0	0	1	
+>>>node: Master
+>>>numMeshes: 0
+>>>numChildren: 5
+>>>transform: 
+>>>0.970367	-0.222965	-0.0931398	-0.490049	
+>>>-0.0931396	-0.700796	0.707255	-1.54026	
+>>>-0.222965	-0.677621	-0.700796	-1.48932	
+>>>0	0	0	1	
+>node: humale
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+>node: loincloth
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: sword
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+-0.731313	-0.552002	-0.448396	0.813231	
+0.426495	0.174262	-0.910121	1.47152	
+0.569093	-0.839947	0.105859	0.250291	
+0	0	0	1	
+exporting mesh: humale
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Hips
+parent node to mesh: Scene
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	1.01748	
+0	0	-0.1	-0.01742	
+0	0	0	1	
+from_mesh_to_bone
+1	0	0	0.00199969	
+0	1	0	2.1748	
+0	0	1	0.1742	
+0	0	0	1	
+abs_mesh_mat
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+using node hierarchy transform
+parent node to mesh: Scene
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+exporting mesh: loincloth
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Root
+parent node to mesh: Scene
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	0.886852	
+0	0	-0.1	-0.01707	
+0	0	0	1	
+from_mesh_to_bone
+0.1	0	0	0	
+0	0	-0.1	-0.01707	
+0	0.1	0	0.886852	
+0	0	0	1	
+abs_mesh_mat
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+using node hierarchy transform
+parent node to mesh: Scene
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+=================================================
+time: Sun Mar 16 15:51:04 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: Scene
+numMeshes: 0
+numChildren: 6
+transform: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+>node: Lamp_001
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	1.52391	
+>-0.955171	0.199884	-0.218391	-1.67053	
+>-0.0551891	0.604525	0.794672	2.22765	
+>0	0	0	1	
+>node: Camera
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>-0.771565	0.275762	-0.573274	-3.00277	
+>-0.636058	-0.349737	0.687833	3.92316	
+>-0.0108168	0.895343	0.445245	3.59832	
+>0	0	0	1	
+>node: Lamp
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	-1.37321	
+>-0.955171	0.199884	-0.218391	2.54951	
+>-0.0551891	0.604525	0.794672	2.12195	
+>0	0	0	1	
+>node: Scene_root
+>numMeshes: 0
+>numChildren: 1
+>transform: 
+>-0.1	-1.4243e-015	-8.74228e-009	0	
+>-8.74228e-009	1.62921e-008	0.1	0	
+>0	0.1	-1.62921e-008	0.8	
+>0	0	0	1	
+>>node: Dir_Master
+>>numMeshes: 0
+>>numChildren: 1
+>>transform: 
+>>0.970367	-0.0931397	-0.222965	1.11796e-006	
+>>-0.0931398	0.707255	-0.700796	3.1005	
+>>0.222965	0.700796	0.677622	0.185055	
+>>0	0	0	1	
+>>>node: Master
+>>>numMeshes: 0
+>>>numChildren: 5
+>>>transform: 
+>>>0.970367	-0.222965	-0.0931398	-0.490049	
+>>>-0.0931396	-0.700796	0.707255	-1.54026	
+>>>-0.222965	-0.677621	-0.700796	-1.48932	
+>>>0	0	0	1	
+>node: humale
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+>node: loincloth
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: sword
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+-0.731313	-0.552002	-0.448396	0.813231	
+0.426495	0.174262	-0.910121	1.47152	
+0.569093	-0.839947	0.105859	0.250291	
+0	0	0	1	
+exporting mesh: humale
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Hips
+parent node to mesh: Scene
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	1.01748	
+0	0	-0.1	-0.01742	
+0	0	0	1	
+from_skel_to_bone
+1	0	0	0.0019997	
+0	1	0	2.1748	
+0	0	1	0.1742	
+0	0	0	1	
+from_mesh_to_bone
+1	0	0	0.00199969	
+0	1	0	2.1748	
+0	0	1	0.1742	
+0	0	0	1	
+abs_mesh_mat
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+using node hierarchy transform
+parent node to mesh: Scene
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+exporting mesh: loincloth
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Root
+parent node to mesh: Scene
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	0.886852	
+0	0	-0.1	-0.01707	
+0	0	0	1	
+from_skel_to_bone
+1	0	0	-0.0015004	
+0	1	0	0.868524	
+0	0	1	0.1707	
+0	0	0	1	
+from_mesh_to_bone
+0.1	0	0	0	
+0	0	-0.1	-0.01707	
+0	0.1	0	0.886852	
+0	0	0	1	
+abs_mesh_mat
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+using node hierarchy transform
+parent node to mesh: Scene
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+=================================================
+time: Sun Mar 16 15:52:50 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: Scene
+numMeshes: 0
+numChildren: 6
+transform: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+>node: Lamp_001
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	1.52391	
+>-0.955171	0.199884	-0.218391	-1.67053	
+>-0.0551891	0.604525	0.794672	2.22765	
+>0	0	0	1	
+>node: Camera
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>-0.771565	0.275762	-0.573274	-3.00277	
+>-0.636058	-0.349737	0.687833	3.92316	
+>-0.0108168	0.895343	0.445245	3.59832	
+>0	0	0	1	
+>node: Lamp
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	-1.37321	
+>-0.955171	0.199884	-0.218391	2.54951	
+>-0.0551891	0.604525	0.794672	2.12195	
+>0	0	0	1	
+>node: Scene_root
+>numMeshes: 0
+>numChildren: 1
+>transform: 
+>-0.1	-1.4243e-015	-8.74228e-009	0	
+>-8.74228e-009	1.62921e-008	0.1	0	
+>0	0.1	-1.62921e-008	0.8	
+>0	0	0	1	
+>>node: Dir_Master
+>>numMeshes: 0
+>>numChildren: 1
+>>transform: 
+>>0.970367	-0.0931397	-0.222965	1.11796e-006	
+>>-0.0931398	0.707255	-0.700796	3.1005	
+>>0.222965	0.700796	0.677622	0.185055	
+>>0	0	0	1	
+>>>node: Master
+>>>numMeshes: 0
+>>>numChildren: 5
+>>>transform: 
+>>>0.970367	-0.222965	-0.0931398	-0.490049	
+>>>-0.0931396	-0.700796	0.707255	-1.54026	
+>>>-0.222965	-0.677621	-0.700796	-1.48932	
+>>>0	0	0	1	
+>node: humale
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+>node: loincloth
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: sword
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+-0.731313	-0.552002	-0.448396	0.813231	
+0.426495	0.174262	-0.910121	1.47152	
+0.569093	-0.839947	0.105859	0.250291	
+0	0	0	1	
+exporting mesh: humale
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Hips
+parent node to mesh: Scene
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	1.01748	
+0	0	-0.1	-0.01742	
+0	0	0	1	
+from_skel_to_bone
+1	0	0	0.0019997	
+0	1	0	2.1748	
+0	0	1	0.1742	
+0	0	0	1	
+from_mesh_to_bone
+1	0	0	0.00199969	
+0	1	0	2.1748	
+0	0	1	0.1742	
+0	0	0	1	
+abs_mesh_mat
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+final
+1	0	0	0	
+0	1	0	0	
+0	0	1	0	
+0	0	0	1	
+using node hierarchy transform
+parent node to mesh: Scene
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+exporting mesh: loincloth
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Root
+parent node to mesh: Scene
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	0.886852	
+0	0	-0.1	-0.01707	
+0	0	0	1	
+from_skel_to_bone
+1	0	0	-0.0015004	
+0	1	0	0.868524	
+0	0	1	0.1707	
+0	0	0	1	
+from_mesh_to_bone
+0.1	0	0	0	
+0	0	-0.1	-0.01707	
+0	0.1	0	0.886852	
+0	0	0	1	
+abs_mesh_mat
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+final
+0.1	0	0	0.00135042	
+0	0	-0.1	-0.885594	
+0	0.1	0	0.716152	
+0	0	0	1	
+using node hierarchy transform
+parent node to mesh: Scene
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+=================================================
+time: Sun Mar 16 15:58:25 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: Scene
+numMeshes: 0
+numChildren: 6
+transform: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+>node: Lamp_001
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	1.52391	
+>-0.955171	0.199884	-0.218391	-1.67053	
+>-0.0551891	0.604525	0.794672	2.22765	
+>0	0	0	1	
+>node: Camera
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>-0.771565	0.275762	-0.573274	-3.00277	
+>-0.636058	-0.349737	0.687833	3.92316	
+>-0.0108168	0.895343	0.445245	3.59832	
+>0	0	0	1	
+>node: Lamp
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	-1.37321	
+>-0.955171	0.199884	-0.218391	2.54951	
+>-0.0551891	0.604525	0.794672	2.12195	
+>0	0	0	1	
+>node: Scene_root
+>numMeshes: 0
+>numChildren: 1
+>transform: 
+>-0.1	-1.4243e-015	-8.74228e-009	0	
+>-8.74228e-009	1.62921e-008	0.1	0	
+>0	0.1	-1.62921e-008	0.8	
+>0	0	0	1	
+>>node: Dir_Master
+>>numMeshes: 0
+>>numChildren: 1
+>>transform: 
+>>0.970367	-0.0931397	-0.222965	1.11796e-006	
+>>-0.0931398	0.707255	-0.700796	3.1005	
+>>0.222965	0.700796	0.677622	0.185055	
+>>0	0	0	1	
+>>>node: Master
+>>>numMeshes: 0
+>>>numChildren: 5
+>>>transform: 
+>>>0.970367	-0.222965	-0.0931398	-0.490049	
+>>>-0.0931396	-0.700796	0.707255	-1.54026	
+>>>-0.222965	-0.677621	-0.700796	-1.48932	
+>>>0	0	0	1	
+>node: humale
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+>node: loincloth
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: sword
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+-0.731313	-0.552002	-0.448396	0.813231	
+0.426495	0.174262	-0.910121	1.47152	
+0.569093	-0.839947	0.105859	0.250291	
+0	0	0	1	
+exporting mesh: humale
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Hips
+parent node to mesh: Scene
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	1.01748	
+0	0	-0.1	-0.01742	
+0	0	0	1	
+from_skel_to_bone
+1	0	0	0.0019997	
+0	1	0	2.1748	
+0	0	1	0.1742	
+0	0	0	1	
+from_mesh_to_bone
+1	0	0	0.00199969	
+0	1	0	2.1748	
+0	0	1	0.1742	
+0	0	0	1	
+abs_mesh_mat
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+from mesh coords to skel coords
+1	0	0	0	
+0	1	0	0	
+0	0	1	0	
+0	0	0	1	
+from skel coords to world (bind) coords
+-10	0	0	0	
+0	10	0	-7.99998	
+0	0	-10	0	
+0	0	0	1	
+using node hierarchy transform
+parent node to mesh: Scene
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+exporting mesh: loincloth
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Root
+parent node to mesh: Scene
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	0.886852	
+0	0	-0.1	-0.01707	
+0	0	0	1	
+from_skel_to_bone
+1	0	0	-0.0015004	
+0	1	0	0.868524	
+0	0	1	0.1707	
+0	0	0	1	
+from_mesh_to_bone
+0.1	0	0	0	
+0	0	-0.1	-0.01707	
+0	0.1	0	0.886852	
+0	0	0	1	
+abs_mesh_mat
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+from mesh coords to skel coords
+0.1	0	0	0.00135042	
+0	0	-0.1	-0.885594	
+0	0.1	0	0.716152	
+0	0	0	1	
+from skel coords to world (bind) coords
+-1	0	0	-0.0135036	
+0	0	-1	-16.8559	
+0	-1	0	-7.16151	
+0	0	0	1	
+using node hierarchy transform
+parent node to mesh: Scene
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+=================================================
+time: Sun Mar 16 16:00:58 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: Scene
+numMeshes: 0
+numChildren: 6
+transform: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+>node: Lamp_001
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	1.52391	
+>-0.955171	0.199884	-0.218391	-1.67053	
+>-0.0551891	0.604525	0.794672	2.22765	
+>0	0	0	1	
+>node: Camera
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>-0.771565	0.275762	-0.573274	-3.00277	
+>-0.636058	-0.349737	0.687833	3.92316	
+>-0.0108168	0.895343	0.445245	3.59832	
+>0	0	0	1	
+>node: Lamp
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	-1.37321	
+>-0.955171	0.199884	-0.218391	2.54951	
+>-0.0551891	0.604525	0.794672	2.12195	
+>0	0	0	1	
+>node: Scene_root
+>numMeshes: 0
+>numChildren: 1
+>transform: 
+>-0.1	-1.4243e-015	-8.74228e-009	0	
+>-8.74228e-009	1.62921e-008	0.1	0	
+>0	0.1	-1.62921e-008	0.8	
+>0	0	0	1	
+>>node: Dir_Master
+>>numMeshes: 0
+>>numChildren: 1
+>>transform: 
+>>0.970367	-0.0931397	-0.222965	1.11796e-006	
+>>-0.0931398	0.707255	-0.700796	3.1005	
+>>0.222965	0.700796	0.677622	0.185055	
+>>0	0	0	1	
+>>>node: Master
+>>>numMeshes: 0
+>>>numChildren: 5
+>>>transform: 
+>>>0.970367	-0.222965	-0.0931398	-0.490049	
+>>>-0.0931396	-0.700796	0.707255	-1.54026	
+>>>-0.222965	-0.677621	-0.700796	-1.48932	
+>>>0	0	0	1	
+>node: humale
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+>node: loincloth
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: sword
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+-0.731313	-0.552002	-0.448396	0.813231	
+0.426495	0.174262	-0.910121	1.47152	
+0.569093	-0.839947	0.105859	0.250291	
+0	0	0	1	
+exporting mesh: humale
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Hips
+parent node to mesh: Scene
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	1.01748	
+0	0	-0.1	-0.01742	
+0	0	0	1	
+from_skel_to_bone
+1	0	0	0.0019997	
+0	1	0	2.1748	
+0	0	1	0.1742	
+0	0	0	1	
+from_mesh_to_bone
+1	0	0	0.00199969	
+0	1	0	2.1748	
+0	0	1	0.1742	
+0	0	0	1	
+abs_mesh_mat
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+from mesh coords to skel coords
+1	0	0	0	
+0	1	0	0	
+0	0	1	0	
+0	0	0	1	
+from mesh coords to world (bind) coords
+-0.1	0	0	0	
+0	0.1	0	0.8	
+0	0	-0.1	0	
+0	0	0	1	
+using node hierarchy transform
+parent node to mesh: Scene
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+exporting mesh: loincloth
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Root
+parent node to mesh: Scene
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	0.886852	
+0	0	-0.1	-0.01707	
+0	0	0	1	
+from_skel_to_bone
+1	0	0	-0.0015004	
+0	1	0	0.868524	
+0	0	1	0.1707	
+0	0	0	1	
+from_mesh_to_bone
+0.1	0	0	0	
+0	0	-0.1	-0.01707	
+0	0.1	0	0.886852	
+0	0	0	1	
+abs_mesh_mat
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+from mesh coords to skel coords
+0.1	0	0	0.00135042	
+0	0	-0.1	-0.885594	
+0	0.1	0	0.716152	
+0	0	0	1	
+from mesh coords to world (bind) coords
+-0.01	0	0	0	
+0	0	-0.01	0.711441	
+0	-0.01	0	-0.0716152	
+0	0	0	1	
+using node hierarchy transform
+parent node to mesh: Scene
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+=================================================
+time: Sun Mar 16 16:01:52 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: Scene
+numMeshes: 0
+numChildren: 6
+transform: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+>node: Lamp_001
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	1.52391	
+>-0.955171	0.199884	-0.218391	-1.67053	
+>-0.0551891	0.604525	0.794672	2.22765	
+>0	0	0	1	
+>node: Camera
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>-0.771565	0.275762	-0.573274	-3.00277	
+>-0.636058	-0.349737	0.687833	3.92316	
+>-0.0108168	0.895343	0.445245	3.59832	
+>0	0	0	1	
+>node: Lamp
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	-1.37321	
+>-0.955171	0.199884	-0.218391	2.54951	
+>-0.0551891	0.604525	0.794672	2.12195	
+>0	0	0	1	
+>node: Scene_root
+>numMeshes: 0
+>numChildren: 1
+>transform: 
+>-0.1	-1.4243e-015	-8.74228e-009	0	
+>-8.74228e-009	1.62921e-008	0.1	0	
+>0	0.1	-1.62921e-008	0.8	
+>0	0	0	1	
+>>node: Dir_Master
+>>numMeshes: 0
+>>numChildren: 1
+>>transform: 
+>>0.970367	-0.0931397	-0.222965	1.11796e-006	
+>>-0.0931398	0.707255	-0.700796	3.1005	
+>>0.222965	0.700796	0.677622	0.185055	
+>>0	0	0	1	
+>>>node: Master
+>>>numMeshes: 0
+>>>numChildren: 5
+>>>transform: 
+>>>0.970367	-0.222965	-0.0931398	-0.490049	
+>>>-0.0931396	-0.700796	0.707255	-1.54026	
+>>>-0.222965	-0.677621	-0.700796	-1.48932	
+>>>0	0	0	1	
+>node: humale
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+>node: loincloth
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: sword
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+-0.731313	-0.552002	-0.448396	0.813231	
+0.426495	0.174262	-0.910121	1.47152	
+0.569093	-0.839947	0.105859	0.250291	
+0	0	0	1	
+exporting mesh: humale
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Hips
+parent node to mesh: Scene
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	1.01748	
+0	0	-0.1	-0.01742	
+0	0	0	1	
+from_skel_to_bone
+1	0	0	0.0019997	
+0	1	0	2.1748	
+0	0	1	0.1742	
+0	0	0	1	
+from_mesh_to_bone
+1	0	0	0.00199969	
+0	1	0	2.1748	
+0	0	1	0.1742	
+0	0	0	1	
+abs_mesh_mat
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+from mesh coords to skel coords
+1	0	0	0.00399955	
+0	1	0	4.3496	
+0	0	1	0.348399	
+0	0	0	1	
+from mesh coords to world (bind) coords
+-0.1	0	0	0	
+0	0.1	0	1.23496	
+0	0	-0.1	-0.0348399	
+0	0	0	1	
+using node hierarchy transform
+parent node to mesh: Scene
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+exporting mesh: loincloth
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Root
+parent node to mesh: Scene
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	0.886852	
+0	0	-0.1	-0.01707	
+0	0	0	1	
+from_skel_to_bone
+1	0	0	-0.0015004	
+0	1	0	0.868524	
+0	0	1	0.1707	
+0	0	0	1	
+from_mesh_to_bone
+0.1	0	0	0	
+0	0	-0.1	-0.01707	
+0	0.1	0	0.886852	
+0	0	0	1	
+abs_mesh_mat
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+from mesh coords to skel coords
+0.1	0	0	-0.00165041	
+0	0	-0.1	0.851454	
+0	0.1	0	1.05755	
+0	0	0	1	
+from mesh coords to world (bind) coords
+-0.01	0	0	0	
+0	0	-0.01	0.885145	
+0	-0.01	0	-0.105755	
+0	0	0	1	
+using node hierarchy transform
+parent node to mesh: Scene
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+=================================================
+time: Sun Mar 16 16:02:35 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: Scene
+numMeshes: 0
+numChildren: 6
+transform: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+>node: Lamp_001
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	1.52391	
+>-0.955171	0.199884	-0.218391	-1.67053	
+>-0.0551891	0.604525	0.794672	2.22765	
+>0	0	0	1	
+>node: Camera
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>-0.771565	0.275762	-0.573274	-3.00277	
+>-0.636058	-0.349737	0.687833	3.92316	
+>-0.0108168	0.895343	0.445245	3.59832	
+>0	0	0	1	
+>node: Lamp
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	-1.37321	
+>-0.955171	0.199884	-0.218391	2.54951	
+>-0.0551891	0.604525	0.794672	2.12195	
+>0	0	0	1	
+>node: Scene_root
+>numMeshes: 0
+>numChildren: 1
+>transform: 
+>-0.1	-1.4243e-015	-8.74228e-009	0	
+>-8.74228e-009	1.62921e-008	0.1	0	
+>0	0.1	-1.62921e-008	0.8	
+>0	0	0	1	
+>>node: Dir_Master
+>>numMeshes: 0
+>>numChildren: 1
+>>transform: 
+>>0.970367	-0.0931397	-0.222965	1.11796e-006	
+>>-0.0931398	0.707255	-0.700796	3.1005	
+>>0.222965	0.700796	0.677622	0.185055	
+>>0	0	0	1	
+>>>node: Master
+>>>numMeshes: 0
+>>>numChildren: 5
+>>>transform: 
+>>>0.970367	-0.222965	-0.0931398	-0.490049	
+>>>-0.0931396	-0.700796	0.707255	-1.54026	
+>>>-0.222965	-0.677621	-0.700796	-1.48932	
+>>>0	0	0	1	
+>node: humale
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+>node: loincloth
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: sword
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+-0.731313	-0.552002	-0.448396	0.813231	
+0.426495	0.174262	-0.910121	1.47152	
+0.569093	-0.839947	0.105859	0.250291	
+0	0	0	1	
+exporting mesh: humale
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Hips
+parent node to mesh: Scene
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	1.01748	
+0	0	-0.1	-0.01742	
+0	0	0	1	
+from_skel_to_bone
+1	0	0	0.0019997	
+0	1	0	2.1748	
+0	0	1	0.1742	
+0	0	0	1	
+from_mesh_to_bone
+1	0	0	0.00199969	
+0	1	0	2.1748	
+0	0	1	0.1742	
+0	0	0	1	
+abs_mesh_mat
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+from mesh coords to skel coords
+1	0	0	0.00399955	
+0	1	0	4.3496	
+0	0	1	0.348399	
+0	0	0	1	
+from mesh coords to world (bind) coords
+-0.1	0	0	0	
+0	0.1	0	1.23496	
+0	0	-0.1	-0.0348399	
+0	0	0	1	
+using node hierarchy transform
+parent node to mesh: Scene
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+exporting mesh: loincloth
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Root
+parent node to mesh: Scene
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	0.886852	
+0	0	-0.1	-0.01707	
+0	0	0	1	
+from_skel_to_bone
+1	0	0	-0.0015004	
+0	1	0	0.868524	
+0	0	1	0.1707	
+0	0	0	1	
+from_mesh_to_bone
+0.1	0	0	0	
+0	0	-0.1	-0.01707	
+0	0.1	0	0.886852	
+0	0	0	1	
+abs_mesh_mat
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+from mesh coords to skel coords
+0.1	0	0	-0.00165041	
+0	0	-0.1	0.851454	
+0	0.1	0	1.05755	
+0	0	0	1	
+from mesh coords to world (bind) coords
+-0.01	0	0	0	
+0	0	-0.01	0.885145	
+0	-0.01	0	-0.105755	
+0	0	0	1	
+using node hierarchy transform
+parent node to mesh: Scene
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+=================================================
+time: Sun Mar 16 16:06:10 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: Scene
+numMeshes: 0
+numChildren: 6
+transform: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+>node: Lamp_001
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	1.52391	
+>-0.955171	0.199884	-0.218391	-1.67053	
+>-0.0551891	0.604525	0.794672	2.22765	
+>0	0	0	1	
+>node: Camera
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>-0.771565	0.275762	-0.573274	-3.00277	
+>-0.636058	-0.349737	0.687833	3.92316	
+>-0.0108168	0.895343	0.445245	3.59832	
+>0	0	0	1	
+>node: Lamp
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	-1.37321	
+>-0.955171	0.199884	-0.218391	2.54951	
+>-0.0551891	0.604525	0.794672	2.12195	
+>0	0	0	1	
+>node: Scene_root
+>numMeshes: 0
+>numChildren: 1
+>transform: 
+>-0.1	-1.4243e-015	-8.74228e-009	0	
+>-8.74228e-009	1.62921e-008	0.1	0	
+>0	0.1	-1.62921e-008	0.8	
+>0	0	0	1	
+>>node: Dir_Master
+>>numMeshes: 0
+>>numChildren: 1
+>>transform: 
+>>0.970367	-0.0931397	-0.222965	1.11796e-006	
+>>-0.0931398	0.707255	-0.700796	3.1005	
+>>0.222965	0.700796	0.677622	0.185055	
+>>0	0	0	1	
+>>>node: Master
+>>>numMeshes: 0
+>>>numChildren: 5
+>>>transform: 
+>>>0.970367	-0.222965	-0.0931398	-0.490049	
+>>>-0.0931396	-0.700796	0.707255	-1.54026	
+>>>-0.222965	-0.677621	-0.700796	-1.48932	
+>>>0	0	0	1	
+>node: humale
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+>node: loincloth
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: sword
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+-0.731313	-0.552002	-0.448396	0.813231	
+0.426495	0.174262	-0.910121	1.47152	
+0.569093	-0.839947	0.105859	0.250291	
+0	0	0	1	
+exporting mesh: humale
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Hips
+parent node to mesh: Scene
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	1.01748	
+0	0	-0.1	-0.01742	
+0	0	0	1	
+from_skel_to_bone
+1	0	0	0.0019997	
+0	1	0	2.1748	
+0	0	1	0.1742	
+0	0	0	1	
+from_mesh_to_bone
+1	0	0	0.00199969	
+0	1	0	2.1748	
+0	0	1	0.1742	
+0	0	0	1	
+abs_mesh_mat
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+from mesh coords to skel coords
+1	0	0	0	
+0	1	0	0	
+0	0	1	0	
+0	0	0	1	
+from mesh coords to world (bind) coords
+-0.1	0	0	0	
+0	0.1	0	0.8	
+0	0	-0.1	0	
+0	0	0	1	
+using node hierarchy transform
+parent node to mesh: Scene
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+exporting mesh: loincloth
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Root
+parent node to mesh: Scene
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	0.886852	
+0	0	-0.1	-0.01707	
+0	0	0	1	
+from_skel_to_bone
+1	0	0	-0.0015004	
+0	1	0	0.868524	
+0	0	1	0.1707	
+0	0	0	1	
+from_mesh_to_bone
+0.1	0	0	0	
+0	0	-0.1	-0.01707	
+0	0.1	0	0.886852	
+0	0	0	1	
+abs_mesh_mat
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+from mesh coords to skel coords
+0.1	0	0	0.00135042	
+0	0	-0.1	-0.885594	
+0	0.1	0	0.716152	
+0	0	0	1	
+from mesh coords to world (bind) coords
+-0.01	0	0	0	
+0	0	-0.01	0.711441	
+0	-0.01	0	-0.0716152	
+0	0	0	1	
+using node hierarchy transform
+parent node to mesh: Scene
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+=================================================
+time: Sun Mar 16 16:07:19 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: Scene
+numMeshes: 0
+numChildren: 6
+transform: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+>node: Lamp_001
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	1.52391	
+>-0.955171	0.199884	-0.218391	-1.67053	
+>-0.0551891	0.604525	0.794672	2.22765	
+>0	0	0	1	
+>node: Camera
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>-0.771565	0.275762	-0.573274	-3.00277	
+>-0.636058	-0.349737	0.687833	3.92316	
+>-0.0108168	0.895343	0.445245	3.59832	
+>0	0	0	1	
+>node: Lamp
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	-1.37321	
+>-0.955171	0.199884	-0.218391	2.54951	
+>-0.0551891	0.604525	0.794672	2.12195	
+>0	0	0	1	
+>node: Scene_root
+>numMeshes: 0
+>numChildren: 1
+>transform: 
+>-0.1	-1.4243e-015	-8.74228e-009	0	
+>-8.74228e-009	1.62921e-008	0.1	0	
+>0	0.1	-1.62921e-008	0.8	
+>0	0	0	1	
+>>node: Dir_Master
+>>numMeshes: 0
+>>numChildren: 1
+>>transform: 
+>>0.970367	-0.0931397	-0.222965	1.11796e-006	
+>>-0.0931398	0.707255	-0.700796	3.1005	
+>>0.222965	0.700796	0.677622	0.185055	
+>>0	0	0	1	
+>>>node: Master
+>>>numMeshes: 0
+>>>numChildren: 5
+>>>transform: 
+>>>0.970367	-0.222965	-0.0931398	-0.490049	
+>>>-0.0931396	-0.700796	0.707255	-1.54026	
+>>>-0.222965	-0.677621	-0.700796	-1.48932	
+>>>0	0	0	1	
+>node: humale
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+>node: loincloth
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: sword
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+-0.731313	-0.552002	-0.448396	0.813231	
+0.426495	0.174262	-0.910121	1.47152	
+0.569093	-0.839947	0.105859	0.250291	
+0	0	0	1	
+exporting mesh: humale
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Hips
+parent node to mesh: Scene
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	1.01748	
+0	0	-0.1	-0.01742	
+0	0	0	1	
+from_skel_to_bone
+1	0	0	0.0019997	
+0	1	0	2.1748	
+0	0	1	0.1742	
+0	0	0	1	
+from_mesh_to_bone
+1	0	0	0.00199969	
+0	1	0	2.1748	
+0	0	1	0.1742	
+0	0	0	1	
+abs_mesh_mat
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+from mesh coords to skel coords
+1	0	0	0	
+0	1	0	0	
+0	0	1	0	
+0	0	0	1	
+from mesh coords to world (bind) coords
+-10	0	0	0	
+0	10	0	-7.99998	
+0	0	-10	0	
+0	0	0	1	
+using node hierarchy transform
+parent node to mesh: Scene
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+exporting mesh: loincloth
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Root
+parent node to mesh: Scene
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	0.886852	
+0	0	-0.1	-0.01707	
+0	0	0	1	
+from_skel_to_bone
+1	0	0	-0.0015004	
+0	1	0	0.868524	
+0	0	1	0.1707	
+0	0	0	1	
+from_mesh_to_bone
+0.1	0	0	0	
+0	0	-0.1	-0.01707	
+0	0.1	0	0.886852	
+0	0	0	1	
+abs_mesh_mat
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+from mesh coords to skel coords
+0.1	0	0	0.00135042	
+0	0	-0.1	-0.885594	
+0	0.1	0	0.716152	
+0	0	0	1	
+from mesh coords to world (bind) coords
+-1	0	0	-0.0135036	
+0	0	-1	-16.8559	
+0	-1	0	-7.16151	
+0	0	0	1	
+using node hierarchy transform
+parent node to mesh: Scene
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+=================================================
+time: Sun Mar 16 16:11:47 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: Scene
+numMeshes: 0
+numChildren: 6
+transform: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+>node: Lamp_001
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	1.52391	
+>-0.955171	0.199884	-0.218391	-1.67053	
+>-0.0551891	0.604525	0.794672	2.22765	
+>0	0	0	1	
+>node: Camera
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>-0.771565	0.275762	-0.573274	-3.00277	
+>-0.636058	-0.349737	0.687833	3.92316	
+>-0.0108168	0.895343	0.445245	3.59832	
+>0	0	0	1	
+>node: Lamp
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	-1.37321	
+>-0.955171	0.199884	-0.218391	2.54951	
+>-0.0551891	0.604525	0.794672	2.12195	
+>0	0	0	1	
+>node: Scene_root
+>numMeshes: 0
+>numChildren: 1
+>transform: 
+>-0.1	-1.4243e-015	-8.74228e-009	0	
+>-8.74228e-009	1.62921e-008	0.1	0	
+>0	0.1	-1.62921e-008	0.8	
+>0	0	0	1	
+>>node: Dir_Master
+>>numMeshes: 0
+>>numChildren: 1
+>>transform: 
+>>0.970367	-0.0931397	-0.222965	1.11796e-006	
+>>-0.0931398	0.707255	-0.700796	3.1005	
+>>0.222965	0.700796	0.677622	0.185055	
+>>0	0	0	1	
+>>>node: Master
+>>>numMeshes: 0
+>>>numChildren: 5
+>>>transform: 
+>>>0.970367	-0.222965	-0.0931398	-0.490049	
+>>>-0.0931396	-0.700796	0.707255	-1.54026	
+>>>-0.222965	-0.677621	-0.700796	-1.48932	
+>>>0	0	0	1	
+>node: humale
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+>node: loincloth
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: sword
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+-0.731313	-0.552002	-0.448396	0.813231	
+0.426495	0.174262	-0.910121	1.47152	
+0.569093	-0.839947	0.105859	0.250291	
+0	0	0	1	
+exporting mesh: humale
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Hips
+parent node to mesh: Scene
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	1.01748	
+0	0	-0.1	-0.01742	
+0	0	0	1	
+from_skel_to_bone
+1	0	0	0.0019997	
+0	1	0	2.1748	
+0	0	1	0.1742	
+0	0	0	1	
+from_mesh_to_bone
+1	0	0	-0.00199956	
+0	1	0	-2.1748	
+0	0	1	-0.1742	
+0	0	0	1	
+abs_mesh_mat
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+from mesh coords to skel coords
+1	0	0	-0.00399893	
+0	1	0	-4.3496	
+0	0	1	-0.348402	
+0	0	0	1	
+from mesh coords to world (bind) coords
+-10	0	0	0.0399889	
+0	10	0	-51.496	
+0	0	-10	3.48403	
+0	0	0	1	
+using node hierarchy transform
+parent node to mesh: Scene
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+exporting mesh: loincloth
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Root
+parent node to mesh: Scene
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	0.886852	
+0	0	-0.1	-0.01707	
+0	0	0	1	
+from_skel_to_bone
+1	0	0	-0.0015004	
+0	1	0	0.868524	
+0	0	1	0.1707	
+0	0	0	1	
+from_mesh_to_bone
+10	0	0	0.00150084	
+0	0	10	-8.86852	
+0	-10	0	-0.170702	
+0	0	0	1	
+abs_mesh_mat
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+from mesh coords to skel coords
+10	0	0	0.00300197	
+0	0	10	-9.73705	
+0	-10	0	-0.341406	
+0	0	0	1	
+from mesh coords to world (bind) coords
+-100	0	0	-0.03002	
+0	0	100	-105.37	
+0	100	0	3.41407	
+0	0	0	1	
+using node hierarchy transform
+parent node to mesh: Scene
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+=================================================
+time: Sun Mar 16 16:13:29 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: Scene
+numMeshes: 0
+numChildren: 6
+transform: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+>node: Lamp_001
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	1.52391	
+>-0.955171	0.199884	-0.218391	-1.67053	
+>-0.0551891	0.604525	0.794672	2.22765	
+>0	0	0	1	
+>node: Camera
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>-0.771565	0.275762	-0.573274	-3.00277	
+>-0.636058	-0.349737	0.687833	3.92316	
+>-0.0108168	0.895343	0.445245	3.59832	
+>0	0	0	1	
+>node: Lamp
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	-1.37321	
+>-0.955171	0.199884	-0.218391	2.54951	
+>-0.0551891	0.604525	0.794672	2.12195	
+>0	0	0	1	
+>node: Scene_root
+>numMeshes: 0
+>numChildren: 1
+>transform: 
+>-0.1	-1.4243e-015	-8.74228e-009	0	
+>-8.74228e-009	1.62921e-008	0.1	0	
+>0	0.1	-1.62921e-008	0.8	
+>0	0	0	1	
+>>node: Dir_Master
+>>numMeshes: 0
+>>numChildren: 1
+>>transform: 
+>>0.970367	-0.0931397	-0.222965	1.11796e-006	
+>>-0.0931398	0.707255	-0.700796	3.1005	
+>>0.222965	0.700796	0.677622	0.185055	
+>>0	0	0	1	
+>>>node: Master
+>>>numMeshes: 0
+>>>numChildren: 5
+>>>transform: 
+>>>0.970367	-0.222965	-0.0931398	-0.490049	
+>>>-0.0931396	-0.700796	0.707255	-1.54026	
+>>>-0.222965	-0.677621	-0.700796	-1.48932	
+>>>0	0	0	1	
+>node: humale
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+>node: loincloth
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: sword
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+-0.731313	-0.552002	-0.448396	0.813231	
+0.426495	0.174262	-0.910121	1.47152	
+0.569093	-0.839947	0.105859	0.250291	
+0	0	0	1	
+exporting mesh: humale
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Hips
+parent node to mesh: Scene
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	1.01748	
+0	0	-0.1	-0.01742	
+0	0	0	1	
+from_bone_to_skel
+1	0	0	0.0019997	
+0	1	0	2.1748	
+0	0	1	0.1742	
+0	0	0	1	
+from_mesh_to_bone
+1	0	0	-0.00199956	
+0	1	0	-2.1748	
+0	0	1	-0.1742	
+0	0	0	1	
+abs_mesh_mat
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+from mesh coords to skel coords
+1	0	0	-0.00399893	
+0	1	0	-4.3496	
+0	0	1	-0.348402	
+0	0	0	1	
+from mesh coords to world (bind) coords
+-10	0	0	0.0399889	
+0	10	0	-51.496	
+0	0	-10	3.48403	
+0	0	0	1	
+using node hierarchy transform
+parent node to mesh: Scene
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+exporting mesh: loincloth
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Root
+parent node to mesh: Scene
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	0.886852	
+0	0	-0.1	-0.01707	
+0	0	0	1	
+from_bone_to_skel
+1	0	0	-0.0015004	
+0	1	0	0.868524	
+0	0	1	0.1707	
+0	0	0	1	
+from_mesh_to_bone
+10	0	0	0.00150084	
+0	0	10	-8.86852	
+0	-10	0	-0.170702	
+0	0	0	1	
+abs_mesh_mat
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+from mesh coords to skel coords
+10	0	0	0.00300197	
+0	0	10	-9.73705	
+0	-10	0	-0.341406	
+0	0	0	1	
+from mesh coords to world (bind) coords
+-100	0	0	-0.03002	
+0	0	100	-105.37	
+0	100	0	3.41407	
+0	0	0	1	
+using node hierarchy transform
+parent node to mesh: Scene
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+=================================================
+time: Sun Mar 16 16:14:32 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: Scene
+numMeshes: 0
+numChildren: 6
+transform: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+>node: Lamp_001
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	1.52391	
+>-0.955171	0.199884	-0.218391	-1.67053	
+>-0.0551891	0.604525	0.794672	2.22765	
+>0	0	0	1	
+>node: Camera
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>-0.771565	0.275762	-0.573274	-3.00277	
+>-0.636058	-0.349737	0.687833	3.92316	
+>-0.0108168	0.895343	0.445245	3.59832	
+>0	0	0	1	
+>node: Lamp
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	-1.37321	
+>-0.955171	0.199884	-0.218391	2.54951	
+>-0.0551891	0.604525	0.794672	2.12195	
+>0	0	0	1	
+>node: Scene_root
+>numMeshes: 0
+>numChildren: 1
+>transform: 
+>-0.1	-1.4243e-015	-8.74228e-009	0	
+>-8.74228e-009	1.62921e-008	0.1	0	
+>0	0.1	-1.62921e-008	0.8	
+>0	0	0	1	
+>>node: Dir_Master
+>>numMeshes: 0
+>>numChildren: 1
+>>transform: 
+>>0.970367	-0.0931397	-0.222965	1.11796e-006	
+>>-0.0931398	0.707255	-0.700796	3.1005	
+>>0.222965	0.700796	0.677622	0.185055	
+>>0	0	0	1	
+>>>node: Master
+>>>numMeshes: 0
+>>>numChildren: 5
+>>>transform: 
+>>>0.970367	-0.222965	-0.0931398	-0.490049	
+>>>-0.0931396	-0.700796	0.707255	-1.54026	
+>>>-0.222965	-0.677621	-0.700796	-1.48932	
+>>>0	0	0	1	
+>node: humale
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+>node: loincloth
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: sword
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+-0.731313	-0.552002	-0.448396	0.813231	
+0.426495	0.174262	-0.910121	1.47152	
+0.569093	-0.839947	0.105859	0.250291	
+0	0	0	1	
+exporting mesh: humale
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Hips
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	1.01748	
+0	0	-0.1	-0.01742	
+0	0	0	1	
+from_bone_to_skel
+1	0	0	0.0019997	
+0	1	0	2.1748	
+0	0	1	0.1742	
+0	0	0	1	
+from_mesh_to_bone
+1	0	0	-0.00199956	
+0	1	0	-2.1748	
+0	0	1	-0.1742	
+0	0	0	1	
+from mesh coords to skel coords
+1	0	0	-0.00399893	
+0	1	0	-4.3496	
+0	0	1	-0.348402	
+0	0	0	1	
+from mesh coords to world (bind) coords
+-10	0	0	0.0399889	
+0	10	0	-51.496	
+0	0	-10	3.48403	
+0	0	0	1	
+using node hierarchy transform
+parent node to mesh: Scene
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+exporting mesh: loincloth
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Root
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	0.886852	
+0	0	-0.1	-0.01707	
+0	0	0	1	
+from_bone_to_skel
+1	0	0	-0.0015004	
+0	1	0	0.868524	
+0	0	1	0.1707	
+0	0	0	1	
+from_mesh_to_bone
+10	0	0	0.00150084	
+0	0	10	-8.86852	
+0	-10	0	-0.170702	
+0	0	0	1	
+from mesh coords to skel coords
+10	0	0	0.00300197	
+0	0	10	-9.73705	
+0	-10	0	-0.341406	
+0	0	0	1	
+from mesh coords to world (bind) coords
+-100	0	0	-0.03002	
+0	0	100	-105.37	
+0	100	0	3.41407	
+0	0	0	1	
+using node hierarchy transform
+parent node to mesh: Scene
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+=================================================
+time: Sun Mar 16 16:15:36 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: Scene
+numMeshes: 0
+numChildren: 6
+transform: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+>node: Lamp_001
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	1.52391	
+>-0.955171	0.199884	-0.218391	-1.67053	
+>-0.0551891	0.604525	0.794672	2.22765	
+>0	0	0	1	
+>node: Camera
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>-0.771565	0.275762	-0.573274	-3.00277	
+>-0.636058	-0.349737	0.687833	3.92316	
+>-0.0108168	0.895343	0.445245	3.59832	
+>0	0	0	1	
+>node: Lamp
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	-1.37321	
+>-0.955171	0.199884	-0.218391	2.54951	
+>-0.0551891	0.604525	0.794672	2.12195	
+>0	0	0	1	
+>node: Scene_root
+>numMeshes: 0
+>numChildren: 1
+>transform: 
+>-0.1	-1.4243e-015	-8.74228e-009	0	
+>-8.74228e-009	1.62921e-008	0.1	0	
+>0	0.1	-1.62921e-008	0.8	
+>0	0	0	1	
+>>node: Dir_Master
+>>numMeshes: 0
+>>numChildren: 1
+>>transform: 
+>>0.970367	-0.0931397	-0.222965	1.11796e-006	
+>>-0.0931398	0.707255	-0.700796	3.1005	
+>>0.222965	0.700796	0.677622	0.185055	
+>>0	0	0	1	
+>>>node: Master
+>>>numMeshes: 0
+>>>numChildren: 5
+>>>transform: 
+>>>0.970367	-0.222965	-0.0931398	-0.490049	
+>>>-0.0931396	-0.700796	0.707255	-1.54026	
+>>>-0.222965	-0.677621	-0.700796	-1.48932	
+>>>0	0	0	1	
+>node: humale
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+>node: loincloth
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: sword
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+-0.731313	-0.552002	-0.448396	0.813231	
+0.426495	0.174262	-0.910121	1.47152	
+0.569093	-0.839947	0.105859	0.250291	
+0	0	0	1	
+exporting mesh: humale
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Hips
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	1.01748	
+0	0	-0.1	-0.01742	
+0	0	0	1	
+from_bone_to_skel
+1	0	0	0.0019997	
+0	1	0	2.1748	
+0	0	1	0.1742	
+0	0	0	1	
+from_mesh_to_bone
+1	0	0	-0.00199956	
+0	1	0	-2.1748	
+0	0	1	-0.1742	
+0	0	0	1	
+from_mesh_to_skel
+1	0	0	0	
+0	1	0	0	
+0	0	1	0	
+0	0	0	1	
+from mesh coords to world (bind) coords
+-10	0	0	0	
+0	10	0	-8.00002	
+0	0	-10	0	
+0	0	0	1	
+using node hierarchy transform
+parent node to mesh: Scene
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+exporting mesh: loincloth
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Root
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	0.886852	
+0	0	-0.1	-0.01707	
+0	0	0	1	
+from_bone_to_skel
+1	0	0	-0.0015004	
+0	1	0	0.868524	
+0	0	1	0.1707	
+0	0	0	1	
+from_mesh_to_bone
+10	0	0	0.00150084	
+0	0	10	-8.86852	
+0	-10	0	-0.170702	
+0	0	0	1	
+from_mesh_to_skel
+10	0	0	0	
+0	0	10	-8	
+0	-10	0	0	
+0	0	0	1	
+from mesh coords to world (bind) coords
+-100	0	0	0	
+0	0	100	-88	
+0	100	0	0	
+0	0	0	1	
+using node hierarchy transform
+parent node to mesh: Scene
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+=================================================
+time: Sun Mar 16 16:17:02 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: Scene
+numMeshes: 0
+numChildren: 6
+transform: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+>node: Lamp_001
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	1.52391	
+>-0.955171	0.199884	-0.218391	-1.67053	
+>-0.0551891	0.604525	0.794672	2.22765	
+>0	0	0	1	
+>node: Camera
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>-0.771565	0.275762	-0.573274	-3.00277	
+>-0.636058	-0.349737	0.687833	3.92316	
+>-0.0108168	0.895343	0.445245	3.59832	
+>0	0	0	1	
+>node: Lamp
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	-1.37321	
+>-0.955171	0.199884	-0.218391	2.54951	
+>-0.0551891	0.604525	0.794672	2.12195	
+>0	0	0	1	
+>node: Scene_root
+>numMeshes: 0
+>numChildren: 1
+>transform: 
+>-0.1	-1.4243e-015	-8.74228e-009	0	
+>-8.74228e-009	1.62921e-008	0.1	0	
+>0	0.1	-1.62921e-008	0.8	
+>0	0	0	1	
+>>node: Dir_Master
+>>numMeshes: 0
+>>numChildren: 1
+>>transform: 
+>>0.970367	-0.0931397	-0.222965	1.11796e-006	
+>>-0.0931398	0.707255	-0.700796	3.1005	
+>>0.222965	0.700796	0.677622	0.185055	
+>>0	0	0	1	
+>>>node: Master
+>>>numMeshes: 0
+>>>numChildren: 5
+>>>transform: 
+>>>0.970367	-0.222965	-0.0931398	-0.490049	
+>>>-0.0931396	-0.700796	0.707255	-1.54026	
+>>>-0.222965	-0.677621	-0.700796	-1.48932	
+>>>0	0	0	1	
+>node: humale
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+>node: loincloth
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: sword
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+-0.731313	-0.552002	-0.448396	0.813231	
+0.426495	0.174262	-0.910121	1.47152	
+0.569093	-0.839947	0.105859	0.250291	
+0	0	0	1	
+exporting mesh: humale
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Hips
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	1.01748	
+0	0	-0.1	-0.01742	
+0	0	0	1	
+from_bone_to_skel
+1	0	0	0.0019997	
+0	1	0	2.1748	
+0	0	1	0.1742	
+0	0	0	1	
+from_mesh_to_bone
+1	0	0	-0.00199956	
+0	1	0	-2.1748	
+0	0	1	-0.1742	
+0	0	0	1	
+from_mesh_to_skel
+1	0	0	0	
+0	1	0	0	
+0	0	1	0	
+0	0	0	1	
+from mesh coords to world (bind) coords
+-0.1	0	0	0	
+0	0.1	0	0.8	
+0	0	-0.1	0	
+0	0	0	1	
+using node hierarchy transform
+parent node to mesh: Scene
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+exporting mesh: loincloth
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Root
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	0.886852	
+0	0	-0.1	-0.01707	
+0	0	0	1	
+from_bone_to_skel
+1	0	0	-0.0015004	
+0	1	0	0.868524	
+0	0	1	0.1707	
+0	0	0	1	
+from_mesh_to_bone
+10	0	0	0.00150084	
+0	0	10	-8.86852	
+0	-10	0	-0.170702	
+0	0	0	1	
+from_mesh_to_skel
+10	0	0	0	
+0	0	10	-8	
+0	-10	0	0	
+0	0	0	1	
+from mesh coords to world (bind) coords
+-1	0	0	0	
+0	0	1	0	
+0	1	0	0	
+0	0	0	1	
+using node hierarchy transform
+parent node to mesh: Scene
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+=================================================
+time: Sun Mar 16 16:20:42 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: Scene
+numMeshes: 0
+numChildren: 6
+transform: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+>node: Lamp_001
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	1.52391	
+>-0.955171	0.199884	-0.218391	-1.67053	
+>-0.0551891	0.604525	0.794672	2.22765	
+>0	0	0	1	
+>node: Camera
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>-0.771565	0.275762	-0.573274	-3.00277	
+>-0.636058	-0.349737	0.687833	3.92316	
+>-0.0108168	0.895343	0.445245	3.59832	
+>0	0	0	1	
+>node: Lamp
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	-1.37321	
+>-0.955171	0.199884	-0.218391	2.54951	
+>-0.0551891	0.604525	0.794672	2.12195	
+>0	0	0	1	
+>node: Scene_root
+>numMeshes: 0
+>numChildren: 1
+>transform: 
+>-0.1	-1.4243e-015	-8.74228e-009	0	
+>-8.74228e-009	1.62921e-008	0.1	0	
+>0	0.1	-1.62921e-008	0.8	
+>0	0	0	1	
+>>node: Dir_Master
+>>numMeshes: 0
+>>numChildren: 1
+>>transform: 
+>>0.970367	-0.0931397	-0.222965	1.11796e-006	
+>>-0.0931398	0.707255	-0.700796	3.1005	
+>>0.222965	0.700796	0.677622	0.185055	
+>>0	0	0	1	
+>>>node: Master
+>>>numMeshes: 0
+>>>numChildren: 5
+>>>transform: 
+>>>0.970367	-0.222965	-0.0931398	-0.490049	
+>>>-0.0931396	-0.700796	0.707255	-1.54026	
+>>>-0.222965	-0.677621	-0.700796	-1.48932	
+>>>0	0	0	1	
+>node: humale
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+>node: loincloth
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: sword
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+-0.731313	-0.552002	-0.448396	0.813231	
+0.426495	0.174262	-0.910121	1.47152	
+0.569093	-0.839947	0.105859	0.250291	
+0	0	0	1	
+exporting mesh: humale
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Hips
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	1.01748	
+0	0	-0.1	-0.01742	
+0	0	0	1	
+from_bone_to_skel
+1	0	0	0.0019997	
+0	1	0	2.1748	
+0	0	1	0.1742	
+0	0	0	1	
+from_mesh_to_bone
+1	0	0	-0.00199956	
+0	1	0	-2.1748	
+0	0	1	-0.1742	
+0	0	0	1	
+from_mesh_to_skel
+1	0	0	0	
+0	1	0	0	
+0	0	1	0	
+0	0	0	1	
+from mesh coords to world (bind) coords
+-0.1	0	0	0	
+0	0.1	0	0.8	
+0	0	-0.1	0	
+0	0	0	1	
+skeleton_transform
+-0.1	0	0	0	
+0	0.1	0	0.8	
+0	0	-0.1	0	
+0	0	0	1	
+using node hierarchy transform
+parent node to mesh: Scene
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+exporting mesh: loincloth
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Root
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	0.886852	
+0	0	-0.1	-0.01707	
+0	0	0	1	
+from_bone_to_skel
+1	0	0	-0.0015004	
+0	1	0	0.868524	
+0	0	1	0.1707	
+0	0	0	1	
+from_mesh_to_bone
+10	0	0	0.00150084	
+0	0	10	-8.86852	
+0	-10	0	-0.170702	
+0	0	0	1	
+from_mesh_to_skel
+10	0	0	0	
+0	0	10	-8	
+0	-10	0	0	
+0	0	0	1	
+from mesh coords to world (bind) coords
+-1	0	0	0	
+0	0	1	0	
+0	1	0	0	
+0	0	0	1	
+skeleton_transform
+-0.1	0	0	0	
+0	0.1	0	0.8	
+0	0	-0.1	0	
+0	0	0	1	
+using node hierarchy transform
+parent node to mesh: Scene
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+=================================================
+time: Sun Mar 16 16:24:49 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: Scene
+numMeshes: 0
+numChildren: 6
+transform: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+>node: Lamp_001
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	1.52391	
+>-0.955171	0.199884	-0.218391	-1.67053	
+>-0.0551891	0.604525	0.794672	2.22765	
+>0	0	0	1	
+>node: Camera
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>-0.771565	0.275762	-0.573274	-3.00277	
+>-0.636058	-0.349737	0.687833	3.92316	
+>-0.0108168	0.895343	0.445245	3.59832	
+>0	0	0	1	
+>node: Lamp
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	-1.37321	
+>-0.955171	0.199884	-0.218391	2.54951	
+>-0.0551891	0.604525	0.794672	2.12195	
+>0	0	0	1	
+>node: Scene_root
+>numMeshes: 0
+>numChildren: 1
+>transform: 
+>-0.1	-1.4243e-015	-8.74228e-009	0	
+>-8.74228e-009	1.62921e-008	0.1	0	
+>0	0.1	-1.62921e-008	0.8	
+>0	0	0	1	
+>>node: Dir_Master
+>>numMeshes: 0
+>>numChildren: 1
+>>transform: 
+>>0.970367	-0.0931397	-0.222965	1.11796e-006	
+>>-0.0931398	0.707255	-0.700796	3.1005	
+>>0.222965	0.700796	0.677622	0.185055	
+>>0	0	0	1	
+>>>node: Master
+>>>numMeshes: 0
+>>>numChildren: 5
+>>>transform: 
+>>>0.970367	-0.222965	-0.0931398	-0.490049	
+>>>-0.0931396	-0.700796	0.707255	-1.54026	
+>>>-0.222965	-0.677621	-0.700796	-1.48932	
+>>>0	0	0	1	
+>node: loincloth
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+>node: humale
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: sword
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+-1.00023	-0.103601	-0.17147	0.672797	
+0.00484999	0.860325	-0.54809	1.10825	
+0.200279	-0.538231	-0.843078	0.0781565	
+0	0	0	1	
+exporting mesh: loincloth
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Root
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	0.886852	
+0	0	-0.1	-0.01707	
+0	0	0	1	
+from_bone_to_skel
+1	0	0	-0.0015004	
+0	1	0	0.868524	
+0	0	1	0.1707	
+0	0	0	1	
+from_mesh_to_bone
+10	0	0	0.00150084	
+0	0	10	-8.86852	
+0	-10	0	-0.170702	
+0	0	0	1	
+from_mesh_to_skel
+10	0	0	0	
+0	0	10	-8	
+0	-10	0	0	
+0	0	0	1	
+from mesh coords to world (bind) coords
+-1	0	0	0	
+0	0	1	0	
+0	1	0	0	
+0	0	0	1	
+skeleton_transform
+-0.1	0	0	0	
+0	0.1	0	0.8	
+0	0	-0.1	0	
+0	0	0	1	
+using node hierarchy transform
+parent node to mesh: Scene
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+exporting mesh: humale
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+parent node of rigged mesh: Scene_root
+found transform of node Hips
+abs_a_bone_transf
+-0.1	0	0	0	
+0	0.1	0	1.01748	
+0	0	-0.1	-0.01742	
+0	0	0	1	
+from_bone_to_skel
+1	0	0	0.0019997	
+0	1	0	2.1748	
+0	0	1	0.1742	
+0	0	0	1	
+from_mesh_to_bone
+-10	0	0	-0.00199908	
+0	0	10	-10.1748	
+0	10	0	-0.174202	
+0	0	0	1	
+from_mesh_to_skel
+-10	0	0	0	
+0	0	10	-8	
+0	10	0	0	
+0	0	0	1	
+from mesh coords to world (bind) coords
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+skeleton_transform
+-0.1	0	0	0	
+0	0.1	0	0.8	
+0	0	-0.1	0	
+0	0	0	1	
+using node hierarchy transform
+parent node to mesh: Scene
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+=================================================
+time: Sun Mar 16 16:25:08 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: Scene
+numMeshes: 0
+numChildren: 6
+transform: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+>node: Lamp_001
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	1.52391	
+>-0.955171	0.199884	-0.218391	-1.67053	
+>-0.0551891	0.604525	0.794672	2.22765	
+>0	0	0	1	
+>node: Camera
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>-0.771565	0.275762	-0.573274	-3.00277	
+>-0.636058	-0.349737	0.687833	3.92316	
+>-0.0108168	0.895343	0.445245	3.59832	
+>0	0	0	1	
+>node: Lamp
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	-1.37321	
+>-0.955171	0.199884	-0.218391	2.54951	
+>-0.0551891	0.604525	0.794672	2.12195	
+>0	0	0	1	
+>node: Scene_root
+>numMeshes: 0
+>numChildren: 1
+>transform: 
+>-0.1	-1.4243e-015	-8.74228e-009	0	
+>-8.74228e-009	1.62921e-008	0.1	0	
+>0	0.1	-1.62921e-008	0.8	
+>0	0	0	1	
+>>node: Dir_Master
+>>numMeshes: 0
+>>numChildren: 1
+>>transform: 
+>>0.970367	-0.0931397	-0.222965	1.11796e-006	
+>>-0.0931398	0.707255	-0.700796	3.1005	
+>>0.222965	0.700796	0.677622	0.185055	
+>>0	0	0	1	
+>>>node: Master
+>>>numMeshes: 0
+>>>numChildren: 5
+>>>transform: 
+>>>0.970367	-0.222965	-0.0931398	-0.490049	
+>>>-0.0931396	-0.700796	0.707255	-1.54026	
+>>>-0.222965	-0.677621	-0.700796	-1.48932	
+>>>0	0	0	1	
+>node: loincloth
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+>node: humale
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: sword
+using node hierarchy transform
+parent node to mesh: Palm-1_R
+using rig_transf: 
+-1.00023	-0.103601	-0.17147	0.672797	
+0.00484999	0.860325	-0.54809	1.10825	
+0.200279	-0.538231	-0.843078	0.0781565	
+0	0	0	1	
+exporting mesh: loincloth
+parent node of rigged mesh: Scene_root
+found transform of node Root
+using rig_transf: 
+-1	0	0	0	
+0	0	1	0	
+0	1	0	0	
+0	0	0	1	
+exporting mesh: humale
+parent node of rigged mesh: Scene_root
+found transform of node Hips
+using rig_transf: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	

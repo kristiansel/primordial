@@ -26,20 +26,20 @@ World::~World()
 list<shared_ptr<WorldObject>>::iterator World::addStaticObject(string mesh_key, string tex_key, glm::vec3 pos)
 //shared_ptr<WorldObject> World::addWorldObject(string mesh_key, string tex_key, glm::vec3 pos, glm::vec3 dir)
 {
-    /// Add a new worldobject to the list and capture
-    /// reference and iterator
+    // Add a new worldobject to the list and capture
+    // reference and iterator
     shared_ptr<WorldObject> worldobject = shared_ptr<WorldObject>(new WorldObject);
 
-    worldobject->pos = pos;         /// configure position
-//    (*new_worldobject_it)->dir = dir;         /// configure direction
+    worldobject->pos = pos;         // configure position
+//    (*new_worldobject_it)->dir = dir;         // configure direction
     addPhysicsStatic( worldobject.get() );
 
-    /// attach the mesh
+    // attach the mesh
     //weak_ptr<Mesh>      mesh_ptr    = resourcemanager.getMeshptrFromKey (mesh_key);
     //weak_ptr<Texture>   tex_ptr     = resourcemanager.getTexptrFromKey  (tex_key);
 
-    weak_ptr<Mesh>      mesh_ptr    = mesh_manager.getResptrFromKey (mesh_key);
-    weak_ptr<Texture>   tex_ptr     = tex_manager.getResptrFromKey  (tex_key);
+    weak_ptr<Mesh>      mesh_ptr    = global::mesh_manager.getResptrFromKey (mesh_key);
+    weak_ptr<Texture>   tex_ptr     = global::tex_manager.getResptrFromKey  (tex_key);
 
     worldobject->attachBatch(mesh_ptr, tex_ptr);
 
@@ -48,47 +48,47 @@ list<shared_ptr<WorldObject>>::iterator World::addStaticObject(string mesh_key, 
     list<shared_ptr<WorldObject>>::iterator new_worldobject_it = --worldobjects.end();
     return new_worldobject_it;
 
-//    return shared_ptr<WorldObject>(&(*new_worldobject_it)); /// This results in SEGFAULT because
-//    /// if not captured, then this will be the last instance of this pointer, and
-//    /// will automatically delete the new worldobject????
+//    return shared_ptr<WorldObject>(&(*new_worldobject_it)); // This results in SEGFAULT because
+//    // if not captured, then this will be the last instance of this pointer, and
+//    // will automatically delete the new worldobject????
 }
 
 
 //list<shared_ptr<WorldObject>>::iterator World::addDynamicObject(string mesh_key, string tex_key, glm::vec3 pos)
-////shared_ptr<WorldObject> World::addWorldObject(string mesh_key, string tex_key, glm::vec3 pos, glm::vec3 dir)
+///shared_ptr<WorldObject> World::addWorldObject(string mesh_key, string tex_key, glm::vec3 pos, glm::vec3 dir)
 //{
-//    /// Add a new worldobject to the list and capture
-//    /// reference and iterator
+//    // Add a new worldobject to the list and capture
+//    // reference and iterator
 //    worldobjects.push_back(shared_ptr<WorldObject>(new WorldObject()));
 //    list<shared_ptr<WorldObject>>::iterator new_worldobject_it = --worldobjects.end();
 //
-//    (*new_worldobject_it)->pos = pos;         /// configure position
-////    (*new_worldobject_it)->dir = dir;         /// configure direction
+//    (*new_worldobject_it)->pos = pos;         // configure position
+///    (*new_worldobject_it)->dir = dir;         // configure direction
 //    addPhysicsDynamic( (*new_worldobject_it).get() );
 //
-//    /// attach the mesh
+//    // attach the mesh
 //    //weak_ptr<Mesh>      mesh_ptr    = resourcemanager.getMeshptrFromKey (mesh_key);
 //    //weak_ptr<Texture>   tex_ptr     = resourcemanager.getTexptrFromKey  (tex_key);
 //
-//    weak_ptr<Mesh>      mesh_ptr    = mesh_manager.getResptrFromKey (mesh_key);
-//    weak_ptr<Texture>   tex_ptr     = tex_manager.getResptrFromKey  (tex_key);
+//    weak_ptr<Mesh>      mesh_ptr    = global::mesh_manager.getResptrFromKey (mesh_key);
+//    weak_ptr<Texture>   tex_ptr     = global::tex_manager.getResptrFromKey  (tex_key);
 //
 //    (*new_worldobject_it)->attachBatch(mesh_ptr, tex_ptr);
 //
 //    return new_worldobject_it;
 //
-////    return shared_ptr<WorldObject>(&(*new_worldobject_it)); /// This results in SEGFAULT because
-////    /// if not captured, then this will be the last instance of this pointer, and
-////    /// will automatically delete the new worldobject????
+///    return shared_ptr<WorldObject>(&(*new_worldobject_it)); // This results in SEGFAULT because
+///    // if not captured, then this will be the last instance of this pointer, and
+///    // will automatically delete the new worldobject????
 //}
-        /// WorldObject is defined by:
-        /// Model               GFX             string/enum
-        /// Texture             GFX             string/enum
-        /// Material            GFX             (Material)
-        /// position            GFX/PHY         vec3
-        /// rotation            GFX/PHY         (quat <- should be otional)
-        /// scale               GFX             (vec3 <- consider )
-        /// Collision shape     PHY             enum
+        // WorldObject is defined by:
+        // Model               GFX             string/enum
+        // Texture             GFX             string/enum
+        // Material            GFX             (Material)
+        // position            GFX/PHY         vec3
+        // rotation            GFX/PHY         (quat <- should be otional)
+        // scale               GFX             (vec3 <- consider )
+        // Collision shape     PHY             enum
 
 list<shared_ptr<WorldObject>>::iterator World::addDynamicObject(string mesh_key,
                                                                 string tex_key,
@@ -96,98 +96,98 @@ list<shared_ptr<WorldObject>>::iterator World::addDynamicObject(string mesh_key,
                                                                 btCollisionShape* shape)
 //shared_ptr<WorldObject> World::addWorldObject(string mesh_key, string tex_key, glm::vec3 pos, glm::vec3 dir)
 {
-    /// Add a new worldobject to the list and capture
-    /// reference and iterator
-    /// Create in place
+    // Add a new worldobject to the list and capture
+    // reference and iterator
+    // Create in place
 //    worldobjects.push_back(shared_ptr<WorldObject>(new WorldObject()));
 //    list<shared_ptr<WorldObject>>::iterator new_worldobject_it = --worldobjects.end();
     shared_ptr<WorldObject> worldobject = shared_ptr<WorldObject>(new WorldObject);
 
-    worldobject->pos = pos;         /// configure position
-//    (*new_worldobject_it)->dir = dir;         /// configure direction
+    worldobject->pos = pos;         // configure position
+//    (*new_worldobject_it)->dir = dir;         // configure direction
 
 
-    /// attach the mesh
+    // attach the mesh
     //weak_ptr<Mesh>      mesh_ptr    = resourcemanager.getMeshptrFromKey (mesh_key);
     //weak_ptr<Texture>   tex_ptr     = resourcemanager.getTexptrFromKey  (tex_key);
 
-    weak_ptr<Mesh>      mesh_ptr    = mesh_manager.getResptrFromKey (mesh_key);
-    weak_ptr<Texture>   tex_ptr     = tex_manager.getResptrFromKey  (tex_key);
+    weak_ptr<Mesh>      mesh_ptr    = global::mesh_manager.getResptrFromKey (mesh_key);
+    weak_ptr<Texture>   tex_ptr     = global::tex_manager.getResptrFromKey  (tex_key);
 
     worldobject->attachBatch(mesh_ptr, tex_ptr);
 
-    /// Add the collision shape if specified, if not, make a convex hull
+    // Add the collision shape if specified, if not, make a convex hull
     if (shape)
         addPhysicsDynamic( worldobject.get(), shape);
     else
         addPhysicsDynamic( worldobject.get(), RigidBody::ConvexHull(*(shared_ptr<Mesh>(mesh_ptr))));
 
-    /// Then add it
+    // Then add it
     worldobjects.push_back(worldobject);
 
-    /// This is not needed....
+    // This is not needed....
     list<shared_ptr<WorldObject>>::iterator new_worldobject_it = --worldobjects.end();
     return new_worldobject_it;
 
-//    return shared_ptr<WorldObject>(&(*new_worldobject_it)); /// This results in SEGFAULT because
-//    /// if not captured, then this will be the last instance of this pointer, and
-//    /// will automatically delete the new worldobject????
+//    return shared_ptr<WorldObject>(&(*new_worldobject_it)); // This results in SEGFAULT because
+//    // if not captured, then this will be the last instance of this pointer, and
+//    // will automatically delete the new worldobject????
 }
 
 void World::delWorldObject(list<shared_ptr<WorldObject>>::iterator worldobject_it_in)
 {
     if (!worldobjects.empty())
     {
-        /// In case another thread attempts to access the object
-        /// while it is being deconstructed, it must be made sure
-        /// that worldobjects no longer points to it
+        // In case another thread attempts to access the object
+        // while it is being deconstructed, it must be made sure
+        // that worldobjects no longer points to it
         shared_ptr<WorldObject> obj_to_del = *worldobject_it_in;
 
         worldobjects.erase(worldobject_it_in);
 
-        /// deconstruct the object
+        // deconstruct the object
         removePhysicsObject( obj_to_del.get() );
 
-        /// The last pointer to the object goes out of scope here
-        /// So it should be destructed
+        // The last pointer to the object goes out of scope here
+        // So it should be destructed
     }
 }
 
 list<shared_ptr<Creature>>::iterator World::addCreature(string mesh_key, string tex_key, glm::vec3 pos)
 //shared_ptr<Creature> World::addCreature(string mesh_key, string tex_key, glm::vec3 pos, glm::vec3 dir)
 {
-    /// Add a new creature to the list and capture
-    /// reference and iterator
+    // Add a new creature to the list and capture
+    // reference and iterator
 
-    /// Create completely in memory before adding it to list of
-    /// renderables
+    // Create completely in memory before adding it to list of
+    // renderables
     shared_ptr<Creature> creature = shared_ptr<Creature>(new Creature);
 
-    creature->pos = pos;         /// configure position
-//    (*new_creature_it)->dir = dir;         /// configure direction
+    creature->pos = pos;         // configure position
+//    (*new_creature_it)->dir = dir;         // configure direction
 
-    /// attach the mesh ( This is how it should be done)
-    weak_ptr<Mesh>       mesh_ptr    = mesh_manager.getResptrFromKey (mesh_key);
-    weak_ptr<Texture>    tex_ptr     = tex_manager.getResptrFromKey  (tex_key);
+    // attach the mesh ( This is how it should be done)
+    weak_ptr<Mesh>       mesh_ptr    = global::mesh_manager.getResptrFromKey (mesh_key);
+    weak_ptr<Texture>    tex_ptr     = global::tex_manager.getResptrFromKey  (tex_key);
 
     // The main "creature", the human is rotated wrong in blender
     creature->attachBatch(mesh_ptr, tex_ptr);
 //    glm::rotate()
 
-    /// attach skeleton
-    /// Use same key for skeleton and mesh for now
+    // attach skeleton
+    // Use same key for skeleton and mesh for now
     string skel_key = mesh_key;
-    weak_ptr<Skeleton>   skel_ptr     = skel_manager.getResptrFromKey  (skel_key);
+    weak_ptr<Skeleton>   skel_ptr     = global::skel_manager.getResptrFromKey  (skel_key);
     creature->attachSkeleton(skel_ptr);
 
-    /// The following bit of code is a lesson learned from another thread
-    /// attempting to render the actor before it was completely loaded...
+    // The following bit of code is a lesson learned from another thread
+    // attempting to render the actor before it was completely loaded...
     creatures.push_back(creature);
 
-    /// Default pose
+    // Default pose
     // creature->pose(/*anim_num=*/ 0, /*time=*/0.290000f);
 
-//    /// Seek debug:
+//    // Seek debug:
 //    TimeSeries<float> my_time_series;
 //
 //    my_time_series.num_keys = 1;
@@ -197,7 +197,7 @@ list<shared_ptr<Creature>>::iterator World::addCreature(string mesh_key, string 
 //
 //    my_time_series.duration = 1.23f;
 //
-//    auto res = my_time_series.seek(0.15); /// Problem!
+//    auto res = my_time_series.seek(0.15); // Problem!
 //
 //    float pre_valu = res.prev.key->value;
 //    float pre_time = res.prev.key->time;
@@ -209,20 +209,20 @@ list<shared_ptr<Creature>>::iterator World::addCreature(string mesh_key, string 
 //    std::cout << "prev t: " << pre_time << " v: " << pre_valu << " wt: " << pre_wght << "\n";
 //    std::cout << "next t: " << nxt_time << " v: " << nxt_valu << " wt: " << nxt_wght << "\n";
 
-    /// Start animation
+    // Start animation
     //creature->playAnim(0);
 
-    /// Pause animation
+    // Pause animation
     //creature->pauseAnim();
 
-    /// By default, should rest-pose;
+    // By default, should rest-pose;
     //creature->poseRest();
 
 
 
-    /// Debugging skeleton
-    weak_ptr<Mesh>      ax_mesh_ptr    = mesh_manager.getResptrFromKey ("axes");
-    weak_ptr<Texture>   ax_tex_ptr     = tex_manager.getResptrFromKey  ("tricolor");
+    // Debugging skeleton
+    weak_ptr<Mesh>      ax_mesh_ptr    = global::mesh_manager.getResptrFromKey ("axes");
+    weak_ptr<Texture>   ax_tex_ptr     = global::tex_manager.getResptrFromKey  ("tricolor");
 //
 //    for (int i = 0; i<creature->shSkelPtr()->num_bones; i++)
 //    {
@@ -261,9 +261,9 @@ list<shared_ptr<Creature>>::iterator World::addCreature(string mesh_key, string 
     list<shared_ptr<Creature>>::iterator new_creature_it = --creatures.end();
     return new_creature_it;
 
-//    return shared_ptr<Creature>(&(*new_creature_it)); /// This results in SEGFAULT because
-//    /// if not captured, then this will be the last instance of this pointer, and
-//    /// will automatically delete the new creature????
+//    return shared_ptr<Creature>(&(*new_creature_it)); // This results in SEGFAULT because
+//    // if not captured, then this will be the last instance of this pointer, and
+//    // will automatically delete the new creature????
 }
 
 void World::delCreature(list<shared_ptr<Creature>>::iterator creature_it_in)

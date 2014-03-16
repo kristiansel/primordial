@@ -4,8 +4,8 @@
 #include <iostream>
 
 
-/// Consider making an abstract base class template for customizable
-/// Signal names "compile time"
+// Consider making an abstract base class template for customizable
+// Signal names "compile time"
 
 struct SignalReceiver
 {

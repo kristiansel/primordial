@@ -6,11 +6,11 @@
 
 struct DirLight
 {
-    /// Methods
+    // Methods
     DirLight();
     glm::mat4 getVPmatrix() const;
 
-    /// Members
+    // Members
     glm::vec3 dir;
     glm::vec4 color;
 };
@@ -18,10 +18,10 @@ struct DirLight
 struct PointLight
 {
     PointLight();
-    /// Later add method of creating FOUR view-projection matrices
-    /// for shadowing point light
+    // Later add method of creating FOUR view-projection matrices
+    // for shadowing point light
 
-    /// Members
+    // Members
     glm::vec3 pos;
     glm::vec4 color;
 };

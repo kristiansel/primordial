@@ -12,7 +12,7 @@ public:
     {
         glm::quat out;
         out = (q1*(1-t) + q2*t);
-        out = glm::normalize(out); /// Could be omitted?
+        out = glm::normalize(out); // Could be omitted?
         //std::cout<<"resorting to lerp\n";
         return out;
     //    return glm::normalize((q1*(1-t) + q2*t));
@@ -22,7 +22,7 @@ public:
     {
         float dot = glm::dot(q1, q2);
 
-        if (dot < 0.0f) /// IMPORTANT: Always choose this path
+        if (dot < 0.0f) // IMPORTANT: Always choose this path
         {
             q1 = -q1; // Or q1 = -q1 (either should work)
             dot = -dot;

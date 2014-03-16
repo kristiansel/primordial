@@ -3,7 +3,7 @@
 // Input vertex data, different for all executions of this shader.
 // layout(location = 0) in vec3 vertexPosition_modelspace;
 
-/// This is what I would have done.. is this depricated?
+// This is what I would have done.. is this depricated?
 attribute vec4 InVertex ;
 attribute vec4 bone_index ;
 attribute vec4 bone_weight ;

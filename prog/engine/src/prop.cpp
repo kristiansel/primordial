@@ -2,7 +2,8 @@
 
 Prop::Prop()
 {
-    //ctor
+    // Reserve space for the render batches
+    render_batches.reserve(render_batches_capacity);
 }
 
 Prop::~Prop()
@@ -14,8 +15,13 @@ void Prop::attachBatch(std::weak_ptr<Mesh> mesh_ptr_in,
                        std::weak_ptr<Texture> tex_ptr_in,
                        glm::mat4 transf_mat_in)
 {
-//    mesh_ptrs.push_back(mesh_ptr_in);
+    if (!(render_batches.size()<render_batches_capacity))
+    {
+        std::cout << "warning: exceeding capacity of renderbatches. \nReallocation may occur\n";
+    }
+
     render_batches.push_back( RenderBatch(mesh_ptr_in,
                                           tex_ptr_in,
                                           transf_mat_in) );
+
 }

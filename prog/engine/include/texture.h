@@ -12,7 +12,7 @@ class Texture
 {
     public:
         Texture();
-        virtual ~Texture(); /// Need to flesh out this
+        virtual ~Texture(); // Need to flesh out this
 
         bool fromFile(std::string filepath_in);
 
@@ -24,7 +24,7 @@ class Texture
 
         GLuint tbo_id;
 
-        /// This mutex is probably not needed...
+        // This mutex is probably not needed...
         Mutex sharedContextLoading; // To guard against buffers being bound differently in several threads
 
 

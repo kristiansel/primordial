@@ -16,22 +16,22 @@ void ShaderBase::load(std::string vertex_shader, std::string fragment_shader)
 {
     if (loaded) unload();
 
-    /// Init the shader program
+    // Init the shader program
     GLuint vertexshader = initshaders(GL_VERTEX_SHADER, vertex_shader.c_str()) ;
     GLuint fragmentshader = initshaders(GL_FRAGMENT_SHADER, fragment_shader.c_str()) ;
     program_id = initprogram(vertexshader, fragmentshader) ;
 
-    /// set loaded-status
+    // set loaded-status
     loaded = true;
 
 }
 
 void ShaderBase::unload()
 {
-    /// deleting the shader object
+    // deleting the shader object
     if (loaded)
     {
-        /// delete the program
+        // delete the program
         glDeleteProgram(program_id);
 
         loaded = false;
@@ -149,7 +149,7 @@ GLuint ShaderBase::initprogram (GLuint vertexshader, GLuint fragmentshader)
         throw 4 ;
     }
 
-    /// When the program is created, the shaders are no longer needed
+    // When the program is created, the shaders are no longer needed
     glDetachShader(program, vertexshader);
     glDetachShader(program, fragmentshader);
     glDeleteShader(vertexshader);

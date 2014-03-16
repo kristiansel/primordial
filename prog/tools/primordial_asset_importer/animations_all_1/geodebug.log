@@ -18,3 +18,617 @@ time: Sat Mar 15 16:31:51 2014
 exporting mesh: sword
 exporting mesh: humale
 exporting mesh: loincloth
+time: Sun Mar 16 10:40:01 2014
+exporting mesh: sword
+exporting mesh: humale
+exporting mesh: loincloth
+time: Sun Mar 16 10:43:44 2014
+exporting mesh: sword
+using node hierarchy transform
+exporting mesh: humale
+using parent mesh transform
+exporting mesh: loincloth
+using parent mesh transform
+=================================================
+time: Sun Mar 16 10:54:16 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: Scene
+numMeshes: 0
+numChildren: 6
+transform: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+>node: Lamp_001
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	1.52391	
+>-0.955171	0.199884	-0.218391	-1.67053	
+>-0.0551891	0.604525	0.794672	2.22765	
+>0	0	0	1	
+>node: Camera
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>-0.771565	0.275762	-0.573274	-3.00277	
+>-0.636058	-0.349737	0.687833	3.92316	
+>-0.0108168	0.895343	0.445245	3.59832	
+>0	0	0	1	
+>node: Lamp
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	-1.37321	
+>-0.955171	0.199884	-0.218391	2.54951	
+>-0.0551891	0.604525	0.794672	2.12195	
+>0	0	0	1	
+>node: Scene_root
+>numMeshes: 0
+>numChildren: 1
+>transform: 
+>-0.1	-1.4243e-015	-8.74228e-009	0	
+>-8.74228e-009	1.62921e-008	0.1	0	
+>0	0.1	-1.62921e-008	0.8	
+>0	0	0	1	
+>>node: Dir_Master
+>>numMeshes: 0
+>>numChildren: 1
+>>transform: 
+>>0.970367	-0.0931397	-0.222965	1.11796e-006	
+>>-0.0931398	0.707255	-0.700796	3.1005	
+>>0.222965	0.700796	0.677622	0.185055	
+>>0	0	0	1	
+>>>node: Master
+>>>numMeshes: 0
+>>>numChildren: 5
+>>>transform: 
+>>>0.970367	-0.222965	-0.0931398	-0.490049	
+>>>-0.0931396	-0.700796	0.707255	-1.54026	
+>>>-0.222965	-0.677621	-0.700796	-1.48932	
+>>>0	0	0	1	
+>node: humale
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+>node: loincloth
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: sword
+using node hierarchy transform
+exporting mesh: humale
+using parent skeleton transform
+exporting mesh: loincloth
+using parent skeleton transform
+=================================================
+time: Sun Mar 16 11:07:42 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: Scene
+numMeshes: 0
+numChildren: 6
+transform: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+>node: Lamp_001
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	1.52391	
+>-0.955171	0.199884	-0.218391	-1.67053	
+>-0.0551891	0.604525	0.794672	2.22765	
+>0	0	0	1	
+>node: Camera
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>-0.771565	0.275762	-0.573274	-3.00277	
+>-0.636058	-0.349737	0.687833	3.92316	
+>-0.0108168	0.895343	0.445245	3.59832	
+>0	0	0	1	
+>node: Lamp
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	-1.37321	
+>-0.955171	0.199884	-0.218391	2.54951	
+>-0.0551891	0.604525	0.794672	2.12195	
+>0	0	0	1	
+>node: Scene_root
+>numMeshes: 0
+>numChildren: 1
+>transform: 
+>-0.1	-1.4243e-015	-8.74228e-009	0	
+>-8.74228e-009	1.62921e-008	0.1	0	
+>0	0.1	-1.62921e-008	0.8	
+>0	0	0	1	
+>>node: Dir_Master
+>>numMeshes: 0
+>>numChildren: 1
+>>transform: 
+>>0.970367	-0.0931397	-0.222965	1.11796e-006	
+>>-0.0931398	0.707255	-0.700796	3.1005	
+>>0.222965	0.700796	0.677622	0.185055	
+>>0	0	0	1	
+>>>node: Master
+>>>numMeshes: 0
+>>>numChildren: 5
+>>>transform: 
+>>>0.970367	-0.222965	-0.0931398	-0.490049	
+>>>-0.0931396	-0.700796	0.707255	-1.54026	
+>>>-0.222965	-0.677621	-0.700796	-1.48932	
+>>>0	0	0	1	
+>node: humale
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+>node: loincloth
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: sword
+using node hierarchy transform
+exporting mesh: humale
+using node hierarchy transform
+exporting mesh: loincloth
+using node hierarchy transform
+=================================================
+time: Sun Mar 16 11:18:14 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: Scene
+numMeshes: 0
+numChildren: 6
+transform: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+>node: Lamp_001
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	1.52391	
+>-0.955171	0.199884	-0.218391	-1.67053	
+>-0.0551891	0.604525	0.794672	2.22765	
+>0	0	0	1	
+>node: Camera
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>-0.771565	0.275762	-0.573274	-3.00277	
+>-0.636058	-0.349737	0.687833	3.92316	
+>-0.0108168	0.895343	0.445245	3.59832	
+>0	0	0	1	
+>node: Lamp
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	-1.37321	
+>-0.955171	0.199884	-0.218391	2.54951	
+>-0.0551891	0.604525	0.794672	2.12195	
+>0	0	0	1	
+>node: Scene_root
+>numMeshes: 0
+>numChildren: 1
+>transform: 
+>-0.1	-1.4243e-015	-8.74228e-009	0	
+>-8.74228e-009	1.62921e-008	0.1	0	
+>0	0.1	-1.62921e-008	0.8	
+>0	0	0	1	
+>>node: Dir_Master
+>>numMeshes: 0
+>>numChildren: 1
+>>transform: 
+>>0.970367	-0.0931397	-0.222965	1.11796e-006	
+>>-0.0931398	0.707255	-0.700796	3.1005	
+>>0.222965	0.700796	0.677622	0.185055	
+>>0	0	0	1	
+>>>node: Master
+>>>numMeshes: 0
+>>>numChildren: 5
+>>>transform: 
+>>>0.970367	-0.222965	-0.0931398	-0.490049	
+>>>-0.0931396	-0.700796	0.707255	-1.54026	
+>>>-0.222965	-0.677621	-0.700796	-1.48932	
+>>>0	0	0	1	
+>node: humale
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+>node: loincloth
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: sword
+using node hierarchy transform
+parent node to mesh: sword
+exporting mesh: humale
+using node hierarchy transform
+parent node to mesh: humale
+exporting mesh: loincloth
+using node hierarchy transform
+parent node to mesh: loincloth
+=================================================
+time: Sun Mar 16 11:20:20 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: Scene
+numMeshes: 0
+numChildren: 6
+transform: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+>node: Lamp_001
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	1.52391	
+>-0.955171	0.199884	-0.218391	-1.67053	
+>-0.0551891	0.604525	0.794672	2.22765	
+>0	0	0	1	
+>node: Camera
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>-0.771565	0.275762	-0.573274	-3.00277	
+>-0.636058	-0.349737	0.687833	3.92316	
+>-0.0108168	0.895343	0.445245	3.59832	
+>0	0	0	1	
+>node: Lamp
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	-1.37321	
+>-0.955171	0.199884	-0.218391	2.54951	
+>-0.0551891	0.604525	0.794672	2.12195	
+>0	0	0	1	
+>node: Scene_root
+>numMeshes: 0
+>numChildren: 1
+>transform: 
+>-0.1	-1.4243e-015	-8.74228e-009	0	
+>-8.74228e-009	1.62921e-008	0.1	0	
+>0	0.1	-1.62921e-008	0.8	
+>0	0	0	1	
+>>node: Dir_Master
+>>numMeshes: 0
+>>numChildren: 1
+>>transform: 
+>>0.970367	-0.0931397	-0.222965	1.11796e-006	
+>>-0.0931398	0.707255	-0.700796	3.1005	
+>>0.222965	0.700796	0.677622	0.185055	
+>>0	0	0	1	
+>>>node: Master
+>>>numMeshes: 0
+>>>numChildren: 5
+>>>transform: 
+>>>0.970367	-0.222965	-0.0931398	-0.490049	
+>>>-0.0931396	-0.700796	0.707255	-1.54026	
+>>>-0.222965	-0.677621	-0.700796	-1.48932	
+>>>0	0	0	1	
+>node: humale
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+>node: loincloth
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: sword
+using node hierarchy transform
+parent node to mesh: sword
+exporting mesh: humale
+using parent skeleton transform
+found parent mat of root bone @Dir_Master
+exporting mesh: loincloth
+using parent skeleton transform
+found parent mat of root bone @Dir_Master
+=================================================
+time: Sun Mar 16 12:06:25 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: Scene
+numMeshes: 0
+numChildren: 6
+transform: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+>node: Lamp_001
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	1.52391	
+>-0.955171	0.199884	-0.218391	-1.67053	
+>-0.0551891	0.604525	0.794672	2.22765	
+>0	0	0	1	
+>node: Camera
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>-0.771565	0.275762	-0.573274	-3.00277	
+>-0.636058	-0.349737	0.687833	3.92316	
+>-0.0108168	0.895343	0.445245	3.59832	
+>0	0	0	1	
+>node: Lamp
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	-1.37321	
+>-0.955171	0.199884	-0.218391	2.54951	
+>-0.0551891	0.604525	0.794672	2.12195	
+>0	0	0	1	
+>node: Scene_root
+>numMeshes: 0
+>numChildren: 1
+>transform: 
+>-0.1	-1.4243e-015	-8.74228e-009	0	
+>-8.74228e-009	1.62921e-008	0.1	0	
+>0	0.1	-1.62921e-008	0.8	
+>0	0	0	1	
+>>node: Dir_Master
+>>numMeshes: 0
+>>numChildren: 1
+>>transform: 
+>>0.970367	-0.0931397	-0.222965	1.11796e-006	
+>>-0.0931398	0.707255	-0.700796	3.1005	
+>>0.222965	0.700796	0.677622	0.185055	
+>>0	0	0	1	
+>>>node: Master
+>>>numMeshes: 0
+>>>numChildren: 5
+>>>transform: 
+>>>0.970367	-0.222965	-0.0931398	-0.490049	
+>>>-0.0931396	-0.700796	0.707255	-1.54026	
+>>>-0.222965	-0.677621	-0.700796	-1.48932	
+>>>0	0	0	1	
+>node: humale
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+>node: loincloth
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: sword
+using node hierarchy transform
+parent node to mesh: sword
+exporting mesh: humale
+using parent skeleton transform
+found parent mat of root bone @Dir_Master
+exporting mesh: loincloth
+using parent skeleton transform
+found parent mat of root bone @Dir_Master
+=================================================
+time: Sun Mar 16 12:18:15 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: Scene
+numMeshes: 0
+numChildren: 6
+transform: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+>node: Lamp_001
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	1.52391	
+>-0.955171	0.199884	-0.218391	-1.67053	
+>-0.0551891	0.604525	0.794672	2.22765	
+>0	0	0	1	
+>node: Camera
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>-0.771565	0.275762	-0.573274	-3.00277	
+>-0.636058	-0.349737	0.687833	3.92316	
+>-0.0108168	0.895343	0.445245	3.59832	
+>0	0	0	1	
+>node: Lamp
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	-1.37321	
+>-0.955171	0.199884	-0.218391	2.54951	
+>-0.0551891	0.604525	0.794672	2.12195	
+>0	0	0	1	
+>node: Scene_root
+>numMeshes: 0
+>numChildren: 1
+>transform: 
+>-0.1	-1.4243e-015	-8.74228e-009	0	
+>-8.74228e-009	1.62921e-008	0.1	0	
+>0	0.1	-1.62921e-008	0.8	
+>0	0	0	1	
+>>node: Dir_Master
+>>numMeshes: 0
+>>numChildren: 1
+>>transform: 
+>>0.970367	-0.0931397	-0.222965	1.11796e-006	
+>>-0.0931398	0.707255	-0.700796	3.1005	
+>>0.222965	0.700796	0.677622	0.185055	
+>>0	0	0	1	
+>>>node: Master
+>>>numMeshes: 0
+>>>numChildren: 5
+>>>transform: 
+>>>0.970367	-0.222965	-0.0931398	-0.490049	
+>>>-0.0931396	-0.700796	0.707255	-1.54026	
+>>>-0.222965	-0.677621	-0.700796	-1.48932	
+>>>0	0	0	1	
+>node: humale
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+>node: loincloth
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: sword
+using node hierarchy transform
+parent node to mesh: sword
+exporting mesh: humale
+using parent skeleton transform
+found parent mat of root bone @Dir_Master
+exporting mesh: loincloth
+using parent skeleton transform
+found parent mat of root bone @Dir_Master
+=================================================
+time: Sun Mar 16 12:22:57 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: Scene
+numMeshes: 0
+numChildren: 6
+transform: 
+1	0	0	0	
+0	0	1	0	
+0	-1	0	0	
+0	0	0	1	
+>node: Lamp_001
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	1.52391	
+>-0.955171	0.199884	-0.218391	-1.67053	
+>-0.0551891	0.604525	0.794672	2.22765	
+>0	0	0	1	
+>node: Camera
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>-0.771565	0.275762	-0.573274	-3.00277	
+>-0.636058	-0.349737	0.687833	3.92316	
+>-0.0108168	0.895343	0.445245	3.59832	
+>0	0	0	1	
+>node: Lamp
+>numMeshes: 0
+>numChildren: 0
+>transform: 
+>0.290865	0.771101	-0.566393	-1.37321	
+>-0.955171	0.199884	-0.218391	2.54951	
+>-0.0551891	0.604525	0.794672	2.12195	
+>0	0	0	1	
+>node: Scene_root
+>numMeshes: 0
+>numChildren: 1
+>transform: 
+>-0.1	-1.4243e-015	-8.74228e-009	0	
+>-8.74228e-009	1.62921e-008	0.1	0	
+>0	0.1	-1.62921e-008	0.8	
+>0	0	0	1	
+>>node: Dir_Master
+>>numMeshes: 0
+>>numChildren: 1
+>>transform: 
+>>0.970367	-0.0931397	-0.222965	1.11796e-006	
+>>-0.0931398	0.707255	-0.700796	3.1005	
+>>0.222965	0.700796	0.677622	0.185055	
+>>0	0	0	1	
+>>>node: Master
+>>>numMeshes: 0
+>>>numChildren: 5
+>>>transform: 
+>>>0.970367	-0.222965	-0.0931398	-0.490049	
+>>>-0.0931396	-0.700796	0.707255	-1.54026	
+>>>-0.222965	-0.677621	-0.700796	-1.48932	
+>>>0	0	0	1	
+>node: humale
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+>node: loincloth
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: sword
+using node hierarchy transform
+parent node to mesh: sword
+exporting mesh: humale
+using parent skeleton transform
+parent node of rigged mesh: Scene_root
+exporting mesh: loincloth
+using parent skeleton transform
+parent node of rigged mesh: Scene_root

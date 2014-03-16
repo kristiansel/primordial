@@ -27,21 +27,21 @@ private:
     std::unordered_map<std::string, ResCounter> resources;
 };
 
-/// SEE DEFINITIONS FURTHER DOWN
-///                          |
-///                          |
-///                          |
-///                          |
-///                          |
-///                          |
-///                          |
-///                          |
-///                          |
-///                          |
-///                          |
-///                          |
-///                          |
-///                          V
+// SEE DEFINITIONS FURTHER DOWN
+//                          |
+//                          |
+//                          |
+//                          |
+//                          |
+//                          |
+//                          |
+//                          |
+//                          |
+//                          |
+//                          |
+//                          |
+//                          |
+//                          V
 
 
 
@@ -78,7 +78,7 @@ private:
 
 
 
-/// DEFINITIONS
+// DEFINITIONS
 
 template <class ResType> ResourceManager<ResType>::ResourceManager()
 {
@@ -90,19 +90,19 @@ template <class ResType> ResourceManager<ResType>::~ResourceManager()
 
 }
 
-template <class ResType> std::weak_ptr<ResType> ResourceManager<ResType>::getResptrFromKey(std::string res_key_in)      /// MESH
+template <class ResType> std::weak_ptr<ResType> ResourceManager<ResType>::getResptrFromKey(std::string res_key_in)      // MESH
 {
 
     std::shared_ptr<ResType> new_resource(new ResType);
 
-    /// Screw emplace:
-    /// first try to find: if not there... then see if the file can be found in file system
-    /// if not found, then return nullptr as skeleton ptr.
+    // Screw emplace:
+    // first try to find: if not there... then see if the file can be found in file system
+    // if not found, then return nullptr as skeleton ptr.
 
     auto emplace_result = resources.emplace(res_key_in, ResCounter(new_resource));
-    /// Type = pair<unordered_map<string, ResCounter<ResType>>::iterator, bool>
+    // Type = pair<unordered_map<string, ResCounter<ResType>>::iterator, bool>
 
-    auto pair_it = emplace_result.first; /// unordered_map<string, ResCounter<ResType>>::iterator
+    auto pair_it = emplace_result.first; // unordered_map<string, ResCounter<ResType>>::iterator
 
     bool inserted   = emplace_result.second;
     auto resource_counter = &(pair_it->second);
@@ -110,7 +110,7 @@ template <class ResType> std::weak_ptr<ResType> ResourceManager<ResType>::getRes
 
     if (inserted)
     {
-        /// construct the resourc filepath from the key
+        // construct the resourc filepath from the key
         //string filepath = basefolder + "/" + modelfolder + "/" + res_key_in + ".obj";
 
         resource_ptr->fromFile(res_key_in);
@@ -118,7 +118,7 @@ template <class ResType> std::weak_ptr<ResType> ResourceManager<ResType>::getRes
 //        cout << "inserted for " << resourc_key_in << "\n";
     }
 
-    /// Important: Count another reference to the resource
+    // Important: Count another reference to the resource
     resource_counter->counter++;
 
 //    cout << "resourc count for " << resourc_key_in << ": " << resourc_counter->counter << "\n";

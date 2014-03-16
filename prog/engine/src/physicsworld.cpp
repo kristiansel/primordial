@@ -2,22 +2,22 @@
 
 PhysicsWorld::PhysicsWorld()
 {
-	///collision configuration contains default setup for memory, collision setup. Advanced users can create their own configuration.
+	//collision configuration contains default setup for memory, collision setup. Advanced users can create their own configuration.
 	collisionConfiguration = new btDefaultCollisionConfiguration();
 
-	///use the default collision dispatcher. For parallel processing you can use a diffent dispatcher (see Extras/BulletMultiThreaded)
+	//use the default collision dispatcher. For parallel processing you can use a diffent dispatcher (see Extras/BulletMultiThreaded)
 	dispatcher = new	btCollisionDispatcher(collisionConfiguration);
 
-	///btDbvtBroadphase is a good general purpose broadphase. You can also try out btAxis3Sweep.
+	//btDbvtBroadphase is a good general purpose broadphase. You can also try out btAxis3Sweep.
 	overlappingPairCache = new btDbvtBroadphase();
 
-	///the default constraint solver. For parallel processing you can use a different solver (see Extras/BulletMultiThreaded)
+	//the default constraint solver. For parallel processing you can use a different solver (see Extras/BulletMultiThreaded)
 	solver = new btSequentialImpulseConstraintSolver;
 
-    /// Initialize the world
+    // Initialize the world
 	dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher,overlappingPairCache,solver,collisionConfiguration);
 
-    /// Set gravity
+    // Set gravity
 	dynamicsWorld->setGravity(btVector3(0,-9.81,0));
 }
 
@@ -31,7 +31,7 @@ void PhysicsWorld::addPhysicsDynamic(RigidBody* rigidbody, btCollisionShape* sha
     btCollisionShape* colShape = shape;
     collisionShapes.push_back(colShape);
 
-    /// Create Dynamic Objects
+    // Create Dynamic Objects
     btTransform startTransform;
     startTransform.setIdentity();
 
@@ -44,12 +44,12 @@ void PhysicsWorld::addPhysicsDynamic(RigidBody* rigidbody, btCollisionShape* sha
     if (isDynamic)
         colShape->calculateLocalInertia(mass,localInertia);
 
-    /// Set starting rotation
+    // Set starting rotation
     btQuaternion bt_start_quat = btQuaternion(rigidbody->rot.w, rigidbody->rot.x,
                                               rigidbody->rot.y, rigidbody->rot.z);
     startTransform.setRotation( bt_start_quat ) ;
 
-    /// Set starting translation
+    // Set starting translation
     startTransform.setOrigin(btVector3(rigidbody->pos.x, rigidbody->pos.y, rigidbody->pos.z));
 
 
@@ -70,11 +70,11 @@ void PhysicsWorld::addPhysicsStatic(RigidBody* rigidbody)
     //create a dynamic rigidbody
 
     //btCollisionShape* colShape = new btBoxShape(btVector3(1,1,1));
-    /// I think this puts the plane at -1 y?
+    // I think this puts the plane at -1 y?
     btCollisionShape* colShape = new btStaticPlaneShape(btVector3(0.0, 1.0, 0.0), 0.0);
     collisionShapes.push_back(colShape);
 
-    /// Create Dynamic Objects
+    // Create Dynamic Objects
     btTransform startTransform;
     startTransform.setIdentity();
 
@@ -87,7 +87,7 @@ void PhysicsWorld::addPhysicsStatic(RigidBody* rigidbody)
     if (isDynamic)
         colShape->calculateLocalInertia(mass,localInertia);
 
-    /// Do not think transform is necessary for infinite plane?
+    // Do not think transform is necessary for infinite plane?
     // startTransform.setOrigin(btVector3(rigidbody->pos.x, rigidbody->pos.y, rigidbody->pos.z));
 
     //using motionstate is recommended, it provides interpolation capabilities, and only synchronizes 'active' objects

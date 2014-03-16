@@ -49,7 +49,7 @@ namespace dirflag
     const unsigned char right = 8;       // 00001000
 }
 
-//// forward declaration of creature
+/// forward declaration of creature
 //class Creature;
 //
 //struct Signal

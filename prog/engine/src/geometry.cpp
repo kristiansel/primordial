@@ -4,14 +4,14 @@
 //{
 //    Vertex temp;
 //
-////    cout<<"    pos: "<<v1.position.x<<"\t"<<v1.position.y<<"\t"<<v1.position.z<<"\n";
-////    cout<<"    pos: "<<v2.position.x<<"\t"<<v2.position.y<<"\t"<<v2.position.z<<"\n";
+///    cout<<"    pos: "<<v1.position.x<<"\t"<<v1.position.y<<"\t"<<v1.position.z<<"\n";
+///    cout<<"    pos: "<<v2.position.x<<"\t"<<v2.position.y<<"\t"<<v2.position.z<<"\n";
 //
 //
 //
 //    temp.position = 0.5*(v1.position + v2.position);
 //
-////    cout<<"   ipos: "<<temp.position.x<<"\t"<<temp.position.y<<"\t"<<temp.position.z<<"\n";
+///    cout<<"   ipos: "<<temp.position.x<<"\t"<<temp.position.y<<"\t"<<temp.position.z<<"\n";
 //
 //    temp.normal = glm::normalize((v1.normal + v2.normal));
 //    temp.tex_coords[0] = 0.5*(v1.tex_coords[0] + v2.tex_coords[0]);
@@ -22,7 +22,7 @@
 //        temp.bone_weights[i] = v1.bone_weights[i];
 //    }
 //
-////    cout<<"    pos: "<<temp.position.x<<"\t"<<temp.position.y<<"\t"<<temp.position.z<<"\n";
+///    cout<<"    pos: "<<temp.position.x<<"\t"<<temp.position.y<<"\t"<<temp.position.z<<"\n";
 //    return temp;
 //
 //}
@@ -31,8 +31,8 @@
 //{
 //    Vertex temp;
 //
-////    cout<<"    pos: "<<v1.position.x<<"\t"<<v1.position.y<<"\t"<<v1.position.z<<"\n";
-////    cout<<"    pos: "<<v2.position.x<<"\t"<<v2.position.y<<"\t"<<v2.position.z<<"\n";
+///    cout<<"    pos: "<<v1.position.x<<"\t"<<v1.position.y<<"\t"<<v1.position.z<<"\n";
+///    cout<<"    pos: "<<v2.position.x<<"\t"<<v2.position.y<<"\t"<<v2.position.z<<"\n";
 //
 //    float n_verts = verts_in.size();
 //    float scalefactor = 1.0/n_verts;

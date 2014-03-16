@@ -14,7 +14,7 @@ varying vec4 shadowvertex ;
 uniform vec3 main_light_dir;
 uniform vec4 main_light_color;
 
-/// With texture
+// With texture
 uniform sampler2D tex; // the active texture
 uniform sampler2DShadow shadow_depth; // the shadow mapping depth texture
 
@@ -62,7 +62,7 @@ uniform int NUM_SHADOW_SAMPLES = 4;
 
 uniform float SHADOW_STRENGTH = 0.87;
 
-/// How can I make this more const...?
+// How can I make this more const...?
 //float SHADOW_DECR = SHADOW_STRENGTH/NUM_SHADOW_SAMPLES;
 float SHADOW_DECR = 0.2175; // = 0.87/4
 float SHADOW_DECR16 = 0.054375; // = 0.87/16
@@ -98,10 +98,10 @@ void main (void)
 //    vec4 light_cols_att;
 //    if (light_posns[i].w > 0.001 || light_posns[i].w < -0.001)
 //    {
-////                vec3 position = light_posns[i].xyz / light_posns[i].w; // dehomogenize light positio
+///                vec3 position = light_posns[i].xyz / light_posns[i].w; // dehomogenize light positio
 //        vec3 position = light_posns[i].xyz;
 //        light_cols_att = light_cols[i]*1/(pow(length(mypos - position),1)); // attenuate
-////                light_cols_att = vec4(1.0, 1.0, 1.0, 1.0);
+///                light_cols_att = vec4(1.0, 1.0, 1.0, 1.0);
 //        //light_cols_att = light_cols[i];
 //        // float light_dist = ((light_posns[0].x - mypos.x) * (light_posns[0].x - mypos.x) + (light_posns[0].y  - mypos.y)* (light_posns[0].y  - mypos.y)+ (light_posns[0].z  - mypos.z)* (light_posns[0].z - mypos.z));
 //        // light_cols_att = vec4(light_cols[i].r/light_dist, light_cols[i].g/light_dist, light_cols[i].b/light_dist, 1.0);
@@ -123,10 +123,10 @@ void main (void)
     SUM = SUM + term;
 //        }
 
-    /// This should be changable
+    // This should be changable
     vec4 amb = vec4(0.05, 0.05, 0.05, 1.0);
 
-    /// Shadow Mapping
+    // Shadow Mapping
     float bias = 0.0025; // cosTheta is dot( n,l ), clamped between 0 and 1
 //    float bias = 0.001*tan(acos(nDotL));
 //    bias = clamp(bias, 0, 0.1);
@@ -140,9 +140,9 @@ void main (void)
 //        visibility -= (1.0-vis_sample)*SHADOW_DECR;
 //    }
 
-    /// 16 sample shadowmap... wow. Tested early jump out of loop
-    /// did not work well. Consider smaller shadowmap and follow camera
-    /// plus 8 samples
+    // 16 sample shadowmap... wow. Tested early jump out of loop
+    // did not work well. Consider smaller shadowmap and follow camera
+    // plus 8 samples
     float visibility = 1.0;
     for (int i=0;i<16;i++){
         float vis_sample = texture( shadow_depth, vec3(shadowvertex.xy + poisson_disk[i]/700.0,   (shadowvertex.z-bias) ) );
@@ -169,9 +169,9 @@ void main (void)
 
     fog_weight = clamp(fog_weight, 0, 1.0);
 
-    /// Make close distance fog bluer than far away fog
-    /// This looks truly beautiful. Should probably pass the blue
-    /// as the same color as the sky
+    // Make close distance fog bluer than far away fog
+    // This looks truly beautiful. Should probably pass the blue
+    // as the same color as the sky
     vec4 final_fog_color = (1.0-distance_fallof)*vec4(0.0, 0.0, 1.0, 1.0) + distance_fallof * fog_color;
 
     gl_FragColor = (1.0-fog_weight) * local_color + fog_weight * final_fog_color;

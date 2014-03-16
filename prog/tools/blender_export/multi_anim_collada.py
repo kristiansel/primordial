@@ -1,7 +1,7 @@
 import bpy
 
 # hard-coded folder to export to
-folder = "D:/Travel/Productivity/blender/projects/human_m/animations_all"
+folder = "D:/Travel/Productivity/blender/projects/human_m/animations_all_2"
 
 # hard-coded object to change action of
 anim_object = bpy.data.objects['Scene_root']

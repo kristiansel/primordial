@@ -18,12 +18,12 @@
 class Master
 {
 public:
-    /// Methods
+    // Methods
     Master(); // starts everything
     virtual ~Master();
 protected:
 private:
-    /// Primary Methods
+    // Primary Methods
 //    void init();
     void initWindow();
     void loadResources();
@@ -32,22 +32,22 @@ private:
     void renderTasks();
 //    void testThreadTasks();
 
-    /// Secondary Methods
+    // Secondary Methods
     bool handleInput();
 
-    /// Members
-    sf::Window  window;     /// Input from the window signals the game mechanics
-    Mechanics   mechanics;  /// the game mechanics takes the input and transforms the scene
-    World       world;      /// struct like class - Contains the game state
-    Culler      culler;      /// process oriented class, scene = culler.stage(&world)
-    Scene       scene;      /// the scene is an interface between the world and the renderer
-    Renderer    renderer;   /// the renderer draws the scene: renderer.draw(&scene)
+    // Members
+    sf::Window  window;     // Input from the window signals the game mechanics
+    Mechanics   mechanics;  // the game mechanics takes the input and transforms the scene
+    World       world;      // struct like class - Contains the game state
+    Culler      culler;      // process oriented class, scene = culler.stage(&world)
+    Scene       scene;      // the scene is an interface between the world and the renderer
+    Renderer    renderer;   // the renderer draws the scene: renderer.draw(&scene)
 
-    /// replace by settings
+    // replace by settings
     unsigned int scr_width_px;
     unsigned int scr_height_px;
 
-    /// Time-related
+    // Time-related
 
     sf::Clock clock;    // helper
     sf::Clock absClock; // never reset
@@ -55,14 +55,14 @@ private:
     float      t;
     bool running;
 
-    /// Threads
+    // Threads
     Thread render_thread;
 //    Thread test_thread;
 
-    /// Thread wait flags
+    // Thread wait flags
     bool render_thread_loaded;
 
-    /// Internal variable signals
+    // Internal variable signals
     bool has_focus;     // helper
     bool rmb_down;
     int press_pos_x;

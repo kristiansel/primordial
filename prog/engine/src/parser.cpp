@@ -148,7 +148,7 @@ bool Parser::parseSimpleObj(string filepath, Vertex*& vertices, Triangle*& trian
             }   // for k<3
         }   // for i<triangle_num
 
-//        /// Skeletal animation specific
+//        // Skeletal animation specific
 //        if (temp_b_names.size()>0)
 //        {
 //            for (int h = 0; h<vertex_num; h++)
@@ -338,7 +338,7 @@ bool Parser::parseSkinnedObj(string filepath, Vertex*& vertices, Triangle*& tria
             }   // for k<3
         }   // for i<triangle_num
 
-//        /// Skeletal animation specific
+//        // Skeletal animation specific
 //        if (temp_b_names.size()>0)
 //        {
 //            for (int h = 0; h<vertex_num; h++)
@@ -390,7 +390,7 @@ bool Parser::parseSkinnedObj(string filepath, Vertex*& vertices, Triangle*& tria
     }
 }
 //
-//// Called from mesh.cpp
+/// Called from mesh.cpp
 //void Parser::parseObjFile(string filename, Vertex*& vertices, Triangle*& triangles, GLuint& vertex_num, GLuint& triangle_num, Skeleton* skeleton)
 //{
 //    vector<glm::vec3> temp_verts;
@@ -495,15 +495,15 @@ bool Parser::parseSkinnedObj(string filepath, Vertex*& vertices, Triangle*& tria
 //                int vert_ind = temp_tris[i].indices[k];
 //                int texco_ind = temp_texco_inds[i].indices[k];
 //                int norm_ind = temp_norm_inds[i].indices[k];
-////
+///
 //                triangles[i].indices[k] = vert_ind;
 //
 //                vertices[vert_ind].position = glm::vec4(temp_verts[vert_ind].x, temp_verts[vert_ind].y, temp_verts[vert_ind].z, 1.0);
-////                if (filename == "resources/models/quad_big_tex.obj")
-////                {
-////                    cout<<"tri("<<i<<"/"<<triangle_num-1<<"):"<<k<<","<<vert_ind<<"/"<<vertex_num-1<<", "<<texco_ind<<"/"<<temp_texcos.size()-1<<", "<<norm_ind<<"/"<<temp_norms.size()-1<<"\n";
-////                    cout<<"temp_texcos[texco_ind] = "<<temp_texcos[texco_ind][0]<<", "<<temp_texcos[texco_ind][1]<<"\n";
-////                }
+///                if (filename == "resources/models/quad_big_tex.obj")
+///                {
+///                    cout<<"tri("<<i<<"/"<<triangle_num-1<<"):"<<k<<","<<vert_ind<<"/"<<vertex_num-1<<", "<<texco_ind<<"/"<<temp_texcos.size()-1<<", "<<norm_ind<<"/"<<temp_norms.size()-1<<"\n";
+///                    cout<<"temp_texcos[texco_ind] = "<<temp_texcos[texco_ind][0]<<", "<<temp_texcos[texco_ind][1]<<"\n";
+///                }
 //                if (temp_texcos.size()>0) {
 //                    vertices[vert_ind].tex_coords[0] = temp_texcos[texco_ind][0];
 //                    vertices[vert_ind].tex_coords[1] = temp_texcos[texco_ind][1];
@@ -572,25 +572,25 @@ bool Parser::parseSkinnedObj(string filepath, Vertex*& vertices, Triangle*& tria
 //            } // for vertices
 //        } // if skeleton
 //    } // if open
-////    if (filename == "resources/models/quad_big_tex.obj")
-////    {
-////        for (int y = 0; y<vertex_num; y++)
-////        {
-////            int ab;
-////            cout<<"vertex "<<y<<": \n";
-////            cout<<"    pos: "<<vertices[y].position.x<<"\t"<<vertices[y].position.y<<"\t"<<vertices[y].position.z<<" \n";
-////            cout<<"   norm: "<<vertices[y].normal.x<<"\t"<<vertices[y].normal.y<<"\t"<<vertices[y].normal.z<<" \n";
-////            cout<<"  texco: "<<vertices[y].tex_coords[0]<<"\t"<<vertices[y].tex_coords[1]<<" \n";
-//////            for
-//////            cout<<"    b_w: "<<y<<": \n";
-//////            cout<<"  b_ind: "<<y<<": \n";
-////            cin>>ab;
-////        }
-////    }
+///    if (filename == "resources/models/quad_big_tex.obj")
+///    {
+///        for (int y = 0; y<vertex_num; y++)
+///        {
+///            int ab;
+///            cout<<"vertex "<<y<<": \n";
+///            cout<<"    pos: "<<vertices[y].position.x<<"\t"<<vertices[y].position.y<<"\t"<<vertices[y].position.z<<" \n";
+///            cout<<"   norm: "<<vertices[y].normal.x<<"\t"<<vertices[y].normal.y<<"\t"<<vertices[y].normal.z<<" \n";
+///            cout<<"  texco: "<<vertices[y].tex_coords[0]<<"\t"<<vertices[y].tex_coords[1]<<" \n";
+////            for
+////            cout<<"    b_w: "<<y<<": \n";
+////            cout<<"  b_ind: "<<y<<": \n";
+///            cin>>ab;
+///        }
+///    }
 //
 //}
 //
-//// Called from mesh.cpp
+/// Called from mesh.cpp
 //void Parser::parseObj(string filename, Vertex*& vertices, Triangle*& triangles, GLuint& vertex_num, GLuint& triangle_num, Skeleton* skeleton)
 //{
 //    vector<glm::vec3> temp_verts;
@@ -598,7 +598,7 @@ bool Parser::parseSkinnedObj(string filepath, Vertex*& vertices, Triangle*& tria
 //    vector<string> temp_b_names;
 //    vector<glm::vec3> temp_b_weights;
 //    vector<Triangle> temp_tris;
-////    vector<int> texco_inds;
+///    vector<int> texco_inds;
 //    vector<glm::vec2> texcos;
 //
 //    string str, ret = "", cmd;
@@ -643,11 +643,11 @@ bool Parser::parseSkinnedObj(string filepath, Vertex*& vertices, Triangle*& tria
 //                    Triangle tri;
 //
 //                    tri.indices[0] = atoi(strtok(NULL, " /"))-1;
-////                    texco_inds.push_back(atoi(strtok(NULL, " /"))-1);
+///                    texco_inds.push_back(atoi(strtok(NULL, " /"))-1);
 //                    tri.indices[1] = atoi(strtok(NULL, " /"))-1;
-////                    texco_inds.push_back(atoi(strtok(NULL, " /"))-1);
+///                    texco_inds.push_back(atoi(strtok(NULL, " /"))-1);
 //                    tri.indices[2] = atoi(strtok(NULL, " /"))-1;
-////                    texco_inds.push_back(atoi(strtok(NULL, " /"))-1);
+///                    texco_inds.push_back(atoi(strtok(NULL, " /"))-1);
 //
 //                    temp_tris.push_back(tri);
 //
@@ -677,36 +677,36 @@ bool Parser::parseSkinnedObj(string filepath, Vertex*& vertices, Triangle*& tria
 //
 //        vertex_num = temp_verts.size();
 //        triangle_num = temp_tris.size();
-////        cout<<"trinum = "<< temp_tris.size() << "\n";
-////        cout<<"vertNum = "<<temp_verts.size() << "\n";
+///        cout<<"trinum = "<< temp_tris.size() << "\n";
+///        cout<<"vertNum = "<<temp_verts.size() << "\n";
 //
 //
 //
 //
-////            Vertex * vertices;
+///            Vertex * vertices;
 //        vertices = new Vertex [vertex_num];
-////            Triangle * triangles;
+///            Triangle * triangles;
 //        triangles = new Triangle [triangle_num];
 //
-////        for (int k = 0; k<triangle_num; k++)
-////        {
-////            vertices[temp_tris[k].indices[0]].tex_coords = texcos[texco_inds[3*k]];
-////            vertices[temp_tris[k].indices[1]].tex_coords = texcos[texco_inds[3*k+1]];
-////            vertices[temp_tris[k].indices[2]].tex_coords = texcos[texco_inds[3*k+2]];
-////        }
+///        for (int k = 0; k<triangle_num; k++)
+///        {
+///            vertices[temp_tris[k].indices[0]].tex_coords = texcos[texco_inds[3*k]];
+///            vertices[temp_tris[k].indices[1]].tex_coords = texcos[texco_inds[3*k+1]];
+///            vertices[temp_tris[k].indices[2]].tex_coords = texcos[texco_inds[3*k+2]];
+///        }
 //
 //        for (int h = 0; h<vertex_num; h++)
 //        {
 //            vertices[h].position = glm::vec4(temp_verts[h].x, temp_verts[h].y, temp_verts[h].z, 1.0);
 //            vertices[h].normal = temp_norms[h];
-////            vertices[h].tex_coords = // THIS IS WHERE IT ALL BREAKS DOWN. INDICES OF TEX-COORDS TO NOT MATCH INDICES OF VERTICES
+///            vertices[h].tex_coords = // THIS IS WHERE IT ALL BREAKS DOWN. INDICES OF TEX-COORDS TO NOT MATCH INDICES OF VERTICES
 //            for (int yy = 0; yy<MAX_BONE_INFLUENCES; yy++ )
 //            {
 //                vertices[h].bone_indices[yy] = 0;
 //                vertices[h].bone_weights[yy] = 0;
 //            }
 //            vertices[h].bone_weights[0] = 1.0;
-////             Find the bones_rest
+///             Find the bones_rest
 //            //cout<<"Vertex nr. "<<h<<": ";
 //            //cout<<temp_b_names[h]<<": ";
 //            if (temp_b_names.size()>0)
@@ -759,27 +759,27 @@ bool Parser::parseSkinnedObj(string filepath, Vertex*& vertices, Triangle*& tria
 //        {
 //            triangles[u] = temp_tris[u];
 //        }
-////        for (int pp = 0; pp<vertex_num; pp++) {
-////            cout<<"indices: "<<vertices[pp].bone_indices[0]<<"\t"<<vertices[pp].bone_indices[1]<<"\t"<<vertices[pp].bone_indices[2]<<"\n";
-////            cout<<"weights: "<<vertices[pp].bone_weights[0]<<"\t"<<vertices[pp].bone_weights[1]<<"\t"<<vertices[pp].bone_weights[2]<<"\n";
-////            cout<<"\n";
-////        }
+///        for (int pp = 0; pp<vertex_num; pp++) {
+///            cout<<"indices: "<<vertices[pp].bone_indices[0]<<"\t"<<vertices[pp].bone_indices[1]<<"\t"<<vertices[pp].bone_indices[2]<<"\n";
+///            cout<<"weights: "<<vertices[pp].bone_weights[0]<<"\t"<<vertices[pp].bone_weights[1]<<"\t"<<vertices[pp].bone_weights[2]<<"\n";
+///            cout<<"\n";
+///        }
 //    }
 //    else
 //    {
 //        cerr<<"unable to open file: "<<filename<<"\n";
 //    }
 //
-////        cout<<"gets out of loop";
-////    if (vertex_num>200)
-////    {
-////        cout<<"normal: "<<vertices[125].normal.x<<", "<<vertices[125].normal.y<<", "<<vertices[125].normal.z<<"\n";
-////    }
+///        cout<<"gets out of loop";
+///    if (vertex_num>200)
+///    {
+///        cout<<"normal: "<<vertices[125].normal.x<<", "<<vertices[125].normal.y<<", "<<vertices[125].normal.z<<"\n";
+///    }
 //
 //
 //}
 //
-//// Called from actor.cpp
+/// Called from actor.cpp
 //void Parser::parseActor(string filename, vector<string>& materials, vector<string>& meshes, mat4& matrix, Skeleton* skeleton)
 //{
 //    string str, ret = "", cmd, esc = " :()";  // esc is symbols ignored by the tokenizer
@@ -919,7 +919,7 @@ bool Parser::parseSkinnedObj(string filepath, Vertex*& vertices, Triangle*& tria
 //
 //    if (texture_path != "none")
 //    {
-////        std::cout << "loading texture " << texture_path << " ... ";
+///        std::cout << "loading texture " << texture_path << " ... ";
 //
 //        sf::Image texture;
 //        if (!(texture.loadFromFile(texture_path)))
@@ -928,11 +928,11 @@ bool Parser::parseSkinnedObj(string filepath, Vertex*& vertices, Triangle*& tria
 //        }
 //        else
 //        {
-////            std::cout << "loaded!\n";
+///            std::cout << "loaded!\n";
 //        }
 //
 //        glGenTextures(1, &tbo_id);
-////        cout<<"texture id: "<<tbo_id<<"\n";
+///        cout<<"texture id: "<<tbo_id<<"\n";
 //
 //        //glActiveTexture( GL_TEXTURE0 );
 //        glBindTexture(GL_TEXTURE_2D, tbo_id);
@@ -943,7 +943,7 @@ bool Parser::parseSkinnedObj(string filepath, Vertex*& vertices, Triangle*& tria
 //        glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 //
 //        sf::Vector2u size = texture.getSize();
-////        std::cout<<"texture size = "<<size.x<<", "<<size.y<<"\n";
+///        std::cout<<"texture size = "<<size.x<<", "<<size.y<<"\n";
 //        gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA, size.x, size.y,
 //                          GL_RGBA, GL_UNSIGNED_BYTE, texture.getPixelsPtr());
 //
@@ -967,11 +967,11 @@ bool Parser::parseSkinnedObj(string filepath, Vertex*& vertices, Triangle*& tria
 //
 //}
 //
-//// called from static.cpp
+/// called from static.cpp
 //void Parser::parseStatic(string filename, vector<string>& materials, vector<string>& meshes, mat4& matrix)
 //{
-////    vector<string> materials;
-////    vector<string> meshes;
+///    vector<string> materials;
+///    vector<string> meshes;
 //    string active_material;
 //
 //    string str, ret = "", cmd, esc = " :()";  // esc is symbols ignored by the tokenizer
@@ -1003,12 +1003,12 @@ bool Parser::parseSkinnedObj(string filepath, Vertex*& vertices, Triangle*& tria
 //                    {
 //                        materials.push_back("none");
 //                    }
-////                    cout<<"adding mesh\n";
+///                    cout<<"adding mesh\n";
 //                    meshes.push_back(strtok(NULL, esc.c_str()));
 //                }
 //                if (cmd=="matrix")
 //                {
-////                    cout<<"adding matrix\n";
+///                    cout<<"adding matrix\n";
 //                    string nl;
 //                    matrix[0][0] = atof(strtok(NULL, esc.c_str()));
 //                    matrix[0][1] = atof(strtok(NULL, esc.c_str()));

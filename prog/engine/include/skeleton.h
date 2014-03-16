@@ -1,12 +1,12 @@
 #ifndef SKELETON_H
 #define SKELETON_H
 
-/// GO DOWN FOR OLD IMPLEMENTATION
-///     |
-///     |
-///     V
+// GO DOWN FOR OLD IMPLEMENTATION
+//     |
+//     |
+//     V
 
-/// PROPOSED NEW IMPLEMENTATION
+// PROPOSED NEW IMPLEMENTATION
 
 #include <string>
 #include <memory>
@@ -16,7 +16,7 @@
 #include <glm/gtc/quaternion.hpp>
 #include <glm/gtx/transform.hpp>
 #include <fstream>
-#include <iostream> /// For debugging
+#include <iostream> // For debugging
 #include <cstring>
 #include <cmath>
 #include <memstreamer.hpp>
@@ -41,10 +41,10 @@ struct ActiveAnim
     {return blend_weight<right.blend_weight; };
 };
 
-class Skeleton /// This is a resource (store one copy)
+class Skeleton // This is a resource (store one copy)
 {
 public:
-    /// Struct used for output interpolation output
+    // Struct used for output interpolation output
     struct Pose;
 public:
     Skeleton();
@@ -69,16 +69,16 @@ public:
     float getAnimDuration(int anim_index);
 protected:
 
-public: /// private: // public for debugging
-    /// Some recursive function to apply bone transforms
+public: // private: // public for debugging
+    // Some recursive function to apply bone transforms
 
-    /// Parts of the Skeleton structure
+    // Parts of the Skeleton structure
     class Bone;
     class Animation;
 
 
-    /// This does not use fancy STL because the data
-    /// will be sent to GPU
+    // This does not use fancy STL because the data
+    // will be sent to GPU
 
     int num_bones;
     Bone* bones;
@@ -86,11 +86,11 @@ public: /// private: // public for debugging
     int num_anims;
     Animation* animations;
 
-private: /// for debuggin
+private: // for debuggin
     bool triggered;
 };
 
-class Skeleton::Bone /// This is part of a resource (store one copy)
+class Skeleton::Bone // This is part of a resource (store one copy)
 {
 public:
     Bone() : rest_matrix(glm::mat4(1.0)),
@@ -99,13 +99,13 @@ public:
 
     ~Bone() {delete[] child_indices;};
 
-    glm::mat4 rest_matrix; /// Transform to move
-                           /// something from object coordinates
-                           /// to this bone's coordinates
+    glm::mat4 rest_matrix; // Transform to move
+                           // something from object coordinates
+                           // to this bone's coordinates
 
-    /// Could perhaps in the future need to add a local
-    /// transform to be used when there are no key frames
-    /// if that is ever the case
+    // Could perhaps in the future need to add a local
+    // transform to be used when there are no key frames
+    // if that is ever the case
 
     int num_children;
     int* child_indices;
@@ -114,10 +114,10 @@ public:
 
 };
 
-class Skeleton::Animation /// This is part of a resource (store one copy)
+class Skeleton::Animation // This is part of a resource (store one copy)
 {
 public:
-    class Channel; /// Each channel corresponds to a bone
+    class Channel; // Each channel corresponds to a bone
 public:
     Animation();
     ~Animation();
@@ -125,33 +125,33 @@ public:
     int num_channels;
     Channel* channels;
 
-    float duration; /// Seconds
+    float duration; // Seconds
 };
 
-//// Alias Skeleton::Animation as just Animation
+/// Alias Skeleton::Animation as just Animation
 //using Animation = Skeleton::Animation;
 
-class Skeleton::Animation::Channel ///
+class Skeleton::Animation::Channel //
 {
 public:
     Channel();
     ~Channel();
 
-    int bone_index; /// Each channel corresponds to a bone
+    int bone_index; // Each channel corresponds to a bone
 
     TimeSeries<glm::vec3> pos_series;
     TimeSeries<glm::quat> rot_series;
     TimeSeries<glm::vec3> sca_series;
 
-    /// Helper vars
+    // Helper vars
     float ch_duration;
     };
 
-///// Output form data structure
+//// Output form data structure
 //struct Skeleton::Pose
 //{
 //public:
-//    struct Transform /// Corresponding to bone/channel
+//    struct Transform // Corresponding to bone/channel
 //    {
 //        Transform() : pos(glm::vec3(0.0, 0.0, 0.0)),
 //                      rot(glm::quat(1.0, 0.0, 0.0, 0.0)),

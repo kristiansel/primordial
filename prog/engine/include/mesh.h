@@ -17,22 +17,22 @@ using std::string;
 using std::cout;
 using std::shared_ptr;
 
-/// Should consider a getDrawInfo function that returns some sort of struct
-/// at the same time checking if it is video loaded, if not video load
-/// (assume context)
+// Should consider a getDrawInfo function that returns some sort of struct
+// at the same time checking if it is video loaded, if not video load
+// (assume context)
 
-/// In the same way when loading from file. Could make check for valid context
-/// before calling glBufferBlabla check out:
-/// static bool sf::Context::IsContextActive()
+// In the same way when loading from file. Could make check for valid context
+// before calling glBufferBlabla check out:
+// static bool sf::Context::IsContextActive()
 
-/// Object3d, consider making getter/setter pos and dir
+// Object3d, consider making getter/setter pos and dir
 
 
-class Mesh : public Object3d /// 3d coordinates local in Prop/Actor coordinate system
+class Mesh : public Object3d // 3d coordinates local in Prop/Actor coordinate system
 {
 public:
-    /// Public subclass
-    struct Material /// This shouldn't belong to mesh, mesh should only be geometry
+    // Public subclass
+    struct Material // This shouldn't belong to mesh, mesh should only be geometry
     {
         glm::vec4 ambient;
         glm::vec4 diffuse;
@@ -44,12 +44,12 @@ public:
         bool hasTexture; // <--- CHANGE THIS
     };
 public:
-    /// Constructor/Destructor
+    // Constructor/Destructor
     Mesh();
     explicit Mesh(string filepath);
     virtual ~Mesh();
 
-    /// Public member functions
+    // Public member functions
     void fromFile(string mesh_key);
     void fromFile2(string mesh_key);
     void fromMemory(Vertex* const &vertices_in,
@@ -65,7 +65,7 @@ public:
     float* getVertsPtr() const {return &vertices[0].position[0];};
     unsigned int getVertsNum() const {return vertex_num;};
 
-//    void drawVertices(); /// draws the mesh vertices (does not affect uniforms)
+//    void drawVertices(); // draws the mesh vertices (does not affect uniforms)
 
 
 
@@ -83,17 +83,17 @@ private:
     GLuint vbo_id;
     GLuint ibo_id;
 
-    /// load_stage = 0, 1, or 2;
-    /// -1: "No file on record                       use procedural default geometry
-    ///  0: "Not loaded (file on disk)"              use filename
-    ///  1: "loaded to RAM (file on RAM)"            use vertex/tri pointer
-    ///  2: "loaded to video (file on video card)"   use vbo_id/ibo_id
+    // load_stage = 0, 1, or 2;
+    // -1: "No file on record                       use procedural default geometry
+    //  0: "Not loaded (file on disk)"              use filename
+    //  1: "loaded to RAM (file on RAM)"            use vertex/tri pointer
+    //  2: "loaded to video (file on video card)"   use vbo_id/ibo_id
 
-    /// Current number in use by graphics card;
+    // Current number in use by graphics card;
 
 
 
-    /// To be separated out at a later stage
+    // To be separated out at a later stage
     // set the materials <-- change this
     Material material;
 

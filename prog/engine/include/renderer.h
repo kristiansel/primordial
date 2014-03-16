@@ -47,17 +47,17 @@ public:
     void setPerspective(int w, int h);
 
 protected:
-    /// Helper functions
+    // Helper functions
     static glm::mat4 getModelViewMatrix(Object3d o3d_in);
 
 private:
     Shader main_shader;
     SkyShader sky_shader;
 
-    /// Have this not change with resize
+    // Have this not change with resize
     Perspective perspective;
 
-    /// For post processing
+    // For post processing
     Settings settings;
 
     static const unsigned short KERNEL_SIZE = 5;

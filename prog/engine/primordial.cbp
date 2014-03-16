@@ -119,6 +119,7 @@
 		<Unit filename="include/creaturesignals.h" />
 		<Unit filename="include/culler.h" />
 		<Unit filename="include/geometry.h" />
+		<Unit filename="include/global.h" />
 		<Unit filename="include/light.h" />
 		<Unit filename="include/master.h" />
 		<Unit filename="include/mechanics.h" />
@@ -158,6 +159,7 @@
 		<Unit filename="src/creature.cpp" />
 		<Unit filename="src/culler.cpp" />
 		<Unit filename="src/geometry.cpp" />
+		<Unit filename="src/global.cpp" />
 		<Unit filename="src/light.cpp" />
 		<Unit filename="src/master.cpp" />
 		<Unit filename="src/mechanics.cpp" />

@@ -40,59 +40,59 @@ public:
     void drawActor(shared_ptr<Actor> actor);
     void drawProp(shared_ptr<Prop> prop);
 
-    /// void draw(Terrain &terrain, glm::mat4 mv);
+    // void draw(Terrain &terrain, glm::mat4 mv);
 
-    /// Should look into ridding me of this:
+    // Should look into ridding me of this:
     GLuint getBoneMat() {return uniforms.bone_mat;};
 
 protected:
 private:
 
-    /// uniforms
+    // uniforms
     struct Uniforms
     {
-        /// light uniforms
+        // light uniforms
 //        GLuint num_lights;
 //        GLuint light_posns;
 //        GLuint light_cols;
         GLuint main_light_dir;
         GLuint main_light_color;
 
-        /// material uniforms
+        // material uniforms
         GLuint ambient;
         GLuint diffuse;
         GLuint specular;
         GLuint shininess;
         GLuint emission;
 
-        /// "sampler" uniforms
+        // "sampler" uniforms
         GLuint tex;
         GLuint shadow_depth;
 
-        /// bone matrices
+        // bone matrices
         GLuint bone_mat;
 
-        /// model view matrix
+        // model view matrix
         GLuint mv_mat;
 
-        /// projection matrix
+        // projection matrix
         GLuint proj_mat;
 
-        /// Object to world space matrix
-        /// for fog computations
+        // Object to world space matrix
+        // for fog computations
         GLuint to_world_space_mat;
 
-        /// Other fog uniforms
+        // Other fog uniforms
         GLuint fog_color;
         GLuint zfar;
 
-        /// light model view projection matrix
+        // light model view projection matrix
         GLuint shadowmap_mvp_mat;
 
     } uniforms;
 
 
-    /// attributes
+    // attributes
     struct Attributes
     {
         GLuint vertex;
@@ -103,15 +103,15 @@ private:
     } attributes;
 
 
-    /// Internally stored, so they do not have to be
-    /// passed as arguments every single draw call
+    // Internally stored, so they do not have to be
+    // passed as arguments every single draw call
     glm::vec4 main_light_dir;
     glm::vec4 main_light_color;
     glm::mat4 main_light_mvp_mat;
     glm::mat4 view_mat;
 
-    /// Updated on initialization
-    GLuint shadowmap_depth_texture;              /// Texture
+    // Updated on initialization
+    GLuint shadowmap_depth_texture;              // Texture
     glm::mat4 clear_matrices[MAX_BONE_NUM];
 };
 

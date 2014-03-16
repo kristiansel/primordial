@@ -5,12 +5,12 @@
 
 template <class ValueType> struct TimeValuePair
 {
-    /// Uninitialized
+    // Uninitialized
     float time;
     ValueType value;
 };
 
-template <class ValueType> class TimeSeries /// Struct like
+template <class ValueType> class TimeSeries // Struct like
 {
     public:
         struct SeekResult
@@ -64,63 +64,63 @@ template <class ValueType> class TimeSeries /// Struct like
         float duration;
 };
 
-/// Definition of beefy functions
+// Definition of beefy functions
 
-/// Feature testing:
-/// Need to handle
+// Feature testing:
+// Need to handle
 
-/// |----v--|-----|-----|--------| best case
-/// -----------v----|------------- one keyframe case        FAILED BADLY
-/// ----------------|----v-------- time on either side      PASSED
-/// --V--|-----|------------|----| before first keyframe (suspect this is causing current trouble)
-/// |---|-------------|---|----v-- after last keyframe
+// |----v--|-----|-----|--------| best case
+// -----------v----|------------- one keyframe case        FAILED BADLY
+// ----------------|----v-------- time on either side      PASSED
+// --V--|-----|------------|----| before first keyframe (suspect this is causing current trouble)
+// |---|-------------|---|----v-- after last keyframe
 
-/// on a higher level handle:
-/// ------------------------------ no keyframe case
-/// (in that case, the data relative rest transf,
-/// is not contained in a timeseries
+// on a higher level handle:
+// ------------------------------ no keyframe case
+// (in that case, the data relative rest transf,
+// is not contained in a timeseries
 
 
-//template <class ValueType>                              /// Template parameters
-//typename TimeSeries<ValueType>::SeekResult              /// Return type
-//TimeSeries<ValueType>::seekPrev(float time, int hint)   /// Function signature
+//template <class ValueType>                              // Template parameters
+//typename TimeSeries<ValueType>::SeekResult              // Return type
+//TimeSeries<ValueType>::seekPrev(float time, int hint)   // Function signature
 //{
-//    /// This function will be called a lot, so might become the bottleneck
+//    // This function will be called a lot, so might become the bottleneck
 //
 //
-//    /// Modulate time
+//    // Modulate time
 //    time = time - int(time/duration) * duration;
 //
 //    TimeValuePair<ValueType>* prev = &(keys[0]);
 //
-//    if (hint < 0 || !(hint < num_keys)) /// If no/bad hint is given
-//        hint = (int)((num_keys-1) * time / duration);  /// Start search by assuming uniform distribution
-//        /// The above guarantees that hint is maximum num_pos_keys - 1
+//    if (hint < 0 || !(hint < num_keys)) // If no/bad hint is given
+//        hint = (int)((num_keys-1) * time / duration);  // Start search by assuming uniform distribution
+//        // The above guarantees that hint is maximum num_pos_keys - 1
 //
-////        std::cout << "num_pos_keys = " << num_pos_keys << "\n";
-////        std::cout << "time / ch_duration = " << time / ch_duration << "\n";
-////        std::cout << "hint = " << hint << "\n";
-//    /// First check if last frame?
-//    /// To eliminate complications further down
+///        std::cout << "num_pos_keys = " << num_pos_keys << "\n";
+///        std::cout << "time / ch_duration = " << time / ch_duration << "\n";
+///        std::cout << "hint = " << hint << "\n";
+//    // First check if last frame?
+//    // To eliminate complications further down
 //    //if ()
 //
 //    bool found = false;
 //    int cand = hint;
 //    while (!found)
 //    {
-////            std::cout << "cand = " << cand << "\n";
-//        /// check if time is between candidate and next
+///            std::cout << "cand = " << cand << "\n";
+//        // check if time is between candidate and next
 //        bool timeGrCand = (time > keys[cand].time-0.00000001);
-//        if (timeGrCand) /// If success so far, proceed
+//        if (timeGrCand) // If success so far, proceed
 //        {
 //            if (cand==num_keys-1)
 //            {
-//                prev = &(keys[cand]); /// Time is greater than the last key... should not happen
+//                prev = &(keys[cand]); // Time is greater than the last key... should not happen
 //                found = true;
 //            }
 //            else
 //            {
-//                /// if not returned here, this is safe
+//                // if not returned here, this is safe
 //                bool timeLsNext = (time < keys[cand+1].time+0.00000001);
 //                if (timeLsNext)
 //                {
@@ -131,20 +131,20 @@ template <class ValueType> class TimeSeries /// Struct like
 //                    cand+=1;
 //            }
 //        }
-//        else /// Linear search for next (step one down)
+//        else // Linear search for next (step one down)
 //        {
 //            cand-=1;
 //        }
 //    }
-////    }
+///    }
 //
 //    SeekResult res;
 //    res.prev.key = prev;
 //
-////    if (time < 0.01)
-////    {
-////        res.prev.key = &(keys[0]);
-////    }
+///    if (time < 0.01)
+///    {
+///        res.prev.key = &(keys[0]);
+///    }
 //
 //    if (prev==&(keys[num_keys-1]))
 //    {
@@ -159,35 +159,35 @@ template <class ValueType> class TimeSeries /// Struct like
 //
 //    res.prev.weight = 1.0-res.next.weight;
 //    return res;
-////    return prev;
+///    return prev;
 //}
 
-template <class ValueType>                              /// Template parameters
-typename TimeSeries<ValueType>::SeekResult              /// Return type
-TimeSeries<ValueType>::seek(float time, int hint)   /// Function signature
+template <class ValueType>                              // Template parameters
+typename TimeSeries<ValueType>::SeekResult              // Return type
+TimeSeries<ValueType>::seek(float time, int hint)   // Function signature
 {
     if (num_keys > 0)
     {
-        /// This function will be called a lot, so might become the bottleneck
+        // This function will be called a lot, so might become the bottleneck
 
 
-        /// Modulate time
+        // Modulate time
         time = time - int(time/duration) * duration;
 
     //    std::cout << "seeking t = " << time << " s (duration = "<<duration<<" s)\n";
 
         TimeValuePair<ValueType>* prev = &(keys[0]);
 
-        if (hint < 0 || !(hint < num_keys)) /// If no/bad hint is given
+        if (hint < 0 || !(hint < num_keys)) // If no/bad hint is given
             float div_duration = (duration > 0.001) ? duration : 1.0; // check for divide by 0
-            hint = (int)((num_keys-1) * time / duration);  /// Start search by assuming uniform distribution
-            /// The above guarantees that hint is maximum num_pos_keys - 1
+            hint = (int)((num_keys-1) * time / duration);  // Start search by assuming uniform distribution
+            // The above guarantees that hint is maximum num_pos_keys - 1
 
     //        std::cout << "num_pos_keys = " << num_pos_keys << "\n";
     //        std::cout << "time / ch_duration = " << time / ch_duration << "\n";
     //        std::cout << "hint = " << hint << "\n";
-        /// First check if last frame?
-        /// To eliminate complications further down
+        // First check if last frame?
+        // To eliminate complications further down
         //if ()
 
         bool found = false;
@@ -199,18 +199,18 @@ TimeSeries<ValueType>::seek(float time, int hint)   /// Function signature
         {
     //            std::cout << "cand = " << cand << "/" << num_keys << "\n";
 
-            /// check if time is between candidate and next
+            // check if time is between candidate and next
             bool timeGrCand = (time > keys[cand].time-0.00000001);
-            if (timeGrCand) /// If success so far, proceed
+            if (timeGrCand) // If success so far, proceed
             {
                 if (cand==num_keys-1)
                 {
-                    prev = &(keys[cand]); /// Time is greater than the last key... should not happen
+                    prev = &(keys[cand]); // Time is greater than the last key... should not happen
                     found = true;
                 }
                 else
                 {
-                    /// if not returned here, this is safe
+                    // if not returned here, this is safe
                     bool timeLsNext = (time < keys[cand+1].time+0.00000001);
                     if (timeLsNext)
                     {
@@ -221,7 +221,7 @@ TimeSeries<ValueType>::seek(float time, int hint)   /// Function signature
                         cand+=1;
                 }
             }
-            else /// Linear search for next (step one down)
+            else // Linear search for next (step one down)
             {
                 if (cand > 0)
                     cand-=1;
@@ -243,15 +243,15 @@ TimeSeries<ValueType>::seek(float time, int hint)   /// Function signature
     //    {
     //        res.prev.key = &(keys[0]);
     //    }
-        /// CASE 1 --v--|------|-----|--- OR
-        /// CASE 2 -----|------|-----|-v-
+        // CASE 1 --v--|------|-----|--- OR
+        // CASE 2 -----|------|-----|-v-
         if (prev==&(keys[num_keys-1]))
         {
             res.next.key = &(keys[0]);
             float total_time = res.next.key->time+(duration-res.prev.key->time);
-            float part_time = (time>res.prev.key->time) ?        /// IF CASE 2
-                              time-res.prev.key->time :              /// CASE 2
-                              ((duration-res.prev.key->time)+time);  /// CASE 1
+            float part_time = (time>res.prev.key->time) ?        // IF CASE 2
+                              time-res.prev.key->time :              // CASE 2
+                              ((duration-res.prev.key->time)+time);  // CASE 1
 
             res.next.weight = part_time/total_time;
         }

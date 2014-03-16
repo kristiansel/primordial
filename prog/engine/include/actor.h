@@ -13,12 +13,12 @@ class Actor : public Prop
         Actor();
         virtual ~Actor();
 
-        /// Add some high level animation functionality later
-        /// for now use Skeleton::startAnimation(Anum enum)
+        // Add some high level animation functionality later
+        // for now use Skeleton::startAnimation(Anum enum)
 
         void attachSkeleton(std::weak_ptr<Skeleton> skel_ptr_in);
 
-        /// Temporary for debugging:
+        // Temporary for debugging:
         std::shared_ptr<Skeleton> shSkelPtr();
 
         std::shared_ptr<Skeleton> skel_ptr;
@@ -29,21 +29,21 @@ class Actor : public Prop
                       bool restart = false,
                       float speed = 1.0);
 
-        void updateAnim(float dt); /// This is where the calculations are called
+        void updateAnim(float dt); // This is where the calculations are called
         void pauseAnim();
         void unPauseAnim();
         void togglePauseAnim();
         float getAnimDuration(int anim_index);
 
-        /// debug methods;
+        // debug methods;
         int getActiveAnimIndex() const;
         int getNumAnims() const;
 
-        /// could consider getter method/private for:
+        // could consider getter method/private for:
         int num_pose_matrices;
         glm::mat4* pose_matrices;
 
-        /// Used by creature to determine action duration
+        // Used by creature to determine action duration
         static constexpr float blend_time = 0.20; // 0.20 seconds to go from blend weight 1.0 to blend weight 0.0
 
     protected:

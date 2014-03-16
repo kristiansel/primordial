@@ -20,17 +20,17 @@ class RigidBody : virtual public Object3d
         virtual ~RigidBody();
 
         void updateTransformation();
-        void setBody(btRigidBody* body) {this->body = body; }; /// Rather make physicsworld a friend class
-        btRigidBody* getBody() {return body;}; /// Rather make physicsworld a friend class
+        void setBody(btRigidBody* body) {this->body = body; }; // Rather make physicsworld a friend class
+        btRigidBody* getBody() {return body;}; // Rather make physicsworld a friend class
 
     protected:
     private:
-        btRigidBody* body; /// Non-owning
+        btRigidBody* body; // Non-owning
 
-        /// Mass is contained in the bullet API...
+        // Mass is contained in the bullet API...
 };
 
-///// Shape class function objects
+//// Shape class function objects
 
 //class RigidBody::Shape
 //{

@@ -4,8 +4,8 @@
 #include "world.h"
 #include "scene.h"
 
-/// Later, make some fancy way of deciding what to send for rendering
-/// for now this class just makes the master.scene up of everything in the master.world
+// Later, make some fancy way of deciding what to send for rendering
+// for now this class just makes the master.scene up of everything in the master.world
 
 class Culler
 {

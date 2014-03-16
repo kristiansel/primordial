@@ -24,28 +24,43 @@ void Mechanics::init(World &world_in, float &dt_in)
     //world->camera->pos = glm::vec3(0.0, 1.5, 0.0);
     world->freecam->pos = glm::vec3(0.0, 1.5, 0.0);
 
-    /// set the main light (sun/moon)
-    world->mainLight( glm::vec3(1.0, 1.0, 1.0),         /// From direction
-                      glm::vec4(1.0, 1.0, 1.0, 1.0) );  /// Color
+    // set the main light (sun/moon)
+    world->mainLight( glm::vec3(1.0, 1.0, 1.0),         // From direction
+                      glm::vec4(1.0, 1.0, 1.0, 1.0) );  // Color
 
-    /// add additional lights
-//    world->addPointLight(glm::vec3(3.0, 1.0, -4.0),         /// Position
-//                         glm::vec3(1.0, 0.5, 1.0));         /// Color
+    // add additional lights
+//    world->addPointLight(glm::vec3(3.0, 1.0, -4.0),         // Position
+//                         glm::vec3(1.0, 0.5, 1.0));         // Color
 //
-//    world->addPointLight(glm::vec3(-4.0, 1.0, 3.0),         /// Position
-//                         glm::vec3(0.0, 1.0, 1.0));         /// Color
+//    world->addPointLight(glm::vec3(-4.0, 1.0, 3.0),         // Position
+//                         glm::vec3(0.0, 1.0, 1.0));         // Color
 
-    /// Load some resources (should be moved)
-    ///                          Model,         Texture,            Position
-    /// WorldObjects:
+    // Load some resources (should be moved)
+    //                          Model,         Texture,            Position
+    // WorldObjects:
     world->addDynamicObject( "sphere",
                              "nicewall",
                              glm::vec3(-2.0, 10.0, -4.0),
                              RigidBody::Sphere(1.0) );
 
-    world->addDynamicObject( "rabbit",
-                             "rabbit_d",
+//    world->addDynamicObject( "rabbit",
+//                             "rabbit_d",
+//                             glm::vec3(2.0, 10.0, -4.0));
+
+
+    // Look into issue of why loincloth is so TINY
+    // probably the exporter that uses the wrong transform...
+    // it probably has something to do with animations and
+    // parenting... (it gets scale of skeleton...)
+    world->addDynamicObject( "loin_x3",
+                             "nicewall",
                              glm::vec3(2.0, 10.0, -4.0));
+
+
+    // sword... forgot to apply mirror modifiers.. :)
+//    world->addDynamicObject( "sword_x",
+//                             "nicewall",
+//                             glm::vec3(2.0, 10.0, -4.0));
 
     world->addStaticObject( "quad",
                             "grass_equal",
@@ -59,40 +74,43 @@ void Mechanics::init(World &world_in, float &dt_in)
                             "tricolor",
                             glm::vec3(0.0, 8.0, 0.0));
 
-    /// Having issue with human model not in the correct
-    /// place in the scene graph outputted by assimp import
+    // Add player
+    {
+//        auto playerCreature = world->addCreature( "human_version2",
+        auto playerCreature = world->addCreature( "human_all_anim3",
+                            "tex_human_male",
+                            glm::vec3(3.0, 0.0, 2.0) );
 
-    auto playerCreature = world->addCreature( "human_all_anim2",
-    //auto playerCreature = world->addCreature( "human_all_anim",
-                        "tex_human_male",
-                        glm::vec3(3.0, 0.0, 2.0) );
+        // Set player to point to the first added creature
+        player = (*playerCreature).get();
 
-    // Set player to point to the first added creature
-    player = (*playerCreature).get();
+        // Set chase_cam to be behind the player
+        world->chasecam->pos = player->pos - 5.f * player->getLookDir() + glm::vec3(0.0, 2.0, 0.0); // Hard camera
+        world->chasecam->rot = player->getLookRot(); // Hard camera
 
-    // Set chase_cam to be behind the player
-    world->chasecam->pos = player->pos - 5.f * player->getLookDir() + glm::vec3(0.0, 2.0, 0.0); // Hard camera
-    world->chasecam->rot = player->getLookRot(); // Hard camera
+        // set the player as the receiver of control signals
+        controlled = player;
 
-    // set the player as the receiver of control signals
-    controlled = player;
+        // set the active camera as the chase cam
+        world->active_cam = world->chasecam;
+    }
 
-    // set the active camera as the chase cam
-    world->active_cam = world->chasecam;
+    // attach a loincloth for modesty
+    {
+        weak_ptr<Mesh>      mesh_ptr    = global::mesh_manager.getResptrFromKey ("loin_x3");
+        weak_ptr<Texture>   tex_ptr     = global::tex_manager.getResptrFromKey  ("nicewall");
 
-//    world->addCreature( "humale_old",
-//                        "tex_human_male",
-//                        glm::vec3(0.0, 0.0, 0.0) );
+        player->attachBatch(mesh_ptr, tex_ptr);
+    }
+
+
+
 
     world->addCreature( "humale_1hswing",
                         "tex_human_male",
                         glm::vec3(-3.0, 0.0, 2.0) );
 
-    //world->addStaticObject( "mdl_human_male",
-    //                "tex_human_male",
-    //                glm::vec3(0.0, 0.0, 0.0) );
-
-    /// Creatures
+    // Creatures
     world->addCreature( "anim_test",
                         "checkers",
                         glm::vec3(0.0, 2.0, -4.0) );
@@ -103,15 +121,15 @@ void Mechanics::init(World &world_in, float &dt_in)
                              RigidBody::Box(0.5f, 0.5f, 0.5f) );
 
 
-    /// remove later
+    // remove later
     worldobject_ptr_it = world->worldobjects.begin();
 
-    /// Testing
+    // Testing
 }
 
 void Mechanics::step(World &world_in, float dt_in)
 {
-    /// Resolve creature signals
+    // Resolve creature signals
     for (shared_ptr<Creature> creature : world_in.creatures)
     {
         creature->resolveActionRequests(dt_in);
@@ -143,7 +161,7 @@ string Mechanics::debugInfo()
     return output.str();
 }
 
-/// move
+// move
 void Mechanics::playerMoveForward()
 {
     if (controlled) controlled->moveForward((*dt)*speed, *dt);
@@ -165,7 +183,7 @@ void Mechanics::playerMoveRight()
 }
 
 
-/// rotate
+// rotate
 void Mechanics::playerRotateUp()
 {
     if (controlled) controlled->rotateUp((*dt)*camTurnSpeed, *dt);
@@ -225,7 +243,7 @@ void Mechanics::func(int num_in)
 {
     switch (num_in)
     {
-    case 1:    /// ADD CUBE
+    case 1:    // ADD CUBE
         if (world->worldobjects.empty())
         {
               worldobject_ptr_it = world->addDynamicObject( "rabbit",
@@ -242,7 +260,7 @@ void Mechanics::func(int num_in)
         }
         break;
 
-    case 2:     /// ADD SPHERE
+    case 2:     // ADD SPHERE
         if (world->worldobjects.empty())
         {
             worldobject_ptr_it = world->addDynamicObject( "sphere",

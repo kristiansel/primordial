@@ -13,13 +13,13 @@ class ShaderBase
 {
     public:
         ShaderBase();
-        virtual ~ShaderBase(); /// confirm that this is called by derived classes
+        virtual ~ShaderBase(); // confirm that this is called by derived classes
 
         void switchTo();
 
     protected:
-        /// Specialized derived shaders with fixed programs
-        /// call this
+        // Specialized derived shaders with fixed programs
+        // call this
         void load(std::string vertex_shader, std::string fragment_shader);
         void unload();
         void validate();

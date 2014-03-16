@@ -1,7 +1,7 @@
 # version 330 core
 
-varying vec3 mynormal ; /// Model space coordinates
-varying vec4 myvertex ;  /// Model space coordinates
+varying vec3 mynormal ; // Model space coordinates
+varying vec4 myvertex ;  // Model space coordinates
 varying vec2 mytexco ;
 
 varying vec4 shadowvertex ;

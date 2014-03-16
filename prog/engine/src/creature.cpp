@@ -190,7 +190,7 @@ void Creature::resolveActionRequests(float dt)
     state.dirflags = dirflag::none;
 }
 
-/// Animations
+// Animations
 
 void Creature::moveForward(float check_sign, float dt)
 {

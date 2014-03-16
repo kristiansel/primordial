@@ -8,11 +8,11 @@ Actor::Actor() : num_pose_matrices(1),
                  speed_factor(1.0),
                  skel_ptr(nullptr)
 {
-    /// Actors with no attached skeleton will have a default
-    /// identity matrix, as not to crash vertex shader
+    // Actors with no attached skeleton will have a default
+    // identity matrix, as not to crash vertex shader
 
-    /// Turns out the above comment is very stupid. Actor will get assigned
-    /// garbage skeleton if .bbns file is not found.. dangerous stuff
+    // Turns out the above comment is very stupid. Actor will get assigned
+    // garbage skeleton if .bbns file is not found.. dangerous stuff
 
     active_anims.reserve(active_anims_capacity);
 }
@@ -25,22 +25,22 @@ Actor::~Actor()
 
 void Actor::attachSkeleton(std::weak_ptr<Skeleton> skel_ptr_in)
 {
-    /// Set the pointer
+    // Set the pointer
     skel_ptr = std::shared_ptr<Skeleton>(skel_ptr_in);
 
     // temporary working shared pointer
     auto shared_skel_ptr = std::shared_ptr<Skeleton>(skel_ptr);
 
-    /// Delete old matrices
+    // Delete old matrices
     delete [] pose_matrices;
 
-//    /// Set num_pose_matrices
+//    // Set num_pose_matrices
 //    num_pose_matrices = shared_skel_ptr->getNumBones();
 //
-//    /// Initialize the matrices to the same number of bones as the skel
+//    // Initialize the matrices to the same number of bones as the skel
 //    pose_matrices = new glm::mat4 [num_pose_matrices];
 
-    /// THREAD SAFE ALTERNATIVE:
+    // THREAD SAFE ALTERNATIVE:
     int num_bones = shared_skel_ptr->getNumBones();
 
     pose_matrices = new glm::mat4 [num_bones];
@@ -55,7 +55,7 @@ std::shared_ptr<Skeleton> Actor::shSkelPtr()
 
 void Actor::pose(int anim_index, float time)
 {
-    /// Checking for null here. Is it performant?
+    // Checking for null here. Is it performant?
 
     if (skel_ptr) skel_ptr->poseMatrices(pose_matrices, anim_index, time);
 }
@@ -90,8 +90,8 @@ void Actor::playAnim(int anim_index_in,
             {
                 if (anim.anim_index == anim_index_in)
                 {
-                    found = true;
-                    main_anim_uid = anim.uid;
+                    found = true; // if it is already playing
+                    main_anim_uid = anim.uid; // make it the main
                 }
             }
         }
@@ -99,7 +99,6 @@ void Actor::playAnim(int anim_index_in,
         if (!found) // if not currently playing
         {
             // Start the animation
-            std::cout << "starting animation: " << anim_index_in << "\n";
 
             // generate a unique ID for this clip
             int uid = uid_gen.getClipUID();
@@ -140,13 +139,7 @@ void Actor::playAnim(int anim_index_in,
     {
         std::cerr << "anim_index_in > number of animtions" << std::endl;
     }
-
 }
-
-//void Actor::reStartAnim(int anim_index_in, float speed) // must blend with self... interesting
-//{
-//
-//}
 
 void Actor::updateAnim(float dt)
 {

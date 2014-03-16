@@ -2,18 +2,23 @@ in Master::handleInput :
 	Add mouselook
 
 Small things could do:				Natural followups:
-	animation blending
 	try sound in sfml					- 3d sound spacialization
 	frustum culling						-
 	support multiple lights				- procedural lighting/sun-moon cycle
 	Alpha blending...					- balance its worth agains deferred shading/many lights
-	utilize call to float texture(sampler2DShadow ... better (returns interpolated 4 bools as float)
 	blur distance based on variance of shadow depth map to create penumbra
 	
 In importer:
 	check for maxbones consistency (100 bones)
 	
 Did some threading tests...
-	Issues: All functions dealing with OpenGL must use the same context
-			This means that creation of context/loading of tex/geom
-			etc... must happen in the current OpenGL thread....
+	Issues: Need separate context with shared resources for different threads
+	
+Animation: Backwards walk animation
+
+Programming:
+	importer, check max bones consistency (100 bones)
+	interrupt signals
+	creature physics
+	static physics
+	model hierarchy (multiple models under a creature)

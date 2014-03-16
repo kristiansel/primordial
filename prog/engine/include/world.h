@@ -6,10 +6,12 @@
 
 #include "worldobject.h"
 #include "creature.h"
-#include "resourcemanager.h"
+// #include "resourcemanager.h"
 #include "camera.h"
 #include "physicsworld.h"
 #include "light.h"
+
+#include "global.h"
 
 
 using std::list;
@@ -17,7 +19,7 @@ using std::shared_ptr;
 using std::weak_ptr;
 using std::string;
 
-class World : public PhysicsWorld /// Consider merging Culling functionality into World Class
+class World : public PhysicsWorld // Consider merging Culling functionality into World Class
 {
     public:
         World();
@@ -42,28 +44,28 @@ class World : public PhysicsWorld /// Consider merging Culling functionality int
 
         void mainLight(glm::vec3 dir, glm::vec4 color );
 
-//        /// Step
+//        // Step
 //        void step(float dt_in);
 
 
 
-        /// "Physical" Contents (could with benefit be private?)
+        // "Physical" Contents (could with benefit be private?)
         list<shared_ptr<WorldObject>>    worldobjects;
         list<shared_ptr<Creature>>       creatures;
-        /// list<shared_ptr<Light>>       lights; // For future
-        /// Terrain                       terrain; // For future
+        // list<shared_ptr<Light>>       lights; // For future
+        // Terrain                       terrain; // For future
 
-        //shared_ptr<Camera> camera; /// Shared pointer here, because we do not want other shared
-        /// pointers to accidentally delete the camera.
+        //shared_ptr<Camera> camera; // Shared pointer here, because we do not want other shared
+        // pointers to accidentally delete the camera.
 
-        /// Safe pointers are for wimps...
-        Camera *freecam;    /// Owning pointer
-        Camera *chasecam;   /// Owning pointer
-        Camera const *active_cam; /// Non-owning pointer (points to either above)
+        // Safe pointers are for wimps...
+        Camera *freecam;    // Owning pointer
+        Camera *chasecam;   // Owning pointer
+        Camera const *active_cam; // Non-owning pointer (points to either above)
 
         DirLight* main_light;
 
-        /// Point lights
+        // Point lights
         static const int MAX_NUM_POINT_LIGHTS = 5;
         int num_point_lights;
         PointLight* point_lights;
@@ -73,9 +75,6 @@ class World : public PhysicsWorld /// Consider merging Culling functionality int
 
     protected:
     private:
-        ResourceManager<Mesh>    mesh_manager;
-        ResourceManager<Texture> tex_manager;
-        ResourceManager<Skeleton> skel_manager;
 
 };
 

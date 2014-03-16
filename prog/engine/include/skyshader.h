@@ -20,15 +20,15 @@ class SkyShader : public ShaderBase
     private:
         struct Uniforms
         {
-            /// Matrices
+            // Matrices
             GLuint mvp_matrix;
             GLuint world_matrix;
 
-            /// Colors
+            // Colors
             GLuint sky_color;
             GLuint fog_color;
 
-            /// Other parameters
+            // Other parameters
             GLuint zfar;
 
         } uniforms;
@@ -39,7 +39,7 @@ class SkyShader : public ShaderBase
 
         } attributes;
 
-        /// Sky quad geometry
+        // Sky quad geometry
         Mesh* sky_quad;
 };
 

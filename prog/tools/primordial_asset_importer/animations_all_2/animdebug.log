@@ -1,0 +1,5368 @@
+time: Sun Mar 16 12:43:48 2014
+bone 0: Dir_Master
+bone 1: Master
+bone 2: Root
+bone 3: Hips
+bone 4: UpLeg_L
+bone 5: LoLeg_L
+bone 6: UpLeg_R
+bone 7: LoLeg_R
+bone 8: Spine1
+bone 9: Spine2
+bone 10: Spine3
+bone 11: Neck
+bone 12: Head
+bone 13: Jaw
+bone 14: TongueBase
+bone 15: TongueMid
+bone 16: TongueTip
+bone 17: Eye_R
+bone 18: Eye_L
+bone 19: UpLid_R
+bone 20: LoLid_R
+bone 21: UpLid_L
+bone 22: LoLid_L
+bone 23: Clavicle_L
+bone 24: UpArm_L
+bone 25: LoArm_L
+bone 26: Hand_L
+bone 27: Wrist-1_L
+bone 28: Palm-2_L
+bone 29: Finger-2-1_L
+bone 30: Finger-2-2_L
+bone 31: Finger-2-3_L
+bone 32: Palm-3_L
+bone 33: Finger-3-1_L
+bone 34: Finger-3-2_L
+bone 35: Finger-3-3_L
+bone 36: Wrist-2_L
+bone 37: Palm-4_L
+bone 38: Finger-4-1_L
+bone 39: Finger-4-2_L
+bone 40: Finger-4-3_L
+bone 41: Palm-5_L
+bone 42: Finger-5-1_L
+bone 43: Finger-5-2_L
+bone 44: Finger-5-3_L
+bone 45: Palm-1_L
+bone 46: Finger-1-1_L
+bone 47: Finger-1-2_L
+bone 48: Finger-1-3_L
+bone 49: Clavicle_R
+bone 50: UpArm_R
+bone 51: LoArm_R
+bone 52: Hand_R
+bone 53: Wrist-1_R
+bone 54: Palm-2_R
+bone 55: Finger-2-1_R
+bone 56: Finger-2-2_R
+bone 57: Finger-2-3_R
+bone 58: Palm-3_R
+bone 59: Finger-3-1_R
+bone 60: Finger-3-2_R
+bone 61: Finger-3-3_R
+bone 62: Wrist-2_R
+bone 63: Palm-4_R
+bone 64: Finger-4-1_R
+bone 65: Finger-4-2_R
+bone 66: Finger-4-3_R
+bone 67: Palm-5_R
+bone 68: Finger-5-1_R
+bone 69: Finger-5-2_R
+bone 70: Finger-5-3_R
+bone 71: Palm-1_R
+bone 72: Finger-1-1_R
+bone 73: Finger-1-2_R
+bone 74: Finger-1-3_R
+bone 75: LegHandle_L
+bone 76: Foot_L
+bone 77: Toe_L
+bone 78: LegHandle_R
+bone 79: Foot_R
+bone 80: Toe_R
+bone 81: Knee_L
+bone 82: Knee_R
+skeleton parent node: Scene_root
+animation #: 0
+#ticks: 3.75
+#ticks/sec: 1
+duration: 3.75
+animation #: 1
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 2
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 3
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 4
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 5
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 6
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 7
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 8
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 9
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 10
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 11
+#ticks: 2.29167
+#ticks/sec: 1
+duration: 1.66667
+animation #: 12
+#ticks: 1.375
+#ticks/sec: 1
+duration: 1
+animation #: 13
+#ticks: 1.41667
+#ticks/sec: 1
+duration: 1
+animation #: 14
+#ticks: 1.41667
+#ticks/sec: 1
+duration: 1
+animation #: 15
+#ticks: 1.04167
+#ticks/sec: 1
+duration: 1.04167
+animation #: 16
+#ticks: 1.04167
+#ticks/sec: 1
+duration: 1.04167
+animation #: 17
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 18
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 19
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 20
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 21
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 22
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 23
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+
+time: Sun Mar 16 13:10:37 2014
+bone 0: Dir_Master
+bone 1: Master
+bone 2: Root
+bone 3: Hips
+bone 4: UpLeg_L
+bone 5: LoLeg_L
+bone 6: UpLeg_R
+bone 7: LoLeg_R
+bone 8: Spine1
+bone 9: Spine2
+bone 10: Spine3
+bone 11: Neck
+bone 12: Head
+bone 13: Jaw
+bone 14: TongueBase
+bone 15: TongueMid
+bone 16: TongueTip
+bone 17: Eye_R
+bone 18: Eye_L
+bone 19: UpLid_R
+bone 20: LoLid_R
+bone 21: UpLid_L
+bone 22: LoLid_L
+bone 23: Clavicle_L
+bone 24: UpArm_L
+bone 25: LoArm_L
+bone 26: Hand_L
+bone 27: Wrist-1_L
+bone 28: Palm-2_L
+bone 29: Finger-2-1_L
+bone 30: Finger-2-2_L
+bone 31: Finger-2-3_L
+bone 32: Palm-3_L
+bone 33: Finger-3-1_L
+bone 34: Finger-3-2_L
+bone 35: Finger-3-3_L
+bone 36: Wrist-2_L
+bone 37: Palm-4_L
+bone 38: Finger-4-1_L
+bone 39: Finger-4-2_L
+bone 40: Finger-4-3_L
+bone 41: Palm-5_L
+bone 42: Finger-5-1_L
+bone 43: Finger-5-2_L
+bone 44: Finger-5-3_L
+bone 45: Palm-1_L
+bone 46: Finger-1-1_L
+bone 47: Finger-1-2_L
+bone 48: Finger-1-3_L
+bone 49: Clavicle_R
+bone 50: UpArm_R
+bone 51: LoArm_R
+bone 52: Hand_R
+bone 53: Wrist-1_R
+bone 54: Palm-2_R
+bone 55: Finger-2-1_R
+bone 56: Finger-2-2_R
+bone 57: Finger-2-3_R
+bone 58: Palm-3_R
+bone 59: Finger-3-1_R
+bone 60: Finger-3-2_R
+bone 61: Finger-3-3_R
+bone 62: Wrist-2_R
+bone 63: Palm-4_R
+bone 64: Finger-4-1_R
+bone 65: Finger-4-2_R
+bone 66: Finger-4-3_R
+bone 67: Palm-5_R
+bone 68: Finger-5-1_R
+bone 69: Finger-5-2_R
+bone 70: Finger-5-3_R
+bone 71: Palm-1_R
+bone 72: Finger-1-1_R
+bone 73: Finger-1-2_R
+bone 74: Finger-1-3_R
+bone 75: LegHandle_L
+bone 76: Foot_L
+bone 77: Toe_L
+bone 78: LegHandle_R
+bone 79: Foot_R
+bone 80: Toe_R
+bone 81: Knee_L
+bone 82: Knee_R
+skeleton parent node: Scene_root
+animation #: 0
+#ticks: 3.75
+#ticks/sec: 1
+duration: 3.75
+animation #: 1
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 2
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 3
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 4
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 5
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 6
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 7
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 8
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 9
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 10
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 11
+#ticks: 2.29167
+#ticks/sec: 1
+duration: 1.66667
+animation #: 12
+#ticks: 1.375
+#ticks/sec: 1
+duration: 1
+animation #: 13
+#ticks: 1.41667
+#ticks/sec: 1
+duration: 1
+animation #: 14
+#ticks: 1.41667
+#ticks/sec: 1
+duration: 1
+animation #: 15
+#ticks: 1.04167
+#ticks/sec: 1
+duration: 1.04167
+animation #: 16
+#ticks: 1.04167
+#ticks/sec: 1
+duration: 1.04167
+animation #: 17
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 18
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 19
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 20
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 21
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 22
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 23
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+
+time: Sun Mar 16 13:37:08 2014
+bone 0: Dir_Master
+bone 1: Master
+bone 2: Root
+bone 3: Hips
+bone 4: UpLeg_L
+bone 5: LoLeg_L
+bone 6: UpLeg_R
+bone 7: LoLeg_R
+bone 8: Spine1
+bone 9: Spine2
+bone 10: Spine3
+bone 11: Neck
+bone 12: Head
+bone 13: Jaw
+bone 14: TongueBase
+bone 15: TongueMid
+bone 16: TongueTip
+bone 17: Eye_R
+bone 18: Eye_L
+bone 19: UpLid_R
+bone 20: LoLid_R
+bone 21: UpLid_L
+bone 22: LoLid_L
+bone 23: Clavicle_L
+bone 24: UpArm_L
+bone 25: LoArm_L
+bone 26: Hand_L
+bone 27: Wrist-1_L
+bone 28: Palm-2_L
+bone 29: Finger-2-1_L
+bone 30: Finger-2-2_L
+bone 31: Finger-2-3_L
+bone 32: Palm-3_L
+bone 33: Finger-3-1_L
+bone 34: Finger-3-2_L
+bone 35: Finger-3-3_L
+bone 36: Wrist-2_L
+bone 37: Palm-4_L
+bone 38: Finger-4-1_L
+bone 39: Finger-4-2_L
+bone 40: Finger-4-3_L
+bone 41: Palm-5_L
+bone 42: Finger-5-1_L
+bone 43: Finger-5-2_L
+bone 44: Finger-5-3_L
+bone 45: Palm-1_L
+bone 46: Finger-1-1_L
+bone 47: Finger-1-2_L
+bone 48: Finger-1-3_L
+bone 49: Clavicle_R
+bone 50: UpArm_R
+bone 51: LoArm_R
+bone 52: Hand_R
+bone 53: Wrist-1_R
+bone 54: Palm-2_R
+bone 55: Finger-2-1_R
+bone 56: Finger-2-2_R
+bone 57: Finger-2-3_R
+bone 58: Palm-3_R
+bone 59: Finger-3-1_R
+bone 60: Finger-3-2_R
+bone 61: Finger-3-3_R
+bone 62: Wrist-2_R
+bone 63: Palm-4_R
+bone 64: Finger-4-1_R
+bone 65: Finger-4-2_R
+bone 66: Finger-4-3_R
+bone 67: Palm-5_R
+bone 68: Finger-5-1_R
+bone 69: Finger-5-2_R
+bone 70: Finger-5-3_R
+bone 71: Palm-1_R
+bone 72: Finger-1-1_R
+bone 73: Finger-1-2_R
+bone 74: Finger-1-3_R
+bone 75: LegHandle_L
+bone 76: Foot_L
+bone 77: Toe_L
+bone 78: LegHandle_R
+bone 79: Foot_R
+bone 80: Toe_R
+bone 81: Knee_L
+bone 82: Knee_R
+skeleton parent node: Scene_root
+animation #: 0
+#ticks: 3.75
+#ticks/sec: 1
+duration: 3.75
+animation #: 1
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 2
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 3
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 4
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 5
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 6
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 7
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 8
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 9
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 10
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 11
+#ticks: 2.29167
+#ticks/sec: 1
+duration: 1.66667
+animation #: 12
+#ticks: 1.375
+#ticks/sec: 1
+duration: 1
+animation #: 13
+#ticks: 1.41667
+#ticks/sec: 1
+duration: 1
+animation #: 14
+#ticks: 1.41667
+#ticks/sec: 1
+duration: 1
+animation #: 15
+#ticks: 1.04167
+#ticks/sec: 1
+duration: 1.04167
+animation #: 16
+#ticks: 1.04167
+#ticks/sec: 1
+duration: 1.04167
+animation #: 17
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 18
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 19
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 20
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 21
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 22
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 23
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+
+time: Sun Mar 16 14:01:36 2014
+bone 0: Dir_Master
+bone 1: Master
+bone 2: Root
+bone 3: Hips
+bone 4: UpLeg_L
+bone 5: LoLeg_L
+bone 6: UpLeg_R
+bone 7: LoLeg_R
+bone 8: Spine1
+bone 9: Spine2
+bone 10: Spine3
+bone 11: Neck
+bone 12: Head
+bone 13: Jaw
+bone 14: TongueBase
+bone 15: TongueMid
+bone 16: TongueTip
+bone 17: Eye_R
+bone 18: Eye_L
+bone 19: UpLid_R
+bone 20: LoLid_R
+bone 21: UpLid_L
+bone 22: LoLid_L
+bone 23: Clavicle_L
+bone 24: UpArm_L
+bone 25: LoArm_L
+bone 26: Hand_L
+bone 27: Wrist-1_L
+bone 28: Palm-2_L
+bone 29: Finger-2-1_L
+bone 30: Finger-2-2_L
+bone 31: Finger-2-3_L
+bone 32: Palm-3_L
+bone 33: Finger-3-1_L
+bone 34: Finger-3-2_L
+bone 35: Finger-3-3_L
+bone 36: Wrist-2_L
+bone 37: Palm-4_L
+bone 38: Finger-4-1_L
+bone 39: Finger-4-2_L
+bone 40: Finger-4-3_L
+bone 41: Palm-5_L
+bone 42: Finger-5-1_L
+bone 43: Finger-5-2_L
+bone 44: Finger-5-3_L
+bone 45: Palm-1_L
+bone 46: Finger-1-1_L
+bone 47: Finger-1-2_L
+bone 48: Finger-1-3_L
+bone 49: Clavicle_R
+bone 50: UpArm_R
+bone 51: LoArm_R
+bone 52: Hand_R
+bone 53: Wrist-1_R
+bone 54: Palm-2_R
+bone 55: Finger-2-1_R
+bone 56: Finger-2-2_R
+bone 57: Finger-2-3_R
+bone 58: Palm-3_R
+bone 59: Finger-3-1_R
+bone 60: Finger-3-2_R
+bone 61: Finger-3-3_R
+bone 62: Wrist-2_R
+bone 63: Palm-4_R
+bone 64: Finger-4-1_R
+bone 65: Finger-4-2_R
+bone 66: Finger-4-3_R
+bone 67: Palm-5_R
+bone 68: Finger-5-1_R
+bone 69: Finger-5-2_R
+bone 70: Finger-5-3_R
+bone 71: Palm-1_R
+bone 72: Finger-1-1_R
+bone 73: Finger-1-2_R
+bone 74: Finger-1-3_R
+bone 75: LegHandle_L
+bone 76: Foot_L
+bone 77: Toe_L
+bone 78: LegHandle_R
+bone 79: Foot_R
+bone 80: Toe_R
+bone 81: Knee_L
+bone 82: Knee_R
+skeleton parent node: Scene_root
+animation #: 0
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+
+time: Sun Mar 16 14:05:38 2014
+bone 0: Dir_Master
+bone 1: Master
+bone 2: Root
+bone 3: Hips
+bone 4: UpLeg_L
+bone 5: LoLeg_L
+bone 6: UpLeg_R
+bone 7: LoLeg_R
+bone 8: Spine1
+bone 9: Spine2
+bone 10: Spine3
+bone 11: Neck
+bone 12: Head
+bone 13: Jaw
+bone 14: TongueBase
+bone 15: TongueMid
+bone 16: TongueTip
+bone 17: Eye_R
+bone 18: Eye_L
+bone 19: UpLid_R
+bone 20: LoLid_R
+bone 21: UpLid_L
+bone 22: LoLid_L
+bone 23: Clavicle_L
+bone 24: UpArm_L
+bone 25: LoArm_L
+bone 26: Hand_L
+bone 27: Wrist-1_L
+bone 28: Palm-2_L
+bone 29: Finger-2-1_L
+bone 30: Finger-2-2_L
+bone 31: Finger-2-3_L
+bone 32: Palm-3_L
+bone 33: Finger-3-1_L
+bone 34: Finger-3-2_L
+bone 35: Finger-3-3_L
+bone 36: Wrist-2_L
+bone 37: Palm-4_L
+bone 38: Finger-4-1_L
+bone 39: Finger-4-2_L
+bone 40: Finger-4-3_L
+bone 41: Palm-5_L
+bone 42: Finger-5-1_L
+bone 43: Finger-5-2_L
+bone 44: Finger-5-3_L
+bone 45: Palm-1_L
+bone 46: Finger-1-1_L
+bone 47: Finger-1-2_L
+bone 48: Finger-1-3_L
+bone 49: Clavicle_R
+bone 50: UpArm_R
+bone 51: LoArm_R
+bone 52: Hand_R
+bone 53: Wrist-1_R
+bone 54: Palm-2_R
+bone 55: Finger-2-1_R
+bone 56: Finger-2-2_R
+bone 57: Finger-2-3_R
+bone 58: Palm-3_R
+bone 59: Finger-3-1_R
+bone 60: Finger-3-2_R
+bone 61: Finger-3-3_R
+bone 62: Wrist-2_R
+bone 63: Palm-4_R
+bone 64: Finger-4-1_R
+bone 65: Finger-4-2_R
+bone 66: Finger-4-3_R
+bone 67: Palm-5_R
+bone 68: Finger-5-1_R
+bone 69: Finger-5-2_R
+bone 70: Finger-5-3_R
+bone 71: Palm-1_R
+bone 72: Finger-1-1_R
+bone 73: Finger-1-2_R
+bone 74: Finger-1-3_R
+bone 75: LegHandle_L
+bone 76: Foot_L
+bone 77: Toe_L
+bone 78: LegHandle_R
+bone 79: Foot_R
+bone 80: Toe_R
+bone 81: Knee_L
+bone 82: Knee_R
+skeleton parent node: Scene_root
+animation #: 0
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+
+time: Sun Mar 16 14:09:16 2014
+bone 0: Dir_Master
+bone 1: Master
+bone 2: Root
+bone 3: Hips
+bone 4: UpLeg_L
+bone 5: LoLeg_L
+bone 6: UpLeg_R
+bone 7: LoLeg_R
+bone 8: Spine1
+bone 9: Spine2
+bone 10: Spine3
+bone 11: Neck
+bone 12: Head
+bone 13: Jaw
+bone 14: TongueBase
+bone 15: TongueMid
+bone 16: TongueTip
+bone 17: Eye_R
+bone 18: Eye_L
+bone 19: UpLid_R
+bone 20: LoLid_R
+bone 21: UpLid_L
+bone 22: LoLid_L
+bone 23: Clavicle_L
+bone 24: UpArm_L
+bone 25: LoArm_L
+bone 26: Hand_L
+bone 27: Wrist-1_L
+bone 28: Palm-2_L
+bone 29: Finger-2-1_L
+bone 30: Finger-2-2_L
+bone 31: Finger-2-3_L
+bone 32: Palm-3_L
+bone 33: Finger-3-1_L
+bone 34: Finger-3-2_L
+bone 35: Finger-3-3_L
+bone 36: Wrist-2_L
+bone 37: Palm-4_L
+bone 38: Finger-4-1_L
+bone 39: Finger-4-2_L
+bone 40: Finger-4-3_L
+bone 41: Palm-5_L
+bone 42: Finger-5-1_L
+bone 43: Finger-5-2_L
+bone 44: Finger-5-3_L
+bone 45: Palm-1_L
+bone 46: Finger-1-1_L
+bone 47: Finger-1-2_L
+bone 48: Finger-1-3_L
+bone 49: Clavicle_R
+bone 50: UpArm_R
+bone 51: LoArm_R
+bone 52: Hand_R
+bone 53: Wrist-1_R
+bone 54: Palm-2_R
+bone 55: Finger-2-1_R
+bone 56: Finger-2-2_R
+bone 57: Finger-2-3_R
+bone 58: Palm-3_R
+bone 59: Finger-3-1_R
+bone 60: Finger-3-2_R
+bone 61: Finger-3-3_R
+bone 62: Wrist-2_R
+bone 63: Palm-4_R
+bone 64: Finger-4-1_R
+bone 65: Finger-4-2_R
+bone 66: Finger-4-3_R
+bone 67: Palm-5_R
+bone 68: Finger-5-1_R
+bone 69: Finger-5-2_R
+bone 70: Finger-5-3_R
+bone 71: Palm-1_R
+bone 72: Finger-1-1_R
+bone 73: Finger-1-2_R
+bone 74: Finger-1-3_R
+bone 75: LegHandle_L
+bone 76: Foot_L
+bone 77: Toe_L
+bone 78: LegHandle_R
+bone 79: Foot_R
+bone 80: Toe_R
+bone 81: Knee_L
+bone 82: Knee_R
+skeleton parent node: Scene_root
+animation #: 0
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+
+time: Sun Mar 16 14:10:45 2014
+bone 0: Dir_Master
+bone 1: Master
+bone 2: Root
+bone 3: Hips
+bone 4: UpLeg_L
+bone 5: LoLeg_L
+bone 6: UpLeg_R
+bone 7: LoLeg_R
+bone 8: Spine1
+bone 9: Spine2
+bone 10: Spine3
+bone 11: Neck
+bone 12: Head
+bone 13: Jaw
+bone 14: TongueBase
+bone 15: TongueMid
+bone 16: TongueTip
+bone 17: Eye_R
+bone 18: Eye_L
+bone 19: UpLid_R
+bone 20: LoLid_R
+bone 21: UpLid_L
+bone 22: LoLid_L
+bone 23: Clavicle_L
+bone 24: UpArm_L
+bone 25: LoArm_L
+bone 26: Hand_L
+bone 27: Wrist-1_L
+bone 28: Palm-2_L
+bone 29: Finger-2-1_L
+bone 30: Finger-2-2_L
+bone 31: Finger-2-3_L
+bone 32: Palm-3_L
+bone 33: Finger-3-1_L
+bone 34: Finger-3-2_L
+bone 35: Finger-3-3_L
+bone 36: Wrist-2_L
+bone 37: Palm-4_L
+bone 38: Finger-4-1_L
+bone 39: Finger-4-2_L
+bone 40: Finger-4-3_L
+bone 41: Palm-5_L
+bone 42: Finger-5-1_L
+bone 43: Finger-5-2_L
+bone 44: Finger-5-3_L
+bone 45: Palm-1_L
+bone 46: Finger-1-1_L
+bone 47: Finger-1-2_L
+bone 48: Finger-1-3_L
+bone 49: Clavicle_R
+bone 50: UpArm_R
+bone 51: LoArm_R
+bone 52: Hand_R
+bone 53: Wrist-1_R
+bone 54: Palm-2_R
+bone 55: Finger-2-1_R
+bone 56: Finger-2-2_R
+bone 57: Finger-2-3_R
+bone 58: Palm-3_R
+bone 59: Finger-3-1_R
+bone 60: Finger-3-2_R
+bone 61: Finger-3-3_R
+bone 62: Wrist-2_R
+bone 63: Palm-4_R
+bone 64: Finger-4-1_R
+bone 65: Finger-4-2_R
+bone 66: Finger-4-3_R
+bone 67: Palm-5_R
+bone 68: Finger-5-1_R
+bone 69: Finger-5-2_R
+bone 70: Finger-5-3_R
+bone 71: Palm-1_R
+bone 72: Finger-1-1_R
+bone 73: Finger-1-2_R
+bone 74: Finger-1-3_R
+bone 75: LegHandle_L
+bone 76: Foot_L
+bone 77: Toe_L
+bone 78: LegHandle_R
+bone 79: Foot_R
+bone 80: Toe_R
+bone 81: Knee_L
+bone 82: Knee_R
+skeleton parent node: Scene_root
+animation #: 0
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+
+time: Sun Mar 16 14:16:36 2014
+bone 0: Dir_Master
+bone 1: Master
+bone 2: Root
+bone 3: Hips
+bone 4: UpLeg_L
+bone 5: LoLeg_L
+bone 6: UpLeg_R
+bone 7: LoLeg_R
+bone 8: Spine1
+bone 9: Spine2
+bone 10: Spine3
+bone 11: Neck
+bone 12: Head
+bone 13: Jaw
+bone 14: TongueBase
+bone 15: TongueMid
+bone 16: TongueTip
+bone 17: Eye_R
+bone 18: Eye_L
+bone 19: UpLid_R
+bone 20: LoLid_R
+bone 21: UpLid_L
+bone 22: LoLid_L
+bone 23: Clavicle_L
+bone 24: UpArm_L
+bone 25: LoArm_L
+bone 26: Hand_L
+bone 27: Wrist-1_L
+bone 28: Palm-2_L
+bone 29: Finger-2-1_L
+bone 30: Finger-2-2_L
+bone 31: Finger-2-3_L
+bone 32: Palm-3_L
+bone 33: Finger-3-1_L
+bone 34: Finger-3-2_L
+bone 35: Finger-3-3_L
+bone 36: Wrist-2_L
+bone 37: Palm-4_L
+bone 38: Finger-4-1_L
+bone 39: Finger-4-2_L
+bone 40: Finger-4-3_L
+bone 41: Palm-5_L
+bone 42: Finger-5-1_L
+bone 43: Finger-5-2_L
+bone 44: Finger-5-3_L
+bone 45: Palm-1_L
+bone 46: Finger-1-1_L
+bone 47: Finger-1-2_L
+bone 48: Finger-1-3_L
+bone 49: Clavicle_R
+bone 50: UpArm_R
+bone 51: LoArm_R
+bone 52: Hand_R
+bone 53: Wrist-1_R
+bone 54: Palm-2_R
+bone 55: Finger-2-1_R
+bone 56: Finger-2-2_R
+bone 57: Finger-2-3_R
+bone 58: Palm-3_R
+bone 59: Finger-3-1_R
+bone 60: Finger-3-2_R
+bone 61: Finger-3-3_R
+bone 62: Wrist-2_R
+bone 63: Palm-4_R
+bone 64: Finger-4-1_R
+bone 65: Finger-4-2_R
+bone 66: Finger-4-3_R
+bone 67: Palm-5_R
+bone 68: Finger-5-1_R
+bone 69: Finger-5-2_R
+bone 70: Finger-5-3_R
+bone 71: Palm-1_R
+bone 72: Finger-1-1_R
+bone 73: Finger-1-2_R
+bone 74: Finger-1-3_R
+bone 75: LegHandle_L
+bone 76: Foot_L
+bone 77: Toe_L
+bone 78: LegHandle_R
+bone 79: Foot_R
+bone 80: Toe_R
+bone 81: Knee_L
+bone 82: Knee_R
+bone 83: humale
+bone 84: loincloth
+skeleton parent node: Scene_root
+animation #: 0
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+
+time: Sun Mar 16 14:18:00 2014
+bone 0: Dir_Master
+bone 1: Master
+bone 2: Root
+bone 3: Hips
+bone 4: UpLeg_L
+bone 5: LoLeg_L
+bone 6: UpLeg_R
+bone 7: LoLeg_R
+bone 8: Spine1
+bone 9: Spine2
+bone 10: Spine3
+bone 11: Neck
+bone 12: Head
+bone 13: Jaw
+bone 14: TongueBase
+bone 15: TongueMid
+bone 16: TongueTip
+bone 17: Eye_R
+bone 18: Eye_L
+bone 19: UpLid_R
+bone 20: LoLid_R
+bone 21: UpLid_L
+bone 22: LoLid_L
+bone 23: Clavicle_L
+bone 24: UpArm_L
+bone 25: LoArm_L
+bone 26: Hand_L
+bone 27: Wrist-1_L
+bone 28: Palm-2_L
+bone 29: Finger-2-1_L
+bone 30: Finger-2-2_L
+bone 31: Finger-2-3_L
+bone 32: Palm-3_L
+bone 33: Finger-3-1_L
+bone 34: Finger-3-2_L
+bone 35: Finger-3-3_L
+bone 36: Wrist-2_L
+bone 37: Palm-4_L
+bone 38: Finger-4-1_L
+bone 39: Finger-4-2_L
+bone 40: Finger-4-3_L
+bone 41: Palm-5_L
+bone 42: Finger-5-1_L
+bone 43: Finger-5-2_L
+bone 44: Finger-5-3_L
+bone 45: Palm-1_L
+bone 46: Finger-1-1_L
+bone 47: Finger-1-2_L
+bone 48: Finger-1-3_L
+bone 49: Clavicle_R
+bone 50: UpArm_R
+bone 51: LoArm_R
+bone 52: Hand_R
+bone 53: Wrist-1_R
+bone 54: Palm-2_R
+bone 55: Finger-2-1_R
+bone 56: Finger-2-2_R
+bone 57: Finger-2-3_R
+bone 58: Palm-3_R
+bone 59: Finger-3-1_R
+bone 60: Finger-3-2_R
+bone 61: Finger-3-3_R
+bone 62: Wrist-2_R
+bone 63: Palm-4_R
+bone 64: Finger-4-1_R
+bone 65: Finger-4-2_R
+bone 66: Finger-4-3_R
+bone 67: Palm-5_R
+bone 68: Finger-5-1_R
+bone 69: Finger-5-2_R
+bone 70: Finger-5-3_R
+bone 71: Palm-1_R
+bone 72: Finger-1-1_R
+bone 73: Finger-1-2_R
+bone 74: Finger-1-3_R
+bone 75: LegHandle_L
+bone 76: Foot_L
+bone 77: Toe_L
+bone 78: LegHandle_R
+bone 79: Foot_R
+bone 80: Toe_R
+bone 81: Knee_L
+bone 82: Knee_R
+bone 83: humale
+bone 84: loincloth
+skeleton parent node: Scene_root
+animation #: 0
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+
+time: Sun Mar 16 14:28:31 2014
+bone 0: Dir_Master
+bone 1: Master
+bone 2: Root
+bone 3: Hips
+bone 4: UpLeg_L
+bone 5: LoLeg_L
+bone 6: UpLeg_R
+bone 7: LoLeg_R
+bone 8: Spine1
+bone 9: Spine2
+bone 10: Spine3
+bone 11: Neck
+bone 12: Head
+bone 13: Jaw
+bone 14: TongueBase
+bone 15: TongueMid
+bone 16: TongueTip
+bone 17: Eye_R
+bone 18: Eye_L
+bone 19: UpLid_R
+bone 20: LoLid_R
+bone 21: UpLid_L
+bone 22: LoLid_L
+bone 23: Clavicle_L
+bone 24: UpArm_L
+bone 25: LoArm_L
+bone 26: Hand_L
+bone 27: Wrist-1_L
+bone 28: Palm-2_L
+bone 29: Finger-2-1_L
+bone 30: Finger-2-2_L
+bone 31: Finger-2-3_L
+bone 32: Palm-3_L
+bone 33: Finger-3-1_L
+bone 34: Finger-3-2_L
+bone 35: Finger-3-3_L
+bone 36: Wrist-2_L
+bone 37: Palm-4_L
+bone 38: Finger-4-1_L
+bone 39: Finger-4-2_L
+bone 40: Finger-4-3_L
+bone 41: Palm-5_L
+bone 42: Finger-5-1_L
+bone 43: Finger-5-2_L
+bone 44: Finger-5-3_L
+bone 45: Palm-1_L
+bone 46: Finger-1-1_L
+bone 47: Finger-1-2_L
+bone 48: Finger-1-3_L
+bone 49: Clavicle_R
+bone 50: UpArm_R
+bone 51: LoArm_R
+bone 52: Hand_R
+bone 53: Wrist-1_R
+bone 54: Palm-2_R
+bone 55: Finger-2-1_R
+bone 56: Finger-2-2_R
+bone 57: Finger-2-3_R
+bone 58: Palm-3_R
+bone 59: Finger-3-1_R
+bone 60: Finger-3-2_R
+bone 61: Finger-3-3_R
+bone 62: Wrist-2_R
+bone 63: Palm-4_R
+bone 64: Finger-4-1_R
+bone 65: Finger-4-2_R
+bone 66: Finger-4-3_R
+bone 67: Palm-5_R
+bone 68: Finger-5-1_R
+bone 69: Finger-5-2_R
+bone 70: Finger-5-3_R
+bone 71: Palm-1_R
+bone 72: Finger-1-1_R
+bone 73: Finger-1-2_R
+bone 74: Finger-1-3_R
+bone 75: LegHandle_L
+bone 76: Foot_L
+bone 77: Toe_L
+bone 78: LegHandle_R
+bone 79: Foot_R
+bone 80: Toe_R
+bone 81: Knee_L
+bone 82: Knee_R
+bone 83: humale
+bone 84: loincloth
+skeleton parent node: Scene_root
+animation #: 0
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+
+time: Sun Mar 16 14:29:28 2014
+bone 0: Dir_Master
+bone 1: Master
+bone 2: Root
+bone 3: Hips
+bone 4: UpLeg_L
+bone 5: LoLeg_L
+bone 6: UpLeg_R
+bone 7: LoLeg_R
+bone 8: Spine1
+bone 9: Spine2
+bone 10: Spine3
+bone 11: Neck
+bone 12: Head
+bone 13: Jaw
+bone 14: TongueBase
+bone 15: TongueMid
+bone 16: TongueTip
+bone 17: Eye_R
+bone 18: Eye_L
+bone 19: UpLid_R
+bone 20: LoLid_R
+bone 21: UpLid_L
+bone 22: LoLid_L
+bone 23: Clavicle_L
+bone 24: UpArm_L
+bone 25: LoArm_L
+bone 26: Hand_L
+bone 27: Wrist-1_L
+bone 28: Palm-2_L
+bone 29: Finger-2-1_L
+bone 30: Finger-2-2_L
+bone 31: Finger-2-3_L
+bone 32: Palm-3_L
+bone 33: Finger-3-1_L
+bone 34: Finger-3-2_L
+bone 35: Finger-3-3_L
+bone 36: Wrist-2_L
+bone 37: Palm-4_L
+bone 38: Finger-4-1_L
+bone 39: Finger-4-2_L
+bone 40: Finger-4-3_L
+bone 41: Palm-5_L
+bone 42: Finger-5-1_L
+bone 43: Finger-5-2_L
+bone 44: Finger-5-3_L
+bone 45: Palm-1_L
+bone 46: Finger-1-1_L
+bone 47: Finger-1-2_L
+bone 48: Finger-1-3_L
+bone 49: Clavicle_R
+bone 50: UpArm_R
+bone 51: LoArm_R
+bone 52: Hand_R
+bone 53: Wrist-1_R
+bone 54: Palm-2_R
+bone 55: Finger-2-1_R
+bone 56: Finger-2-2_R
+bone 57: Finger-2-3_R
+bone 58: Palm-3_R
+bone 59: Finger-3-1_R
+bone 60: Finger-3-2_R
+bone 61: Finger-3-3_R
+bone 62: Wrist-2_R
+bone 63: Palm-4_R
+bone 64: Finger-4-1_R
+bone 65: Finger-4-2_R
+bone 66: Finger-4-3_R
+bone 67: Palm-5_R
+bone 68: Finger-5-1_R
+bone 69: Finger-5-2_R
+bone 70: Finger-5-3_R
+bone 71: Palm-1_R
+bone 72: Finger-1-1_R
+bone 73: Finger-1-2_R
+bone 74: Finger-1-3_R
+bone 75: LegHandle_L
+bone 76: Foot_L
+bone 77: Toe_L
+bone 78: LegHandle_R
+bone 79: Foot_R
+bone 80: Toe_R
+bone 81: Knee_L
+bone 82: Knee_R
+bone 83: humale
+bone 84: loincloth
+skeleton parent node: Scene_root
+animation #: 0
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+
+time: Sun Mar 16 14:30:31 2014
+bone 0: Dir_Master
+bone 1: Master
+bone 2: Root
+bone 3: Hips
+bone 4: UpLeg_L
+bone 5: LoLeg_L
+bone 6: UpLeg_R
+bone 7: LoLeg_R
+bone 8: Spine1
+bone 9: Spine2
+bone 10: Spine3
+bone 11: Neck
+bone 12: Head
+bone 13: Jaw
+bone 14: TongueBase
+bone 15: TongueMid
+bone 16: TongueTip
+bone 17: Eye_R
+bone 18: Eye_L
+bone 19: UpLid_R
+bone 20: LoLid_R
+bone 21: UpLid_L
+bone 22: LoLid_L
+bone 23: Clavicle_L
+bone 24: UpArm_L
+bone 25: LoArm_L
+bone 26: Hand_L
+bone 27: Wrist-1_L
+bone 28: Palm-2_L
+bone 29: Finger-2-1_L
+bone 30: Finger-2-2_L
+bone 31: Finger-2-3_L
+bone 32: Palm-3_L
+bone 33: Finger-3-1_L
+bone 34: Finger-3-2_L
+bone 35: Finger-3-3_L
+bone 36: Wrist-2_L
+bone 37: Palm-4_L
+bone 38: Finger-4-1_L
+bone 39: Finger-4-2_L
+bone 40: Finger-4-3_L
+bone 41: Palm-5_L
+bone 42: Finger-5-1_L
+bone 43: Finger-5-2_L
+bone 44: Finger-5-3_L
+bone 45: Palm-1_L
+bone 46: Finger-1-1_L
+bone 47: Finger-1-2_L
+bone 48: Finger-1-3_L
+bone 49: Clavicle_R
+bone 50: UpArm_R
+bone 51: LoArm_R
+bone 52: Hand_R
+bone 53: Wrist-1_R
+bone 54: Palm-2_R
+bone 55: Finger-2-1_R
+bone 56: Finger-2-2_R
+bone 57: Finger-2-3_R
+bone 58: Palm-3_R
+bone 59: Finger-3-1_R
+bone 60: Finger-3-2_R
+bone 61: Finger-3-3_R
+bone 62: Wrist-2_R
+bone 63: Palm-4_R
+bone 64: Finger-4-1_R
+bone 65: Finger-4-2_R
+bone 66: Finger-4-3_R
+bone 67: Palm-5_R
+bone 68: Finger-5-1_R
+bone 69: Finger-5-2_R
+bone 70: Finger-5-3_R
+bone 71: Palm-1_R
+bone 72: Finger-1-1_R
+bone 73: Finger-1-2_R
+bone 74: Finger-1-3_R
+bone 75: LegHandle_L
+bone 76: Foot_L
+bone 77: Toe_L
+bone 78: LegHandle_R
+bone 79: Foot_R
+bone 80: Toe_R
+bone 81: Knee_L
+bone 82: Knee_R
+bone 83: humale
+bone 84: loincloth
+skeleton parent node: Scene_root
+animation #: 0
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+
+time: Sun Mar 16 14:31:27 2014
+bone 0: Dir_Master
+bone 1: Master
+bone 2: Root
+bone 3: Hips
+bone 4: UpLeg_L
+bone 5: LoLeg_L
+bone 6: UpLeg_R
+bone 7: LoLeg_R
+bone 8: Spine1
+bone 9: Spine2
+bone 10: Spine3
+bone 11: Neck
+bone 12: Head
+bone 13: Jaw
+bone 14: TongueBase
+bone 15: TongueMid
+bone 16: TongueTip
+bone 17: Eye_R
+bone 18: Eye_L
+bone 19: UpLid_R
+bone 20: LoLid_R
+bone 21: UpLid_L
+bone 22: LoLid_L
+bone 23: Clavicle_L
+bone 24: UpArm_L
+bone 25: LoArm_L
+bone 26: Hand_L
+bone 27: Wrist-1_L
+bone 28: Palm-2_L
+bone 29: Finger-2-1_L
+bone 30: Finger-2-2_L
+bone 31: Finger-2-3_L
+bone 32: Palm-3_L
+bone 33: Finger-3-1_L
+bone 34: Finger-3-2_L
+bone 35: Finger-3-3_L
+bone 36: Wrist-2_L
+bone 37: Palm-4_L
+bone 38: Finger-4-1_L
+bone 39: Finger-4-2_L
+bone 40: Finger-4-3_L
+bone 41: Palm-5_L
+bone 42: Finger-5-1_L
+bone 43: Finger-5-2_L
+bone 44: Finger-5-3_L
+bone 45: Palm-1_L
+bone 46: Finger-1-1_L
+bone 47: Finger-1-2_L
+bone 48: Finger-1-3_L
+bone 49: Clavicle_R
+bone 50: UpArm_R
+bone 51: LoArm_R
+bone 52: Hand_R
+bone 53: Wrist-1_R
+bone 54: Palm-2_R
+bone 55: Finger-2-1_R
+bone 56: Finger-2-2_R
+bone 57: Finger-2-3_R
+bone 58: Palm-3_R
+bone 59: Finger-3-1_R
+bone 60: Finger-3-2_R
+bone 61: Finger-3-3_R
+bone 62: Wrist-2_R
+bone 63: Palm-4_R
+bone 64: Finger-4-1_R
+bone 65: Finger-4-2_R
+bone 66: Finger-4-3_R
+bone 67: Palm-5_R
+bone 68: Finger-5-1_R
+bone 69: Finger-5-2_R
+bone 70: Finger-5-3_R
+bone 71: Palm-1_R
+bone 72: Finger-1-1_R
+bone 73: Finger-1-2_R
+bone 74: Finger-1-3_R
+bone 75: LegHandle_L
+bone 76: Foot_L
+bone 77: Toe_L
+bone 78: LegHandle_R
+bone 79: Foot_R
+bone 80: Toe_R
+bone 81: Knee_L
+bone 82: Knee_R
+bone 83: humale
+bone 84: loincloth
+skeleton parent node: Scene_root
+animation #: 0
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+
+time: Sun Mar 16 14:32:12 2014
+bone 0: Dir_Master
+bone 1: Master
+bone 2: Root
+bone 3: Hips
+bone 4: UpLeg_L
+bone 5: LoLeg_L
+bone 6: UpLeg_R
+bone 7: LoLeg_R
+bone 8: Spine1
+bone 9: Spine2
+bone 10: Spine3
+bone 11: Neck
+bone 12: Head
+bone 13: Jaw
+bone 14: TongueBase
+bone 15: TongueMid
+bone 16: TongueTip
+bone 17: Eye_R
+bone 18: Eye_L
+bone 19: UpLid_R
+bone 20: LoLid_R
+bone 21: UpLid_L
+bone 22: LoLid_L
+bone 23: Clavicle_L
+bone 24: UpArm_L
+bone 25: LoArm_L
+bone 26: Hand_L
+bone 27: Wrist-1_L
+bone 28: Palm-2_L
+bone 29: Finger-2-1_L
+bone 30: Finger-2-2_L
+bone 31: Finger-2-3_L
+bone 32: Palm-3_L
+bone 33: Finger-3-1_L
+bone 34: Finger-3-2_L
+bone 35: Finger-3-3_L
+bone 36: Wrist-2_L
+bone 37: Palm-4_L
+bone 38: Finger-4-1_L
+bone 39: Finger-4-2_L
+bone 40: Finger-4-3_L
+bone 41: Palm-5_L
+bone 42: Finger-5-1_L
+bone 43: Finger-5-2_L
+bone 44: Finger-5-3_L
+bone 45: Palm-1_L
+bone 46: Finger-1-1_L
+bone 47: Finger-1-2_L
+bone 48: Finger-1-3_L
+bone 49: Clavicle_R
+bone 50: UpArm_R
+bone 51: LoArm_R
+bone 52: Hand_R
+bone 53: Wrist-1_R
+bone 54: Palm-2_R
+bone 55: Finger-2-1_R
+bone 56: Finger-2-2_R
+bone 57: Finger-2-3_R
+bone 58: Palm-3_R
+bone 59: Finger-3-1_R
+bone 60: Finger-3-2_R
+bone 61: Finger-3-3_R
+bone 62: Wrist-2_R
+bone 63: Palm-4_R
+bone 64: Finger-4-1_R
+bone 65: Finger-4-2_R
+bone 66: Finger-4-3_R
+bone 67: Palm-5_R
+bone 68: Finger-5-1_R
+bone 69: Finger-5-2_R
+bone 70: Finger-5-3_R
+bone 71: Palm-1_R
+bone 72: Finger-1-1_R
+bone 73: Finger-1-2_R
+bone 74: Finger-1-3_R
+bone 75: LegHandle_L
+bone 76: Foot_L
+bone 77: Toe_L
+bone 78: LegHandle_R
+bone 79: Foot_R
+bone 80: Toe_R
+bone 81: Knee_L
+bone 82: Knee_R
+bone 83: humale
+bone 84: loincloth
+skeleton parent node: Scene_root
+animation #: 0
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+
+time: Sun Mar 16 14:33:09 2014
+bone 0: Dir_Master
+bone 1: Master
+bone 2: Root
+bone 3: Hips
+bone 4: UpLeg_L
+bone 5: LoLeg_L
+bone 6: UpLeg_R
+bone 7: LoLeg_R
+bone 8: Spine1
+bone 9: Spine2
+bone 10: Spine3
+bone 11: Neck
+bone 12: Head
+bone 13: Jaw
+bone 14: TongueBase
+bone 15: TongueMid
+bone 16: TongueTip
+bone 17: Eye_R
+bone 18: Eye_L
+bone 19: UpLid_R
+bone 20: LoLid_R
+bone 21: UpLid_L
+bone 22: LoLid_L
+bone 23: Clavicle_L
+bone 24: UpArm_L
+bone 25: LoArm_L
+bone 26: Hand_L
+bone 27: Wrist-1_L
+bone 28: Palm-2_L
+bone 29: Finger-2-1_L
+bone 30: Finger-2-2_L
+bone 31: Finger-2-3_L
+bone 32: Palm-3_L
+bone 33: Finger-3-1_L
+bone 34: Finger-3-2_L
+bone 35: Finger-3-3_L
+bone 36: Wrist-2_L
+bone 37: Palm-4_L
+bone 38: Finger-4-1_L
+bone 39: Finger-4-2_L
+bone 40: Finger-4-3_L
+bone 41: Palm-5_L
+bone 42: Finger-5-1_L
+bone 43: Finger-5-2_L
+bone 44: Finger-5-3_L
+bone 45: Palm-1_L
+bone 46: Finger-1-1_L
+bone 47: Finger-1-2_L
+bone 48: Finger-1-3_L
+bone 49: Clavicle_R
+bone 50: UpArm_R
+bone 51: LoArm_R
+bone 52: Hand_R
+bone 53: Wrist-1_R
+bone 54: Palm-2_R
+bone 55: Finger-2-1_R
+bone 56: Finger-2-2_R
+bone 57: Finger-2-3_R
+bone 58: Palm-3_R
+bone 59: Finger-3-1_R
+bone 60: Finger-3-2_R
+bone 61: Finger-3-3_R
+bone 62: Wrist-2_R
+bone 63: Palm-4_R
+bone 64: Finger-4-1_R
+bone 65: Finger-4-2_R
+bone 66: Finger-4-3_R
+bone 67: Palm-5_R
+bone 68: Finger-5-1_R
+bone 69: Finger-5-2_R
+bone 70: Finger-5-3_R
+bone 71: Palm-1_R
+bone 72: Finger-1-1_R
+bone 73: Finger-1-2_R
+bone 74: Finger-1-3_R
+bone 75: LegHandle_L
+bone 76: Foot_L
+bone 77: Toe_L
+bone 78: LegHandle_R
+bone 79: Foot_R
+bone 80: Toe_R
+bone 81: Knee_L
+bone 82: Knee_R
+bone 83: humale
+bone 84: loincloth
+skeleton parent node: Scene_root
+animation #: 0
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+
+time: Sun Mar 16 14:39:39 2014
+bone 0: Dir_Master
+bone 1: Master
+bone 2: Root
+bone 3: Hips
+bone 4: UpLeg_L
+bone 5: LoLeg_L
+bone 6: UpLeg_R
+bone 7: LoLeg_R
+bone 8: Spine1
+bone 9: Spine2
+bone 10: Spine3
+bone 11: Neck
+bone 12: Head
+bone 13: Jaw
+bone 14: TongueBase
+bone 15: TongueMid
+bone 16: TongueTip
+bone 17: Eye_R
+bone 18: Eye_L
+bone 19: UpLid_R
+bone 20: LoLid_R
+bone 21: UpLid_L
+bone 22: LoLid_L
+bone 23: Clavicle_L
+bone 24: UpArm_L
+bone 25: LoArm_L
+bone 26: Hand_L
+bone 27: Wrist-1_L
+bone 28: Palm-2_L
+bone 29: Finger-2-1_L
+bone 30: Finger-2-2_L
+bone 31: Finger-2-3_L
+bone 32: Palm-3_L
+bone 33: Finger-3-1_L
+bone 34: Finger-3-2_L
+bone 35: Finger-3-3_L
+bone 36: Wrist-2_L
+bone 37: Palm-4_L
+bone 38: Finger-4-1_L
+bone 39: Finger-4-2_L
+bone 40: Finger-4-3_L
+bone 41: Palm-5_L
+bone 42: Finger-5-1_L
+bone 43: Finger-5-2_L
+bone 44: Finger-5-3_L
+bone 45: Palm-1_L
+bone 46: Finger-1-1_L
+bone 47: Finger-1-2_L
+bone 48: Finger-1-3_L
+bone 49: Clavicle_R
+bone 50: UpArm_R
+bone 51: LoArm_R
+bone 52: Hand_R
+bone 53: Wrist-1_R
+bone 54: Palm-2_R
+bone 55: Finger-2-1_R
+bone 56: Finger-2-2_R
+bone 57: Finger-2-3_R
+bone 58: Palm-3_R
+bone 59: Finger-3-1_R
+bone 60: Finger-3-2_R
+bone 61: Finger-3-3_R
+bone 62: Wrist-2_R
+bone 63: Palm-4_R
+bone 64: Finger-4-1_R
+bone 65: Finger-4-2_R
+bone 66: Finger-4-3_R
+bone 67: Palm-5_R
+bone 68: Finger-5-1_R
+bone 69: Finger-5-2_R
+bone 70: Finger-5-3_R
+bone 71: Palm-1_R
+bone 72: Finger-1-1_R
+bone 73: Finger-1-2_R
+bone 74: Finger-1-3_R
+bone 75: LegHandle_L
+bone 76: Foot_L
+bone 77: Toe_L
+bone 78: LegHandle_R
+bone 79: Foot_R
+bone 80: Toe_R
+bone 81: Knee_L
+bone 82: Knee_R
+bone 83: humale
+bone 84: loincloth
+skeleton parent node: Scene_root
+animation #: 0
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+
+time: Sun Mar 16 14:47:27 2014
+bone 0: Dir_Master
+bone 1: Master
+bone 2: Root
+bone 3: Hips
+bone 4: UpLeg_L
+bone 5: LoLeg_L
+bone 6: UpLeg_R
+bone 7: LoLeg_R
+bone 8: Spine1
+bone 9: Spine2
+bone 10: Spine3
+bone 11: Neck
+bone 12: Head
+bone 13: Jaw
+bone 14: TongueBase
+bone 15: TongueMid
+bone 16: TongueTip
+bone 17: Eye_R
+bone 18: Eye_L
+bone 19: UpLid_R
+bone 20: LoLid_R
+bone 21: UpLid_L
+bone 22: LoLid_L
+bone 23: Clavicle_L
+bone 24: UpArm_L
+bone 25: LoArm_L
+bone 26: Hand_L
+bone 27: Wrist-1_L
+bone 28: Palm-2_L
+bone 29: Finger-2-1_L
+bone 30: Finger-2-2_L
+bone 31: Finger-2-3_L
+bone 32: Palm-3_L
+bone 33: Finger-3-1_L
+bone 34: Finger-3-2_L
+bone 35: Finger-3-3_L
+bone 36: Wrist-2_L
+bone 37: Palm-4_L
+bone 38: Finger-4-1_L
+bone 39: Finger-4-2_L
+bone 40: Finger-4-3_L
+bone 41: Palm-5_L
+bone 42: Finger-5-1_L
+bone 43: Finger-5-2_L
+bone 44: Finger-5-3_L
+bone 45: Palm-1_L
+bone 46: Finger-1-1_L
+bone 47: Finger-1-2_L
+bone 48: Finger-1-3_L
+bone 49: Clavicle_R
+bone 50: UpArm_R
+bone 51: LoArm_R
+bone 52: Hand_R
+bone 53: Wrist-1_R
+bone 54: Palm-2_R
+bone 55: Finger-2-1_R
+bone 56: Finger-2-2_R
+bone 57: Finger-2-3_R
+bone 58: Palm-3_R
+bone 59: Finger-3-1_R
+bone 60: Finger-3-2_R
+bone 61: Finger-3-3_R
+bone 62: Wrist-2_R
+bone 63: Palm-4_R
+bone 64: Finger-4-1_R
+bone 65: Finger-4-2_R
+bone 66: Finger-4-3_R
+bone 67: Palm-5_R
+bone 68: Finger-5-1_R
+bone 69: Finger-5-2_R
+bone 70: Finger-5-3_R
+bone 71: Palm-1_R
+bone 72: Finger-1-1_R
+bone 73: Finger-1-2_R
+bone 74: Finger-1-3_R
+bone 75: LegHandle_L
+bone 76: Foot_L
+bone 77: Toe_L
+bone 78: LegHandle_R
+bone 79: Foot_R
+bone 80: Toe_R
+bone 81: Knee_L
+bone 82: Knee_R
+skeleton parent node: Scene_root
+animation #: 0
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+
+time: Sun Mar 16 14:49:04 2014
+bone 0: Dir_Master
+bone 1: Master
+bone 2: Root
+bone 3: Hips
+bone 4: UpLeg_L
+bone 5: LoLeg_L
+bone 6: UpLeg_R
+bone 7: LoLeg_R
+bone 8: Spine1
+bone 9: Spine2
+bone 10: Spine3
+bone 11: Neck
+bone 12: Head
+bone 13: Jaw
+bone 14: TongueBase
+bone 15: TongueMid
+bone 16: TongueTip
+bone 17: Eye_R
+bone 18: Eye_L
+bone 19: UpLid_R
+bone 20: LoLid_R
+bone 21: UpLid_L
+bone 22: LoLid_L
+bone 23: Clavicle_L
+bone 24: UpArm_L
+bone 25: LoArm_L
+bone 26: Hand_L
+bone 27: Wrist-1_L
+bone 28: Palm-2_L
+bone 29: Finger-2-1_L
+bone 30: Finger-2-2_L
+bone 31: Finger-2-3_L
+bone 32: Palm-3_L
+bone 33: Finger-3-1_L
+bone 34: Finger-3-2_L
+bone 35: Finger-3-3_L
+bone 36: Wrist-2_L
+bone 37: Palm-4_L
+bone 38: Finger-4-1_L
+bone 39: Finger-4-2_L
+bone 40: Finger-4-3_L
+bone 41: Palm-5_L
+bone 42: Finger-5-1_L
+bone 43: Finger-5-2_L
+bone 44: Finger-5-3_L
+bone 45: Palm-1_L
+bone 46: Finger-1-1_L
+bone 47: Finger-1-2_L
+bone 48: Finger-1-3_L
+bone 49: Clavicle_R
+bone 50: UpArm_R
+bone 51: LoArm_R
+bone 52: Hand_R
+bone 53: Wrist-1_R
+bone 54: Palm-2_R
+bone 55: Finger-2-1_R
+bone 56: Finger-2-2_R
+bone 57: Finger-2-3_R
+bone 58: Palm-3_R
+bone 59: Finger-3-1_R
+bone 60: Finger-3-2_R
+bone 61: Finger-3-3_R
+bone 62: Wrist-2_R
+bone 63: Palm-4_R
+bone 64: Finger-4-1_R
+bone 65: Finger-4-2_R
+bone 66: Finger-4-3_R
+bone 67: Palm-5_R
+bone 68: Finger-5-1_R
+bone 69: Finger-5-2_R
+bone 70: Finger-5-3_R
+bone 71: Palm-1_R
+bone 72: Finger-1-1_R
+bone 73: Finger-1-2_R
+bone 74: Finger-1-3_R
+bone 75: LegHandle_L
+bone 76: Foot_L
+bone 77: Toe_L
+bone 78: LegHandle_R
+bone 79: Foot_R
+bone 80: Toe_R
+bone 81: Knee_L
+bone 82: Knee_R
+skeleton parent node: Scene_root
+animation #: 0
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+
+time: Sun Mar 16 14:52:28 2014
+bone 0: Dir_Master
+bone 1: Master
+bone 2: Root
+bone 3: Hips
+bone 4: UpLeg_L
+bone 5: LoLeg_L
+bone 6: UpLeg_R
+bone 7: LoLeg_R
+bone 8: Spine1
+bone 9: Spine2
+bone 10: Spine3
+bone 11: Neck
+bone 12: Head
+bone 13: Jaw
+bone 14: TongueBase
+bone 15: TongueMid
+bone 16: TongueTip
+bone 17: Eye_R
+bone 18: Eye_L
+bone 19: UpLid_R
+bone 20: LoLid_R
+bone 21: UpLid_L
+bone 22: LoLid_L
+bone 23: Clavicle_L
+bone 24: UpArm_L
+bone 25: LoArm_L
+bone 26: Hand_L
+bone 27: Wrist-1_L
+bone 28: Palm-2_L
+bone 29: Finger-2-1_L
+bone 30: Finger-2-2_L
+bone 31: Finger-2-3_L
+bone 32: Palm-3_L
+bone 33: Finger-3-1_L
+bone 34: Finger-3-2_L
+bone 35: Finger-3-3_L
+bone 36: Wrist-2_L
+bone 37: Palm-4_L
+bone 38: Finger-4-1_L
+bone 39: Finger-4-2_L
+bone 40: Finger-4-3_L
+bone 41: Palm-5_L
+bone 42: Finger-5-1_L
+bone 43: Finger-5-2_L
+bone 44: Finger-5-3_L
+bone 45: Palm-1_L
+bone 46: Finger-1-1_L
+bone 47: Finger-1-2_L
+bone 48: Finger-1-3_L
+bone 49: Clavicle_R
+bone 50: UpArm_R
+bone 51: LoArm_R
+bone 52: Hand_R
+bone 53: Wrist-1_R
+bone 54: Palm-2_R
+bone 55: Finger-2-1_R
+bone 56: Finger-2-2_R
+bone 57: Finger-2-3_R
+bone 58: Palm-3_R
+bone 59: Finger-3-1_R
+bone 60: Finger-3-2_R
+bone 61: Finger-3-3_R
+bone 62: Wrist-2_R
+bone 63: Palm-4_R
+bone 64: Finger-4-1_R
+bone 65: Finger-4-2_R
+bone 66: Finger-4-3_R
+bone 67: Palm-5_R
+bone 68: Finger-5-1_R
+bone 69: Finger-5-2_R
+bone 70: Finger-5-3_R
+bone 71: Palm-1_R
+bone 72: Finger-1-1_R
+bone 73: Finger-1-2_R
+bone 74: Finger-1-3_R
+bone 75: LegHandle_L
+bone 76: Foot_L
+bone 77: Toe_L
+bone 78: LegHandle_R
+bone 79: Foot_R
+bone 80: Toe_R
+bone 81: Knee_L
+bone 82: Knee_R
+skeleton parent node: Scene_root
+animation #: 0
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+
+time: Sun Mar 16 15:01:04 2014
+bone 0: Dir_Master
+bone 1: Master
+bone 2: Root
+bone 3: Hips
+bone 4: UpLeg_L
+bone 5: LoLeg_L
+bone 6: UpLeg_R
+bone 7: LoLeg_R
+bone 8: Spine1
+bone 9: Spine2
+bone 10: Spine3
+bone 11: Neck
+bone 12: Head
+bone 13: Jaw
+bone 14: TongueBase
+bone 15: TongueMid
+bone 16: TongueTip
+bone 17: Eye_R
+bone 18: Eye_L
+bone 19: UpLid_R
+bone 20: LoLid_R
+bone 21: UpLid_L
+bone 22: LoLid_L
+bone 23: Clavicle_L
+bone 24: UpArm_L
+bone 25: LoArm_L
+bone 26: Hand_L
+bone 27: Wrist-1_L
+bone 28: Palm-2_L
+bone 29: Finger-2-1_L
+bone 30: Finger-2-2_L
+bone 31: Finger-2-3_L
+bone 32: Palm-3_L
+bone 33: Finger-3-1_L
+bone 34: Finger-3-2_L
+bone 35: Finger-3-3_L
+bone 36: Wrist-2_L
+bone 37: Palm-4_L
+bone 38: Finger-4-1_L
+bone 39: Finger-4-2_L
+bone 40: Finger-4-3_L
+bone 41: Palm-5_L
+bone 42: Finger-5-1_L
+bone 43: Finger-5-2_L
+bone 44: Finger-5-3_L
+bone 45: Palm-1_L
+bone 46: Finger-1-1_L
+bone 47: Finger-1-2_L
+bone 48: Finger-1-3_L
+bone 49: Clavicle_R
+bone 50: UpArm_R
+bone 51: LoArm_R
+bone 52: Hand_R
+bone 53: Wrist-1_R
+bone 54: Palm-2_R
+bone 55: Finger-2-1_R
+bone 56: Finger-2-2_R
+bone 57: Finger-2-3_R
+bone 58: Palm-3_R
+bone 59: Finger-3-1_R
+bone 60: Finger-3-2_R
+bone 61: Finger-3-3_R
+bone 62: Wrist-2_R
+bone 63: Palm-4_R
+bone 64: Finger-4-1_R
+bone 65: Finger-4-2_R
+bone 66: Finger-4-3_R
+bone 67: Palm-5_R
+bone 68: Finger-5-1_R
+bone 69: Finger-5-2_R
+bone 70: Finger-5-3_R
+bone 71: Palm-1_R
+bone 72: Finger-1-1_R
+bone 73: Finger-1-2_R
+bone 74: Finger-1-3_R
+bone 75: LegHandle_L
+bone 76: Foot_L
+bone 77: Toe_L
+bone 78: LegHandle_R
+bone 79: Foot_R
+bone 80: Toe_R
+bone 81: Knee_L
+bone 82: Knee_R
+skeleton parent node: Scene_root
+animation #: 0
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+
+time: Sun Mar 16 15:02:39 2014
+bone 0: Dir_Master
+bone 1: Master
+bone 2: Root
+bone 3: Hips
+bone 4: UpLeg_L
+bone 5: LoLeg_L
+bone 6: UpLeg_R
+bone 7: LoLeg_R
+bone 8: Spine1
+bone 9: Spine2
+bone 10: Spine3
+bone 11: Neck
+bone 12: Head
+bone 13: Jaw
+bone 14: TongueBase
+bone 15: TongueMid
+bone 16: TongueTip
+bone 17: Eye_R
+bone 18: Eye_L
+bone 19: UpLid_R
+bone 20: LoLid_R
+bone 21: UpLid_L
+bone 22: LoLid_L
+bone 23: Clavicle_L
+bone 24: UpArm_L
+bone 25: LoArm_L
+bone 26: Hand_L
+bone 27: Wrist-1_L
+bone 28: Palm-2_L
+bone 29: Finger-2-1_L
+bone 30: Finger-2-2_L
+bone 31: Finger-2-3_L
+bone 32: Palm-3_L
+bone 33: Finger-3-1_L
+bone 34: Finger-3-2_L
+bone 35: Finger-3-3_L
+bone 36: Wrist-2_L
+bone 37: Palm-4_L
+bone 38: Finger-4-1_L
+bone 39: Finger-4-2_L
+bone 40: Finger-4-3_L
+bone 41: Palm-5_L
+bone 42: Finger-5-1_L
+bone 43: Finger-5-2_L
+bone 44: Finger-5-3_L
+bone 45: Palm-1_L
+bone 46: Finger-1-1_L
+bone 47: Finger-1-2_L
+bone 48: Finger-1-3_L
+bone 49: Clavicle_R
+bone 50: UpArm_R
+bone 51: LoArm_R
+bone 52: Hand_R
+bone 53: Wrist-1_R
+bone 54: Palm-2_R
+bone 55: Finger-2-1_R
+bone 56: Finger-2-2_R
+bone 57: Finger-2-3_R
+bone 58: Palm-3_R
+bone 59: Finger-3-1_R
+bone 60: Finger-3-2_R
+bone 61: Finger-3-3_R
+bone 62: Wrist-2_R
+bone 63: Palm-4_R
+bone 64: Finger-4-1_R
+bone 65: Finger-4-2_R
+bone 66: Finger-4-3_R
+bone 67: Palm-5_R
+bone 68: Finger-5-1_R
+bone 69: Finger-5-2_R
+bone 70: Finger-5-3_R
+bone 71: Palm-1_R
+bone 72: Finger-1-1_R
+bone 73: Finger-1-2_R
+bone 74: Finger-1-3_R
+bone 75: LegHandle_L
+bone 76: Foot_L
+bone 77: Toe_L
+bone 78: LegHandle_R
+bone 79: Foot_R
+bone 80: Toe_R
+bone 81: Knee_L
+bone 82: Knee_R
+skeleton parent node: Scene_root
+animation #: 0
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+
+time: Sun Mar 16 15:06:09 2014
+bone 0: Dir_Master
+bone 1: Master
+bone 2: Root
+bone 3: Hips
+bone 4: UpLeg_L
+bone 5: LoLeg_L
+bone 6: UpLeg_R
+bone 7: LoLeg_R
+bone 8: Spine1
+bone 9: Spine2
+bone 10: Spine3
+bone 11: Neck
+bone 12: Head
+bone 13: Jaw
+bone 14: TongueBase
+bone 15: TongueMid
+bone 16: TongueTip
+bone 17: Eye_R
+bone 18: Eye_L
+bone 19: UpLid_R
+bone 20: LoLid_R
+bone 21: UpLid_L
+bone 22: LoLid_L
+bone 23: Clavicle_L
+bone 24: UpArm_L
+bone 25: LoArm_L
+bone 26: Hand_L
+bone 27: Wrist-1_L
+bone 28: Palm-2_L
+bone 29: Finger-2-1_L
+bone 30: Finger-2-2_L
+bone 31: Finger-2-3_L
+bone 32: Palm-3_L
+bone 33: Finger-3-1_L
+bone 34: Finger-3-2_L
+bone 35: Finger-3-3_L
+bone 36: Wrist-2_L
+bone 37: Palm-4_L
+bone 38: Finger-4-1_L
+bone 39: Finger-4-2_L
+bone 40: Finger-4-3_L
+bone 41: Palm-5_L
+bone 42: Finger-5-1_L
+bone 43: Finger-5-2_L
+bone 44: Finger-5-3_L
+bone 45: Palm-1_L
+bone 46: Finger-1-1_L
+bone 47: Finger-1-2_L
+bone 48: Finger-1-3_L
+bone 49: Clavicle_R
+bone 50: UpArm_R
+bone 51: LoArm_R
+bone 52: Hand_R
+bone 53: Wrist-1_R
+bone 54: Palm-2_R
+bone 55: Finger-2-1_R
+bone 56: Finger-2-2_R
+bone 57: Finger-2-3_R
+bone 58: Palm-3_R
+bone 59: Finger-3-1_R
+bone 60: Finger-3-2_R
+bone 61: Finger-3-3_R
+bone 62: Wrist-2_R
+bone 63: Palm-4_R
+bone 64: Finger-4-1_R
+bone 65: Finger-4-2_R
+bone 66: Finger-4-3_R
+bone 67: Palm-5_R
+bone 68: Finger-5-1_R
+bone 69: Finger-5-2_R
+bone 70: Finger-5-3_R
+bone 71: Palm-1_R
+bone 72: Finger-1-1_R
+bone 73: Finger-1-2_R
+bone 74: Finger-1-3_R
+bone 75: LegHandle_L
+bone 76: Foot_L
+bone 77: Toe_L
+bone 78: LegHandle_R
+bone 79: Foot_R
+bone 80: Toe_R
+bone 81: Knee_L
+bone 82: Knee_R
+skeleton parent node: Scene_root
+animation #: 0
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+
+time: Sun Mar 16 15:09:01 2014
+bone 0: Dir_Master
+bone 1: Master
+bone 2: Root
+bone 3: Hips
+bone 4: UpLeg_L
+bone 5: LoLeg_L
+bone 6: UpLeg_R
+bone 7: LoLeg_R
+bone 8: Spine1
+bone 9: Spine2
+bone 10: Spine3
+bone 11: Neck
+bone 12: Head
+bone 13: Jaw
+bone 14: TongueBase
+bone 15: TongueMid
+bone 16: TongueTip
+bone 17: Eye_R
+bone 18: Eye_L
+bone 19: UpLid_R
+bone 20: LoLid_R
+bone 21: UpLid_L
+bone 22: LoLid_L
+bone 23: Clavicle_L
+bone 24: UpArm_L
+bone 25: LoArm_L
+bone 26: Hand_L
+bone 27: Wrist-1_L
+bone 28: Palm-2_L
+bone 29: Finger-2-1_L
+bone 30: Finger-2-2_L
+bone 31: Finger-2-3_L
+bone 32: Palm-3_L
+bone 33: Finger-3-1_L
+bone 34: Finger-3-2_L
+bone 35: Finger-3-3_L
+bone 36: Wrist-2_L
+bone 37: Palm-4_L
+bone 38: Finger-4-1_L
+bone 39: Finger-4-2_L
+bone 40: Finger-4-3_L
+bone 41: Palm-5_L
+bone 42: Finger-5-1_L
+bone 43: Finger-5-2_L
+bone 44: Finger-5-3_L
+bone 45: Palm-1_L
+bone 46: Finger-1-1_L
+bone 47: Finger-1-2_L
+bone 48: Finger-1-3_L
+bone 49: Clavicle_R
+bone 50: UpArm_R
+bone 51: LoArm_R
+bone 52: Hand_R
+bone 53: Wrist-1_R
+bone 54: Palm-2_R
+bone 55: Finger-2-1_R
+bone 56: Finger-2-2_R
+bone 57: Finger-2-3_R
+bone 58: Palm-3_R
+bone 59: Finger-3-1_R
+bone 60: Finger-3-2_R
+bone 61: Finger-3-3_R
+bone 62: Wrist-2_R
+bone 63: Palm-4_R
+bone 64: Finger-4-1_R
+bone 65: Finger-4-2_R
+bone 66: Finger-4-3_R
+bone 67: Palm-5_R
+bone 68: Finger-5-1_R
+bone 69: Finger-5-2_R
+bone 70: Finger-5-3_R
+bone 71: Palm-1_R
+bone 72: Finger-1-1_R
+bone 73: Finger-1-2_R
+bone 74: Finger-1-3_R
+bone 75: LegHandle_L
+bone 76: Foot_L
+bone 77: Toe_L
+bone 78: LegHandle_R
+bone 79: Foot_R
+bone 80: Toe_R
+bone 81: Knee_L
+bone 82: Knee_R
+skeleton parent node: Scene_root
+animation #: 0
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+
+time: Sun Mar 16 15:10:29 2014
+bone 0: Dir_Master
+bone 1: Master
+bone 2: Root
+bone 3: Hips
+bone 4: UpLeg_L
+bone 5: LoLeg_L
+bone 6: UpLeg_R
+bone 7: LoLeg_R
+bone 8: Spine1
+bone 9: Spine2
+bone 10: Spine3
+bone 11: Neck
+bone 12: Head
+bone 13: Jaw
+bone 14: TongueBase
+bone 15: TongueMid
+bone 16: TongueTip
+bone 17: Eye_R
+bone 18: Eye_L
+bone 19: UpLid_R
+bone 20: LoLid_R
+bone 21: UpLid_L
+bone 22: LoLid_L
+bone 23: Clavicle_L
+bone 24: UpArm_L
+bone 25: LoArm_L
+bone 26: Hand_L
+bone 27: Wrist-1_L
+bone 28: Palm-2_L
+bone 29: Finger-2-1_L
+bone 30: Finger-2-2_L
+bone 31: Finger-2-3_L
+bone 32: Palm-3_L
+bone 33: Finger-3-1_L
+bone 34: Finger-3-2_L
+bone 35: Finger-3-3_L
+bone 36: Wrist-2_L
+bone 37: Palm-4_L
+bone 38: Finger-4-1_L
+bone 39: Finger-4-2_L
+bone 40: Finger-4-3_L
+bone 41: Palm-5_L
+bone 42: Finger-5-1_L
+bone 43: Finger-5-2_L
+bone 44: Finger-5-3_L
+bone 45: Palm-1_L
+bone 46: Finger-1-1_L
+bone 47: Finger-1-2_L
+bone 48: Finger-1-3_L
+bone 49: Clavicle_R
+bone 50: UpArm_R
+bone 51: LoArm_R
+bone 52: Hand_R
+bone 53: Wrist-1_R
+bone 54: Palm-2_R
+bone 55: Finger-2-1_R
+bone 56: Finger-2-2_R
+bone 57: Finger-2-3_R
+bone 58: Palm-3_R
+bone 59: Finger-3-1_R
+bone 60: Finger-3-2_R
+bone 61: Finger-3-3_R
+bone 62: Wrist-2_R
+bone 63: Palm-4_R
+bone 64: Finger-4-1_R
+bone 65: Finger-4-2_R
+bone 66: Finger-4-3_R
+bone 67: Palm-5_R
+bone 68: Finger-5-1_R
+bone 69: Finger-5-2_R
+bone 70: Finger-5-3_R
+bone 71: Palm-1_R
+bone 72: Finger-1-1_R
+bone 73: Finger-1-2_R
+bone 74: Finger-1-3_R
+bone 75: LegHandle_L
+bone 76: Foot_L
+bone 77: Toe_L
+bone 78: LegHandle_R
+bone 79: Foot_R
+bone 80: Toe_R
+bone 81: Knee_L
+bone 82: Knee_R
+skeleton parent node: Scene_root
+animation #: 0
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+
+time: Sun Mar 16 15:13:20 2014
+bone 0: Dir_Master
+bone 1: Master
+bone 2: Root
+bone 3: Hips
+bone 4: UpLeg_L
+bone 5: LoLeg_L
+bone 6: UpLeg_R
+bone 7: LoLeg_R
+bone 8: Spine1
+bone 9: Spine2
+bone 10: Spine3
+bone 11: Neck
+bone 12: Head
+bone 13: Jaw
+bone 14: TongueBase
+bone 15: TongueMid
+bone 16: TongueTip
+bone 17: Eye_R
+bone 18: Eye_L
+bone 19: UpLid_R
+bone 20: LoLid_R
+bone 21: UpLid_L
+bone 22: LoLid_L
+bone 23: Clavicle_L
+bone 24: UpArm_L
+bone 25: LoArm_L
+bone 26: Hand_L
+bone 27: Wrist-1_L
+bone 28: Palm-2_L
+bone 29: Finger-2-1_L
+bone 30: Finger-2-2_L
+bone 31: Finger-2-3_L
+bone 32: Palm-3_L
+bone 33: Finger-3-1_L
+bone 34: Finger-3-2_L
+bone 35: Finger-3-3_L
+bone 36: Wrist-2_L
+bone 37: Palm-4_L
+bone 38: Finger-4-1_L
+bone 39: Finger-4-2_L
+bone 40: Finger-4-3_L
+bone 41: Palm-5_L
+bone 42: Finger-5-1_L
+bone 43: Finger-5-2_L
+bone 44: Finger-5-3_L
+bone 45: Palm-1_L
+bone 46: Finger-1-1_L
+bone 47: Finger-1-2_L
+bone 48: Finger-1-3_L
+bone 49: Clavicle_R
+bone 50: UpArm_R
+bone 51: LoArm_R
+bone 52: Hand_R
+bone 53: Wrist-1_R
+bone 54: Palm-2_R
+bone 55: Finger-2-1_R
+bone 56: Finger-2-2_R
+bone 57: Finger-2-3_R
+bone 58: Palm-3_R
+bone 59: Finger-3-1_R
+bone 60: Finger-3-2_R
+bone 61: Finger-3-3_R
+bone 62: Wrist-2_R
+bone 63: Palm-4_R
+bone 64: Finger-4-1_R
+bone 65: Finger-4-2_R
+bone 66: Finger-4-3_R
+bone 67: Palm-5_R
+bone 68: Finger-5-1_R
+bone 69: Finger-5-2_R
+bone 70: Finger-5-3_R
+bone 71: Palm-1_R
+bone 72: Finger-1-1_R
+bone 73: Finger-1-2_R
+bone 74: Finger-1-3_R
+bone 75: LegHandle_L
+bone 76: Foot_L
+bone 77: Toe_L
+bone 78: LegHandle_R
+bone 79: Foot_R
+bone 80: Toe_R
+bone 81: Knee_L
+bone 82: Knee_R
+skeleton parent node: Scene_root
+animation #: 0
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+
+time: Sun Mar 16 15:13:36 2014
+bone 0: Dir_Master
+bone 1: Master
+bone 2: Root
+bone 3: Hips
+bone 4: UpLeg_L
+bone 5: LoLeg_L
+bone 6: UpLeg_R
+bone 7: LoLeg_R
+bone 8: Spine1
+bone 9: Spine2
+bone 10: Spine3
+bone 11: Neck
+bone 12: Head
+bone 13: Jaw
+bone 14: TongueBase
+bone 15: TongueMid
+bone 16: TongueTip
+bone 17: Eye_R
+bone 18: Eye_L
+bone 19: UpLid_R
+bone 20: LoLid_R
+bone 21: UpLid_L
+bone 22: LoLid_L
+bone 23: Clavicle_L
+bone 24: UpArm_L
+bone 25: LoArm_L
+bone 26: Hand_L
+bone 27: Wrist-1_L
+bone 28: Palm-2_L
+bone 29: Finger-2-1_L
+bone 30: Finger-2-2_L
+bone 31: Finger-2-3_L
+bone 32: Palm-3_L
+bone 33: Finger-3-1_L
+bone 34: Finger-3-2_L
+bone 35: Finger-3-3_L
+bone 36: Wrist-2_L
+bone 37: Palm-4_L
+bone 38: Finger-4-1_L
+bone 39: Finger-4-2_L
+bone 40: Finger-4-3_L
+bone 41: Palm-5_L
+bone 42: Finger-5-1_L
+bone 43: Finger-5-2_L
+bone 44: Finger-5-3_L
+bone 45: Palm-1_L
+bone 46: Finger-1-1_L
+bone 47: Finger-1-2_L
+bone 48: Finger-1-3_L
+bone 49: Clavicle_R
+bone 50: UpArm_R
+bone 51: LoArm_R
+bone 52: Hand_R
+bone 53: Wrist-1_R
+bone 54: Palm-2_R
+bone 55: Finger-2-1_R
+bone 56: Finger-2-2_R
+bone 57: Finger-2-3_R
+bone 58: Palm-3_R
+bone 59: Finger-3-1_R
+bone 60: Finger-3-2_R
+bone 61: Finger-3-3_R
+bone 62: Wrist-2_R
+bone 63: Palm-4_R
+bone 64: Finger-4-1_R
+bone 65: Finger-4-2_R
+bone 66: Finger-4-3_R
+bone 67: Palm-5_R
+bone 68: Finger-5-1_R
+bone 69: Finger-5-2_R
+bone 70: Finger-5-3_R
+bone 71: Palm-1_R
+bone 72: Finger-1-1_R
+bone 73: Finger-1-2_R
+bone 74: Finger-1-3_R
+bone 75: LegHandle_L
+bone 76: Foot_L
+bone 77: Toe_L
+bone 78: LegHandle_R
+bone 79: Foot_R
+bone 80: Toe_R
+bone 81: Knee_L
+bone 82: Knee_R
+skeleton parent node: Scene_root
+animation #: 0
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+
+time: Sun Mar 16 15:16:29 2014
+bone 0: Dir_Master
+bone 1: Master
+bone 2: Root
+bone 3: Hips
+bone 4: UpLeg_L
+bone 5: LoLeg_L
+bone 6: UpLeg_R
+bone 7: LoLeg_R
+bone 8: Spine1
+bone 9: Spine2
+bone 10: Spine3
+bone 11: Neck
+bone 12: Head
+bone 13: Jaw
+bone 14: TongueBase
+bone 15: TongueMid
+bone 16: TongueTip
+bone 17: Eye_R
+bone 18: Eye_L
+bone 19: UpLid_R
+bone 20: LoLid_R
+bone 21: UpLid_L
+bone 22: LoLid_L
+bone 23: Clavicle_L
+bone 24: UpArm_L
+bone 25: LoArm_L
+bone 26: Hand_L
+bone 27: Wrist-1_L
+bone 28: Palm-2_L
+bone 29: Finger-2-1_L
+bone 30: Finger-2-2_L
+bone 31: Finger-2-3_L
+bone 32: Palm-3_L
+bone 33: Finger-3-1_L
+bone 34: Finger-3-2_L
+bone 35: Finger-3-3_L
+bone 36: Wrist-2_L
+bone 37: Palm-4_L
+bone 38: Finger-4-1_L
+bone 39: Finger-4-2_L
+bone 40: Finger-4-3_L
+bone 41: Palm-5_L
+bone 42: Finger-5-1_L
+bone 43: Finger-5-2_L
+bone 44: Finger-5-3_L
+bone 45: Palm-1_L
+bone 46: Finger-1-1_L
+bone 47: Finger-1-2_L
+bone 48: Finger-1-3_L
+bone 49: Clavicle_R
+bone 50: UpArm_R
+bone 51: LoArm_R
+bone 52: Hand_R
+bone 53: Wrist-1_R
+bone 54: Palm-2_R
+bone 55: Finger-2-1_R
+bone 56: Finger-2-2_R
+bone 57: Finger-2-3_R
+bone 58: Palm-3_R
+bone 59: Finger-3-1_R
+bone 60: Finger-3-2_R
+bone 61: Finger-3-3_R
+bone 62: Wrist-2_R
+bone 63: Palm-4_R
+bone 64: Finger-4-1_R
+bone 65: Finger-4-2_R
+bone 66: Finger-4-3_R
+bone 67: Palm-5_R
+bone 68: Finger-5-1_R
+bone 69: Finger-5-2_R
+bone 70: Finger-5-3_R
+bone 71: Palm-1_R
+bone 72: Finger-1-1_R
+bone 73: Finger-1-2_R
+bone 74: Finger-1-3_R
+bone 75: LegHandle_L
+bone 76: Foot_L
+bone 77: Toe_L
+bone 78: LegHandle_R
+bone 79: Foot_R
+bone 80: Toe_R
+bone 81: Knee_L
+bone 82: Knee_R
+skeleton parent node: Scene_root
+animation #: 0
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+
+time: Sun Mar 16 15:21:56 2014
+bone 0: Dir_Master
+bone 1: Master
+bone 2: Root
+bone 3: Hips
+bone 4: UpLeg_L
+bone 5: LoLeg_L
+bone 6: UpLeg_R
+bone 7: LoLeg_R
+bone 8: Spine1
+bone 9: Spine2
+bone 10: Spine3
+bone 11: Neck
+bone 12: Head
+bone 13: Jaw
+bone 14: TongueBase
+bone 15: TongueMid
+bone 16: TongueTip
+bone 17: Eye_R
+bone 18: Eye_L
+bone 19: UpLid_R
+bone 20: LoLid_R
+bone 21: UpLid_L
+bone 22: LoLid_L
+bone 23: Clavicle_L
+bone 24: UpArm_L
+bone 25: LoArm_L
+bone 26: Hand_L
+bone 27: Wrist-1_L
+bone 28: Palm-2_L
+bone 29: Finger-2-1_L
+bone 30: Finger-2-2_L
+bone 31: Finger-2-3_L
+bone 32: Palm-3_L
+bone 33: Finger-3-1_L
+bone 34: Finger-3-2_L
+bone 35: Finger-3-3_L
+bone 36: Wrist-2_L
+bone 37: Palm-4_L
+bone 38: Finger-4-1_L
+bone 39: Finger-4-2_L
+bone 40: Finger-4-3_L
+bone 41: Palm-5_L
+bone 42: Finger-5-1_L
+bone 43: Finger-5-2_L
+bone 44: Finger-5-3_L
+bone 45: Palm-1_L
+bone 46: Finger-1-1_L
+bone 47: Finger-1-2_L
+bone 48: Finger-1-3_L
+bone 49: Clavicle_R
+bone 50: UpArm_R
+bone 51: LoArm_R
+bone 52: Hand_R
+bone 53: Wrist-1_R
+bone 54: Palm-2_R
+bone 55: Finger-2-1_R
+bone 56: Finger-2-2_R
+bone 57: Finger-2-3_R
+bone 58: Palm-3_R
+bone 59: Finger-3-1_R
+bone 60: Finger-3-2_R
+bone 61: Finger-3-3_R
+bone 62: Wrist-2_R
+bone 63: Palm-4_R
+bone 64: Finger-4-1_R
+bone 65: Finger-4-2_R
+bone 66: Finger-4-3_R
+bone 67: Palm-5_R
+bone 68: Finger-5-1_R
+bone 69: Finger-5-2_R
+bone 70: Finger-5-3_R
+bone 71: Palm-1_R
+bone 72: Finger-1-1_R
+bone 73: Finger-1-2_R
+bone 74: Finger-1-3_R
+bone 75: LegHandle_L
+bone 76: Foot_L
+bone 77: Toe_L
+bone 78: LegHandle_R
+bone 79: Foot_R
+bone 80: Toe_R
+bone 81: Knee_L
+bone 82: Knee_R
+skeleton parent node: Scene_root
+animation #: 0
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+
+time: Sun Mar 16 15:24:28 2014
+bone 0: Dir_Master
+bone 1: Master
+bone 2: Root
+bone 3: Hips
+bone 4: UpLeg_L
+bone 5: LoLeg_L
+bone 6: UpLeg_R
+bone 7: LoLeg_R
+bone 8: Spine1
+bone 9: Spine2
+bone 10: Spine3
+bone 11: Neck
+bone 12: Head
+bone 13: Jaw
+bone 14: TongueBase
+bone 15: TongueMid
+bone 16: TongueTip
+bone 17: Eye_R
+bone 18: Eye_L
+bone 19: UpLid_R
+bone 20: LoLid_R
+bone 21: UpLid_L
+bone 22: LoLid_L
+bone 23: Clavicle_L
+bone 24: UpArm_L
+bone 25: LoArm_L
+bone 26: Hand_L
+bone 27: Wrist-1_L
+bone 28: Palm-2_L
+bone 29: Finger-2-1_L
+bone 30: Finger-2-2_L
+bone 31: Finger-2-3_L
+bone 32: Palm-3_L
+bone 33: Finger-3-1_L
+bone 34: Finger-3-2_L
+bone 35: Finger-3-3_L
+bone 36: Wrist-2_L
+bone 37: Palm-4_L
+bone 38: Finger-4-1_L
+bone 39: Finger-4-2_L
+bone 40: Finger-4-3_L
+bone 41: Palm-5_L
+bone 42: Finger-5-1_L
+bone 43: Finger-5-2_L
+bone 44: Finger-5-3_L
+bone 45: Palm-1_L
+bone 46: Finger-1-1_L
+bone 47: Finger-1-2_L
+bone 48: Finger-1-3_L
+bone 49: Clavicle_R
+bone 50: UpArm_R
+bone 51: LoArm_R
+bone 52: Hand_R
+bone 53: Wrist-1_R
+bone 54: Palm-2_R
+bone 55: Finger-2-1_R
+bone 56: Finger-2-2_R
+bone 57: Finger-2-3_R
+bone 58: Palm-3_R
+bone 59: Finger-3-1_R
+bone 60: Finger-3-2_R
+bone 61: Finger-3-3_R
+bone 62: Wrist-2_R
+bone 63: Palm-4_R
+bone 64: Finger-4-1_R
+bone 65: Finger-4-2_R
+bone 66: Finger-4-3_R
+bone 67: Palm-5_R
+bone 68: Finger-5-1_R
+bone 69: Finger-5-2_R
+bone 70: Finger-5-3_R
+bone 71: Palm-1_R
+bone 72: Finger-1-1_R
+bone 73: Finger-1-2_R
+bone 74: Finger-1-3_R
+bone 75: LegHandle_L
+bone 76: Foot_L
+bone 77: Toe_L
+bone 78: LegHandle_R
+bone 79: Foot_R
+bone 80: Toe_R
+bone 81: Knee_L
+bone 82: Knee_R
+skeleton parent node: Scene_root
+animation #: 0
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+
+time: Sun Mar 16 15:25:58 2014
+bone 0: Dir_Master
+bone 1: Master
+bone 2: Root
+bone 3: Hips
+bone 4: UpLeg_L
+bone 5: LoLeg_L
+bone 6: UpLeg_R
+bone 7: LoLeg_R
+bone 8: Spine1
+bone 9: Spine2
+bone 10: Spine3
+bone 11: Neck
+bone 12: Head
+bone 13: Jaw
+bone 14: TongueBase
+bone 15: TongueMid
+bone 16: TongueTip
+bone 17: Eye_R
+bone 18: Eye_L
+bone 19: UpLid_R
+bone 20: LoLid_R
+bone 21: UpLid_L
+bone 22: LoLid_L
+bone 23: Clavicle_L
+bone 24: UpArm_L
+bone 25: LoArm_L
+bone 26: Hand_L
+bone 27: Wrist-1_L
+bone 28: Palm-2_L
+bone 29: Finger-2-1_L
+bone 30: Finger-2-2_L
+bone 31: Finger-2-3_L
+bone 32: Palm-3_L
+bone 33: Finger-3-1_L
+bone 34: Finger-3-2_L
+bone 35: Finger-3-3_L
+bone 36: Wrist-2_L
+bone 37: Palm-4_L
+bone 38: Finger-4-1_L
+bone 39: Finger-4-2_L
+bone 40: Finger-4-3_L
+bone 41: Palm-5_L
+bone 42: Finger-5-1_L
+bone 43: Finger-5-2_L
+bone 44: Finger-5-3_L
+bone 45: Palm-1_L
+bone 46: Finger-1-1_L
+bone 47: Finger-1-2_L
+bone 48: Finger-1-3_L
+bone 49: Clavicle_R
+bone 50: UpArm_R
+bone 51: LoArm_R
+bone 52: Hand_R
+bone 53: Wrist-1_R
+bone 54: Palm-2_R
+bone 55: Finger-2-1_R
+bone 56: Finger-2-2_R
+bone 57: Finger-2-3_R
+bone 58: Palm-3_R
+bone 59: Finger-3-1_R
+bone 60: Finger-3-2_R
+bone 61: Finger-3-3_R
+bone 62: Wrist-2_R
+bone 63: Palm-4_R
+bone 64: Finger-4-1_R
+bone 65: Finger-4-2_R
+bone 66: Finger-4-3_R
+bone 67: Palm-5_R
+bone 68: Finger-5-1_R
+bone 69: Finger-5-2_R
+bone 70: Finger-5-3_R
+bone 71: Palm-1_R
+bone 72: Finger-1-1_R
+bone 73: Finger-1-2_R
+bone 74: Finger-1-3_R
+bone 75: LegHandle_L
+bone 76: Foot_L
+bone 77: Toe_L
+bone 78: LegHandle_R
+bone 79: Foot_R
+bone 80: Toe_R
+bone 81: Knee_L
+bone 82: Knee_R
+skeleton parent node: Scene_root
+animation #: 0
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+
+time: Sun Mar 16 15:27:06 2014
+bone 0: Dir_Master
+bone 1: Master
+bone 2: Root
+bone 3: Hips
+bone 4: UpLeg_L
+bone 5: LoLeg_L
+bone 6: UpLeg_R
+bone 7: LoLeg_R
+bone 8: Spine1
+bone 9: Spine2
+bone 10: Spine3
+bone 11: Neck
+bone 12: Head
+bone 13: Jaw
+bone 14: TongueBase
+bone 15: TongueMid
+bone 16: TongueTip
+bone 17: Eye_R
+bone 18: Eye_L
+bone 19: UpLid_R
+bone 20: LoLid_R
+bone 21: UpLid_L
+bone 22: LoLid_L
+bone 23: Clavicle_L
+bone 24: UpArm_L
+bone 25: LoArm_L
+bone 26: Hand_L
+bone 27: Wrist-1_L
+bone 28: Palm-2_L
+bone 29: Finger-2-1_L
+bone 30: Finger-2-2_L
+bone 31: Finger-2-3_L
+bone 32: Palm-3_L
+bone 33: Finger-3-1_L
+bone 34: Finger-3-2_L
+bone 35: Finger-3-3_L
+bone 36: Wrist-2_L
+bone 37: Palm-4_L
+bone 38: Finger-4-1_L
+bone 39: Finger-4-2_L
+bone 40: Finger-4-3_L
+bone 41: Palm-5_L
+bone 42: Finger-5-1_L
+bone 43: Finger-5-2_L
+bone 44: Finger-5-3_L
+bone 45: Palm-1_L
+bone 46: Finger-1-1_L
+bone 47: Finger-1-2_L
+bone 48: Finger-1-3_L
+bone 49: Clavicle_R
+bone 50: UpArm_R
+bone 51: LoArm_R
+bone 52: Hand_R
+bone 53: Wrist-1_R
+bone 54: Palm-2_R
+bone 55: Finger-2-1_R
+bone 56: Finger-2-2_R
+bone 57: Finger-2-3_R
+bone 58: Palm-3_R
+bone 59: Finger-3-1_R
+bone 60: Finger-3-2_R
+bone 61: Finger-3-3_R
+bone 62: Wrist-2_R
+bone 63: Palm-4_R
+bone 64: Finger-4-1_R
+bone 65: Finger-4-2_R
+bone 66: Finger-4-3_R
+bone 67: Palm-5_R
+bone 68: Finger-5-1_R
+bone 69: Finger-5-2_R
+bone 70: Finger-5-3_R
+bone 71: Palm-1_R
+bone 72: Finger-1-1_R
+bone 73: Finger-1-2_R
+bone 74: Finger-1-3_R
+bone 75: LegHandle_L
+bone 76: Foot_L
+bone 77: Toe_L
+bone 78: LegHandle_R
+bone 79: Foot_R
+bone 80: Toe_R
+bone 81: Knee_L
+bone 82: Knee_R
+skeleton parent node: Scene_root
+animation #: 0
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+
+time: Sun Mar 16 15:28:10 2014
+bone 0: Dir_Master
+bone 1: Master
+bone 2: Root
+bone 3: Hips
+bone 4: UpLeg_L
+bone 5: LoLeg_L
+bone 6: UpLeg_R
+bone 7: LoLeg_R
+bone 8: Spine1
+bone 9: Spine2
+bone 10: Spine3
+bone 11: Neck
+bone 12: Head
+bone 13: Jaw
+bone 14: TongueBase
+bone 15: TongueMid
+bone 16: TongueTip
+bone 17: Eye_R
+bone 18: Eye_L
+bone 19: UpLid_R
+bone 20: LoLid_R
+bone 21: UpLid_L
+bone 22: LoLid_L
+bone 23: Clavicle_L
+bone 24: UpArm_L
+bone 25: LoArm_L
+bone 26: Hand_L
+bone 27: Wrist-1_L
+bone 28: Palm-2_L
+bone 29: Finger-2-1_L
+bone 30: Finger-2-2_L
+bone 31: Finger-2-3_L
+bone 32: Palm-3_L
+bone 33: Finger-3-1_L
+bone 34: Finger-3-2_L
+bone 35: Finger-3-3_L
+bone 36: Wrist-2_L
+bone 37: Palm-4_L
+bone 38: Finger-4-1_L
+bone 39: Finger-4-2_L
+bone 40: Finger-4-3_L
+bone 41: Palm-5_L
+bone 42: Finger-5-1_L
+bone 43: Finger-5-2_L
+bone 44: Finger-5-3_L
+bone 45: Palm-1_L
+bone 46: Finger-1-1_L
+bone 47: Finger-1-2_L
+bone 48: Finger-1-3_L
+bone 49: Clavicle_R
+bone 50: UpArm_R
+bone 51: LoArm_R
+bone 52: Hand_R
+bone 53: Wrist-1_R
+bone 54: Palm-2_R
+bone 55: Finger-2-1_R
+bone 56: Finger-2-2_R
+bone 57: Finger-2-3_R
+bone 58: Palm-3_R
+bone 59: Finger-3-1_R
+bone 60: Finger-3-2_R
+bone 61: Finger-3-3_R
+bone 62: Wrist-2_R
+bone 63: Palm-4_R
+bone 64: Finger-4-1_R
+bone 65: Finger-4-2_R
+bone 66: Finger-4-3_R
+bone 67: Palm-5_R
+bone 68: Finger-5-1_R
+bone 69: Finger-5-2_R
+bone 70: Finger-5-3_R
+bone 71: Palm-1_R
+bone 72: Finger-1-1_R
+bone 73: Finger-1-2_R
+bone 74: Finger-1-3_R
+bone 75: LegHandle_L
+bone 76: Foot_L
+bone 77: Toe_L
+bone 78: LegHandle_R
+bone 79: Foot_R
+bone 80: Toe_R
+bone 81: Knee_L
+bone 82: Knee_R
+skeleton parent node: Scene_root
+animation #: 0
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+
+time: Sun Mar 16 15:32:02 2014
+bone 0: Dir_Master
+bone 1: Master
+bone 2: Root
+bone 3: Hips
+bone 4: UpLeg_L
+bone 5: LoLeg_L
+bone 6: UpLeg_R
+bone 7: LoLeg_R
+bone 8: Spine1
+bone 9: Spine2
+bone 10: Spine3
+bone 11: Neck
+bone 12: Head
+bone 13: Jaw
+bone 14: TongueBase
+bone 15: TongueMid
+bone 16: TongueTip
+bone 17: Eye_R
+bone 18: Eye_L
+bone 19: UpLid_R
+bone 20: LoLid_R
+bone 21: UpLid_L
+bone 22: LoLid_L
+bone 23: Clavicle_L
+bone 24: UpArm_L
+bone 25: LoArm_L
+bone 26: Hand_L
+bone 27: Wrist-1_L
+bone 28: Palm-2_L
+bone 29: Finger-2-1_L
+bone 30: Finger-2-2_L
+bone 31: Finger-2-3_L
+bone 32: Palm-3_L
+bone 33: Finger-3-1_L
+bone 34: Finger-3-2_L
+bone 35: Finger-3-3_L
+bone 36: Wrist-2_L
+bone 37: Palm-4_L
+bone 38: Finger-4-1_L
+bone 39: Finger-4-2_L
+bone 40: Finger-4-3_L
+bone 41: Palm-5_L
+bone 42: Finger-5-1_L
+bone 43: Finger-5-2_L
+bone 44: Finger-5-3_L
+bone 45: Palm-1_L
+bone 46: Finger-1-1_L
+bone 47: Finger-1-2_L
+bone 48: Finger-1-3_L
+bone 49: Clavicle_R
+bone 50: UpArm_R
+bone 51: LoArm_R
+bone 52: Hand_R
+bone 53: Wrist-1_R
+bone 54: Palm-2_R
+bone 55: Finger-2-1_R
+bone 56: Finger-2-2_R
+bone 57: Finger-2-3_R
+bone 58: Palm-3_R
+bone 59: Finger-3-1_R
+bone 60: Finger-3-2_R
+bone 61: Finger-3-3_R
+bone 62: Wrist-2_R
+bone 63: Palm-4_R
+bone 64: Finger-4-1_R
+bone 65: Finger-4-2_R
+bone 66: Finger-4-3_R
+bone 67: Palm-5_R
+bone 68: Finger-5-1_R
+bone 69: Finger-5-2_R
+bone 70: Finger-5-3_R
+bone 71: Palm-1_R
+bone 72: Finger-1-1_R
+bone 73: Finger-1-2_R
+bone 74: Finger-1-3_R
+bone 75: LegHandle_L
+bone 76: Foot_L
+bone 77: Toe_L
+bone 78: LegHandle_R
+bone 79: Foot_R
+bone 80: Toe_R
+bone 81: Knee_L
+bone 82: Knee_R
+skeleton parent node: Scene_root
+animation #: 0
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+
+time: Sun Mar 16 15:32:34 2014
+bone 0: Dir_Master
+bone 1: Master
+bone 2: Root
+bone 3: Hips
+bone 4: UpLeg_L
+bone 5: LoLeg_L
+bone 6: UpLeg_R
+bone 7: LoLeg_R
+bone 8: Spine1
+bone 9: Spine2
+bone 10: Spine3
+bone 11: Neck
+bone 12: Head
+bone 13: Jaw
+bone 14: TongueBase
+bone 15: TongueMid
+bone 16: TongueTip
+bone 17: Eye_R
+bone 18: Eye_L
+bone 19: UpLid_R
+bone 20: LoLid_R
+bone 21: UpLid_L
+bone 22: LoLid_L
+bone 23: Clavicle_L
+bone 24: UpArm_L
+bone 25: LoArm_L
+bone 26: Hand_L
+bone 27: Wrist-1_L
+bone 28: Palm-2_L
+bone 29: Finger-2-1_L
+bone 30: Finger-2-2_L
+bone 31: Finger-2-3_L
+bone 32: Palm-3_L
+bone 33: Finger-3-1_L
+bone 34: Finger-3-2_L
+bone 35: Finger-3-3_L
+bone 36: Wrist-2_L
+bone 37: Palm-4_L
+bone 38: Finger-4-1_L
+bone 39: Finger-4-2_L
+bone 40: Finger-4-3_L
+bone 41: Palm-5_L
+bone 42: Finger-5-1_L
+bone 43: Finger-5-2_L
+bone 44: Finger-5-3_L
+bone 45: Palm-1_L
+bone 46: Finger-1-1_L
+bone 47: Finger-1-2_L
+bone 48: Finger-1-3_L
+bone 49: Clavicle_R
+bone 50: UpArm_R
+bone 51: LoArm_R
+bone 52: Hand_R
+bone 53: Wrist-1_R
+bone 54: Palm-2_R
+bone 55: Finger-2-1_R
+bone 56: Finger-2-2_R
+bone 57: Finger-2-3_R
+bone 58: Palm-3_R
+bone 59: Finger-3-1_R
+bone 60: Finger-3-2_R
+bone 61: Finger-3-3_R
+bone 62: Wrist-2_R
+bone 63: Palm-4_R
+bone 64: Finger-4-1_R
+bone 65: Finger-4-2_R
+bone 66: Finger-4-3_R
+bone 67: Palm-5_R
+bone 68: Finger-5-1_R
+bone 69: Finger-5-2_R
+bone 70: Finger-5-3_R
+bone 71: Palm-1_R
+bone 72: Finger-1-1_R
+bone 73: Finger-1-2_R
+bone 74: Finger-1-3_R
+bone 75: LegHandle_L
+bone 76: Foot_L
+bone 77: Toe_L
+bone 78: LegHandle_R
+bone 79: Foot_R
+bone 80: Toe_R
+bone 81: Knee_L
+bone 82: Knee_R
+skeleton parent node: Scene_root
+animation #: 0
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+
+time: Sun Mar 16 15:35:02 2014
+bone 0: Dir_Master
+bone 1: Master
+bone 2: Root
+bone 3: Hips
+bone 4: UpLeg_L
+bone 5: LoLeg_L
+bone 6: UpLeg_R
+bone 7: LoLeg_R
+bone 8: Spine1
+bone 9: Spine2
+bone 10: Spine3
+bone 11: Neck
+bone 12: Head
+bone 13: Jaw
+bone 14: TongueBase
+bone 15: TongueMid
+bone 16: TongueTip
+bone 17: Eye_R
+bone 18: Eye_L
+bone 19: UpLid_R
+bone 20: LoLid_R
+bone 21: UpLid_L
+bone 22: LoLid_L
+bone 23: Clavicle_L
+bone 24: UpArm_L
+bone 25: LoArm_L
+bone 26: Hand_L
+bone 27: Wrist-1_L
+bone 28: Palm-2_L
+bone 29: Finger-2-1_L
+bone 30: Finger-2-2_L
+bone 31: Finger-2-3_L
+bone 32: Palm-3_L
+bone 33: Finger-3-1_L
+bone 34: Finger-3-2_L
+bone 35: Finger-3-3_L
+bone 36: Wrist-2_L
+bone 37: Palm-4_L
+bone 38: Finger-4-1_L
+bone 39: Finger-4-2_L
+bone 40: Finger-4-3_L
+bone 41: Palm-5_L
+bone 42: Finger-5-1_L
+bone 43: Finger-5-2_L
+bone 44: Finger-5-3_L
+bone 45: Palm-1_L
+bone 46: Finger-1-1_L
+bone 47: Finger-1-2_L
+bone 48: Finger-1-3_L
+bone 49: Clavicle_R
+bone 50: UpArm_R
+bone 51: LoArm_R
+bone 52: Hand_R
+bone 53: Wrist-1_R
+bone 54: Palm-2_R
+bone 55: Finger-2-1_R
+bone 56: Finger-2-2_R
+bone 57: Finger-2-3_R
+bone 58: Palm-3_R
+bone 59: Finger-3-1_R
+bone 60: Finger-3-2_R
+bone 61: Finger-3-3_R
+bone 62: Wrist-2_R
+bone 63: Palm-4_R
+bone 64: Finger-4-1_R
+bone 65: Finger-4-2_R
+bone 66: Finger-4-3_R
+bone 67: Palm-5_R
+bone 68: Finger-5-1_R
+bone 69: Finger-5-2_R
+bone 70: Finger-5-3_R
+bone 71: Palm-1_R
+bone 72: Finger-1-1_R
+bone 73: Finger-1-2_R
+bone 74: Finger-1-3_R
+bone 75: LegHandle_L
+bone 76: Foot_L
+bone 77: Toe_L
+bone 78: LegHandle_R
+bone 79: Foot_R
+bone 80: Toe_R
+bone 81: Knee_L
+bone 82: Knee_R
+skeleton parent node: Scene_root
+animation #: 0
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+
+time: Sun Mar 16 15:37:50 2014
+bone 0: Dir_Master
+bone 1: Master
+bone 2: Root
+bone 3: Hips
+bone 4: UpLeg_L
+bone 5: LoLeg_L
+bone 6: UpLeg_R
+bone 7: LoLeg_R
+bone 8: Spine1
+bone 9: Spine2
+bone 10: Spine3
+bone 11: Neck
+bone 12: Head
+bone 13: Jaw
+bone 14: TongueBase
+bone 15: TongueMid
+bone 16: TongueTip
+bone 17: Eye_R
+bone 18: Eye_L
+bone 19: UpLid_R
+bone 20: LoLid_R
+bone 21: UpLid_L
+bone 22: LoLid_L
+bone 23: Clavicle_L
+bone 24: UpArm_L
+bone 25: LoArm_L
+bone 26: Hand_L
+bone 27: Wrist-1_L
+bone 28: Palm-2_L
+bone 29: Finger-2-1_L
+bone 30: Finger-2-2_L
+bone 31: Finger-2-3_L
+bone 32: Palm-3_L
+bone 33: Finger-3-1_L
+bone 34: Finger-3-2_L
+bone 35: Finger-3-3_L
+bone 36: Wrist-2_L
+bone 37: Palm-4_L
+bone 38: Finger-4-1_L
+bone 39: Finger-4-2_L
+bone 40: Finger-4-3_L
+bone 41: Palm-5_L
+bone 42: Finger-5-1_L
+bone 43: Finger-5-2_L
+bone 44: Finger-5-3_L
+bone 45: Palm-1_L
+bone 46: Finger-1-1_L
+bone 47: Finger-1-2_L
+bone 48: Finger-1-3_L
+bone 49: Clavicle_R
+bone 50: UpArm_R
+bone 51: LoArm_R
+bone 52: Hand_R
+bone 53: Wrist-1_R
+bone 54: Palm-2_R
+bone 55: Finger-2-1_R
+bone 56: Finger-2-2_R
+bone 57: Finger-2-3_R
+bone 58: Palm-3_R
+bone 59: Finger-3-1_R
+bone 60: Finger-3-2_R
+bone 61: Finger-3-3_R
+bone 62: Wrist-2_R
+bone 63: Palm-4_R
+bone 64: Finger-4-1_R
+bone 65: Finger-4-2_R
+bone 66: Finger-4-3_R
+bone 67: Palm-5_R
+bone 68: Finger-5-1_R
+bone 69: Finger-5-2_R
+bone 70: Finger-5-3_R
+bone 71: Palm-1_R
+bone 72: Finger-1-1_R
+bone 73: Finger-1-2_R
+bone 74: Finger-1-3_R
+bone 75: LegHandle_L
+bone 76: Foot_L
+bone 77: Toe_L
+bone 78: LegHandle_R
+bone 79: Foot_R
+bone 80: Toe_R
+bone 81: Knee_L
+bone 82: Knee_R
+skeleton parent node: Scene_root
+animation #: 0
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+
+time: Sun Mar 16 15:40:13 2014
+bone 0: Dir_Master
+bone 1: Master
+bone 2: Root
+bone 3: Hips
+bone 4: UpLeg_L
+bone 5: LoLeg_L
+bone 6: UpLeg_R
+bone 7: LoLeg_R
+bone 8: Spine1
+bone 9: Spine2
+bone 10: Spine3
+bone 11: Neck
+bone 12: Head
+bone 13: Jaw
+bone 14: TongueBase
+bone 15: TongueMid
+bone 16: TongueTip
+bone 17: Eye_R
+bone 18: Eye_L
+bone 19: UpLid_R
+bone 20: LoLid_R
+bone 21: UpLid_L
+bone 22: LoLid_L
+bone 23: Clavicle_L
+bone 24: UpArm_L
+bone 25: LoArm_L
+bone 26: Hand_L
+bone 27: Wrist-1_L
+bone 28: Palm-2_L
+bone 29: Finger-2-1_L
+bone 30: Finger-2-2_L
+bone 31: Finger-2-3_L
+bone 32: Palm-3_L
+bone 33: Finger-3-1_L
+bone 34: Finger-3-2_L
+bone 35: Finger-3-3_L
+bone 36: Wrist-2_L
+bone 37: Palm-4_L
+bone 38: Finger-4-1_L
+bone 39: Finger-4-2_L
+bone 40: Finger-4-3_L
+bone 41: Palm-5_L
+bone 42: Finger-5-1_L
+bone 43: Finger-5-2_L
+bone 44: Finger-5-3_L
+bone 45: Palm-1_L
+bone 46: Finger-1-1_L
+bone 47: Finger-1-2_L
+bone 48: Finger-1-3_L
+bone 49: Clavicle_R
+bone 50: UpArm_R
+bone 51: LoArm_R
+bone 52: Hand_R
+bone 53: Wrist-1_R
+bone 54: Palm-2_R
+bone 55: Finger-2-1_R
+bone 56: Finger-2-2_R
+bone 57: Finger-2-3_R
+bone 58: Palm-3_R
+bone 59: Finger-3-1_R
+bone 60: Finger-3-2_R
+bone 61: Finger-3-3_R
+bone 62: Wrist-2_R
+bone 63: Palm-4_R
+bone 64: Finger-4-1_R
+bone 65: Finger-4-2_R
+bone 66: Finger-4-3_R
+bone 67: Palm-5_R
+bone 68: Finger-5-1_R
+bone 69: Finger-5-2_R
+bone 70: Finger-5-3_R
+bone 71: Palm-1_R
+bone 72: Finger-1-1_R
+bone 73: Finger-1-2_R
+bone 74: Finger-1-3_R
+bone 75: LegHandle_L
+bone 76: Foot_L
+bone 77: Toe_L
+bone 78: LegHandle_R
+bone 79: Foot_R
+bone 80: Toe_R
+bone 81: Knee_L
+bone 82: Knee_R
+skeleton parent node: Scene_root
+animation #: 0
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+
+time: Sun Mar 16 15:40:51 2014
+bone 0: Dir_Master
+bone 1: Master
+bone 2: Root
+bone 3: Hips
+bone 4: UpLeg_L
+bone 5: LoLeg_L
+bone 6: UpLeg_R
+bone 7: LoLeg_R
+bone 8: Spine1
+bone 9: Spine2
+bone 10: Spine3
+bone 11: Neck
+bone 12: Head
+bone 13: Jaw
+bone 14: TongueBase
+bone 15: TongueMid
+bone 16: TongueTip
+bone 17: Eye_R
+bone 18: Eye_L
+bone 19: UpLid_R
+bone 20: LoLid_R
+bone 21: UpLid_L
+bone 22: LoLid_L
+bone 23: Clavicle_L
+bone 24: UpArm_L
+bone 25: LoArm_L
+bone 26: Hand_L
+bone 27: Wrist-1_L
+bone 28: Palm-2_L
+bone 29: Finger-2-1_L
+bone 30: Finger-2-2_L
+bone 31: Finger-2-3_L
+bone 32: Palm-3_L
+bone 33: Finger-3-1_L
+bone 34: Finger-3-2_L
+bone 35: Finger-3-3_L
+bone 36: Wrist-2_L
+bone 37: Palm-4_L
+bone 38: Finger-4-1_L
+bone 39: Finger-4-2_L
+bone 40: Finger-4-3_L
+bone 41: Palm-5_L
+bone 42: Finger-5-1_L
+bone 43: Finger-5-2_L
+bone 44: Finger-5-3_L
+bone 45: Palm-1_L
+bone 46: Finger-1-1_L
+bone 47: Finger-1-2_L
+bone 48: Finger-1-3_L
+bone 49: Clavicle_R
+bone 50: UpArm_R
+bone 51: LoArm_R
+bone 52: Hand_R
+bone 53: Wrist-1_R
+bone 54: Palm-2_R
+bone 55: Finger-2-1_R
+bone 56: Finger-2-2_R
+bone 57: Finger-2-3_R
+bone 58: Palm-3_R
+bone 59: Finger-3-1_R
+bone 60: Finger-3-2_R
+bone 61: Finger-3-3_R
+bone 62: Wrist-2_R
+bone 63: Palm-4_R
+bone 64: Finger-4-1_R
+bone 65: Finger-4-2_R
+bone 66: Finger-4-3_R
+bone 67: Palm-5_R
+bone 68: Finger-5-1_R
+bone 69: Finger-5-2_R
+bone 70: Finger-5-3_R
+bone 71: Palm-1_R
+bone 72: Finger-1-1_R
+bone 73: Finger-1-2_R
+bone 74: Finger-1-3_R
+bone 75: LegHandle_L
+bone 76: Foot_L
+bone 77: Toe_L
+bone 78: LegHandle_R
+bone 79: Foot_R
+bone 80: Toe_R
+bone 81: Knee_L
+bone 82: Knee_R
+bone 83: humale
+bone 84: loincloth
+skeleton parent node: Scene_root
+animation #: 0
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+
+time: Sun Mar 16 15:51:04 2014
+bone 0: Dir_Master
+bone 1: Master
+bone 2: Root
+bone 3: Hips
+bone 4: UpLeg_L
+bone 5: LoLeg_L
+bone 6: UpLeg_R
+bone 7: LoLeg_R
+bone 8: Spine1
+bone 9: Spine2
+bone 10: Spine3
+bone 11: Neck
+bone 12: Head
+bone 13: Jaw
+bone 14: TongueBase
+bone 15: TongueMid
+bone 16: TongueTip
+bone 17: Eye_R
+bone 18: Eye_L
+bone 19: UpLid_R
+bone 20: LoLid_R
+bone 21: UpLid_L
+bone 22: LoLid_L
+bone 23: Clavicle_L
+bone 24: UpArm_L
+bone 25: LoArm_L
+bone 26: Hand_L
+bone 27: Wrist-1_L
+bone 28: Palm-2_L
+bone 29: Finger-2-1_L
+bone 30: Finger-2-2_L
+bone 31: Finger-2-3_L
+bone 32: Palm-3_L
+bone 33: Finger-3-1_L
+bone 34: Finger-3-2_L
+bone 35: Finger-3-3_L
+bone 36: Wrist-2_L
+bone 37: Palm-4_L
+bone 38: Finger-4-1_L
+bone 39: Finger-4-2_L
+bone 40: Finger-4-3_L
+bone 41: Palm-5_L
+bone 42: Finger-5-1_L
+bone 43: Finger-5-2_L
+bone 44: Finger-5-3_L
+bone 45: Palm-1_L
+bone 46: Finger-1-1_L
+bone 47: Finger-1-2_L
+bone 48: Finger-1-3_L
+bone 49: Clavicle_R
+bone 50: UpArm_R
+bone 51: LoArm_R
+bone 52: Hand_R
+bone 53: Wrist-1_R
+bone 54: Palm-2_R
+bone 55: Finger-2-1_R
+bone 56: Finger-2-2_R
+bone 57: Finger-2-3_R
+bone 58: Palm-3_R
+bone 59: Finger-3-1_R
+bone 60: Finger-3-2_R
+bone 61: Finger-3-3_R
+bone 62: Wrist-2_R
+bone 63: Palm-4_R
+bone 64: Finger-4-1_R
+bone 65: Finger-4-2_R
+bone 66: Finger-4-3_R
+bone 67: Palm-5_R
+bone 68: Finger-5-1_R
+bone 69: Finger-5-2_R
+bone 70: Finger-5-3_R
+bone 71: Palm-1_R
+bone 72: Finger-1-1_R
+bone 73: Finger-1-2_R
+bone 74: Finger-1-3_R
+bone 75: LegHandle_L
+bone 76: Foot_L
+bone 77: Toe_L
+bone 78: LegHandle_R
+bone 79: Foot_R
+bone 80: Toe_R
+bone 81: Knee_L
+bone 82: Knee_R
+bone 83: humale
+bone 84: loincloth
+skeleton parent node: Scene_root
+animation #: 0
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+
+time: Sun Mar 16 15:52:50 2014
+bone 0: Dir_Master
+bone 1: Master
+bone 2: Root
+bone 3: Hips
+bone 4: UpLeg_L
+bone 5: LoLeg_L
+bone 6: UpLeg_R
+bone 7: LoLeg_R
+bone 8: Spine1
+bone 9: Spine2
+bone 10: Spine3
+bone 11: Neck
+bone 12: Head
+bone 13: Jaw
+bone 14: TongueBase
+bone 15: TongueMid
+bone 16: TongueTip
+bone 17: Eye_R
+bone 18: Eye_L
+bone 19: UpLid_R
+bone 20: LoLid_R
+bone 21: UpLid_L
+bone 22: LoLid_L
+bone 23: Clavicle_L
+bone 24: UpArm_L
+bone 25: LoArm_L
+bone 26: Hand_L
+bone 27: Wrist-1_L
+bone 28: Palm-2_L
+bone 29: Finger-2-1_L
+bone 30: Finger-2-2_L
+bone 31: Finger-2-3_L
+bone 32: Palm-3_L
+bone 33: Finger-3-1_L
+bone 34: Finger-3-2_L
+bone 35: Finger-3-3_L
+bone 36: Wrist-2_L
+bone 37: Palm-4_L
+bone 38: Finger-4-1_L
+bone 39: Finger-4-2_L
+bone 40: Finger-4-3_L
+bone 41: Palm-5_L
+bone 42: Finger-5-1_L
+bone 43: Finger-5-2_L
+bone 44: Finger-5-3_L
+bone 45: Palm-1_L
+bone 46: Finger-1-1_L
+bone 47: Finger-1-2_L
+bone 48: Finger-1-3_L
+bone 49: Clavicle_R
+bone 50: UpArm_R
+bone 51: LoArm_R
+bone 52: Hand_R
+bone 53: Wrist-1_R
+bone 54: Palm-2_R
+bone 55: Finger-2-1_R
+bone 56: Finger-2-2_R
+bone 57: Finger-2-3_R
+bone 58: Palm-3_R
+bone 59: Finger-3-1_R
+bone 60: Finger-3-2_R
+bone 61: Finger-3-3_R
+bone 62: Wrist-2_R
+bone 63: Palm-4_R
+bone 64: Finger-4-1_R
+bone 65: Finger-4-2_R
+bone 66: Finger-4-3_R
+bone 67: Palm-5_R
+bone 68: Finger-5-1_R
+bone 69: Finger-5-2_R
+bone 70: Finger-5-3_R
+bone 71: Palm-1_R
+bone 72: Finger-1-1_R
+bone 73: Finger-1-2_R
+bone 74: Finger-1-3_R
+bone 75: LegHandle_L
+bone 76: Foot_L
+bone 77: Toe_L
+bone 78: LegHandle_R
+bone 79: Foot_R
+bone 80: Toe_R
+bone 81: Knee_L
+bone 82: Knee_R
+bone 83: humale
+bone 84: loincloth
+skeleton parent node: Scene_root
+animation #: 0
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+
+time: Sun Mar 16 15:58:25 2014
+bone 0: Dir_Master
+bone 1: Master
+bone 2: Root
+bone 3: Hips
+bone 4: UpLeg_L
+bone 5: LoLeg_L
+bone 6: UpLeg_R
+bone 7: LoLeg_R
+bone 8: Spine1
+bone 9: Spine2
+bone 10: Spine3
+bone 11: Neck
+bone 12: Head
+bone 13: Jaw
+bone 14: TongueBase
+bone 15: TongueMid
+bone 16: TongueTip
+bone 17: Eye_R
+bone 18: Eye_L
+bone 19: UpLid_R
+bone 20: LoLid_R
+bone 21: UpLid_L
+bone 22: LoLid_L
+bone 23: Clavicle_L
+bone 24: UpArm_L
+bone 25: LoArm_L
+bone 26: Hand_L
+bone 27: Wrist-1_L
+bone 28: Palm-2_L
+bone 29: Finger-2-1_L
+bone 30: Finger-2-2_L
+bone 31: Finger-2-3_L
+bone 32: Palm-3_L
+bone 33: Finger-3-1_L
+bone 34: Finger-3-2_L
+bone 35: Finger-3-3_L
+bone 36: Wrist-2_L
+bone 37: Palm-4_L
+bone 38: Finger-4-1_L
+bone 39: Finger-4-2_L
+bone 40: Finger-4-3_L
+bone 41: Palm-5_L
+bone 42: Finger-5-1_L
+bone 43: Finger-5-2_L
+bone 44: Finger-5-3_L
+bone 45: Palm-1_L
+bone 46: Finger-1-1_L
+bone 47: Finger-1-2_L
+bone 48: Finger-1-3_L
+bone 49: Clavicle_R
+bone 50: UpArm_R
+bone 51: LoArm_R
+bone 52: Hand_R
+bone 53: Wrist-1_R
+bone 54: Palm-2_R
+bone 55: Finger-2-1_R
+bone 56: Finger-2-2_R
+bone 57: Finger-2-3_R
+bone 58: Palm-3_R
+bone 59: Finger-3-1_R
+bone 60: Finger-3-2_R
+bone 61: Finger-3-3_R
+bone 62: Wrist-2_R
+bone 63: Palm-4_R
+bone 64: Finger-4-1_R
+bone 65: Finger-4-2_R
+bone 66: Finger-4-3_R
+bone 67: Palm-5_R
+bone 68: Finger-5-1_R
+bone 69: Finger-5-2_R
+bone 70: Finger-5-3_R
+bone 71: Palm-1_R
+bone 72: Finger-1-1_R
+bone 73: Finger-1-2_R
+bone 74: Finger-1-3_R
+bone 75: LegHandle_L
+bone 76: Foot_L
+bone 77: Toe_L
+bone 78: LegHandle_R
+bone 79: Foot_R
+bone 80: Toe_R
+bone 81: Knee_L
+bone 82: Knee_R
+bone 83: humale
+bone 84: loincloth
+skeleton parent node: Scene_root
+animation #: 0
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+
+time: Sun Mar 16 16:00:58 2014
+bone 0: Dir_Master
+bone 1: Master
+bone 2: Root
+bone 3: Hips
+bone 4: UpLeg_L
+bone 5: LoLeg_L
+bone 6: UpLeg_R
+bone 7: LoLeg_R
+bone 8: Spine1
+bone 9: Spine2
+bone 10: Spine3
+bone 11: Neck
+bone 12: Head
+bone 13: Jaw
+bone 14: TongueBase
+bone 15: TongueMid
+bone 16: TongueTip
+bone 17: Eye_R
+bone 18: Eye_L
+bone 19: UpLid_R
+bone 20: LoLid_R
+bone 21: UpLid_L
+bone 22: LoLid_L
+bone 23: Clavicle_L
+bone 24: UpArm_L
+bone 25: LoArm_L
+bone 26: Hand_L
+bone 27: Wrist-1_L
+bone 28: Palm-2_L
+bone 29: Finger-2-1_L
+bone 30: Finger-2-2_L
+bone 31: Finger-2-3_L
+bone 32: Palm-3_L
+bone 33: Finger-3-1_L
+bone 34: Finger-3-2_L
+bone 35: Finger-3-3_L
+bone 36: Wrist-2_L
+bone 37: Palm-4_L
+bone 38: Finger-4-1_L
+bone 39: Finger-4-2_L
+bone 40: Finger-4-3_L
+bone 41: Palm-5_L
+bone 42: Finger-5-1_L
+bone 43: Finger-5-2_L
+bone 44: Finger-5-3_L
+bone 45: Palm-1_L
+bone 46: Finger-1-1_L
+bone 47: Finger-1-2_L
+bone 48: Finger-1-3_L
+bone 49: Clavicle_R
+bone 50: UpArm_R
+bone 51: LoArm_R
+bone 52: Hand_R
+bone 53: Wrist-1_R
+bone 54: Palm-2_R
+bone 55: Finger-2-1_R
+bone 56: Finger-2-2_R
+bone 57: Finger-2-3_R
+bone 58: Palm-3_R
+bone 59: Finger-3-1_R
+bone 60: Finger-3-2_R
+bone 61: Finger-3-3_R
+bone 62: Wrist-2_R
+bone 63: Palm-4_R
+bone 64: Finger-4-1_R
+bone 65: Finger-4-2_R
+bone 66: Finger-4-3_R
+bone 67: Palm-5_R
+bone 68: Finger-5-1_R
+bone 69: Finger-5-2_R
+bone 70: Finger-5-3_R
+bone 71: Palm-1_R
+bone 72: Finger-1-1_R
+bone 73: Finger-1-2_R
+bone 74: Finger-1-3_R
+bone 75: LegHandle_L
+bone 76: Foot_L
+bone 77: Toe_L
+bone 78: LegHandle_R
+bone 79: Foot_R
+bone 80: Toe_R
+bone 81: Knee_L
+bone 82: Knee_R
+bone 83: humale
+bone 84: loincloth
+skeleton parent node: Scene_root
+animation #: 0
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+
+time: Sun Mar 16 16:01:52 2014
+bone 0: Dir_Master
+bone 1: Master
+bone 2: Root
+bone 3: Hips
+bone 4: UpLeg_L
+bone 5: LoLeg_L
+bone 6: UpLeg_R
+bone 7: LoLeg_R
+bone 8: Spine1
+bone 9: Spine2
+bone 10: Spine3
+bone 11: Neck
+bone 12: Head
+bone 13: Jaw
+bone 14: TongueBase
+bone 15: TongueMid
+bone 16: TongueTip
+bone 17: Eye_R
+bone 18: Eye_L
+bone 19: UpLid_R
+bone 20: LoLid_R
+bone 21: UpLid_L
+bone 22: LoLid_L
+bone 23: Clavicle_L
+bone 24: UpArm_L
+bone 25: LoArm_L
+bone 26: Hand_L
+bone 27: Wrist-1_L
+bone 28: Palm-2_L
+bone 29: Finger-2-1_L
+bone 30: Finger-2-2_L
+bone 31: Finger-2-3_L
+bone 32: Palm-3_L
+bone 33: Finger-3-1_L
+bone 34: Finger-3-2_L
+bone 35: Finger-3-3_L
+bone 36: Wrist-2_L
+bone 37: Palm-4_L
+bone 38: Finger-4-1_L
+bone 39: Finger-4-2_L
+bone 40: Finger-4-3_L
+bone 41: Palm-5_L
+bone 42: Finger-5-1_L
+bone 43: Finger-5-2_L
+bone 44: Finger-5-3_L
+bone 45: Palm-1_L
+bone 46: Finger-1-1_L
+bone 47: Finger-1-2_L
+bone 48: Finger-1-3_L
+bone 49: Clavicle_R
+bone 50: UpArm_R
+bone 51: LoArm_R
+bone 52: Hand_R
+bone 53: Wrist-1_R
+bone 54: Palm-2_R
+bone 55: Finger-2-1_R
+bone 56: Finger-2-2_R
+bone 57: Finger-2-3_R
+bone 58: Palm-3_R
+bone 59: Finger-3-1_R
+bone 60: Finger-3-2_R
+bone 61: Finger-3-3_R
+bone 62: Wrist-2_R
+bone 63: Palm-4_R
+bone 64: Finger-4-1_R
+bone 65: Finger-4-2_R
+bone 66: Finger-4-3_R
+bone 67: Palm-5_R
+bone 68: Finger-5-1_R
+bone 69: Finger-5-2_R
+bone 70: Finger-5-3_R
+bone 71: Palm-1_R
+bone 72: Finger-1-1_R
+bone 73: Finger-1-2_R
+bone 74: Finger-1-3_R
+bone 75: LegHandle_L
+bone 76: Foot_L
+bone 77: Toe_L
+bone 78: LegHandle_R
+bone 79: Foot_R
+bone 80: Toe_R
+bone 81: Knee_L
+bone 82: Knee_R
+bone 83: humale
+bone 84: loincloth
+skeleton parent node: Scene_root
+animation #: 0
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+
+time: Sun Mar 16 16:02:35 2014
+bone 0: Dir_Master
+bone 1: Master
+bone 2: Root
+bone 3: Hips
+bone 4: UpLeg_L
+bone 5: LoLeg_L
+bone 6: UpLeg_R
+bone 7: LoLeg_R
+bone 8: Spine1
+bone 9: Spine2
+bone 10: Spine3
+bone 11: Neck
+bone 12: Head
+bone 13: Jaw
+bone 14: TongueBase
+bone 15: TongueMid
+bone 16: TongueTip
+bone 17: Eye_R
+bone 18: Eye_L
+bone 19: UpLid_R
+bone 20: LoLid_R
+bone 21: UpLid_L
+bone 22: LoLid_L
+bone 23: Clavicle_L
+bone 24: UpArm_L
+bone 25: LoArm_L
+bone 26: Hand_L
+bone 27: Wrist-1_L
+bone 28: Palm-2_L
+bone 29: Finger-2-1_L
+bone 30: Finger-2-2_L
+bone 31: Finger-2-3_L
+bone 32: Palm-3_L
+bone 33: Finger-3-1_L
+bone 34: Finger-3-2_L
+bone 35: Finger-3-3_L
+bone 36: Wrist-2_L
+bone 37: Palm-4_L
+bone 38: Finger-4-1_L
+bone 39: Finger-4-2_L
+bone 40: Finger-4-3_L
+bone 41: Palm-5_L
+bone 42: Finger-5-1_L
+bone 43: Finger-5-2_L
+bone 44: Finger-5-3_L
+bone 45: Palm-1_L
+bone 46: Finger-1-1_L
+bone 47: Finger-1-2_L
+bone 48: Finger-1-3_L
+bone 49: Clavicle_R
+bone 50: UpArm_R
+bone 51: LoArm_R
+bone 52: Hand_R
+bone 53: Wrist-1_R
+bone 54: Palm-2_R
+bone 55: Finger-2-1_R
+bone 56: Finger-2-2_R
+bone 57: Finger-2-3_R
+bone 58: Palm-3_R
+bone 59: Finger-3-1_R
+bone 60: Finger-3-2_R
+bone 61: Finger-3-3_R
+bone 62: Wrist-2_R
+bone 63: Palm-4_R
+bone 64: Finger-4-1_R
+bone 65: Finger-4-2_R
+bone 66: Finger-4-3_R
+bone 67: Palm-5_R
+bone 68: Finger-5-1_R
+bone 69: Finger-5-2_R
+bone 70: Finger-5-3_R
+bone 71: Palm-1_R
+bone 72: Finger-1-1_R
+bone 73: Finger-1-2_R
+bone 74: Finger-1-3_R
+bone 75: LegHandle_L
+bone 76: Foot_L
+bone 77: Toe_L
+bone 78: LegHandle_R
+bone 79: Foot_R
+bone 80: Toe_R
+bone 81: Knee_L
+bone 82: Knee_R
+bone 83: humale
+bone 84: loincloth
+skeleton parent node: Scene_root
+animation #: 0
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+
+time: Sun Mar 16 16:06:10 2014
+bone 0: Dir_Master
+bone 1: Master
+bone 2: Root
+bone 3: Hips
+bone 4: UpLeg_L
+bone 5: LoLeg_L
+bone 6: UpLeg_R
+bone 7: LoLeg_R
+bone 8: Spine1
+bone 9: Spine2
+bone 10: Spine3
+bone 11: Neck
+bone 12: Head
+bone 13: Jaw
+bone 14: TongueBase
+bone 15: TongueMid
+bone 16: TongueTip
+bone 17: Eye_R
+bone 18: Eye_L
+bone 19: UpLid_R
+bone 20: LoLid_R
+bone 21: UpLid_L
+bone 22: LoLid_L
+bone 23: Clavicle_L
+bone 24: UpArm_L
+bone 25: LoArm_L
+bone 26: Hand_L
+bone 27: Wrist-1_L
+bone 28: Palm-2_L
+bone 29: Finger-2-1_L
+bone 30: Finger-2-2_L
+bone 31: Finger-2-3_L
+bone 32: Palm-3_L
+bone 33: Finger-3-1_L
+bone 34: Finger-3-2_L
+bone 35: Finger-3-3_L
+bone 36: Wrist-2_L
+bone 37: Palm-4_L
+bone 38: Finger-4-1_L
+bone 39: Finger-4-2_L
+bone 40: Finger-4-3_L
+bone 41: Palm-5_L
+bone 42: Finger-5-1_L
+bone 43: Finger-5-2_L
+bone 44: Finger-5-3_L
+bone 45: Palm-1_L
+bone 46: Finger-1-1_L
+bone 47: Finger-1-2_L
+bone 48: Finger-1-3_L
+bone 49: Clavicle_R
+bone 50: UpArm_R
+bone 51: LoArm_R
+bone 52: Hand_R
+bone 53: Wrist-1_R
+bone 54: Palm-2_R
+bone 55: Finger-2-1_R
+bone 56: Finger-2-2_R
+bone 57: Finger-2-3_R
+bone 58: Palm-3_R
+bone 59: Finger-3-1_R
+bone 60: Finger-3-2_R
+bone 61: Finger-3-3_R
+bone 62: Wrist-2_R
+bone 63: Palm-4_R
+bone 64: Finger-4-1_R
+bone 65: Finger-4-2_R
+bone 66: Finger-4-3_R
+bone 67: Palm-5_R
+bone 68: Finger-5-1_R
+bone 69: Finger-5-2_R
+bone 70: Finger-5-3_R
+bone 71: Palm-1_R
+bone 72: Finger-1-1_R
+bone 73: Finger-1-2_R
+bone 74: Finger-1-3_R
+bone 75: LegHandle_L
+bone 76: Foot_L
+bone 77: Toe_L
+bone 78: LegHandle_R
+bone 79: Foot_R
+bone 80: Toe_R
+bone 81: Knee_L
+bone 82: Knee_R
+bone 83: humale
+bone 84: loincloth
+skeleton parent node: Scene_root
+animation #: 0
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+
+time: Sun Mar 16 16:07:19 2014
+bone 0: Dir_Master
+bone 1: Master
+bone 2: Root
+bone 3: Hips
+bone 4: UpLeg_L
+bone 5: LoLeg_L
+bone 6: UpLeg_R
+bone 7: LoLeg_R
+bone 8: Spine1
+bone 9: Spine2
+bone 10: Spine3
+bone 11: Neck
+bone 12: Head
+bone 13: Jaw
+bone 14: TongueBase
+bone 15: TongueMid
+bone 16: TongueTip
+bone 17: Eye_R
+bone 18: Eye_L
+bone 19: UpLid_R
+bone 20: LoLid_R
+bone 21: UpLid_L
+bone 22: LoLid_L
+bone 23: Clavicle_L
+bone 24: UpArm_L
+bone 25: LoArm_L
+bone 26: Hand_L
+bone 27: Wrist-1_L
+bone 28: Palm-2_L
+bone 29: Finger-2-1_L
+bone 30: Finger-2-2_L
+bone 31: Finger-2-3_L
+bone 32: Palm-3_L
+bone 33: Finger-3-1_L
+bone 34: Finger-3-2_L
+bone 35: Finger-3-3_L
+bone 36: Wrist-2_L
+bone 37: Palm-4_L
+bone 38: Finger-4-1_L
+bone 39: Finger-4-2_L
+bone 40: Finger-4-3_L
+bone 41: Palm-5_L
+bone 42: Finger-5-1_L
+bone 43: Finger-5-2_L
+bone 44: Finger-5-3_L
+bone 45: Palm-1_L
+bone 46: Finger-1-1_L
+bone 47: Finger-1-2_L
+bone 48: Finger-1-3_L
+bone 49: Clavicle_R
+bone 50: UpArm_R
+bone 51: LoArm_R
+bone 52: Hand_R
+bone 53: Wrist-1_R
+bone 54: Palm-2_R
+bone 55: Finger-2-1_R
+bone 56: Finger-2-2_R
+bone 57: Finger-2-3_R
+bone 58: Palm-3_R
+bone 59: Finger-3-1_R
+bone 60: Finger-3-2_R
+bone 61: Finger-3-3_R
+bone 62: Wrist-2_R
+bone 63: Palm-4_R
+bone 64: Finger-4-1_R
+bone 65: Finger-4-2_R
+bone 66: Finger-4-3_R
+bone 67: Palm-5_R
+bone 68: Finger-5-1_R
+bone 69: Finger-5-2_R
+bone 70: Finger-5-3_R
+bone 71: Palm-1_R
+bone 72: Finger-1-1_R
+bone 73: Finger-1-2_R
+bone 74: Finger-1-3_R
+bone 75: LegHandle_L
+bone 76: Foot_L
+bone 77: Toe_L
+bone 78: LegHandle_R
+bone 79: Foot_R
+bone 80: Toe_R
+bone 81: Knee_L
+bone 82: Knee_R
+bone 83: humale
+bone 84: loincloth
+skeleton parent node: Scene_root
+animation #: 0
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+
+time: Sun Mar 16 16:11:47 2014
+bone 0: Dir_Master
+bone 1: Master
+bone 2: Root
+bone 3: Hips
+bone 4: UpLeg_L
+bone 5: LoLeg_L
+bone 6: UpLeg_R
+bone 7: LoLeg_R
+bone 8: Spine1
+bone 9: Spine2
+bone 10: Spine3
+bone 11: Neck
+bone 12: Head
+bone 13: Jaw
+bone 14: TongueBase
+bone 15: TongueMid
+bone 16: TongueTip
+bone 17: Eye_R
+bone 18: Eye_L
+bone 19: UpLid_R
+bone 20: LoLid_R
+bone 21: UpLid_L
+bone 22: LoLid_L
+bone 23: Clavicle_L
+bone 24: UpArm_L
+bone 25: LoArm_L
+bone 26: Hand_L
+bone 27: Wrist-1_L
+bone 28: Palm-2_L
+bone 29: Finger-2-1_L
+bone 30: Finger-2-2_L
+bone 31: Finger-2-3_L
+bone 32: Palm-3_L
+bone 33: Finger-3-1_L
+bone 34: Finger-3-2_L
+bone 35: Finger-3-3_L
+bone 36: Wrist-2_L
+bone 37: Palm-4_L
+bone 38: Finger-4-1_L
+bone 39: Finger-4-2_L
+bone 40: Finger-4-3_L
+bone 41: Palm-5_L
+bone 42: Finger-5-1_L
+bone 43: Finger-5-2_L
+bone 44: Finger-5-3_L
+bone 45: Palm-1_L
+bone 46: Finger-1-1_L
+bone 47: Finger-1-2_L
+bone 48: Finger-1-3_L
+bone 49: Clavicle_R
+bone 50: UpArm_R
+bone 51: LoArm_R
+bone 52: Hand_R
+bone 53: Wrist-1_R
+bone 54: Palm-2_R
+bone 55: Finger-2-1_R
+bone 56: Finger-2-2_R
+bone 57: Finger-2-3_R
+bone 58: Palm-3_R
+bone 59: Finger-3-1_R
+bone 60: Finger-3-2_R
+bone 61: Finger-3-3_R
+bone 62: Wrist-2_R
+bone 63: Palm-4_R
+bone 64: Finger-4-1_R
+bone 65: Finger-4-2_R
+bone 66: Finger-4-3_R
+bone 67: Palm-5_R
+bone 68: Finger-5-1_R
+bone 69: Finger-5-2_R
+bone 70: Finger-5-3_R
+bone 71: Palm-1_R
+bone 72: Finger-1-1_R
+bone 73: Finger-1-2_R
+bone 74: Finger-1-3_R
+bone 75: LegHandle_L
+bone 76: Foot_L
+bone 77: Toe_L
+bone 78: LegHandle_R
+bone 79: Foot_R
+bone 80: Toe_R
+bone 81: Knee_L
+bone 82: Knee_R
+bone 83: humale
+bone 84: loincloth
+skeleton parent node: Scene_root
+animation #: 0
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+
+time: Sun Mar 16 16:13:29 2014
+bone 0: Dir_Master
+bone 1: Master
+bone 2: Root
+bone 3: Hips
+bone 4: UpLeg_L
+bone 5: LoLeg_L
+bone 6: UpLeg_R
+bone 7: LoLeg_R
+bone 8: Spine1
+bone 9: Spine2
+bone 10: Spine3
+bone 11: Neck
+bone 12: Head
+bone 13: Jaw
+bone 14: TongueBase
+bone 15: TongueMid
+bone 16: TongueTip
+bone 17: Eye_R
+bone 18: Eye_L
+bone 19: UpLid_R
+bone 20: LoLid_R
+bone 21: UpLid_L
+bone 22: LoLid_L
+bone 23: Clavicle_L
+bone 24: UpArm_L
+bone 25: LoArm_L
+bone 26: Hand_L
+bone 27: Wrist-1_L
+bone 28: Palm-2_L
+bone 29: Finger-2-1_L
+bone 30: Finger-2-2_L
+bone 31: Finger-2-3_L
+bone 32: Palm-3_L
+bone 33: Finger-3-1_L
+bone 34: Finger-3-2_L
+bone 35: Finger-3-3_L
+bone 36: Wrist-2_L
+bone 37: Palm-4_L
+bone 38: Finger-4-1_L
+bone 39: Finger-4-2_L
+bone 40: Finger-4-3_L
+bone 41: Palm-5_L
+bone 42: Finger-5-1_L
+bone 43: Finger-5-2_L
+bone 44: Finger-5-3_L
+bone 45: Palm-1_L
+bone 46: Finger-1-1_L
+bone 47: Finger-1-2_L
+bone 48: Finger-1-3_L
+bone 49: Clavicle_R
+bone 50: UpArm_R
+bone 51: LoArm_R
+bone 52: Hand_R
+bone 53: Wrist-1_R
+bone 54: Palm-2_R
+bone 55: Finger-2-1_R
+bone 56: Finger-2-2_R
+bone 57: Finger-2-3_R
+bone 58: Palm-3_R
+bone 59: Finger-3-1_R
+bone 60: Finger-3-2_R
+bone 61: Finger-3-3_R
+bone 62: Wrist-2_R
+bone 63: Palm-4_R
+bone 64: Finger-4-1_R
+bone 65: Finger-4-2_R
+bone 66: Finger-4-3_R
+bone 67: Palm-5_R
+bone 68: Finger-5-1_R
+bone 69: Finger-5-2_R
+bone 70: Finger-5-3_R
+bone 71: Palm-1_R
+bone 72: Finger-1-1_R
+bone 73: Finger-1-2_R
+bone 74: Finger-1-3_R
+bone 75: LegHandle_L
+bone 76: Foot_L
+bone 77: Toe_L
+bone 78: LegHandle_R
+bone 79: Foot_R
+bone 80: Toe_R
+bone 81: Knee_L
+bone 82: Knee_R
+bone 83: humale
+bone 84: loincloth
+skeleton parent node: Scene_root
+animation #: 0
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+
+time: Sun Mar 16 16:14:31 2014
+bone 0: Dir_Master
+bone 1: Master
+bone 2: Root
+bone 3: Hips
+bone 4: UpLeg_L
+bone 5: LoLeg_L
+bone 6: UpLeg_R
+bone 7: LoLeg_R
+bone 8: Spine1
+bone 9: Spine2
+bone 10: Spine3
+bone 11: Neck
+bone 12: Head
+bone 13: Jaw
+bone 14: TongueBase
+bone 15: TongueMid
+bone 16: TongueTip
+bone 17: Eye_R
+bone 18: Eye_L
+bone 19: UpLid_R
+bone 20: LoLid_R
+bone 21: UpLid_L
+bone 22: LoLid_L
+bone 23: Clavicle_L
+bone 24: UpArm_L
+bone 25: LoArm_L
+bone 26: Hand_L
+bone 27: Wrist-1_L
+bone 28: Palm-2_L
+bone 29: Finger-2-1_L
+bone 30: Finger-2-2_L
+bone 31: Finger-2-3_L
+bone 32: Palm-3_L
+bone 33: Finger-3-1_L
+bone 34: Finger-3-2_L
+bone 35: Finger-3-3_L
+bone 36: Wrist-2_L
+bone 37: Palm-4_L
+bone 38: Finger-4-1_L
+bone 39: Finger-4-2_L
+bone 40: Finger-4-3_L
+bone 41: Palm-5_L
+bone 42: Finger-5-1_L
+bone 43: Finger-5-2_L
+bone 44: Finger-5-3_L
+bone 45: Palm-1_L
+bone 46: Finger-1-1_L
+bone 47: Finger-1-2_L
+bone 48: Finger-1-3_L
+bone 49: Clavicle_R
+bone 50: UpArm_R
+bone 51: LoArm_R
+bone 52: Hand_R
+bone 53: Wrist-1_R
+bone 54: Palm-2_R
+bone 55: Finger-2-1_R
+bone 56: Finger-2-2_R
+bone 57: Finger-2-3_R
+bone 58: Palm-3_R
+bone 59: Finger-3-1_R
+bone 60: Finger-3-2_R
+bone 61: Finger-3-3_R
+bone 62: Wrist-2_R
+bone 63: Palm-4_R
+bone 64: Finger-4-1_R
+bone 65: Finger-4-2_R
+bone 66: Finger-4-3_R
+bone 67: Palm-5_R
+bone 68: Finger-5-1_R
+bone 69: Finger-5-2_R
+bone 70: Finger-5-3_R
+bone 71: Palm-1_R
+bone 72: Finger-1-1_R
+bone 73: Finger-1-2_R
+bone 74: Finger-1-3_R
+bone 75: LegHandle_L
+bone 76: Foot_L
+bone 77: Toe_L
+bone 78: LegHandle_R
+bone 79: Foot_R
+bone 80: Toe_R
+bone 81: Knee_L
+bone 82: Knee_R
+bone 83: humale
+bone 84: loincloth
+skeleton parent node: Scene_root
+animation #: 0
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+
+time: Sun Mar 16 16:15:36 2014
+bone 0: Dir_Master
+bone 1: Master
+bone 2: Root
+bone 3: Hips
+bone 4: UpLeg_L
+bone 5: LoLeg_L
+bone 6: UpLeg_R
+bone 7: LoLeg_R
+bone 8: Spine1
+bone 9: Spine2
+bone 10: Spine3
+bone 11: Neck
+bone 12: Head
+bone 13: Jaw
+bone 14: TongueBase
+bone 15: TongueMid
+bone 16: TongueTip
+bone 17: Eye_R
+bone 18: Eye_L
+bone 19: UpLid_R
+bone 20: LoLid_R
+bone 21: UpLid_L
+bone 22: LoLid_L
+bone 23: Clavicle_L
+bone 24: UpArm_L
+bone 25: LoArm_L
+bone 26: Hand_L
+bone 27: Wrist-1_L
+bone 28: Palm-2_L
+bone 29: Finger-2-1_L
+bone 30: Finger-2-2_L
+bone 31: Finger-2-3_L
+bone 32: Palm-3_L
+bone 33: Finger-3-1_L
+bone 34: Finger-3-2_L
+bone 35: Finger-3-3_L
+bone 36: Wrist-2_L
+bone 37: Palm-4_L
+bone 38: Finger-4-1_L
+bone 39: Finger-4-2_L
+bone 40: Finger-4-3_L
+bone 41: Palm-5_L
+bone 42: Finger-5-1_L
+bone 43: Finger-5-2_L
+bone 44: Finger-5-3_L
+bone 45: Palm-1_L
+bone 46: Finger-1-1_L
+bone 47: Finger-1-2_L
+bone 48: Finger-1-3_L
+bone 49: Clavicle_R
+bone 50: UpArm_R
+bone 51: LoArm_R
+bone 52: Hand_R
+bone 53: Wrist-1_R
+bone 54: Palm-2_R
+bone 55: Finger-2-1_R
+bone 56: Finger-2-2_R
+bone 57: Finger-2-3_R
+bone 58: Palm-3_R
+bone 59: Finger-3-1_R
+bone 60: Finger-3-2_R
+bone 61: Finger-3-3_R
+bone 62: Wrist-2_R
+bone 63: Palm-4_R
+bone 64: Finger-4-1_R
+bone 65: Finger-4-2_R
+bone 66: Finger-4-3_R
+bone 67: Palm-5_R
+bone 68: Finger-5-1_R
+bone 69: Finger-5-2_R
+bone 70: Finger-5-3_R
+bone 71: Palm-1_R
+bone 72: Finger-1-1_R
+bone 73: Finger-1-2_R
+bone 74: Finger-1-3_R
+bone 75: LegHandle_L
+bone 76: Foot_L
+bone 77: Toe_L
+bone 78: LegHandle_R
+bone 79: Foot_R
+bone 80: Toe_R
+bone 81: Knee_L
+bone 82: Knee_R
+bone 83: humale
+bone 84: loincloth
+skeleton parent node: Scene_root
+animation #: 0
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+
+time: Sun Mar 16 16:17:02 2014
+bone 0: Dir_Master
+bone 1: Master
+bone 2: Root
+bone 3: Hips
+bone 4: UpLeg_L
+bone 5: LoLeg_L
+bone 6: UpLeg_R
+bone 7: LoLeg_R
+bone 8: Spine1
+bone 9: Spine2
+bone 10: Spine3
+bone 11: Neck
+bone 12: Head
+bone 13: Jaw
+bone 14: TongueBase
+bone 15: TongueMid
+bone 16: TongueTip
+bone 17: Eye_R
+bone 18: Eye_L
+bone 19: UpLid_R
+bone 20: LoLid_R
+bone 21: UpLid_L
+bone 22: LoLid_L
+bone 23: Clavicle_L
+bone 24: UpArm_L
+bone 25: LoArm_L
+bone 26: Hand_L
+bone 27: Wrist-1_L
+bone 28: Palm-2_L
+bone 29: Finger-2-1_L
+bone 30: Finger-2-2_L
+bone 31: Finger-2-3_L
+bone 32: Palm-3_L
+bone 33: Finger-3-1_L
+bone 34: Finger-3-2_L
+bone 35: Finger-3-3_L
+bone 36: Wrist-2_L
+bone 37: Palm-4_L
+bone 38: Finger-4-1_L
+bone 39: Finger-4-2_L
+bone 40: Finger-4-3_L
+bone 41: Palm-5_L
+bone 42: Finger-5-1_L
+bone 43: Finger-5-2_L
+bone 44: Finger-5-3_L
+bone 45: Palm-1_L
+bone 46: Finger-1-1_L
+bone 47: Finger-1-2_L
+bone 48: Finger-1-3_L
+bone 49: Clavicle_R
+bone 50: UpArm_R
+bone 51: LoArm_R
+bone 52: Hand_R
+bone 53: Wrist-1_R
+bone 54: Palm-2_R
+bone 55: Finger-2-1_R
+bone 56: Finger-2-2_R
+bone 57: Finger-2-3_R
+bone 58: Palm-3_R
+bone 59: Finger-3-1_R
+bone 60: Finger-3-2_R
+bone 61: Finger-3-3_R
+bone 62: Wrist-2_R
+bone 63: Palm-4_R
+bone 64: Finger-4-1_R
+bone 65: Finger-4-2_R
+bone 66: Finger-4-3_R
+bone 67: Palm-5_R
+bone 68: Finger-5-1_R
+bone 69: Finger-5-2_R
+bone 70: Finger-5-3_R
+bone 71: Palm-1_R
+bone 72: Finger-1-1_R
+bone 73: Finger-1-2_R
+bone 74: Finger-1-3_R
+bone 75: LegHandle_L
+bone 76: Foot_L
+bone 77: Toe_L
+bone 78: LegHandle_R
+bone 79: Foot_R
+bone 80: Toe_R
+bone 81: Knee_L
+bone 82: Knee_R
+bone 83: humale
+bone 84: loincloth
+skeleton parent node: Scene_root
+animation #: 0
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+
+time: Sun Mar 16 16:20:42 2014
+bone 0: Dir_Master
+bone 1: Master
+bone 2: Root
+bone 3: Hips
+bone 4: UpLeg_L
+bone 5: LoLeg_L
+bone 6: UpLeg_R
+bone 7: LoLeg_R
+bone 8: Spine1
+bone 9: Spine2
+bone 10: Spine3
+bone 11: Neck
+bone 12: Head
+bone 13: Jaw
+bone 14: TongueBase
+bone 15: TongueMid
+bone 16: TongueTip
+bone 17: Eye_R
+bone 18: Eye_L
+bone 19: UpLid_R
+bone 20: LoLid_R
+bone 21: UpLid_L
+bone 22: LoLid_L
+bone 23: Clavicle_L
+bone 24: UpArm_L
+bone 25: LoArm_L
+bone 26: Hand_L
+bone 27: Wrist-1_L
+bone 28: Palm-2_L
+bone 29: Finger-2-1_L
+bone 30: Finger-2-2_L
+bone 31: Finger-2-3_L
+bone 32: Palm-3_L
+bone 33: Finger-3-1_L
+bone 34: Finger-3-2_L
+bone 35: Finger-3-3_L
+bone 36: Wrist-2_L
+bone 37: Palm-4_L
+bone 38: Finger-4-1_L
+bone 39: Finger-4-2_L
+bone 40: Finger-4-3_L
+bone 41: Palm-5_L
+bone 42: Finger-5-1_L
+bone 43: Finger-5-2_L
+bone 44: Finger-5-3_L
+bone 45: Palm-1_L
+bone 46: Finger-1-1_L
+bone 47: Finger-1-2_L
+bone 48: Finger-1-3_L
+bone 49: Clavicle_R
+bone 50: UpArm_R
+bone 51: LoArm_R
+bone 52: Hand_R
+bone 53: Wrist-1_R
+bone 54: Palm-2_R
+bone 55: Finger-2-1_R
+bone 56: Finger-2-2_R
+bone 57: Finger-2-3_R
+bone 58: Palm-3_R
+bone 59: Finger-3-1_R
+bone 60: Finger-3-2_R
+bone 61: Finger-3-3_R
+bone 62: Wrist-2_R
+bone 63: Palm-4_R
+bone 64: Finger-4-1_R
+bone 65: Finger-4-2_R
+bone 66: Finger-4-3_R
+bone 67: Palm-5_R
+bone 68: Finger-5-1_R
+bone 69: Finger-5-2_R
+bone 70: Finger-5-3_R
+bone 71: Palm-1_R
+bone 72: Finger-1-1_R
+bone 73: Finger-1-2_R
+bone 74: Finger-1-3_R
+bone 75: LegHandle_L
+bone 76: Foot_L
+bone 77: Toe_L
+bone 78: LegHandle_R
+bone 79: Foot_R
+bone 80: Toe_R
+bone 81: Knee_L
+bone 82: Knee_R
+bone 83: humale
+bone 84: loincloth
+skeleton parent node: Scene_root
+animation #: 0
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+
+time: Sun Mar 16 16:24:36 2014
+bone 0: Dir_Master
+bone 1: Master
+bone 2: Root
+bone 3: Hips
+bone 4: UpLeg_L
+bone 5: LoLeg_L
+bone 6: UpLeg_R
+bone 7: LoLeg_R
+bone 8: Spine1
+bone 9: Spine2
+bone 10: Spine3
+bone 11: Neck
+bone 12: Head
+bone 13: Jaw
+bone 14: TongueBase
+bone 15: TongueMid
+bone 16: TongueTip
+bone 17: Eye_R
+bone 18: Eye_L
+bone 19: UpLid_R
+bone 20: LoLid_R
+bone 21: UpLid_L
+bone 22: LoLid_L
+bone 23: Clavicle_L
+bone 24: UpArm_L
+bone 25: LoArm_L
+bone 26: Hand_L
+bone 27: Wrist-1_L
+bone 28: Palm-2_L
+bone 29: Finger-2-1_L
+bone 30: Finger-2-2_L
+bone 31: Finger-2-3_L
+bone 32: Palm-3_L
+bone 33: Finger-3-1_L
+bone 34: Finger-3-2_L
+bone 35: Finger-3-3_L
+bone 36: Wrist-2_L
+bone 37: Palm-4_L
+bone 38: Finger-4-1_L
+bone 39: Finger-4-2_L
+bone 40: Finger-4-3_L
+bone 41: Palm-5_L
+bone 42: Finger-5-1_L
+bone 43: Finger-5-2_L
+bone 44: Finger-5-3_L
+bone 45: Palm-1_L
+bone 46: Finger-1-1_L
+bone 47: Finger-1-2_L
+bone 48: Finger-1-3_L
+bone 49: Clavicle_R
+bone 50: UpArm_R
+bone 51: LoArm_R
+bone 52: Hand_R
+bone 53: Wrist-1_R
+bone 54: Palm-2_R
+bone 55: Finger-2-1_R
+bone 56: Finger-2-2_R
+bone 57: Finger-2-3_R
+bone 58: Palm-3_R
+bone 59: Finger-3-1_R
+bone 60: Finger-3-2_R
+bone 61: Finger-3-3_R
+bone 62: Wrist-2_R
+bone 63: Palm-4_R
+bone 64: Finger-4-1_R
+bone 65: Finger-4-2_R
+bone 66: Finger-4-3_R
+bone 67: Palm-5_R
+bone 68: Finger-5-1_R
+bone 69: Finger-5-2_R
+bone 70: Finger-5-3_R
+bone 71: Palm-1_R
+bone 72: Finger-1-1_R
+bone 73: Finger-1-2_R
+bone 74: Finger-1-3_R
+bone 75: LegHandle_L
+bone 76: Foot_L
+bone 77: Toe_L
+bone 78: LegHandle_R
+bone 79: Foot_R
+bone 80: Toe_R
+bone 81: Knee_L
+bone 82: Knee_R
+skeleton parent node: Scene_root
+animation #: 0
+#ticks: 3.75
+#ticks/sec: 1
+duration: 3.75
+animation #: 1
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 2
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 3
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 4
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 5
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 6
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 7
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 8
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 9
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 10
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 11
+#ticks: 2.29167
+#ticks/sec: 1
+duration: 1.66667
+animation #: 12
+#ticks: 1.375
+#ticks/sec: 1
+duration: 1
+animation #: 13
+#ticks: 1.41667
+#ticks/sec: 1
+duration: 1
+animation #: 14
+#ticks: 1.41667
+#ticks/sec: 1
+duration: 1
+animation #: 15
+#ticks: 1.04167
+#ticks/sec: 1
+duration: 1.04167
+animation #: 16
+#ticks: 1.04167
+#ticks/sec: 1
+duration: 1.04167
+animation #: 17
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 18
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 19
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 20
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 21
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 22
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 23
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+
+time: Sun Mar 16 16:24:56 2014
+bone 0: Dir_Master
+bone 1: Master
+bone 2: Root
+bone 3: Hips
+bone 4: UpLeg_L
+bone 5: LoLeg_L
+bone 6: UpLeg_R
+bone 7: LoLeg_R
+bone 8: Spine1
+bone 9: Spine2
+bone 10: Spine3
+bone 11: Neck
+bone 12: Head
+bone 13: Jaw
+bone 14: TongueBase
+bone 15: TongueMid
+bone 16: TongueTip
+bone 17: Eye_R
+bone 18: Eye_L
+bone 19: UpLid_R
+bone 20: LoLid_R
+bone 21: UpLid_L
+bone 22: LoLid_L
+bone 23: Clavicle_L
+bone 24: UpArm_L
+bone 25: LoArm_L
+bone 26: Hand_L
+bone 27: Wrist-1_L
+bone 28: Palm-2_L
+bone 29: Finger-2-1_L
+bone 30: Finger-2-2_L
+bone 31: Finger-2-3_L
+bone 32: Palm-3_L
+bone 33: Finger-3-1_L
+bone 34: Finger-3-2_L
+bone 35: Finger-3-3_L
+bone 36: Wrist-2_L
+bone 37: Palm-4_L
+bone 38: Finger-4-1_L
+bone 39: Finger-4-2_L
+bone 40: Finger-4-3_L
+bone 41: Palm-5_L
+bone 42: Finger-5-1_L
+bone 43: Finger-5-2_L
+bone 44: Finger-5-3_L
+bone 45: Palm-1_L
+bone 46: Finger-1-1_L
+bone 47: Finger-1-2_L
+bone 48: Finger-1-3_L
+bone 49: Clavicle_R
+bone 50: UpArm_R
+bone 51: LoArm_R
+bone 52: Hand_R
+bone 53: Wrist-1_R
+bone 54: Palm-2_R
+bone 55: Finger-2-1_R
+bone 56: Finger-2-2_R
+bone 57: Finger-2-3_R
+bone 58: Palm-3_R
+bone 59: Finger-3-1_R
+bone 60: Finger-3-2_R
+bone 61: Finger-3-3_R
+bone 62: Wrist-2_R
+bone 63: Palm-4_R
+bone 64: Finger-4-1_R
+bone 65: Finger-4-2_R
+bone 66: Finger-4-3_R
+bone 67: Palm-5_R
+bone 68: Finger-5-1_R
+bone 69: Finger-5-2_R
+bone 70: Finger-5-3_R
+bone 71: Palm-1_R
+bone 72: Finger-1-1_R
+bone 73: Finger-1-2_R
+bone 74: Finger-1-3_R
+bone 75: LegHandle_L
+bone 76: Foot_L
+bone 77: Toe_L
+bone 78: LegHandle_R
+bone 79: Foot_R
+bone 80: Toe_R
+bone 81: Knee_L
+bone 82: Knee_R
+skeleton parent node: Scene_root
+animation #: 0
+#ticks: 3.75
+#ticks/sec: 1
+duration: 3.75
+animation #: 1
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 2
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 3
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 4
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 5
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 6
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 7
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 8
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 9
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 10
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 11
+#ticks: 2.29167
+#ticks/sec: 1
+duration: 1.66667
+animation #: 12
+#ticks: 1.375
+#ticks/sec: 1
+duration: 1
+animation #: 13
+#ticks: 1.41667
+#ticks/sec: 1
+duration: 1
+animation #: 14
+#ticks: 1.41667
+#ticks/sec: 1
+duration: 1
+animation #: 15
+#ticks: 1.04167
+#ticks/sec: 1
+duration: 1.04167
+animation #: 16
+#ticks: 1.04167
+#ticks/sec: 1
+duration: 1.04167
+animation #: 17
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 18
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 19
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 20
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 21
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 22
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+animation #: 23
+#ticks: 1
+#ticks/sec: 1
+duration: 1
+
