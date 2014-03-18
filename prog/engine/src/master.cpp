@@ -7,7 +7,8 @@ Master::Master() :
     press_pos_x(0),
     press_pos_y(0),
     running(true),
-    render_thread_loaded(false)
+    render_thread_loaded(false),
+    main_thread_loaded(false)
 {
     // Start window in main thread...
     initWindow();
@@ -83,6 +84,7 @@ void Master::mainLoop()
     // Initialize the game module
     mechanics.init(world, dt);
 
+    main_thread_loaded = true;
 
     // run the main loop
     while (running)
@@ -138,6 +140,8 @@ void Master::renderTasks()
     float timeRenderLast = absClock.getElapsedTime().asSeconds();
     float timeRenderNew = timeRenderLast;
     float dtRender = 0.0;
+
+    while (!main_thread_loaded) {} // WAIT
 
     while (running)
     {

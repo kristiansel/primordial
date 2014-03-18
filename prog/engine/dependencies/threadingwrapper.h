@@ -18,14 +18,18 @@ using Thread = std::thread;
 using Mutex = std::mutex;
 using LockGuard = std::lock_guard<std::mutex>;
 
+
+#endif // WINDOWS
+
+// Thread initialization needs to be called on unix
+
 #ifdef __unix
 
 #include <X11/Xlib.h>
-int result = XInitThreads();
 
-#endif
+extern int result;
 
-#endif // WINDOWS
+#endif // UNIX
 
 #endif // THREADWRAPPER_H
 

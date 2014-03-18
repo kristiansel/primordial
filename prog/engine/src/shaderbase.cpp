@@ -16,10 +16,14 @@ void ShaderBase::load(std::string vertex_shader, std::string fragment_shader)
 {
     if (loaded) unload();
 
+    //std::cout << "loading shader " << fragment_shader << "\n";
+
     // Init the shader program
     GLuint vertexshader = initshaders(GL_VERTEX_SHADER, vertex_shader.c_str()) ;
     GLuint fragmentshader = initshaders(GL_FRAGMENT_SHADER, fragment_shader.c_str()) ;
     program_id = initprogram(vertexshader, fragmentshader) ;
+
+
 
     // set loaded-status
     loaded = true;
@@ -45,6 +49,7 @@ void ShaderBase::switchTo()
         glUseProgram(program_id);
     }
     else std::cerr << "Tried to use shader program before it was loaded\n";
+    //else std::cerr << "Tried to use shader program before it was loaded\n";
 }
 
 void ShaderBase::validate()

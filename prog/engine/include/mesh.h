@@ -6,7 +6,7 @@
 #include <string>
 #include <memory>
 #include <algorithm>
-#include <threadingwrapper.hpp>
+//#include <threadingwrapper.h>
 
 #include "geometry.h"
 #include "parser.h"
@@ -67,10 +67,13 @@ public:
 
 //    void drawVertices(); // draws the mesh vertices (does not affect uniforms)
 
+    enum LoadStage {NotLoaded, LoadMePlease, Loaded};
+    LoadStage getLoadStage() {return load_stage;};
 
-
+    void createGL();
+    void deleteGL();
 protected:
-    void geomToVRAM();
+    //void geomToVRAM();
 private:
    // string filepath;
 
@@ -91,13 +94,16 @@ private:
 
     // Current number in use by graphics card;
 
+    LoadStage load_stage;
 
 
     // To be separated out at a later stage
     // set the materials <-- change this
     Material material;
 
-    Mutex sharedContextLoading;
+    //Mutex sharedContextLoading;
+
+
 
 
 };

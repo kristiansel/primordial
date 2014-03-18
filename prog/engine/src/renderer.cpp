@@ -38,10 +38,8 @@ void Renderer::init(unsigned int scr_width_in, unsigned int scr_height_in)
     glCullFace(GL_BACK);
     glEnable(GL_CULL_FACE);
 
-#ifndef __unix
     // Initialize Shadow mapping shader
     shadow_map.init();
-#endif
 
     // Initialize shaders
     main_shader.init(shadow_map.getDepthTex());
@@ -88,6 +86,10 @@ void Renderer::draw(Scene &scene, float dt)
     // This should look something like this: (for now light is hardcoded
     // in the shadow_map.activate() method)
     //shadow_map.setLight(scene->getShadowLight())
+#ifndef __unix
+
+// something is thrown in here on linux...
+// check shadowmap renderbuffer state etc...
 
 //    shadow_map.activate();
     shadow_map.activate(mlight_vp);
@@ -106,6 +108,7 @@ void Renderer::draw(Scene &scene, float dt)
         }
 
     shadow_map.deactivate();
+#endif
 
     resizeWindow(settings.width, settings.height, false);
 

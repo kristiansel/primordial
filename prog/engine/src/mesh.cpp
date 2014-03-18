@@ -1,7 +1,8 @@
 #include "mesh.h"
 
 Mesh::Mesh() : vertex_num(0), triangle_num(0)
-              ,vertices(nullptr), triangles(nullptr)
+              ,vertices(nullptr), triangles(nullptr),
+              load_stage(NotLoaded)
 {
     //ctor
 //    filepath = "";
@@ -36,15 +37,9 @@ Mesh::~Mesh()
 
     // in order to mitigate another buffer being accidentally
     // bound in render thread
-    LockGuard lock(sharedContextLoading);
+    //LockGuard lock(sharedContextLoading);
+    deleteGL();
 
-    // release video RAM buffers
-    glBindBuffer(GL_ARRAY_BUFFER, 0); // do you really need this?
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-
-//    cout << "Deleting Buffers: " << vbo_id << " & " << ibo_id << "\n";
-    glDeleteBuffers(1, &vbo_id); // is this really sufficient
-    glDeleteBuffers(1, &ibo_id);
 
 }
 
@@ -57,26 +52,11 @@ void Mesh::fromFile(string mesh_key)
 {
     fromFile2(mesh_key);
 
-    geomToVRAM();
+
+    //load_stage = LoadMePlease;
+    createGL();
 }
 
-void Mesh::geomToVRAM()
-{
-    // in order to mitigate another buffer being accidentally
-    // bound in render thread
-    LockGuard lock(sharedContextLoading);
-
-    // send directly to graphics card
-    glGenBuffers(1, &vbo_id); //must come after glewinit
-    glBindBuffer(GL_ARRAY_BUFFER, vbo_id);
-    glBufferData(GL_ARRAY_BUFFER, vertex_num*sizeof(Vertex), vertices, GL_STATIC_DRAW);
-    glBindBuffer(GL_ARRAY_BUFFER, 0); // unbind buffer
-
-    glGenBuffers(1, &ibo_id);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo_id);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, triangle_num*(sizeof(Triangle)), triangles, GL_STATIC_DRAW);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-}
 
 void Mesh::fromFile2(string mesh_key)
 {
@@ -188,7 +168,8 @@ void Mesh::fromMemory(Vertex* const &vertices_in,
     memcpy(&vertices[0], &vertices_in[0], vertex_num*sizeof(Vertex));
     memcpy(&triangles[0], &triangles_in[0], triangle_num*sizeof(Triangle));
 
-    geomToVRAM();
+    //load_stage = LoadMePlease;
+    createGL();
 }
 
 Mesh::Material Mesh::getMaterial()
@@ -210,3 +191,38 @@ unsigned int Mesh::getTriNum()
 {
     return triangle_num;
 }
+
+
+void Mesh::createGL()
+{
+    // in order to mitigate another buffer being accidentally
+    // bound in render thread
+    //LockGuard lock(sharedContextLoading);
+
+    // send directly to graphics card
+    glGenBuffers(1, &vbo_id); //must come after glewinit
+    glBindBuffer(GL_ARRAY_BUFFER, vbo_id);
+    glBufferData(GL_ARRAY_BUFFER, vertex_num*sizeof(Vertex), vertices, GL_STATIC_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER, 0); // unbind buffer
+
+    glGenBuffers(1, &ibo_id);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo_id);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, triangle_num*(sizeof(Triangle)), triangles, GL_STATIC_DRAW);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+    load_stage = Loaded;
+}
+
+void Mesh::deleteGL()
+{
+    // release video RAM buffers
+    glBindBuffer(GL_ARRAY_BUFFER, 0); // do you really need this?
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+//    cout << "Deleting Buffers: " << vbo_id << " & " << ibo_id << "\n";
+    glDeleteBuffers(1, &vbo_id); // is this really sufficient
+    glDeleteBuffers(1, &ibo_id);
+
+    load_stage = NotLoaded;
+}
+

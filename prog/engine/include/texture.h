@@ -6,7 +6,7 @@
 #include <string>
 #include <iostream>
 #include <SFML/Graphics/Image.hpp>
-#include <threadingwrapper.hpp>
+//#include <threadingwrapper.h>
 
 class Texture
 {
@@ -17,6 +17,13 @@ class Texture
         bool fromFile(std::string filepath_in);
 
         GLuint getTBOid();
+
+        enum LoadStage {NotLoaded, LoadMePlease, Loaded};
+        LoadStage getLoadStage() {return load_stage;};
+
+        void deleteGL();
+        void createGL();
+
     protected:
     private:
         std::string      str_key;
@@ -24,8 +31,11 @@ class Texture
 
         GLuint tbo_id;
 
+
+        LoadStage load_stage;
+
         // This mutex is probably not needed...
-        Mutex sharedContextLoading; // To guard against buffers being bound differently in several threads
+        //Mutex sharedContextLoading; // To guard against buffers being bound differently in several threads
 
 
 };

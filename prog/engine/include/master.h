@@ -6,7 +6,7 @@
 #include "mechanics.h"
 #include "renderer.h"
 #include "culler.h"
-#include "threadingwrapper.hpp"
+#include "threadingwrapper.h"
 
 /**
     Philosophy of the Master class: Handles technicalities
@@ -60,6 +60,10 @@ private:
 
     // Thread wait flags
     bool render_thread_loaded;
+    bool main_thread_loaded;
+
+    // HoopJumping required to call XInitThreads() on unix before sf::Window
+    //int init_threads;
 
     // Internal variable signals
     bool has_focus;     // helper

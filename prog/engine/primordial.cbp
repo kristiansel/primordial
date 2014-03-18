@@ -27,6 +27,7 @@
 					<Add library="BulletDynamics" />
 					<Add library="BulletCollision" />
 					<Add library="LinearMath" />
+					<Add library="X11" />
 				</Linker>
 			</Target>
 			<Target title="Release_linux">
@@ -46,6 +47,10 @@
 					<Add library="sfml-system" />
 					<Add library="GL" />
 					<Add library="GLEW" />
+					<Add library="BulletDynamics" />
+					<Add library="BulletCollision" />
+					<Add library="LinearMath" />
+					<Add library="X11" />
 				</Linker>
 			</Target>
 			<Target title="Debug_windows">
@@ -72,8 +77,8 @@
 					<Add library="BulletDynamics" />
 					<Add library="BulletCollision" />
 					<Add library="LinearMath" />
-					<Add library="D:\Travel\Productivity\libraries\boost_1_55_0\bin.v2\libs\system\build\gcc-mingw-4.7.1\debug\link-static\threading-multi\libboost_system-mgw47-mt-d-1_55.a" />
-					<Add library="D:\Travel\Productivity\libraries\boost_1_55_0\bin.v2\libs\thread\build\gcc-mingw-4.7.1\debug\link-static\threading-multi\libboost_thread-mgw47-mt-d-1_55.a" />
+					<Add library="D:/Travel/Productivity/libraries/boost_1_55_0/bin.v2/libs/system/build/gcc-mingw-4.7.1/debug/link-static/threading-multi/libboost_system-mgw47-mt-d-1_55.a" />
+					<Add library="D:/Travel/Productivity/libraries/boost_1_55_0/bin.v2/libs/thread/build/gcc-mingw-4.7.1/debug/link-static/threading-multi/libboost_thread-mgw47-mt-d-1_55.a" />
 					<Add directory="dependencies/bullet/lib" />
 				</Linker>
 			</Target>
@@ -110,7 +115,8 @@
 		</Compiler>
 		<Unit filename="dependencies/helperfunctions.hpp" />
 		<Unit filename="dependencies/memstreamer.hpp" />
-		<Unit filename="dependencies/threadingwrapper.hpp" />
+		<Unit filename="dependencies/threadingwrapper.cpp" />
+		<Unit filename="dependencies/threadingwrapper.h" />
 		<Unit filename="dependencies/timeseries.hpp" />
 		<Unit filename="include/actor.h" />
 		<Unit filename="include/camera.h" />
