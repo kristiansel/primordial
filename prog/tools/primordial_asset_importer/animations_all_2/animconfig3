@@ -22,3 +22,5 @@ anim 20 from jump.dae duration 0.0 to 1.00
 anim 21 from walk_back.dae duration 0.0 to 1.00
 anim 22 from walk_back_left.dae duration 0.0 to 1.00
 anim 23 from walk_back_right.dae duration 0.0 to 1.00
+
+slot 0 from Palm-1_R

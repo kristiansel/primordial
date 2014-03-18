@@ -98,22 +98,33 @@ void Mechanics::init(World &world_in, float &dt_in)
     // attach a loincloth for modesty
     {
         weak_ptr<Mesh>      mesh_ptr    = global::mesh_manager.getResptrFromKey ("loin_x3");
-        weak_ptr<Texture>   tex_ptr     = global::tex_manager.getResptrFromKey  ("nicewall");
+        weak_ptr<Texture>   tex_ptr     = global::tex_manager.getResptrFromKey  ("tex_knapsack");
 
         player->attachBatch(mesh_ptr, tex_ptr);
+    }
+
+    // give a sword
+    {
+        weak_ptr<Mesh>      mesh_ptr    = global::mesh_manager.getResptrFromKey ("sword_03");
+//        weak_ptr<Mesh>      mesh_ptr    = global::mesh_manager.getResptrFromKey ("axes");
+        weak_ptr<Texture>   tex_ptr     = global::tex_manager.getResptrFromKey  ("nicewall");
+//        weak_ptr<Texture>   tex_ptr     = global::tex_manager.getResptrFromKey  ("tricolor");
+
+        RenderBatch* sword_batch = player->attachBatch(mesh_ptr, tex_ptr);
+        player->moveBatchToSlot(sword_batch, Actor::Slot::RightHand);
     }
 
 
 
 
-    world->addCreature( "humale_1hswing",
-                        "tex_human_male",
-                        glm::vec3(-3.0, 0.0, 2.0) );
-
-    // Creatures
-    world->addCreature( "anim_test",
-                        "checkers",
-                        glm::vec3(0.0, 2.0, -4.0) );
+//    world->addCreature( "humale_1hswing",
+//                        "tex_human_male",
+//                        glm::vec3(-3.0, 0.0, 2.0) );
+//
+//    // Creatures
+//    world->addCreature( "anim_test",
+//                        "checkers",
+//                        glm::vec3(0.0, 2.0, -4.0) );
 
     world->addDynamicObject( "cube",
                              "nicewall",
@@ -282,7 +293,8 @@ void Mechanics::func(int num_in)
     case 4:
         for (auto &creature : world->creatures)
         {
-            creature->togglePauseAnim();
+            creature->togglePauseAnim(); // This is inefficient, seeing as Idle animation is
+            // "played" all the time
         }
         break;
     case 5:

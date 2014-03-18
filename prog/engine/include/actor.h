@@ -46,6 +46,10 @@ class Actor : public Prop
         // Used by creature to determine action duration
         static constexpr float blend_time = 0.20; // 0.20 seconds to go from blend weight 1.0 to blend weight 0.0
 
+        // make a renderbatch the child of a skeleton slot:
+        enum Slot {RightHand = 0};
+        void moveBatchToSlot(RenderBatch* batch, Slot slot);
+
     protected:
     private:
         int active_anim; // The index of the main active animation

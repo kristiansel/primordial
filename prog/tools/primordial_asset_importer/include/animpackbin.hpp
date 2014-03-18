@@ -83,23 +83,54 @@ bool animPackBin(const aiScene* scene, std::string outputpath, std::string animc
 
     std::vector<AniSpec> anispecs;
 
+    struct Slot {
+        int slot_to_create;
+        std::string parent_bone_name;
+    };
+
+    std::vector<Slot> slots;
+
+
+
     std::string line;
     while (std::getline(configFile, line))
     {
-        AniSpec anispec;
-
         std::istringstream is(line);
-        std::string anim, from, duration, to;
+        std::string anim_or_slot;
 
-        is >> anim >> anispec.anim_to_create >> from >> anispec.anim_create_from
-           >> duration >> anispec.time_start >> to >> anispec.time_end;
+        is >> anim_or_slot;
 
-        // Need to prepend directory of the anispec file to the anispec.anim_create_from
-        anispec.anim_create_from = configDir + "/" + anispec.anim_create_from;
+        if (anim_or_slot == "anim")
+        {
+            AniSpec anispec;
 
-        anispec.specified = true;
+            std::string from, duration, to;
 
-        anispecs.push_back(anispec);
+            is >> anispec.anim_to_create >> from >> anispec.anim_create_from
+               >> duration >> anispec.time_start >> to >> anispec.time_end;
+
+            // Need to prepend directory of the anispec file to the anispec.anim_create_from
+            anispec.anim_create_from = configDir + "/" + anispec.anim_create_from;
+
+            anispec.specified = true;
+
+            anispecs.push_back(anispec);
+        }
+
+        if (anim_or_slot == "slot")
+        {
+            Slot slotspec;
+
+            std::string from;
+
+            is >> slotspec.slot_to_create >> from >> slotspec.parent_bone_name;
+
+//            std::cout << "creating slot: " << slotspec.slot_to_create << " from " << slotspec.parent_bone_name << "\n";
+
+            slots.push_back(slotspec);
+        }
+
+
 
 //        std::cout << anispec.time_end << "\n";
     }
@@ -325,6 +356,28 @@ bool animPackBin(const aiScene* scene, std::string outputpath, std::string animc
 
     } // Animations
 
+    // Write slots
+    int numSlots = 0;
+
+    if (use_config && slots.size()>0)
+    {
+        numSlots = slots.size();
+    }
+
+    myFile.write((char*) &numSlots, 1*sizeof(int));
+
+    for (int i = 0; i<numSlots; i++)
+    {
+        Slot* slot = &(slots[i]);
+
+        // write parent bone index
+        int bone_index = get_bone_index(slot->parent_bone_name,
+                                            boneNames);
+
+        myFile.write((char*) &bone_index, 1*sizeof(int));
+
+        // write relative to parent bone transformation matrix
+    }
 
     // Close file
     myFile.close();

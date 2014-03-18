@@ -9,7 +9,9 @@ Skeleton::Skeleton() : num_bones(0),
                        bones(nullptr),
                        num_anims(0),
                        animations(nullptr),
-                       triggered(false)
+                       triggered(false),
+                       num_slots(0),
+                       slots(nullptr)
 {
     //ctor
 }
@@ -18,6 +20,7 @@ Skeleton::~Skeleton()
 {
     delete [] bones;
     delete [] animations;
+    delete [] slots;
 }
 
 void Skeleton::fromFile(std::string skel_key)
@@ -198,6 +201,25 @@ void Skeleton::fromFile(std::string skel_key)
                 // Fill helper variable (used for seek)
                 channel->ch_duration = anim->duration;
             }
+        } // Animations
+
+        // Slots
+        reader.chomp(&num_slots, 1*sizeof(int));
+
+        std::cout << "num_slots: " << num_slots << std::endl;
+
+        if (num_slots > 0)
+        {
+            delete [] slots;
+            slots = new Slot [num_slots];
+        }
+
+        for (int i = 0; i<num_slots; i++)
+        {
+            // read parent bone index
+            reader.chomp(&(slots[i].parent_bone_index), 1*sizeof(int));
+
+            // write relative to parent bone transformation matrix
         }
 
         delete[] memblock;
@@ -265,7 +287,10 @@ void Skeleton::poseMatrices(glm::mat4* matrices,
 
             // Add the matrix to the output (still don't understand why this must be transposed
             // and not modelViewMatrix etc...)
-            matrices[bone_index] = glm::transpose(pose_mat * glm::inverse(bones[bone_index].rest_matrix));
+//            matrices[bone_index] = glm::transpose(pose_mat * glm::inverse(bones[bone_index].rest_matrix));
+
+            // not transpose
+            matrices[bone_index] = pose_mat * glm::inverse(bones[bone_index].rest_matrix);
     //        } // if channel.num_keys > 0
     //        else
     //        {
@@ -398,7 +423,7 @@ void Skeleton::poseMatricesBlend( glm::mat4* matrices,
 
         // Add the matrix to the output (still don't understand why this must be transposed
         // and not modelViewMatrix etc...)
-        matrices[bone_index] = glm::transpose(pose_mat * glm::inverse(bones[bone_index].rest_matrix));
+        matrices[bone_index] = pose_mat * glm::inverse(bones[bone_index].rest_matrix);
 
 
 

@@ -182,6 +182,37 @@ void Actor::updateAnim(float dt)
         // pose matrices:
         if (skel_ptr) skel_ptr->poseMatricesBlend(pose_matrices, active_anims);
 
+        // pose slots:
+        // Pose parented render-batches (DEFINITLY REVISE THIS)
+        for (auto &render_batch : render_batches)
+        {
+            int parent_index = render_batch.parent_bone;
+
+            if (parent_index != -1)
+            {
+                if (parent_index<num_pose_matrices && parent_index>=0)
+                {
+                    int parent = render_batch.parent_bone;
+
+                    // This code is a work-around (the price of not having a proper scene graph)
+                    glm::mat4 id(1.0);
+                    glm::mat4 rot = glm::rotate(id, (float)(-3.14/2.0), glm::vec3(1.f, 0.f, 0.f));
+                    glm::mat4 tra = glm::translate(glm::mat4(1.0), glm::vec3(0.74104, 1.33846, -0.06084));
+
+                    // tra and rot are the translation and rotation of the slot...
+                    render_batch.transf_mat = pose_matrices[parent_index] * tra * rot * glm::inverse(pose_matrices[0]);
+                    // as for why we post multiply by inverse of pose_matrices[0], that is because in the vertex shader
+                    // models that are not "skinned" use bone number 0 for transformation, because I am too lazy to write
+                    // a shader for non-skinned meshes...
+                }
+                else
+                {
+                    std::cerr << "error: assigned slot parent bone out of bounds\n";
+                }
+            }
+
+        }
+
 //        std:cout << "length of active_anims: " << active_anims.size() << "\n";
     }
 }
@@ -226,4 +257,17 @@ int Actor::getNumAnims() const
 float Actor::getAnimDuration(int anim_index)
 {
     return ( (skel_ptr) ? skel_ptr->getAnimDuration(anim_index) : 0.0 );
+}
+
+void Actor::moveBatchToSlot(RenderBatch* batch, Slot slot_index)
+{
+    // do
+    if (slot_index < skel_ptr->num_slots && slot_index>=0)
+    {
+        batch->parent_bone = skel_ptr->slots[slot_index].parent_bone_index;
+    }
+    else
+    {
+        std::cerr << "error: attempted to assign to slot out of bounds\n";
+    }
 }

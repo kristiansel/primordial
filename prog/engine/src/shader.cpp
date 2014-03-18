@@ -146,7 +146,13 @@ void Shader::drawActor(shared_ptr<Actor> actor)
     // Set bones
     int num = (actor->num_pose_matrices <= MAX_BONE_NUM) ? actor->num_pose_matrices : MAX_BONE_NUM;
 
-    glUniformMatrix4fv(uniforms.bone_mat, num, true, &(actor->pose_matrices[0][0][0])); // <-- THIS!
+//    for (int i = 0; i<actor->num_pose_matrices; i++)
+//    {
+//        glm::mat4 &matrix = actor->pose_matrices[i];
+//        matrix = glm::transpose(matrix);
+//    }
+
+    glUniformMatrix4fv(uniforms.bone_mat, num, false, &(actor->pose_matrices[0][0][0])); // <-- THIS!
 
     drawProp(actor);
 }
@@ -159,6 +165,8 @@ void Shader::drawProp(shared_ptr<Prop> prop)
         shared_ptr<Texture> tex_ptr = shared_ptr<Texture>(rb_it->tex_ptr);
         glm::mat4 transf_mat = rb_it->transf_mat;
 
+
+
         // set the modelview matrix for this model
         glm::mat4 tr = glm::translate(glm::mat4(1.0), prop->pos);
         glm::mat4 rt = glm::mat4_cast(prop->rot);
@@ -166,6 +174,17 @@ void Shader::drawProp(shared_ptr<Prop> prop)
 
         glm::mat4 obj_to_world_space_mat = tr * rt * sc * transf_mat;
         glm::mat4 vertex_matrix  = view_mat * obj_to_world_space_mat; // scale, then translate, then lookat.
+
+//        for (int i = 0; i<4; i++)
+//        {
+//            for (int j = 0; j<4; j++)
+//            {
+//                std::cout << vertex_matrix[i][j] << "\t";
+//            }
+//            std::cout << "\n";
+//        }
+//
+//        system("PAUSE");
 
         glUniformMatrix4fv(uniforms.mv_mat, 1, false, &vertex_matrix[0][0]);
         glUniformMatrix4fv(uniforms.to_world_space_mat, 1, false, &obj_to_world_space_mat[0][0]);

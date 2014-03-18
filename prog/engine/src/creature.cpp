@@ -46,6 +46,8 @@ void Creature::resolveActionRequests(float dt)
                 // 00001111, 00000000, 00001100, 00000011 -> idle   15, 0, 12, 3
                 // 00000101 -> diagonal left                        5
                 // 00001001 -> diagonal right                       9
+                // 00000110 -> diagonal back left                   6
+                // 00001010 -> diagonal back right                  10
                 // 00000001, 00001101 -> forward                    1, 13
                 // 00000010, 00001110 -> backward                   2, 14
                 // 00000100, 00000111 -> left                       4, 7
@@ -117,9 +119,29 @@ void Creature::resolveActionRequests(float dt)
                     else
                     {
                         playAnim(Anim::WalkRightDiag);
-                        Object3d::moveLeft(-walkspeed*dt, 0.0);
-                        Object3d::moveForward(walkspeed*dt, 0.0);
+                        Object3d::moveLeft(-0.70710678*walkspeed*dt, 0.0);
+                        Object3d::moveForward(0.70710678*walkspeed*dt, 0.0);
                     }
+                }
+                if (state.dirflags==2 || state.dirflags==14)                          // backwards
+                {
+                    // cannot run backwards
+                    playAnim(Anim::WalkBackward);
+                    Object3d::moveForward(-walkspeed*dt, 0.0);
+                }
+                if (state.dirflags==6)                          // back left
+                {
+                    // cannot run backwards
+                    playAnim(Anim::WalkBackLeft);
+                    Object3d::moveForward(-0.70710678*walkspeed*dt, 0.0);
+                    Object3d::moveLeft(0.70710678*walkspeed*dt, 0.0);
+                }
+                if (state.dirflags==10)                          // back right
+                {
+                    // cannot run backwards
+                    playAnim(Anim::WalkBackRight);
+                    Object3d::moveForward(-0.70710678*walkspeed*dt, 0.0);
+                    Object3d::moveLeft(-0.70710678*walkspeed*dt, 0.0);
                 }
 
             } break;

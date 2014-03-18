@@ -22,3 +22,18 @@ Programming:
 	creature physics
 	static physics
 	model hierarchy (multiple models under a creature)
+	separate skeleton loading and skinned/sub_node model loading
+	find out why the pose_matrices must be transposed, but not transform matrices
+	encapsulate drawing functions with attrib and uniforms as arguments 
+		so that shadowmap and main_renderer do not have their completely separate
+		drawing routines
+	worker threads for loading from disk(but upload to GFX card from render-thread)
+	
+	
+Known bugs/issues:
+	random crashes (glm invsqrt assert not divide by zero fails)
+		suspect glm::cross/glm::rotate/glm::normalize with bad arguments
+		(0, 0, 0) vectors etc...
+		Fix: either find root cause, or edit glm source
+	Model "hierarchy" attached sword slot (not the same depending on
+		walk direction... a bit strange..

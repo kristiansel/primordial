@@ -75,6 +75,7 @@ public: // private: // public for debugging
     // Parts of the Skeleton structure
     class Bone;
     class Animation;
+    struct Slot;
 
 
     // This does not use fancy STL because the data
@@ -85,6 +86,9 @@ public: // private: // public for debugging
 
     int num_anims;
     Animation* animations;
+
+    int num_slots;
+    Slot* slots;
 
 private: // for debuggin
     bool triggered;
@@ -145,36 +149,13 @@ public:
 
     // Helper vars
     float ch_duration;
-    };
+};
 
-//// Output form data structure
-//struct Skeleton::Pose
-//{
-//public:
-//    struct Transform // Corresponding to bone/channel
-//    {
-//        Transform() : pos(glm::vec3(0.0, 0.0, 0.0)),
-//                      rot(glm::quat(1.0, 0.0, 0.0, 0.0)),
-//                      sca(glm::vec3(0.0, 0.0, 0.0)) {};
-//        glm::vec3 pos;
-//        glm::quat rot;
-//        glm::vec3 sca;
-//    };
-//public:
-//    Pose();
-//    ~Pose();
-//
-//    explicit Pose(int num_transforms_in);
-//    explicit Pose(Skeleton* skel);
-//
-//    int num_transforms;
-//    Transform* transforms;
-//
-//private:
-//    void allocate(int num_transforms_in);
-//
-//};
-
+struct Skeleton::Slot
+{
+    int parent_bone_index;
+    glm::mat4 local_transform;
+};
 
 
 #endif // SKELETON_H

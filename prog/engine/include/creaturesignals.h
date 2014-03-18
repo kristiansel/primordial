@@ -25,7 +25,10 @@ enum Anim
     ParryLeft1H = 17,
     ParryRight1H = 18,
     DodgeBack = 19,
-    JumpUp = 20
+    JumpUp = 20,
+    WalkBackward = 21,
+    WalkBackLeft = 22,
+    WalkBackRight = 23
 
 };
 

@@ -26,7 +26,6 @@ private:
     // Primary Methods
 //    void init();
     void initWindow();
-    void loadResources();
     void mainLoop();
     void cleanUp();
     void renderTasks();
@@ -39,7 +38,7 @@ private:
     sf::Window  window;     // Input from the window signals the game mechanics
     Mechanics   mechanics;  // the game mechanics takes the input and transforms the scene
     World       world;      // struct like class - Contains the game state
-    Culler      culler;      // process oriented class, scene = culler.stage(&world)
+    Culler      culler;     // process oriented class, scene = culler.stage(&world)
     Scene       scene;      // the scene is an interface between the world and the renderer
     Renderer    renderer;   // the renderer draws the scene: renderer.draw(&scene)
 

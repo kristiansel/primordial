@@ -38,8 +38,10 @@ void Renderer::init(unsigned int scr_width_in, unsigned int scr_height_in)
     glCullFace(GL_BACK);
     glEnable(GL_CULL_FACE);
 
+#ifndef __unix
     // Initialize Shadow mapping shader
     shadow_map.init();
+#endif
 
     // Initialize shaders
     main_shader.init(shadow_map.getDepthTex());
@@ -177,6 +179,11 @@ void Renderer::draw(Scene &scene, float dt)
 //    comb1.activateTextures(render_stage.fbo_texture, render_stage.fbo_depth);
     comb1.draw();
 
+//
+//    if (glGetError() != GL_NO_ERROR) // check error
+//    {
+//        std::cerr << "opengl error present\n";
+//    }
     // Consider drawing lower resolution, and upscaling while applying
     // FXAA...
 }

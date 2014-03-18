@@ -9,14 +9,6 @@ Master::Master() :
     running(true),
     render_thread_loaded(false)
 {
-//    // initiate
-//    init();
-//    // initiate
-//    init();
-
-    // load resources
-    loadResources();
-
     // Start window in main thread...
     initWindow();
 
@@ -27,6 +19,14 @@ Master::Master() :
     // Wait for render_thread to load fully
     std::cout << "waiting for render thread\n";
     while (!render_thread_loaded) {} // WAIT
+
+    // There are more data races here that I do not know about
+    // lucky that this works...
+
+    // proposed: queue loading to opengl to the rendering thread
+    // so that only rendering thread contains opengl calls
+
+    // Fix skyshader and shadow map shader to conform to 330 core
 
     // main loop
     mainLoop();
@@ -77,11 +77,6 @@ void Master::initWindow()
 //
 //
 //}
-
-void Master::loadResources()
-{
-
-}
 
 void Master::mainLoop()
 {

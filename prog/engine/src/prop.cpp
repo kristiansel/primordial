@@ -3,7 +3,7 @@
 Prop::Prop()
 {
     // Reserve space for the render batches
-    render_batches.reserve(render_batches_capacity);
+//    render_batches.reserve(render_batches_capacity);
 }
 
 Prop::~Prop()
@@ -11,7 +11,7 @@ Prop::~Prop()
     //dtor
 }
 
-void Prop::attachBatch(std::weak_ptr<Mesh> mesh_ptr_in,
+RenderBatch* Prop::attachBatch(std::weak_ptr<Mesh> mesh_ptr_in,
                        std::weak_ptr<Texture> tex_ptr_in,
                        glm::mat4 transf_mat_in)
 {
@@ -23,5 +23,5 @@ void Prop::attachBatch(std::weak_ptr<Mesh> mesh_ptr_in,
     render_batches.push_back( RenderBatch(mesh_ptr_in,
                                           tex_ptr_in,
                                           transf_mat_in) );
-
+    return &render_batches.back();
 }

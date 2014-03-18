@@ -1,0 +1,60 @@
+=================================================
+time: Sun Mar 16 22:52:00 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: sword.obj
+numMeshes: 0
+numChildren: 1
+transform: 
+1	0	0	0	
+0	1	0	0	
+0	0	1	0	
+0	0	0	1	
+>node: sword
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: 
+using node hierarchy transform
+parent node to mesh: sword.obj
+using rig_transf: 
+1	0	0	0	
+0	1	0	0	
+0	0	1	0	
+0	0	0	1	
+=================================================
+time: Sun Mar 16 22:53:42 2014
+-------------------------------------------------
+dumping node hierarchy: 
+node: sword.obj
+numMeshes: 0
+numChildren: 1
+transform: 
+1	0	0	0	
+0	1	0	0	
+0	0	1	0	
+0	0	0	1	
+>node: sword
+>numMeshes: 1
+>numChildren: 0
+>transform: 
+>1	0	0	0	
+>0	1	0	0	
+>0	0	1	0	
+>0	0	0	1	
+-------------------------------------------------
+exporting meshes...: 
+exporting mesh: 
+using node hierarchy transform
+parent node to mesh: sword.obj
+using rig_transf: 
+1	0	0	0	
+0	1	0	0	
+0	0	1	0	
+0	0	0	1	
