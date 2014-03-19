@@ -51,19 +51,11 @@ void Shader::init(GLuint shadowmap_depth_texture)
     uniforms.fog_color = glGetUniformLocation(getProgramID(), "fog_color");
     uniforms.zfar = glGetUniformLocation(getProgramID(), "zfar");
 
-    // set the attribute locations
-    attributes.vertex = glGetAttribLocation(getProgramID(), "InVertex") ;
-    attributes.normal = glGetAttribLocation(getProgramID(), "InNormal") ;
-    attributes.texCoord0 = glGetAttribLocation(getProgramID(), "InTexCoord") ;
-    attributes.bone_index = glGetAttribLocation(getProgramID(), "bone_index") ;
-    attributes.bone_weight = glGetAttribLocation(getProgramID(), "bone_weight") ;
-
-    // activate the attributes
-    glEnableVertexAttribArray(attributes.vertex);
-    glEnableVertexAttribArray(attributes.normal);
-    glEnableVertexAttribArray(attributes.texCoord0);
-    glEnableVertexAttribArray(attributes.bone_index);
-    glEnableVertexAttribArray(attributes.bone_weight);
+    glEnableVertexAttribArray(0);
+    glEnableVertexAttribArray(1);
+    glEnableVertexAttribArray(2);
+    glEnableVertexAttribArray(3);
+    glEnableVertexAttribArray(4);
 
     // Store the shadow map depth texture
     // internally. This will not change over time
@@ -77,11 +69,11 @@ void Shader::unload()
     if (isLoaded())
     {
         // not sure if this is needed
-        glDisableVertexAttribArray(attributes.vertex);
-        glDisableVertexAttribArray(attributes.normal);
-        glDisableVertexAttribArray(attributes.texCoord0);
-        glDisableVertexAttribArray(attributes.bone_index);
-        glDisableVertexAttribArray(attributes.bone_weight);
+        glDisableVertexAttribArray(0);
+        glDisableVertexAttribArray(1);
+        glDisableVertexAttribArray(2);
+        glDisableVertexAttribArray(3);
+        glDisableVertexAttribArray(4);
     }
 
     ShaderBase::unload();
@@ -231,11 +223,18 @@ void Shader::drawProp(shared_ptr<Prop> prop)
 
         // Apparently, the below is buffer specific? It needs to be here at least. Look into VAO
         // Or separate buffers for each attribute (corresponds better to the .obj 3d format)
-        glVertexAttribPointer(attributes.vertex,       4, GL_FLOAT,    GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(0)                      );
-        glVertexAttribPointer(attributes.normal,       3, GL_FLOAT,    GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(normalOffset)           );
-        glVertexAttribPointer(attributes.texCoord0,    2, GL_FLOAT,    GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(texCoord0Offset)        );
-        glVertexAttribPointer(attributes.bone_index,   MAX_BONE_INFLUENCES, GL_INT,      GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(bone_indexOffset)       );
-        glVertexAttribPointer(attributes.bone_weight,  MAX_BONE_INFLUENCES, GL_FLOAT,    GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(bone_weightOffset)      );
+//        glVertexAttribPointer(attributes.vertex,       4, GL_FLOAT,    GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(0)                      );
+//        glVertexAttribPointer(attributes.normal,       3, GL_FLOAT,    GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(normalOffset)           );
+//        glVertexAttribPointer(attributes.texCoord0,    2, GL_FLOAT,    GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(texCoord0Offset)        );
+//        glVertexAttribPointer(attributes.bone_index,   MAX_BONE_INFLUENCES, GL_INT,      GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(bone_indexOffset)       );
+//        glVertexAttribPointer(attributes.bone_weight,  MAX_BONE_INFLUENCES, GL_FLOAT,    GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(bone_weightOffset)      );
+
+
+        glVertexAttribPointer(0,       4, GL_FLOAT,    GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(0)                      );
+        glVertexAttribPointer(1,       3, GL_FLOAT,    GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(normalOffset)           );
+        glVertexAttribPointer(2,    2, GL_FLOAT,    GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(texCoord0Offset)        );
+        glVertexAttribPointer(3,   MAX_BONE_INFLUENCES, GL_INT,      GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(bone_indexOffset)       );
+        glVertexAttribPointer(4,  MAX_BONE_INFLUENCES, GL_FLOAT,    GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(bone_weightOffset)      );
 
         // Draw call
         glDrawElements(GL_TRIANGLES, 3*mesh_ptr->getTriNum(), GL_UNSIGNED_SHORT, BUFFER_OFFSET(0));

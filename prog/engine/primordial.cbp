@@ -28,6 +28,8 @@
 					<Add library="BulletCollision" />
 					<Add library="LinearMath" />
 					<Add library="X11" />
+					<Add library="boost_system" />
+					<Add library="boost_thread" />
 				</Linker>
 			</Target>
 			<Target title="Release_linux">
@@ -39,6 +41,7 @@
 				<Compiler>
 					<Add option="-O2" />
 					<Add directory="include" />
+					<Add directory="dependencies" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -94,6 +97,7 @@
 					<Add option="-DGLEW_STATIC" />
 					<Add directory="include" />
 					<Add directory="dependencies/bullet/src" />
+					<Add directory="dependencies" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -113,6 +117,8 @@
 			<Add option="-fexceptions" />
 			<Add option="-DGLM_FORCE_RADIANS" />
 		</Compiler>
+		<Unit filename="dependencies/glerrorcodes.cpp" />
+		<Unit filename="dependencies/glerrorcodes.h" />
 		<Unit filename="dependencies/helperfunctions.hpp" />
 		<Unit filename="dependencies/memstreamer.hpp" />
 		<Unit filename="dependencies/threadingwrapper.cpp" />

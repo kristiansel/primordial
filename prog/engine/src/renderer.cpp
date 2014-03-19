@@ -89,14 +89,14 @@ void Renderer::draw(Scene &scene, float dt)
     // This should look something like this: (for now light is hardcoded
     // in the shadow_map.activate() method)
     //shadow_map.setLight(scene->getShadowLight())
-#ifndef __unix
+//#ifndef __unix
 
 // something is thrown in here on linux...
 // check shadowmap renderbuffer state etc...
 
 //    shadow_map.activate();
-    shadow_map.activate(mlight_vp);
-//    shadow_map.activateDrawContent();
+   shadow_map.activate(mlight_vp);
+   // shadow_map.activateDrawContent(mlight_vp);
         // Draw props (non-animated)
         shadow_map.clearBoneMatrices();
 
@@ -111,8 +111,8 @@ void Renderer::draw(Scene &scene, float dt)
         }
 
     shadow_map.deactivate();
-#endif
-
+//#endif
+////
     resizeWindow(settings.width, settings.height, false);
 
 //    glm::vec4 fog_color = glm::vec4(1.0, 0.6, 0.8, 0.0);

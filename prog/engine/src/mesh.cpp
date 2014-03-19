@@ -30,10 +30,11 @@ Mesh::Mesh() : vertex_num(0), triangle_num(0)
 
 Mesh::~Mesh()
 {
-//    cout << "WARNING: DELETING MESH\n";
+    cout << "WARNING: DELETING MESH\n";
     // release RAM pointers
     delete [] vertices;
     delete [] triangles;
+
 
     // in order to mitigate another buffer being accidentally
     // bound in render thread
@@ -210,21 +211,23 @@ void Mesh::createGL()
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, triangle_num*(sizeof(Triangle)), triangles, GL_STATIC_DRAW);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
-    std::cout << "vertex num: " << vertex_num << "\n";
-    std::cout << "triangle num: " << triangle_num << "\n";
-    std::cout << "vbo_id: " << vbo_id << "\n";
-    std::cout << "ibo_id: " << ibo_id << "\n";
+//    std::cout << "vertex num: " << vertex_num << "\n";
+//    std::cout << "triangle num: " << triangle_num << "\n";
+//    std::cout << "vbo_id: " << vbo_id << "\n";
+//    std::cout << "ibo_id: " << ibo_id << "\n";
 
     load_stage = Loaded;
 }
 
 void Mesh::deleteGL()
 {
-    std::cout << "deleting mesh from video RAM\n";
-    std::cout << "vertex num: " << vertex_num << "\n";
-    std::cout << "triangle num: " << triangle_num << "\n";
-    std::cout << "vbo_id: " << vbo_id << "\n";
-    std::cout << "ibo_id: " << ibo_id << "\n";
+//    std::cout << "deleting mesh from video RAM\n";
+//    std::cout << "vertex num: " << vertex_num << "\n";
+//    std::cout << "triangle num: " << triangle_num << "\n";
+//    std::cout << "vbo_id: " << vbo_id << "\n";
+//    std::cout << "ibo_id: " << ibo_id << "\n";
+
+    std::cout << "deleting mesh, vbo:id: " << vbo_id << "\n";
 
     // release video RAM buffers
     glBindBuffer(GL_ARRAY_BUFFER, 0); // do you really need this?

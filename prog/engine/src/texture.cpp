@@ -1,6 +1,6 @@
 #include "texture.h"
 
-Texture::Texture() : load_stage(NotLoaded)
+Texture::Texture() : load_stage(NotLoaded), tbo_id(99999)
 {
     //ctor
 }
@@ -25,6 +25,8 @@ Texture::~Texture()
 bool Texture::fromFile(std::string filepath_in)
 {
     filepath_in = "assets/textures/"+filepath_in+".png";
+
+    //std::cout << "loading texture " << filepath_in << "\n";
 
     if (!(image.loadFromFile(filepath_in)))
     {
@@ -87,7 +89,8 @@ void Texture::deleteGL()
 {
     glBindTexture(GL_TEXTURE_2D, 0); // Really this should not be necessary
 
-//    cout << "Deleting Buffers: " << vbo_id << " & " << ibo_id << "\n";
+    //std::cout << "deleting texture, tbo_id: " << tbo_id << "\n";
+
     glDeleteTextures(1, &tbo_id);
 
     load_stage = NotLoaded;
@@ -120,11 +123,17 @@ void Texture::createGL()
     glBindTexture(GL_TEXTURE_2D, 0);
 
     GLenum errCode;
-    const GLubyte *errString;
+    errCode = glGetError();
+    if (errCode != GL_NO_ERROR) {
+        std::cerr << "glGetError()) != GL_NO_ERROR-----TEXTURE------\n";
 
-    if ((errCode = glGetError()) != GL_NO_ERROR) {
-        std::cerr << "something is wrong in texture loading\n";
+        if (errCode == GL_INVALID_VALUE)
+        {
+            std::cerr << "GL_INVALID_VALUE\n";
+        }
     }
+
+    std::cout << "creating texture buffer " << tbo_id << "\n";
 
     load_stage = Loaded;
 }
