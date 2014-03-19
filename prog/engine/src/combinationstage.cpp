@@ -16,6 +16,7 @@ CombinationStage::~CombinationStage()
         glDeleteFramebuffers(1, &fbo);
         glDeleteRenderbuffers(1, &rbo_depth);
         glDisableVertexAttribArray(attribute_v_coord_postproc);
+        glDeleteBuffers(1, &vbo_fbo_vertices);
     }
     ShaderBase::unload();
 };
@@ -72,31 +73,6 @@ void CombinationStage::init(int w, int h)
     glBufferData(GL_ARRAY_BUFFER, sizeof(fbo_vertices), fbo_vertices, GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-//    // Post-processing
-//    GLuint vs, fs;
-//    GLint link_ok;
-//    GLint validate_ok;
-//
-//    vs = Shader::initshaders(GL_VERTEX_SHADER, "shaders/pp_wave.vert.glsl");
-//    fs = Shader::initshaders(GL_FRAGMENT_SHADER, shader_path);
-//
-//    getProgramID() = glCreateProgram();
-//    glAttachShader(getProgramID(), vs);
-//    glAttachShader(getProgramID(), fs);
-//    glLinkProgram(getProgramID());
-//    glGetProgramiv(getProgramID(), GL_LINK_STATUS, &link_ok);
-//    if (!link_ok)
-//    {
-//        fprintf(stderr, "glLinkProgram:");
-//        Shader::shadererrors(getProgramID());
-//        //return 0;
-//    }
-//    glValidateProgram(getProgramID());
-//    glGetProgramiv(getProgramID(), GL_VALIDATE_STATUS, &validate_ok);
-//    if (!validate_ok)
-//    {
-//        fprintf(stderr, "glValidateProgram:");
-//        //print_log(getProgramID());
 //    }
     ShaderBase::load("shaders/pp_wave.vert.glsl", "shaders/pp_comb.frag.glsl");
 

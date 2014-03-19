@@ -65,3 +65,37 @@
 //    return temp;
 //
 //}
+
+
+std::ostream &operator<< (std::ostream &out, const glm::vec3 &vec) {
+    out << "{"
+        << vec.x << " " << vec.y << " "<< vec.z
+        << "}";
+
+    return out;
+}
+
+std::ostream &operator<< (std::ostream &out, const glm::vec4 &vec) {
+    out << "{"
+        << vec[0] << " " <<  vec[1] << " "<<  vec[2] <<  " " << vec[3]
+        << "}";
+
+    return out;
+}
+
+
+std::ostream &operator<< (std::ostream &out, const glm::mat4 &mat) {
+    out << "{";
+    for (int i = 0; i<4; i++)
+    {
+        out << "{";
+        for (int j = 0; j<4; j++)
+        {
+            out << mat[i][j] << "\t";
+        }
+        out << "}\n";
+    }
+    out << "}";
+
+    return out;
+}

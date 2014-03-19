@@ -23,4 +23,6 @@ void main (void)
     fog_weight = clamp(fog_weight, 0, 1.0);
 
     gl_FragColor = (1.0-fog_weight) * sky_color + fog_weight * fog_color;
+
+    //gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);
 }

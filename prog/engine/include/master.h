@@ -27,6 +27,7 @@ private:
 //    void init();
     void initWindow();
     void mainLoop();
+    void mainLoopSingleThreaded();
     void cleanUp();
     void renderTasks();
 //    void testThreadTasks();

@@ -1,4 +1,4 @@
-# version 120
+# version 330 core
 
 varying vec4 myvertex ;
 
@@ -9,6 +9,6 @@ uniform mat4 mv_mat;
 void main() {
     myvertex = vertex ;
 
-    gl_Position = gl_ProjectionMatrix * mv_mat * myvertex ;
+    gl_Position = mv_mat * myvertex ;
 }
 

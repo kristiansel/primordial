@@ -23,7 +23,10 @@ void Renderer::init(unsigned int scr_width_in, unsigned int scr_height_in)
     cout << "Status: Using GLEW " << glewGetString(GLEW_VERSION) << "\n";
 
     // Set clear values
+    //glClearColor(0.f/255.f, 80.f/255.f, 186.f/255.f, 0.0);
+
     glClearColor(0.f/255.f, 80.f/255.f, 186.f/255.f, 0.0);
+
     glClearDepth(1.0);
 
     // Enable depth testing
@@ -34,9 +37,9 @@ void Renderer::init(unsigned int scr_width_in, unsigned int scr_height_in)
 //    glEnable( GL_BLEND );
 
     // Set up culling
-    glFrontFace(GL_CCW);
-    glCullFace(GL_BACK);
-    glEnable(GL_CULL_FACE);
+ //   glFrontFace(GL_CCW);
+//    glCullFace(GL_BACK);
+ //   glEnable(GL_CULL_FACE);
 
     // Initialize Shadow mapping shader
     shadow_map.init();
@@ -155,6 +158,8 @@ void Renderer::draw(Scene &scene, float dt)
     // Finished main drawing, post processing
     render_stage.deactivate();
 
+
+
     // should be
 //    blur1.activate(render_stage.fbo_texture, render_stage.fbo_depth);
 //    blur1.drawb();
@@ -164,8 +169,13 @@ void Renderer::draw(Scene &scene, float dt)
 
     // Consider managing the resizing in the post-proc-stage class
     blur1.activate(KERNEL_SIZE, &kernelOffsetx[0], &kernelOffsety[0]);
+
+
     blur1.activateTextures(render_stage.fbo_texture, render_stage.fbo_depth);
+    //std::cout << "REND gets here1!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1\n";
     blur1.drawb();
+    //std::cout << "REND gets here2!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1\n";
+
 
     // removing this has no effect on performance
     blur2.activate(KERNEL_SIZE, &kernelOffsetx[0], &kernelOffsety[0]);
@@ -180,6 +190,9 @@ void Renderer::draw(Scene &scene, float dt)
 //    comb1.activate(0.7, 0.5);
     comb1.activateTextures(render_stage.fbo_texture, blur2.fbo_texture); // original
 //    comb1.activateTextures(render_stage.fbo_texture, render_stage.fbo_depth);
+
+
+
     comb1.draw();
 
 //

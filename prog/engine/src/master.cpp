@@ -13,13 +13,42 @@ Master::Master() :
     // Start window in main thread...
     initWindow();
 
+    bool multithreaded = false;
+
+    if (multithreaded)
+    {
+        window.setActive(false);
+
+        // Launch threads
+        render_thread = Thread(&Master::renderTasks, this);
+        //test_thread = Thread(&Master::testThreadTasks, this);
+
+        // Wait for render_thread to load fully
+        std::cout << "waiting for render thread\n";
+        while (!render_thread_loaded) {} // WAIT
+
+        // There are more data races here that I do not know about
+        // lucky that this works...
+
+        // proposed: queue loading to opengl to the rendering thread
+        // so that only rendering thread contains opengl calls
+
+        // Fix skyshader and shadow map shader to conform to 330 core
+
+        // main loop
+        mainLoop();
+    }
+    else
+    {
+        mainLoopSingleThreaded();
+    }
     // Launch threads
-    render_thread = Thread(&Master::renderTasks, this);
+    // render_thread = Thread(&Master::renderTasks, this);
     //test_thread = Thread(&Master::testThreadTasks, this);
 
     // Wait for render_thread to load fully
-    std::cout << "waiting for render thread\n";
-    while (!render_thread_loaded) {} // WAIT
+    //std::cout << "waiting for render thread\n";
+    //while (!render_thread_loaded) {} // WAIT
 
     // There are more data races here that I do not know about
     // lucky that this works...
@@ -30,7 +59,9 @@ Master::Master() :
     // Fix skyshader and shadow map shader to conform to 330 core
 
     // main loop
-    mainLoop();
+    //mainLoop();
+
+    //mainLoopSingleThreaded();
 
     // cleanup
     cleanUp();
@@ -51,33 +82,50 @@ void Master::initWindow()
     window.create(sf::VideoMode(scr_width_px, scr_height_px), "Primordial", sf::Style::Default, sf::ContextSettings(32, 0, 0, 4, 4));
     window.setVerticalSyncEnabled(false); // This forces frame rate to 60 FPS?
 
-    window.setActive(false);
-
     // Disable repeated key presses when holding down keys
     window.setKeyRepeatEnabled(false);
 }
 
-//void Master::init()
-//{
-///    // to be loaded from settings
-///    scr_width_px = 1400;
-///    scr_height_px = 900;
-///
-///    // create the window and OpenGL context
-///    window.create(sf::VideoMode(scr_width_px, scr_height_px), "Primordial", sf::Style::Default, sf::ContextSettings(32, 0, 0, 4, 4));
-///    window.setVerticalSyncEnabled(true);
-///
-///    window.setActive(false);
-///    // Deactivate window in current thread
-///    window.setActive(true);
-///
-///    renderer.init(scr_width_px, scr_height_px);
-///
-///    // Initialize the game module
-///    mechanics.init(world, dt);
-//
-//
-//}
+void Master::mainLoopSingleThreaded()
+{
+
+    renderer.init(scr_width_px, scr_height_px);
+
+ // Initialize the game module
+    mechanics.init(world, dt);
+
+
+    // run the main loop
+    while (running)
+    {
+        // start the watch
+        clock.restart();
+
+        // handle user input
+        running = handleInput();
+
+        // Step the simulation
+        mechanics.step(world, dt);
+
+        // cout << "dt = " << dt << "\n";
+
+        // Choose what to render
+        culler.stage(scene, world); // stage the scene from the world THIS breaks everything since non-shared shared pointers go out of scope
+
+        // draw...
+        renderer.draw(scene, dt);
+
+        // end the current frame (internally swaps the front and back buffers)
+        window.display();
+
+        // record the time
+        dt = clock.getElapsedTime().asSeconds();
+
+//        cout << "frame time = " << dt << ", FPS = " << 1.0/dt << "\n";
+//        system("PAUSE");
+    }
+}
+
 
 void Master::mainLoop()
 {

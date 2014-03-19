@@ -39,8 +39,14 @@ class SkyShader : public ShaderBase
 
         } attributes;
 
+
         // Sky quad geometry
         Mesh* sky_quad;
+
+
+
+        // TEST
+        GLuint vbo_fbo_vertices;
 };
 
 #endif // SKYSHADER_H

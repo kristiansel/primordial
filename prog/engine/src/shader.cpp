@@ -106,6 +106,10 @@ void Shader::activate(const Camera &cam_in,
     glm::mat4 p = cam_in.getProjectionMatrix();
     glUniformMatrix4fv(uniforms.proj_mat, 1, false, &p[0][0] );
 
+//    std::cout << "cam_in.getProjectionMatrix():  \n" << p << "\n\n";
+//
+//    std::terminate();
+
     // Set view matrix and light matrix
     view_mat = cam_in.getViewMatrix();
     main_light_mvp_mat = light_mvp_mat;
@@ -174,6 +178,13 @@ void Shader::drawProp(shared_ptr<Prop> prop)
 
         glm::mat4 obj_to_world_space_mat = tr * rt * sc * transf_mat;
         glm::mat4 vertex_matrix  = view_mat * obj_to_world_space_mat; // scale, then translate, then lookat.
+
+//
+//        std::cout << "t: \n" << tr << "\n\n";
+//        std::cout << "s: \n" << sc << "\n\n";
+//
+//        std::cout << "terminating prematurely\n";
+//        std::terminate();
 
 //        for (int i = 0; i<4; i++)
 //        {

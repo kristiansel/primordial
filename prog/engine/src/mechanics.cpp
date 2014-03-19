@@ -38,10 +38,13 @@ void Mechanics::init(World &world_in, float &dt_in)
     // Load some resources (should be moved)
     //                          Model,         Texture,            Position
     // WorldObjects:
+
+
     world->addDynamicObject( "sphere",
                              "nicewall",
                              glm::vec3(-2.0, 10.0, -4.0),
                              RigidBody::Sphere(1.0) );
+
 
 //    world->addDynamicObject( "rabbit",
 //                             "rabbit_d",

@@ -28,6 +28,7 @@ list<shared_ptr<WorldObject>>::iterator World::addStaticObject(string mesh_key, 
 {
     // Add a new worldobject to the list and capture
     // reference and iterator
+
     shared_ptr<WorldObject> worldobject = shared_ptr<WorldObject>(new WorldObject);
 
     worldobject->pos = pos;         // configure position
@@ -101,6 +102,7 @@ list<shared_ptr<WorldObject>>::iterator World::addDynamicObject(string mesh_key,
     // Create in place
 //    worldobjects.push_back(shared_ptr<WorldObject>(new WorldObject()));
 //    list<shared_ptr<WorldObject>>::iterator new_worldobject_it = --worldobjects.end();
+
     shared_ptr<WorldObject> worldobject = shared_ptr<WorldObject>(new WorldObject);
 
     worldobject->pos = pos;         // configure position
@@ -110,9 +112,12 @@ list<shared_ptr<WorldObject>>::iterator World::addDynamicObject(string mesh_key,
     // attach the mesh
     //weak_ptr<Mesh>      mesh_ptr    = resourcemanager.getMeshptrFromKey (mesh_key);
     //weak_ptr<Texture>   tex_ptr     = resourcemanager.getTexptrFromKey  (tex_key);
-
+//std::cout << "MASTER gets here2>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>1\n";
     weak_ptr<Mesh>      mesh_ptr    = global::mesh_manager.getResptrFromKey (mesh_key);
+//std::cout << "MASTER gets here1>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>1\n";
+
     weak_ptr<Texture>   tex_ptr     = global::tex_manager.getResptrFromKey  (tex_key);
+
 
     worldobject->attachBatch(mesh_ptr, tex_ptr);
 
@@ -127,6 +132,8 @@ list<shared_ptr<WorldObject>>::iterator World::addDynamicObject(string mesh_key,
 
     // This is not needed....
     list<shared_ptr<WorldObject>>::iterator new_worldobject_it = --worldobjects.end();
+
+
     return new_worldobject_it;
 
 //    return shared_ptr<WorldObject>(&(*new_worldobject_it)); // This results in SEGFAULT because

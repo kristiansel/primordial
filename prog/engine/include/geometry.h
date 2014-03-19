@@ -33,5 +33,9 @@ struct Triangle // 12 bytes
 //    unsigned short padding;
 };
 
+// some overloads...
+extern std::ostream &operator<< (std::ostream &out, const glm::vec3 &vec);
+extern std::ostream &operator<< (std::ostream &out, const glm::vec4 &vec);
+extern std::ostream &operator<< (std::ostream &out, const glm::mat4 &mat);
 
 #endif // GEOMETRY_H
