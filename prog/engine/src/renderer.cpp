@@ -37,9 +37,9 @@ void Renderer::init(unsigned int scr_width_in, unsigned int scr_height_in)
 //    glEnable( GL_BLEND );
 
     // Set up culling
- //   glFrontFace(GL_CCW);
-//    glCullFace(GL_BACK);
- //   glEnable(GL_CULL_FACE);
+    glFrontFace(GL_CCW);
+    glCullFace(GL_BACK);
+    glEnable(GL_CULL_FACE);
 
     // Initialize Shadow mapping shader
     shadow_map.init();
@@ -95,8 +95,8 @@ void Renderer::draw(Scene &scene, float dt)
 // check shadowmap renderbuffer state etc...
 
 //    shadow_map.activate();
-   shadow_map.activate(mlight_vp);
-   // shadow_map.activateDrawContent(mlight_vp);
+   // shadow_map.activate(mlight_vp);
+   shadow_map.activateDrawContent(mlight_vp);
         // Draw props (non-animated)
         shadow_map.clearBoneMatrices();
 
@@ -113,87 +113,87 @@ void Renderer::draw(Scene &scene, float dt)
     shadow_map.deactivate();
 //#endif
 ////
-    resizeWindow(settings.width, settings.height, false);
-
-//    glm::vec4 fog_color = glm::vec4(1.0, 0.6, 0.8, 0.0);
-    glm::vec4 fog_color = glm::vec4(1.0, 1.0, 1.0, 1.0);
-
-    // Set render "target" to draw to frame buffer
-    render_stage.activate();
-
-
-
-        // Set the values of the uniforms which are updated
-        // per-frame and switch to main shader
-        main_shader.activate(*(scene.camera),
-                             fog_color,
-                             mlight_vp,
-                             mlight/*, plights, num_plights, scene.fog_color*/);
-
-        // draw
-
-
-        // Draw props (non-animated)
-        main_shader.clearBoneMatrices();
-
-        for (auto it = scene.props.begin(); it!=scene.props.end(); it++)
-        {
-            // main_shader.drawProp(&**it);
-            main_shader.drawProp(*it);
-        }
-
-        // Draw actors;
-        for (auto it = scene.actors.begin(); it!=scene.actors.end(); it++)
-        {
-            // main_shader.drawActor(&**it);
-            main_shader.drawActor(*it);
-        }
-
-        // Draw "sky quad" following the camera
-        glm::vec4 sky_color = glm::vec4(0.f/255.f, 80.f/255.f, 186.f/255.f, 1.0);
-
-        // activate and draw in the same call
-        sky_shader.drawSkyQuad((*(scene.camera)), sky_color, fog_color);
-
-    // Finished main drawing, post processing
-    render_stage.deactivate();
-
-
-
-    // should be
-//    blur1.activate(render_stage.fbo_texture, render_stage.fbo_depth);
+//    resizeWindow(settings.width, settings.height, false);
+//
+////    glm::vec4 fog_color = glm::vec4(1.0, 0.6, 0.8, 0.0);
+//    glm::vec4 fog_color = glm::vec4(1.0, 1.0, 1.0, 1.0);
+//
+//    // Set render "target" to draw to frame buffer
+//    render_stage.activate();
+//
+//
+//
+//        // Set the values of the uniforms which are updated
+//        // per-frame and switch to main shader
+//        main_shader.activate(*(scene.camera),
+//                             fog_color,
+//                             mlight_vp,
+//                             mlight/*, plights, num_plights, scene.fog_color*/);
+//
+//        // draw
+//
+//
+//        // Draw props (non-animated)
+//        main_shader.clearBoneMatrices();
+//
+//        for (auto it = scene.props.begin(); it!=scene.props.end(); it++)
+//        {
+//            // main_shader.drawProp(&**it);
+//            main_shader.drawProp(*it);
+//        }
+//
+//        // Draw actors;
+//        for (auto it = scene.actors.begin(); it!=scene.actors.end(); it++)
+//        {
+//            // main_shader.drawActor(&**it);
+//            main_shader.drawActor(*it);
+//        }
+//
+//        // Draw "sky quad" following the camera
+//        glm::vec4 sky_color = glm::vec4(0.f/255.f, 80.f/255.f, 186.f/255.f, 1.0);
+//
+//        // activate and draw in the same call
+//        sky_shader.drawSkyQuad((*(scene.camera)), sky_color, fog_color);
+//
+//    // Finished main drawing, post processing
+//    render_stage.deactivate();
+//
+//
+//
+//    // should be
+////    blur1.activate(render_stage.fbo_texture, render_stage.fbo_depth);
+////    blur1.drawb();
+//
+//    ///     GENERATING POST-PROCESSING IMAGES
+//    resizeWindow(settings.width/ratio, settings.height/ratio, false);
+//
+//    // Consider managing the resizing in the post-proc-stage class
+//    blur1.activate(KERNEL_SIZE, &kernelOffsetx[0], &kernelOffsety[0]);
+//
+//
+//    blur1.activateTextures(render_stage.fbo_texture, render_stage.fbo_depth);
+//    //std::cout << "REND gets here1!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1\n";
 //    blur1.drawb();
-
-    ///     GENERATING POST-PROCESSING IMAGES
-    resizeWindow(settings.width/ratio, settings.height/ratio, false);
-
-    // Consider managing the resizing in the post-proc-stage class
-    blur1.activate(KERNEL_SIZE, &kernelOffsetx[0], &kernelOffsety[0]);
-
-
-    blur1.activateTextures(render_stage.fbo_texture, render_stage.fbo_depth);
-    //std::cout << "REND gets here1!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1\n";
-    blur1.drawb();
-    //std::cout << "REND gets here2!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1\n";
-
-
-    // removing this has no effect on performance
-    blur2.activate(KERNEL_SIZE, &kernelOffsetx[0], &kernelOffsety[0]);
-    blur2.activateTextures(blur1.fbo_texture, render_stage.fbo_depth);
-    blur2.drawb();
-
-    resizeWindow(settings.width, settings.height, false);
-
-    // is absolutely killing performance
-//    comb1.activate(1.000, 0.00); // original
-    comb1.activate(0.585, 0.415); // original
-//    comb1.activate(0.7, 0.5);
-    comb1.activateTextures(render_stage.fbo_texture, blur2.fbo_texture); // original
-//    comb1.activateTextures(render_stage.fbo_texture, render_stage.fbo_depth);
-
-
-
-    comb1.draw();
+//    //std::cout << "REND gets here2!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1\n";
+//
+//
+//    // removing this has no effect on performance
+//    blur2.activate(KERNEL_SIZE, &kernelOffsetx[0], &kernelOffsety[0]);
+//    blur2.activateTextures(blur1.fbo_texture, render_stage.fbo_depth);
+//    blur2.drawb();
+//
+//    resizeWindow(settings.width, settings.height, false);
+//
+//    // is absolutely killing performance
+////    comb1.activate(1.000, 0.00); // original
+//    comb1.activate(0.585, 0.415); // original
+////    comb1.activate(0.7, 0.5);
+//    comb1.activateTextures(render_stage.fbo_texture, blur2.fbo_texture); // original
+////    comb1.activateTextures(render_stage.fbo_texture, render_stage.fbo_depth);
+//
+//
+//
+//    comb1.draw();
 
 //
 //    if (glGetError() != GL_NO_ERROR) // check error

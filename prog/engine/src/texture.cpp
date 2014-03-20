@@ -89,7 +89,7 @@ void Texture::deleteGL()
 {
     glBindTexture(GL_TEXTURE_2D, 0); // Really this should not be necessary
 
-    //std::cout << "deleting texture, tbo_id: " << tbo_id << "\n";
+    std::cout << "deleting texture, tbo_id: " << tbo_id << "\n";
 
     glDeleteTextures(1, &tbo_id);
 

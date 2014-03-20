@@ -118,7 +118,7 @@ void ShadowMap::init()
     }
 
 
-    glFinish();
+//    glFinish();
 
     std::cout << "shadowmap initialized\n";
 }
@@ -175,101 +175,101 @@ void ShadowMap::drawActor(shared_ptr<Actor> actor)
 
 void ShadowMap::drawProp(shared_ptr<Prop> prop)
 {
-    { // OLD
-        for (auto rb_it = prop->render_batches.begin(); rb_it!= prop->render_batches.end(); rb_it++)
-        {
-    //        Mesh &mesh = *shared_ptr<Mesh>(*mesh_ptr_it); // deref the it to ptr, from ptr to mesh
-            shared_ptr<Mesh> mesh_ptr = shared_ptr<Mesh>(rb_it->mesh_ptr);
-            glm::mat4 transf_mat = rb_it->transf_mat;
-
-            // set the modelview matrix for this model
-            glm::mat4 tr = glm::translate(glm::mat4(1.0), prop->pos);
-            glm::mat4 rt = glm::mat4_cast(prop->rot);
-            glm::mat4 sc = glm::scale(glm::mat4(1.0), prop->scale);
-
-            glm::mat4 mv = light_vp_value;
-            glm::mat4 vertex_matrix  = mv * tr * rt * sc * transf_mat; // scale, then translate, then lookat.
-
-            glUniformMatrix4fv(uniforms.light_mvp_mat, 1, false, &vertex_matrix[0][0]);
-
-            // Bind vertex data
-            glBindBuffer(GL_ARRAY_BUFFER, mesh_ptr->getVBOid());
-            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh_ptr->getIBOid());
-
-            // Apparently, the below is buffer specific? It needs to be here at least. Look into VAO
-            // Or separate buffers for each attribute (corresponds better to the .obj 3d format)
-    //        glVertexAttribPointer(attributes.vertex,       4, GL_FLOAT,    GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(0));
-    //        glVertexAttribPointer(attributes.bone_index,   MAX_BONE_INFLUENCES, GL_INT,      GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(bone_indexOffset)       );
-    //        glVertexAttribPointer(attributes.bone_weight,  MAX_BONE_INFLUENCES, GL_FLOAT,    GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(bone_weightOffset)      );
-
-            glVertexAttribPointer(0,       4, GL_FLOAT,    GL_FALSE,    sizeof(Vertex), BUFFER_OFFSET(0));
-            glVertexAttribPointer(1,  MAX_BONE_INFLUENCES, GL_INT,      GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(bone_indexOffset)       );
-            glVertexAttribPointer(2,  MAX_BONE_INFLUENCES, GL_FLOAT,    GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(bone_weightOffset)      );
-            // glDraw checklist...
-            // All uniforms set?
-            // buffers work on other shader, so it should be fine
-
-    //        std::cout << "vbo_id: \n" << mesh_ptr->getVBOid() << "\n\n";
-    //        std::cout << "ibo_id: \n" << mesh_ptr->getIBOid() << "\n\n";
-    //
-    //        std::cout << "mesh_ptr->getTriNum(): \n" << mesh_ptr->getTriNum() << "\n\n";
-    //
-    //        std::cout << "glGetError(): " << ((glGetError()!=GL_NO_ERROR) ? "error" : "no error" ) << "\n";
-    //        std::cout << "calling glDrawElements\n";
-            // Draw call
-
-
-            if (triggered > 4000) // segfaults without this for some reason connected to the framebuffer...
-            {
-                //std::cout << "drawing\n";
-                glDrawElements(GL_TRIANGLES, 3*mesh_ptr->getTriNum(), GL_UNSIGNED_SHORT, BUFFER_OFFSET(0));
-            }
-
-            else
-            {
-                triggered++;
-            }
-
-
-            //glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_SHORT, BUFFER_OFFSET(0));
-
-            // Not sure if this is necessary unless other code is badly written
-            glBindBuffer(GL_ARRAY_BUFFER, 0);
-            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-        }
-    } // OLD
-
-
-//    { // TEST
-//        //std::cout << "drawing arrays\n";
-//        glm::mat4 mv = light_vp_value;
-//        glm::mat4 vertex_matrix  = mv;// scale, then translate, then lookat.
+//    { // OLD
+//        for (auto rb_it = prop->render_batches.begin(); rb_it!= prop->render_batches.end(); rb_it++)
+//        {
+//    //        Mesh &mesh = *shared_ptr<Mesh>(*mesh_ptr_it); // deref the it to ptr, from ptr to mesh
+//            shared_ptr<Mesh> mesh_ptr = shared_ptr<Mesh>(rb_it->mesh_ptr);
+//            glm::mat4 transf_mat = rb_it->transf_mat;
 //
-//        glUniformMatrix4fv(uniforms.light_mvp_mat, 1, false, &vertex_matrix[0][0]);
+//            // set the modelview matrix for this model
+//            glm::mat4 tr = glm::translate(glm::mat4(1.0), prop->pos);
+//            glm::mat4 rt = glm::mat4_cast(prop->rot);
+//            glm::mat4 sc = glm::scale(glm::mat4(1.0), prop->scale);
 //
-//        // Bind vertex data
-//        glBindBuffer(GL_ARRAY_BUFFER, vbo_fbo_vertices);
-//        glVertexAttribPointer(
-//            attributes.vertex,  // attribute
-//            4,                  // number of elements per vertex, here (x,y)
-//            GL_FLOAT,           // the type of each element
-//            GL_FALSE,           // take our values as-is
-//            0,                  // no extra data between each position
-//            0                   // offset of first element
-//        );
+//            glm::mat4 mv = light_vp_value;
+//            glm::mat4 vertex_matrix  = mv * tr * rt * sc * transf_mat; // scale, then translate, then lookat.
+//
+//            glUniformMatrix4fv(uniforms.light_mvp_mat, 1, false, &vertex_matrix[0][0]);
+//
+//            // Bind vertex data
+//            glBindBuffer(GL_ARRAY_BUFFER, mesh_ptr->getVBOid());
+//            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh_ptr->getIBOid());
+//
+//            // Apparently, the below is buffer specific? It needs to be here at least. Look into VAO
+//            // Or separate buffers for each attribute (corresponds better to the .obj 3d format)
+//    //        glVertexAttribPointer(attributes.vertex,       4, GL_FLOAT,    GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(0));
+//    //        glVertexAttribPointer(attributes.bone_index,   MAX_BONE_INFLUENCES, GL_INT,      GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(bone_indexOffset)       );
+//    //        glVertexAttribPointer(attributes.bone_weight,  MAX_BONE_INFLUENCES, GL_FLOAT,    GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(bone_weightOffset)      );
+//
+//            glVertexAttribPointer(0,       4, GL_FLOAT,    GL_FALSE,    sizeof(Vertex), BUFFER_OFFSET(0));
+//            glVertexAttribPointer(1,  MAX_BONE_INFLUENCES, GL_INT,      GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(bone_indexOffset)       );
+//            glVertexAttribPointer(2,  MAX_BONE_INFLUENCES, GL_FLOAT,    GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(bone_weightOffset)      );
+//            // glDraw checklist...
+//            // All uniforms set?
+//            // buffers work on other shader, so it should be fine
+//
+//    //        std::cout << "vbo_id: \n" << mesh_ptr->getVBOid() << "\n\n";
+//    //        std::cout << "ibo_id: \n" << mesh_ptr->getIBOid() << "\n\n";
+//    //
+//    //        std::cout << "mesh_ptr->getTriNum(): \n" << mesh_ptr->getTriNum() << "\n\n";
+//    //
+//    //        std::cout << "glGetError(): " << ((glGetError()!=GL_NO_ERROR) ? "error" : "no error" ) << "\n";
+//    //        std::cout << "calling glDrawElements\n";
+//            // Draw call
+//
+//
+////            if (triggered > 4000) // segfaults without this for some reason connected to the framebuffer...
+////            {
+////                std::cout << "drawing\n";
+//                glDrawElements(GL_TRIANGLES, 3*mesh_ptr->getTriNum(), GL_UNSIGNED_SHORT, BUFFER_OFFSET(0));
+////            }
+////
+////            else
+////            {
+////                triggered++;
+////            }
+//
+//
+//            //glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_SHORT, BUFFER_OFFSET(0));
+//
+//            // Not sure if this is necessary unless other code is badly written
+//            glBindBuffer(GL_ARRAY_BUFFER, 0);
+//            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+//        }
+//    } // OLD
+
+
+    { // TEST
+        //std::cout << "drawing arrays\n";
+        glm::mat4 mv = light_vp_value;
+        glm::mat4 vertex_matrix  = mv;// scale, then translate, then lookat.
+
+        glUniformMatrix4fv(uniforms.light_mvp_mat, 1, false, &vertex_matrix[0][0]);
+
+        // Bind vertex data
+        glBindBuffer(GL_ARRAY_BUFFER, vbo_fbo_vertices);
+        glVertexAttribPointer(
+            0,                  // attribute channel
+            4,                  // number of elements per vertex, here (x,y,z,w)
+            GL_FLOAT,           // the type of each element
+            GL_FALSE,           // take our values as-is
+            0,                  // no extra data between each position
+            0                   // offset of first element
+        );
 //        if (triggered > 500)
 //        {
 //            std::cout << "drawing\n";
-//            glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+            glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 //        }
 //
 //        else
 //        {
 //            triggered++;
 //        }
-//
-//        //std::cout << "drawing arrays\n";
-//    }
+
+        //std::cout << "drawing arrays\n";
+    }
 
 }
 

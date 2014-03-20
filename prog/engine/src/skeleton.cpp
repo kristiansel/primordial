@@ -381,6 +381,9 @@ void Skeleton::poseMatricesBlend( glm::mat4* matrices,
                 auto rot_res = channel->rot_series.seek(time);
                 auto sca_res = channel->sca_series.seek(time);
 
+
+                // Add something here to debug assert gentype(0) error from glm
+
                 // Preform interpolation
                 glm::vec3 key_pos = glm::mix(pos_res.prev.key->value,
                                              pos_res.next.key->value,
