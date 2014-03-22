@@ -126,6 +126,7 @@
 		<Unit filename="dependencies/timeseries.hpp" />
 		<Unit filename="include/actor.h" />
 		<Unit filename="include/camera.h" />
+		<Unit filename="include/charactercontroller.h" />
 		<Unit filename="include/combinationstage.h" />
 		<Unit filename="include/creature.h" />
 		<Unit filename="include/creaturesignals.h" />
@@ -167,6 +168,7 @@
 		<Unit filename="shaders/sky_vert.glsl" />
 		<Unit filename="src/actor.cpp" />
 		<Unit filename="src/camera.cpp" />
+		<Unit filename="src/charactercontroller.cpp" />
 		<Unit filename="src/combinationstage.cpp" />
 		<Unit filename="src/creature.cpp" />
 		<Unit filename="src/culler.cpp" />
