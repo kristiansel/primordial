@@ -47,7 +47,6 @@ void Mesh::fromFile(string mesh_key)
 {
     fromFile2(mesh_key);
 
-
     //load_stage = LoadMePlease;
     createGL();
 }
@@ -193,7 +192,9 @@ void Mesh::createGL()
     // in order to mitigate another buffer being accidentally
     // bound in render thread
     //LockGuard lock(sharedContextLoading);
-    //if (load_stage ==
+
+    // clear out whatever is there (if there is anything...)
+    deleteGL(); // this will not do anything if not loaded
 
     // send directly to graphics card
     glGenBuffers(1, &vbo_id); //must come after glewinit
@@ -206,6 +207,7 @@ void Mesh::createGL()
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, triangle_num*(sizeof(Triangle)), triangles, GL_STATIC_DRAW);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
+    std::cout << "loading mesh, vbo_id:" << vbo_id << "\n";
 //    std::cout << "vertex num: " << vertex_num << "\n";
 //    std::cout << "triangle num: " << triangle_num << "\n";
 //    std::cout << "vbo_id: " << vbo_id << "\n";
@@ -216,15 +218,9 @@ void Mesh::createGL()
 
 void Mesh::deleteGL()
 {
-//    std::cout << "deleting mesh from video RAM\n";
-//    std::cout << "vertex num: " << vertex_num << "\n";
-//    std::cout << "triangle num: " << triangle_num << "\n";
-//    std::cout << "vbo_id: " << vbo_id << "\n";
-//    std::cout << "ibo_id: " << ibo_id << "\n";
     if (load_stage==Loaded)
-
     {
-        std::cout << "deleting mesh, vbo:id: " << vbo_id << "\n";
+        std::cout << "deleting mesh, vbo_id: " << vbo_id << "\n";
 
         // release video RAM buffers
         glBindBuffer(GL_ARRAY_BUFFER, 0); // do you really need this?

@@ -358,9 +358,6 @@ bool Master::handleInput()
 
     if(rmb_down)
     {
-//        if (camera_mode == FREE)
-//        {
-        //std::cout<<", ms";
         sf::Vector2i mouse_pos = sf::Mouse::getPosition(window);
         int new_posx = mouse_pos.x;
         int new_posy = mouse_pos.y;

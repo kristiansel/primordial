@@ -21,7 +21,7 @@ class RigidBody : virtual public Object3d
 
         void updateTransformation();
         void setBody(btRigidBody* body) {this->body = body; }; // Rather make physicsworld a friend class
-        btRigidBody* getBody() {return body;}; // Rather make physicsworld a friend class
+        btRigidBody* getBody() {return body;}; // Rather make physicsworld a friend class?
 
     protected:
     private:

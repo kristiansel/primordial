@@ -95,50 +95,34 @@ list<shared_ptr<WorldObject>>::iterator World::addDynamicObject(string mesh_key,
                                                                 string tex_key,
                                                                 glm::vec3 pos,
                                                                 btCollisionShape* shape)
-//shared_ptr<WorldObject> World::addWorldObject(string mesh_key, string tex_key, glm::vec3 pos, glm::vec3 dir)
 {
-    // Add a new worldobject to the list and capture
-    // reference and iterator
-    // Create in place
-//    worldobjects.push_back(shared_ptr<WorldObject>(new WorldObject()));
-//    list<shared_ptr<WorldObject>>::iterator new_worldobject_it = --worldobjects.end();
-
+    // Create a blank worldobject
     shared_ptr<WorldObject> worldobject = shared_ptr<WorldObject>(new WorldObject);
 
-    worldobject->pos = pos;         // configure position
-//    (*new_worldobject_it)->dir = dir;         // configure direction
 
+    { // Construct the object
+        worldobject->pos = pos;         // configure position
 
-    // attach the mesh
-    //weak_ptr<Mesh>      mesh_ptr    = resourcemanager.getMeshptrFromKey (mesh_key);
-    //weak_ptr<Texture>   tex_ptr     = resourcemanager.getTexptrFromKey  (tex_key);
-//std::cout << "MASTER gets here2>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>1\n";
-    weak_ptr<Mesh>      mesh_ptr    = global::mesh_manager.getResptrFromKey (mesh_key);
-//std::cout << "MASTER gets here1>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>1\n";
+        // attach the mesh and texture
+        weak_ptr<Mesh>      mesh_ptr    = global::mesh_manager.getResptrFromKey (mesh_key);
+        weak_ptr<Texture>   tex_ptr     = global::tex_manager.getResptrFromKey  (tex_key);
 
-    weak_ptr<Texture>   tex_ptr     = global::tex_manager.getResptrFromKey  (tex_key);
+        // attach the geometry
+        worldobject->attachBatch(mesh_ptr, tex_ptr);
 
-
-    worldobject->attachBatch(mesh_ptr, tex_ptr);
-
-    // Add the collision shape if specified, if not, make a convex hull
-    if (shape)
-        addPhysicsDynamic( worldobject.get(), shape);
-    else
-        addPhysicsDynamic( worldobject.get(), RigidBody::ConvexHull(*(shared_ptr<Mesh>(mesh_ptr))));
+        // Add the collision shape if specified, if not, make a convex hull
+        if (shape)
+            addPhysicsDynamic( worldobject.get(), shape);
+        else
+            addPhysicsDynamic( worldobject.get(), RigidBody::ConvexHull(*(shared_ptr<Mesh>(mesh_ptr))));
+    } // This should ideally go on in a worker thread
 
     // Then add it
     worldobjects.push_back(worldobject);
 
-    // This is not needed....
+    // Return iterator to the newly created object
     list<shared_ptr<WorldObject>>::iterator new_worldobject_it = --worldobjects.end();
-
-
     return new_worldobject_it;
-
-//    return shared_ptr<WorldObject>(&(*new_worldobject_it)); // This results in SEGFAULT because
-//    // if not captured, then this will be the last instance of this pointer, and
-//    // will automatically delete the new worldobject????
 }
 
 void World::delWorldObject(list<shared_ptr<WorldObject>>::iterator worldobject_it_in)
@@ -163,33 +147,38 @@ void World::delWorldObject(list<shared_ptr<WorldObject>>::iterator worldobject_i
 list<shared_ptr<Creature>>::iterator World::addCreature(string mesh_key, string tex_key, glm::vec3 pos)
 //shared_ptr<Creature> World::addCreature(string mesh_key, string tex_key, glm::vec3 pos, glm::vec3 dir)
 {
-    // Add a new creature to the list and capture
-    // reference and iterator
-
-    // Create completely in memory before adding it to list of
-    // renderables
+    // create a blank creature
     shared_ptr<Creature> creature = shared_ptr<Creature>(new Creature);
 
-    creature->pos = pos;         // configure position
-//    (*new_creature_it)->dir = dir;         // configure direction
+    { // Construct creature
+        creature->pos = pos;         // configure position
 
-    // attach the mesh ( This is how it should be done)
-    weak_ptr<Mesh>       mesh_ptr    = global::mesh_manager.getResptrFromKey (mesh_key);
-    weak_ptr<Texture>    tex_ptr     = global::tex_manager.getResptrFromKey  (tex_key);
+        // attach the mesh and texture
+        weak_ptr<Mesh>       mesh_ptr    = global::mesh_manager.getResptrFromKey (mesh_key);
+        weak_ptr<Texture>    tex_ptr     = global::tex_manager.getResptrFromKey  (tex_key);
 
-    // The main "creature", the human is rotated wrong in blender
-    creature->attachBatch(mesh_ptr, tex_ptr);
-//    glm::rotate()
+        // The "main" skinned mesh
+        creature->attachBatch(mesh_ptr, tex_ptr);
 
-    // attach skeleton
-    // Use same key for skeleton and mesh for now
-    string skel_key = mesh_key;
-    weak_ptr<Skeleton>   skel_ptr     = global::skel_manager.getResptrFromKey  (skel_key);
-    creature->attachSkeleton(skel_ptr);
+        // attach skeleton
+        // Use same key for skeleton and mesh
+        string skel_key = mesh_key;
+        weak_ptr<Skeleton>   skel_ptr     = global::skel_manager.getResptrFromKey  (skel_key);
+        creature->attachSkeleton(skel_ptr);
+
+//        addPhysicsCharacter(creature.get());
+
+    } // could be done in another thread
 
     // The following bit of code is a lesson learned from another thread
     // attempting to render the actor before it was completely loaded...
     creatures.push_back(creature);
+
+    // return iterator to newly created creature
+    list<shared_ptr<Creature>>::iterator new_creature_it = --creatures.end();
+    return new_creature_it;
+
+    // DEBUGGING CODE
 
     // Default pose
     // creature->pose(/*anim_num=*/ 0, /*time=*/0.290000f);
@@ -225,11 +214,9 @@ list<shared_ptr<Creature>>::iterator World::addCreature(string mesh_key, string 
     // By default, should rest-pose;
     //creature->poseRest();
 
-
-
     // Debugging skeleton
-    weak_ptr<Mesh>      ax_mesh_ptr    = global::mesh_manager.getResptrFromKey ("axes");
-    weak_ptr<Texture>   ax_tex_ptr     = global::tex_manager.getResptrFromKey  ("tricolor");
+    //weak_ptr<Mesh>      ax_mesh_ptr    = global::mesh_manager.getResptrFromKey ("axes");
+    //weak_ptr<Texture>   ax_tex_ptr     = global::tex_manager.getResptrFromKey  ("tricolor");
 //
 //    for (int i = 0; i<creature->shSkelPtr()->num_bones; i++)
 //    {
@@ -265,8 +252,7 @@ list<shared_ptr<Creature>>::iterator World::addCreature(string mesh_key, string 
 //                +bone_weight[2]*bone_mat[int(bone_index[2])]
 //                +bone_weight[3]*bone_mat[int(bone_index[3])]) * orig_pos;
 
-    list<shared_ptr<Creature>>::iterator new_creature_it = --creatures.end();
-    return new_creature_it;
+
 
 //    return shared_ptr<Creature>(&(*new_creature_it)); // This results in SEGFAULT because
 //    // if not captured, then this will be the last instance of this pointer, and
@@ -275,17 +261,17 @@ list<shared_ptr<Creature>>::iterator World::addCreature(string mesh_key, string 
 
 void World::delCreature(list<shared_ptr<Creature>>::iterator creature_it_in)
 {
-    if (!creatures.empty()) creatures.erase(creature_it_in);
-}
+    if (!creatures.empty())
+    {
+        shared_ptr<Creature> creature_to_del = *creature_it_in;
 
-//void World::step(float dt_in)
-//{
-//    physicsStep(dt_in);
-//    for (shared_ptr<WorldObject> wObject : worldobjects)
-//    {
-//        wObject->updateTransformation();
-//    }
-//}
+        creatures.erase(creature_it_in);  // should probably add mutex lock where these
+        // pointers are used
+
+        // deconstruct the object
+        //removePhysicsObject( obj_to_del.get() );
+    }
+}
 
 void World::mainLight(glm::vec3 dir, glm::vec4 color)
 {

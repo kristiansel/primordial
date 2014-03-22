@@ -3,8 +3,10 @@
 
 #include "actor.h"
 #include "creaturesignals.h"
+#include "charactercontroller.h"
 
-class Creature : public Actor, virtual public SignalReceiver // count virtula looms in the distance
+class Creature : public Actor, virtual public SignalReceiver // count virtula looms
+
 {
     public:
         Creature();

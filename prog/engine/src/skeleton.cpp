@@ -206,7 +206,7 @@ void Skeleton::fromFile(std::string skel_key)
         // Slots
         reader.chomp(&num_slots, 1*sizeof(int));
 
-        std::cout << "num_slots: " << num_slots << std::endl;
+        //std::cout << "num_slots: " << num_slots << std::endl;
 
         if (num_slots > 0)
         {

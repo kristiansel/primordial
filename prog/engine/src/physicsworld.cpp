@@ -65,6 +65,11 @@ void PhysicsWorld::addPhysicsDynamic(RigidBody* rigidbody, btCollisionShape* sha
     dynamicsWorld->addRigidBody(body);
 }
 
+//void PhysicsWorld::addPhysicsCharacter(RigidBody* rigidbody)
+//{
+//
+//}
+
 void PhysicsWorld::addPhysicsStatic(RigidBody* rigidbody)
 {
     //create a dynamic rigidbody
