@@ -26,6 +26,11 @@ glm::vec3 Object3d::getDir() const
     return glm::mat3_cast(rot) * glm::vec3(0.0, 0.0, -1.0);
 }
 
+glm::vec3 Object3d::getLeft() const
+{
+    return glm::mat3_cast(rot) * glm::vec3(-1.0, 0.0, 0.0);
+}
+
 
 void Object3d::setDir(glm::vec3 u) // Trust that u is normalized
 {

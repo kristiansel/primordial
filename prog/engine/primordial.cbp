@@ -131,6 +131,7 @@
 		<Unit filename="include/creature.h" />
 		<Unit filename="include/creaturesignals.h" />
 		<Unit filename="include/culler.h" />
+		<Unit filename="include/debugdrawer.h" />
 		<Unit filename="include/geometry.h" />
 		<Unit filename="include/global.h" />
 		<Unit filename="include/light.h" />
@@ -172,6 +173,7 @@
 		<Unit filename="src/combinationstage.cpp" />
 		<Unit filename="src/creature.cpp" />
 		<Unit filename="src/culler.cpp" />
+		<Unit filename="src/debugdrawer.cpp" />
 		<Unit filename="src/geometry.cpp" />
 		<Unit filename="src/global.cpp" />
 		<Unit filename="src/light.cpp" />

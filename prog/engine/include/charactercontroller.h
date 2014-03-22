@@ -9,14 +9,19 @@
 
 // Make it kinematic for now (does not get pushed back by the world)
 
-class CharacterController : virtual public Object3d
+class CharacterController
 {
     public:
         CharacterController();
         virtual ~CharacterController();
 
-        void createCharController(btDynamicsWorld* dyn_world, glm::vec3 pos);
+        void createCharController(btDynamicsWorld *dyn_world,
+                                  btBroadphaseInterface *pair_cache,
+                                  glm::vec3 pos);
         void delCharController();
+        void displace(const glm::vec3 &displacement);
+
+        void updateTransform(glm::vec3 &pos, glm::quat &rot); // use motionstate for this..
 
     protected:
     private:

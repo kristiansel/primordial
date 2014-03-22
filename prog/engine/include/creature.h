@@ -5,7 +5,7 @@
 #include "creaturesignals.h"
 #include "charactercontroller.h"
 
-class Creature : public Actor, virtual public SignalReceiver // count virtula looms
+class Creature : public Actor, virtual public SignalReceiver// count virtula looms
 
 {
     public:
@@ -33,10 +33,9 @@ class Creature : public Actor, virtual public SignalReceiver // count virtula lo
         void setLookDir(glm::vec3 u);
 //
         glm::quat getLookRot() const;
-//        void setLookRot(glm::quat q_in);
-//
-//        void lookInDir(const glm::vec3 &dir_in);
-//        void lookAt(const glm::vec3 &pos_in);
+
+        // character physics
+        CharacterController* getCharContr();
 
     protected:
     private:
@@ -51,6 +50,8 @@ class Creature : public Actor, virtual public SignalReceiver // count virtula lo
         {
             bool isShiftDown;
             unsigned char dirflags; // use a bitmask to represent directions
+
+            // temporary for debugging
         } state;
 
         struct Action
@@ -62,6 +63,8 @@ class Creature : public Actor, virtual public SignalReceiver // count virtula lo
         std::vector<sSignal> signal_stack;
 
         static unsigned int const signal_stack_capacity = 20;
+
+        CharacterController* char_contr;
 };
 
 #endif // CREATURE_H

@@ -166,6 +166,9 @@ list<shared_ptr<Creature>>::iterator World::addCreature(string mesh_key, string 
         weak_ptr<Skeleton>   skel_ptr     = global::skel_manager.getResptrFromKey  (skel_key);
         creature->attachSkeleton(skel_ptr);
 
+        // consider adding this to default constructor...
+        addPhysicsCharContr(creature->getCharContr(), creature->pos+glm::vec3(0.0, 1.0, 0.0));
+
 //        addPhysicsCharacter(creature.get());
 
     } // could be done in another thread

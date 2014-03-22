@@ -21,6 +21,9 @@ public:
     virtual ~Object3d();
 
     glm::vec3 getDir() const;
+    glm::vec3 getLeft() const;
+
+
     void setDir(glm::vec3 u);
 
     glm::mat4 getTransformMatrix() const;

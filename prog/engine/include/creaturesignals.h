@@ -44,12 +44,13 @@ enum sSignal
 
 namespace dirflag
 {
-    const unsigned char none = 0;         // 00000000
+    const unsigned char ONE = 1;
 
-    const unsigned char forw = 1;         // 00000001
-    const unsigned char backw = 2;        // 00000010
-    const unsigned char left = 4;         // 00000100
-    const unsigned char right = 8;       // 00001000
+    const unsigned char none =  0;         // 00000000
+    const unsigned char forw =  ONE << 0;         // 00000001
+    const unsigned char backw = ONE << 1;        // 00000010
+    const unsigned char left =  ONE << 2;         // 00000100
+    const unsigned char right = ONE << 3;       // 00001000
 }
 
 /// forward declaration of creature

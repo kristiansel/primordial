@@ -115,6 +115,9 @@ void Master::mainLoopSingleThreaded()
         // draw...
         renderer.draw(scene, dt);
 
+        // bullet debug draw
+        //world.drawBulletDebug();
+
         // end the current frame (internally swaps the front and back buffers)
         window.display();
 

@@ -5,9 +5,9 @@ Creature::Creature() :
     runspeed(3.0),
     //look_rot(glm::quat(1.0, 0.0, 0.0, 0.0))
     look_rot(rot),
-    // isIdle, isShiftDown
     state( {false} ),
-    doing( {sSignal::sNothing, 0.000})
+    doing( {sSignal::sNothing, 0.000}),
+    char_contr(new CharacterController)
 {
     //ctor
     signal_stack.reserve(signal_stack_capacity);
@@ -16,10 +16,15 @@ Creature::Creature() :
 Creature::~Creature()
 {
     //dtor
+    delete char_contr;
 }
 
 void Creature::resolveActionRequests(float dt)
 {
+    // set physics velocity to zero
+    //char_contr->displace(glm::vec3(0.0, 0.0, 0.0));
+
+
     // decrement the time
     doing.time -=dt;
     if (!signal_stack.empty())
@@ -53,18 +58,23 @@ void Creature::resolveActionRequests(float dt)
                 // 00000100, 00000111 -> left                       4, 7
                 // 00001000, 00001011 -> right                      8, 11
 
+                float forw_displ = 0.0;
+                float left_displ = 0.0;
+
                 // if shift -> run
                 if (state.dirflags==1 || state.dirflags==13)    // forward
                 {
                     if (state.isShiftDown)
                     {
                         playAnim(Anim::RunForward);
-                        Object3d::moveForward(runspeed*dt, 0.0);
+                        //Object3d::moveForward(runspeed*dt, 0.0);
+                        forw_displ = runspeed*dt;
                     }
                     else
                     {
                         playAnim(Anim::WalkForward);
-                        Object3d::moveForward(walkspeed*dt, 0.0);
+                        //Object3d::moveForward(walkspeed*dt, 0.0);
+                        forw_displ = walkspeed*dt;
                     }
                 }
                 if (state.dirflags==4 || state.dirflags==7)     // left
@@ -72,12 +82,14 @@ void Creature::resolveActionRequests(float dt)
                     if (state.isShiftDown)
                     {
                         playAnim(Anim::RunLeft);
-                        Object3d::moveLeft(runspeed*dt, 0.0);
+                        //Object3d::moveLeft(runspeed*dt, 0.0);
+                        left_displ = runspeed*dt;
                     }
                     else
                     {
                         playAnim(Anim::WalkLeft);
-                        Object3d::moveLeft(walkspeed*dt, 0.0);
+                        //Object3d::moveLeft(walkspeed*dt, 0.0);
+                        left_displ = walkspeed*dt;
                     }
                 }
                 if (state.dirflags==8 || state.dirflags==11)    // right
@@ -85,12 +97,14 @@ void Creature::resolveActionRequests(float dt)
                     if (state.isShiftDown)
                     {
                         playAnim(Anim::RunRight);
-                        Object3d::moveLeft(-runspeed*dt, 0.0);
+                        //Object3d::moveLeft(-runspeed*dt, 0.0);
+                        left_displ = -runspeed*dt;
                     }
                     else
                     {
                         playAnim(Anim::WalkRight);
-                        Object3d::moveLeft(-walkspeed*dt, 0.0);
+                        //Object3d::moveLeft(-walkspeed*dt, 0.0);
+                        left_displ = -walkspeed*dt;
                     }
                 }
                 if (state.dirflags==5)                          // left diag
@@ -98,51 +112,71 @@ void Creature::resolveActionRequests(float dt)
                     if (state.isShiftDown)
                     {
                         playAnim(Anim::RunLeftDiag);
-                        Object3d::moveLeft(0.70710678*runspeed*dt, 0.0);
-                        Object3d::moveForward(0.70710678*runspeed*dt, 0.0);
+                        //Object3d::moveLeft(0.70710678*runspeed*dt, 0.0);
+                        left_displ = 0.70710678*runspeed*dt;
+                        //Object3d::moveForward(0.70710678*runspeed*dt, 0.0);
+                        forw_displ = 0.70710678*runspeed*dt;
                     }
                     else
                     {
                         playAnim(Anim::WalkLeftDiag);
-                        Object3d::moveLeft(0.70710678*walkspeed*dt, 0.0);
-                        Object3d::moveForward(0.70710678*walkspeed*dt, 0.0);
+                        //Object3d::moveLeft(0.70710678*walkspeed*dt, 0.0);
+                        left_displ = 0.70710678*walkspeed*dt;
+                        //Object3d::moveForward(0.70710678*walkspeed*dt, 0.0);
+                        forw_displ = 0.70710678*walkspeed*dt;
                     }
                 }
-                if (state.dirflags==9)                          // right diag
+                if (state.dirflags==9)                        // right diag
                 {
                     if (state.isShiftDown)
                     {
                         playAnim(Anim::RunRightDiag);
-                        Object3d::moveLeft(-0.70710678*runspeed*dt, 0.0);
-                        Object3d::moveForward(0.70710678*runspeed*dt, 0.0);
+                        //Object3d::moveLeft(-0.70710678*runspeed*dt, 0.0);
+                        left_displ = -0.70710678*runspeed*dt;
+                        //Object3d::moveForward(0.70710678*runspeed*dt, 0.0);
+                        forw_displ = 0.70710678*runspeed*dt;
                     }
                     else
                     {
                         playAnim(Anim::WalkRightDiag);
-                        Object3d::moveLeft(-0.70710678*walkspeed*dt, 0.0);
-                        Object3d::moveForward(0.70710678*walkspeed*dt, 0.0);
+                        //Object3d::moveLeft(-0.70710678*walkspeed*dt, 0.0);
+                        left_displ = -0.70710678*walkspeed*dt;
+                        //Object3d::moveForward(0.70710678*walkspeed*dt, 0.0);
+                        forw_displ = 0.70710678*walkspeed*dt;
                     }
                 }
                 if (state.dirflags==2 || state.dirflags==14)                          // backwards
                 {
                     // cannot run backwards
                     playAnim(Anim::WalkBackward);
-                    Object3d::moveForward(-walkspeed*dt, 0.0);
+                    //Object3d::moveForward(-walkspeed*dt, 0.0);
+                    forw_displ = -walkspeed*dt;
                 }
                 if (state.dirflags==6)                          // back left
                 {
                     // cannot run backwards
                     playAnim(Anim::WalkBackLeft);
-                    Object3d::moveForward(-0.70710678*walkspeed*dt, 0.0);
-                    Object3d::moveLeft(0.70710678*walkspeed*dt, 0.0);
+                    //Object3d::moveForward(-0.70710678*walkspeed*dt, 0.0);
+                    forw_displ = -0.70710678*walkspeed*dt;
+                    //Object3d::moveLeft(0.70710678*walkspeed*dt, 0.0);
+                    left_displ = 0.70710678*walkspeed*dt;
                 }
                 if (state.dirflags==10)                          // back right
                 {
                     // cannot run backwards
                     playAnim(Anim::WalkBackRight);
-                    Object3d::moveForward(-0.70710678*walkspeed*dt, 0.0);
-                    Object3d::moveLeft(-0.70710678*walkspeed*dt, 0.0);
+                    //Object3d::moveForward(-0.70710678*walkspeed*dt, 0.0);
+                    forw_displ = -0.70710678*walkspeed*dt;
+                    //Object3d::moveLeft(-0.70710678*walkspeed*dt, 0.0);
+                    left_displ = -0.70710678*walkspeed*dt;
                 }
+                Object3d::moveForward(forw_displ, 0.f);
+                Object3d::moveLeft(left_displ, 0.f);
+
+                // Physics
+                glm::vec3 displacement = forw_displ*getDir() + getLeft()*left_displ;
+                //char_contr->displace(displacement);
+
 
             } break;
         case sSignal::sAttack:
@@ -212,7 +246,10 @@ void Creature::resolveActionRequests(float dt)
     state.dirflags = dirflag::none;
 }
 
-// Animations
+CharacterController* Creature::getCharContr()
+{
+    return char_contr;
+}
 
 void Creature::moveForward(float check_sign, float dt)
 {

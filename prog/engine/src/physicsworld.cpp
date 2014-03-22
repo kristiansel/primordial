@@ -9,7 +9,8 @@ PhysicsWorld::PhysicsWorld()
 	dispatcher = new	btCollisionDispatcher(collisionConfiguration);
 
 	//btDbvtBroadphase is a good general purpose broadphase. You can also try out btAxis3Sweep.
-	overlappingPairCache = new btDbvtBroadphase();
+	//overlappingPairCache = new btDbvtBroadphase();
+	overlappingPairCache = new btAxisSweep3(btVector3(-1000,-1000,-1000), btVector3(1000,1000,1000));
 
 	//the default constraint solver. For parallel processing you can use a different solver (see Extras/BulletMultiThreaded)
 	solver = new btSequentialImpulseConstraintSolver;
@@ -17,8 +18,14 @@ PhysicsWorld::PhysicsWorld()
     // Initialize the world
 	dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher,overlappingPairCache,solver,collisionConfiguration);
 
-    // Set gravity
+    // Set gravity (have to be a little bit accurate :)
 	dynamicsWorld->setGravity(btVector3(0,-9.81,0));
+
+	// create debug drawer
+    debugDraw = new DebugDrawer;
+
+	// attach debug draw
+	dynamicsWorld->setDebugDrawer(debugDraw);
 }
 
 // void PhysicsWorld::addPhysicsObject(RigidBody::Collision shape, par1=0, par2=0, par3=0, par4=0)
@@ -65,11 +72,6 @@ void PhysicsWorld::addPhysicsDynamic(RigidBody* rigidbody, btCollisionShape* sha
     dynamicsWorld->addRigidBody(body);
 }
 
-//void PhysicsWorld::addPhysicsCharacter(RigidBody* rigidbody)
-//{
-//
-//}
-
 void PhysicsWorld::addPhysicsStatic(RigidBody* rigidbody)
 {
     //create a dynamic rigidbody
@@ -105,6 +107,18 @@ void PhysicsWorld::addPhysicsStatic(RigidBody* rigidbody)
     rigidbody->setBody(body);
 
     dynamicsWorld->addRigidBody(body);
+}
+
+void PhysicsWorld::addPhysicsCharContr(CharacterController* char_contr, const glm::vec3 &pos)
+{
+    char_contr->createCharController(this->dynamicsWorld, this->overlappingPairCache, pos);
+}
+
+void PhysicsWorld::drawBulletDebug()
+{
+    glClear(GL_DEPTH_BUFFER_BIT);
+
+    dynamicsWorld->debugDrawWorld();
 }
 
 void PhysicsWorld::removePhysicsObject(RigidBody* rigidbody)
@@ -155,6 +169,9 @@ PhysicsWorld::~PhysicsWorld()
 		collisionShapes[j] = 0;
 		delete shape;
 	}
+	//delete debug draw ?
+	delete debugDraw;
+
 	//delete dynamics world
 	delete dynamicsWorld;
 
