@@ -30,18 +30,12 @@ Mesh::Mesh() : vertex_num(0), triangle_num(0)
 
 Mesh::~Mesh()
 {
-    cout << "WARNING: DELETING MESH\n";
     // release RAM pointers
     delete [] vertices;
     delete [] triangles;
 
-
-    // in order to mitigate another buffer being accidentally
-    // bound in render thread
-    //LockGuard lock(sharedContextLoading);
+    // delete from graphics-card
     deleteGL();
-
-
 }
 
 Mesh::Mesh(string filepath)
@@ -199,6 +193,7 @@ void Mesh::createGL()
     // in order to mitigate another buffer being accidentally
     // bound in render thread
     //LockGuard lock(sharedContextLoading);
+    //if (load_stage ==
 
     // send directly to graphics card
     glGenBuffers(1, &vbo_id); //must come after glewinit
@@ -226,21 +221,20 @@ void Mesh::deleteGL()
 //    std::cout << "triangle num: " << triangle_num << "\n";
 //    std::cout << "vbo_id: " << vbo_id << "\n";
 //    std::cout << "ibo_id: " << ibo_id << "\n";
+    if (load_stage==Loaded)
 
-    std::cout << "deleting mesh, vbo:id: " << vbo_id << "\n";
+    {
+        std::cout << "deleting mesh, vbo:id: " << vbo_id << "\n";
 
-    // release video RAM buffers
-    glBindBuffer(GL_ARRAY_BUFFER, 0); // do you really need this?
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+        // release video RAM buffers
+        glBindBuffer(GL_ARRAY_BUFFER, 0); // do you really need this?
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
-//    cout << "Deleting Buffers: " << vbo_id << " & " << ibo_id << "\n";
-    glDeleteBuffers(1, &vbo_id); // is this really sufficient
-    glDeleteBuffers(1, &ibo_id);
+    //    cout << "Deleting Buffers: " << vbo_id << " & " << ibo_id << "\n";
+        glDeleteBuffers(1, &vbo_id); // is this really sufficient
+        glDeleteBuffers(1, &ibo_id);
 
-    load_stage = NotLoaded;
-
-// Remember to uncomment this again... this is a graphics memory leak
-
-
+        load_stage = NotLoaded;
+    }
 }
 

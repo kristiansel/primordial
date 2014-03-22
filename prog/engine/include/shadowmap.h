@@ -47,12 +47,12 @@ class ShadowMap : public ShaderBase
         } uniforms;
 
         // Attributes
-        struct Attributes
-        {
-            GLuint vertex;
-            GLuint bone_index;
-            GLuint bone_weight;
-        } attributes;
+//        struct Attributes
+//        {
+//            GLuint vertex;
+//            GLuint bone_index;
+//            GLuint bone_weight;
+//        } attributes;
 
         // Frame buffer info
         GLuint fbo;

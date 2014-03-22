@@ -61,9 +61,6 @@ void Renderer::init(unsigned int scr_width_in, unsigned int scr_height_in)
 
 void Renderer::draw(Scene &scene, float dt)
 {
-//    // instead of passing dt... sample dt from the clock
-//    dt = 1.f/60.f;
-
     // First update all animations
     // consider moving this out...
     // Or: Should update the time in animations somewhere else, then
@@ -78,25 +75,14 @@ void Renderer::draw(Scene &scene, float dt)
     // Set all things which are shared by shaders but can change in time
     glm::mat4 view_mat = scene.camera->getViewMatrix();
     glm::mat4 proj_mat = scene.camera->getProjectionMatrix();
-//    setPerspective(settings.width, settings.height);
-
-    // The above should be replaced by:
-//    glm::mat4 vp_mat = scene.camera->getViewProjectionMatrix();
 
     const DirLight &mlight = (*scene.main_light);
     glm::mat4 mlight_vp = mlight.getVPmatrix();
 
-    // This should look something like this: (for now light is hardcoded
-    // in the shadow_map.activate() method)
-    //shadow_map.setLight(scene->getShadowLight())
-//#ifndef __unix
+    glm::vec4 fog_color = glm::vec4(1.0, 1.0, 1.0, 1.0);
 
-// something is thrown in here on linux...
-// check shadowmap renderbuffer state etc...
-
-//    shadow_map.activate();
-   shadow_map.activate(mlight_vp);
-   // shadow_map.activateDrawContent(mlight_vp);
+    shadow_map.activate(mlight_vp);
+    // shadow_map.activateDrawContent(mlight_vp);
         // Draw props (non-animated)
         shadow_map.clearBoneMatrices();
 
@@ -111,12 +97,9 @@ void Renderer::draw(Scene &scene, float dt)
         }
 
     shadow_map.deactivate();
-//#endif
-////
+
     resizeWindow(settings.width, settings.height, false);
 
-//    glm::vec4 fog_color = glm::vec4(1.0, 0.6, 0.8, 0.0);
-    glm::vec4 fog_color = glm::vec4(1.0, 1.0, 1.0, 1.0);
 
     // Set render "target" to draw to frame buffer
     render_stage.activate();
@@ -158,13 +141,7 @@ void Renderer::draw(Scene &scene, float dt)
     // Finished main drawing, post processing
     render_stage.deactivate();
 
-
-
-    // should be
-//    blur1.activate(render_stage.fbo_texture, render_stage.fbo_depth);
-//    blur1.drawb();
-
-    ///     GENERATING POST-PROCESSING IMAGES
+    //     GENERATING POST-PROCESSING IMAGES
     resizeWindow(settings.width/ratio, settings.height/ratio, false);
 
     // Consider managing the resizing in the post-proc-stage class
@@ -184,22 +161,12 @@ void Renderer::draw(Scene &scene, float dt)
 
     resizeWindow(settings.width, settings.height, false);
 
-    // is absolutely killing performance
-//    comb1.activate(1.000, 0.00); // original
+
     comb1.activate(0.585, 0.415); // original
-//    comb1.activate(0.7, 0.5);
-    comb1.activateTextures(render_stage.fbo_texture, blur2.fbo_texture); // original
-//    comb1.activateTextures(render_stage.fbo_texture, render_stage.fbo_depth);
 
-
-
+    comb1.activateTextures(render_stage.fbo_texture, blur2.fbo_texture);
     comb1.draw();
 
-//
-//    if (glGetError() != GL_NO_ERROR) // check error
-//    {
-//        std::cerr << "opengl error present\n";
-//    }
     // Consider drawing lower resolution, and upscaling while applying
     // FXAA...
 }
