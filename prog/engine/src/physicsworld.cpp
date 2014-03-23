@@ -109,9 +109,10 @@ void PhysicsWorld::addPhysicsStatic(RigidBody* rigidbody)
     dynamicsWorld->addRigidBody(body);
 }
 
-void PhysicsWorld::addPhysicsCharContr(CharacterController* char_contr, const glm::vec3 &pos)
+void PhysicsWorld::addPhysicsCharContr(DynamicCharacterController* char_contr, const glm::vec3 &pos)
 {
-    char_contr->createCharController(this->dynamicsWorld, this->overlappingPairCache, pos);
+    //char_contr->createCharController(this->dynamicsWorld, this->overlappingPairCache, pos);
+    char_contr->setup(this->dynamicsWorld, 1.9, 0.5, pos);
 }
 
 void PhysicsWorld::drawBulletDebug()

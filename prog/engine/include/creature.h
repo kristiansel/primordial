@@ -34,8 +34,11 @@ class Creature : public Actor, virtual public SignalReceiver// count virtula loo
 //
         glm::quat getLookRot() const;
 
+
+        void updateTransformation();
+
         // character physics
-        CharacterController* getCharContr();
+        DynamicCharacterController* getCharContr();
 
     protected:
     private:
@@ -64,7 +67,7 @@ class Creature : public Actor, virtual public SignalReceiver// count virtula loo
 
         static unsigned int const signal_stack_capacity = 20;
 
-        CharacterController* char_contr;
+        DynamicCharacterController* char_contr;
 };
 
 #endif // CREATURE_H

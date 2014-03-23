@@ -149,10 +149,21 @@ void Mechanics::step(World &world_in, float dt_in)
         creature->resolveActionRequests(dt_in);
     }
 
+    // step physics
     world_in.physicsStep(dt_in);
+
+    // Update transforms
+
+    // update object transforms
     for (shared_ptr<WorldObject> wObject : world_in.worldobjects)
     {
         wObject->updateTransformation();
+    }
+
+    // update creature transforms
+    for (shared_ptr<Creature> creature : world_in.creatures)
+    {
+        creature->updateTransformation();
     }
 
 

@@ -7,7 +7,7 @@ Creature::Creature() :
     look_rot(rot),
     state( {false} ),
     doing( {sSignal::sNothing, 0.000}),
-    char_contr(new CharacterController)
+    char_contr(new DynamicCharacterController)
 {
     //ctor
     signal_stack.reserve(signal_stack_capacity);
@@ -23,7 +23,7 @@ void Creature::resolveActionRequests(float dt)
 {
     // set physics velocity to zero
     //char_contr->displace(glm::vec3(0.0, 0.0, 0.0));
-
+    //char_contr->setVelocity(glm::vec3(0.0, 0.0, 0.0));
 
     // decrement the time
     doing.time -=dt;
@@ -61,20 +61,21 @@ void Creature::resolveActionRequests(float dt)
                 float forw_displ = 0.0;
                 float left_displ = 0.0;
 
+                float forw_speed = 0.0;
+                float left_speed = 0.0;
+
                 // if shift -> run
                 if (state.dirflags==1 || state.dirflags==13)    // forward
                 {
                     if (state.isShiftDown)
                     {
                         playAnim(Anim::RunForward);
-                        //Object3d::moveForward(runspeed*dt, 0.0);
-                        forw_displ = runspeed*dt;
+                        forw_speed = runspeed;
                     }
                     else
                     {
                         playAnim(Anim::WalkForward);
-                        //Object3d::moveForward(walkspeed*dt, 0.0);
-                        forw_displ = walkspeed*dt;
+                        forw_speed = walkspeed;
                     }
                 }
                 if (state.dirflags==4 || state.dirflags==7)     // left
@@ -82,14 +83,12 @@ void Creature::resolveActionRequests(float dt)
                     if (state.isShiftDown)
                     {
                         playAnim(Anim::RunLeft);
-                        //Object3d::moveLeft(runspeed*dt, 0.0);
-                        left_displ = runspeed*dt;
+                        left_speed = runspeed;
                     }
                     else
                     {
                         playAnim(Anim::WalkLeft);
-                        //Object3d::moveLeft(walkspeed*dt, 0.0);
-                        left_displ = walkspeed*dt;
+                        left_speed = walkspeed;
                     }
                 }
                 if (state.dirflags==8 || state.dirflags==11)    // right
@@ -97,14 +96,12 @@ void Creature::resolveActionRequests(float dt)
                     if (state.isShiftDown)
                     {
                         playAnim(Anim::RunRight);
-                        //Object3d::moveLeft(-runspeed*dt, 0.0);
-                        left_displ = -runspeed*dt;
+                        left_speed = -runspeed;
                     }
                     else
                     {
                         playAnim(Anim::WalkRight);
-                        //Object3d::moveLeft(-walkspeed*dt, 0.0);
-                        left_displ = -walkspeed*dt;
+                        left_speed = -walkspeed;
                     }
                 }
                 if (state.dirflags==5)                          // left diag
@@ -112,18 +109,14 @@ void Creature::resolveActionRequests(float dt)
                     if (state.isShiftDown)
                     {
                         playAnim(Anim::RunLeftDiag);
-                        //Object3d::moveLeft(0.70710678*runspeed*dt, 0.0);
-                        left_displ = 0.70710678*runspeed*dt;
-                        //Object3d::moveForward(0.70710678*runspeed*dt, 0.0);
-                        forw_displ = 0.70710678*runspeed*dt;
+                        left_speed = 0.70710678*runspeed;
+                        forw_speed = 0.70710678*runspeed;
                     }
                     else
                     {
                         playAnim(Anim::WalkLeftDiag);
-                        //Object3d::moveLeft(0.70710678*walkspeed*dt, 0.0);
-                        left_displ = 0.70710678*walkspeed*dt;
-                        //Object3d::moveForward(0.70710678*walkspeed*dt, 0.0);
-                        forw_displ = 0.70710678*walkspeed*dt;
+                        left_speed = 0.70710678*walkspeed;
+                        forw_speed = 0.70710678*walkspeed;
                     }
                 }
                 if (state.dirflags==9)                        // right diag
@@ -131,52 +124,45 @@ void Creature::resolveActionRequests(float dt)
                     if (state.isShiftDown)
                     {
                         playAnim(Anim::RunRightDiag);
-                        //Object3d::moveLeft(-0.70710678*runspeed*dt, 0.0);
-                        left_displ = -0.70710678*runspeed*dt;
-                        //Object3d::moveForward(0.70710678*runspeed*dt, 0.0);
-                        forw_displ = 0.70710678*runspeed*dt;
+                        left_speed = -0.70710678*runspeed;
+                        forw_speed = 0.70710678*runspeed;
                     }
                     else
                     {
                         playAnim(Anim::WalkRightDiag);
-                        //Object3d::moveLeft(-0.70710678*walkspeed*dt, 0.0);
-                        left_displ = -0.70710678*walkspeed*dt;
-                        //Object3d::moveForward(0.70710678*walkspeed*dt, 0.0);
-                        forw_displ = 0.70710678*walkspeed*dt;
+                        left_speed = -0.70710678*walkspeed;
+                        forw_speed = 0.70710678*walkspeed;
                     }
                 }
                 if (state.dirflags==2 || state.dirflags==14)                          // backwards
                 {
                     // cannot run backwards
                     playAnim(Anim::WalkBackward);
-                    //Object3d::moveForward(-walkspeed*dt, 0.0);
-                    forw_displ = -walkspeed*dt;
+                    forw_speed = -walkspeed;
                 }
                 if (state.dirflags==6)                          // back left
                 {
                     // cannot run backwards
                     playAnim(Anim::WalkBackLeft);
-                    //Object3d::moveForward(-0.70710678*walkspeed*dt, 0.0);
-                    forw_displ = -0.70710678*walkspeed*dt;
-                    //Object3d::moveLeft(0.70710678*walkspeed*dt, 0.0);
-                    left_displ = 0.70710678*walkspeed*dt;
+                    forw_speed = -0.70710678*walkspeed;
+                    left_speed = 0.70710678*walkspeed;
                 }
                 if (state.dirflags==10)                          // back right
                 {
                     // cannot run backwards
                     playAnim(Anim::WalkBackRight);
-                    //Object3d::moveForward(-0.70710678*walkspeed*dt, 0.0);
-                    forw_displ = -0.70710678*walkspeed*dt;
-                    //Object3d::moveLeft(-0.70710678*walkspeed*dt, 0.0);
-                    left_displ = -0.70710678*walkspeed*dt;
+                    forw_speed = -0.70710678*walkspeed;
+                    left_speed = -0.70710678*walkspeed;
                 }
-                Object3d::moveForward(forw_displ, 0.f);
-                Object3d::moveLeft(left_displ, 0.f);
+                //Object3d::moveForward(forw_displ, 0.f);
+                //Object3d::moveLeft(left_displ, 0.f);
 
                 // Physics
-                glm::vec3 displacement = forw_displ*getDir() + getLeft()*left_displ;
-                //char_contr->displace(displacement);
+                //glm::vec3 displacement = forw_displ*glm::normalize(getDir()) + left_displ*glm::normalize(getLeft());
 
+                glm::vec3 velocity_setpoint = forw_speed*glm::normalize(getDir()) + left_speed*glm::normalize(getLeft());
+
+                char_contr->velocitySetpoint(velocity_setpoint);
 
             } break;
         case sSignal::sAttack:
@@ -234,6 +220,11 @@ void Creature::resolveActionRequests(float dt)
         // else keep on playing whatever animation was playing
     }
 
+    if (doing.signal != sMove)
+    {
+        char_contr->velocitySetpoint(glm::vec3(0.0, 0.0, 0.0));
+    }
+
     // Get ready for next frame
 
     // clear signal stack
@@ -246,9 +237,14 @@ void Creature::resolveActionRequests(float dt)
     state.dirflags = dirflag::none;
 }
 
-CharacterController* Creature::getCharContr()
+DynamicCharacterController* Creature::getCharContr()
 {
     return char_contr;
+}
+
+void Creature::updateTransformation()
+{
+    pos = char_contr->getWorldPos();
 }
 
 void Creature::moveForward(float check_sign, float dt)
