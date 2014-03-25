@@ -167,7 +167,10 @@ list<shared_ptr<Creature>>::iterator World::addCreature(string mesh_key, string 
         creature->attachSkeleton(skel_ptr);
 
         // consider adding this to default constructor...
-        addPhysicsCharContr(creature->getCharContr(), creature->pos+glm::vec3(0.0, 1.0, 0.0));
+        addPhysicsCharContr(creature->getCharContr(), creature->pos,
+                                                      1.8,          // height [m]
+                                                      0.4,          // radius [m]
+                                                      80.0);        // 80 kg
 
 //        addPhysicsCharacter(creature.get());
 

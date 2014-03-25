@@ -13,7 +13,7 @@ Master::Master() :
     // Start window in main thread...
     initWindow();
 
-    bool multithreaded = true;
+    bool multithreaded = false;
 
     if (multithreaded)
     {

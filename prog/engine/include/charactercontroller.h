@@ -7,6 +7,7 @@
 //#include "BulletDynamics/Character/btKinematicCharacterController.h"
 //#include "BulletCollision/CollisionDispatch/btGhostObject.h"
 #include "glm/glm.hpp"
+#include "geometry.h"
 
 /// The following bit of code is grabbed from bullet on github
 
@@ -29,14 +30,27 @@ protected:
 //        btScalar m_turnVelocity;
 public:
         DynamicCharacterController ();
+
         ~DynamicCharacterController ();
-        void setup (btDynamicsWorld* dynamicsWorld, btScalar height, btScalar width, /*btScalar stepHeight,*/ glm::vec3 pos);
-        void destroy (btDynamicsWorld* dynamicsWorld);
+
+        void setup (btDynamicsWorld* dynamicsWorld_in,
+                    btScalar height, btScalar radius, glm::vec3 pos, btScalar mass);
+
+        void destroy ();
 
         void setVelocity(glm::vec3 v);
+
         void applyForce(glm::vec3 f);
+
+        void jump(glm::vec3 forw);
+
         void velocitySetpoint(glm::vec3 v_s);
+
+        void applyMoveController();
+
         glm::vec3 getWorldPos() const;
+
+        bool onGround();
 
 private:
         // Gain/how fast can you change your speed (maybe this agi)
@@ -44,6 +58,21 @@ private:
 
         // maximum force able to exert (maybe this strength)
         float f_max;        // N, should make this a function of strength/agi and mass
+
+        btVector3 f_set;
+
+        float m_halfHeight;
+
+
+        // temporary storage
+        btVector3 m_rayStart;
+        btVector3 m_rayEnd;
+
+
+
+        bool on_ground;
+
+        btDynamicsWorld* m_dynamicsWorld;
 
 //        btCollisionObject* getCollisionObject ();
 //

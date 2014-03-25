@@ -53,7 +53,8 @@ class Creature : public Actor, virtual public SignalReceiver// count virtula loo
         {
             bool isShiftDown;
             unsigned char dirflags; // use a bitmask to represent directions
-
+            bool moveInterrupted;
+            sSignal prev_signal;
             // temporary for debugging
         } state;
 
@@ -61,6 +62,7 @@ class Creature : public Actor, virtual public SignalReceiver// count virtula loo
         {
             sSignal signal;
             float time;
+            bool triggered;
         } doing;
 
         std::vector<sSignal> signal_stack;

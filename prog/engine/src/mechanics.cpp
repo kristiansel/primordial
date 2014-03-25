@@ -117,6 +117,33 @@ void Mechanics::init(World &world_in, float &dt_in)
         player->moveBatchToSlot(sword_batch, Actor::Slot::RightHand);
     }
 
+    // add another creature
+    Creature* other = nullptr;
+    {
+        auto otherCreature = world->addCreature( "human_all_anim3",
+                            "tex_human_male",
+                            glm::vec3(-3.0, 0.0, 2.0) );
+
+        other = (*otherCreature).get();
+    }
+
+    // attach a loincloth
+    {
+        weak_ptr<Mesh>      mesh_ptr    = global::mesh_manager.getResptrFromKey ("loin_x3");
+        weak_ptr<Texture>   tex_ptr     = global::tex_manager.getResptrFromKey  ("tex_knapsack");
+
+        other->attachBatch(mesh_ptr, tex_ptr);
+    }
+
+    // give a sword
+    {
+        weak_ptr<Mesh>      mesh_ptr    = global::mesh_manager.getResptrFromKey ("sword_03");
+        weak_ptr<Texture>   tex_ptr     = global::tex_manager.getResptrFromKey  ("nicewall");
+
+        RenderBatch* sword_batch = other->attachBatch(mesh_ptr, tex_ptr);
+        other->moveBatchToSlot(sword_batch, Actor::Slot::RightHand);
+    }
+
 
 
 
