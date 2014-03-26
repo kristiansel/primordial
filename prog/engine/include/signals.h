@@ -22,6 +22,7 @@ struct SignalReceiver
     virtual void block() {std::cerr << "block signal received, not implemented\n";};
     virtual void shift() {std::cerr << "shift signal received, not implemented\n";};
     virtual void jump() {std::cerr << "jump signal received, not implemented\n";};
+    virtual void stance() {std::cerr << "stance signal received, not implemented\n";};
 };
 
 #endif // SIGNALS_H

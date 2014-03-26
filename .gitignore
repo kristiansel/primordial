@@ -40,3 +40,8 @@ prog/engine/obj/
 
 # Collada files
 *.dae
+
+# big sound files
+*.wav
+*.mp3
+*.ogg

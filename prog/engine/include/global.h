@@ -5,6 +5,7 @@
 #include "mesh.h"
 #include "texture.h"
 #include "skeleton.h"
+#include "sound.h"
 #include <functional>
 #include <vector>
 //
@@ -21,6 +22,7 @@ namespace global
     extern ResourceManager<Mesh>     mesh_manager;
     extern ResourceManager<Texture>   tex_manager;
     extern ResourceManager<Skeleton> skel_manager;
+    extern ResourceManager<Sound>   sound_manager;
 
 //    extern std::function<TexMethod> texDelete;
 //    extern std::function<TexMethod> texCreate;

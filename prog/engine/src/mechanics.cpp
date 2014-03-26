@@ -17,6 +17,8 @@ void Mechanics::init(World &world_in, float &dt_in)
     world = &world_in;
     dt = &dt_in;
 
+    world->startMusic("lost.wav");
+
     // Set the input to control the camera
     //controlled = world->camera.get();
     controlled = world->freecam;
@@ -289,6 +291,11 @@ void Mechanics::playerShift()
 void Mechanics::playerJump()
 {
     if (controlled) controlled->jump();
+}
+
+void Mechanics::playerStance()
+{
+    if (controlled) controlled->stance();
 }
 
 void Mechanics::func(int num_in)

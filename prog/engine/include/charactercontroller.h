@@ -44,6 +44,8 @@ public:
 
         void jump(glm::vec3 forw);
 
+        void lunge(glm::vec3 forw);
+
         void velocitySetpoint(glm::vec3 v_s);
 
         void applyMoveController();

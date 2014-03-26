@@ -121,6 +121,16 @@ void DynamicCharacterController::jump(glm::vec3 forw)
     }
 }
 
+void DynamicCharacterController::lunge(glm::vec3 forw)
+{
+    if (on_ground)
+    {
+        btVector3 forwbt = btVector3(forw.x, forw.y, forw.z);
+        btScalar magnitude = (btScalar(1.0)/m_rigidBody->getInvMass()) * btScalar(4.7);
+        m_rigidBody->applyCentralImpulse (forwbt* magnitude);
+    }
+}
+
 bool DynamicCharacterController::onGround()
 {
     m_rayStart = m_rigidBody->getCenterOfMassPosition();

@@ -7,7 +7,8 @@ World::World()  :
     active_cam(freecam),
     main_light(new DirLight),
     num_point_lights(0),
-    point_lights(new PointLight [MAX_NUM_POINT_LIGHTS])
+    point_lights(new PointLight [MAX_NUM_POINT_LIGHTS]),
+    music(new sf::Sound)
 {
 
 }
@@ -20,6 +21,7 @@ World::~World()
 
     delete [] point_lights;
     delete main_light;
+    delete music;
 }
 
 
@@ -52,6 +54,15 @@ list<shared_ptr<WorldObject>>::iterator World::addStaticObject(string mesh_key, 
 //    return shared_ptr<WorldObject>(&(*new_worldobject_it)); // This results in SEGFAULT because
 //    // if not captured, then this will be the last instance of this pointer, and
 //    // will automatically delete the new worldobject????
+}
+
+void World::startMusic(string soundKey)
+{
+    auto weak_ptr_snd_buff = global::sound_manager.getResptrFromKey(soundKey);
+    sf::SoundBuffer* ptr_snd_buff = shared_ptr<sf::SoundBuffer>(weak_ptr_snd_buff).get();
+
+    music->setBuffer(*ptr_snd_buff);
+    music->play();
 }
 
 

@@ -47,6 +47,9 @@ class World : public PhysicsWorld // Consider merging Culling functionality into
 //        // Step
 //        void step(float dt_in);
 
+        void startMusic(string soundKey);
+        sf::Sound* music;
+
 
 
         // "Physical" Contents (could with benefit be private?)

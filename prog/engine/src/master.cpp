@@ -84,6 +84,7 @@ void Master::initWindow()
 
     // Disable repeated key presses when holding down keys
     window.setKeyRepeatEnabled(false);
+
 }
 
 void Master::mainLoopSingleThreaded()
@@ -94,6 +95,8 @@ void Master::mainLoopSingleThreaded()
  // Initialize the game module
     mechanics.init(world, dt);
 
+
+    resetPressPos(); // place the mouse in the middle of the screen
 
     // run the main loop
     while (running)
@@ -137,6 +140,7 @@ void Master::mainLoop()
 
     main_thread_loaded = true;
 
+    resetPressPos(); // place the mouse in the middle of the screen
     // run the main loop
     while (running)
     {
@@ -261,24 +265,24 @@ bool Master::handleInput()
             break;
         case sf::Event::LostFocus:
             has_focus = false;
+            window.setMouseCursorVisible (true);
             break;
         case sf::Event::GainedFocus:
             has_focus = true;
+            window.setMouseCursorVisible (false);
+            resetPressPos();
             break;
         case sf::Event::MouseButtonPressed:
             switch (event.mouseButton.button)
             {
             case sf::Mouse::Right:
                 {
-                    window.setMouseCursorVisible (false);
-                    sf::Vector2i mouse_pos = sf::Mouse::getPosition(window);
-                    press_pos_x = mouse_pos.x;
-                    press_pos_y = mouse_pos.y;
-                    rmb_down = true;
-                } break;
-            case sf::Mouse::Left:
-                {
-                    mechanics.playerAttack();
+//                    window.setMouseCursorVisible (false);
+//                    sf::Vector2i mouse_pos = sf::Mouse::getPosition(window);
+//                    press_pos_x = mouse_pos.x;
+//                    press_pos_y = mouse_pos.y;
+//                    rmb_down = true;
+                    mechanics.playerBlock();
                 } break;
             case sf::Mouse::Middle: break;
             default: break;
@@ -288,10 +292,13 @@ bool Master::handleInput()
             {
             case sf::Mouse::Right:
                 {
-                    window.setMouseCursorVisible (true);            // SELF
-                    rmb_down = false;
+//                    window.setMouseCursorVisible (true);            // SELF
+//                    rmb_down = false;
                 } break;
-            case sf::Mouse::Left: break;
+            case sf::Mouse::Left:
+                {
+                    mechanics.playerAttack();
+                } break;
             case sf::Mouse::Middle: break;
             default: break;
             } break;
@@ -305,13 +312,16 @@ bool Master::handleInput()
                 // do something
                 break;
             case sf::Keyboard::E:
-                mechanics.playerBlock();
+                //mechanics.playerBlock();
                 break;
             case sf::Keyboard::Q:
                 mechanics.playerDodge();
                 break;
             case sf::Keyboard::Space:
                 mechanics.playerJump();
+                break;
+            case sf::Keyboard::Tab:
+                mechanics.playerStance();
                 break;
             case sf::Keyboard::F1:
                 mechanics.func(1);
@@ -359,7 +369,22 @@ bool Master::handleInput()
 
     }
 
-    if(rmb_down)
+//    if(rmb_down)
+//    {
+//        sf::Vector2i mouse_pos = sf::Mouse::getPosition(window);
+//        int new_posx = mouse_pos.x;
+//        int new_posy = mouse_pos.y;
+//        int xoffset = new_posx - press_pos_x;
+//        int yoffset = new_posy - press_pos_y;
+//        //        cout<<" by "<<xoffset<<" and "<<yoffset;
+//
+//        mechanics.playerRotateLeftVal(-xoffset/4.0);
+//        mechanics.playerRotateUpVal(-yoffset/4.0);
+//        mouse_pos = sf::Vector2i(press_pos_x, press_pos_y);
+//        sf::Mouse::setPosition(mouse_pos, window);
+//    }
+
+    if (has_focus)
     {
         sf::Vector2i mouse_pos = sf::Mouse::getPosition(window);
         int new_posx = mouse_pos.x;
@@ -370,8 +395,8 @@ bool Master::handleInput()
 
         mechanics.playerRotateLeftVal(-xoffset/4.0);
         mechanics.playerRotateUpVal(-yoffset/4.0);
-        mouse_pos = sf::Vector2i(press_pos_x, press_pos_y);
-        sf::Mouse::setPosition(mouse_pos, window);
+
+        resetPressPos();
     }
 
     return running;

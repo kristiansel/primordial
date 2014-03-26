@@ -58,6 +58,8 @@ public:
 
     void playerJump();
 
+    void playerStance();
+
     // Testing
     void func(int num_in);
 protected:

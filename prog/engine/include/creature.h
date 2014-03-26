@@ -28,6 +28,8 @@ class Creature : public Actor, virtual public SignalReceiver// count virtula loo
 
         void jump();
 
+        void stance();
+
 
         glm::vec3 getLookDir() const;
         void setLookDir(glm::vec3 u);
@@ -52,9 +54,13 @@ class Creature : public Actor, virtual public SignalReceiver// count virtula loo
         struct State // Could use bitflags for this?
         {
             bool isShiftDown;
+            bool inCombat; // combat or not...
             unsigned char dirflags; // use a bitmask to represent directions
+            unsigned char prev_dirflags;
+            float up_sweep; // mouse rotation up
+            float left_sweep; // mouse rotation left (used for determining attack angle)
             bool moveInterrupted;
-            sSignal prev_signal;
+            //sSignal prev_signal;
             // temporary for debugging
         } state;
 

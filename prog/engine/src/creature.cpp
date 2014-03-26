@@ -3,9 +3,17 @@
 Creature::Creature() :
     walkspeed(1.5), // m/s
     runspeed(3.0),
-    //look_rot(glm::quat(1.0, 0.0, 0.0, 0.0))
     look_rot(rot),
-    state( {false, dirflag::none, false, sSignal::sNothing} ),
+    //              moveInterrupt prev_signal
+    state( {false,              //isShiftDown
+            false,              //inCombat
+            dirflag::none,      //dirflags
+            dirflag::none,      //prev_dirflags
+            0.f,                //upsw
+            0.f,                //leftsw
+            false//,              //moveInterrupted
+            //sSignal::sNothing   //
+            } ),
     doing( {sSignal::sNothing, 0.000, false}),
     char_contr(new DynamicCharacterController)
 {
@@ -83,33 +91,43 @@ void Creature::resolveActionRequests(float dt)
                             }
                             else
                             {
-                                playAnim(Anim::WalkForward);
+                                if (state.inCombat)
+                                    playAnim(Anim::WalkForward1H);      // This animation is crap...
+                                else
+                                    playAnim(Anim::WalkForward);
                                 forw_speed = walkspeed;
                             }
                         }
                         if (state.dirflags==4 || state.dirflags==7)     // left
                         {
-                            if (state.isShiftDown)
+                            if (state.isShiftDown && !state.inCombat)
                             {
                                 playAnim(Anim::RunLeft);
                                 left_speed = runspeed;
                             }
                             else
                             {
-                                playAnim(Anim::WalkLeft);
+                                if (state.inCombat)
+                                    playAnim(Anim::StrafeLeft1H);
+                                else
+                                    playAnim(Anim::WalkLeft);
+                                //playAnim(Anim::WalkLeft);
                                 left_speed = walkspeed;
                             }
                         }
                         if (state.dirflags==8 || state.dirflags==11)    // right
                         {
-                            if (state.isShiftDown)
+                            if (state.isShiftDown && !state.inCombat)
                             {
                                 playAnim(Anim::RunRight);
                                 left_speed = -runspeed;
                             }
                             else
                             {
-                                playAnim(Anim::WalkRight);
+                                if (state.inCombat)
+                                    playAnim(Anim::StrafeRight1H);
+                                else
+                                    playAnim(Anim::WalkRight);
                                 left_speed = -walkspeed;
                             }
                         }
@@ -182,9 +200,17 @@ void Creature::resolveActionRequests(float dt)
 
                     if (doing.signal == sMove) state.moveInterrupted = true;
 
-                    doing = {sAttack, getAnimDuration(Anim::SwingRight1H)/speed};
+                    if (state.left_sweep<0.0)
+                    {
+                        doing = {sAttack, getAnimDuration(Anim::SwingLeft1H)/speed, false};
+                        playAnim(Anim::SwingLeft1H, true, speed);
+                    }
+                    else
+                    {
+                        doing = {sAttack, getAnimDuration(Anim::SwingRight1H)/speed, false};
+                        playAnim(Anim::SwingRight1H, true, speed);
+                    }
 
-                    playAnim(Anim::SwingRight1H, true, speed);
                 } break;
                 case sSignal::sDodge:
                 {
@@ -192,7 +218,7 @@ void Creature::resolveActionRequests(float dt)
 
                     if (doing.signal == sMove) state.moveInterrupted = true;
 
-                    doing = {sDodge, getAnimDuration(Anim::DodgeBack)/speed};
+                    doing = {sDodge, getAnimDuration(Anim::DodgeBack)/speed, false};
 
                     playAnim(Anim::DodgeBack, true, speed);
                 } break;
@@ -202,9 +228,16 @@ void Creature::resolveActionRequests(float dt)
 
                     if (doing.signal == sMove) state.moveInterrupted = true;
 
-                    doing = {sBlock, getAnimDuration(Anim::ParryLeft1H)/speed};
-
-                    playAnim(Anim::ParryLeft1H, true, speed);
+                    if (state.left_sweep<=0.0)
+                    {
+                        doing = {sBlock, getAnimDuration(Anim::ParryRight1H)/speed, false};
+                        playAnim(Anim::ParryRight1H, true, speed);
+                    }
+                    else
+                    {
+                        doing = {sBlock, getAnimDuration(Anim::ParryLeft1H)/speed, false};
+                        playAnim(Anim::ParryLeft1H, true, speed);
+                    }
                 } break;
                 case sSignal::sJump:
                 {
@@ -238,7 +271,12 @@ void Creature::resolveActionRequests(float dt)
     // animation
     if (doing.time < Actor::blend_time && doing.signal != sMove) // finished whatever was doing
     {
-        playAnim(Anim::Idle); // pre-emptively blend into idle
+         // pre-emptively blend into idle
+        if (state.inCombat)
+            playAnim(Anim::Idle1H);
+        else
+            playAnim(Anim::Idle);
+
 
         if (doing.time < 0.0) // but the ACTION is not finished until time 0.0
         {
@@ -254,10 +292,13 @@ void Creature::resolveActionRequests(float dt)
         char_contr->velocitySetpoint(glm::vec3(0.0, 0.0, 0.0));
     }
 
-    if (state.dirflags == dirflag::none)
+    //if (state.dirflags == dirflag::none)
+    if (state.dirflags>state.prev_dirflags || state.dirflags == dirflag::none)
     {
         state.moveInterrupted = false;
     }
+
+    state.prev_dirflags = state.dirflags;
 
     // follow up on the currently doing action (could implement some generic action interface later)
     switch (doing.signal)
@@ -270,14 +311,35 @@ void Creature::resolveActionRequests(float dt)
         {
             if (doing.time < Actor::blend_time) state.moveInterrupted = false;
 
+            // delayed lunge
+            if (!doing.triggered && doing.time < 0.75)
+            {
+                char_contr->lunge(getDir());
+                doing.triggered = true;
+            }
+
         } break;
         case sSignal::sDodge:
         {
             if (doing.time < Actor::blend_time) state.moveInterrupted = false;
+
+            // delayed lunge back
+            if (!doing.triggered && doing.time < 0.6)
+            {
+                char_contr->lunge(-getDir());
+                doing.triggered = true;
+            }
         } break;
         case sSignal::sBlock:
         {
             if (doing.time < Actor::blend_time) state.moveInterrupted = false;
+
+            // delayed lunge back
+            if (!doing.triggered && doing.time < 0.6)
+            {
+                char_contr->lunge(-getDir());
+                doing.triggered = true;
+            }
         } break;
         case sSignal::sJump:
         {
@@ -307,7 +369,7 @@ void Creature::resolveActionRequests(float dt)
     state.dirflags = dirflag::none;
 
     // store the previous signal
-    state.prev_signal = temp_prev_signal;
+//    state.prev_signal = temp_prev_signal;
 }
 
 DynamicCharacterController* Creature::getCharContr()
@@ -357,6 +419,7 @@ void Creature::moveLeft(float check_sign, float dt)
 
 void Creature::rotateUp(float degrees, float dt_unused)
 {
+    state.up_sweep = degrees;
     // Creatures can not be rotated up
     look_rot = glm::rotate(look_rot, 3.14159265f*degrees/180.f, glm::vec3(1.0, 0.0, 0.0));
 }
@@ -364,6 +427,7 @@ void Creature::rotateUp(float degrees, float dt_unused)
 void Creature::rotateLeft(float degrees, float dt_unused)
 {
     // Object3d::rotateLeft(check_sign, dt_unused);
+    state.left_sweep = degrees;
 
 
     glm::vec3 axis = glm::inverse(glm::mat3_cast(look_rot)) * glm::vec3(0.0, 1.0, 0.0);
@@ -410,4 +474,10 @@ void Creature::shift()
 void Creature::jump()
 {
     signal_stack.push_back(sSignal::sJump);
+}
+
+void Creature::stance()
+{
+    state.inCombat = !state.inCombat;
+    std::cout << "changing stance \n";
 }

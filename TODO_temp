@@ -1,0 +1,16 @@
+Todo now:
+
+actual rotation controller using look_rot as setpoint (do not rotate when doing things)
+force applied when attacking
+attack hit ghost_shape
+threatened region ghost_shape (affect choice of parry etc)
+Stats (from primordial)
+refactor to Entity-component
+capture the mouse
+fix player friction (to zero)
+switch the blend stack to a more fitting structure (like a fixed array)
+opengl loading in the render_thread
+
+Todo art:
+redo combat walk animations (stance is fine)
+

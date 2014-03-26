@@ -71,6 +71,14 @@ private:
     bool rmb_down;
     int press_pos_x;
     int press_pos_y;
+
+    void resetPressPos()
+    {
+        press_pos_x = scr_width_px/2;
+        press_pos_y = scr_height_px/2;
+        sf::Vector2i mouse_pos = sf::Vector2i(press_pos_x, press_pos_y);
+        sf::Mouse::setPosition(mouse_pos, window);
+    };
 };
 
 #endif // MASTER_H
