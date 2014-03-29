@@ -15,7 +15,8 @@ Creature::Creature() :
             //sSignal::sNothing   //
             } ),
     doing( {sSignal::sNothing, 0.000, false}),
-    char_contr(new DynamicCharacterController)
+    char_contr(new DynamicCharacterController),
+    snd_emitter(new SoundEmitter)
 {
     //ctor
     signal_stack.reserve(signal_stack_capacity);
@@ -26,6 +27,7 @@ Creature::~Creature()
     //dtor
     char_contr->destroy();
     delete char_contr;
+    delete snd_emitter;
 }
 
 void Creature::resolveActionRequests(float dt)
@@ -198,6 +200,8 @@ void Creature::resolveActionRequests(float dt)
                 {
                     float speed = 1.0;
 
+                    snd_emitter->emitSound("swosh3.flac");
+
                     if (doing.signal == sMove) state.moveInterrupted = true;
 
                     if (state.left_sweep<0.0)
@@ -216,6 +220,8 @@ void Creature::resolveActionRequests(float dt)
                 {
                     float speed = 1.0;
 
+                    snd_emitter->emitSound("dodge1.flac");
+
                     if (doing.signal == sMove) state.moveInterrupted = true;
 
                     doing = {sDodge, getAnimDuration(Anim::DodgeBack)/speed, false};
@@ -224,24 +230,31 @@ void Creature::resolveActionRequests(float dt)
                 } break;
                 case sSignal::sBlock:
                 {
-                    float speed = 1.0;
-
-                    if (doing.signal == sMove) state.moveInterrupted = true;
-
-                    if (state.left_sweep<=0.0)
+                    if (doing.signal != sBlock)
                     {
-                        doing = {sBlock, getAnimDuration(Anim::ParryRight1H)/speed, false};
-                        playAnim(Anim::ParryRight1H, true, speed);
+                        float speed = 1.0;
+                        snd_emitter->emitSound("swosh2.flac");
+
+                        if (doing.signal == sMove) state.moveInterrupted = true;
+
+                        if (state.left_sweep<=0.0)
+                        {
+                            doing = {sBlock, getAnimDuration(Anim::ParryRight1H)/speed, false};
+                            playAnim(Anim::ParryRight1H, true, speed);
+                        }
+                        else
+                        {
+                            doing = {sBlock, getAnimDuration(Anim::ParryLeft1H)/speed, false};
+                            playAnim(Anim::ParryLeft1H, true, speed);
+                        }
                     }
-                    else
-                    {
-                        doing = {sBlock, getAnimDuration(Anim::ParryLeft1H)/speed, false};
-                        playAnim(Anim::ParryLeft1H, true, speed);
-                    }
+
                 } break;
                 case sSignal::sJump:
                 {
                     float speed = 1.0;
+
+                    snd_emitter->emitSound("jump1.flac");
 
                     if (doing.signal == sMove) state.moveInterrupted = true;
 
@@ -335,7 +348,7 @@ void Creature::resolveActionRequests(float dt)
             if (doing.time < Actor::blend_time) state.moveInterrupted = false;
 
             // delayed lunge back
-            if (!doing.triggered && doing.time < 0.6)
+            if (!doing.triggered && doing.time < 0.75)
             {
                 char_contr->lunge(-getDir());
                 doing.triggered = true;

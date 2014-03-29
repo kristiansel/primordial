@@ -4,6 +4,7 @@
 #include "actor.h"
 #include "creaturesignals.h"
 #include "charactercontroller.h"
+#include "soundemitter.h"
 
 class Creature : public Actor, virtual public SignalReceiver// count virtula looms
 
@@ -75,7 +76,9 @@ class Creature : public Actor, virtual public SignalReceiver// count virtula loo
 
         static unsigned int const signal_stack_capacity = 20;
 
+        // "Components" (most of connection functionality is here)
         DynamicCharacterController* char_contr;
+        SoundEmitter* snd_emitter;
 };
 
 #endif // CREATURE_H

@@ -48,7 +48,7 @@ class World : public PhysicsWorld // Consider merging Culling functionality into
 //        void step(float dt_in);
 
         void startMusic(string soundKey);
-        sf::Sound* music;
+        sf::Music* music;
 
 
 
