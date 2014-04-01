@@ -25,6 +25,7 @@
 #include <helperfunctions.hpp>
 #include <cstdlib>
 #include <vector>
+#include "geometry.h"
 
 
 

@@ -52,11 +52,6 @@ void Mechanics::init(World &world_in, float &dt_in)
 //                             "rabbit_d",
 //                             glm::vec3(2.0, 10.0, -4.0));
 
-
-    // Look into issue of why loincloth is so TINY
-    // probably the exporter that uses the wrong transform...
-    // it probably has something to do with animations and
-    // parenting... (it gets scale of skeleton...)
     world->addDynamicObject( "loin_x3",
                              "nicewall",
                              glm::vec3(2.0, 10.0, -4.0));
@@ -144,6 +139,29 @@ void Mechanics::init(World &world_in, float &dt_in)
 
         RenderBatch* sword_batch = other->attachBatch(mesh_ptr, tex_ptr);
         other->moveBatchToSlot(sword_batch, Actor::Slot::RightHand);
+
+//        // Item* item::sword
+//
+//        // ideally
+//        player->acquire(item::sword[4]);            // acquire a specific sword
+//        player->acquire(item::sword);               // acquire a random sword
+//        player->acquire(item::sword(parameters));   // find an appropriate sword based on parameters
+//        player->acquire(item::sword, slot::backpack); // place it it backpack
+//        player->acquire(item::sword, slot::offhand); // pick it up with offhand
+//        player->acquire(item::sword, slot::lefthip); // place it on left hip
+//
+//        // for now
+//        player->acquire(item::sword);               // acquire the only sword in the game right now
+//
+//        // then to equip
+//        player->equip(item::sword); // main hand default
+//        player->equip(item::sword, slot::mainhand);
+//        player->equip(item::sword, slot::offhand);
+//         // find the best alternative for mainhand (given skills and what is available)
+//        player->equip(slot::mainhand);
+//        player->draw(slot::mainhand);
+//        player->draw(slot::offhand);
+
     }
 
 

@@ -231,106 +231,106 @@ void Skeleton::fromFile(std::string skel_key)
     }
 }
 
-void Skeleton::poseMatrices(glm::mat4* matrices,
-                            int anim_index,
-                            float time,
-                            int bone_index,
-                            glm::mat4 parent_mat)
-{
-    bool debug = true;
-//    std::cout << "anim_index = " << anim_index << "\n";
-//    std::cout << "num_anims = " << num_anims << "\n";
-//    std::cout << "num_bones = " << num_bones << "\n";
-
-    bool valid = true;
-    if ( anim_index<num_anims && anim_index>=0 &&
-         bone_index<num_bones && bone_index>=0 )
-    {
-        Animation *animation = &(animations[anim_index]);
-        Animation::Channel *channel = &(animation->channels[bone_index]);
-        Bone *bone = &(bones[bone_index]);
-
-        if(channel->pos_series.num_keys > 0 &&
-           channel->rot_series.num_keys > 0 &&
-           channel->sca_series.num_keys > 0)
-        {
-            // proceed
-            // Seek (find keyframes to interpolate and their weights
-            auto pos_res = channel->pos_series.seek(time);
-            auto rot_res = channel->rot_series.seek(time);
-            auto sca_res = channel->sca_series.seek(time);
-
-            // Preform interpolation
-            glm::vec3 key_pos = glm::mix(pos_res.prev.key->value,
-                                         pos_res.next.key->value,
-                                         pos_res.next.weight);
-
-            glm::quat key_rot = helper::qslerp(rot_res.prev.key->value, // glm::mix is not sufficient in this case
-                                              rot_res.next.key->value, // it will not choose the same path
-                                              rot_res.next.weight); // will oscillate between equiv solutions quat = -quat
-
-            glm::vec3 key_sca = glm::mix(sca_res.prev.key->value,
-                                         sca_res.next.key->value,
-                                         sca_res.next.weight);
-
-
-            // Construct transformation matrices
-            glm::mat4 trans_mat = glm::translate(glm::mat4(1.0), key_pos);
-            glm::mat4 rot_mat = glm::mat4_cast(key_rot);
-            glm::mat4 sca_mat = glm::scale(glm::mat4(1.0), key_sca);
-
-            // Construct local transformation matrix
-            glm::mat4 local_mat = trans_mat * rot_mat * sca_mat;
-
-            // Premultiply by parent to create object space matrix
-            glm::mat4 pose_mat = parent_mat * local_mat;
-
-            // Add the matrix to the output (still don't understand why this must be transposed
-            // and not modelViewMatrix etc...)
-//            matrices[bone_index] = glm::transpose(pose_mat * glm::inverse(bones[bone_index].rest_matrix));
-
-            // not transpose
-            matrices[bone_index] = pose_mat * glm::inverse(bones[bone_index].rest_matrix);
-    //        } // if channel.num_keys > 0
-    //        else
-    //        {
-    //            matrices[bone_index] =
-    //        }
-
-            // Recursively pose child bone matrices
-            for (int i_child=0; i_child<bone->num_children; i_child++)
-            {
-    //            std::cout << "bone_num: " << bone_index << "\n";
-    //            std::cout << "num_children: " << bone->num_children << "\n";
-    //            std::cout << "child #: " << i_child << " = "<<bone->child_indices[i_child] << "\n";
-                poseMatrices(matrices,
-                             anim_index,
-                             time,
-                             bone->child_indices[i_child],
-                             pose_mat);
-            }
-        }   // if channel contains keyframes
-        else
-        {
-            valid = false;
-        }
-    } // if animation and bone index is fine
-    else
-    {
-        valid = false;
-    }
-
-    if (!valid)
-    {
-        std::cerr << "invalid skeleton pose call\n";
-        std::cerr << "setting all bone matrices to rest\n";
-        std::cerr << "likely that skeleton file not found";
-        for (int i=0; i<num_bones; i++)
-        {
-            matrices[i] = glm::mat4(1.0);
-        }
-    }
-}
+//void Skeleton::poseMatrices(glm::mat4* matrices,
+//                            int anim_index,
+//                            float time,
+//                            int bone_index,
+//                            glm::mat4 parent_mat)
+//{
+//    bool debug = true;
+////    std::cout << "anim_index = " << anim_index << "\n";
+////    std::cout << "num_anims = " << num_anims << "\n";
+////    std::cout << "num_bones = " << num_bones << "\n";
+//
+//    bool valid = true;
+//    if ( anim_index<num_anims && anim_index>=0 &&
+//         bone_index<num_bones && bone_index>=0 )
+//    {
+//        Animation *animation = &(animations[anim_index]);
+//        Animation::Channel *channel = &(animation->channels[bone_index]);
+//        Bone *bone = &(bones[bone_index]);
+//
+//        if(channel->pos_series.num_keys > 0 &&
+//           channel->rot_series.num_keys > 0 &&
+//           channel->sca_series.num_keys > 0)
+//        {
+//            // proceed
+//            // Seek (find keyframes to interpolate and their weights
+//            auto pos_res = channel->pos_series.seek(time);
+//            auto rot_res = channel->rot_series.seek(time);
+//            auto sca_res = channel->sca_series.seek(time);
+//
+//            // Preform interpolation
+//            glm::vec3 key_pos = glm::mix(pos_res.prev.key->value,
+//                                         pos_res.next.key->value,
+//                                         pos_res.next.weight);
+//
+//            glm::quat key_rot = helper::qslerp(rot_res.prev.key->value, // glm::mix is not sufficient in this case
+//                                              rot_res.next.key->value, // it will not choose the same path
+//                                              rot_res.next.weight); // will oscillate between equiv solutions quat = -quat
+//
+//            glm::vec3 key_sca = glm::mix(sca_res.prev.key->value,
+//                                         sca_res.next.key->value,
+//                                         sca_res.next.weight);
+//
+//
+//            // Construct transformation matrices
+//            glm::mat4 trans_mat = glm::translate(glm::mat4(1.0), key_pos);
+//            glm::mat4 rot_mat = glm::mat4_cast(key_rot);
+//            glm::mat4 sca_mat = glm::scale(glm::mat4(1.0), key_sca);
+//
+//            // Construct local transformation matrix
+//            glm::mat4 local_mat = trans_mat * rot_mat * sca_mat;
+//
+//            // Premultiply by parent to create object space matrix
+//            glm::mat4 pose_mat = parent_mat * local_mat;
+//
+//            // Add the matrix to the output (still don't understand why this must be transposed
+//            // and not modelViewMatrix etc...)
+////            matrices[bone_index] = glm::transpose(pose_mat * glm::inverse(bones[bone_index].rest_matrix));
+//
+//            // not transpose
+//            matrices[bone_index] = pose_mat * glm::inverse(bones[bone_index].rest_matrix);
+//    //        } // if channel.num_keys > 0
+//    //        else
+//    //        {
+//    //            matrices[bone_index] =
+//    //        }
+//
+//            // Recursively pose child bone matrices
+//            for (int i_child=0; i_child<bone->num_children; i_child++)
+//            {
+//    //            std::cout << "bone_num: " << bone_index << "\n";
+//    //            std::cout << "num_children: " << bone->num_children << "\n";
+//    //            std::cout << "child #: " << i_child << " = "<<bone->child_indices[i_child] << "\n";
+//                poseMatrices(matrices,
+//                             anim_index,
+//                             time,
+//                             bone->child_indices[i_child],
+//                             pose_mat);
+//            }
+//        }   // if channel contains keyframes
+//        else
+//        {
+//            valid = false;
+//        }
+//    } // if animation and bone index is fine
+//    else
+//    {
+//        valid = false;
+//    }
+//
+//    if (!valid)
+//    {
+//        std::cerr << "invalid skeleton pose call\n";
+//        std::cerr << "setting all bone matrices to rest\n";
+//        std::cerr << "likely that skeleton file not found";
+//        for (int i=0; i<num_bones; i++)
+//        {
+//            matrices[i] = glm::mat4(1.0);
+//        }
+//    }
+//}
 
 void Skeleton::poseMatricesBlend( glm::mat4* matrices,
                                   const std::vector<ActiveAnim> &active_anims,
@@ -375,11 +375,13 @@ void Skeleton::poseMatricesBlend( glm::mat4* matrices,
                channel->rot_series.num_keys > 0 &&
                channel->sca_series.num_keys > 0)
             {
+
                 // proceed
                 // Seek (find keyframes to interpolate and their weights
                 auto pos_res = channel->pos_series.seek(time);
                 auto rot_res = channel->rot_series.seek(time);
                 auto sca_res = channel->sca_series.seek(time);
+
 
                 // Preform interpolation
                 glm::vec3 key_pos = glm::mix(pos_res.prev.key->value,
@@ -395,13 +397,15 @@ void Skeleton::poseMatricesBlend( glm::mat4* matrices,
                                              sca_res.next.weight);
 
                 // blend in with tot_key-frames
-                float blend_weight_norm = anim.blend_weight/sum;
-                float this_weight = blend_weight_norm/(blend_weight_norm+spent_weight);
+                float blend_weight_norm = (sum<0.00001) ? 0.0 : anim.blend_weight/sum;
+                float this_weight = (blend_weight_norm<0.00001) ? 0.0 : blend_weight_norm/(blend_weight_norm+spent_weight);
+
                 tot_key_pos = glm::mix(tot_key_pos, key_pos, this_weight);
                 tot_key_rot = helper::qslerp(tot_key_rot, key_rot, this_weight);
                 tot_key_sca = glm::mix(tot_key_sca, key_sca, this_weight);
 
                 spent_weight +=blend_weight_norm;
+
             } // if channel OK
             else {valid = false;}
         }// if animation OK

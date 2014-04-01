@@ -53,12 +53,12 @@ std::shared_ptr<Skeleton> Actor::shSkelPtr()
     return std::shared_ptr<Skeleton>(skel_ptr);
 }
 
-void Actor::pose(int anim_index, float time)
-{
-    // Checking for null here. Is it performant?
-
-    if (skel_ptr) skel_ptr->poseMatrices(pose_matrices, anim_index, time);
-}
+//void Actor::pose(int anim_index, float time)
+//{
+//    // Checking for null here. Is it performant?
+//
+//    if (skel_ptr) skel_ptr->poseMatrices(pose_matrices, anim_index, time);
+//}
 
 void Actor::poseRest()
 {

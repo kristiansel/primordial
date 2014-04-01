@@ -1,8 +1,10 @@
 #ifndef GEOMETRY_H
 #define GEOMETRY_H
 
+#include <GL/glew.h>
 #include <GL/gl.h>
 #include "glm/glm.hpp"
+#include "glm/gtx/quaternion.hpp"
 #include <vector>
 #include <iostream>
 
@@ -63,5 +65,6 @@ struct Triangle // 12 bytes
 extern std::ostream &operator<< (std::ostream &out, const glm::vec3 &vec);
 extern std::ostream &operator<< (std::ostream &out, const glm::vec4 &vec);
 extern std::ostream &operator<< (std::ostream &out, const glm::mat4 &mat);
+extern std::ostream &operator<< (std::ostream &out, const glm::quat &quat);
 
 #endif // GEOMETRY_H

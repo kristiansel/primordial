@@ -99,3 +99,11 @@ std::ostream &operator<< (std::ostream &out, const glm::mat4 &mat) {
 
     return out;
 }
+
+std::ostream &operator<< (std::ostream &out, const glm::quat &quat) {
+    out << "{"
+        << quat.w << " " <<  quat.x << " "<<  quat.y <<  " " << quat.z
+        << "}";
+
+    return out;
+}

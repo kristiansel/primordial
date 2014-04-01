@@ -21,19 +21,10 @@ Master::Master() :
 
         // Launch threads
         render_thread = Thread(&Master::renderTasks, this);
-        //test_thread = Thread(&Master::testThreadTasks, this);
 
         // Wait for render_thread to load fully
         std::cout << "waiting for render thread\n";
         while (!render_thread_loaded) {} // WAIT
-
-        // There are more data races here that I do not know about
-        // lucky that this works...
-
-        // proposed: queue loading to opengl to the rendering thread
-        // so that only rendering thread contains opengl calls
-
-        // Fix skyshader and shadow map shader to conform to 330 core
 
         // main loop
         mainLoop();
@@ -84,6 +75,8 @@ void Master::initWindow()
 
     // Disable repeated key presses when holding down keys
     window.setKeyRepeatEnabled(false);
+
+    window.setMouseCursorVisible (false);
 
 }
 

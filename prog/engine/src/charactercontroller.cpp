@@ -7,10 +7,14 @@ DynamicCharacterController::DynamicCharacterController () :
     f_max(30000.0), // 20000 too low. this will only limit "getting off the ground"
     m_halfHeight(0.0),
     on_ground(false),
-    f_set(btVector3(0.0, 0.0, 0.0))
+    f_set(btVector3(0.0, 0.0, 0.0)),
+    m_hitInfo({false, 0.0})
 {
         m_shape = nullptr;
         m_rigidBody = nullptr;
+
+        m_threat_shape = nullptr;
+        m_threat_object = nullptr;
 }
 
 DynamicCharacterController::~DynamicCharacterController ()
@@ -21,32 +25,66 @@ void DynamicCharacterController::setup (btDynamicsWorld* dynamicsWorld, btScalar
 {
     m_dynamicsWorld = dynamicsWorld;
 
-    radius = (radius > 0.0) ? radius : -radius ;                                   // must be positive
-    height = (height > 0.0) ? height : -height ;                                 // must be positive
-    height = (height > 2.f*radius) ? height : radius*2.00001;     // height must be > radius
 
-    m_halfHeight = height/2.0;
+    { // the character capsule shape
+        radius = (radius > 0.0) ? radius : -radius ;                                   // must be positive
+        height = (height > 0.0) ? height : -height ;                                 // must be positive
+        height = (height > 2.f*radius) ? height : radius*2.00001;     // height must be > radius
 
-    m_shape = new btCapsuleShape (radius, height-2*radius);
+        m_halfHeight = height/2.0;
 
+        m_shape = new btCapsuleShape (radius, height-2*radius);
 
-//height+2*radius
+        btTransform startTransform;
+        startTransform.setIdentity ();
+        startTransform.setOrigin (btVector3(pos.x, pos.y+m_halfHeight, pos.z));
+        btDefaultMotionState* myMotionState = new btDefaultMotionState(startTransform);
 
-    btTransform startTransform;
-    startTransform.setIdentity ();
-    startTransform.setOrigin (btVector3(pos.x, pos.y+m_halfHeight, pos.z));
-    btDefaultMotionState* myMotionState = new btDefaultMotionState(startTransform);
+        btRigidBody::btRigidBodyConstructionInfo cInfo(mass, myMotionState, m_shape);
+        //cInfo.m_friction = 0.2f;
+        m_rigidBody = new btRigidBody(cInfo);
 
-    btRigidBody::btRigidBodyConstructionInfo cInfo(mass, myMotionState, m_shape);
-    m_rigidBody = new btRigidBody(cInfo);
+        m_rigidBody->setSleepingThresholds (0.0, 0.0);
+        m_rigidBody->setAngularFactor (0.0);
+        m_rigidBody->setUserPointer(&m_hitInfo);
 
-    m_rigidBody->setSleepingThresholds (0.0, 0.0);
-    m_rigidBody->setAngularFactor (0.0);
-    m_dynamicsWorld->addRigidBody (m_rigidBody);
+        m_dynamicsWorld->addRigidBody (m_rigidBody, btBroadphaseProxy::CharacterFilter, btBroadphaseProxy::AllFilter);
+    }
 
-    btVector3 comPosition = m_rigidBody->getCenterOfMassPosition();
-    glm::vec3 out = glm::vec3((float)comPosition[0], (float)comPosition[1], (float)comPosition[2]);
+    { // Threat shape
+        // threat shape (a box in front of character that represents melee/touch range)
+        // 2x2x2 m box;
+        m_threat_shape = new btBoxShape (btVector3(0.30, 0.5, 0.5));
+
+        btGhostPairCallback* ghostCall = new btGhostPairCallback();
+        dynamicsWorld->getBroadphase()->getOverlappingPairCache()->setInternalGhostPairCallback(ghostCall);
+
+        m_threat_object = new btGhostObject();
+
+        m_threat_object->setCollisionShape(m_threat_shape);
+        btTransform trans;
+        trans.setIdentity();
+        trans.setOrigin(btVector3(pos.x, pos.y+1.0f, pos.z-1.0f));
+        m_threat_object->setWorldTransform(trans);
+        m_threat_object->setCollisionFlags(m_threat_object->getCollisionFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
+        //dynamicsWorld->addCollisionObject(m_threat_object, btBroadphaseProxy::SensorTrigger, btBroadphaseProxy::AllFilter & ~btBroadphaseProxy::SensorTrigger);
+        dynamicsWorld->addCollisionObject(m_threat_object, btBroadphaseProxy::SensorTrigger, btBroadphaseProxy::CharacterFilter);
+
+        //dynamicsWorld->addCollisionObject(m_threat_object);
+    }
+
 }
+
+void DynamicCharacterController::updateThreatRegionTransf(glm::vec3 pos, glm::quat rot)
+{
+    btTransform trans;
+    trans.setIdentity();
+    trans.setRotation(btQuaternion(rot.w, rot.x, rot.y, rot.z));
+    trans.setOrigin(btVector3(pos.x, pos.y, pos.z));
+
+    m_threat_object->setWorldTransform(trans);
+}
+
 
 void DynamicCharacterController::destroy ()
 {
@@ -59,6 +97,17 @@ void DynamicCharacterController::destroy ()
         {
                 m_dynamicsWorld->removeRigidBody (m_rigidBody);
                 delete m_rigidBody;
+        }
+
+        if (m_threat_shape)
+        {
+                delete m_threat_shape;
+        }
+
+        if (m_threat_object)
+        {
+                m_dynamicsWorld->removeCollisionObject(m_threat_object);
+                delete m_threat_object;
         }
 }
 
@@ -95,6 +144,41 @@ void DynamicCharacterController::applyMoveController()
     if (on_ground)
     {
         m_rigidBody->applyCentralForce(btVector3(f_set[0], 0.f, f_set[2]));
+    }
+}
+
+DynamicCharacterController::HitInfo *DynamicCharacterController::getHitInfo()
+{
+    return &m_hitInfo;
+}
+
+void DynamicCharacterController::testThreatRegion()
+{
+    //std::cout << "testing threat region" << std::endl;
+    if (m_threat_object)
+    {
+        int num_overlapping = m_threat_object->getNumOverlappingObjects();
+        for (int i = 0; i<num_overlapping; i++)
+        {
+            btCollisionObject* col_object = m_threat_object->getOverlappingObject(i);
+
+            if (col_object != m_rigidBody) // Do not count hits with self
+            {
+                HitInfo* user = (HitInfo*) col_object->getUserPointer();
+                if (user)
+                {
+                    *user = {true, 10.0}; // set some more funny hit thing here...
+                }
+                else std::cerr << "error: testThreatRegion() hit collision object has no user\n";
+            }
+            else
+            {
+                //std::cout << "registered hit with self\n";
+            }
+
+        }
+
+        //std::cout << "overlapping: " << num_overlapping << std::endl;
     }
 }
 

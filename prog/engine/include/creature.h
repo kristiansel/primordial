@@ -5,8 +5,9 @@
 #include "creaturesignals.h"
 #include "charactercontroller.h"
 #include "soundemitter.h"
+#include "stats.h"
 
-class Creature : public Actor, virtual public SignalReceiver// count virtula looms
+class Creature : public Actor, virtual public SignalReceiver // count virtula looms
 
 {
     public:
@@ -37,11 +38,11 @@ class Creature : public Actor, virtual public SignalReceiver// count virtula loo
 //
         glm::quat getLookRot() const;
 
-
         void updateTransformation();
 
         // character physics
         DynamicCharacterController* getCharContr();
+        void notifyGotHit();
 
     protected:
     private:
@@ -71,6 +72,8 @@ class Creature : public Actor, virtual public SignalReceiver// count virtula loo
             float time;
             bool triggered;
         } doing;
+
+        Stats stats;
 
         std::vector<sSignal> signal_stack;
 

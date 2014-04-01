@@ -5,7 +5,7 @@
 #include "btBulletDynamicsCommon.h"
 #include "BulletCollision/CollisionShapes/btMultiSphereShape.h"
 //#include "BulletDynamics/Character/btKinematicCharacterController.h"
-//#include "BulletCollision/CollisionDispatch/btGhostObject.h"
+#include "BulletCollision/CollisionDispatch/btGhostObject.h"
 #include "glm/glm.hpp"
 #include "geometry.h"
 
@@ -14,20 +14,15 @@
 class DynamicCharacterController
 {
 protected:
-//        btScalar m_halfHeight;
+        // For the body
         btCollisionShape* m_shape;
         btRigidBody* m_rigidBody;
-//
-//        btVector3 m_raySource[2];
-//        btVector3 m_rayTarget[2];
-//        btScalar m_rayLambda[2];
-//        btVector3 m_rayNormal[2];
-//
-//        btScalar m_turnAngle;
-//
-//        btScalar m_maxLinearVelocity;
-//        btScalar m_walkVelocity;
-//        btScalar m_turnVelocity;
+
+        // Threat region (for attacking)
+        btCollisionShape* m_threat_shape;
+        btGhostObject* m_threat_object;
+
+
 public:
         DynamicCharacterController ();
 
@@ -50,9 +45,23 @@ public:
 
         void applyMoveController();
 
+        void testThreatRegion();
+
+        void updateThreatRegionTransf(glm::vec3 pos, glm::quat rot);
+
+        //void setUser(void *user);
+
         glm::vec3 getWorldPos() const;
 
         bool onGround();
+
+        struct HitInfo
+        {
+            bool isHit;
+            float hitStrength;
+        };
+
+        HitInfo* getHitInfo();
 
 private:
         // Gain/how fast can you change your speed (maybe this agi)
@@ -70,25 +79,12 @@ private:
         btVector3 m_rayStart;
         btVector3 m_rayEnd;
 
+        HitInfo m_hitInfo;
 
 
         bool on_ground;
 
         btDynamicsWorld* m_dynamicsWorld;
-
-//        btCollisionObject* getCollisionObject ();
-//
-//        void preStep (btDynamicsWorld* dynamicsWorld);
-//        void playerStep (btScalar dt,
-//                                         int forward,
-//                                         int backward,
-//                                         int left,
-//                                         int right,
-//                                         int jump);
-//        bool canJump () const;
-//        void jump ();
-//
-//        bool onGround () const;
 };
 
 

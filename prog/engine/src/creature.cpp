@@ -32,9 +32,17 @@ Creature::~Creature()
 
 void Creature::resolveActionRequests(float dt)
 {
+    // receive "last minute signals"
+    DynamicCharacterController::HitInfo *hitInfo = char_contr->getHitInfo();
+    if (hitInfo->isHit)
+    {
+        signal_stack.push_back(sSignal::sGotHit);
+        hitInfo->isHit = false;
+        //std::cout << "received hit signal\n";
+    }
+
     // Check if on ground
     bool on_ground = char_contr->onGround();
-
 
     sSignal temp_prev_signal = doing.signal;
 
@@ -214,7 +222,6 @@ void Creature::resolveActionRequests(float dt)
                         doing = {sAttack, getAnimDuration(Anim::SwingRight1H)/speed, false};
                         playAnim(Anim::SwingRight1H, true, speed);
                     }
-
                 } break;
                 case sSignal::sDodge:
                 {
@@ -228,10 +235,22 @@ void Creature::resolveActionRequests(float dt)
 
                     playAnim(Anim::DodgeBack, true, speed);
                 } break;
+                case sSignal::sGotHit:
+                {
+                    float speed = 1.0;
+
+ //                   snd_emitter->emitSound("dodge1.flac");
+
+                    if (doing.signal == sMove) state.moveInterrupted = true;
+
+                    doing = {sGotHit, getAnimDuration(Anim::DodgeBack)/speed, false};
+
+                    playAnim(Anim::DodgeBack, true, speed);
+                } break;
                 case sSignal::sBlock:
                 {
-                    if (doing.signal != sBlock)
-                    {
+//                    if (doing.signal != sBlock)
+//                    {
                         float speed = 1.0;
                         snd_emitter->emitSound("swosh2.flac");
 
@@ -247,7 +266,7 @@ void Creature::resolveActionRequests(float dt)
                             doing = {sBlock, getAnimDuration(Anim::ParryLeft1H)/speed, false};
                             playAnim(Anim::ParryLeft1H, true, speed);
                         }
-                    }
+//                    }
 
                 } break;
                 case sSignal::sJump:
@@ -329,6 +348,7 @@ void Creature::resolveActionRequests(float dt)
             {
                 char_contr->lunge(getDir());
                 doing.triggered = true;
+                char_contr->testThreatRegion();
             }
 
         } break;
@@ -369,6 +389,8 @@ void Creature::resolveActionRequests(float dt)
     }
 
     char_contr->applyMoveController();
+                                           // in front     up
+    char_contr->updateThreatRegionTransf(pos+1.25f*getDir()+glm::vec3(0.0, 1.0, 0.0), rot);
 
     // Get ready for next frame
 
@@ -388,6 +410,11 @@ void Creature::resolveActionRequests(float dt)
 DynamicCharacterController* Creature::getCharContr()
 {
     return char_contr;
+}
+
+void Creature::notifyGotHit()
+{
+    std::cout << "gotHit\n";
 }
 
 void Creature::updateTransformation()
