@@ -81,6 +81,9 @@ class Stats
         float weight; // total weight of animal, body weight plus carrying
         float fatigue; // weariness, sleepiness, tiredness. Determines ability to sleep and improve stats and skills.
 
+        // temporary
+        float health;
+
 
     protected:
     private:

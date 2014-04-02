@@ -8,6 +8,10 @@
 #include "culler.h"
 #include "threadingwrapper.h"
 
+#ifdef WINDOWS
+#include "windows.h"
+#endif // WINDOWS
+
 /**
     Philosophy of the Master class: Handles technicalities
     like window creation, directs input, swap display buffer

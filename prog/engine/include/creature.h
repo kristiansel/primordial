@@ -44,6 +44,8 @@ class Creature : public Actor, virtual public SignalReceiver // count virtula lo
         DynamicCharacterController* getCharContr();
         void notifyGotHit();
 
+        float getHealth() const;
+
     protected:
     private:
         float walkspeed;
@@ -73,6 +75,7 @@ class Creature : public Actor, virtual public SignalReceiver // count virtula lo
             bool triggered;
         } doing;
 
+        // stats
         Stats stats;
 
         std::vector<sSignal> signal_stack;

@@ -123,27 +123,36 @@ void DynamicCharacterController::applyForce(glm::vec3 f)
 
 void DynamicCharacterController::velocitySetpoint(glm::vec3 glm_v_s)
 {
-        btVector3 v = m_rigidBody->getLinearVelocity();
-
-        btVector3 v_s = btVector3(glm_v_s.x, glm_v_s.y, glm_v_s.z);
-
-        // Simple P(ID) controller
-        f_set = gain*(v_s-v);
-        btScalar f_mag = f_set.length();
-
-        f_set = (f_mag > f_max) ? f_set/f_max : f_set ;
-
-        //std::cout << "applying force " << f.length() << " N \n";
-
-        //                             cannot control y (cannot fly)
-
+//        btVector3 v = m_rigidBody->getLinearVelocity();
+//
+//        btVector3 v_s = btVector3(glm_v_s.x, glm_v_s.y, glm_v_s.z);
+//
+//        // Simple P(ID) controller
+//        f_set = gain*(v_s-v);
+//        btScalar f_mag = f_set.length();
+//
+//        f_set = (f_mag > f_max) ? f_set/f_max : f_set ;
+//
+//        //std::cout << "applying force " << f.length() << " N \n";
+//
+//        //                             cannot control y (cannot fly)
+    f_set = btVector3(glm_v_s.x, glm_v_s.y, glm_v_s.z);
 
 }
 void DynamicCharacterController::applyMoveController()
 {
     if (on_ground)
     {
-        m_rigidBody->applyCentralForce(btVector3(f_set[0], 0.f, f_set[2]));
+//        m_rigidBody->applyCentralForce(btVector3(f_set[0], 0.f, f_set[2]));
+        m_rigidBody->setLinearVelocity(btVector3(f_set[0], (m_rigidBody->getLinearVelocity())[1], f_set[2]));
+    }
+}
+
+void DynamicCharacterController::setVelocityXZ(float v_x, float v_z)
+{
+    if (on_ground)
+    {
+        m_rigidBody->setLinearVelocity(btVector3(v_x, (m_rigidBody->getLinearVelocity())[1], v_z));
     }
 }
 
@@ -198,10 +207,11 @@ void DynamicCharacterController::jump(glm::vec3 forw)
 {
     if (on_ground)
     {
-        btVector3 forwbt = btVector3(forw.x, forw.y, forw.z);
+        //btVector3 forwbt = btVector3(forw.x, forw.y, forw.z);
         btVector3 up(0.0, 1.0, 0.0);
         btScalar magnitude = (btScalar(1.0)/m_rigidBody->getInvMass()) * btScalar(4.5);
-        m_rigidBody->applyCentralImpulse ((up + forwbt*0.7)* magnitude);
+        //m_rigidBody->applyCentralImpulse ((up + forwbt*0.7)* magnitude);
+        m_rigidBody->applyCentralImpulse (up * magnitude);
     }
 }
 

@@ -32,6 +32,8 @@ Creature::~Creature()
 
 void Creature::resolveActionRequests(float dt)
 {
+    //char_contr->setVelocity()
+
     // receive "last minute signals"
     DynamicCharacterController::HitInfo *hitInfo = char_contr->getHitInfo();
     if (hitInfo->isHit)
@@ -239,7 +241,7 @@ void Creature::resolveActionRequests(float dt)
                 {
                     float speed = 1.0;
 
- //                   snd_emitter->emitSound("dodge1.flac");
+                    snd_emitter->emitSound("fleshrip.wav");
 
                     if (doing.signal == sMove) state.moveInterrupted = true;
 
@@ -272,8 +274,6 @@ void Creature::resolveActionRequests(float dt)
                 case sSignal::sJump:
                 {
                     float speed = 1.0;
-
-                    snd_emitter->emitSound("jump1.flac");
 
                     if (doing.signal == sMove) state.moveInterrupted = true;
 
@@ -318,8 +318,8 @@ void Creature::resolveActionRequests(float dt)
     }
     // else keep on playing whatever animation was playing
 
-    //if (doing.signal != sMove && doing.signal != sJump)
-    if (doing.signal != sMove)
+    if (doing.signal == sNothing)
+    //if (doing.signal != sMove )
     {
         char_contr->velocitySetpoint(glm::vec3(0.0, 0.0, 0.0));
     }
@@ -341,12 +341,23 @@ void Creature::resolveActionRequests(float dt)
         } break;
         case sSignal::sAttack:
         {
+            float trigger_time = 0.75;
+
             if (doing.time < Actor::blend_time) state.moveInterrupted = false;
 
-            // delayed lunge
-            if (!doing.triggered && doing.time < 0.75)
+            if (doing.time > trigger_time)
+            { // before triggered
+                char_contr->velocitySetpoint(glm::vec3(0.0, 0.0, 0.0));
+            }
+            else
             {
-                char_contr->lunge(getDir());
+                char_contr->velocitySetpoint(getDir()*doing.time/trigger_time*3.f);
+            }
+
+            // delayed lunge
+            if (!doing.triggered && doing.time < trigger_time)
+            {
+                //char_contr->lunge(getDir());
                 doing.triggered = true;
                 char_contr->testThreatRegion();
             }
@@ -354,21 +365,44 @@ void Creature::resolveActionRequests(float dt)
         } break;
         case sSignal::sDodge:
         {
+            float trigger_time = 0.6;
+
             if (doing.time < Actor::blend_time) state.moveInterrupted = false;
 
-            // delayed lunge back
-            if (!doing.triggered && doing.time < 0.6)
+            if (doing.time > trigger_time)
+            { // before triggered
+                char_contr->velocitySetpoint(glm::vec3(0.0, 0.0, 0.0));
+            }
+            else
             {
-                char_contr->lunge(-getDir());
+                char_contr->velocitySetpoint(-getDir()*doing.time/trigger_time*3.f);
+            }
+
+
+            // delayed lunge back
+            if (!doing.triggered && doing.time < trigger_time)
+            {
+                //char_contr->lunge(-getDir());
                 doing.triggered = true;
             }
         } break;
         case sSignal::sBlock:
         {
+            float trigger_time = 0.98;
+
             if (doing.time < Actor::blend_time) state.moveInterrupted = false;
 
+            if (doing.time > trigger_time)
+            { // before triggered
+                char_contr->velocitySetpoint(glm::vec3(0.0, 0.0, 0.0));
+            }
+            else
+            {
+                char_contr->velocitySetpoint(-getDir()*doing.time/trigger_time*3.f);
+            }
+
             // delayed lunge back
-            if (!doing.triggered && doing.time < 0.75)
+            if (!doing.triggered && doing.time < trigger_time)
             {
                 char_contr->lunge(-getDir());
                 doing.triggered = true;
@@ -382,6 +416,7 @@ void Creature::resolveActionRequests(float dt)
             if (!doing.triggered && doing.time < 0.8)
             {
                 char_contr->jump(getDir());
+                snd_emitter->emitSound("jump1.flac");
                 doing.triggered = true;
             }
 
@@ -415,6 +450,11 @@ DynamicCharacterController* Creature::getCharContr()
 void Creature::notifyGotHit()
 {
     std::cout << "gotHit\n";
+}
+
+float Creature::getHealth() const
+{
+    return stats.health;
 }
 
 void Creature::updateTransformation()

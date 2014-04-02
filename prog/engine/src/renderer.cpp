@@ -59,7 +59,6 @@ void Renderer::init(unsigned int scr_width_in, unsigned int scr_height_in)
 
     // Initiate perspective (this needs to be done after post processing init for now)
     resizeWindow(scr_width_in, scr_height_in);
-
 }
 
 void Renderer::draw(Scene &scene, float dt)
@@ -172,10 +171,25 @@ void Renderer::draw(Scene &scene, float dt)
     comb1.activateTextures(render_stage.fbo_texture, blur2.fbo_texture);
     comb1.draw();
 
-    text_shader.printText2D("hello", 10, 500, 40);
+
 
     // Consider drawing lower resolution, and upscaling while applying
     // FXAA...
+}
+
+void Renderer::drawOverlay(float interfaceInfo)
+{
+    char str[80];
+    strcpy (str,"health: ");
+    char healthstr[4];
+    sprintf(healthstr, "%f", interfaceInfo);
+    strcat (str, healthstr);
+
+//    std::cout << "interfaceInfo1: " << str << "\n";
+
+    // draw UI stuff
+//    text_shader.printText2D(std::string("health: "+number).c_str(), 10, 10, 20);
+    text_shader.printText2D(str, 10, 10, 20);
 }
 
 void Renderer::resizeWindow(int w, int h, bool real)
@@ -213,36 +227,3 @@ void Renderer::updateKernel()
         }
     }
 }
-
-Renderer::Perspective::Perspective()
-{
-    fovy = 40; // field of vertical view
-    aspect = 1; // Ahhh! Where is this used?
-    nearz = 0.1; // near z clipping plane
-    farz = 200; // far z clipping plane
-}
-
-Renderer::Perspective::~Perspective()
-{
-
-}
-
-Renderer::Perspective::Perspective(float fovy, float aspect, float nearz, float farz)
-{
-    setPerspective(fovy, aspect, nearz, farz);
-}
-
-void Renderer::Perspective::setPerspective(float fovy_in, float aspect_in, float nearz_in, float farz_in)
-{
-    fovy = fovy_in;
-    aspect = aspect_in;
-    nearz = nearz_in;
-    farz = farz_in;
-}
-
-//glm::mat4 Renderer::Perspective::getModelViewMatrix()
-//{
-//    glm::mat4 mv = Transform::lookAt(pos, dir, up) ;
-//    mv = glm::transpose(mv) ;
-//    return mv;
-//}

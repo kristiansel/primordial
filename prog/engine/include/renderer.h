@@ -6,6 +6,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <iostream>
+#include <string>
 
 #include "shader.h"
 #include "skyshader.h"
@@ -20,23 +21,10 @@
 class Renderer
 {
 public:
-    struct Settings
+    struct Settings // is this used?
     {
         int width;
         int height;
-    };
-    struct Perspective
-    {
-        Perspective();
-        ~Perspective();
-        explicit Perspective(float fovy, float aspect, float nearz, float farz);
-
-        void setPerspective(float fovy_in, float aspect_in, float nearz_in, float farz_in);
-
-        float fovy;
-        float aspect;
-        float nearz;
-        float farz;
     };
 public:
     Renderer();
@@ -44,6 +32,7 @@ public:
 
     void init(unsigned int scr_width_in, unsigned int scr_height_in); // depends on an OpenGL context, therefore public
     void draw(Scene &scene, float dt);
+    void drawOverlay(float interfaceInfo);
     void resizeWindow(int w, int h, bool real = true);
     void setPerspective(int w, int h);
 
@@ -56,7 +45,7 @@ private:
     SkyShader sky_shader;
 
     // Have this not change with resize
-    Perspective perspective;
+//    Perspective perspective;
 
     // For post processing
     Settings settings;

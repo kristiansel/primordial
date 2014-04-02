@@ -67,11 +67,31 @@ Master::~Master()
 void Master::initWindow()
 {
     // to be loaded from settings
-    scr_width_px = 1400;
-    scr_height_px = 900;
+//    scr_width_px = 1400;
+//    scr_height_px = 900;
+
+//    std::vector<sf::VideoMode> modes = sf::VideoMode::getFullscreenModes();
+//    for (std::size_t i = 0; i < modes.size(); ++i)
+//    {
+//        sf::VideoMode mode = modes[i];
+//        std::cout << "Mode #" << i << ": "
+//                  << mode.width << "x" << mode.height << " - "
+//                  << mode.bitsPerPixel << " bpp" << std::endl;
+//    }
+
 
     // create the window and OpenGL context
-    window.create(sf::VideoMode(scr_width_px, scr_height_px), "Primordial", sf::Style::Default, sf::ContextSettings(32, 0, 0, 4, 4));
+    //window.create(sf::VideoMode(scr_width_px, scr_height_px), "Primordial", sf::Style::Default, sf::ContextSettings(32, 0, 0, 4, 4));
+
+
+//    sf::VideoMode desktop_mode = sf::VideoMode::getDesktopMode();
+    sf::VideoMode desktop_mode = sf::VideoMode(1400, 900);
+    scr_width_px = desktop_mode.width;
+    scr_height_px = desktop_mode.height;
+
+//    window.create(desktop_mode, "Primordial", sf::Style::Fullscreen, sf::ContextSettings(32, 0, 0, 4, 4));
+    window.create(desktop_mode, "Primordial", sf::Style::Default, sf::ContextSettings(32, 0, 0, 4, 4));
+
     window.setVerticalSyncEnabled(false); // This forces frame rate to 60 FPS?
 
     // Disable repeated key presses when holding down keys
@@ -112,7 +132,11 @@ void Master::mainLoopSingleThreaded()
         // draw...
         renderer.draw(scene, dt);
 
-        // bullet debug draw
+        // draw overlay/interface
+        renderer.drawOverlay(mechanics.getInterfaceInfo());
+//        renderer.drawOverlay(5.0);
+
+        // bullet debug draw, not implemented
         //world.drawBulletDebug();
 
         // end the current frame (internally swaps the front and back buffers)
@@ -205,6 +229,9 @@ void Master::renderTasks()
         // draw
         renderer.draw(scene, dtRender);
 
+        // draw overlay/interface
+        renderer.drawOverlay(mechanics.getInterfaceInfo());
+
         // end the current frame (internally swaps the front and back buffers)
         window.display();
     }
@@ -258,10 +285,33 @@ bool Master::handleInput()
             renderer.resizeWindow(event.size.width, event.size.height);
             break;
         case sf::Event::LostFocus:
+        {
             has_focus = false;
             window.setMouseCursorVisible (true);
-            break;
-        case sf::Event::GainedFocus:
+
+            sf::WindowHandle window_handle = window.getSystemHandle(); // still portable
+
+#ifdef WINDOWS
+            //running = false;
+            ShowWindow(window_handle, SW_MINIMIZE);
+#endif // WINDOWS
+
+            sf::Event focusevent;
+            while (!has_focus)
+            {
+                while (window.pollEvent(focusevent))
+                {
+                    if (focusevent.type == sf::Event::GainedFocus)
+                    {
+                        has_focus = true;
+                        window.setMouseCursorVisible (false);
+                        resetPressPos();
+                        // pause music/sound
+                    }
+                }
+            }
+        } break;
+        case sf::Event::GainedFocus: // Redundant?
             has_focus = true;
             window.setMouseCursorVisible (false);
             resetPressPos();

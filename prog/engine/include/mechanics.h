@@ -60,6 +60,8 @@ public:
 
     void playerStance();
 
+    float getInterfaceInfo();
+
     // Testing
     void func(int num_in);
 protected:
@@ -77,6 +79,10 @@ private:
 
     // Temporary for testing deletion
     list<shared_ptr<WorldObject>>::iterator worldobject_ptr_it;
+
+
+    // some temporary creature assembler function
+    void addNPC(glm::vec3 pos_in);
 };
 
 #endif // MECHANICS_H

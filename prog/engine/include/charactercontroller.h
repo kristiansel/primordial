@@ -35,6 +35,8 @@ public:
 
         void setVelocity(glm::vec3 v);
 
+        void setVelocityXZ(float v_x, float v_z);
+
         void applyForce(glm::vec3 f);
 
         void jump(glm::vec3 forw);

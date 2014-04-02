@@ -114,12 +114,54 @@ void Mechanics::init(World &world_in, float &dt_in)
         player->moveBatchToSlot(sword_batch, Actor::Slot::RightHand);
     }
 
+    addNPC(glm::vec3(-3.0, 0.0, 2.0) );
+
+    addNPC(glm::vec3(-3.0, 0.0, -2.0) );
+
+
+
+//    world->addCreature( "humale_1hswing",
+//                        "tex_human_male",
+//                        glm::vec3(-3.0, 0.0, 2.0) );
+//
+//    // Creatures
+//    world->addCreature( "anim_test",
+//                        "checkers",
+//                        glm::vec3(0.0, 2.0, -4.0) );
+
+    world->addDynamicObject( "cube",
+                             "nicewall",
+                             glm::vec3(2.0, 10.0, -4.0),
+                             RigidBody::Box(0.5f, 0.5f, 0.5f) );
+
+
+    // remove later
+    worldobject_ptr_it = world->worldobjects.begin();
+
+    // Testing
+}
+
+float Mechanics::getInterfaceInfo()
+{
+    Creature* player_creature = dynamic_cast<Creature*>(player);
+    if (player_creature)
+    {
+        return player_creature->getHealth();
+    }
+    else
+    {
+        return -1.0;
+    }
+}
+
+void Mechanics::addNPC(glm::vec3 pos_in)
+{
     // add another creature
     Creature* other = nullptr;
     {
         auto otherCreature = world->addCreature( "human_all_anim3",
                             "tex_human_male",
-                            glm::vec3(-3.0, 0.0, 2.0) );
+                            pos_in );
 
         other = (*otherCreature).get();
     }
@@ -164,28 +206,6 @@ void Mechanics::init(World &world_in, float &dt_in)
 
     }
 
-
-
-
-//    world->addCreature( "humale_1hswing",
-//                        "tex_human_male",
-//                        glm::vec3(-3.0, 0.0, 2.0) );
-//
-//    // Creatures
-//    world->addCreature( "anim_test",
-//                        "checkers",
-//                        glm::vec3(0.0, 2.0, -4.0) );
-
-    world->addDynamicObject( "cube",
-                             "nicewall",
-                             glm::vec3(2.0, 10.0, -4.0),
-                             RigidBody::Box(0.5f, 0.5f, 0.5f) );
-
-
-    // remove later
-    worldobject_ptr_it = world->worldobjects.begin();
-
-    // Testing
 }
 
 void Mechanics::step(World &world_in, float dt_in)
