@@ -14,6 +14,7 @@
 #include "renderstage.h"
 #include "postprocstage.h"
 #include "combinationstage.h"
+#include "textshader.h"
 
 
 class Renderer
@@ -72,6 +73,8 @@ private:
     PostProcStage blur1;
     PostProcStage blur2; // UNCOMMENTING THIS MAKES ONE OF THE HEAD VERTICES WEIRD...
     CombinationStage comb1;
+
+    TextShader text_shader;
 
     void updateKernel();
 

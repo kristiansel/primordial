@@ -8,7 +8,8 @@ Master::Master() :
     press_pos_y(0),
     running(true),
     render_thread_loaded(false),
-    main_thread_loaded(false)
+    main_thread_loaded(false),
+    m_restart(1)
 {
     // Start window in main thread...
     initWindow();
@@ -300,6 +301,7 @@ bool Master::handleInput()
             {
             case sf::Keyboard::Escape:
                 running = false;
+                m_restart = 0;
                 break;
             case sf::Keyboard::R:
                 // do something
@@ -394,3 +396,9 @@ bool Master::handleInput()
 
     return running;
 }
+
+int Master::restart()
+{
+    return m_restart;
+}
+

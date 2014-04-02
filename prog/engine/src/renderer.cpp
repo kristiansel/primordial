@@ -54,6 +54,9 @@ void Renderer::init(unsigned int scr_width_in, unsigned int scr_height_in)
     blur2.init(scr_width_in/ratio, scr_height_in/ratio, "shaders/pp_pass2.frag.glsl");
     comb1.init(scr_width_in, scr_height_in);
 
+    // init the text shader
+    text_shader.init();
+
     // Initiate perspective (this needs to be done after post processing init for now)
     resizeWindow(scr_width_in, scr_height_in);
 
@@ -80,6 +83,8 @@ void Renderer::draw(Scene &scene, float dt)
     glm::mat4 mlight_vp = mlight.getVPmatrix();
 
     glm::vec4 fog_color = glm::vec4(1.0, 1.0, 1.0, 1.0);
+
+    glDisable(GL_BLEND);
 
     shadow_map.activate(mlight_vp);
     // shadow_map.activateDrawContent(mlight_vp);
@@ -166,6 +171,8 @@ void Renderer::draw(Scene &scene, float dt)
 
     comb1.activateTextures(render_stage.fbo_texture, blur2.fbo_texture);
     comb1.draw();
+
+    text_shader.printText2D("hello", 10, 500, 40);
 
     // Consider drawing lower resolution, and upscaling while applying
     // FXAA...

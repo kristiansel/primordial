@@ -21,6 +21,9 @@ public:
     // Methods
     Master(); // starts everything
     virtual ~Master();
+
+    int restart(); // whether to restart 1 or not 0
+
 protected:
 private:
     // Primary Methods
@@ -31,6 +34,8 @@ private:
     void cleanUp();
     void renderTasks();
 //    void testThreadTasks();
+
+
 
     // Secondary Methods
     bool handleInput();
@@ -79,6 +84,8 @@ private:
         sf::Vector2i mouse_pos = sf::Vector2i(press_pos_x, press_pos_y);
         sf::Mouse::setPosition(mouse_pos, window);
     };
+
+    int m_restart;
 };
 
 #endif // MASTER_H
