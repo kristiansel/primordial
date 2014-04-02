@@ -26,13 +26,19 @@ public:
         int width;
         int height;
     };
+
+    struct InterfaceInfo
+    {
+        float health;
+        float frames_per_second;
+    };
 public:
     Renderer();
     virtual ~Renderer();
 
     void init(unsigned int scr_width_in, unsigned int scr_height_in); // depends on an OpenGL context, therefore public
     void draw(Scene &scene, float dt);
-    void drawOverlay(float interfaceInfo);
+    void drawOverlay(InterfaceInfo interfaceInfo);
     void resizeWindow(int w, int h, bool real = true);
     void setPerspective(int w, int h);
 
@@ -64,6 +70,7 @@ private:
     CombinationStage comb1;
 
     TextShader text_shader;
+    void labelNumberPair(const char * label, float number, char * out);
 
     void updateKernel();
 

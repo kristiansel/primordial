@@ -6,6 +6,7 @@
 #include "charactercontroller.h"
 #include "soundemitter.h"
 #include "stats.h"
+#include "artificialintelligence.h"
 
 class Creature : public Actor, virtual public SignalReceiver // count virtula looms
 
@@ -40,9 +41,11 @@ class Creature : public Actor, virtual public SignalReceiver // count virtula lo
 
         void updateTransformation();
 
+        void connectAI(ai::Agent* aiAgent, ai::World* aiWorld);
+
         // character physics
         DynamicCharacterController* getCharContr();
-        void notifyGotHit();
+//        void notifyGotHit();
 
         float getHealth() const;
 
@@ -85,6 +88,11 @@ class Creature : public Actor, virtual public SignalReceiver // count virtula lo
         // "Components" (most of connection functionality is here)
         DynamicCharacterController* char_contr;
         SoundEmitter* snd_emitter;
+
+        const Creature * target_creature;
+
+        ai::Agent *m_aiAgent;
+        ai::World *m_aiWorld;
 };
 
 #endif // CREATURE_H

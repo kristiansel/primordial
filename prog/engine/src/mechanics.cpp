@@ -2,7 +2,8 @@
 
 Mechanics::Mechanics() : speed(24.5), camTurnSpeed(80.0),
     controlled(nullptr),
-    player(nullptr)
+    player(nullptr),
+    aiWorld(nullptr)
 {
 
 }
@@ -10,11 +11,14 @@ Mechanics::Mechanics() : speed(24.5), camTurnSpeed(80.0),
 Mechanics::~Mechanics()
 {
     //dtor
+    delete aiWorld;
 }
 
 void Mechanics::init(World &world_in, float &dt_in)
 {
     world = &world_in;
+    aiWorld = new ai::World;
+
     dt = &dt_in;
 
     world->startMusic("lost.wav");
@@ -114,6 +118,16 @@ void Mechanics::init(World &world_in, float &dt_in)
         player->moveBatchToSlot(sword_batch, Actor::Slot::RightHand);
     }
 
+    { // ai stuff
+
+        // attach passive AI
+        ai::Agent* aiAgent = new ai::Agent(glm::vec3(), glm::vec3(), true);
+        aiWorld->addAgent(aiAgent);
+
+        player->connectAI(aiAgent, aiWorld);
+    }
+
+
     addNPC(glm::vec3(-3.0, 0.0, 2.0) );
 
     addNPC(glm::vec3(-3.0, 0.0, -2.0) );
@@ -206,10 +220,18 @@ void Mechanics::addNPC(glm::vec3 pos_in)
 
     }
 
+    // attach an AI
+    ai::Agent* aiAgent = new ai::Agent(pos_in, glm::vec3(0.0, 0.0, -1.0)); // should be updated
+    aiWorld->addAgent(aiAgent);
+
+    other->connectAI(aiAgent, aiWorld);
+
 }
 
 void Mechanics::step(World &world_in, float dt_in)
 {
+    aiWorld->stepAI();
+
     // Resolve creature signals
     for (shared_ptr<Creature> creature : world_in.creatures)
     {
@@ -232,8 +254,6 @@ void Mechanics::step(World &world_in, float dt_in)
     {
         creature->updateTransformation();
     }
-
-
 
     // Make the chase cam chase the player
     world->chasecam->pos = player->pos - 5.f * player->getLookDir() + glm::vec3(0.0, 2.0, 0.0); // Hard camera

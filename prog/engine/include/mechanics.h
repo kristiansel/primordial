@@ -10,6 +10,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include "signals.h"
 #include "global.h" // temporary for direct loading of files
+#include "artificialintelligence.h"
 
 class Mechanics
 {
@@ -68,6 +69,7 @@ protected:
     void toggleCamera();
 private:
     World *world;
+    ai::World *aiWorld;
     float* dt; // refactor away
 
     // Controls related

@@ -177,19 +177,29 @@ void Renderer::draw(Scene &scene, float dt)
     // FXAA...
 }
 
-void Renderer::drawOverlay(float interfaceInfo)
+void Renderer::labelNumberPair(const char * label, float number, char * out)
 {
-    char str[80];
-    strcpy (str,"health: ");
-    char healthstr[4];
-    sprintf(healthstr, "%f", interfaceInfo);
-    strcat (str, healthstr);
+    strcpy (out, label);
+    char numstr[6];
+    sprintf(numstr, "%f", number);
+    strcat (out, numstr);
+}
 
-//    std::cout << "interfaceInfo1: " << str << "\n";
+void Renderer::drawOverlay(InterfaceInfo interfaceInfo)
+{
+//    char str[80];
+//    strcpy (str,"health: ");
+//    char healthstr[4];
+//    sprintf(healthstr, "%f", interfaceInfo.health);
+//    strcat (str, healthstr);
 
-    // draw UI stuff
-//    text_shader.printText2D(std::string("health: "+number).c_str(), 10, 10, 20);
-    text_shader.printText2D(str, 10, 10, 20);
+    char health_disp[40];
+    labelNumberPair("health: ", interfaceInfo.health, health_disp);
+    text_shader.printText2D(health_disp, 10, 10, 20);
+
+    char fps_disp[40];
+    labelNumberPair("FPS: ", interfaceInfo.frames_per_second, fps_disp);
+    text_shader.printText2D(fps_disp, 10, 580, 20);
 }
 
 void Renderer::resizeWindow(int w, int h, bool real)

@@ -16,7 +16,10 @@ Creature::Creature() :
             } ),
     doing( {sSignal::sNothing, 0.000, false}),
     char_contr(new DynamicCharacterController),
-    snd_emitter(new SoundEmitter)
+    snd_emitter(new SoundEmitter),
+    target_creature(nullptr),
+    m_aiAgent(nullptr),
+    m_aiWorld(nullptr)
 {
     //ctor
     signal_stack.reserve(signal_stack_capacity);
@@ -28,11 +31,18 @@ Creature::~Creature()
     char_contr->destroy();
     delete char_contr;
     delete snd_emitter;
+
+    if (m_aiAgent && m_aiWorld)
+    {
+        m_aiWorld->removeAgent(m_aiAgent);
+        delete m_aiAgent;
+    }
 }
 
 void Creature::resolveActionRequests(float dt)
 {
-    //char_contr->setVelocity()
+//    const Creature * target_scan = char_contr->scanForTargets();
+//    if (target_scan) target_creature = target_scan;
 
     // receive "last minute signals"
     DynamicCharacterController::HitInfo *hitInfo = char_contr->getHitInfo();
@@ -438,8 +448,10 @@ void Creature::resolveActionRequests(float dt)
     // clear bitflags
     state.dirflags = dirflag::none;
 
-    // store the previous signal
-//    state.prev_signal = temp_prev_signal;
+    // have to do this somewhere:
+    // update ai where we are and what we are looking at
+    m_aiAgent->setPos(pos);
+    m_aiAgent->setDir(getLookDir()); // getDir or getLookDir?
 }
 
 DynamicCharacterController* Creature::getCharContr()
@@ -447,10 +459,10 @@ DynamicCharacterController* Creature::getCharContr()
     return char_contr;
 }
 
-void Creature::notifyGotHit()
-{
-    std::cout << "gotHit\n";
-}
+//void Creature::notifyGotHit()
+//{
+//    std::cout << "gotHit\n";
+//}
 
 float Creature::getHealth() const
 {
@@ -460,6 +472,14 @@ float Creature::getHealth() const
 void Creature::updateTransformation()
 {
     pos = char_contr->getWorldPos();
+}
+
+void Creature::connectAI(ai::Agent* aiAgent, ai::World* aiWorld)
+{
+    m_aiAgent = aiAgent;
+    m_aiWorld = aiWorld;
+
+    m_aiAgent->setUserPointer(this);
 }
 
 void Creature::moveForward(float check_sign, float dt)

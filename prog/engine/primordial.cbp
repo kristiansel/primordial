@@ -124,10 +124,12 @@
 		<Unit filename="dependencies/glerrorcodes.h" />
 		<Unit filename="dependencies/helperfunctions.hpp" />
 		<Unit filename="dependencies/memstreamer.hpp" />
+		<Unit filename="dependencies/packedlinkedlist.hpp" />
 		<Unit filename="dependencies/threadingwrapper.cpp" />
 		<Unit filename="dependencies/threadingwrapper.h" />
 		<Unit filename="dependencies/timeseries.hpp" />
 		<Unit filename="include/actor.h" />
+		<Unit filename="include/artificialintelligence.h" />
 		<Unit filename="include/camera.h" />
 		<Unit filename="include/charactercontroller.h" />
 		<Unit filename="include/combinationstage.h" />
@@ -177,6 +179,7 @@
 		<Unit filename="shaders/text_frag.glsl" />
 		<Unit filename="shaders/text_vert.glsl" />
 		<Unit filename="src/actor.cpp" />
+		<Unit filename="src/artificialintelligence.cpp" />
 		<Unit filename="src/camera.cpp" />
 		<Unit filename="src/charactercontroller.cpp" />
 		<Unit filename="src/combinationstage.cpp" />

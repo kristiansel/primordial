@@ -109,6 +109,7 @@ void Master::mainLoopSingleThreaded()
  // Initialize the game module
     mechanics.init(world, dt);
 
+    float dt_smooth = dt;
 
     resetPressPos(); // place the mouse in the middle of the screen
 
@@ -133,7 +134,7 @@ void Master::mainLoopSingleThreaded()
         renderer.draw(scene, dt);
 
         // draw overlay/interface
-        renderer.drawOverlay(mechanics.getInterfaceInfo());
+        renderer.drawOverlay({mechanics.getInterfaceInfo(), 1.0/dt_smooth});
 //        renderer.drawOverlay(5.0);
 
         // bullet debug draw, not implemented
@@ -144,6 +145,8 @@ void Master::mainLoopSingleThreaded()
 
         // record the time
         dt = clock.getElapsedTime().asSeconds();
+
+        dt_smooth = dt_smooth*19.f/20.f + dt*1.f/20.f;
 
 //        cout << "frame time = " << dt << ", FPS = " << 1.0/dt << "\n";
 //        system("PAUSE");
@@ -230,7 +233,7 @@ void Master::renderTasks()
         renderer.draw(scene, dtRender);
 
         // draw overlay/interface
-        renderer.drawOverlay(mechanics.getInterfaceInfo());
+        renderer.drawOverlay({mechanics.getInterfaceInfo(), 1.0/dtRender});
 
         // end the current frame (internally swaps the front and back buffers)
         window.display();
