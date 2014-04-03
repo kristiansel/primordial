@@ -181,7 +181,7 @@ list<shared_ptr<Creature>>::iterator World::addCreature(string mesh_key, string 
         // consider adding this to default constructor...
         addPhysicsCharContr(creature->getCharContr(), creature->pos,
                                                       1.8,          // height [m]
-                                                      0.4,          // radius [m]
+                                                      0.6,          // radius [m]
                                                       80.0);        // 80 kg
 
 //        addPhysicsCharacter(creature.get());

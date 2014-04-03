@@ -48,7 +48,14 @@ void Creature::resolveActionRequests(float dt)
     DynamicCharacterController::HitInfo *hitInfo = char_contr->getHitInfo();
     if (hitInfo->isHit)
     {
-        signal_stack.push_back(sSignal::sGotHit);
+        if (doing.signal==sBlock)
+        {
+            signal_stack.push_back(sSignal::sParried);
+        }
+        else
+        {
+            signal_stack.push_back(sSignal::sGotHit);
+        }
         hitInfo->isHit = false;
         //std::cout << "received hit signal\n";
     }
@@ -253,11 +260,20 @@ void Creature::resolveActionRequests(float dt)
 
                     snd_emitter->emitSound("fleshrip.wav");
 
+                    stats.health -=10.0;
+
                     if (doing.signal == sMove) state.moveInterrupted = true;
 
                     doing = {sGotHit, getAnimDuration(Anim::DodgeBack)/speed, false};
 
                     playAnim(Anim::DodgeBack, true, speed);
+                } break;
+                case sSignal::sParried:
+                {
+                    snd_emitter->emitSound("clang.aiff");
+
+                    doing.signal = sBlock;
+
                 } break;
                 case sSignal::sBlock:
                 {
@@ -396,6 +412,15 @@ void Creature::resolveActionRequests(float dt)
                 doing.triggered = true;
             }
         } break;
+        case sSignal::sGotHit:
+        {
+            // No triggers
+
+            if (doing.time < Actor::blend_time) state.moveInterrupted = false;
+
+            // No nothing
+
+        } break;
         case sSignal::sBlock:
         {
             float trigger_time = 0.98;
@@ -480,6 +505,16 @@ void Creature::connectAI(ai::Agent* aiAgent, ai::World* aiWorld)
     m_aiWorld = aiWorld;
 
     m_aiAgent->setUserPointer(this);
+}
+
+bool Creature::isAttacking()
+{
+    return (doing.signal==sAttack);
+}
+
+bool Creature::isInCombat()
+{
+    return state.inCombat;
 }
 
 void Creature::moveForward(float check_sign, float dt)

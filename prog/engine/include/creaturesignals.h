@@ -34,6 +34,7 @@ enum Anim
 
 enum sSignal
 {
+    sParried = 6,
     sGotHit = 5,
     sDodge = 4,
     sBlock = 3,

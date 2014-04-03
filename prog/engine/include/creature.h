@@ -33,6 +33,10 @@ class Creature : public Actor, virtual public SignalReceiver // count virtula lo
 
         void stance();
 
+        // observer functions
+        bool isAttacking();
+        bool isInCombat();
+
 
         glm::vec3 getLookDir() const;
         void setLookDir(glm::vec3 u);

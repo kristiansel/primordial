@@ -6,6 +6,7 @@
 #include <iostream>
 #include <glm/glm.hpp>
 #include "signals.h"
+#include <cstdlib>
 
 namespace ai
 {
@@ -22,8 +23,9 @@ const TeamFlag Team4 = 1 << 4;
 class Agent
 {
 friend class World;
-public:
+private:
     Agent();
+public:
     Agent(glm::vec3 pos, glm::vec3 dir, bool passive = false);
 
     virtual ~Agent();
@@ -47,6 +49,17 @@ private:
 
     glm::vec3 m_pos;
     glm::vec3 m_dir;
+
+    static constexpr float pursuit_stop_dist = 1.5; // m
+    static constexpr float pursuit_start_dist = 2.0; // m
+    static constexpr float run_stop_dist = 3.0; // m
+    static constexpr float run_start_dist = 4.0; // m
+    static constexpr float interact_dist = pursuit_start_dist; // m
+
+    // state flags (can be bit-packed later)
+    bool m_isPursuing;
+    bool m_isRunning;
+    int m_randomWait;
 };
 
 class World

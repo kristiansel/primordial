@@ -23,6 +23,11 @@ struct SignalReceiver
     virtual void shift() {std::cerr << "shift signal received, not implemented\n";};
     virtual void jump() {std::cerr << "jump signal received, not implemented\n";};
     virtual void stance() {std::cerr << "stance signal received, not implemented\n";};
+
+    // Change the of this class to Controllable/Observable
+    // observing functions
+    virtual bool isAttacking() {std::cerr << "isAttacking observation requested, not implemented\n";};
+    virtual bool isInCombat() {std::cerr << "isInCombat observation requested, not implemented\n";};
 };
 
 #endif // SIGNALS_H
