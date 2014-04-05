@@ -35,6 +35,9 @@ public:
     glm::vec3 getPos() const;
     glm::vec3 getDir() const;
 
+    // send interrupt signal
+    void interrupt(); // induce a temporary lapse in AI control (where it waits)
+
     SignalReceiver* getUserPointer();
     void setUserPointer(SignalReceiver* user);
 
@@ -50,16 +53,25 @@ private:
     glm::vec3 m_pos;
     glm::vec3 m_dir;
 
+    // AI properties
     static constexpr float pursuit_stop_dist = 1.5; // m
     static constexpr float pursuit_start_dist = 2.0; // m
     static constexpr float run_stop_dist = 3.0; // m
     static constexpr float run_start_dist = 4.0; // m
     static constexpr float interact_dist = pursuit_start_dist; // m
+    float m_reactionTime;   // an AI parameter for average reaction time
+
+
+    // book-keeping
+    float m_reactionWait;   // an internal book-keeping variable to measure how long it has left to wait
 
     // state flags (can be bit-packed later)
     bool m_isPursuing;
     bool m_isRunning;
-    int m_randomWait;
+//    int m_randomWait;
+
+    // private methods
+
 };
 
 class World
@@ -74,7 +86,7 @@ public:
     // on the side
     void deleteAgent(Agent* agent);
 
-    void stepAI();
+    void stepAI(float dt); // really should not rely on default arg here
 
 private:
     //PackedFlagList<Agent> agents;

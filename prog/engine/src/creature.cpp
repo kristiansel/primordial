@@ -260,6 +260,9 @@ void Creature::resolveActionRequests(float dt)
 
                     snd_emitter->emitSound("fleshrip.wav");
 
+                    // WTB a consistent and robust signalling system...
+                    m_aiAgent->interrupt();
+
                     stats.health -=10.0;
 
                     if (doing.signal == sMove) state.moveInterrupted = true;
@@ -367,7 +370,7 @@ void Creature::resolveActionRequests(float dt)
         } break;
         case sSignal::sAttack:
         {
-            float trigger_time = 0.75;
+            float trigger_time = 0.68; // very short reaction time?
 
             if (doing.time < Actor::blend_time) state.moveInterrupted = false;
 

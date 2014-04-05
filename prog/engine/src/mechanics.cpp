@@ -230,7 +230,7 @@ void Mechanics::addNPC(glm::vec3 pos_in)
 
 void Mechanics::step(World &world_in, float dt_in)
 {
-    aiWorld->stepAI();
+    aiWorld->stepAI(dt_in);
 
     // Resolve creature signals
     for (shared_ptr<Creature> creature : world_in.creatures)

@@ -5,17 +5,36 @@
 #include "global.h"
 
 
+class SoundChannel
+{
+public:
+    SoundChannel();
+    virtual ~SoundChannel();
+
+    void playSound(std::string soundKey);
+private:
+    sf::Sound sound;
+};
+
 class SoundEmitter
 {
-    public:
-        SoundEmitter();
-        virtual ~SoundEmitter();
+private:
+    static const unsigned int NUM_FX_CHANNELS = 200;
+    static SoundChannel s_soundChannels[NUM_FX_CHANNELS]; // 200/255 sound channels are for sound effects
+    static unsigned int current_sound_channel;
 
-        void emitSound(std::string soundKey);
+public:
+    SoundEmitter();
+    virtual ~SoundEmitter();
 
-    protected:
-    private:
-        sf::Sound sound;
+    void emitSound(std::string soundKey);
+
+protected:
+private:
+    //sf::Sound sound;
+
+private:
+    SoundChannel* getFreeSoundChannel();
 
 };
 

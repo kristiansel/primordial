@@ -26,7 +26,8 @@ Agent::Agent(glm::vec3 pos, glm::vec3 dir, bool passive) :
     m_user(nullptr),
     m_isPursuing(false),
     m_isRunning(false),
-    m_randomWait(0)
+    m_reactionTime(0.70),
+    m_reactionWait(0.0)
 {
     if (passive) // If this is the player set him against the world;
     {
@@ -70,6 +71,15 @@ void Agent::setUserPointer(SignalReceiver* user)
     m_user = user;
 }
 
+void Agent::interrupt()
+{
+    int spread_perc = 50 - (rand() % 100); // spread between -50 and +50 % of reaction time
+    float spread_s = m_reactionTime*((float)spread_perc)/100.f; // convert % to secs
+
+    float interruptTime = m_reactionTime + spread_s; // add up this specific interruption time
+    m_reactionWait = interruptTime; // set it
+}
+
 Agent::~Agent()
 {
 
@@ -98,7 +108,7 @@ void World::deleteAgent(Agent* agent)
     delete agent;
 }
 
-void World::stepAI() // as it stands O(n^2), where n is number of ai agents
+void World::stepAI(float dt) // as it stands O(n^2), where n is number of ai agents
 {
     //int counter = 0;
     for (auto agent : agents)
@@ -119,7 +129,8 @@ void World::stepAI() // as it stands O(n^2), where n is number of ai agents
             if (agent->m_user)
             {
                 // check if I have a target
-                if (agent->m_target && agent->m_randomWait==0)
+                //if (agent->m_target && agent->m_randomWait==0)
+                if (agent->m_target && agent->m_reactionWait<=0.0)
                 {
                     { // do this:
                         glm::vec3 from_me_2_target = (agent->m_target)->getPos() - (agent)->getPos();
@@ -218,16 +229,32 @@ void World::stepAI() // as it stands O(n^2), where n is number of ai agents
                 {
                     // relax (wait till next tick)
                 }
-//                std::cout << "random weight = " << agent->m_randomWait << "\n";
-                if (agent->m_randomWait > 0) agent->m_randomWait--;
+
+//                if (agent->m_randomWait > 0) agent->m_randomWait--;
+//                else
+//                {
+//                    // randomly wait
+//                    int res = rand()%10000;
+//                    if (res > 9940) // 0.6% chance per tick
+//                    {
+//                        agent->m_randomWait = rand() % 70; // wait for between 1 and 70 ticks
+////                        std::cout << "randomwaiting\n";
+//                    }
+//                }
+                if (agent->m_reactionWait > 0.0) agent->m_reactionWait-=dt;
                 else
                 {
                     // randomly wait
                     int res = rand()%10000;
-                    if (res > 9940) // 0.6% chance per tick
+                    float prob = dt*0.36; // assuming 36% chance of interupt per second or one interrupt every ~3 secs on avg.
+                    if (res > (1-prob)*10000) // 0.6% chance per tick
                     {
-                        agent->m_randomWait = rand() % 70; // wait for between 1 and 70 ticks
-//                        std::cout << "randomwaiting\n";
+//                        int spread_perc = 50 - (rand() % 100); // spread between -50 and +50 % of reaction time
+//                        float spread_s = agent->m_reactionTime*((float)spread_perc)/100.f; // convert % to secs
+//
+//                        float interruptTime = agent->m_reactionTime + spread_s; // add up this specific interruption time
+//                        agent->m_reactionWait = interruptTime; // set it
+                        agent->interrupt();
                     }
                 }
             } // if agent has user
