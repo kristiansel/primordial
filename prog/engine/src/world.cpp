@@ -184,7 +184,8 @@ list<shared_ptr<Creature>>::iterator World::addCreature(string mesh_key, string 
                                                       0.6,          // radius [m]
                                                       80.0);        // 80 kg
 
-//        addPhysicsCharacter(creature.get());
+       // connect the creature to physics char contr
+       creature->getCharContr()->setUser(creature.get()); // This needs to be refactored....
 
     } // could be done in another thread
 

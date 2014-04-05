@@ -47,23 +47,17 @@ public:
 
         void applyMoveController();
 
-        void testThreatRegion();
+//        void testThreatRegion();
+
+        void getThreatened(void** &targets, unsigned int &num_targets, unsigned int max_num_targets);
 
         void updateThreatRegionTransf(glm::vec3 pos, glm::quat rot);
 
-        //void setUser(void *user);
+        void setUser(void *user);
 
         glm::vec3 getWorldPos() const;
 
         bool onGround();
-
-        struct HitInfo
-        {
-            bool isHit;
-            float hitStrength;
-        };
-
-        HitInfo* getHitInfo();
 
 private:
         // Gain/how fast can you change your speed (maybe this agi)
@@ -80,9 +74,6 @@ private:
         // temporary storage
         btVector3 m_rayStart;
         btVector3 m_rayEnd;
-
-        HitInfo m_hitInfo;
-
 
         bool on_ground;
 

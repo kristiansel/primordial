@@ -37,7 +37,6 @@ class Creature : public Actor, virtual public SignalReceiver // count virtula lo
         bool isAttacking();
         bool isInCombat();
 
-
         glm::vec3 getLookDir() const;
         void setLookDir(glm::vec3 u);
 //
@@ -57,6 +56,15 @@ class Creature : public Actor, virtual public SignalReceiver // count virtula lo
     private:
         float walkspeed;
         float runspeed;
+
+        // internal signals
+        struct HitInfo
+        {
+            Creature* hitBy; // the creature that did the hitting
+            float from_angle; // 0 means top down chop, - from left side, + from right side
+        };
+        void hit(HitInfo hit_info);
+        void hitWasBlocked();
 
         // rotation representing look direction (different from 3d object facing direction)
         glm::quat look_rot;
@@ -97,6 +105,8 @@ class Creature : public Actor, virtual public SignalReceiver // count virtula lo
 
         ai::Agent *m_aiAgent;
         ai::World *m_aiWorld;
+
+
 };
 
 #endif // CREATURE_H

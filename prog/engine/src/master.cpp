@@ -84,13 +84,13 @@ void Master::initWindow()
     //window.create(sf::VideoMode(scr_width_px, scr_height_px), "Primordial", sf::Style::Default, sf::ContextSettings(32, 0, 0, 4, 4));
 
 
-    sf::VideoMode desktop_mode = sf::VideoMode::getDesktopMode();
-//    sf::VideoMode desktop_mode = sf::VideoMode(1400, 900);
+//    sf::VideoMode desktop_mode = sf::VideoMode::getDesktopMode();
+    sf::VideoMode desktop_mode = sf::VideoMode(1400, 900);
     scr_width_px = desktop_mode.width;
     scr_height_px = desktop_mode.height;
 
-    window.create(desktop_mode, "Primordial", sf::Style::Fullscreen, sf::ContextSettings(32, 0, 0, 4, 4));
-//    window.create(desktop_mode, "Primordial", sf::Style::Default, sf::ContextSettings(32, 0, 0, 4, 4));
+//    window.create(desktop_mode, "Primordial", sf::Style::Fullscreen, sf::ContextSettings(32, 0, 0, 4, 4));
+    window.create(desktop_mode, "Primordial", sf::Style::Default, sf::ContextSettings(32, 0, 0, 4, 4));
 
     window.setVerticalSyncEnabled(false); // This forces frame rate to 60 FPS?
 

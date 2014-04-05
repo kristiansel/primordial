@@ -7,8 +7,7 @@ DynamicCharacterController::DynamicCharacterController () :
     f_max(30000.0), // 20000 too low. this will only limit "getting off the ground"
     m_halfHeight(0.0),
     on_ground(false),
-    f_set(btVector3(0.0, 0.0, 0.0)),
-    m_hitInfo({false, 0.0})
+    f_set(btVector3(0.0, 0.0, 0.0))
 {
         m_shape = nullptr;
         m_rigidBody = nullptr;
@@ -46,7 +45,7 @@ void DynamicCharacterController::setup (btDynamicsWorld* dynamicsWorld, btScalar
 
         m_rigidBody->setSleepingThresholds (0.0, 0.0);
         m_rigidBody->setAngularFactor (0.0);
-        m_rigidBody->setUserPointer(&m_hitInfo);
+        //m_rigidBody->setUserPointer(&m_hitInfo);
 
         m_dynamicsWorld->addRigidBody (m_rigidBody, btBroadphaseProxy::CharacterFilter, btBroadphaseProxy::AllFilter);
     }
@@ -156,27 +155,26 @@ void DynamicCharacterController::setVelocityXZ(float v_x, float v_z)
     }
 }
 
-DynamicCharacterController::HitInfo *DynamicCharacterController::getHitInfo()
-{
-    return &m_hitInfo;
-}
-
-void DynamicCharacterController::testThreatRegion()
+void DynamicCharacterController::getThreatened(void** &targets,
+                                               unsigned int &num_targets,
+                                               unsigned int max_num_targets)
 {
     //std::cout << "testing threat region" << std::endl;
     if (m_threat_object)
     {
         int num_overlapping = m_threat_object->getNumOverlappingObjects();
-        for (int i = 0; i<num_overlapping; i++)
+        num_targets = 0;
+        for (int i = 0; (i<num_overlapping && num_targets<max_num_targets); i++)
         {
             btCollisionObject* col_object = m_threat_object->getOverlappingObject(i);
 
             if (col_object != m_rigidBody) // Do not count hits with self
             {
-                HitInfo* user = (HitInfo*) col_object->getUserPointer();
+                auto user = col_object->getUserPointer();
                 if (user)
                 {
-                    *user = {true, 10.0}; // set some more funny hit thing here...
+                    targets[num_targets] = user;
+                    num_targets++;
                 }
                 else std::cerr << "error: testThreatRegion() hit collision object has no user\n";
             }
@@ -191,6 +189,10 @@ void DynamicCharacterController::testThreatRegion()
     }
 }
 
+void DynamicCharacterController::setUser(void* pointerIn)
+{
+    m_rigidBody->setUserPointer(pointerIn);
+}
 
 glm::vec3 DynamicCharacterController::getWorldPos() const
 {

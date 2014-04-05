@@ -23,6 +23,8 @@ Creature::Creature() :
 {
     //ctor
     signal_stack.reserve(signal_stack_capacity);
+
+    // can not set user of the character controller here... until the char controller is initialized
 }
 
 Creature::~Creature()
@@ -41,25 +43,6 @@ Creature::~Creature()
 
 void Creature::resolveActionRequests(float dt)
 {
-//    const Creature * target_scan = char_contr->scanForTargets();
-//    if (target_scan) target_creature = target_scan;
-
-    // receive "last minute signals"
-    DynamicCharacterController::HitInfo *hitInfo = char_contr->getHitInfo();
-    if (hitInfo->isHit)
-    {
-        if (doing.signal==sBlock)
-        {
-            signal_stack.push_back(sSignal::sParried);
-        }
-        else
-        {
-            signal_stack.push_back(sSignal::sGotHit);
-        }
-        hitInfo->isHit = false;
-        //std::cout << "received hit signal\n";
-    }
-
     // Check if on ground
     bool on_ground = char_contr->onGround();
 
@@ -388,13 +371,25 @@ void Creature::resolveActionRequests(float dt)
             {
                 //char_contr->lunge(getDir());
                 doing.triggered = true;
-                char_contr->testThreatRegion();
+                //char_contr->testThreatRegion();
+
+                // new way
+                static const unsigned int MAX_NUM_TARGETS = 8;
+                unsigned int num_targets;
+                void* hit_creatures[MAX_NUM_TARGETS];
+                void** first_hit_creatures = &hit_creatures[0];
+                char_contr->getThreatened(first_hit_creatures, num_targets, MAX_NUM_TARGETS);
+                for (int i = 0; i<num_targets; i++)
+                {
+                    Creature* creature = (Creature*) first_hit_creatures[i];
+                    creature->hit( {this, 0.0} ); // do not use angle for anything yet
+                }
             }
 
         } break;
         case sSignal::sDodge:
         {
-            float trigger_time = 0.6;
+            float trigger_time = 0.98;
 
             if (doing.time < Actor::blend_time) state.moveInterrupted = false;
 
@@ -404,7 +399,7 @@ void Creature::resolveActionRequests(float dt)
             }
             else
             {
-                char_contr->velocitySetpoint(-getDir()*doing.time/trigger_time*3.f);
+                char_contr->velocitySetpoint(-getDir()*1.8f*pow(doing.time/trigger_time*2.f, 2.f));
             }
 
 
@@ -518,6 +513,32 @@ bool Creature::isAttacking()
 bool Creature::isInCombat()
 {
     return state.inCombat;
+}
+
+void Creature::hit(HitInfo hit_info)
+{
+    if (doing.signal==sBlock)
+    {
+        signal_stack.push_back(sSignal::sParried);
+        hit_info.hitBy->hitWasBlocked();
+    }
+    else if (doing.signal==sDodge)
+    {
+        // keep dodging/register no hit
+    }
+    else
+    {
+        signal_stack.push_back(sSignal::sGotHit);
+    }
+}
+
+void Creature::hitWasBlocked()
+{
+    // This will start blending into idle
+    doing.time = Actor::blend_time*1.2f;
+
+    // interrupt the AI
+    m_aiAgent->interrupt();
 }
 
 void Creature::moveForward(float check_sign, float dt)
