@@ -78,6 +78,8 @@ private:
     SignalReceiver* controlled;
     Creature * player;    // the creature chased by chase-cam
 
+    void spawnPlayer(glm::vec3 position);
+    void killPlayer();
 
     // Temporary for testing deletion
     list<shared_ptr<WorldObject>>::iterator worldobject_ptr_it;

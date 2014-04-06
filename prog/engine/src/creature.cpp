@@ -212,7 +212,7 @@ void Creature::resolveActionRequests(float dt)
 
                     snd_emitter->emitSound("swosh3.flac");
 
-                    if (doing.signal == sMove) state.moveInterrupted = true;
+                    state.moveInterrupted = true;
 
                     if (state.left_sweep<0.0)
                     {
@@ -231,7 +231,7 @@ void Creature::resolveActionRequests(float dt)
 
                     snd_emitter->emitSound("dodge1.flac");
 
-                    if (doing.signal == sMove) state.moveInterrupted = true;
+                    state.moveInterrupted = true;
 
                     doing = {sDodge, getAnimDuration(Anim::DodgeBack)/speed, false};
 
@@ -248,7 +248,7 @@ void Creature::resolveActionRequests(float dt)
 
                     stats.health -=10.0;
 
-                    if (doing.signal == sMove) state.moveInterrupted = true;
+                    state.moveInterrupted = true;
 
                     doing = {sGotHit, getAnimDuration(Anim::DodgeBack)/speed, false};
 
@@ -258,7 +258,9 @@ void Creature::resolveActionRequests(float dt)
                 {
                     snd_emitter->emitSound("clang.aiff");
 
-                    doing.signal = sBlock;
+//                    doing.signal = sBlock;
+                    doing.signal = sParried;
+                    doing.time = 1.0;
 
                 } break;
                 case sSignal::sBlock:
@@ -268,7 +270,7 @@ void Creature::resolveActionRequests(float dt)
                         float speed = 1.0;
                         snd_emitter->emitSound("swosh2.flac");
 
-                        if (doing.signal == sMove) state.moveInterrupted = true;
+                        state.moveInterrupted = true;
 
                         if (state.left_sweep<=0.0)
                         {
@@ -287,7 +289,7 @@ void Creature::resolveActionRequests(float dt)
                 {
                     float speed = 1.0;
 
-                    if (doing.signal == sMove) state.moveInterrupted = true;
+                    state.moveInterrupted = true;
 
                     //       signal         time left                    main result triggered
                     doing = {sJump, getAnimDuration(Anim::JumpUp)/speed, false};
@@ -336,11 +338,11 @@ void Creature::resolveActionRequests(float dt)
         char_contr->velocitySetpoint(glm::vec3(0.0, 0.0, 0.0));
     }
 
-    //if (state.dirflags == dirflag::none)
-    if (state.dirflags>state.prev_dirflags || state.dirflags == dirflag::none)
-    {
-        state.moveInterrupted = false;
-    }
+    // alow move to interrupt... other things (def better with this off)
+//    if (state.dirflags>state.prev_dirflags || state.dirflags == dirflag::none)
+//    {
+//        state.moveInterrupted = false;
+//    }
 
     state.prev_dirflags = state.dirflags;
 
@@ -366,24 +368,18 @@ void Creature::resolveActionRequests(float dt)
                 char_contr->velocitySetpoint(getDir()*doing.time/trigger_time*3.f);
             }
 
-            // delayed lunge
             if (!doing.triggered && doing.time < trigger_time)
             {
                 //char_contr->lunge(getDir());
                 doing.triggered = true;
                 //char_contr->testThreatRegion();
 
-                // new way
-                static const unsigned int MAX_NUM_TARGETS = 8;
-                unsigned int num_targets;
-                void* hit_creatures[MAX_NUM_TARGETS];
-                void** first_hit_creatures = &hit_creatures[0];
-                char_contr->getThreatened(first_hit_creatures, num_targets, MAX_NUM_TARGETS);
-                for (int i = 0; i<num_targets; i++)
-                {
-                    Creature* creature = (Creature*) first_hit_creatures[i];
-                    creature->hit( {this, 0.0} ); // do not use angle for anything yet
-                }
+                char_contr->forAllThreatenedDo(
+                                                   [&] (void* in)
+                                                   {
+                                                       ((Creature*)(in))->hit( {this, 0.0} );
+                                                   }
+                                               );
             }
 
         } break;
@@ -399,9 +395,8 @@ void Creature::resolveActionRequests(float dt)
             }
             else
             {
-                char_contr->velocitySetpoint(-getDir()*1.8f*pow(doing.time/trigger_time*2.f, 2.f));
+                char_contr->velocitySetpoint(-getDir()*1.0f*pow(doing.time/trigger_time*2.f, 2.f));
             }
-
 
             // delayed lunge back
             if (!doing.triggered && doing.time < trigger_time)
@@ -421,25 +416,40 @@ void Creature::resolveActionRequests(float dt)
         } break;
         case sSignal::sBlock:
         {
-            float trigger_time = 0.98;
+//            float trigger_time = 0.98;
 
             if (doing.time < Actor::blend_time) state.moveInterrupted = false;
 
-            if (doing.time > trigger_time)
-            { // before triggered
+//            if (doing.time > trigger_time)
+//            { // before triggered
                 char_contr->velocitySetpoint(glm::vec3(0.0, 0.0, 0.0));
-            }
-            else
-            {
-                char_contr->velocitySetpoint(-getDir()*doing.time/trigger_time*3.f);
-            }
+//            }
+//            else
+//            {
+////                char_contr->velocitySetpoint(-getDir()*doing.time/trigger_time*3.f);
+//            }
 
             // delayed lunge back
-            if (!doing.triggered && doing.time < trigger_time)
-            {
-                char_contr->lunge(-getDir());
-                doing.triggered = true;
-            }
+//            if (!doing.triggered && doing.time < trigger_time)
+//            {
+//                char_contr->lunge(-getDir());
+//                doing.triggered = true;
+//            }
+        } break;
+        case sSignal::sParried:
+        {
+//            float trigger_time = 0.98;
+
+            if (doing.time < Actor::blend_time) state.moveInterrupted = false;
+
+//            if (doing.time > trigger_time)
+//            { // before triggered
+//                char_contr->velocitySetpoint(glm::vec3(0.0, 0.0, 0.0));
+//            }
+//            else
+//            {
+                char_contr->velocitySetpoint(-getDir()*0.7f*pow(doing.time*2.f, 2.f));
+//            }
         } break;
         case sSignal::sJump:
         {
@@ -492,6 +502,11 @@ float Creature::getHealth() const
     return stats.health;
 }
 
+void Creature::setHealth(float health)
+{
+    stats.health = health;
+}
+
 void Creature::updateTransformation()
 {
     pos = char_contr->getWorldPos();
@@ -508,6 +523,11 @@ void Creature::connectAI(ai::Agent* aiAgent, ai::World* aiWorld)
 bool Creature::isAttacking()
 {
     return (doing.signal==sAttack);
+}
+
+bool Creature::isBlocking()
+{
+    return (doing.signal==sBlock || doing.signal==sParried);
 }
 
 bool Creature::isInCombat()
@@ -612,7 +632,27 @@ glm::quat Creature::getLookRot() const
 
 void Creature::attack()
 {
-    signal_stack.push_back(sSignal::sAttack);
+
+
+    // This signal should be called "swing or something like it"
+    // choose attack or parry based on if threatened
+
+    bool threatened = false;
+    char_contr->forAllThreatenedDo(
+                                       [&] (void* in)
+                                       {
+                                           Creature* creature = (Creature*)(in);
+                                           if (creature->isAttacking()) threatened = true;
+                                       }
+                                   );
+    if (threatened)
+    {
+        signal_stack.push_back(sSignal::sBlock);
+    }
+    else
+    {
+        signal_stack.push_back(sSignal::sAttack);
+    }
 }
 
 void Creature::dodge()

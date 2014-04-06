@@ -78,6 +78,36 @@ private:
         bool on_ground;
 
         btDynamicsWorld* m_dynamicsWorld;
+
+public:
+    template <typename FuncType>
+    void forAllThreatenedDo(FuncType func)
+    {
+        if (m_threat_object)
+        {
+            int num_overlapping = m_threat_object->getNumOverlappingObjects();
+            for (int i = 0; (i<num_overlapping); i++)
+            {
+                btCollisionObject* col_object = m_threat_object->getOverlappingObject(i);
+
+                if (col_object != m_rigidBody) // Do not count hits with self
+                {
+                    void* user = col_object->getUserPointer();
+                    if (user)
+                    {
+                        func(user); // do it
+                    }
+                    else std::cerr << "error: testThreatRegion() hit collision object has no user\n";
+                }
+                else
+                {
+                    //std::cout << "registered hit with self\n";
+                }
+
+            }
+            //std::cout << "overlapping: " << num_overlapping << std::endl;
+        }
+    }
 };
 
 

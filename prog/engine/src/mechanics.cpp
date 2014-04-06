@@ -78,55 +78,7 @@ void Mechanics::init(World &world_in, float &dt_in)
                             "tricolor",
                             glm::vec3(0.0, 8.0, 0.0));
 
-    // Add player
-    {
-//        auto playerCreature = world->addCreature( "human_version2",
-        auto playerCreature = world->addCreature( "human_all_anim3",
-                            "tex_human_male",
-                            glm::vec3(3.0, 0.0, 2.0) );
-
-        // Set player to point to the first added creature
-        player = (*playerCreature).get();
-
-        // Set chase_cam to be behind the player
-        world->chasecam->pos = player->pos - 5.f * player->getLookDir() + glm::vec3(0.0, 2.0, 0.0); // Hard camera
-        world->chasecam->rot = player->getLookRot(); // Hard camera
-
-        // set the player as the receiver of control signals
-        controlled = player;
-
-        // set the active camera as the chase cam
-        world->active_cam = world->chasecam;
-    }
-
-    // attach a loincloth for modesty
-    {
-        weak_ptr<Mesh>      mesh_ptr    = global::mesh_manager.getResptrFromKey ("loin_x3");
-        weak_ptr<Texture>   tex_ptr     = global::tex_manager.getResptrFromKey  ("tex_knapsack");
-
-        player->attachBatch(mesh_ptr, tex_ptr);
-    }
-
-    // give a sword
-    {
-        weak_ptr<Mesh>      mesh_ptr    = global::mesh_manager.getResptrFromKey ("sword_03");
-//        weak_ptr<Mesh>      mesh_ptr    = global::mesh_manager.getResptrFromKey ("axes");
-        weak_ptr<Texture>   tex_ptr     = global::tex_manager.getResptrFromKey  ("nicewall");
-//        weak_ptr<Texture>   tex_ptr     = global::tex_manager.getResptrFromKey  ("tricolor");
-
-        RenderBatch* sword_batch = player->attachBatch(mesh_ptr, tex_ptr);
-        player->moveBatchToSlot(sword_batch, Actor::Slot::RightHand);
-    }
-
-    { // ai stuff
-
-        // attach passive AI
-        ai::Agent* aiAgent = new ai::Agent(glm::vec3(), glm::vec3(), true);
-        aiWorld->addAgent(aiAgent);
-
-        player->connectAI(aiAgent, aiWorld);
-    }
-
+    spawnPlayer(glm::vec3(3.0, 0.0, 2.0));
 
     addNPC(glm::vec3(-3.0, 0.0, 2.0) );
 
@@ -232,10 +184,48 @@ void Mechanics::step(World &world_in, float dt_in)
 {
     aiWorld->stepAI(dt_in);
 
-    // Resolve creature signals
-    for (shared_ptr<Creature> creature : world_in.creatures)
+//    // Resolve creature signals
+//    for (shared_ptr<Creature> creature : world_in.creatures)
+//    {
+//        creature->resolveActionRequests(dt_in);
+//    }
+
+    for (auto creature_it = world_in.creatures.begin();
+         creature_it != world_in.creatures.end();
+         /*don't increment*/ )
     {
-        creature->resolveActionRequests(dt_in);
+        auto creature_ptr = *creature_it;
+        if(creature_ptr->getHealth() < 0.0)
+        {
+            auto to_del_it = creature_it;
+            creature_it++;
+
+            if (creature_ptr.get()==player)
+            {
+                player=nullptr;
+
+                // set the freecam as controlled
+                controlled = world->freecam;
+
+                // set the freecam as active
+                world->active_cam = world->freecam;
+
+                // make the freecam duplicate the chasecam
+                world->freecam->pos = world->chasecam->pos;
+                world->freecam->rot = world->chasecam->rot;
+
+                std::cout << "player killed\n";
+            }
+            world_in.delCreature(to_del_it);
+
+            std::cout<<"creature killed\n";
+        }
+        else
+        {
+            creature_ptr->resolveActionRequests(dt_in);
+            creature_it++;
+        }
+
     }
 
     // step physics
@@ -256,8 +246,12 @@ void Mechanics::step(World &world_in, float dt_in)
     }
 
     // Make the chase cam chase the player
-    world->chasecam->pos = player->pos - 5.f * player->getLookDir() + glm::vec3(0.0, 2.0, 0.0); // Hard camera
-    world->chasecam->rot = player->getLookRot(); // Hard camera
+    if (player)
+    {
+        world->chasecam->pos = player->pos - 5.f * player->getLookDir() + glm::vec3(0.0, 2.0, 0.0); // Hard camera
+        world->chasecam->rot = player->getLookRot(); // Hard camera
+    }
+
 
 //    float cam_dist = 5.0;
 //    world->chasecam->pos = player->pos - cam_dist * player->getLookDir();
@@ -356,6 +350,71 @@ void Mechanics::playerStance()
     if (controlled) controlled->stance();
 }
 
+void Mechanics::spawnPlayer(glm::vec3 pos)
+{
+    if (player)
+    {
+        player->setHealth(-1.0); // killit
+    }
+
+
+
+// Add player
+    {
+//        auto playerCreature = world->addCreature( "human_version2",
+        auto playerCreature = world->addCreature( "human_all_anim3",
+                            "tex_human_male",
+                            pos );
+
+        // Set player to point to the first added creature
+        player = (*playerCreature).get();
+
+        // Set chase_cam to be behind the player
+        world->chasecam->pos = player->pos - 5.f * player->getLookDir() + glm::vec3(0.0, 2.0, 0.0); // Hard camera
+        world->chasecam->rot = player->getLookRot(); // Hard camera
+
+        // set the player as the receiver of control signals
+        controlled = player;
+
+        // set the active camera as the chase cam
+        world->active_cam = world->chasecam;
+    }
+
+    // attach a loincloth for modesty
+    {
+        weak_ptr<Mesh>      mesh_ptr    = global::mesh_manager.getResptrFromKey ("loin_x3");
+        weak_ptr<Texture>   tex_ptr     = global::tex_manager.getResptrFromKey  ("tex_knapsack");
+
+        player->attachBatch(mesh_ptr, tex_ptr);
+    }
+
+    // give a sword
+    {
+        weak_ptr<Mesh>      mesh_ptr    = global::mesh_manager.getResptrFromKey ("sword_03");
+//        weak_ptr<Mesh>      mesh_ptr    = global::mesh_manager.getResptrFromKey ("axes");
+        weak_ptr<Texture>   tex_ptr     = global::tex_manager.getResptrFromKey  ("nicewall");
+//        weak_ptr<Texture>   tex_ptr     = global::tex_manager.getResptrFromKey  ("tricolor");
+
+        RenderBatch* sword_batch = player->attachBatch(mesh_ptr, tex_ptr);
+        player->moveBatchToSlot(sword_batch, Actor::Slot::RightHand);
+    }
+
+    { // ai stuff
+
+        // attach passive AI
+        ai::Agent* aiAgent = new ai::Agent(glm::vec3(), glm::vec3(), true);
+        aiWorld->addAgent(aiAgent);
+
+        player->connectAI(aiAgent, aiWorld);
+    }
+
+}
+
+void Mechanics::killPlayer()
+{
+
+}
+
 void Mechanics::func(int num_in)
 {
     switch (num_in)
@@ -396,30 +455,16 @@ void Mechanics::func(int num_in)
         }
         break;
     case 3:     world->delWorldObject(worldobject_ptr_it); worldobject_ptr_it = world->worldobjects.begin(); break;
-    case 4:
-        for (auto &creature : world->creatures)
-        {
-            creature->togglePauseAnim(); // This is inefficient, seeing as Idle animation is
-            // "played" all the time
-        }
+    case 4: // add AI
+        addNPC(glm::vec3(rand()%10,2.0,rand()%10));
         break;
     case 5:
-        for (auto &creature : world->creatures)
-        {
-            if (creature->getActiveAnimIndex() < (creature->getNumAnims()-1))
-            {
-                creature->playAnim(creature->getActiveAnimIndex()+1);
-            }
-            else
-            {
-                creature->playAnim(0);
-            }
-        }
+        spawnPlayer(glm::vec3(rand()%10,2.0,rand()%10));
         break;
     case 6: // switch between free-cam and chase cam
         if (controlled == world->freecam)
         {
-            if (world->creatures.size() > 0)
+            if (player)
             {
                 // set player as controlled
                 controlled = player;
@@ -441,14 +486,6 @@ void Mechanics::func(int num_in)
             world->freecam->rot = world->chasecam->rot;
         }
         break;
-//    case 7:
-//        if (world->active_cam == world->freecam)
-//            world->active_cam = world->chasecam;
-//        else
-//            world->active_cam = world->freecam;
-//
-//
-//        break;
 
     default:    break;
     }

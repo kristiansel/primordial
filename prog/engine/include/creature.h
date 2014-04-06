@@ -36,6 +36,7 @@ class Creature : public Actor, virtual public SignalReceiver // count virtula lo
         // observer functions
         bool isAttacking();
         bool isInCombat();
+        bool isBlocking();
 
         glm::vec3 getLookDir() const;
         void setLookDir(glm::vec3 u);
@@ -51,6 +52,9 @@ class Creature : public Actor, virtual public SignalReceiver // count virtula lo
 //        void notifyGotHit();
 
         float getHealth() const;
+        void setHealth(float health);
+
+        Stats getStats() const;
 
     protected:
     private:

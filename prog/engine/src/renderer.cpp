@@ -194,12 +194,12 @@ void Renderer::drawOverlay(InterfaceInfo interfaceInfo)
 //    strcat (str, healthstr);
 
     char health_disp[40];
-    labelNumberPair("health: ", interfaceInfo.health, health_disp);
-    text_shader.printText2D(health_disp, 10, 10, 20);
+    labelNumberPair("HP: ", interfaceInfo.health, health_disp);
+    text_shader.printText2D(health_disp, 10, 10, 10);
 
     char fps_disp[40];
     labelNumberPair("FPS: ", interfaceInfo.frames_per_second, fps_disp);
-    text_shader.printText2D(fps_disp, 10, 580, 20);
+    text_shader.printText2D(fps_disp, 10, 580, 10);
 }
 
 void Renderer::resizeWindow(int w, int h, bool real)

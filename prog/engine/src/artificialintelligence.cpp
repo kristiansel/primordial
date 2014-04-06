@@ -97,15 +97,25 @@ void World::addAgent(Agent* agent)
     agents.push_back(agent);
 }
 
-void World::removeAgent(Agent* agent)
+void World::removeAgent(Agent* torem_agent)
 {
-    agents.remove(agent);
+    agents.remove(torem_agent);
+    // remove this agent as target of all those who have this as target
+    for (auto remaining_agent : agents)
+    {
+        if (remaining_agent->m_target==torem_agent)
+        {
+            remaining_agent->m_target = nullptr;
+//            std::cout << "removed as target: " << (long)torem_agent << "\n";
+        }
+    }
 }
 
-void World::deleteAgent(Agent* agent)
+void World::deleteAgent(Agent* todel_agent)
 {
-    agents.remove(agent);
-    delete agent;
+    removeAgent(todel_agent);
+
+    delete todel_agent;
 }
 
 void World::stepAI(float dt) // as it stands O(n^2), where n is number of ai agents
@@ -116,12 +126,13 @@ void World::stepAI(float dt) // as it stands O(n^2), where n is number of ai age
         if (!(agent->m_passive))
         {
             if (!(agent->m_target)) // if no target
-            { // acquire target
+            { // search for target
                 for (auto agent_inner : agents)
                 {
                     if (agent_inner->m_team_flag & agent->m_hostile_flags) // we have a hostile
                     {
                         agent->m_target = agent_inner;
+//                        std::cout << "assinging target\n";
                     }
                 }
             }
@@ -213,11 +224,9 @@ void World::stepAI(float dt) // as it stands O(n^2), where n is number of ai age
                             agent->m_user->stance();
                         }
 
-
-//
                         if (from_me_2_target_dist < Agent::interact_dist)
                         {
-                            if (!(agent->m_user->isAttacking()))
+                            if (!(agent->m_user->isAttacking() || agent->m_user->isBlocking()))
                             {
                                 agent->m_user->attack(); // brutal AI
                             }
@@ -229,6 +238,9 @@ void World::stepAI(float dt) // as it stands O(n^2), where n is number of ai age
                 {
                     // relax (wait till next tick)
                 }
+
+//                if (agent->m_target==nullptr)
+//                    std::cout << "no target, doing nothing\n";
 
 //                if (agent->m_randomWait > 0) agent->m_randomWait--;
 //                else
