@@ -34,6 +34,7 @@ class Actor : public Prop
         void unPauseAnim();
         void togglePauseAnim();
         float getAnimDuration(int anim_index);
+        void staggerAnim(float stagger_time);
 
         // debug methods;
         int getActiveAnimIndex() const;
@@ -54,6 +55,8 @@ class Actor : public Prop
     private:
         int active_anim; // The index of the main active animation
         int main_anim_uid; // The index of the main active animation blend clip
+
+        float m_stagger_time; // used for temporarily pausing animation
 
         bool paused; // is animation turned paused
         float speed_factor; // dt_animation = dt_real * speed_factor

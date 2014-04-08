@@ -29,6 +29,7 @@ struct SignalReceiver
     virtual bool isAttacking() {std::cerr << "isAttacking observation requested, not implemented\n";};
     virtual bool isBlocking() {std::cerr << "isBlocking observation requested, not implemented\n";};
     virtual bool isInCombat() {std::cerr << "isInCombat observation requested, not implemented\n";};
+    virtual bool isDodging() {std::cerr << "isDodging observation requested, not implemented\n";};
 
     // should have something like isDoing(Action::Block) // where Action::Block is a bit flag
 };

@@ -6,7 +6,8 @@ Actor::Actor() : num_pose_matrices(1),
                  active_anim(-1),
                  paused(true),
                  speed_factor(1.0),
-                 skel_ptr(nullptr)
+                 skel_ptr(nullptr),
+                 m_stagger_time(0.0)
 {
     // Actors with no attached skeleton will have a default
     // identity matrix, as not to crash vertex shader
@@ -214,6 +215,21 @@ void Actor::updateAnim(float dt)
         }
 
 //        std:cout << "length of active_anims: " << active_anims.size() << "\n";
+    } // if not paused
+    else
+    {
+        // if paused it might be staggered
+        if (m_stagger_time > 0.000001) // this means it has been staggered
+        {
+            float advance_time = speed_factor*dt;
+            m_stagger_time -=advance_time;
+
+            if (m_stagger_time <= 0.000001)
+            {
+                // resume playing animation
+                unPauseAnim();
+            }
+        }
     }
 }
 
@@ -230,6 +246,12 @@ void Actor::unPauseAnim()
 void Actor::togglePauseAnim()
 {
     paused = !paused;
+}
+
+void Actor::staggerAnim(float stagger_time)
+{
+    pauseAnim();
+    m_stagger_time = stagger_time;
 }
 
 //float Actor::getActiveAnimTime() const

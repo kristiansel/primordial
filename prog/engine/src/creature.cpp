@@ -450,6 +450,7 @@ void Creature::resolveActionRequests(float dt)
 //            {
                 char_contr->velocitySetpoint(-getDir()*0.7f*pow(doing.time*2.f, 2.f));
 //            }
+
         } break;
         case sSignal::sJump:
         {
@@ -522,7 +523,8 @@ void Creature::connectAI(ai::Agent* aiAgent, ai::World* aiWorld)
 
 bool Creature::isAttacking()
 {
-    return (doing.signal==sAttack);
+    // if still attacking and triggered is true, then the threat is over
+    return (doing.signal==sAttack && doing.triggered==false);
 }
 
 bool Creature::isBlocking()
@@ -530,10 +532,22 @@ bool Creature::isBlocking()
     return (doing.signal==sBlock || doing.signal==sParried);
 }
 
+bool Creature::isDodging()
+{
+    return (doing.signal==sDodge);
+}
+
+
 bool Creature::isInCombat()
 {
     return state.inCombat;
 }
+
+//void Creature::signal_push(sSignal signal, float args[SIG_REG_SIZE])
+//{
+//    signal_stack.push_back(signal);
+////    if (signal>)
+//}
 
 void Creature::hit(HitInfo hit_info)
 {
@@ -555,7 +569,9 @@ void Creature::hit(HitInfo hit_info)
 void Creature::hitWasBlocked()
 {
     // This will start blending into idle
-    doing.time = Actor::blend_time*1.2f;
+    doing.time = Actor::blend_time*1.4; // instead of stopping the animation prematurely...
+    // should pause the animation for a bit
+//    staggerAnim(0.1); // pause animation for 0.1 secs
 
     // interrupt the AI
     m_aiAgent->interrupt();

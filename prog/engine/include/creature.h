@@ -37,6 +37,7 @@ class Creature : public Actor, virtual public SignalReceiver // count virtula lo
         bool isAttacking();
         bool isInCombat();
         bool isBlocking();
+        bool isDodging();
 
         glm::vec3 getLookDir() const;
         void setLookDir(glm::vec3 u);
@@ -58,6 +59,8 @@ class Creature : public Actor, virtual public SignalReceiver // count virtula lo
 
     protected:
     private:
+        static const unsigned int SIG_REG_SIZE = 3;
+
         float walkspeed;
         float runspeed;
 
@@ -69,6 +72,8 @@ class Creature : public Actor, virtual public SignalReceiver // count virtula lo
         };
         void hit(HitInfo hit_info);
         void hitWasBlocked();
+
+//        void signal_push(sSignal signal, float[SIG_REG_SIZE] args);
 
         // rotation representing look direction (different from 3d object facing direction)
         glm::quat look_rot;
@@ -90,8 +95,10 @@ class Creature : public Actor, virtual public SignalReceiver // count virtula lo
         struct Action
         {
             sSignal signal;
-            float time;
+            float time; // used only for action, not animation
             bool triggered;
+            float reg[SIG_REG_SIZE]; // provide three registers for signals to store their arguments
+            // like direction, magnitude etc...
         } doing;
 
         // stats

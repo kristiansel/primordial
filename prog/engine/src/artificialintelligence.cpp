@@ -226,9 +226,23 @@ void World::stepAI(float dt) // as it stands O(n^2), where n is number of ai age
 
                         if (from_me_2_target_dist < Agent::interact_dist)
                         {
+                            // attack
                             if (!(agent->m_user->isAttacking() || agent->m_user->isBlocking()))
                             {
                                 agent->m_user->attack(); // brutal AI
+                            }
+
+                            // dodge
+                            if (agent->m_target->m_user->isAttacking())// if there is need
+                            {
+//                                std::cout << "I am getting attacked\n";
+                                if (!(agent->m_user->isDodging() || agent->m_user->isBlocking())) // if there is need
+                                {
+//                                    std::cout << "therefore I dodge\n";
+                                    agent->m_user->dodge();
+                                    agent->interrupt(); // wait while dodge completes
+                                }
+
                             }
                         }
 
