@@ -46,7 +46,7 @@ Stats::Stats()
 
     weight = 65; // kg
     fatigue = 0; // not tired
-    health = 15.0;
+    health = 100.0;
 }
 
 Stats::~Stats()

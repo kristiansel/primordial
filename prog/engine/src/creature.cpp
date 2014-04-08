@@ -22,7 +22,7 @@ Creature::Creature() :
     m_aiWorld(nullptr)
 {
     //ctor
-    signal_stack.reserve(signal_stack_capacity);
+//    signal_stack.reserve(signal_stack_capacity);
 
     // can not set user of the character controller here... until the char controller is initialized
 }
@@ -50,258 +50,261 @@ void Creature::resolveActionRequests(float dt)
 
     // decrement the time
     doing.time -=dt;
-    if (!signal_stack.empty())
+    if (candidate.signal != sSignal::sClearSignal)
+//    if (!signal_stack.empty())
     {
-        std::sort(signal_stack.begin(), signal_stack.end());
-
-        // get reference to top prioritized signal
-        sSignal &top_pri = signal_stack.back();
-
-        // Gameplay decision: If singals should be hierarchical (uncomment)
-        // or the new signal should always interupt current (comment)
-        // if (top_pri > doing.signal)
-
-        // execute that signal
-//        if (top_pri >= doing.signal )
-//        {
+//        std::sort(signal_stack.begin(), signal_stack.end());
+//
+//        // get reference to top prioritized signal
+//        sSignal &top_pri = signal_stack.back();
+//
+//        // Gameplay decision: If singals should be hierarchical (uncomment)
+//        // or the new signal should always interupt current (comment)
+//        // if (top_pri > doing.signal)
 
 
-            switch (top_pri)
+        switch (candidate.signal)
+        {
+            case sSignal::sMove: // most likely
             {
-                case sSignal::sMove: // most likely
+                if (on_ground && !state.moveInterrupted)
                 {
-                    if (on_ground && !state.moveInterrupted)
+                    doing = {sMove, 1.0/20.0}; // keep moving for a twentieth of a second
+
+                    // choose correct move animation based on the combination of direction
+                    // signals received
+
+                    // 00001111, 00000000, 00001100, 00000011 -> idle   15, 0, 12, 3
+                    // 00000101 -> diagonal left                        5
+                    // 00001001 -> diagonal right                       9
+                    // 00000110 -> diagonal back left                   6
+                    // 00001010 -> diagonal back right                  10
+                    // 00000001, 00001101 -> forward                    1, 13
+                    // 00000010, 00001110 -> backward                   2, 14
+                    // 00000100, 00000111 -> left                       4, 7
+                    // 00001000, 00001011 -> right                      8, 11
+
+                    float forw_displ = 0.0;
+                    float left_displ = 0.0;
+
+                    float forw_speed = 0.0;
+                    float left_speed = 0.0;
+
+                    // if shift -> run
+                    if (state.dirflags==1 || state.dirflags==13)    // forward
                     {
-                        doing = {sMove, 1.0/20.0}; // keep moving for a twentieth of a second
-
-                        // choose correct move animation based on the combination of direction
-                        // signals received
-
-                        // 00001111, 00000000, 00001100, 00000011 -> idle   15, 0, 12, 3
-                        // 00000101 -> diagonal left                        5
-                        // 00001001 -> diagonal right                       9
-                        // 00000110 -> diagonal back left                   6
-                        // 00001010 -> diagonal back right                  10
-                        // 00000001, 00001101 -> forward                    1, 13
-                        // 00000010, 00001110 -> backward                   2, 14
-                        // 00000100, 00000111 -> left                       4, 7
-                        // 00001000, 00001011 -> right                      8, 11
-
-                        float forw_displ = 0.0;
-                        float left_displ = 0.0;
-
-                        float forw_speed = 0.0;
-                        float left_speed = 0.0;
-
-                        // if shift -> run
-                        if (state.dirflags==1 || state.dirflags==13)    // forward
+                        if (state.isShiftDown)
                         {
-                            if (state.isShiftDown)
-                            {
-                                playAnim(Anim::RunForward);
-                                forw_speed = runspeed;
-                            }
-                            else
-                            {
-                                if (state.inCombat)
-                                    playAnim(Anim::WalkForward1H);      // This animation is crap...
-                                else
-                                    playAnim(Anim::WalkForward);
-                                forw_speed = walkspeed;
-                            }
-                        }
-                        if (state.dirflags==4 || state.dirflags==7)     // left
-                        {
-                            if (state.isShiftDown && !state.inCombat)
-                            {
-                                playAnim(Anim::RunLeft);
-                                left_speed = runspeed;
-                            }
-                            else
-                            {
-                                if (state.inCombat)
-                                    playAnim(Anim::StrafeLeft1H);
-                                else
-                                    playAnim(Anim::WalkLeft);
-                                //playAnim(Anim::WalkLeft);
-                                left_speed = walkspeed;
-                            }
-                        }
-                        if (state.dirflags==8 || state.dirflags==11)    // right
-                        {
-                            if (state.isShiftDown && !state.inCombat)
-                            {
-                                playAnim(Anim::RunRight);
-                                left_speed = -runspeed;
-                            }
-                            else
-                            {
-                                if (state.inCombat)
-                                    playAnim(Anim::StrafeRight1H);
-                                else
-                                    playAnim(Anim::WalkRight);
-                                left_speed = -walkspeed;
-                            }
-                        }
-                        if (state.dirflags==5)                          // left diag
-                        {
-                            if (state.isShiftDown)
-                            {
-                                playAnim(Anim::RunLeftDiag);
-                                left_speed = 0.70710678*runspeed;
-                                forw_speed = 0.70710678*runspeed;
-                            }
-                            else
-                            {
-                                playAnim(Anim::WalkLeftDiag);
-                                left_speed = 0.70710678*walkspeed;
-                                forw_speed = 0.70710678*walkspeed;
-                            }
-                        }
-                        if (state.dirflags==9)                        // right diag
-                        {
-                            if (state.isShiftDown)
-                            {
-                                playAnim(Anim::RunRightDiag);
-                                left_speed = -0.70710678*runspeed;
-                                forw_speed = 0.70710678*runspeed;
-                            }
-                            else
-                            {
-                                playAnim(Anim::WalkRightDiag);
-                                left_speed = -0.70710678*walkspeed;
-                                forw_speed = 0.70710678*walkspeed;
-                            }
-                        }
-                        if (state.dirflags==2 || state.dirflags==14)                          // backwards
-                        {
-                            // cannot run backwards
-                            playAnim(Anim::WalkBackward);
-                            forw_speed = -walkspeed;
-                        }
-                        if (state.dirflags==6)                          // back left
-                        {
-                            // cannot run backwards
-                            playAnim(Anim::WalkBackLeft);
-                            forw_speed = -0.70710678*walkspeed;
-                            left_speed = 0.70710678*walkspeed;
-                        }
-                        if (state.dirflags==10)                          // back right
-                        {
-                            // cannot run backwards
-                            playAnim(Anim::WalkBackRight);
-                            forw_speed = -0.70710678*walkspeed;
-                            left_speed = -0.70710678*walkspeed;
-                        }
-                        //Object3d::moveForward(forw_displ, 0.f);
-                        //Object3d::moveLeft(left_displ, 0.f);
-
-                        // Physics
-                        //glm::vec3 displacement = forw_displ*glm::normalize(getDir()) + left_displ*glm::normalize(getLeft());
-
-                        glm::vec3 velocity_setpoint = forw_speed*glm::normalize(getDir()) + left_speed*glm::normalize(getLeft());
-
-                        char_contr->velocitySetpoint(velocity_setpoint);
-
-                    } // if (on_ground)
-
-                } break; // case
-                case sSignal::sAttack:
-                {
-                    float speed = 1.0;
-
-                    snd_emitter->emitSound("swosh3.flac");
-
-                    state.moveInterrupted = true;
-
-                    if (state.left_sweep<0.0)
-                    {
-                        doing = {sAttack, getAnimDuration(Anim::SwingLeft1H)/speed, false};
-                        playAnim(Anim::SwingLeft1H, true, speed);
-                    }
-                    else
-                    {
-                        doing = {sAttack, getAnimDuration(Anim::SwingRight1H)/speed, false};
-                        playAnim(Anim::SwingRight1H, true, speed);
-                    }
-                } break;
-                case sSignal::sDodge:
-                {
-                    float speed = 1.0;
-
-                    snd_emitter->emitSound("dodge1.flac");
-
-                    state.moveInterrupted = true;
-
-                    doing = {sDodge, getAnimDuration(Anim::DodgeBack)/speed, false};
-
-                    playAnim(Anim::DodgeBack, true, speed);
-                } break;
-                case sSignal::sGotHit:
-                {
-                    float speed = 1.0;
-
-                    snd_emitter->emitSound("fleshrip.wav");
-
-                    // WTB a consistent and robust signalling system...
-                    m_aiAgent->interrupt();
-
-                    stats.health -=10.0;
-
-                    state.moveInterrupted = true;
-
-                    doing = {sGotHit, getAnimDuration(Anim::DodgeBack)/speed, false};
-
-                    playAnim(Anim::DodgeBack, true, speed);
-                } break;
-                case sSignal::sParried:
-                {
-                    snd_emitter->emitSound("clang.aiff");
-
-//                    doing.signal = sBlock;
-                    doing.signal = sParried;
-                    doing.time = 1.0;
-
-                } break;
-                case sSignal::sBlock:
-                {
-//                    if (doing.signal != sBlock)
-//                    {
-                        float speed = 1.0;
-                        snd_emitter->emitSound("swosh2.flac");
-
-                        state.moveInterrupted = true;
-
-                        if (state.left_sweep<=0.0)
-                        {
-                            doing = {sBlock, getAnimDuration(Anim::ParryRight1H)/speed, false};
-                            playAnim(Anim::ParryRight1H, true, speed);
+                            playAnim(Anim::RunForward);
+                            forw_speed = runspeed;
                         }
                         else
                         {
-                            doing = {sBlock, getAnimDuration(Anim::ParryLeft1H)/speed, false};
-                            playAnim(Anim::ParryLeft1H, true, speed);
+                            if (state.inCombat)
+                                playAnim(Anim::WalkForward1H);      // This animation is crap...
+                            else
+                                playAnim(Anim::WalkForward);
+                            forw_speed = walkspeed;
                         }
-//                    }
+                    }
+                    if (state.dirflags==4 || state.dirflags==7)     // left
+                    {
+                        if (state.isShiftDown && !state.inCombat)
+                        {
+                            playAnim(Anim::RunLeft);
+                            left_speed = runspeed;
+                        }
+                        else
+                        {
+                            if (state.inCombat)
+                                playAnim(Anim::StrafeLeft1H);
+                            else
+                                playAnim(Anim::WalkLeft);
+                            //playAnim(Anim::WalkLeft);
+                            left_speed = walkspeed;
+                        }
+                    }
+                    if (state.dirflags==8 || state.dirflags==11)    // right
+                    {
+                        if (state.isShiftDown && !state.inCombat)
+                        {
+                            playAnim(Anim::RunRight);
+                            left_speed = -runspeed;
+                        }
+                        else
+                        {
+                            if (state.inCombat)
+                                playAnim(Anim::StrafeRight1H);
+                            else
+                                playAnim(Anim::WalkRight);
+                            left_speed = -walkspeed;
+                        }
+                    }
+                    if (state.dirflags==5)                          // left diag
+                    {
+                        if (state.isShiftDown)
+                        {
+                            playAnim(Anim::RunLeftDiag);
+                            left_speed = 0.70710678*runspeed;
+                            forw_speed = 0.70710678*runspeed;
+                        }
+                        else
+                        {
+                            playAnim(Anim::WalkLeftDiag);
+                            left_speed = 0.70710678*walkspeed;
+                            forw_speed = 0.70710678*walkspeed;
+                        }
+                    }
+                    if (state.dirflags==9)                        // right diag
+                    {
+                        if (state.isShiftDown)
+                        {
+                            playAnim(Anim::RunRightDiag);
+                            left_speed = -0.70710678*runspeed;
+                            forw_speed = 0.70710678*runspeed;
+                        }
+                        else
+                        {
+                            playAnim(Anim::WalkRightDiag);
+                            left_speed = -0.70710678*walkspeed;
+                            forw_speed = 0.70710678*walkspeed;
+                        }
+                    }
+                    if (state.dirflags==2 || state.dirflags==14)                          // backwards
+                    {
+                        // cannot run backwards
+                        playAnim(Anim::WalkBackward);
+                        forw_speed = -walkspeed;
+                    }
+                    if (state.dirflags==6)                          // back left
+                    {
+                        // cannot run backwards
+                        playAnim(Anim::WalkBackLeft);
+                        forw_speed = -0.70710678*walkspeed;
+                        left_speed = 0.70710678*walkspeed;
+                    }
+                    if (state.dirflags==10)                          // back right
+                    {
+                        // cannot run backwards
+                        playAnim(Anim::WalkBackRight);
+                        forw_speed = -0.70710678*walkspeed;
+                        left_speed = -0.70710678*walkspeed;
+                    }
+                    //Object3d::moveForward(forw_displ, 0.f);
+                    //Object3d::moveLeft(left_displ, 0.f);
 
-                } break;
-                case sSignal::sJump:
+                    // Physics
+                    //glm::vec3 displacement = forw_displ*glm::normalize(getDir()) + left_displ*glm::normalize(getLeft());
+
+                    glm::vec3 velocity_setpoint = forw_speed*glm::normalize(getDir()) + left_speed*glm::normalize(getLeft());
+
+                    char_contr->velocitySetpoint(velocity_setpoint);
+
+                } // if (on_ground)
+
+            } break; // case
+            case sSignal::sAttack:
+            {
+                float speed = 1.0;
+
+                snd_emitter->emitSound("swosh3.flac");
+
+                state.moveInterrupted = true;
+
+                if (state.left_sweep<0.0)
                 {
+                    doing = {sAttack, getAnimDuration(Anim::SwingLeft1H)/speed, false};
+                    playAnim(Anim::SwingLeft1H, true, speed);
+                }
+                else
+                {
+                    doing = {sAttack, getAnimDuration(Anim::SwingRight1H)/speed, false};
+                    playAnim(Anim::SwingRight1H, true, speed);
+                }
+            } break;
+            case sSignal::sDodge:
+            {
+                float speed = 1.0;
+
+                snd_emitter->emitSound("dodge1.flac");
+
+                state.moveInterrupted = true;
+
+                doing = {sDodge, getAnimDuration(Anim::DodgeBack)/speed, false};
+
+                playAnim(Anim::DodgeBack, true, speed);
+            } break;
+            case sSignal::sGotHit:
+            {
+                float speed = 1.0;
+
+                snd_emitter->emitSound("fleshrip.wav");
+
+                // WTB a consistent and robust signalling system...
+                m_aiAgent->interrupt();
+
+                stats.health -=10.0;
+
+                state.moveInterrupted = true;
+
+                doing = {sGotHit, getAnimDuration(Anim::DodgeBack)/speed, false};
+
+                playAnim(Anim::DodgeBack, true, speed);
+
+                // Copy the candidate register over into the doing.reg
+                doing.reg = candidate.reg;
+//                doing.reg[0] = candidate.reg[0];
+//                doing.reg[1] = candidate.reg[1];
+//                doing.reg[2] = candidate.reg[2];
+
+                glm::vec3 hit_dir = glm::vec3(doing.reg[0], doing.reg[1], doing.reg[2]);
+            } break;
+            case sSignal::sParried:
+            {
+                snd_emitter->emitSound("clang.aiff");
+
+//                    doing.signal = sBlock;
+                doing.signal = sParried;
+                doing.time = 1.0;
+
+            } break;
+            case sSignal::sBlock:
+            {
+//                    if (doing.signal != sBlock)
+//                    {
                     float speed = 1.0;
+                    snd_emitter->emitSound("swosh2.flac");
 
                     state.moveInterrupted = true;
 
-                    //       signal         time left                    main result triggered
-                    doing = {sJump, getAnimDuration(Anim::JumpUp)/speed, false};
+                    if (state.left_sweep<=0.0)
+                    {
+                        doing = {sBlock, getAnimDuration(Anim::ParryRight1H)/speed, false};
+                        playAnim(Anim::ParryRight1H, true, speed);
+                    }
+                    else
+                    {
+                        doing = {sBlock, getAnimDuration(Anim::ParryLeft1H)/speed, false};
+                        playAnim(Anim::ParryLeft1H, true, speed);
+                    }
+//                    }
 
-                    playAnim(Anim::JumpUp, true, speed);
+            } break;
+            case sSignal::sJump:
+            {
+                float speed = 1.0;
 
-                    //char_contr->jump();
-                } break;
-            } // switch
-        //} // if top_sig > doing.doing
+                state.moveInterrupted = true;
 
-    }
+                //       signal         time left                    main result triggered
+                doing = {sJump, getAnimDuration(Anim::JumpUp)/speed, false};
+
+                playAnim(Anim::JumpUp, true, speed);
+
+                //char_contr->jump();
+            } break;
+        } // switch
+    } // if signal received
     else // No signal received
     {
         if (doing.signal == sMove)
@@ -377,7 +380,11 @@ void Creature::resolveActionRequests(float dt)
                 char_contr->forAllThreatenedDo(
                                                    [&] (void* in)
                                                    {
-                                                       ((Creature*)(in))->hit( {this, 0.0} );
+                                                       Creature* target = (Creature*)in;
+                                                       glm::vec3 hit_dir = glm::normalize(target->pos - this->pos);
+
+                                                       //          hit_by, angle, direction
+                                                       target->hit( {this, 0.0, hit_dir} );
                                                    }
                                                );
             }
@@ -395,7 +402,7 @@ void Creature::resolveActionRequests(float dt)
             }
             else
             {
-                char_contr->velocitySetpoint(-getDir()*1.0f*pow(doing.time/trigger_time*2.f, 2.f));
+                char_contr->velocitySetpoint(-getDir()*1.3f*pow(doing.time/trigger_time*2.f, 2.f));
             }
 
             // delayed lunge back
@@ -411,7 +418,10 @@ void Creature::resolveActionRequests(float dt)
 
             if (doing.time < Actor::blend_time) state.moveInterrupted = false;
 
-            // No nothing
+            // movement in direction of hit
+//            std::cout << "moving when getting hit\n";
+            glm::vec3 hit_dir = glm::vec3(doing.reg[0], doing.reg[1], doing.reg[2]);
+            char_contr->velocitySetpoint(hit_dir*0.1f*pow(doing.time*2.f, 4.f));
 
         } break;
         case sSignal::sBlock:
@@ -474,7 +484,8 @@ void Creature::resolveActionRequests(float dt)
     // Get ready for next frame
 
     // clear signal stack
-    signal_stack.clear();
+//    signal_stack.clear();
+    candidate.signal = sSignal::sClearSignal;
 
     // shift is not held down generally
     state.isShiftDown = false;
@@ -492,11 +503,6 @@ DynamicCharacterController* Creature::getCharContr()
 {
     return char_contr;
 }
-
-//void Creature::notifyGotHit()
-//{
-//    std::cout << "gotHit\n";
-//}
 
 float Creature::getHealth() const
 {
@@ -543,35 +549,54 @@ bool Creature::isInCombat()
     return state.inCombat;
 }
 
-//void Creature::signal_push(sSignal signal, float args[SIG_REG_SIZE])
-//{
+void Creature::signal_push(sSignal signal)
+{
 //    signal_stack.push_back(signal);
-////    if (signal>)
-//}
+    if (signal > candidate.signal) // if the signal has higher priority
+    {
+        candidate.signal = signal;
+    }
+}
+
+void Creature::signal_push(sSignal signal, std::array<float, SIG_REG_SIZE> args)
+{
+    signal_push(signal); // just one place to modify later if changes are required
+
+    // store the arguments
+    candidate.reg = args;
+//    candidate.reg[0] = args[0];
+//    candidate.reg[1] = args[1];
+//    candidate.reg[2] = args[2];
+}
 
 void Creature::hit(HitInfo hit_info)
 {
     if (doing.signal==sBlock)
     {
-        signal_stack.push_back(sSignal::sParried);
+        signal_push(sSignal::sParried);
         hit_info.hitBy->hitWasBlocked();
+
+        // register the direction of the hit
     }
     else if (doing.signal==sDodge)
     {
         // keep dodging/register no hit
     }
     else
-    {
-        signal_stack.push_back(sSignal::sGotHit);
+    { // Actually got hit
+        SignArgType to_reg = {hit_info.dir.x, hit_info.dir.y, hit_info.dir.z};
+        signal_push(sSignal::sGotHit, to_reg);
     }
 }
 
 void Creature::hitWasBlocked()
 {
+//    std::cout << "hit was blocked with a margin of " << doing.time-0.68 << " secs\n";
     // This will start blending into idle
     doing.time = Actor::blend_time*1.4; // instead of stopping the animation prematurely...
     // should pause the animation for a bit
 //    staggerAnim(0.1); // pause animation for 0.1 secs
+
 
     // interrupt the AI
     m_aiAgent->interrupt();
@@ -590,7 +615,7 @@ void Creature::moveForward(float check_sign, float dt)
     else
         state.dirflags = state.dirflags | dirflag::forw;
 
-    signal_stack.push_back(sSignal::sMove);
+    signal_push(sSignal::sMove);
 //    setDir(look_dir_projected_xz);
 }
 
@@ -609,7 +634,7 @@ void Creature::moveLeft(float check_sign, float dt)
 
     // Blend into left movement
     // create the animation specifically in blender
-    signal_stack.push_back(sSignal::sMove);
+    signal_push(sSignal::sMove);
 }
 
 void Creature::rotateUp(float degrees, float dt_unused)
@@ -663,22 +688,22 @@ void Creature::attack()
                                    );
     if (threatened)
     {
-        signal_stack.push_back(sSignal::sBlock);
+        signal_push(sSignal::sBlock);
     }
     else
     {
-        signal_stack.push_back(sSignal::sAttack);
+        signal_push(sSignal::sAttack);
     }
 }
 
 void Creature::dodge()
 {
-    signal_stack.push_back(sSignal::sDodge);
+    signal_push(sSignal::sDodge);
 }
 
 void Creature::block()
 {
-    signal_stack.push_back(sSignal::sBlock);
+    signal_push(sSignal::sBlock);
 }
 
 void Creature::shift()
@@ -688,7 +713,7 @@ void Creature::shift()
 
 void Creature::jump()
 {
-    signal_stack.push_back(sSignal::sJump);
+    signal_push(sSignal::sJump);
 }
 
 void Creature::stance()

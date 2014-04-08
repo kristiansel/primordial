@@ -7,6 +7,7 @@
 #include "soundemitter.h"
 #include "stats.h"
 #include "artificialintelligence.h"
+#include <array>
 
 class Creature : public Actor, virtual public SignalReceiver // count virtula looms
 
@@ -69,11 +70,16 @@ class Creature : public Actor, virtual public SignalReceiver // count virtula lo
         {
             Creature* hitBy; // the creature that did the hitting
             float from_angle; // 0 means top down chop, - from left side, + from right side
+            glm::vec3 dir; // the "force" direction of the hit
         };
         void hit(HitInfo hit_info);
         void hitWasBlocked();
 
-//        void signal_push(sSignal signal, float[SIG_REG_SIZE] args);
+
+        void signal_push(sSignal signal); // push without using registers
+
+        typedef std::array<float, SIG_REG_SIZE> SignArgType;
+        void signal_push(sSignal signal, SignArgType args); // push signal and arguments
 
         // rotation representing look direction (different from 3d object facing direction)
         glm::quat look_rot;
@@ -97,16 +103,24 @@ class Creature : public Actor, virtual public SignalReceiver // count virtula lo
             sSignal signal;
             float time; // used only for action, not animation
             bool triggered;
-            float reg[SIG_REG_SIZE]; // provide three registers for signals to store their arguments
+            std::array<float, SIG_REG_SIZE> reg;
+//            float reg[SIG_REG_SIZE]; // provide three registers for signals to store their arguments
             // like direction, magnitude etc...
         } doing;
+
+        struct Candidate    // a place to store signal requests as they are received
+        {
+            sSignal signal;
+            std::array<float, SIG_REG_SIZE> reg;
+//            float reg[SIG_REG_SIZE];
+        } candidate;
 
         // stats
         Stats stats;
 
-        std::vector<sSignal> signal_stack;
-
-        static unsigned int const signal_stack_capacity = 20;
+//        std::vector<sSignal> signal_stack;
+//
+//        static unsigned int const signal_stack_capacity = 20;
 
         // "Components" (most of connection functionality is here)
         DynamicCharacterController* char_contr;

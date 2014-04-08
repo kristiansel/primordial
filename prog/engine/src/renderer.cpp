@@ -193,13 +193,51 @@ void Renderer::drawOverlay(InterfaceInfo interfaceInfo)
 //    sprintf(healthstr, "%f", interfaceInfo.health);
 //    strcat (str, healthstr);
 
+    // bottom left corner: health/stats
     char health_disp[40];
     labelNumberPair("HP: ", interfaceInfo.health, health_disp);
-    text_shader.printText2D(health_disp, 10, 10, 10);
+    text_shader.printText2D(health_disp, 10, 10, 14);
 
+    // Top left corner: frames per second
     char fps_disp[40];
     labelNumberPair("FPS: ", interfaceInfo.frames_per_second, fps_disp);
     text_shader.printText2D(fps_disp, 10, 580, 10);
+
+    // Top right corner: instructions
+    int line = 1;
+    int right = 540;
+
+    char move_disp[] = "Move: WASD";
+    text_shader.printText2D(move_disp, right, 600-20*line++, 14);
+
+    char swing_disp[] = "Swing: Left Mouse";
+    text_shader.printText2D(swing_disp, right, 600-20*line++, 14);
+
+    char dodge_disp[] = "Dodge: Q";
+    text_shader.printText2D(dodge_disp, right, 600-20*line++, 14);
+
+    char jump_disp[] = "Jump: SPACE";
+    text_shader.printText2D(jump_disp, right, 600-20*line++, 14);
+
+    char stance_disp[] = "Toggle Stance: TAB";
+    text_shader.printText2D(stance_disp, right, 600-20*line++, 14);
+
+    line++; // jump a line
+
+    char sphere_disp[] = "Add sphere:     F1";
+    text_shader.printText2D(sphere_disp, right, 600-20*line++, 14);
+
+    char rabbit_disp[] = "Add rabbit:     F2";
+    text_shader.printText2D(rabbit_disp, right, 600-20*line++, 14);
+
+    char delete_disp[] = "Delete object:  F3";
+    text_shader.printText2D(delete_disp, right, 600-20*line++, 14);
+
+    char enemy_disp[] = "Spawn enem:     F4";
+    text_shader.printText2D(enemy_disp, right, 600-20*line++, 14);
+
+    char respawn_disp[] = "Player respawn: F5";
+    text_shader.printText2D(respawn_disp, right, 600-20*line++, 14);
 }
 
 void Renderer::resizeWindow(int w, int h, bool real)

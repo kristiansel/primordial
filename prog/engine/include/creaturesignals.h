@@ -41,7 +41,8 @@ enum sSignal
     sAttack = 2,
     sJump = 1,
     sMove = 0,
-    sNothing = -1
+    sNothing = -1,
+    sClearSignal = -2
 };
 
 namespace dirflag

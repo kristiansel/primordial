@@ -185,6 +185,7 @@ void World::stepAI(float dt) // as it stands O(n^2), where n is number of ai age
 
 //                        std::cout << "target distance: " << from_me_2_target_dist << "\n";
 
+                        if (!(agent->m_user->isDodging()))
                         { // Pursuit
                             if ((from_me_2_target_dist > Agent::pursuit_start_dist) && !(agent->m_isPursuing))
                             {
@@ -227,7 +228,7 @@ void World::stepAI(float dt) // as it stands O(n^2), where n is number of ai age
                         if (from_me_2_target_dist < Agent::interact_dist)
                         {
                             // attack
-                            if (!(agent->m_user->isAttacking() || agent->m_user->isBlocking()))
+                            if (!(agent->m_user->isAttacking() || agent->m_user->isBlocking() || agent->m_user->isDodging()))
                             {
                                 agent->m_user->attack(); // brutal AI
                             }
