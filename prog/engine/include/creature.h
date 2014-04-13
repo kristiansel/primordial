@@ -60,7 +60,7 @@ class Creature : public Actor, virtual public SignalReceiver // count virtula lo
 
     protected:
     private:
-        static const unsigned int SIG_REG_SIZE = 3;
+        static const unsigned int SIG_REG_SIZE = 5;
 
         float walkspeed;
         float runspeed;

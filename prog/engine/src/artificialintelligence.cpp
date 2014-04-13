@@ -26,7 +26,7 @@ Agent::Agent(glm::vec3 pos, glm::vec3 dir, bool passive) :
     m_user(nullptr),
     m_isPursuing(false),
     m_isRunning(false),
-    m_reactionTime(0.70),
+    m_reactionTime(0.50),
     m_reactionWait(0.0)
 {
     if (passive) // If this is the player set him against the world;
@@ -73,12 +73,31 @@ void Agent::setUserPointer(SignalReceiver* user)
 
 void Agent::interrupt()
 {
-    int spread_perc = 50 - (rand() % 100); // spread between -50 and +50 % of reaction time
-    float spread_s = m_reactionTime*((float)spread_perc)/100.f; // convert % to secs
+//    int spread_perc = 50 - (rand() % 100); // spread between -50 and +50 % of reaction time
+//    float spread_s = m_reactionTime*((float)spread_perc)/100.f; // convert % to secs
+//
+//    float interruptTime = m_reactionTime + spread_s; // add up this specific interruption time
+//    m_reactionWait = interruptTime; // set it
 
-    float interruptTime = m_reactionTime + spread_s; // add up this specific interruption time
-    m_reactionWait = interruptTime; // set it
+    auto range = [] (float lower_frac, float upper_frac)
+                {
+                    return (lower_frac + (rand()%100)/100.f * (upper_frac-lower_frac));
+                };
+
+
+
+    float timez = m_reactionTime * range(0.2, 1.2);
+
+//    std::cout << "interrupted for: " << timez << "s\n";
+
+    m_reactionWait = timez; // set it
 }
+
+void Agent::wait(float wait_time)
+{
+    m_reactionWait = wait_time; // set it
+}
+
 
 Agent::~Agent()
 {
@@ -237,11 +256,19 @@ void World::stepAI(float dt) // as it stands O(n^2), where n is number of ai age
                             if (agent->m_target->m_user->isAttacking())// if there is need
                             {
 //                                std::cout << "I am getting attacked\n";
-                                if (!(agent->m_user->isDodging() || agent->m_user->isBlocking())) // if there is need
+                                if (!(agent->m_user->isDodging() || agent->m_user->isBlocking())) // if opportunity
                                 {
 //                                    std::cout << "therefore I dodge\n";
-                                    agent->m_user->dodge();
-                                    agent->interrupt(); // wait while dodge completes
+                                    // either block or dodge
+                                    if (rand()%10 >=4 ) // 6/10 chance for dodge
+                                    {
+                                        agent->m_user->dodge();
+                                    }
+                                    else                // 4/10 chance for parry
+                                    {
+                                        agent->m_user->attack();
+                                    }
+                                    agent->wait(0.90); // wait while dodge completes
                                 }
 
                             }

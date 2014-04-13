@@ -211,15 +211,35 @@ void Creature::resolveActionRequests(float dt)
 
                 state.moveInterrupted = true;
 
-                if (state.left_sweep<0.0)
+                float eps = 0.000001;
+
+                if (state.left_sweep<-eps)
                 {
                     doing = {sAttack, getAnimDuration(Anim::SwingLeft1H)/speed, false};
                     playAnim(Anim::SwingLeft1H, true, speed);
+                    doing.reg[0] = -90.0; // store angle
                 }
-                else
+                else if (state.left_sweep>eps)
                 {
                     doing = {sAttack, getAnimDuration(Anim::SwingRight1H)/speed, false};
                     playAnim(Anim::SwingRight1H, true, speed);
+                    doing.reg[0] = 90.0; // store angle
+                }
+                else // state.left_sweep ~= 0.0
+                {
+                    int dice = rand() % 100;
+                    if (dice >= 50)
+                    {
+                        doing = {sAttack, getAnimDuration(Anim::SwingLeft1H)/speed, false};
+                        playAnim(Anim::SwingLeft1H, true, speed);
+                        doing.reg[0] = -90.0; // store angle
+                    }
+                    else
+                    {
+                        doing = {sAttack, getAnimDuration(Anim::SwingRight1H)/speed, false};
+                        playAnim(Anim::SwingRight1H, true, speed);
+                        doing.reg[0] = 90.0; // store angle
+                    }
                 }
             } break;
             case sSignal::sDodge:
@@ -257,7 +277,7 @@ void Creature::resolveActionRequests(float dt)
 //                doing.reg[1] = candidate.reg[1];
 //                doing.reg[2] = candidate.reg[2];
 
-                glm::vec3 hit_dir = glm::vec3(doing.reg[0], doing.reg[1], doing.reg[2]);
+//                glm::vec3 hit_dir = glm::vec3(doing.reg[0], doing.reg[1], doing.reg[2]);
             } break;
             case sSignal::sParried:
             {
@@ -277,7 +297,11 @@ void Creature::resolveActionRequests(float dt)
 
                     state.moveInterrupted = true;
 
-                    if (state.left_sweep<=0.0)
+                    // Copy the candidate register over into the doing.reg
+                    doing.reg = candidate.reg;
+                    float from_angle = doing.reg[0];
+
+                    if (from_angle<0.0)
                     {
                         doing = {sBlock, getAnimDuration(Anim::ParryRight1H)/speed, false};
                         playAnim(Anim::ParryRight1H, true, speed);
@@ -383,8 +407,10 @@ void Creature::resolveActionRequests(float dt)
                                                        Creature* target = (Creature*)in;
                                                        glm::vec3 hit_dir = glm::normalize(target->pos - this->pos);
 
+                                                       float angle = doing.reg[0]; // unpack the stored angle
+
                                                        //          hit_by, angle, direction
-                                                       target->hit( {this, 0.0, hit_dir} );
+                                                       target->hit( {this, angle, hit_dir} );
                                                    }
                                                );
             }
@@ -575,8 +601,6 @@ void Creature::hit(HitInfo hit_info)
     {
         signal_push(sSignal::sParried);
         hit_info.hitBy->hitWasBlocked();
-
-        // register the direction of the hit
     }
     else if (doing.signal==sDodge)
     {
@@ -679,16 +703,19 @@ void Creature::attack()
     // choose attack or parry based on if threatened
 
     bool threatened = false;
+    float from_angle = 0.0;
     char_contr->forAllThreatenedDo(
                                        [&] (void* in)
                                        {
                                            Creature* creature = (Creature*)(in);
                                            if (creature->isAttacking()) threatened = true;
+                                           from_angle = -creature->doing.reg[0];
                                        }
                                    );
     if (threatened)
     {
-        signal_push(sSignal::sBlock);
+        SignArgType args = {from_angle}; // pass the angle of the attack to the block signal
+        signal_push(sSignal::sBlock, args);
     }
     else
     {

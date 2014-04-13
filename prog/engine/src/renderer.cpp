@@ -224,10 +224,10 @@ void Renderer::drawOverlay(InterfaceInfo interfaceInfo)
 
     line++; // jump a line
 
-    char sphere_disp[] = "Add sphere:     F1";
+    char sphere_disp[] = "Add rabbit:     F1";
     text_shader.printText2D(sphere_disp, right, 600-20*line++, 14);
 
-    char rabbit_disp[] = "Add rabbit:     F2";
+    char rabbit_disp[] = "Add sphere:     F2";
     text_shader.printText2D(rabbit_disp, right, 600-20*line++, 14);
 
     char delete_disp[] = "Delete object:  F3";
@@ -238,6 +238,9 @@ void Renderer::drawOverlay(InterfaceInfo interfaceInfo)
 
     char respawn_disp[] = "Player respawn: F5";
     text_shader.printText2D(respawn_disp, right, 600-20*line++, 14);
+
+    char freecam_disp[] = "Toggle freecam: F6";
+    text_shader.printText2D(freecam_disp, right, 600-20*line++, 14);
 }
 
 void Renderer::resizeWindow(int w, int h, bool real)

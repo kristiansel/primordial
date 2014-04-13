@@ -21,7 +21,7 @@ void Mechanics::init(World &world_in, float &dt_in)
 
     dt = &dt_in;
 
-    world->startMusic("lost.wav");
+//    world->startMusic("lost.wav");
 
     // Set the input to control the camera
     //controlled = world->camera.get();
@@ -80,9 +80,9 @@ void Mechanics::init(World &world_in, float &dt_in)
 
     spawnPlayer(glm::vec3(3.0, 0.0, 2.0));
 
-    addNPC(glm::vec3(-3.0, 0.0, 2.0) );
+    addNPC(glm::vec3(3.0, 0.0, -5.0) );
 
-    addNPC(glm::vec3(-3.0, 0.0, -2.0) );
+//    addNPC(glm::vec3(-3.0, 0.0, -2.0) );
 
 
 
@@ -195,7 +195,7 @@ void Mechanics::step(World &world_in, float dt_in)
          /*don't increment*/ )
     {
         auto creature_ptr = *creature_it;
-        if(creature_ptr->getHealth() < 0.0)
+        if(creature_ptr->getHealth() < 0.000001)
         {
             auto to_del_it = creature_it;
             creature_it++;

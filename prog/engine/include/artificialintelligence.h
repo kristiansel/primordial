@@ -37,6 +37,7 @@ public:
 
     // send interrupt signal
     void interrupt(); // induce a temporary lapse in AI control (where it waits)
+    void wait(float wait_time);
 
     SignalReceiver* getUserPointer();
     void setUserPointer(SignalReceiver* user);
