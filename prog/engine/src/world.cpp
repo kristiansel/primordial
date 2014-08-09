@@ -297,3 +297,11 @@ void World::mainLight(glm::vec3 dir, glm::vec4 color)
     main_light->dir = dir;
     main_light->color = color;
 }
+
+void World::addTerrain()
+{
+    // all graphics/AI related
+    terrain.init();
+
+    // Physics related
+}

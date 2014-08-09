@@ -83,8 +83,8 @@
 					<Add library="BulletDynamics" />
 					<Add library="BulletCollision" />
 					<Add library="LinearMath" />
-					<Add library="D:\Travel\Productivity\libraries\boost_1_55_0\bin.v2\libs\system\build\gcc-mingw-4.7.1\debug\link-static\threading-multi\libboost_system-mgw47-mt-d-1_55.a" />
-					<Add library="D:\Travel\Productivity\libraries\boost_1_55_0\bin.v2\libs\thread\build\gcc-mingw-4.7.1\debug\link-static\threading-multi\libboost_thread-mgw47-mt-d-1_55.a" />
+					<Add library="D:/Travel/Productivity/libraries/boost_1_55_0/bin.v2/libs/system/build/gcc-mingw-4.7.1/debug/link-static/threading-multi/libboost_system-mgw47-mt-d-1_55.a" />
+					<Add library="D:/Travel/Productivity/libraries/boost_1_55_0/bin.v2/libs/thread/build/gcc-mingw-4.7.1/debug/link-static/threading-multi/libboost_thread-mgw47-mt-d-1_55.a" />
 					<Add directory="dependencies/bullet/lib" />
 				</Linker>
 			</Target>
@@ -132,6 +132,7 @@
 		<Unit filename="include/artificialintelligence.h" />
 		<Unit filename="include/camera.h" />
 		<Unit filename="include/charactercontroller.h" />
+		<Unit filename="include/closedmap.h" />
 		<Unit filename="include/combinationstage.h" />
 		<Unit filename="include/creature.h" />
 		<Unit filename="include/creaturesignals.h" />
@@ -162,6 +163,7 @@
 		<Unit filename="include/sound.h" />
 		<Unit filename="include/soundemitter.h" />
 		<Unit filename="include/stats.h" />
+		<Unit filename="include/terrain.h" />
 		<Unit filename="include/textshader.h" />
 		<Unit filename="include/texture.h" />
 		<Unit filename="include/world.h" />
@@ -209,6 +211,7 @@
 		<Unit filename="src/sound.cpp" />
 		<Unit filename="src/soundemitter.cpp" />
 		<Unit filename="src/stats.cpp" />
+		<Unit filename="src/terrain.cpp" />
 		<Unit filename="src/textshader.cpp" />
 		<Unit filename="src/texture.cpp" />
 		<Unit filename="src/world.cpp" />

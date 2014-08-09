@@ -153,7 +153,7 @@ void Shader::drawActor(shared_ptr<Actor> actor)
     drawProp(actor);
 }
 
-void Shader::drawProp(shared_ptr<Prop> prop)
+void Shader::drawProp(shared_ptr<Prop> prop, bool debug)
 {
     for (auto rb_it = prop->render_batches.begin(); rb_it!= prop->render_batches.end(); rb_it++)
     {
@@ -161,6 +161,7 @@ void Shader::drawProp(shared_ptr<Prop> prop)
         shared_ptr<Texture> tex_ptr = shared_ptr<Texture>(rb_it->tex_ptr);
         glm::mat4 transf_mat = rb_it->transf_mat;
 
+        if (debug) std::cout << "transfmat identity " << transf_mat[0][0]  << "\n";
 
 
         // set the modelview matrix for this model
@@ -169,6 +170,8 @@ void Shader::drawProp(shared_ptr<Prop> prop)
         glm::mat4 sc = glm::scale(glm::mat4(1.0), prop->scale);
 
         glm::mat4 obj_to_world_space_mat = tr * rt * sc * transf_mat;
+
+        if (debug) std::cout << "trans identity " << obj_to_world_space_mat[0][0] << "\n";
         glm::mat4 vertex_matrix  = view_mat * obj_to_world_space_mat; // scale, then translate, then lookat.
 
 //
@@ -235,6 +238,10 @@ void Shader::drawProp(shared_ptr<Prop> prop)
         glVertexAttribPointer(2,    2, GL_FLOAT,    GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(texCoord0Offset)        );
         glVertexAttribPointer(3,   MAX_BONE_INFLUENCES, GL_INT,      GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(bone_indexOffset)       );
         glVertexAttribPointer(4,  MAX_BONE_INFLUENCES, GL_FLOAT,    GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(bone_weightOffset)      );
+
+        if (debug) std::cout << "numvertices " << 3*mesh_ptr->getTriNum() << "\n";
+        if (debug) std::cout << "bound vbo_id " << mesh_ptr->getVBOid() << "\n";
+        if (debug) std::cout << "bound texture " << tex_ptr->getTBOid() << "\n";
 
         // Draw call
         glDrawElements(GL_TRIANGLES, 3*mesh_ptr->getTriNum(), GL_UNSIGNED_SHORT, BUFFER_OFFSET(0));

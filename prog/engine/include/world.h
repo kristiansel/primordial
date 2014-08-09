@@ -10,6 +10,7 @@
 #include "camera.h"
 #include "physicsworld.h"
 #include "light.h"
+#include "terrain.h"
 
 #include "global.h"
 
@@ -44,6 +45,8 @@ class World : public PhysicsWorld // Consider merging Culling functionality into
 
         void mainLight(glm::vec3 dir, glm::vec4 color );
 
+        void addTerrain();
+
 //        // Step
 //        void step(float dt_in);
 
@@ -56,7 +59,7 @@ class World : public PhysicsWorld // Consider merging Culling functionality into
         list<shared_ptr<WorldObject>>    worldobjects;
         list<shared_ptr<Creature>>       creatures;
         // list<shared_ptr<Light>>       lights; // For future
-        // Terrain                       terrain; // For future
+        Terrain                          terrain;
 
         //shared_ptr<Camera> camera; // Shared pointer here, because we do not want other shared
         // pointers to accidentally delete the camera.

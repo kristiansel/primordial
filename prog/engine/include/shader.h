@@ -38,7 +38,7 @@ public:
     void clearBoneMatrices();
 
     void drawActor(shared_ptr<Actor> actor);
-    void drawProp(shared_ptr<Prop> prop);
+    void drawProp(shared_ptr<Prop> prop, bool debug = false);
 
     // void draw(Terrain &terrain, glm::mat4 mv);
 

@@ -5,6 +5,7 @@
 
 #include "prop.h"
 #include "actor.h"
+#include "terrain.h"
 #include "camera.h"
 #include "light.h"
 
@@ -21,6 +22,8 @@ class Scene
         // container use shared pointers
         std::list<std::shared_ptr<Prop>> props;
         std::list<std::shared_ptr<Actor>> actors;
+
+        Terrain* terrain;
 
         //std::shared_ptr<Camera> camera;
         Camera const *camera;

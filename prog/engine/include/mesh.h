@@ -70,7 +70,7 @@ public:
     enum LoadStage {NotLoaded, LoadMePlease, Loaded};
     LoadStage getLoadStage() {return load_stage;};
 
-    void createGL();
+    void createGL(bool debug = false);
     void deleteGL();
 protected:
     //void geomToVRAM();
@@ -93,7 +93,6 @@ private:
     //  2: "loaded to video (file on video card)"   use vbo_id/ibo_id
 
     // Current number in use by graphics card;
-
     LoadStage load_stage;
 
 

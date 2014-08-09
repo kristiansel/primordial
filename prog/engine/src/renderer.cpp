@@ -83,6 +83,7 @@ void Renderer::draw(Scene &scene, float dt)
 
     glm::vec4 fog_color = glm::vec4(1.0, 1.0, 1.0, 1.0);
 
+    // Why is this in here?
     glDisable(GL_BLEND);
 
     shadow_map.activate(mlight_vp);
@@ -91,6 +92,14 @@ void Renderer::draw(Scene &scene, float dt)
         shadow_map.clearBoneMatrices();
 
         for (auto it = scene.props.begin(); it!=scene.props.end(); it++)
+        {
+            shadow_map.drawProp(*it);
+        }
+
+        // Should preferably draw the terrain after actors and props
+        std::vector<std::shared_ptr<Prop>>* terrain_patches = scene.terrain->getPatches();
+
+        for (auto it = terrain_patches->begin(); it!=terrain_patches->end(); it++)
         {
             shadow_map.drawProp(*it);
         }
@@ -107,8 +116,6 @@ void Renderer::draw(Scene &scene, float dt)
 
     // Set render "target" to draw to frame buffer
     render_stage.activate();
-
-
 
         // Set the values of the uniforms which are updated
         // per-frame and switch to main shader
@@ -129,12 +136,27 @@ void Renderer::draw(Scene &scene, float dt)
             main_shader.drawProp(*it);
         }
 
+        for (auto it = terrain_patches->begin(); it!=terrain_patches->end(); it++)
+        {
+            main_shader.drawProp(*it);
+            // why is this not showing...?
+        }
+
+        // Should preferably draw the terrain after actors and props
+        // terrain_patches defined above
+
+
+        // remove
+        //std::terminate();
+
         // Draw actors;
         for (auto it = scene.actors.begin(); it!=scene.actors.end(); it++)
         {
             // main_shader.drawActor(&**it);
             main_shader.drawActor(*it);
         }
+
+        //after this the bone matrices are soiled
 
         // Draw "sky quad" following the camera
         glm::vec4 sky_color = glm::vec4(0.f/255.f, 80.f/255.f, 186.f/255.f, 1.0);
@@ -224,11 +246,11 @@ void Renderer::drawOverlay(InterfaceInfo interfaceInfo)
 
     line++; // jump a line
 
-    char sphere_disp[] = "Add rabbit:     F1";
-    text_shader.printText2D(sphere_disp, right, 600-20*line++, 14);
-
-    char rabbit_disp[] = "Add sphere:     F2";
+    char rabbit_disp[] = "Add rabbit:     F1";
     text_shader.printText2D(rabbit_disp, right, 600-20*line++, 14);
+
+    char sphere_disp[] = "Add sphere:     F2";
+    text_shader.printText2D(sphere_disp, right, 600-20*line++, 14);
 
     char delete_disp[] = "Delete object:  F3";
     text_shader.printText2D(delete_disp, right, 600-20*line++, 14);

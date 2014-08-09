@@ -28,4 +28,6 @@ void Culler::stage(Scene &scene_in, World &world_in)
     {
         scene_in.actors.push_back(creature);
     }
+
+    scene_in.terrain = &world_in.terrain;
 }

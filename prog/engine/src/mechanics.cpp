@@ -45,6 +45,8 @@ void Mechanics::init(World &world_in, float &dt_in)
     //                          Model,         Texture,            Position
     // WorldObjects:
 
+    world->addTerrain();
+
 
     world->addDynamicObject( "sphere",
                              "nicewall",
@@ -66,11 +68,11 @@ void Mechanics::init(World &world_in, float &dt_in)
 //                             "nicewall",
 //                             glm::vec3(2.0, 10.0, -4.0));
 
-    world->addStaticObject( "quad",
-                            "grass_equal",
-                             glm::vec3(0.0, 0.0, 0.0) );
+//    world->addStaticObject( "quad",
+//                            "grass_equal",
+//                             glm::vec3(0.0, 0.0, 0.0) );
 
-    world->addStaticObject( "terrain",
+    world->addStaticObject( "terrain",                  // This adds a static plane
                             "grass_equal",
                              glm::vec3(0.0, 0.0, 0.0) );
 

@@ -258,7 +258,7 @@ void Creature::resolveActionRequests(float dt)
             {
                 float speed = 1.0;
 
-                snd_emitter->emitSound("fleshrip.wav");
+                snd_emitter->emitSound("fleshrip.aiff");
 
                 // WTB a consistent and robust signalling system...
                 m_aiAgent->interrupt();

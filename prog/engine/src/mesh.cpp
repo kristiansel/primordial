@@ -47,8 +47,9 @@ void Mesh::fromFile(string mesh_key)
 {
     fromFile2(mesh_key);
 
-    //load_stage = LoadMePlease;
+
     createGL();
+
 }
 
 
@@ -187,7 +188,7 @@ unsigned int Mesh::getTriNum()
 }
 
 
-void Mesh::createGL()
+void Mesh::createGL(bool debug)
 {
     // in order to mitigate another buffer being accidentally
     // bound in render thread
@@ -195,6 +196,26 @@ void Mesh::createGL()
 
     // clear out whatever is there (if there is anything...)
     deleteGL(); // this will not do anything if not loaded
+
+    // debug
+    if (debug)
+    {
+        for (int i = 0; i<triangle_num; i++)
+        {
+            std::cout << "triangle " << i << ": \n";
+            for (int j=0; j<3; j++)
+            {
+                Vertex* vert = &(vertices[triangles[i].indices[j]]);
+                std::cout << "  vertex " << j << ": \n";
+                std::cout << "      pos " << vert->position.x << ", " << vert->position.y << ", " << vert->position.z << ", " << vert->position.w << " \n";
+                std::cout << "      nor " << vert->normal.x << ", " << vert->normal.y << ", " << vert->normal.z << ", " << " \n";
+                std::cout << "      bone_indices " << vert->bone_indices[0] << ", " << vert->bone_indices[1] << ", " << vert->bone_indices[2] << ", " << vert->bone_indices[3] << " \n";
+                std::cout << "      bone_weights " << vert->bone_weights[0] << ", " << vert->bone_weights[1] << ", " << vert->bone_weights[2] << ", " << vert->bone_weights[3] << " \n";
+            }
+
+        }
+    }
+
 
     // send directly to graphics card
     glGenBuffers(1, &vbo_id); //must come after glewinit
