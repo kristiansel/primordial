@@ -2,7 +2,13 @@
 
 Terrain::Terrain() :
     m_dimension(256),
-    m_height_map(256)
+    m_height_map(256),
+    m_heightScale(0.016),
+    m_horzScale(1024.0),
+    m_centerX(0.0),
+    m_centerZ(0.0),
+    m_physicsWorld(nullptr),
+    m_heightData(nullptr)
 {
     //ctor
 }
@@ -12,9 +18,11 @@ Terrain::~Terrain()
     //dtor
 }
 
-void Terrain::init()
+void Terrain::init(PhysicsWorld* physics_world_in)
 {
     std::cout << "initializing terrain...\n";
+
+    m_physicsWorld = physics_world_in;
 
     generateHeightMap();
 
@@ -32,16 +40,21 @@ void Terrain::init()
             int num_verts;
             int num_tris;
 
-            std::cout << "num_verts: " << num_verts << "\n";
-            std::cout << "num_tris: " << num_tris << "\n";
+//            std::cout << "num_verts: " << num_verts << "\n";
+//            std::cout << "num_tris: " << num_tris << "\n";
 
-            subdividedQuads(verts, num_verts, tris, num_tris, patch_length/2, 3, center_x, center_z);
+            subdividedQuads(verts, num_verts, tris, num_tris, patch_length/2, 4, center_x, center_z);
 
              // assing the quad to the mesh;
             terrain_meshes.push_back(std::shared_ptr<Mesh> (new Mesh));
 
             std::shared_ptr<Mesh> terrain_quad = terrain_meshes.back();
             terrain_quad->fromMemory(verts, num_verts, tris, num_tris);
+
+            #ifdef TRIANGLE_TERRAIN_PHYSICS
+            // take the triangles here and do something clever
+
+            #endif // TRIANGLE_TERRAIN_PHYSICS
 
             delete [] verts;
             delete [] tris;
@@ -61,12 +74,17 @@ void Terrain::init()
 
             // add the terrain patch to the vector of terrain patches
             terrain_patches.push_back(terrain_patch);
+
+            if (i==1 && j==1)
+            {
+                #ifdef HEIGHTMAP_TERRAIN_PHYSICS
+                generatePhysicsPatch(glm::vec3(center_x, 0.0, center_z), 96.0, 48);
+                #endif // HEIGHTMAP_TERRAIN_PHYSICS
+            }
         }
     }
 
     std::cout << "length of terrain_patches: " << terrain_patches.size() << "\n";
-
-    std::cout << "SAMPLE" << sampleHeightMap(0.3, 0.3, 32, 0, 0) << "\n";
 }
 
 std::vector<std::shared_ptr<Prop>>* Terrain::getPatches()
@@ -115,26 +133,27 @@ void Terrain::subdividedQuads(Vertex* &vertices,
             float x = -half_length + j*quad_length;
             float z = -half_length + i*quad_length;
 
-            float center_x = 0;
-            float center_z = 0;
-            float map_l = 128.0;
+            float sample0 = m_heightScale*sampleHeightMap(x+x_corner, z+quad_length+z_corner, m_horzScale, m_centerX, m_centerZ);
+            float sample1 = m_heightScale*sampleHeightMap(x+x_corner, z+z_corner, m_horzScale, m_centerX, m_centerZ);
+            float sample2 = m_heightScale*sampleHeightMap(x+quad_length+x_corner, z+z_corner, m_horzScale, m_centerX, m_centerZ);
+            float sample3 = m_heightScale*sampleHeightMap(x+quad_length+x_corner, z+quad_length+z_corner, m_horzScale, m_centerX, m_centerZ);
 
-            float sample0 = 0.002*sampleHeightMap(x+x_corner, z+quad_length+z_corner, map_l, center_x, center_z);
-            float sample1 = 0.002*sampleHeightMap(x+x_corner, z+z_corner, map_l, center_x, center_z);
-            float sample2 = 0.002*sampleHeightMap(x+quad_length+x_corner, z+z_corner, map_l, center_x, center_z);
-            float sample3 = 0.002*sampleHeightMap(x+quad_length+x_corner, z+quad_length+z_corner, map_l, center_x, center_z);
-
-            std::cout << "samples " << sample0 << ", " << sample1 << ", " << sample2 << ", " << sample3 << "\n";
+//            std::cout << "samples " << sample0 << ", " << sample1 << ", " << sample2 << ", " << sample3 << "\n";
 
             verts[0].position = glm::vec4(x, sample0, z+quad_length, 1.0);
             verts[1].position = glm::vec4(x, sample1, z, 1.0);
             verts[2].position = glm::vec4(x+quad_length, sample2, z, 1.0);
             verts[3].position = glm::vec4(x+quad_length, sample3, z+quad_length, 1.0);
 
-            verts[0].normal = glm::vec3(0.0, 1.0, 0.0);
-            verts[1].normal = glm::vec3(0.0, 1.0, 0.0);
-            verts[2].normal = glm::vec3(0.0, 1.0, 0.0);
-            verts[3].normal = glm::vec3(0.0, 1.0, 0.0);
+            glm::vec3 facenormal = glm::normalize(glm::cross(glm::vec3(verts[3].position.x, verts[3].position.y, verts[3].position.z)-
+                                                             glm::vec3(verts[0].position.x, verts[0].position.y, verts[0].position.z),
+                                                             glm::vec3(verts[1].position.x, verts[1].position.y, verts[1].position.z)-
+                                                             glm::vec3(verts[0].position.x, verts[0].position.y, verts[0].position.z)));
+
+            verts[0].normal = facenormal;
+            verts[1].normal = facenormal;
+            verts[2].normal = facenormal;
+            verts[3].normal = facenormal;
 
             verts[0].tex_coords[0] = 0.0; verts[0].tex_coords[1] = 0.0;
             verts[1].tex_coords[0] = 0.0; verts[1].tex_coords[1] = 1.0;
@@ -169,6 +188,35 @@ void Terrain::subdividedQuads(Vertex* &vertices,
         }
     }
 
+    // correct interior normals
+    for (int i = 0; i<n_side-1; i++)
+    {
+        for (int j = 0; j<n_side-1; j++)
+        {
+            int nw = verts_per_quad*(i*n_side + j);
+            int ne = verts_per_quad*(i*n_side + j+1);
+            int sw = verts_per_quad*((i+1)*n_side + j);
+            int se = verts_per_quad*((i+1)*n_side + j+1);
+            //     1-------2------x
+            //     | _0___/| ____/|
+            //     |/   1  |/     |
+            //     0------(3)-----x
+            //     | _____/| ____/|
+            //     |/      |/     |
+            //     x-------x------x
+
+            glm::vec3 av_normal = 0.25f*(vertices[nw+3].normal +
+                                        vertices[ne+0].normal +
+                                        vertices[sw+2].normal +
+                                        vertices[se+1].normal);
+
+            vertices[nw+3].normal = av_normal;
+            vertices[ne+0].normal = av_normal;
+            vertices[sw+2].normal = av_normal;
+            vertices[se+1].normal = av_normal;
+        }
+    }
+
     // finished
 }
 
@@ -176,6 +224,26 @@ void Terrain::subdividedQuads(Vertex* &vertices,
 //{
 //    return i*map_dim+j;
 //};
+
+void Terrain::generatePhysicsPatch(glm::vec3 center, float sideLength, int dim)
+{
+    if (!m_heightData) m_heightData = new float [dim*dim];
+
+    float spacing = sideLength/((float)(dim));
+
+    for (int i = 0; i<dim; i++)
+    {
+       for (int j = 0; j<dim; j++)
+       {
+            float x = center.x-sideLength/2.0 + j*spacing;
+            float z = center.z-sideLength/2.0 + i*spacing;
+
+            m_heightData[i*dim + j] = m_heightScale*sampleHeightMap(x, z, m_horzScale, m_centerX, m_centerZ);
+       }
+    }
+
+    m_physicsWorld->addStaticTerrainPatch(m_heightData, dim, spacing, center);
+}
 
 double rand_range(double a, double b)
 {
@@ -354,20 +422,20 @@ float Terrain::sampleHeightMap(float x, float z, float length, float center_x, f
     float wt21 = (upper_x-dec_ind_x)*(dec_ind_z-lower_z)/((upper_x-lower_x)*(upper_z-lower_z));
     float wt22 = (dec_ind_x-lower_x)*(dec_ind_z-lower_z)/((upper_x-lower_x)*(upper_z-lower_z));
 
-    std::cout << "======================================================\n";
-    std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!d " << dec_ind_x << "\n";
-    std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!u " << upper_x << "\n";
-    std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!l " << lower_x << "\n";
-
-    std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!d " << wt11 << "\n";
-    std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!u " << wt12 << "\n";
-    std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!l " << wt21 << "\n";
-    std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!l " << wt22 << "\n";
-
-    std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!d " << m_height_map(lower_x, lower_z) << "\n";
-    std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!u " << m_height_map(lower_x, upper_z) << "\n";
-    std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!l " << m_height_map(upper_x, lower_z) << "\n";
-    std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!l " << m_height_map(upper_x, upper_z) << "\n";
+//    std::cout << "======================================================\n";
+//    std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!d " << dec_ind_x << "\n";
+//    std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!u " << upper_x << "\n";
+//    std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!l " << lower_x << "\n";
+//
+//    std::couft << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!d " << wt11 << "\n";
+//    std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!u " << wt12 << "\n";
+//    std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!l " << wt21 << "\n";
+//    std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!l " << wt22 << "\n";
+//
+//    std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!d " << m_height_map(lower_x, lower_z) << "\n";
+//    std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!u " << m_height_map(lower_x, upper_z) << "\n";
+//    std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!l " << m_height_map(upper_x, lower_z) << "\n";
+//    std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!l " << m_height_map(upper_x, upper_z) << "\n";
     float out = wt11*m_height_map(lower_x, lower_z) +
                 wt12*m_height_map(lower_x, upper_z) +
                 wt21*m_height_map(upper_x, lower_z) +

@@ -2,6 +2,7 @@
 #define PHYSICSWORLD_H
 
 #include "btBulletDynamicsCommon.h"
+#include "BulletCollision/CollisionShapes/btHeightfieldTerrainShape.h"
 #include "rigidbody.h"
 #include "charactercontroller.h"
 #include "debugdrawer.h"
@@ -19,6 +20,11 @@ class PhysicsWorld
 
         void drawBulletDebug();
 
+        void addStaticTerrainPatch(float* height_data,
+                                 unsigned int dim,
+                                 float spacing,
+                                 glm::vec3 center);
+
     protected:
         // Should aim for something like
         // addPhysicsObject(CollShape shape, float mass, glm::vec3 position)
@@ -34,6 +40,7 @@ class PhysicsWorld
                                     float mass);      // kg
 
         void removePhysicsObject(RigidBody* rigidbody);
+
 
     private:
         //collision configuration contains default setup for memory, collision setup. Advanced users can create their own configuration.

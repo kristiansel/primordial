@@ -301,7 +301,7 @@ void World::mainLight(glm::vec3 dir, glm::vec4 color)
 void World::addTerrain()
 {
     // all graphics/AI related
-    terrain.init();
+    terrain.init(this);
 
     // Physics related
 }

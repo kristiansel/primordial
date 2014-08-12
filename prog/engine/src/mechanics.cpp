@@ -72,9 +72,9 @@ void Mechanics::init(World &world_in, float &dt_in)
 //                            "grass_equal",
 //                             glm::vec3(0.0, 0.0, 0.0) );
 
-    world->addStaticObject( "terrain",                  // This adds a static plane
-                            "grass_equal",
-                             glm::vec3(0.0, 0.0, 0.0) );
+//    world->addStaticObject( "terrain",                  // This adds a static plane
+//                            "grass_equal",
+//                             glm::vec3(0.0, 0.0, 0.0) );
 
     world->addDynamicObject( "axes",
                             "tricolor",

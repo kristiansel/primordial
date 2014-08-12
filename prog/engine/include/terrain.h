@@ -4,6 +4,10 @@
 #include "prop.h"
 #include "global.h"
 #include "closedmap.h"
+#include "physicsworld.h"
+
+#define HEIGHTMAP_TERRAIN_PHYSICS
+//#define TRIANGLE_TERRAIN_PHYSICS
 
 class Terrain
 {
@@ -11,7 +15,7 @@ class Terrain
         Terrain();
         virtual ~Terrain();
 
-        void init(); // Initialize the monolithic "terrain" object
+        void init(PhysicsWorld* physics_world_in); // Initialize the monolithic "terrain" object
 
         std::vector<std::shared_ptr<Prop>>* getPatches();
 
@@ -32,6 +36,9 @@ class Terrain
                              float z_corner);
 
         void generateHeightMap();
+        void generatePhysicsPatch(glm::vec3 center,
+                                  float length,
+                                  int dim);
 
         float sampleHeightMap(float x, float z, float length, float center_x, float center_z);
 
@@ -41,6 +48,22 @@ class Terrain
         //int lin_i(int i, int j);
 
         ClosedMap<float> m_height_map;
+
+        float m_heightScale;
+        float m_horzScale;
+        float m_centerX;
+        float m_centerZ;
+
+        PhysicsWorld* m_physicsWorld;
+
+        float* m_heightData;
+
+//        unsigned int m_numVertices;
+//        unsigned int m_numVertices;
+//
+//        Vertex* m_terrainVertices;
+//        Triangle* m_triangleVertices;
+
 };
 
 #endif // TERRAIN_H

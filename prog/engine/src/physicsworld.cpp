@@ -109,6 +109,53 @@ void PhysicsWorld::addPhysicsStatic(RigidBody* rigidbody)
     dynamicsWorld->addRigidBody(body);
 }
 
+void PhysicsWorld::addStaticTerrainPatch(float* height_data,
+                                         unsigned int dim,
+                                         float spacing,
+                                         glm::vec3 center)
+{
+    int y_Axis = 1; // y axis is up
+
+    btHeightfieldTerrainShape* heightfieldShape =
+        new btHeightfieldTerrainShape(dim, dim,                         // dimentions x, y
+                                   height_data,                         // raw data
+                                   1.0,                                 // height scale (ignored with float type
+                                   -500.0, 500.0,                       // minheight and maxheight (average must be 0)
+                                   y_Axis, PHY_FLOAT, true);           // upaxis = y, type, flipQuadEdges
+
+    // scale the shape
+    btVector3 localScaling(spacing, spacing, spacing);
+	localScaling[y_Axis] = 1.0;
+	heightfieldShape->setLocalScaling(localScaling);
+
+	// stash this shape away
+	collisionShapes.push_back(heightfieldShape);
+
+	// set origin to middle of heightfield
+	btTransform tr;
+	tr.setIdentity();
+	tr.setOrigin(btVector3(0.0, 0.0, 0.0));
+
+	// create ground object
+	float mass = 0.0;
+	//localCreateRigidBody(mass, tr, heightfieldShape);
+
+	btVector3 inertia(0,0,0);
+//    if (mass)
+//    {
+        heightfieldShape->calculateLocalInertia(mass,inertia);
+        btRigidBody::btRigidBodyConstructionInfo rbci(mass,0,heightfieldShape,inertia);
+        rbci.m_startWorldTransform = tr;
+//    }
+
+
+    btRigidBody* body = new btRigidBody(rbci);
+    dynamicsWorld->addRigidBody(body);
+
+    std::cout << "finished generating PHYSICAL terrain\n";
+
+}
+
 void PhysicsWorld::addPhysicsCharContr(DynamicCharacterController* char_contr,
                                        const glm::vec3 &pos,
                                        float height,    // m
