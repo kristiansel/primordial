@@ -82,7 +82,7 @@ void Mechanics::init(World &world_in, float &dt_in)
 
     spawnPlayer(glm::vec3(3.0, 0.0, 2.0));
 
-    addNPC(glm::vec3(3.0, 0.0, -5.0) );
+    //addNPC(glm::vec3(3.0, 0.0, -5.0) );
 
 //    addNPC(glm::vec3(-3.0, 0.0, -2.0) );
 
@@ -253,6 +253,9 @@ void Mechanics::step(World &world_in, float dt_in)
         world->chasecam->pos = player->pos - 5.f * player->getLookDir() + glm::vec3(0.0, 2.0, 0.0); // Hard camera
         world->chasecam->rot = player->getLookRot(); // Hard camera
     }
+
+    // Update the terrain (based on player position)
+    world->terrain.updateObserverPosition(player->pos);
 
 
 //    float cam_dist = 5.0;

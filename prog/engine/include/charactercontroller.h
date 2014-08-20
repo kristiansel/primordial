@@ -79,6 +79,9 @@ private:
 
         btDynamicsWorld* m_dynamicsWorld;
 
+        // a trick and a hack
+        glm::vec3 m_footingNormal;
+
 public:
     template <typename FuncType>
     void forAllThreatenedDo(FuncType func)

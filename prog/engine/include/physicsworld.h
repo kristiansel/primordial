@@ -20,10 +20,15 @@ class PhysicsWorld
 
         void drawBulletDebug();
 
-        void addStaticTerrainPatch(float* height_data,
+        btRigidBody* addStaticTerrainPatch(float* height_data,
                                  unsigned int dim,
                                  float spacing,
+                                 float min_height,
+                                 float max_height,
                                  glm::vec3 center);
+
+        // Have a feeling this and the one above should be protected or something
+        void removeBtRigidBody(btRigidBody* body);
 
     protected:
         // Should aim for something like
@@ -31,6 +36,7 @@ class PhysicsWorld
         // addPhysicsObject(Sphere(1.0), 1.0, glm::vec3(1.0, 2.0, -1.0))
         // void addPhysicsObject(RigidBody::Collision shape, par1=0, par2=0, par3=0, par4=0);
         void addPhysicsDynamic(RigidBody* rigidbody, btCollisionShape* shape);
+
         void addPhysicsStatic(RigidBody* rigidbody);
 
         void addPhysicsCharContr(   DynamicCharacterController* char_contr,
@@ -63,7 +69,6 @@ class PhysicsWorld
 
         //debug draw class
         btIDebugDraw* debugDraw;
-
 };
 
 #endif // PHYSICSWORLD_H

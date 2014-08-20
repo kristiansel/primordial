@@ -7,7 +7,8 @@ DynamicCharacterController::DynamicCharacterController () :
     f_max(30000.0), // 20000 too low. this will only limit "getting off the ground"
     m_halfHeight(0.0),
     on_ground(false),
-    f_set(btVector3(0.0, 0.0, 0.0))
+    f_set(btVector3(0.0, 0.0, 0.0)),
+    m_footingNormal(glm::vec3(0.0, 1.0, 0.0))
 {
         m_shape = nullptr;
         m_rigidBody = nullptr;
@@ -140,18 +141,37 @@ void DynamicCharacterController::velocitySetpoint(glm::vec3 glm_v_s)
 }
 void DynamicCharacterController::applyMoveController()
 {
+    // This function gets used all the time
     if (on_ground)
     {
 //        m_rigidBody->applyCentralForce(btVector3(f_set[0], 0.f, f_set[2]));
-        m_rigidBody->setLinearVelocity(btVector3(f_set[0], (m_rigidBody->getLinearVelocity())[1], f_set[2]));
+
+        //
+        //std::cout << "on ground\n";
+
+
+        //m_rigidBody->setLinearVelocity(btVector3(f_set[0], (m_rigidBody->getLinearVelocity())[1], f_set[2]));
+
+        //float y_adj = (-m_footingNormal.x*f_set[0] - m_footingNormal.z*f_set[2])/m_footingNormal.y;
+
+        m_rigidBody->setLinearVelocity(btVector3(f_set[0],
+                                                 (m_rigidBody->getLinearVelocity())[1],
+                                                 f_set[2]));
+    }
+    else
+    {
+        //std::cout << "NOT on ground\n";
     }
 }
 
 void DynamicCharacterController::setVelocityXZ(float v_x, float v_z)
 {
+    // This function is unused
     if (on_ground)
     {
         m_rigidBody->setLinearVelocity(btVector3(v_x, (m_rigidBody->getLinearVelocity())[1], v_z));
+
+        //std::cout << "getting here\n";
     }
 }
 
@@ -229,16 +249,23 @@ void DynamicCharacterController::lunge(glm::vec3 forw)
 
 bool DynamicCharacterController::onGround()
 {
+    btVector3 vel = m_rigidBody->getLinearVelocity();
+
+    btVector3 dir = vel.normalized();
+
+    float climbing_factor = 0.16;
+
     m_rayStart = m_rigidBody->getCenterOfMassPosition();
-    m_rayEnd = m_rayStart - btVector3(0.0, m_halfHeight*1.05, 0.0);
+    m_rayEnd = m_rayStart - btVector3(dir[0]*climbing_factor, m_halfHeight*(1+climbing_factor/2.0), dir[2]*climbing_factor);
 
     // rayCallback
-    btCollisionWorld::AllHitsRayResultCallback rayCallback(m_rayStart, m_rayEnd);
+    btCollisionWorld::ClosestRayResultCallback rayCallback(m_rayStart, m_rayEnd);
 
     m_dynamicsWorld->rayTest (m_rayStart, m_rayEnd, rayCallback);
     if (rayCallback.hasHit())
     {
         on_ground = true;
+        m_footingNormal = glm::vec3(rayCallback.m_hitNormalWorld[0], rayCallback.m_hitNormalWorld[1], rayCallback.m_hitNormalWorld[2]);
         return true;
     }
     on_ground = false;

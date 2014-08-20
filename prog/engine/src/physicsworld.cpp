@@ -109,9 +109,11 @@ void PhysicsWorld::addPhysicsStatic(RigidBody* rigidbody)
     dynamicsWorld->addRigidBody(body);
 }
 
-void PhysicsWorld::addStaticTerrainPatch(float* height_data,
+btRigidBody* PhysicsWorld::addStaticTerrainPatch(float* height_data,
                                          unsigned int dim,
                                          float spacing,
+                                         float min_height,
+                                         float max_height,
                                          glm::vec3 center)
 {
     int y_Axis = 1; // y axis is up
@@ -120,8 +122,9 @@ void PhysicsWorld::addStaticTerrainPatch(float* height_data,
         new btHeightfieldTerrainShape(dim, dim,                         // dimentions x, y
                                    height_data,                         // raw data
                                    1.0,                                 // height scale (ignored with float type
-                                   -500.0, 500.0,                       // minheight and maxheight (average must be 0)
-                                   y_Axis, PHY_FLOAT, true);           // upaxis = y, type, flipQuadEdges
+                                   // -500.0, 500.0,                       // minheight and maxheight (average must be 0)
+                                   min_height, max_height,
+                                   y_Axis, PHY_FLOAT, false);           // upaxis = y, type, flipQuadEdges
 
     // scale the shape
     btVector3 localScaling(spacing, spacing, spacing);
@@ -134,7 +137,9 @@ void PhysicsWorld::addStaticTerrainPatch(float* height_data,
 	// set origin to middle of heightfield
 	btTransform tr;
 	tr.setIdentity();
-	tr.setOrigin(btVector3(0.0, 0.0, 0.0));
+	//tr.setOrigin(btVector3(0.0, 0.0, 0.0));
+	tr.setOrigin(btVector3(center.x, (max_height+min_height)*0.5, center.z));
+
 
 	// create ground object
 	float mass = 0.0;
@@ -153,7 +158,9 @@ void PhysicsWorld::addStaticTerrainPatch(float* height_data,
     dynamicsWorld->addRigidBody(body);
 
     std::cout << "finished generating PHYSICAL terrain\n";
+    std::cout << "addr of body " << body << "\n";
 
+    return body;
 }
 
 void PhysicsWorld::addPhysicsCharContr(DynamicCharacterController* char_contr,
@@ -179,6 +186,16 @@ void PhysicsWorld::removePhysicsObject(RigidBody* rigidbody)
    dynamicsWorld->removeRigidBody(body);
    delete body->getMotionState();
    delete body;
+}
+
+void PhysicsWorld::removeBtRigidBody(btRigidBody* body)
+{
+   std::cout << "deleting body " << body << "\n";
+   dynamicsWorld->removeRigidBody(body);
+   delete body->getMotionState();
+   delete body;
+
+
 }
 
 void PhysicsWorld::physicsStep(float dt_in)

@@ -6,9 +6,6 @@
 #include "closedmap.h"
 #include "physicsworld.h"
 
-#define HEIGHTMAP_TERRAIN_PHYSICS
-//#define TRIANGLE_TERRAIN_PHYSICS
-
 class Terrain
 {
     public:
@@ -19,11 +16,9 @@ class Terrain
 
         std::vector<std::shared_ptr<Prop>>* getPatches();
 
-    protected:
-        std::vector<std::shared_ptr<Prop>> terrain_patches; // Keep own geometry since none of it is duplicate
-        std::vector<std::shared_ptr<Mesh>> terrain_meshes;
+        void updateObserverPosition(glm::vec3 observer_position);
 
-        std::shared_ptr<Prop> patches_LOD1[9]; // 3*3 with LOD 1
+    protected:
 //        std::shared_ptr<Prop> patches_LOD2[20];
 
         void subdividedQuads(Vertex* &vertices,
@@ -36,11 +31,19 @@ class Terrain
                              float z_corner);
 
         void generateHeightMap();
+
+        void generateGraphicsPatch(glm::vec3 center,
+                                  float length,
+                                  int dim);
         void generatePhysicsPatch(glm::vec3 center,
                                   float length,
                                   int dim);
 
+        void updatePhysicsTerrain(glm::vec3 anchor_in);
+
         float sampleHeightMap(float x, float z, float length, float center_x, float center_z);
+
+
 
     private:
         int m_dimension;
@@ -54,15 +57,22 @@ class Terrain
         float m_centerX;
         float m_centerZ;
 
+        float m_patchLength;
+
         PhysicsWorld* m_physicsWorld;
+        btRigidBody* m_terrainBody;
 
-        float* m_heightData;
+        unsigned int m_dimPhysHeights;
+        float* m_heightData0;
 
-//        unsigned int m_numVertices;
-//        unsigned int m_numVertices;
-//
-//        Vertex* m_terrainVertices;
-//        Triangle* m_triangleVertices;
+        float m_spacingPhysHeights;
+        float m_sidePhysHeights;
+        //float* m_heightData1;
+
+        std::vector<std::shared_ptr<Prop>> terrain_patches; // Keep own geometry since none of it is duplicate
+        std::vector<std::shared_ptr<Mesh>> terrain_meshes;
+
+        glm::vec3 anchor_position; // the center of the currently loaded terrain
 
 };
 
