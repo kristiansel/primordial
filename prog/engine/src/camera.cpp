@@ -4,7 +4,7 @@ Camera::Camera() :
     fovy(40), // field of vertical view
     aspect(1.6), // aspect ratio
     nearz(0.6), // near z clipping plane
-    farz(1200) // far z clipping plane
+    farz(600) // far z clipping plane
 {
 
 }

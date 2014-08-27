@@ -8,6 +8,9 @@
 
 struct TerrainPatch
 {
+    TerrainPatch() {prop = std::shared_ptr<Prop>(new Prop); mesh = std::shared_ptr<Mesh>(new Mesh); unsigned int subd_lvl = 0;}
+    TerrainPatch(unsigned int subd_lvl_in) {prop = std::shared_ptr<Prop>(new Prop); mesh = std::shared_ptr<Mesh>(new Mesh); subd_lvl = subd_lvl_in;}
+    void reInit(unsigned int subd_lvl_in) {prop = std::shared_ptr<Prop>(new Prop); mesh = std::shared_ptr<Mesh>(new Mesh); subd_lvl = subd_lvl_in;}
     std::shared_ptr<Prop> prop;
     std::shared_ptr<Mesh> mesh;
     unsigned int subd_lvl;
@@ -21,7 +24,7 @@ class Terrain
 
         void init(PhysicsWorld* physics_world_in); // Initialize the monolithic "terrain" object
 
-        std::vector<std::shared_ptr<Prop>>* getPatches();
+        std::vector<TerrainPatch>* getPatches();
 
         void updateObserverPosition(glm::vec3 observer_position);
 
@@ -51,9 +54,9 @@ class Terrain
 
         void updatePhysicsTerrain(glm::vec3 anchor_in);
 
-        void fixEdgeNormals();
-
         float sampleHeightMap(float x, float z, float length, float center_x, float center_z);
+
+        void changeSubdLvl(unsigned int subd_lvl_in, TerrainPatch* terrain_patch);
 
 
 
@@ -83,8 +86,7 @@ class Terrain
         float m_sidePhysHeights;
         //float* m_heightData1;
 
-        std::vector<std::shared_ptr<Prop>> terrain_patches; // Keep own geometry since none of it is duplicate
-        std::vector<std::shared_ptr<Mesh>> terrain_meshes;
+        std::vector<TerrainPatch> terrain_patches;
 
         glm::vec3 anchor_position; // the center of the currently loaded terrain
 

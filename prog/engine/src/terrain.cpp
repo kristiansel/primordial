@@ -7,12 +7,12 @@ Terrain::Terrain() :
     m_horzScale(256), // 1024, 4096
     m_centerX(0.0), // 0.0
     m_centerZ(0.0), // 0.0
-    m_patchLength(32), // 32, 96
+    m_patchLength(178), // 32, 96
     m_physicsWorld(nullptr),
     m_terrainBody(nullptr),
     m_heightData0(nullptr),
     m_corePatchDim(8), // 4, 32
-    m_numPatchSubd(3)
+    m_numPatchSubd(7)
 {
     //ctor
     //m_sqLODthresh = {}
@@ -46,12 +46,12 @@ void Terrain::init(PhysicsWorld* physics_world_in)
         }
     }
 
-    generatePhysicsPatch(glm::vec3(0.0, 0.0, 0.0), 5*32.0, 5*16);
+    generatePhysicsPatch(glm::vec3(0.0, 0.0, 0.0), 2*m_patchLength, 2*pow(2, m_numPatchSubd));
 
     std::cout << "length of terrain_patches: " << terrain_patches.size() << "\n";
 }
 
-std::vector<std::shared_ptr<Prop>>* Terrain::getPatches()
+std::vector<TerrainPatch>* Terrain::getPatches()
 {
     return &terrain_patches;
 }
@@ -213,19 +213,19 @@ void Terrain::generateGraphicsPatch(glm::vec3 center, float patch_length, unsign
 
     subdividedQuads(verts, num_verts, tris, num_tris, patch_length/2, num_subd, center.x, center.z);
 
-     // assing the quad to the mesh;
-    terrain_meshes.push_back(std::shared_ptr<Mesh> (new Mesh));
 
-    std::shared_ptr<Mesh> terrain_quad = terrain_meshes.back();
+
+     // assing the quad to the mesh;
+    terrain_patches.push_back(TerrainPatch(num_subd)); // generates both new mesh and prop
+    TerrainPatch* terrain_patch = &(terrain_patches.back());
+
+    std::shared_ptr<Mesh> terrain_quad = terrain_patch->mesh;
     terrain_quad->fromMemory(verts, num_verts, tris, num_tris);
 
     delete [] verts;
     delete [] tris;
 
-    // declare our patch as a prop
-    std::shared_ptr<Prop> terrain_patch = std::shared_ptr<Prop>(new Prop);
-
-    terrain_patch->pos = glm::vec3(center.x, 0.0, center.z);
+    terrain_patch->prop->pos = glm::vec3(center.x, 0.0, center.z);
 
     // get the placeholder terrain texture
     //std::weak_ptr<Mesh>      mesh_ptr    = global::mesh_manager.getResptrFromKey ("simple_plane");
@@ -233,10 +233,7 @@ void Terrain::generateGraphicsPatch(glm::vec3 center, float patch_length, unsign
     std::weak_ptr<Texture>   tex_ptr     = global::tex_manager.getResptrFromKey  ("grass_equal");
 
     // attach the generated geometry to the patch-prop
-    terrain_patch->attachBatch(mesh_ptr, tex_ptr);
-
-    // add the terrain patch to the vector of terrain patches
-    terrain_patches.push_back(terrain_patch);
+    terrain_patch->prop->attachBatch(mesh_ptr, tex_ptr);
 }
 
 
@@ -324,7 +321,7 @@ void Terrain::generateHeightMap()
 {
     double range = 8000.0; // m
 
-    //srand(23798); // removing this gives a nice one
+    srand(23798); // removing this gives a nice one
 
     // find the first (middle point) m_dimension/2
     m_height_map(m_dimension/2, m_dimension/2) = rand_range(-range, range);
@@ -542,21 +539,17 @@ void Terrain::updateObserverPosition(glm::vec3 observer_position)
 
         // 2:
 
-        for (std::pair<std::vector<std::shared_ptr<Prop>>::iterator, std::vector<std::shared_ptr<Mesh>>::iterator> // C++ is shit...
-             it(terrain_patches.begin(), terrain_meshes.begin());
-             it.first != terrain_patches.end() /* && i.second != dubVec.end() */;
-             /* don't increment */)
+        for (auto it = terrain_patches.begin(); it<terrain_patches.end(); /*don't incr*/)
         {
-            if (abs((*(it.first))->pos.x-anchor_position.x) > m_patchLength*erase_distance)
+            if (abs(it->prop->pos.x-anchor_position.x) > m_patchLength*erase_distance)
             {
-                it.first  = terrain_patches.erase(it.first);
-                it.second = terrain_meshes.erase(it.second);
+                it = terrain_patches.erase(it);
             }
             else
             {
-                it.first++;
-                it.second++;
+                it++;
             }
+
         }
 
         // create
@@ -575,7 +568,7 @@ void Terrain::updateObserverPosition(glm::vec3 observer_position)
 
         m_physicsWorld->removeBtRigidBody(m_terrainBody);
 
-        generatePhysicsPatch(anchor_position, 5*32.0, 5*16);
+        generatePhysicsPatch(anchor_position, 2*m_patchLength, 2*pow(2, m_numPatchSubd));
     }
 
     // if the difference is greater than threshold then move the anchor
@@ -591,21 +584,18 @@ void Terrain::updateObserverPosition(glm::vec3 observer_position)
 
         float erase_distance = ((float)(m_corePatchDim-1)/2.0)*1.01;
 
-        for (std::pair<std::vector<std::shared_ptr<Prop>>::iterator, std::vector<std::shared_ptr<Mesh>>::iterator> // C++ is shit...
-             it(terrain_patches.begin(), terrain_meshes.begin());
-             it.first != terrain_patches.end() /* && i.second != dubVec.end() */;
-             /* don't increment */)
+
+        for (auto it = terrain_patches.begin(); it<terrain_patches.end(); /*don't incr*/)
         {
-            if (abs((*(it.first))->pos.z-anchor_position.z) > m_patchLength*erase_distance)
+            if (abs(it->prop->pos.z-anchor_position.z) > m_patchLength*erase_distance)
             {
-                it.first  = terrain_patches.erase(it.first);
-                it.second = terrain_meshes.erase(it.second);
+                it = terrain_patches.erase(it);
             }
             else
             {
-                it.first++;
-                it.second++;
+                it++;
             }
+
         }
 
         // create
@@ -626,14 +616,49 @@ void Terrain::updateObserverPosition(glm::vec3 observer_position)
 
         m_physicsWorld->removeBtRigidBody(m_terrainBody);
 
-        generatePhysicsPatch(anchor_position, 5*32.0, 5*16);
+        generatePhysicsPatch(anchor_position, 2*m_patchLength, 2*pow(2, m_numPatchSubd));
     }
 
+    //std::cout << ">>>>>>>>>>>going through patches\n";
+    // go through all patches, if they are wrong level change them
 
+    //bool changed_terrain = false;
+    for (auto it = terrain_patches.begin(); it<terrain_patches.end(); it++)
+    {
+        float del_x = it->prop->pos.x - observer_position.x;
+        float del_z = it->prop->pos.z - observer_position.z;
+        float sq_distance = del_x*del_x + del_z*del_z;
 
+        float max_dist = (m_corePatchDim/2.f*m_patchLength)*0.9;
+        //std::cout << max_dist << "\n";
 
-    // std::cout << "updating terrain!\n";
+        int distance_index = ceil(m_numPatchSubd*(1-sq_distance/(max_dist*max_dist)));
 
+//        float max_dist = (m_corePatchDim/2.f*m_patchLength)*0.9;
+//        //std::cout << max_dist << "\n";
+//
+//        int distance_index = sq_distance < m_patchLength*m_patchLength ?
+//                             m_numPatchSubd :
+//                             ceil(m_numPatchSubd*(1-sqrt(abs(sq_distance-m_patchLength*m_patchLength)/(max_dist*max_dist))));
+
+        unsigned int pref_lvl = distance_index > 0 ? distance_index : 0 ;
+
+        //std::cout << "  dist_sq = " << sq_distance << ", lvl should be " << pref_lvl << ", is " << it->subd_lvl << "\n";
+
+        // check difference in lvl of surroudning patches
+        // if lower, then account for this in subdivision
+
+        if (pref_lvl != it->subd_lvl)
+        {
+            //changed_terrain = true;
+            changeSubdLvl(pref_lvl, &(*it));
+        }
+    }
+//    if (changed_terrain==false)
+//    {
+//        std::cout << "no terrain changes\n";
+//    }
+    //std::cout << "updating terrain!\n";
 
 }
 
@@ -662,10 +687,39 @@ glm::vec3 Terrain::normSample(float x, float z)
     return normal;
 }
 
-void Terrain::fixEdgeNormals()
+void Terrain::changeSubdLvl(unsigned int subd_lvl_in, TerrainPatch* terrain_patch)
 {
-    for (auto patch : terrain_patches)
-    {
-        // classify as border or internal
-    }
+    glm::vec3 old_pos = terrain_patch->prop->pos;
+
+    //std::cout << "Do any meshes get deleted here?\n"; //YES!!
+    //delete what is already there? Check how magic the shared pointer is
+    terrain_patch->reInit(subd_lvl_in);
+
+    Vertex* verts;
+    Triangle* tris;
+    int num_verts;
+    int num_tris;
+
+//            std::cout << "num_verts: " << num_verts << "\n";
+//            std::cout << "num_tris: " << num_tris << "\n";
+
+    Terrain::subdividedQuads(verts, num_verts, tris, num_tris, m_patchLength/2.0, subd_lvl_in, old_pos.x, old_pos.z);
+
+    std::shared_ptr<Mesh> terrain_quad = terrain_patch->mesh;
+    terrain_quad->fromMemory(verts, num_verts, tris, num_tris);
+
+    delete [] verts;
+    delete [] tris;
+
+    terrain_patch->prop->pos = old_pos;
+
+    // get the placeholder terrain texture
+    //std::weak_ptr<Mesh>      mesh_ptr    = global::mesh_manager.getResptrFromKey ("simple_plane");
+    std::weak_ptr<Mesh>      mesh_ptr    = std::weak_ptr<Mesh>(terrain_quad);
+    std::weak_ptr<Texture>   tex_ptr     = global::tex_manager.getResptrFromKey  ("grass_equal");
+
+    // attach the generated geometry to the patch-prop
+    terrain_patch->prop->attachBatch(mesh_ptr, tex_ptr);
+
+    //std::cout << "After change then the new subd_lvl is" << terrain_patch->subd_lvl <<"\n";
 }

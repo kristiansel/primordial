@@ -99,7 +99,7 @@ void Renderer::draw(Scene &scene, float dt)
         }
 
         // Should preferably draw the terrain after actors and props
-        std::vector<std::shared_ptr<Prop>>* terrain_patches = scene.terrain->getPatches();
+        std::vector<TerrainPatch>* terrain_patches = scene.terrain->getPatches();
 
 //      // uncomment the below to make the terrain cast shadow
 //        for (auto it = terrain_patches->begin(); it!=terrain_patches->end(); it++)
@@ -141,7 +141,7 @@ void Renderer::draw(Scene &scene, float dt)
 
         for (auto it = terrain_patches->begin(); it!=terrain_patches->end(); it++)
         {
-            main_shader.drawProp(*it);
+            main_shader.drawProp(it->prop);
             // why is this not showing...?
         }
 
