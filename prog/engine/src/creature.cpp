@@ -207,40 +207,49 @@ void Creature::resolveActionRequests(float dt)
             {
                 float speed = 1.0;
 
-                snd_emitter->emitSound("swosh3.flac");
-
-                state.moveInterrupted = true;
-
-                float eps = 0.000001;
-
-                if (state.left_sweep<-eps)
+                if ((doing.signal!=sSignal::sAttack) || (doing.time < 0.68)) // doing.time < triggertime
+                //if(1)
                 {
-                    doing = {sAttack, getAnimDuration(Anim::SwingLeft1H)/speed, false};
-                    playAnim(Anim::SwingLeft1H, true, speed);
-                    doing.reg[0] = -90.0; // store angle
-                }
-                else if (state.left_sweep>eps)
-                {
-                    doing = {sAttack, getAnimDuration(Anim::SwingRight1H)/speed, false};
-                    playAnim(Anim::SwingRight1H, true, speed);
-                    doing.reg[0] = 90.0; // store angle
-                }
-                else // state.left_sweep ~= 0.0
-                {
-                    int dice = rand() % 100;
-                    if (dice >= 50)
+                    snd_emitter->emitSound("swosh3.flac");
+
+                    state.moveInterrupted = true;
+
+                    float eps = 0.000001;
+
+                    if (state.left_sweep<-eps)
                     {
                         doing = {sAttack, getAnimDuration(Anim::SwingLeft1H)/speed, false};
                         playAnim(Anim::SwingLeft1H, true, speed);
                         doing.reg[0] = -90.0; // store angle
                     }
-                    else
+                    else if (state.left_sweep>eps)
                     {
                         doing = {sAttack, getAnimDuration(Anim::SwingRight1H)/speed, false};
                         playAnim(Anim::SwingRight1H, true, speed);
                         doing.reg[0] = 90.0; // store angle
                     }
+                    else // state.left_sweep ~= 0.0
+                    {
+                        int dice = rand() % 100;
+                        if (dice >= 50)
+                        {
+                            doing = {sAttack, getAnimDuration(Anim::SwingLeft1H)/speed, false};
+                            playAnim(Anim::SwingLeft1H, true, speed);
+                            doing.reg[0] = -90.0; // store angle
+                        }
+                        else
+                        {
+                            doing = {sAttack, getAnimDuration(Anim::SwingRight1H)/speed, false};
+                            playAnim(Anim::SwingRight1H, true, speed);
+                            doing.reg[0] = 90.0; // store angle
+                        }
+                    }
                 }
+                else
+                {
+                    std::cout << "Attack cancelled because already attacking\n";
+                }
+
             } break;
             case sSignal::sDodge:
             {

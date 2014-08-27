@@ -1,18 +1,21 @@
 #include "terrain.h"
 
 Terrain::Terrain() :
-    m_dimension(256),
-    m_height_map(256),
-    m_heightScale(0.016),
-    m_horzScale(1024.0),
-    m_centerX(0.0),
-    m_centerZ(0.0),
-    m_patchLength(32.0),
+    m_dimension(256),   // 256, 2048
+    m_height_map(256),  // 256, 2048
+    m_heightScale(0.0050), // 0.016, 5*0.016
+    m_horzScale(256), // 1024, 4096
+    m_centerX(0.0), // 0.0
+    m_centerZ(0.0), // 0.0
+    m_patchLength(32), // 32, 96
     m_physicsWorld(nullptr),
     m_terrainBody(nullptr),
-    m_heightData0(nullptr)
+    m_heightData0(nullptr),
+    m_corePatchDim(8), // 4, 32
+    m_numPatchSubd(3)
 {
     //ctor
+    //m_sqLODthresh = {}
 }
 
 Terrain::~Terrain()
@@ -30,17 +33,16 @@ void Terrain::init(PhysicsWorld* physics_world_in)
 
     anchor_position = glm::vec3(0.0, 0.0, 0.0);
 
-    float patch_length = 32.0; // LOD1 16, LOD2 8, LOD3 4
-    m_patchLength = patch_length;
-
-    for (int i = 0; i<3; i++)
+    for (unsigned int i = 0; i<m_corePatchDim; i++)
     {
-        for (int j = 0; j<3; j++)
+        for (unsigned int j = 0; j<m_corePatchDim; j++)
         {
-            float center_x = -1*patch_length + j*patch_length;
-            float center_z = -1*patch_length + i*patch_length;
+            float start_offset = (float)(m_corePatchDim-1)/2.0;
 
-            generateGraphicsPatch(glm::vec3(center_x, 0.0, center_z), 32.0, 16);
+            float center_x = -start_offset*m_patchLength + j*m_patchLength;
+            float center_z = -start_offset*m_patchLength + i*m_patchLength;
+
+            generateGraphicsPatch(glm::vec3(center_x, 0.0, center_z), m_patchLength, m_numPatchSubd);
         }
     }
 
@@ -111,16 +113,23 @@ void Terrain::subdividedQuads(Vertex* &vertices,
             verts[1].position = glm::vec4(x, sample1, z, 1.0);
             verts[2].position = glm::vec4(x+quad_length, sample2, z, 1.0);
             verts[3].position = glm::vec4(x+quad_length, sample3, z+quad_length, 1.0);
+//
+//            glm::vec3 facenormal = glm::normalize(glm::cross(glm::vec3(verts[3].position.x, verts[3].position.y, verts[3].position.z)-
+//                                                             glm::vec3(verts[0].position.x, verts[0].position.y, verts[0].position.z),
+//                                                             glm::vec3(verts[1].position.x, verts[1].position.y, verts[1].position.z)-
+//                                                             glm::vec3(verts[0].position.x, verts[0].position.y, verts[0].position.z)));
+//
+//
+//            verts[0].normal = facenormal;
+//            verts[1].normal = facenormal;
+//            verts[2].normal = facenormal;
+//            verts[3].normal = facenormal;
 
-            glm::vec3 facenormal = glm::normalize(glm::cross(glm::vec3(verts[3].position.x, verts[3].position.y, verts[3].position.z)-
-                                                             glm::vec3(verts[0].position.x, verts[0].position.y, verts[0].position.z),
-                                                             glm::vec3(verts[1].position.x, verts[1].position.y, verts[1].position.z)-
-                                                             glm::vec3(verts[0].position.x, verts[0].position.y, verts[0].position.z)));
-
-            verts[0].normal = facenormal;
-            verts[1].normal = facenormal;
-            verts[2].normal = facenormal;
-            verts[3].normal = facenormal;
+            // make a numerical estimation of the normal
+            verts[0].normal = normSample(x+x_corner, z+quad_length+z_corner);
+            verts[1].normal = normSample(x+x_corner, z+z_corner);
+            verts[2].normal = normSample(x+quad_length+x_corner, z+z_corner);
+            verts[3].normal = normSample(x+quad_length+x_corner, z+quad_length+z_corner);
 
             verts[0].tex_coords[0] = 0.0; verts[0].tex_coords[1] = 0.0;
             verts[1].tex_coords[0] = 0.0; verts[1].tex_coords[1] = 1.0;
@@ -155,34 +164,34 @@ void Terrain::subdividedQuads(Vertex* &vertices,
         }
     }
 
-    // correct interior normals
-    for (int i = 0; i<n_side-1; i++)
-    {
-        for (int j = 0; j<n_side-1; j++)
-        {
-            int nw = verts_per_quad*(i*n_side + j);
-            int ne = verts_per_quad*(i*n_side + j+1);
-            int sw = verts_per_quad*((i+1)*n_side + j);
-            int se = verts_per_quad*((i+1)*n_side + j+1);
-            //     1-------2------x
-            //     | _0___/| ____/|
-            //     |/   1  |/     |
-            //     0------(3)-----x
-            //     | _____/| ____/|
-            //     |/      |/     |
-            //     x-------x------x
-
-            glm::vec3 av_normal = 0.25f*(vertices[nw+3].normal +
-                                        vertices[ne+0].normal +
-                                        vertices[sw+2].normal +
-                                        vertices[se+1].normal);
-
-            vertices[nw+3].normal = av_normal;
-            vertices[ne+0].normal = av_normal;
-            vertices[sw+2].normal = av_normal;
-            vertices[se+1].normal = av_normal;
-        }
-    }
+//    // correct interior normals
+//    for (int i = 0; i<n_side-1; i++)
+//    {
+//        for (int j = 0; j<n_side-1; j++)
+//        {
+//            int nw = verts_per_quad*(i*n_side + j);
+//            int ne = verts_per_quad*(i*n_side + j+1);
+//            int sw = verts_per_quad*((i+1)*n_side + j);
+//            int se = verts_per_quad*((i+1)*n_side + j+1);
+//            //     1-------2------x
+//            //     | _0___/| ____/|
+//            //     |/   1  |/     |
+//            //     0------(3)-----x
+//            //     | _____/| ____/|
+//            //     |/      |/     |
+//            //     x-------x------x
+//
+//            glm::vec3 av_normal = 0.25f*(vertices[nw+3].normal +
+//                                        vertices[ne+0].normal +
+//                                        vertices[sw+2].normal +
+//                                        vertices[se+1].normal);
+//
+//            vertices[nw+3].normal = av_normal;
+//            vertices[ne+0].normal = av_normal;
+//            vertices[sw+2].normal = av_normal;
+//            vertices[se+1].normal = av_normal;
+//        }
+//    }
 
     // finished
 }
@@ -192,7 +201,7 @@ void Terrain::subdividedQuads(Vertex* &vertices,
 //    return i*map_dim+j;
 //};
 
-void Terrain::generateGraphicsPatch(glm::vec3 center, float patch_length, int dim)
+void Terrain::generateGraphicsPatch(glm::vec3 center, float patch_length, unsigned int num_subd)
 {
     Vertex* verts;
     Triangle* tris;
@@ -202,7 +211,7 @@ void Terrain::generateGraphicsPatch(glm::vec3 center, float patch_length, int di
 //            std::cout << "num_verts: " << num_verts << "\n";
 //            std::cout << "num_tris: " << num_tris << "\n";
 
-    subdividedQuads(verts, num_verts, tris, num_tris, patch_length/2, 4, center.x, center.z);
+    subdividedQuads(verts, num_verts, tris, num_tris, patch_length/2, num_subd, center.x, center.z);
 
      // assing the quad to the mesh;
     terrain_meshes.push_back(std::shared_ptr<Mesh> (new Mesh));
@@ -314,6 +323,8 @@ double rand_range(double a, double b)
 void Terrain::generateHeightMap()
 {
     double range = 8000.0; // m
+
+    //srand(23798); // removing this gives a nice one
 
     // find the first (middle point) m_dimension/2
     m_height_map(m_dimension/2, m_dimension/2) = rand_range(-range, range);
@@ -514,8 +525,10 @@ void Terrain::updateObserverPosition(glm::vec3 observer_position)
     float sign_x = (diff_x > 0.0) ? 1.0 : -1.0;
     float sign_z = (diff_z > 0.0) ? 1.0 : -1.0;
 
+    //float start_offset = (float)(m_corePatchDim-1)/2.0;
+
     // if the difference is greater than threshold then move the anchor
-    if (abs_diff_x > m_patchLength*0.80)
+    if (abs_diff_x > m_patchLength*0.6)
     {
         std::cout << "old anchor position: " << anchor_position.x << ", " << anchor_position.y << ", " << anchor_position.z << "\n";
         // do a swap in the x direction
@@ -525,13 +538,16 @@ void Terrain::updateObserverPosition(glm::vec3 observer_position)
 
         std::cout << "length before: " << terrain_patches.size() << "\n";
 
+        float erase_distance = ((float)(m_corePatchDim-1)/2.0)*1.01;
+
+        // 2:
 
         for (std::pair<std::vector<std::shared_ptr<Prop>>::iterator, std::vector<std::shared_ptr<Mesh>>::iterator> // C++ is shit...
              it(terrain_patches.begin(), terrain_meshes.begin());
              it.first != terrain_patches.end() /* && i.second != dubVec.end() */;
              /* don't increment */)
         {
-            if (abs((*(it.first))->pos.x-anchor_position.x) > m_patchLength*1.2)
+            if (abs((*(it.first))->pos.x-anchor_position.x) > m_patchLength*erase_distance)
             {
                 it.first  = terrain_patches.erase(it.first);
                 it.second = terrain_meshes.erase(it.second);
@@ -544,12 +560,15 @@ void Terrain::updateObserverPosition(glm::vec3 observer_position)
         }
 
         // create
-        for (int i = -1; i<2; i++)
+        for (int i = 0; i<m_corePatchDim; i++)
         {
-            float center_x = anchor_position.x + sign_x*m_patchLength;;
-            float center_z = anchor_position.z + i*m_patchLength;
 
-            generateGraphicsPatch(glm::vec3(center_x, 0.0, center_z), 32.0, 16);
+            float start_offset = (float)(m_corePatchDim-1)/2.0;
+
+            float center_x = anchor_position.x + start_offset*sign_x*m_patchLength;
+            float center_z = anchor_position.z + (i - start_offset)*m_patchLength;
+
+            generateGraphicsPatch(glm::vec3(center_x, 0.0, center_z), m_patchLength, 0);
         }
 
         std::cout << "swapped x\n";
@@ -570,13 +589,14 @@ void Terrain::updateObserverPosition(glm::vec3 observer_position)
 
         std::cout << "length before: " << terrain_patches.size() << "\n";
 
+        float erase_distance = ((float)(m_corePatchDim-1)/2.0)*1.01;
 
         for (std::pair<std::vector<std::shared_ptr<Prop>>::iterator, std::vector<std::shared_ptr<Mesh>>::iterator> // C++ is shit...
              it(terrain_patches.begin(), terrain_meshes.begin());
              it.first != terrain_patches.end() /* && i.second != dubVec.end() */;
              /* don't increment */)
         {
-            if (abs((*(it.first))->pos.z-anchor_position.z) > m_patchLength*1.2)
+            if (abs((*(it.first))->pos.z-anchor_position.z) > m_patchLength*erase_distance)
             {
                 it.first  = terrain_patches.erase(it.first);
                 it.second = terrain_meshes.erase(it.second);
@@ -589,12 +609,14 @@ void Terrain::updateObserverPosition(glm::vec3 observer_position)
         }
 
         // create
-        for (int j = -1; j<2; j++)
+        for (int j = 0; j<m_corePatchDim; j++)
         {
-            float center_x = anchor_position.x + j*m_patchLength;;
-            float center_z = anchor_position.z + sign_z*m_patchLength;
+            float start_offset = (float)(m_corePatchDim-1)/2.0;
 
-            generateGraphicsPatch(glm::vec3(center_x, 0.0, center_z), 32.0, 16);
+            float center_x = anchor_position.x + (j - start_offset)*m_patchLength;;
+            float center_z = anchor_position.z + start_offset*sign_z*m_patchLength;
+
+            generateGraphicsPatch(glm::vec3(center_x, 0.0, center_z), m_patchLength, 0);
         }
 
         std::cout << "swapped z\n";
@@ -615,4 +637,35 @@ void Terrain::updateObserverPosition(glm::vec3 observer_position)
 
 }
 
+float Terrain::ySample(float x, float z)
+{
+    return m_heightScale*sampleHeightMap(x, z, m_horzScale, m_centerX, m_centerZ);
+}
 
+glm::vec3 Terrain::normSample(float x, float z)
+{
+    float dx = 2.0;
+    float dz = dx;
+
+    float y_back_x = ySample(x-dx, z);
+    float y_forw_x = ySample(x+dx, z);
+
+    glm::vec3 del_x = glm::vec3 (2*dx, y_forw_x - y_back_x, 0.0);
+
+    float y_back_z = ySample(x, z-dz);
+    float y_forw_z = ySample(x, z+dz);
+
+    glm::vec3 del_z = glm::vec3 (0.0, y_forw_z - y_back_z, 2*dz);
+
+    glm::vec3 normal = glm::normalize(glm::cross(del_z, del_x));
+
+    return normal;
+}
+
+void Terrain::fixEdgeNormals()
+{
+    for (auto patch : terrain_patches)
+    {
+        // classify as border or internal
+    }
+}

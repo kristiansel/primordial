@@ -8,7 +8,7 @@ struct DirLight
 {
     // Methods
     DirLight();
-    glm::mat4 getVPmatrix() const;
+    glm::mat4 getVPmatrix(glm::vec3 focus_pos) const;
 
     // Members
     glm::vec3 dir;

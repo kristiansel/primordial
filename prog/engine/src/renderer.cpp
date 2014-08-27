@@ -79,7 +79,9 @@ void Renderer::draw(Scene &scene, float dt)
     glm::mat4 proj_mat = scene.camera->getProjectionMatrix();
 
     const DirLight &mlight = (*scene.main_light);
-    glm::mat4 mlight_vp = mlight.getVPmatrix();
+    glm::vec3 cam_dir = scene.camera->getDir();
+    glm::vec3 shadow_focus = scene.camera->pos + 12.f*glm::normalize(glm::vec3(cam_dir.x, 0.0, cam_dir.z));
+    glm::mat4 mlight_vp = mlight.getVPmatrix(shadow_focus);
 
     glm::vec4 fog_color = glm::vec4(1.0, 1.0, 1.0, 1.0);
 
@@ -99,10 +101,11 @@ void Renderer::draw(Scene &scene, float dt)
         // Should preferably draw the terrain after actors and props
         std::vector<std::shared_ptr<Prop>>* terrain_patches = scene.terrain->getPatches();
 
-        for (auto it = terrain_patches->begin(); it!=terrain_patches->end(); it++)
-        {
-            shadow_map.drawProp(*it);
-        }
+//      // uncomment the below to make the terrain cast shadow
+//        for (auto it = terrain_patches->begin(); it!=terrain_patches->end(); it++)
+//        {
+//            shadow_map.drawProp(*it);
+//        }
 
         for (auto it = scene.actors.begin(); it!=scene.actors.end(); it++)
         {

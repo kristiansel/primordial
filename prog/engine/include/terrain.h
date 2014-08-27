@@ -6,6 +6,13 @@
 #include "closedmap.h"
 #include "physicsworld.h"
 
+struct TerrainPatch
+{
+    std::shared_ptr<Prop> prop;
+    std::shared_ptr<Mesh> mesh;
+    unsigned int subd_lvl;
+};
+
 class Terrain
 {
     public:
@@ -17,6 +24,9 @@ class Terrain
         std::vector<std::shared_ptr<Prop>>* getPatches();
 
         void updateObserverPosition(glm::vec3 observer_position);
+
+        float ySample(float x, float z);
+        glm::vec3 normSample(float x, float z);
 
     protected:
 //        std::shared_ptr<Prop> patches_LOD2[20];
@@ -34,12 +44,14 @@ class Terrain
 
         void generateGraphicsPatch(glm::vec3 center,
                                   float length,
-                                  int dim);
+                                  unsigned int num_subd);
         void generatePhysicsPatch(glm::vec3 center,
                                   float length,
                                   int dim);
 
         void updatePhysicsTerrain(glm::vec3 anchor_in);
+
+        void fixEdgeNormals();
 
         float sampleHeightMap(float x, float z, float length, float center_x, float center_z);
 
@@ -58,6 +70,8 @@ class Terrain
         float m_centerZ;
 
         float m_patchLength;
+        unsigned int m_numPatchSubd;
+        //std::vector<float> m_sqLODthresh;
 
         PhysicsWorld* m_physicsWorld;
         btRigidBody* m_terrainBody;
@@ -73,6 +87,8 @@ class Terrain
         std::vector<std::shared_ptr<Mesh>> terrain_meshes;
 
         glm::vec3 anchor_position; // the center of the currently loaded terrain
+
+        unsigned int m_corePatchDim;
 
 };
 

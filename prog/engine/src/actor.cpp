@@ -153,8 +153,8 @@ void Actor::updateAnim(float dt)
             float advance_time = speed_factor*dt;
             anim.anim_time+=advance_time;
 
-            float weight_change = advance_time/blend_time;
-            // if (anim.anim_index == active_anim) // It is the main active animation
+            float weight_change = advance_time/blend_time; // 1.0 * fraction of blend_time
+
             if (anim.uid == main_anim_uid) // It is the main active animation
             {
                 // increase blend weight
@@ -172,6 +172,7 @@ void Actor::updateAnim(float dt)
                 // taken out of active_anims
             }
         }
+
         // remove if blend weight below 0.0
         auto has_neg_weight = [] (ActiveAnim &a) {return (a.blend_weight < 0.0);};
 
