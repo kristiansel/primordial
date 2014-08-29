@@ -8,12 +8,13 @@
 
 struct TerrainPatch
 {
-    TerrainPatch() {prop = std::shared_ptr<Prop>(new Prop); mesh = std::shared_ptr<Mesh>(new Mesh); unsigned int subd_lvl = 0;}
-    TerrainPatch(unsigned int subd_lvl_in) {prop = std::shared_ptr<Prop>(new Prop); mesh = std::shared_ptr<Mesh>(new Mesh); subd_lvl = subd_lvl_in;}
+    TerrainPatch();
+    TerrainPatch(unsigned int subd_lvl_in);
     void reInit(unsigned int subd_lvl_in) {prop = std::shared_ptr<Prop>(new Prop); mesh = std::shared_ptr<Mesh>(new Mesh); subd_lvl = subd_lvl_in;}
     std::shared_ptr<Prop> prop;
     std::shared_ptr<Mesh> mesh;
     unsigned int subd_lvl;
+    int diff_lvl[4];
 };
 
 class Terrain
@@ -40,6 +41,7 @@ class Terrain
                              int &num_tris,
                              float half_length,
                              int n_sub,
+                             int *lvldiff_nsew,
                              float x_corner,
                              float z_corner);
 
@@ -56,7 +58,7 @@ class Terrain
 
         float sampleHeightMap(float x, float z, float length, float center_x, float center_z);
 
-        void changeSubdLvl(unsigned int subd_lvl_in, TerrainPatch* terrain_patch);
+        void changeSubdLvl(unsigned int subd_lvl_in, TerrainPatch* terrain_patch, int *lvldiff_nsew);
 
 
 
@@ -74,7 +76,7 @@ class Terrain
 
         float m_patchLength;
         unsigned int m_numPatchSubd;
-        //std::vector<float> m_sqLODthresh;
+        float m_maxDistSq;
 
         PhysicsWorld* m_physicsWorld;
         btRigidBody* m_terrainBody;
@@ -84,7 +86,8 @@ class Terrain
 
         float m_spacingPhysHeights;
         float m_sidePhysHeights;
-        //float* m_heightData1;
+        glm::vec3 phys_anchor;
+        float phys_anchor_l_sq;
 
         std::vector<TerrainPatch> terrain_patches;
 

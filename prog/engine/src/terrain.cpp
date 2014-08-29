@@ -7,15 +7,17 @@ Terrain::Terrain() :
     m_horzScale(256), // 1024, 4096
     m_centerX(0.0), // 0.0
     m_centerZ(0.0), // 0.0
-    m_patchLength(178), // 32, 96
+    m_patchLength(300), // 32, 96
     m_physicsWorld(nullptr),
     m_terrainBody(nullptr),
     m_heightData0(nullptr),
     m_corePatchDim(8), // 4, 32
-    m_numPatchSubd(7)
+    m_numPatchSubd(7),
+    phys_anchor_l_sq(1024) // physics moves when distance to anchor = 32 m
 {
     //ctor
     //m_sqLODthresh = {}
+    m_maxDistSq = pow((m_corePatchDim/2.f*m_patchLength)*0.9, 2.0);
 }
 
 Terrain::~Terrain()
@@ -23,7 +25,23 @@ Terrain::~Terrain()
     //dtor
 }
 
-void Terrain::init(PhysicsWorld* physics_world_in)
+TerrainPatch::TerrainPatch() :
+    diff_lvl({-100, -100, -100, -100})
+{
+    prop = std::shared_ptr<Prop>(new Prop);
+    mesh = std::shared_ptr<Mesh>(new Mesh);
+    subd_lvl = 0;
+}
+
+TerrainPatch::TerrainPatch(unsigned int subd_lvl_in) :
+    diff_lvl({-100, -100, -100, -100})
+{
+    prop = std::shared_ptr<Prop>(new Prop);
+    mesh = std::shared_ptr<Mesh>(new Mesh);
+    subd_lvl = subd_lvl_in;
+}
+
+void Terrain::init(PhysicsWorld* physics_world_in /*, glm::vec3 position_terr*/)
 {
     std::cout << "initializing terrain...\n";
 
@@ -32,6 +50,7 @@ void Terrain::init(PhysicsWorld* physics_world_in)
     generateHeightMap();
 
     anchor_position = glm::vec3(0.0, 0.0, 0.0);
+    phys_anchor = glm::vec3(0.0, 0.0, 0.0);
 
     for (unsigned int i = 0; i<m_corePatchDim; i++)
     {
@@ -42,7 +61,8 @@ void Terrain::init(PhysicsWorld* physics_world_in)
             float center_x = -start_offset*m_patchLength + j*m_patchLength;
             float center_z = -start_offset*m_patchLength + i*m_patchLength;
 
-            generateGraphicsPatch(glm::vec3(center_x, 0.0, center_z), m_patchLength, m_numPatchSubd);
+            //generateGraphicsPatch(glm::vec3(center_x, 0.0, center_z), m_patchLength, m_numPatchSubd);
+            generateGraphicsPatch(glm::vec3(center_x, 0.0, center_z), m_patchLength, 0);
         }
     }
 
@@ -62,6 +82,7 @@ void Terrain::subdividedQuads(Vertex* &vertices,
                               int &num_tris,
                               float half_length,
                               int n_sub,
+                              int *lvldiff_nsew,
                               float x_corner,
                               float z_corner)
 {
@@ -164,6 +185,175 @@ void Terrain::subdividedQuads(Vertex* &vertices,
         }
     }
 
+    // stick edge vertices to neighboring patches of lower detail
+    /**if (lvldiff_nsew[0] < 0)
+    {
+        int skip = abs(lvldiff_nsew[0]);
+        int diff_samepos = 3;
+        int diff_skip = 1+pow(2,skip+1)
+        for (int start = 2; j<n_side*4; j++)
+        {
+            //          1--2 1--2 1--2 1--2 1--2 1--2 1--2 1--2 1--2 1--2 1--2
+            // -1 :     x  ( )   x   ( )   x   ( )   x   ( )   x   ( )
+            //             2 5      10 13     18 21     26 29
+            // -2 :     x  ( )  ( )  ( )   x   ( )  ( )  ( )   x
+            // -3 :     x  ( )  ( )  ( )  ( )  ( )  ( )  ( )   x   ( )
+
+        }
+    }*/
+
+    // new algorithm:
+    // fill interior first, then edges
+
+    if (lvldiff_nsew[0] < 0)
+    {
+        int skip = pow(2, abs(lvldiff_nsew[0])); // 2, 4, 8 etc
+
+        int corner_offset = 1;
+        int skip_vert_stride = skip*verts_per_quad;
+
+        float left_height = vertices[corner_offset].position.y;
+        float right_height = vertices[corner_offset + skip_vert_stride-3].position.y;
+
+        int i = 0;
+        for (int j = 0; j<n_side-1; j++) // all columns
+        {
+            int first_vert_index = verts_per_quad*(i*n_side + j);
+            Vertex* verts = &(vertices[first_vert_index]);
+
+            int edge_num = j+1;
+            int mod = edge_num%skip;
+
+            if (mod==0)
+            {
+                //update interpolants
+                left_height = verts[2].position.y;
+                right_height = verts[2 + skip_vert_stride].position.y;
+            }
+            else
+            {
+                float left_weight = 1.0-(float)(mod)/(float)(skip);
+                float right_weight = (float)(mod)/(float)(skip);
+
+                verts[2].position.y = left_height * left_weight +
+                                      right_height * right_weight;
+                verts[2+3].position.y = verts[2].position.y;
+            }
+        } // for
+    } // fix north edge
+
+
+    if (lvldiff_nsew[1] < 0)
+    {
+        int skip = pow(2, abs(lvldiff_nsew[1])); // 2, 4, 8 etc
+
+        int corner_offset = verts_per_quad*(n_side-1)*n_side; // +first vertex of last row
+        int skip_vert_stride = skip*verts_per_quad;
+
+        float left_height = vertices[corner_offset].position.y;
+        float right_height = vertices[corner_offset + skip_vert_stride-1].position.y;
+
+        int i = (n_side-1);
+        for (int j = 0; j<n_side-1; j++) // all columns
+        {
+            int first_vert_index = verts_per_quad*(i*n_side + j);
+            Vertex* verts = &(vertices[first_vert_index]);
+
+            int edge_num = j+1;
+            int mod = edge_num%skip;
+
+            if (mod==0)
+            {
+                //update interpolants
+                left_height = verts[3].position.y;
+                right_height = verts[3 + skip_vert_stride].position.y;
+            }
+            else
+            {
+                float left_weight = 1.0-(float)(mod)/(float)(skip);
+                float right_weight = (float)(mod)/(float)(skip);
+
+                verts[3].position.y = left_height * left_weight +
+                                      right_height * right_weight;
+                verts[3+1].position.y = verts[3].position.y; // overlapping vertex in the next quad
+            }
+        } // for
+    } // fix south edge
+
+    if (lvldiff_nsew[2] < 0)
+    {
+        int skip = pow(2, abs(lvldiff_nsew[2])); // 2, 4, 8 etc
+
+        int corner_offset = verts_per_quad*(n_side-1)+2; // +first vertex of last column
+        int skip_vert_stride = skip*(verts_per_quad*n_side);
+
+        float left_height = vertices[corner_offset].position.y;
+        float right_height = vertices[corner_offset + skip_vert_stride-verts_per_quad*n_side+1].position.y;
+
+        int j = (n_side-1);
+        for (int i = 0; i<n_side-1; i++) // all rows
+        {
+            int first_vert_index = verts_per_quad*(i*n_side + j);
+            Vertex* verts = &(vertices[first_vert_index]);
+
+            int edge_num = i+1;
+            int mod = edge_num%skip;
+
+            if (mod==0)
+            {
+                //update interpolants
+                left_height = verts[3].position.y;
+                right_height = verts[3 + skip_vert_stride].position.y;
+            }
+            else
+            {
+                float left_weight = 1.0-(float)(mod)/(float)(skip);
+                float right_weight = (float)(mod)/(float)(skip);
+
+                verts[3].position.y = left_height * left_weight +
+                                      right_height * right_weight;
+                verts[3+verts_per_quad*n_side-1].position.y = verts[3].position.y; // overlapping vertex in the next quad
+            }
+        } // for
+    } // fix east edge
+
+    if (lvldiff_nsew[3] < 0)
+    {
+        int skip = pow(2, abs(lvldiff_nsew[3])); // 2, 4, 8 etc
+
+        int corner_offset = 1; // +first vertex of first column
+        int skip_vert_stride = skip*(verts_per_quad*n_side);
+
+        float left_height = vertices[corner_offset].position.y;
+        float right_height = vertices[corner_offset + skip_vert_stride-verts_per_quad*n_side-1].position.y;
+
+        int j = 0;
+        for (int i = 0; i<n_side-1; i++) // all rows
+        {
+            int first_vert_index = verts_per_quad*(i*n_side + j);
+            Vertex* verts = &(vertices[first_vert_index]);
+
+            int edge_num = i+1;
+            int mod = edge_num%skip;
+
+            if (mod==0)
+            {
+                //update interpolants
+                left_height = verts[0].position.y;
+                right_height = verts[0 + skip_vert_stride].position.y;
+            }
+            else
+            {
+                float left_weight = 1.0-(float)(mod)/(float)(skip);
+                float right_weight = (float)(mod)/(float)(skip);
+
+                verts[0].position.y = left_height * left_weight +
+                                      right_height * right_weight;
+                verts[0+verts_per_quad*n_side+1].position.y = verts[0].position.y; // overlapping vertex in the next quad
+            }
+        } // for
+    } // fix west edge
+
 //    // correct interior normals
 //    for (int i = 0; i<n_side-1; i++)
 //    {
@@ -210,8 +400,9 @@ void Terrain::generateGraphicsPatch(glm::vec3 center, float patch_length, unsign
 
 //            std::cout << "num_verts: " << num_verts << "\n";
 //            std::cout << "num_tris: " << num_tris << "\n";
+    int lvldiff_nsew[] = {0, 0, 0, 0};
 
-    subdividedQuads(verts, num_verts, tris, num_tris, patch_length/2, num_subd, center.x, center.z);
+    subdividedQuads(verts, num_verts, tris, num_tris, patch_length/2, num_subd, lvldiff_nsew, center.x, center.z);
 
 
 
@@ -566,9 +757,6 @@ void Terrain::updateObserverPosition(glm::vec3 observer_position)
 
         std::cout << "swapped x\n";
 
-        m_physicsWorld->removeBtRigidBody(m_terrainBody);
-
-        generatePhysicsPatch(anchor_position, 2*m_patchLength, 2*pow(2, m_numPatchSubd));
     }
 
     // if the difference is greater than threshold then move the anchor
@@ -613,11 +801,21 @@ void Terrain::updateObserverPosition(glm::vec3 observer_position)
 
         // Move the physics as well (just lazy, could add another
         // anchor to de-stress the CPU load of the "swapping frame"
+    }
 
+    float dist_to_phys_anchor = pow(observer_position.x-phys_anchor.x, 2) +
+                                pow(observer_position.z-phys_anchor.z, 2);
+    if (dist_to_phys_anchor > phys_anchor_l_sq)
+    {
         m_physicsWorld->removeBtRigidBody(m_terrainBody);
 
         generatePhysicsPatch(anchor_position, 2*m_patchLength, 2*pow(2, m_numPatchSubd));
+
+        std::cout << "swapped physics\n";
+
+        phys_anchor = observer_position;
     }
+
 
     //std::cout << ">>>>>>>>>>>going through patches\n";
     // go through all patches, if they are wrong level change them
@@ -628,30 +826,70 @@ void Terrain::updateObserverPosition(glm::vec3 observer_position)
         float del_x = it->prop->pos.x - observer_position.x;
         float del_z = it->prop->pos.z - observer_position.z;
         float sq_distance = del_x*del_x + del_z*del_z;
-
-        float max_dist = (m_corePatchDim/2.f*m_patchLength)*0.9;
         //std::cout << max_dist << "\n";
 
-        int distance_index = ceil(m_numPatchSubd*(1-sq_distance/(max_dist*max_dist)));
-
-//        float max_dist = (m_corePatchDim/2.f*m_patchLength)*0.9;
-//        //std::cout << max_dist << "\n";
-//
-//        int distance_index = sq_distance < m_patchLength*m_patchLength ?
-//                             m_numPatchSubd :
-//                             ceil(m_numPatchSubd*(1-sqrt(abs(sq_distance-m_patchLength*m_patchLength)/(max_dist*max_dist))));
-
-        unsigned int pref_lvl = distance_index > 0 ? distance_index : 0 ;
+        int pref_lvl = std::max((int)(ceil(m_numPatchSubd*(1-sq_distance/m_maxDistSq))), 0);
 
         //std::cout << "  dist_sq = " << sq_distance << ", lvl should be " << pref_lvl << ", is " << it->subd_lvl << "\n";
 
         // check difference in lvl of surroudning patches
         // if lower, then account for this in subdivision
+        int preflvldiff_nsew[] = {0, 0, 0, 0};
 
-        if (pref_lvl != it->subd_lvl)
+        { // north
+            float ndel_z = it->prop->pos.z - m_patchLength - observer_position.z;
+            float nsq_distance = del_x*del_x + ndel_z*ndel_z;
+
+            preflvldiff_nsew[0] = std::max((int)(ceil(m_numPatchSubd*(1-nsq_distance/m_maxDistSq))), 0) -pref_lvl;
+        }
+
+        { // south
+            float sdel_z = it->prop->pos.z + m_patchLength - observer_position.z;
+            float ssq_distance = del_x*del_x + sdel_z*sdel_z;
+
+            preflvldiff_nsew[1] = std::max((int)(ceil(m_numPatchSubd*(1-ssq_distance/m_maxDistSq))), 0)-pref_lvl;
+        }
+
+        { // east
+            float edel_x = it->prop->pos.x + m_patchLength - observer_position.x;
+            float esq_distance = edel_x*edel_x + del_z*del_z;
+
+            preflvldiff_nsew[2] = std::max((int)(ceil(m_numPatchSubd*(1-esq_distance/m_maxDistSq))), 0)-pref_lvl;
+        }
+
+        { // west
+            float wdel_x = it->prop->pos.x - m_patchLength - observer_position.x;
+            float wsq_distance = wdel_x*wdel_x + del_z*del_z;
+
+            preflvldiff_nsew[3] = std::max((int)(ceil(m_numPatchSubd*(1-wsq_distance/m_maxDistSq))), 0)-pref_lvl;
+        }
+
+//        std::cout << "level diff: ";
+//        for (int i = 0; i<4; i++)
+//        {
+//            std::cout << preflvldiff_nsew[i] << ", ";
+//        }
+//        std::cout << "\n";
+        //std::cout << ">" << it->prop->pos.x/m_patchLength << ", " << it->prop->pos.z/m_patchLength << " ";
+        //std::cout << "own: " << pref_lvl << ", nsew: ";
+        int sum_deviances = abs(pref_lvl-it->subd_lvl);
+        for (int i = 0; i<4; i++)
+        {
+            sum_deviances += abs(preflvldiff_nsew[i]-it->diff_lvl[i]);
+           // std::cout << preflvldiff_nsew[i] << " ";
+        }
+        //std::cout << "\n";
+
+
+
+
+
+
+        if (sum_deviances > 0)
         {
             //changed_terrain = true;
-            changeSubdLvl(pref_lvl, &(*it));
+            changeSubdLvl(pref_lvl, &(*it), preflvldiff_nsew);
+            //std::cout << "remedying\n";
         }
     }
 //    if (changed_terrain==false)
@@ -687,13 +925,16 @@ glm::vec3 Terrain::normSample(float x, float z)
     return normal;
 }
 
-void Terrain::changeSubdLvl(unsigned int subd_lvl_in, TerrainPatch* terrain_patch)
+void Terrain::changeSubdLvl(unsigned int subd_lvl_in, TerrainPatch* terrain_patch, int *lvldiff_nsew)
 {
     glm::vec3 old_pos = terrain_patch->prop->pos;
 
     //std::cout << "Do any meshes get deleted here?\n"; //YES!!
     //delete what is already there? Check how magic the shared pointer is
     terrain_patch->reInit(subd_lvl_in);
+
+    for (int i = 0; i<4; i++)
+        terrain_patch->diff_lvl[i] = lvldiff_nsew[i];
 
     Vertex* verts;
     Triangle* tris;
@@ -703,7 +944,15 @@ void Terrain::changeSubdLvl(unsigned int subd_lvl_in, TerrainPatch* terrain_patc
 //            std::cout << "num_verts: " << num_verts << "\n";
 //            std::cout << "num_tris: " << num_tris << "\n";
 
-    Terrain::subdividedQuads(verts, num_verts, tris, num_tris, m_patchLength/2.0, subd_lvl_in, old_pos.x, old_pos.z);
+    Terrain::subdividedQuads(verts,
+                             num_verts,
+                             tris,
+                             num_tris,
+                             m_patchLength/2.0,
+                             subd_lvl_in,
+                             lvldiff_nsew,
+                             old_pos.x,
+                             old_pos.z);
 
     std::shared_ptr<Mesh> terrain_quad = terrain_patch->mesh;
     terrain_quad->fromMemory(verts, num_verts, tris, num_tris);

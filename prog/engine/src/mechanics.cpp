@@ -464,7 +464,7 @@ void Mechanics::func(int num_in)
         addNPC(glm::vec3(rand()%10,2.0,rand()%10));
         break;
     case 5:
-        spawnPlayer(glm::vec3(rand()%10,2.0,rand()%10));
+        spawnPlayer(glm::vec3(world->freecam->pos.x,world->freecam->pos.y,world->freecam->pos.z));
         break;
     case 6: // switch between free-cam and chase cam
         if (controlled == world->freecam)
