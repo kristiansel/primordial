@@ -134,7 +134,7 @@ void main (void)
     vec4 texel = texture(tex, mytexco.st);
     vec4 local_color = vec4(texel.rgb * color.rgb, texel.a);
 
-    if (local_color.a < 0.5)
+    if (texel.a < 0.80)
     {
         discard;
     }

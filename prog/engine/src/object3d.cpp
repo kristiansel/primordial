@@ -59,6 +59,7 @@ void Object3d::rotateUp(float degrees, float dt_unused)
 {
     // There might be a more efficient way of doing this if this
     // ever becomes a bottle-neck (suggest: quaternion mult)
+    // std::cout << "RRRRRRRRRRRRRRRRRRRRRRRRRrotating up " << degrees << "degrees\n";
     rot = glm::rotate(rot, 3.14159265f*degrees/180.f, glm::vec3(1.0, 0.0, 0.0));
 }
 

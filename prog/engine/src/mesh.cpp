@@ -102,6 +102,7 @@ void Mesh::fromFile2(string mesh_key)
 
             reader.chomp(&(vert->normal[0]), 3*sizeof(float) );
             reader.chomp(&(vert->tex_coords[0]), 2*sizeof(float));
+            // Consider changing the above to NUM_TEX_COORDS*sizeof(float)
 
             reader.chomp(&(vert->bone_indices[0]), MAX_BONE_INFLUENCES*sizeof(int));
             reader.chomp(&(vert->bone_weights[0]), MAX_BONE_INFLUENCES*sizeof(float));

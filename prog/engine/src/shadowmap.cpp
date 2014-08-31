@@ -58,6 +58,8 @@ void ShadowMap::init()
     //Uniforms
     uniforms.light_mvp_mat  = glGetUniformLocation(getProgramID(), "depthMVP");
     uniforms.bone_mat = glGetUniformLocation(getProgramID(), "bone_mat");
+    uniforms.tex = glGetUniformLocation(getProgramID(), "tex");
+    glUniform1i(uniforms.tex, 0);            // ALWAYS CHANNEL 0
 
     //Attributes
     glEnableVertexAttribArray(0);
@@ -138,6 +140,7 @@ void ShadowMap::drawProp(shared_ptr<Prop> prop)
     for (auto rb_it = prop->render_batches.begin(); rb_it!= prop->render_batches.end(); rb_it++)
     {
         shared_ptr<Mesh> mesh_ptr = shared_ptr<Mesh>(rb_it->mesh_ptr);
+        shared_ptr<Texture> tex_ptr = shared_ptr<Texture>(rb_it->tex_ptr);
         glm::mat4 transf_mat = rb_it->transf_mat;
 
         // set the modelview matrix for this model
@@ -149,6 +152,10 @@ void ShadowMap::drawProp(shared_ptr<Prop> prop)
         glm::mat4 vertex_matrix  = mv * tr * rt * sc * transf_mat; // scale, then translate, then lookat.
 
         glUniformMatrix4fv(uniforms.light_mvp_mat, 1, false, &vertex_matrix[0][0]);
+
+        // activate texture
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, tex_ptr->getTBOid());
 
         // Bind vertex data
         glBindBuffer(GL_ARRAY_BUFFER, mesh_ptr->getVBOid());

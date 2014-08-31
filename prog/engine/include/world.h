@@ -63,7 +63,8 @@ class World : public PhysicsWorld // Consider merging Culling functionality into
                                                          string tex_key,
                                                          glm::vec3 pos);
 
-        vector<shared_ptr<WInstObj>> instanced_objects;
+
+        //vector<shared_ptr<Prop>> instanced_objects;
 
         void delCreature(list<shared_ptr<Creature>>::iterator creature_it_in);
 
@@ -101,6 +102,8 @@ class World : public PhysicsWorld // Consider merging Culling functionality into
         static const int MAX_NUM_POINT_LIGHTS = 5;
         int num_point_lights;
         PointLight* point_lights;
+
+        static constexpr btCollisionShape* NO_COLLISION = (btCollisionShape*)(-12345);
 
 
         // void forAllWorldObjects( void (*f) (WorldObject&) );

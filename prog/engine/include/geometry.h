@@ -12,10 +12,12 @@ const unsigned int MAX_BONE_INFLUENCES = 4;
 
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
 //
+const unsigned short NUM_TEX_COORDS = 3;
+
 const unsigned short normalOffset = 1*sizeof(glm::vec4);
 const unsigned short texCoord0Offset = 1*sizeof(glm::vec4)+1*sizeof(glm::vec3);
-const unsigned short bone_indexOffset = 1*sizeof(glm::vec4)+1*sizeof(glm::vec3)+2*sizeof(float);
-const unsigned short bone_weightOffset = 1*sizeof(glm::vec4)+1*sizeof(glm::vec3)+2*sizeof(float)+MAX_BONE_INFLUENCES*sizeof(int);
+const unsigned short bone_indexOffset = 1*sizeof(glm::vec4)+1*sizeof(glm::vec3)+NUM_TEX_COORDS*sizeof(float);
+const unsigned short bone_weightOffset = 1*sizeof(glm::vec4)+1*sizeof(glm::vec3)+NUM_TEX_COORDS*sizeof(float)+MAX_BONE_INFLUENCES*sizeof(int);
 
 //const unsigned short normalOffset = 1*sizeof(glm::vec4);
 //const unsigned short texCoord0Offset = 1*sizeof(glm::vec4)+1*sizeof(glm::vec3);
@@ -24,13 +26,13 @@ const unsigned short bone_weightOffset = 1*sizeof(glm::vec4)+1*sizeof(glm::vec3)
 
 struct Vertex // 60 bytes
 {
-//    Vertex();
+    Vertex() {for (int i = 0; i<NUM_TEX_COORDS; i++) tex_coords[i] = 0.0;};
 //    static Vertex lerp(Vertex v1, Vertex v2);
 //    static Vertex lerp(vector<Vertex> &verts_in);
     glm::vec4 position; //X,Y,Z coordinates -----16bytes
     glm::vec3 normal; //Vertex normals; -----12bytes
 //    vec2 tex_coords; //Texture coordinates u, v -----8 bytes
-    float tex_coords[2];
+    float tex_coords[NUM_TEX_COORDS];
     int bone_indices[MAX_BONE_INFLUENCES]; // 4*4 = 16 bytes
     float bone_weights[MAX_BONE_INFLUENCES]; // 4*4 = 16 bytes
 };

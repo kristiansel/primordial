@@ -65,7 +65,7 @@ list<shared_ptr<WorldObject>>::iterator World::addStaticObject(string mesh_key,
         worldobject->pos = pos;         // configure position
         worldobject->scale = glm::vec3(scale, scale, scale);
         worldobject->rotateLeft(rotate_left_deg, 0);
-        worldobject->rotateLeft(rotate_up_deg, 0);
+        worldobject->rotateUp(rotate_up_deg, 0);
 
 //        worldobject->mesh_key = mesh_key;
 //        worldobject->tex_key = tex_key;
@@ -106,11 +106,14 @@ list<shared_ptr<WorldObject>>::iterator World::addStaticObject(string mesh_key,
 //        addPhysicsStatic( this_body, shape);
 //    else
 //        addPhysicsStatic( this_body, RigidBody::ConvexHull(*(shared_ptr<Mesh>(mesh_ptr))));
+    if (shape!=NO_COLLISION)
+    {
+        if (shape)
+            addPhysicsStatic( worldobject.get(), shape);
+        else
+            addPhysicsStatic( worldobject.get(), RigidBody::ConvexHull(*(shared_ptr<Mesh>(mesh_ptr))));
+    }
 
-    if (shape)
-        addPhysicsStatic( worldobject.get(), shape);
-    else
-        addPhysicsStatic( worldobject.get(), RigidBody::ConvexHull(*(shared_ptr<Mesh>(mesh_ptr))));
 
 
     worldobjects.push_back(worldobject);

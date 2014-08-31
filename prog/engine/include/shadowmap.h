@@ -44,6 +44,7 @@ class ShadowMap : public ShaderBase
         {
             GLuint light_mvp_mat;
             GLuint bone_mat;
+            GLuint tex;
         } uniforms;
 
         // Attributes

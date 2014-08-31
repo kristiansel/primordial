@@ -3,7 +3,7 @@
 Terrain::Terrain() :
     m_dimension(256),   // 256, 2048
     m_height_map(256),  // 256, 2048
-    m_heightScale(0.0050), // 0.016, 5*0.016
+    m_heightScale(0.0110), // 0.016, 5*0.016
     m_horzScale(256), // 1024, 4096
     m_centerX(0.0), // 0.0
     m_centerZ(0.0), // 0.0
@@ -512,7 +512,7 @@ void Terrain::generateHeightMap()
 {
     double range = 8000.0; // m
 
-    srand(23798); // removing this gives a nice one
+    //srand(23798); // removing this gives a nice one
 
     // find the first (middle point) m_dimension/2
     m_height_map(m_dimension/2, m_dimension/2) = rand_range(-range, range);
