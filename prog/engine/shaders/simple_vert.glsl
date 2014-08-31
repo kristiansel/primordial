@@ -29,6 +29,7 @@ const int MAX_BONES = 100;
 uniform mat4[MAX_BONES] bone_mat;
 
 void main() {
+    int instanceID = gl_InstanceID;
     //color = normalize(vec4(InColor.r, InColor.g, InColor.b, 1.0)) ;
     mynormal = InNormal ;
 	mytexco = InTexCoord ;

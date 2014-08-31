@@ -37,13 +37,13 @@ class PhysicsWorld
         // void addPhysicsObject(RigidBody::Collision shape, par1=0, par2=0, par3=0, par4=0);
         void addPhysicsDynamic(RigidBody* rigidbody, btCollisionShape* shape);
 
-        void addPhysicsStatic(RigidBody* rigidbody);
+        void addPhysicsStatic(RigidBody* rigidbody, btCollisionShape* shape);
 
         void addPhysicsCharContr(   DynamicCharacterController* char_contr,
                                     const glm::vec3 &pos,
                                     float height,    // m
                                     float radius,    // m
-                                    float mass);      // kg
+                                    float mass);     // kg
 
         void removePhysicsObject(RigidBody* rigidbody);
 

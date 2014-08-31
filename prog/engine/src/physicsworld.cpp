@@ -72,18 +72,22 @@ void PhysicsWorld::addPhysicsDynamic(RigidBody* rigidbody, btCollisionShape* sha
     dynamicsWorld->addRigidBody(body);
 }
 
-void PhysicsWorld::addPhysicsStatic(RigidBody* rigidbody)
+void PhysicsWorld::addPhysicsStatic(RigidBody* rigidbody, btCollisionShape* shape)
 {
     //create a dynamic rigidbody
 
     //btCollisionShape* colShape = new btBoxShape(btVector3(1,1,1));
     // I think this puts the plane at -1 y?
-    btCollisionShape* colShape = new btStaticPlaneShape(btVector3(0.0, 1.0, 0.0), 0.0);
+    btCollisionShape* colShape = shape;
+    shape->setLocalScaling(btVector3(rigidbody->scale.x, rigidbody->scale.y, rigidbody->scale.z) );
     collisionShapes.push_back(colShape);
 
     // Create Dynamic Objects
     btTransform startTransform;
     startTransform.setIdentity();
+
+    // Set scale
+
 
     btScalar	mass(0.f);
 
@@ -94,14 +98,23 @@ void PhysicsWorld::addPhysicsStatic(RigidBody* rigidbody)
     if (isDynamic)
         colShape->calculateLocalInertia(mass,localInertia);
 
-    // Do not think transform is necessary for infinite plane?
-    // startTransform.setOrigin(btVector3(rigidbody->pos.x, rigidbody->pos.y, rigidbody->pos.z));
+   // Set starting rotation
+    btQuaternion bt_start_quat = btQuaternion(rigidbody->rot.w, rigidbody->rot.x,
+                                              rigidbody->rot.y, rigidbody->rot.z);
+    startTransform.setRotation( bt_start_quat ) ;
+
+    // Set starting translation
+    startTransform.setOrigin(btVector3(rigidbody->pos.x, rigidbody->pos.y, rigidbody->pos.z));
+
+
 
     //using motionstate is recommended, it provides interpolation capabilities, and only synchronizes 'active' objects
     btDefaultMotionState* myMotionState = new btDefaultMotionState(startTransform);
     btRigidBody::btRigidBodyConstructionInfo rbInfo(mass,myMotionState,colShape,localInertia);
-    rbInfo.m_restitution = btScalar(0.99f);
-    rbInfo.m_friction = btScalar(0.99f);
+//    rbInfo.m_restitution = btScalar(0.99f);
+//    rbInfo.m_friction = btScalar(0.99f);
+    rbInfo.m_restitution = btScalar(0.33f);
+    rbInfo.m_friction = btScalar(0.4f);
     btRigidBody* body = new btRigidBody(rbInfo);
 
     rigidbody->setBody(body);

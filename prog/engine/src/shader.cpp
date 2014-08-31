@@ -49,6 +49,7 @@ void Shader::init(GLuint shadowmap_depth_texture)
     uniforms.shadowmap_mvp_mat = glGetUniformLocation(getProgramID(), "shadowmap_mvp_mat");
 
     uniforms.fog_color = glGetUniformLocation(getProgramID(), "fog_color");
+    uniforms.sky_color = glGetUniformLocation(getProgramID(), "sky_color");
     uniforms.zfar = glGetUniformLocation(getProgramID(), "zfar");
 
     glEnableVertexAttribArray(0);
@@ -81,6 +82,7 @@ void Shader::unload()
 
 void Shader::activate(const Camera &cam_in,
                       const glm::vec4 fog_color,
+                      const glm::vec4 sky_color,
                       const glm::mat4 &light_mvp_mat,
                       const DirLight &main_light)
 {
@@ -116,6 +118,7 @@ void Shader::activate(const Camera &cam_in,
 
     // Fog uniforms
     glUniform4fv(uniforms.fog_color, 1, &fog_color[0]);
+    glUniform4fv(uniforms.sky_color, 1, &sky_color[0]);
     glUniform1f(uniforms.zfar, cam_in.farz);
 
 //    // transform light to eye coordinates
@@ -159,55 +162,50 @@ void Shader::drawProp(shared_ptr<Prop> prop, bool debug)
     {
         shared_ptr<Mesh> mesh_ptr = shared_ptr<Mesh>(rb_it->mesh_ptr);
         shared_ptr<Texture> tex_ptr = shared_ptr<Texture>(rb_it->tex_ptr);
-        glm::mat4 transf_mat = rb_it->transf_mat;
-
-        if (debug) std::cout << "transfmat identity " << transf_mat[0][0]  << "\n";
 
 
-        // set the modelview matrix for this model
-        glm::mat4 tr = glm::translate(glm::mat4(1.0), prop->pos);
-        glm::mat4 rt = glm::mat4_cast(prop->rot);
-        glm::mat4 sc = glm::scale(glm::mat4(1.0), prop->scale);
+        //if (rb_it->m_instanced==false)
+        { // everything form here on will be instanced
+            glm::mat4 transf_mat = rb_it->transf_mat;
 
-        glm::mat4 obj_to_world_space_mat = tr * rt * sc * transf_mat;
+            if (debug) std::cout << "transfmat identity " << transf_mat[0][0]  << "\n";
 
-        if (debug) std::cout << "trans identity " << obj_to_world_space_mat[0][0] << "\n";
-        glm::mat4 vertex_matrix  = view_mat * obj_to_world_space_mat; // scale, then translate, then lookat.
 
-//
-//        std::cout << "t: \n" << tr << "\n\n";
-//        std::cout << "s: \n" << sc << "\n\n";
-//
-//        std::cout << "terminating prematurely\n";
-//        std::terminate();
+            // set the modelview matrix for this model
+            glm::mat4 tr = glm::translate(glm::mat4(1.0), prop->pos);
+            glm::mat4 rt = glm::mat4_cast(prop->rot);
+            glm::mat4 sc = glm::scale(glm::mat4(1.0), prop->scale);
 
-//        for (int i = 0; i<4; i++)
-//        {
-//            for (int j = 0; j<4; j++)
-//            {
-//                std::cout << vertex_matrix[i][j] << "\t";
-//            }
-//            std::cout << "\n";
-//        }
-//
-//        system("PAUSE");
+            glm::mat4 obj_to_world_space_mat = tr * rt * sc * transf_mat;
 
-        glUniformMatrix4fv(uniforms.mv_mat, 1, false, &vertex_matrix[0][0]);
-        glUniformMatrix4fv(uniforms.to_world_space_mat, 1, false, &obj_to_world_space_mat[0][0]);
+            if (debug) std::cout << "trans identity " << obj_to_world_space_mat[0][0] << "\n";
+            glm::mat4 vertex_matrix  = view_mat * obj_to_world_space_mat; // scale, then translate, then lookat.
+
+            glUniformMatrix4fv(uniforms.mv_mat, 1, false, &vertex_matrix[0][0]);
+            glUniformMatrix4fv(uniforms.to_world_space_mat, 1, false, &obj_to_world_space_mat[0][0]);
 
 
 
-        // Shadowmap related
-        glm::mat4 biasMatrix(
-                    0.5, 0.0, 0.0, 0.0,
-                    0.0, 0.5, 0.0, 0.0,
-                    0.0, 0.0, 0.5, 0.0,
-                    0.5, 0.5, 0.5, 1.0
-                    );
+            // Shadowmap related
+            glm::mat4 biasMatrix(
+                        0.5, 0.0, 0.0, 0.0,
+                        0.0, 0.5, 0.0, 0.0,
+                        0.0, 0.0, 0.5, 0.0,
+                        0.5, 0.5, 0.5, 1.0
+                        );
 
-        glm::mat4 light_mvp_mat_refable  = biasMatrix * main_light_mvp_mat * tr * rt * sc * transf_mat;
-        glUniformMatrix4fv(uniforms.shadowmap_mvp_mat, 1, false, &light_mvp_mat_refable[0][0]);
+            glm::mat4 light_mvp_mat_refable  = biasMatrix * main_light_mvp_mat * tr * rt * sc * transf_mat;
+            glUniformMatrix4fv(uniforms.shadowmap_mvp_mat, 1, false, &light_mvp_mat_refable[0][0]);
 
+        } // finished instancing
+
+        // send all the instanced uniforms
+        // glUniformMatrix4fv(uniforms.mv_mat, N_INST, false, &vertex_matrix[0][0][0]); // mvp matrix
+        // glUniformMatrix4fv(uniforms.to_world_space_mat, N_INST, false, &obj_to_world_space_mat[0][0][0]); // to world_space
+        // glUniformMatrix4fv(uniforms.shadowmap_mvp_mat, N_INST, false, &light_mvp_mat_refable[0][0][0]); // shadowmap mvp
+
+
+        // later make the material instancable
         Mesh::Material mat = mesh_ptr->getMaterial();
 
         // send mesh_ptr->specific uniforms to shader (materials)
@@ -216,6 +214,9 @@ void Shader::drawProp(shared_ptr<Prop> prop, bool debug)
         glUniform4fv(uniforms.specular,  1,  &(mat.specular[0])    ) ;
         glUniform1fv(uniforms.shininess, 1,  &(mat.shininess)      ) ;
         glUniform4fv(uniforms.emission,  1,  &(mat.emission[0])    ) ;
+
+        // // glUniform4fv(uniforms.material_cols, N_INST*4, &mats.mat_cols[0][0][0]); // amb. diff. spec. emi. colors
+        // // glUniform1fv(uniforms.shininess, N_INST, &mats.shiny[0][0][0]); // shininess value
 
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, tex_ptr->getTBOid());
@@ -244,7 +245,7 @@ void Shader::drawProp(shared_ptr<Prop> prop, bool debug)
         if (debug) std::cout << "bound texture " << tex_ptr->getTBOid() << "\n";
 
         // Draw call
-        glDrawElements(GL_TRIANGLES, 3*mesh_ptr->getTriNum(), GL_UNSIGNED_SHORT, BUFFER_OFFSET(0));
+        glDrawElements(GL_TRIANGLES, 3*mesh_ptr->getTriNum(), GL_UNSIGNED_SHORT, BUFFER_OFFSET(0)); // <-----
 
         // Not sure if this is necessary unless other code is badly written
         glBindBuffer(GL_ARRAY_BUFFER, 0);

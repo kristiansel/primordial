@@ -27,7 +27,6 @@ using std::shared_ptr;
 
 // Object3d, consider making getter/setter pos and dir
 
-
 class Mesh : public Object3d // 3d coordinates local in Prop/Actor coordinate system
 {
 public:

@@ -16,9 +16,25 @@
 
 
 using std::list;
+using std::vector;
 using std::shared_ptr;
 using std::weak_ptr;
 using std::string;
+
+class WInstObj : public Prop
+{
+public:
+    vector<RigidBody>* getRigidBodies() {return &rigid_bodies;}
+    std::string mesh_key;
+    std::string tex_key;
+protected:
+private:
+    vector<RigidBody> rigid_bodies;
+};
+
+enum class yRelativeTo {Ground, World};
+
+
 
 class World : public PhysicsWorld // Consider merging Culling functionality into World Class
 {
@@ -26,9 +42,15 @@ class World : public PhysicsWorld // Consider merging Culling functionality into
         World();
         virtual ~World();
 
-        list<shared_ptr<WorldObject>>::iterator addStaticObject(string mesh_key,
-                                                                string tex_key,
-                                                                glm::vec3 pos);
+
+        //list<shared_ptr<WorldObject>>::iterator addStaticObject(string mesh_key,
+        void                                    addStaticObject(string mesh_key,
+                                                                 string tex_key,
+                                                                 glm::vec3 pos,
+                                                                 float scale,
+                                                                 float rotate_left_deg, float rotate_up_deg,
+                                                                 yRelativeTo y_rel = yRelativeTo::World,
+                                                                 btCollisionShape* shape = nullptr);
 
         list<shared_ptr<WorldObject>>::iterator addDynamicObject(string mesh_key,
                                                                  string tex_key,
@@ -40,6 +62,8 @@ class World : public PhysicsWorld // Consider merging Culling functionality into
         list<shared_ptr<Creature>>::iterator addCreature(string mesh_key,
                                                          string tex_key,
                                                          glm::vec3 pos);
+
+        vector<shared_ptr<WInstObj>> instanced_objects;
 
         void delCreature(list<shared_ptr<Creature>>::iterator creature_it_in);
 
@@ -60,6 +84,8 @@ class World : public PhysicsWorld // Consider merging Culling functionality into
         list<shared_ptr<Creature>>       creatures;
         // list<shared_ptr<Light>>       lights; // For future
         Terrain                          terrain;
+
+
 
         //shared_ptr<Camera> camera; // Shared pointer here, because we do not want other shared
         // pointers to accidentally delete the camera.

@@ -84,6 +84,7 @@ void Renderer::draw(Scene &scene, float dt)
     glm::mat4 mlight_vp = mlight.getVPmatrix(shadow_focus);
 
     glm::vec4 fog_color = glm::vec4(1.0, 1.0, 1.0, 1.0);
+    glm::vec4 sky_color = glm::vec4(0.f/255.f, 80.f/255.f, 186.f/255.f, 1.0);
 
     // Why is this in here?
     glDisable(GL_BLEND);
@@ -104,7 +105,7 @@ void Renderer::draw(Scene &scene, float dt)
 //      // uncomment the below to make the terrain cast shadow
 //        for (auto it = terrain_patches->begin(); it!=terrain_patches->end(); it++)
 //        {
-//            shadow_map.drawProp(*it);
+//            shadow_map.drawProp(it->prop);
 //        }
 
         for (auto it = scene.actors.begin(); it!=scene.actors.end(); it++)
@@ -124,6 +125,7 @@ void Renderer::draw(Scene &scene, float dt)
         // per-frame and switch to main shader
         main_shader.activate(*(scene.camera),
                              fog_color,
+                             sky_color,
                              mlight_vp,
                              mlight/*, plights, num_plights, scene.fog_color*/);
 
@@ -162,7 +164,6 @@ void Renderer::draw(Scene &scene, float dt)
         //after this the bone matrices are soiled
 
         // Draw "sky quad" following the camera
-        glm::vec4 sky_color = glm::vec4(0.f/255.f, 80.f/255.f, 186.f/255.f, 1.0);
 
         // activate and draw in the same call
         sky_shader.drawSkyQuad((*(scene.camera)), sky_color, fog_color);

@@ -24,6 +24,11 @@ void Culler::stage(Scene &scene_in, World &world_in)
         scene_in.props.push_back(worldobject);
     }
 
+    for (auto winstbody : world_in.instanced_objects)
+    {
+        scene_in.props.push_back(winstbody);
+    }
+
     for (auto creature : world_in.creatures)
     {
         scene_in.actors.push_back(creature);

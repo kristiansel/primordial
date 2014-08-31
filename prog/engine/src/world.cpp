@@ -24,18 +24,65 @@ World::~World()
     delete music;
 }
 
-
-list<shared_ptr<WorldObject>>::iterator World::addStaticObject(string mesh_key, string tex_key, glm::vec3 pos)
+//list<shared_ptr<WorldObject>>::iterator World::addStaticObject(string mesh_key,
+void World::addStaticObject(string mesh_key,
+                                                                string tex_key,
+                                                                glm::vec3 pos,
+                                                                float scale,
+                                                                float rotate_left_deg, float rotate_up_deg,
+                                                                yRelativeTo y_rel,// later echange this for Object3d to expose all transforms
+                                                                btCollisionShape* shape)
 //shared_ptr<WorldObject> World::addWorldObject(string mesh_key, string tex_key, glm::vec3 pos, glm::vec3 dir)
 {
     // Add a new worldobject to the list and capture
     // reference and iterator
 
-    shared_ptr<WorldObject> worldobject = shared_ptr<WorldObject>(new WorldObject);
+    // first check if same object is in already
+    bool already_exists = false;
+    shared_ptr<WInstObj> worldobject = nullptr;
+    for (auto instobj : instanced_objects)
+    {
+        if (instobj->mesh_key == mesh_key && instobj->tex_key == tex_key)
+        {
+            worldobject = instobj;
+            already_exists = true;
+            std::cout << "WE HAVE INSTANCING\n";
+        }
+    }
 
-    worldobject->pos = pos;         // configure position
+    if (!worldobject)
+        worldobject = shared_ptr<WInstObj>(new WInstObj);
+
+    //shared_ptr<WorldObject> worldobject = shared_ptr<WorldObject>(new WorldObject);
+
+    if  (y_rel == yRelativeTo::Ground)
+    {
+        pos.y = terrain.ySample(pos.x, pos.z);
+    }
+
+    if (!already_exists)
+    {
+        worldobject->pos = pos;         // configure position
+        worldobject->scale = glm::vec3(scale, scale, scale);
+        worldobject->rotateLeft(rotate_left_deg, 0);
+        worldobject->rotateLeft(rotate_up_deg, 0);
+
+        worldobject->mesh_key = mesh_key;
+        worldobject->tex_key = tex_key;
+    }
+    else
+    {
+        Object3d* to_transform = worldobject->render_batches.begin()->addInstance();
+        to_transform->pos = pos;         // configure position
+        to_transform->scale = glm::vec3(scale, scale, scale);
+        to_transform->rotateLeft(rotate_left_deg, 0);
+        to_transform->rotateLeft(rotate_up_deg, 0);
+    }
+
+
+
 //    (*new_worldobject_it)->dir = dir;         // configure direction
-    addPhysicsStatic( worldobject.get() );
+    //addPhysicsStatic( worldobject.get() );
 
     // attach the mesh
     //weak_ptr<Mesh>      mesh_ptr    = resourcemanager.getMeshptrFromKey (mesh_key);
@@ -46,10 +93,28 @@ list<shared_ptr<WorldObject>>::iterator World::addStaticObject(string mesh_key, 
 
     worldobject->attachBatch(mesh_ptr, tex_ptr);
 
-    worldobjects.push_back(worldobject);
+    //get a reference to the body
+    vector<RigidBody>* rigidbodies = worldobject->getRigidBodies();
+    rigidbodies->push_back(RigidBody());
+    RigidBody* this_body = &(rigidbodies->back());
+    this_body->pos = pos;
+    this_body->scale = glm::vec3(scale, scale, scale);
+    this_body->rotateLeft(rotate_left_deg, 0);
+    this_body->rotateLeft(rotate_up_deg, 0);
 
-    list<shared_ptr<WorldObject>>::iterator new_worldobject_it = --worldobjects.end();
-    return new_worldobject_it;
+    if (shape)
+        addPhysicsStatic( this_body, shape);
+    else
+        addPhysicsStatic( this_body, RigidBody::ConvexHull(*(shared_ptr<Mesh>(mesh_ptr))));
+
+
+    //worldobjects.push_back(worldobject);
+    instanced_objects.push_back(worldobject);
+
+    // STILL NEED TO CODE REMOVAL
+
+//    list<shared_ptr<WorldObject>>::iterator new_worldobject_it = --worldobjects.end();
+//    return new_worldobject_it;
 
 //    return shared_ptr<WorldObject>(&(*new_worldobject_it)); // This results in SEGFAULT because
 //    // if not captured, then this will be the last instance of this pointer, and

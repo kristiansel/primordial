@@ -60,6 +60,8 @@ class Terrain
 
         void changeSubdLvl(unsigned int subd_lvl_in, TerrainPatch* terrain_patch, int *lvldiff_nsew);
 
+        int getPrefLvl(float square_distance);
+
 
 
     private:

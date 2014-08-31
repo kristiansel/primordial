@@ -703,6 +703,25 @@ float Terrain::sampleHeightMap(float x, float z, float length, float center_x, f
 
 void Terrain::updateObserverPosition(glm::vec3 observer_position)
 {
+
+
+    if (phys_anchor != anchor_position) // swap physics the frame after swapping graphics
+    {
+        m_physicsWorld->removeBtRigidBody(m_terrainBody);
+
+        std::cout << "swapped physics\n";
+
+        phys_anchor = anchor_position; // this snaps the physics away from graphics
+
+        generatePhysicsPatch(phys_anchor, 2*m_patchLength, 2*pow(2, m_numPatchSubd));
+    }
+//    float dist_to_phys_anchor = pow(observer_position.x-phys_anchor.x, 2) +
+//                                pow(observer_position.z-phys_anchor.z, 2);
+//    if (dist_to_phys_anchor > phys_anchor_l_sq)
+//    {
+//
+//    }
+
     // check the difference in x and z between observer and anchor
     float diff_x = observer_position.x-anchor_position.x;
     float diff_z = observer_position.z-anchor_position.z;
@@ -803,20 +822,6 @@ void Terrain::updateObserverPosition(glm::vec3 observer_position)
         // anchor to de-stress the CPU load of the "swapping frame"
     }
 
-    float dist_to_phys_anchor = pow(observer_position.x-phys_anchor.x, 2) +
-                                pow(observer_position.z-phys_anchor.z, 2);
-    if (dist_to_phys_anchor > phys_anchor_l_sq)
-    {
-        m_physicsWorld->removeBtRigidBody(m_terrainBody);
-
-        generatePhysicsPatch(anchor_position, 2*m_patchLength, 2*pow(2, m_numPatchSubd));
-
-        std::cout << "swapped physics\n";
-
-        phys_anchor = observer_position;
-    }
-
-
     //std::cout << ">>>>>>>>>>>going through patches\n";
     // go through all patches, if they are wrong level change them
 
@@ -828,7 +833,7 @@ void Terrain::updateObserverPosition(glm::vec3 observer_position)
         float sq_distance = del_x*del_x + del_z*del_z;
         //std::cout << max_dist << "\n";
 
-        int pref_lvl = std::max((int)(ceil(m_numPatchSubd*(1-sq_distance/m_maxDistSq))), 0);
+        int pref_lvl = getPrefLvl(sq_distance);
 
         //std::cout << "  dist_sq = " << sq_distance << ", lvl should be " << pref_lvl << ", is " << it->subd_lvl << "\n";
 
@@ -840,28 +845,28 @@ void Terrain::updateObserverPosition(glm::vec3 observer_position)
             float ndel_z = it->prop->pos.z - m_patchLength - observer_position.z;
             float nsq_distance = del_x*del_x + ndel_z*ndel_z;
 
-            preflvldiff_nsew[0] = std::max((int)(ceil(m_numPatchSubd*(1-nsq_distance/m_maxDistSq))), 0) -pref_lvl;
+            preflvldiff_nsew[0] = getPrefLvl(nsq_distance) - pref_lvl;
         }
 
         { // south
             float sdel_z = it->prop->pos.z + m_patchLength - observer_position.z;
             float ssq_distance = del_x*del_x + sdel_z*sdel_z;
 
-            preflvldiff_nsew[1] = std::max((int)(ceil(m_numPatchSubd*(1-ssq_distance/m_maxDistSq))), 0)-pref_lvl;
+            preflvldiff_nsew[1] = getPrefLvl(ssq_distance) - pref_lvl;
         }
 
         { // east
             float edel_x = it->prop->pos.x + m_patchLength - observer_position.x;
             float esq_distance = edel_x*edel_x + del_z*del_z;
 
-            preflvldiff_nsew[2] = std::max((int)(ceil(m_numPatchSubd*(1-esq_distance/m_maxDistSq))), 0)-pref_lvl;
+            preflvldiff_nsew[2] = getPrefLvl(esq_distance) - pref_lvl;
         }
 
         { // west
             float wdel_x = it->prop->pos.x - m_patchLength - observer_position.x;
             float wsq_distance = wdel_x*wdel_x + del_z*del_z;
 
-            preflvldiff_nsew[3] = std::max((int)(ceil(m_numPatchSubd*(1-wsq_distance/m_maxDistSq))), 0)-pref_lvl;
+            preflvldiff_nsew[3] = getPrefLvl(wsq_distance) - pref_lvl;
         }
 
 //        std::cout << "level diff: ";
@@ -897,6 +902,23 @@ void Terrain::updateObserverPosition(glm::vec3 observer_position)
 //        std::cout << "no terrain changes\n";
 //    }
     //std::cout << "updating terrain!\n";
+
+}
+
+int Terrain::getPrefLvl(float square_distance)
+{
+    // quadratic
+    //return std::max((int)(ceil(m_numPatchSubd*(1-square_distance/m_maxDistSq))), 0);
+
+    // linear
+    if (square_distance < m_patchLength*m_patchLength)
+    {
+        return m_numPatchSubd;
+    }
+    else
+    {
+        return std::max((int)(ceil(m_numPatchSubd*(1-sqrt(square_distance/m_maxDistSq)))), 0);
+    }
 
 }
 
@@ -965,7 +987,7 @@ void Terrain::changeSubdLvl(unsigned int subd_lvl_in, TerrainPatch* terrain_patc
     // get the placeholder terrain texture
     //std::weak_ptr<Mesh>      mesh_ptr    = global::mesh_manager.getResptrFromKey ("simple_plane");
     std::weak_ptr<Mesh>      mesh_ptr    = std::weak_ptr<Mesh>(terrain_quad);
-    std::weak_ptr<Texture>   tex_ptr     = global::tex_manager.getResptrFromKey  ("grass_equal");
+    std::weak_ptr<Texture>   tex_ptr     = global::tex_manager.getResptrFromKey  ("growth");
 
     // attach the generated geometry to the patch-prop
     terrain_patch->prop->attachBatch(mesh_ptr, tex_ptr);

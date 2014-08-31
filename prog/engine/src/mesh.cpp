@@ -20,7 +20,7 @@ Mesh::Mesh() : vertex_num(0), triangle_num(0)
     // set the materials <-- change this
     material.ambient = glm::vec4(0.4, 0.4, 0.4, 1.0);
     material.diffuse = glm::vec4(1.0, 1.0, 1.0, 1.0);
-    material.specular = glm::vec4(0.7, 0.8, 1.0, 1.0);
+    material.specular = glm::vec4(1.0, 1.0, 1.0, 1.0);
     material.shininess = 2;
     material.emission = glm::vec4(0.5, 0.5, 0.5, 1.0);
 

@@ -22,6 +22,7 @@ uniform mat4 mv_mat;
 uniform mat4 to_world_space_mat;
 
 uniform vec4 fog_color;
+uniform vec4 sky_color;
 uniform float zfar;
 
 uniform mat4 shadowmap_mvp_mat;
@@ -159,24 +160,27 @@ void main (void)
     vec4 texel = texture(tex, mytexco.st);
     vec4 local_color = vec4(texel.rgb * color.rgb, texel.a);
 
-    vec4 world_pos = to_world_space_mat * myvertex;
+    if (local_color.a < 0.5)
+    {
+        discard;
+    }
+    else
+    {
+        vec4 world_pos = to_world_space_mat * myvertex;
 
-    float distance_fallof = exp(-3.0*(mypos.z/zfar+1.0));
-    distance_fallof = (distance_fallof-exp(-3.0))/(1.0-exp(-3.0));
-    float height_fallof = exp(-abs(world_pos.y)/90.0);
+        float distance_fallof = exp(-3.0*(mypos.z/zfar+1.0));
+        distance_fallof = (distance_fallof-exp(-3.0))/(1.0-exp(-3.0));
+        float height_fallof = exp(-abs(world_pos.y)/90.0);
 
-    float fog_weight = height_fallof * distance_fallof  ;
+        float fog_weight = height_fallof * distance_fallof  ;
 
-    fog_weight = clamp(fog_weight, 0, 1.0);
+        fog_weight = clamp(fog_weight, 0, 1.0);
 
-    // Make close distance fog bluer than far away fog
-    // This looks truly beautiful. Should probably pass the blue
-    // as the same color as the sky
-    vec4 final_fog_color = (1.0-distance_fallof)*vec4(0.0, 0.0, 1.0, 1.0) + distance_fallof * fog_color;
+        // Make close distance fog bluer than far away fog
+        // This looks truly beautiful. Should probably pass the blue
+        // as the same color as the sky
+        vec4 final_fog_color = (1.0-distance_fallof)*sky_color + distance_fallof * fog_color;
 
-    gl_FragColor = (1.0-fog_weight) * local_color + fog_weight * final_fog_color;
-
-//
-//    gl_Frag
-
+        gl_FragColor = (1.0-fog_weight) * local_color + fog_weight * final_fog_color;
+    }
 }

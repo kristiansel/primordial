@@ -58,10 +58,34 @@ void Mechanics::init(World &world_in, float &dt_in)
 //                             "rabbit_d",
 //                             glm::vec3(2.0, 10.0, -4.0));
 
-    world->addDynamicObject( "loin_x3",
-                             "nicewall",
-                             glm::vec3(2.0, 10.0, -4.0));
+//    world->addDynamicObject( "loin_x3",
+//                             "nicewall",
+//                             glm::vec3(2.0, 10.0, -4.0));
 
+
+    world->addDynamicObject( "rock01",
+                             "rock_diffuse",
+                             glm::vec3(-2.0, 10.0, 8.0));
+//
+//    world->addStaticObject( "rock01",
+//                             "rock_diffuse",
+//                             glm::vec3(-8.0, 0.5, 2.0),
+//                             1.0, 0.0 ,0.0,
+//                             yRelativeTo::Ground);
+//
+//    for (int i = 0; i<20; i++)
+//    {
+//        world->addStaticObject("rock01", "rock_diffuse",
+//                               glm::vec3(rand()%500-250, (float)(rand()%100)/100.f, rand()%500-250), // position
+//                               (((float)(rand()%1000)/1000.f)-0.5)*6.0, // uniform scaling
+//                               rand()%360, (rand()%2)*180, // rotateleft and up
+//                               yRelativeTo::Ground);
+//
+////        world->addDynamicObject("rock01", "rock_diffuse",
+////                               glm::vec3(rand()%500-250, (float)(rand()%100), rand()%500-250)); // position
+//    }
+
+    // In an ideal world
 
     // sword... forgot to apply mirror modifiers.. :)
 //    world->addDynamicObject( "sword_x",
@@ -255,7 +279,7 @@ void Mechanics::step(World &world_in, float dt_in)
     }
 
     // Update the terrain (based on player position)
-    world->terrain.updateObserverPosition(player->pos);
+    if (player) world->terrain.updateObserverPosition(player->pos);
 
 
 //    float cam_dist = 5.0;
@@ -459,7 +483,11 @@ void Mechanics::func(int num_in)
                                      RigidBody::Sphere(1.0)  );
         }
         break;
-    case 3:     world->delWorldObject(worldobject_ptr_it); worldobject_ptr_it = world->worldobjects.begin(); break;
+    case 3:
+        {
+            world->delWorldObject(worldobject_ptr_it); worldobject_ptr_it = world->worldobjects.begin();
+        }
+        break;
     case 4: // add AI
         addNPC(glm::vec3(rand()%10,2.0,rand()%10));
         break;

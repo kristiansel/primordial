@@ -32,6 +32,7 @@ public:
 
     void activate(const Camera &cam_in,
                   const glm::vec4 fog_color,
+                  const glm::vec4 sky_color,
                   const glm::mat4 &light_mvp_mat,
                   const DirLight &main_light);
 
@@ -84,6 +85,7 @@ private:
 
         // Other fog uniforms
         GLuint fog_color;
+        GLuint sky_color;
         GLuint zfar;
 
         // light model view projection matrix
