@@ -245,7 +245,7 @@ void Shader::drawProp(shared_ptr<Prop> prop, bool debug)
         if (debug) std::cout << "bound texture " << tex_ptr->getTBOid() << "\n";
 
         // Draw call
-        glDrawElements(GL_TRIANGLES, 3*mesh_ptr->getTriNum(), GL_UNSIGNED_SHORT, BUFFER_OFFSET(0)); // <-----
+        glDrawElementsInstanced(GL_TRIANGLES, 3*mesh_ptr->getTriNum(), GL_UNSIGNED_SHORT, BUFFER_OFFSET(0), 1); // <-----
 
         // Not sure if this is necessary unless other code is badly written
         glBindBuffer(GL_ARRAY_BUFFER, 0);

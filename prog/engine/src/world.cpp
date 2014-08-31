@@ -24,8 +24,8 @@ World::~World()
     delete music;
 }
 
-//list<shared_ptr<WorldObject>>::iterator World::addStaticObject(string mesh_key,
-void World::addStaticObject(string mesh_key,
+list<shared_ptr<WorldObject>>::iterator World::addStaticObject(string mesh_key,
+//void World::addStaticObject(string mesh_key,
                                                                 string tex_key,
                                                                 glm::vec3 pos,
                                                                 float scale,
@@ -38,46 +38,46 @@ void World::addStaticObject(string mesh_key,
     // reference and iterator
 
     // first check if same object is in already
-    bool already_exists = false;
-    shared_ptr<WInstObj> worldobject = nullptr;
-    for (auto instobj : instanced_objects)
-    {
-        if (instobj->mesh_key == mesh_key && instobj->tex_key == tex_key)
-        {
-            worldobject = instobj;
-            already_exists = true;
-            std::cout << "WE HAVE INSTANCING\n";
-        }
-    }
+//    bool already_exists = false;
+//    shared_ptr<WInstObj> worldobject = nullptr;
+//    for (auto instobj : instanced_objects)
+//    {
+//        if (instobj->mesh_key == mesh_key && instobj->tex_key == tex_key)
+//        {
+//            worldobject = instobj;
+//            already_exists = true;
+//            std::cout << "WE HAVE INSTANCING\n";
+//        }
+//    }
+//
+//    if (!worldobject)
+//        worldobject = shared_ptr<WInstObj>(new WInstObj);
 
-    if (!worldobject)
-        worldobject = shared_ptr<WInstObj>(new WInstObj);
-
-    //shared_ptr<WorldObject> worldobject = shared_ptr<WorldObject>(new WorldObject);
+    shared_ptr<WorldObject> worldobject = shared_ptr<WorldObject>(new WorldObject);
 
     if  (y_rel == yRelativeTo::Ground)
     {
         pos.y = terrain.ySample(pos.x, pos.z);
     }
 
-    if (!already_exists)
-    {
+//    if (!already_exists)
+//    {
         worldobject->pos = pos;         // configure position
         worldobject->scale = glm::vec3(scale, scale, scale);
         worldobject->rotateLeft(rotate_left_deg, 0);
         worldobject->rotateLeft(rotate_up_deg, 0);
 
-        worldobject->mesh_key = mesh_key;
-        worldobject->tex_key = tex_key;
-    }
-    else
-    {
-        Object3d* to_transform = worldobject->render_batches.begin()->addInstance();
-        to_transform->pos = pos;         // configure position
-        to_transform->scale = glm::vec3(scale, scale, scale);
-        to_transform->rotateLeft(rotate_left_deg, 0);
-        to_transform->rotateLeft(rotate_up_deg, 0);
-    }
+//        worldobject->mesh_key = mesh_key;
+//        worldobject->tex_key = tex_key;
+//    }
+//    else
+//    {
+//        Object3d* to_transform = worldobject->render_batches.begin()->addInstance();
+//        to_transform->pos = pos;         // configure position
+//        to_transform->scale = glm::vec3(scale, scale, scale);
+//        to_transform->rotateLeft(rotate_left_deg, 0);
+//        to_transform->rotateLeft(rotate_up_deg, 0);
+//    }
 
 
 
@@ -93,28 +93,33 @@ void World::addStaticObject(string mesh_key,
 
     worldobject->attachBatch(mesh_ptr, tex_ptr);
 
-    //get a reference to the body
-    vector<RigidBody>* rigidbodies = worldobject->getRigidBodies();
-    rigidbodies->push_back(RigidBody());
-    RigidBody* this_body = &(rigidbodies->back());
-    this_body->pos = pos;
-    this_body->scale = glm::vec3(scale, scale, scale);
-    this_body->rotateLeft(rotate_left_deg, 0);
-    this_body->rotateLeft(rotate_up_deg, 0);
+//    //get a reference to the body
+//    vector<RigidBody>* rigidbodies = worldobject->getRigidBodies();
+//    rigidbodies->push_back(RigidBody());
+//    RigidBody* this_body = &(rigidbodies->back());
+//    this_body->pos = pos;
+//    this_body->scale = glm::vec3(scale, scale, scale);
+//    this_body->rotateLeft(rotate_left_deg, 0);
+//    this_body->rotateLeft(rotate_up_deg, 0);
+//
+//    if (shape)
+//        addPhysicsStatic( this_body, shape);
+//    else
+//        addPhysicsStatic( this_body, RigidBody::ConvexHull(*(shared_ptr<Mesh>(mesh_ptr))));
 
     if (shape)
-        addPhysicsStatic( this_body, shape);
+        addPhysicsStatic( worldobject.get(), shape);
     else
-        addPhysicsStatic( this_body, RigidBody::ConvexHull(*(shared_ptr<Mesh>(mesh_ptr))));
+        addPhysicsStatic( worldobject.get(), RigidBody::ConvexHull(*(shared_ptr<Mesh>(mesh_ptr))));
 
 
-    //worldobjects.push_back(worldobject);
-    instanced_objects.push_back(worldobject);
+    worldobjects.push_back(worldobject);
+   // instanced_objects.push_back(worldobject);
 
     // STILL NEED TO CODE REMOVAL
 
-//    list<shared_ptr<WorldObject>>::iterator new_worldobject_it = --worldobjects.end();
-//    return new_worldobject_it;
+    list<shared_ptr<WorldObject>>::iterator new_worldobject_it = --worldobjects.end();
+    return new_worldobject_it;
 
 //    return shared_ptr<WorldObject>(&(*new_worldobject_it)); // This results in SEGFAULT because
 //    // if not captured, then this will be the last instance of this pointer, and

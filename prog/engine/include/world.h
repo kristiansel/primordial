@@ -43,8 +43,8 @@ class World : public PhysicsWorld // Consider merging Culling functionality into
         virtual ~World();
 
 
-        //list<shared_ptr<WorldObject>>::iterator addStaticObject(string mesh_key,
-        void                                    addStaticObject(string mesh_key,
+        list<shared_ptr<WorldObject>>::iterator addStaticObject(string mesh_key,
+        //void                                    addStaticObject(string mesh_key,
                                                                  string tex_key,
                                                                  glm::vec3 pos,
                                                                  float scale,

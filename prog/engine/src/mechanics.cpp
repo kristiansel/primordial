@@ -67,23 +67,25 @@ void Mechanics::init(World &world_in, float &dt_in)
                              "rock_diffuse",
                              glm::vec3(-2.0, 10.0, 8.0));
 //
-//    world->addStaticObject( "rock01",
-//                             "rock_diffuse",
-//                             glm::vec3(-8.0, 0.5, 2.0),
-//                             1.0, 0.0 ,0.0,
-//                             yRelativeTo::Ground);
+    world->addStaticObject( "rock01",
+                             "rock_diffuse",
+                             glm::vec3(-8.0, 0.5, 2.0),
+                             1.0, 0.0 ,0.0,
+                             yRelativeTo::Ground);
 //
-//    for (int i = 0; i<20; i++)
-//    {
-//        world->addStaticObject("rock01", "rock_diffuse",
-//                               glm::vec3(rand()%500-250, (float)(rand()%100)/100.f, rand()%500-250), // position
-//                               (((float)(rand()%1000)/1000.f)-0.5)*6.0, // uniform scaling
-//                               rand()%360, (rand()%2)*180, // rotateleft and up
-//                               yRelativeTo::Ground);
-//
-////        world->addDynamicObject("rock01", "rock_diffuse",
-////                               glm::vec3(rand()%500-250, (float)(rand()%100), rand()%500-250)); // position
-//    }
+    for (int i = 0; i<100; i++)
+    {
+        world->addStaticObject("rock01", "rock_diffuse",
+                               glm::vec3(rand()%500-250, (float)(rand()%100)/100.f, rand()%500-250), // position
+                               (((float)(rand()%1000)/1000.f)-0.5)*6.0, // uniform scaling
+                               rand()%360, (rand()%2)*180, // rotateleft and up
+                               yRelativeTo::Ground);
+
+//        world->addDynamicObject("rock01", "rock_diffuse",
+//                               glm::vec3(rand()%500-250, (float)(rand()%100), rand()%500-250)); // position
+    }
+
+    //world->addGrass()
 
     // In an ideal world
 

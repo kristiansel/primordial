@@ -1,10 +1,12 @@
 # version 330 core
 
-varying vec3 mynormal ;
-varying vec4 myvertex ;
 varying vec2 mytexco ;
 
 varying vec4 shadowvertex ;
+varying vec3 mypos ;
+varying vec3 normal ;
+
+varying vec4 world_pos ;
 
 //uniform int num_lights ; // are we lighting.
 //
@@ -18,14 +20,14 @@ uniform vec4 main_light_color;
 uniform sampler2D tex; // the active texture
 uniform sampler2DShadow shadow_depth; // the shadow mapping depth texture
 
-uniform mat4 mv_mat;
-uniform mat4 to_world_space_mat;
+//uniform mat4[1] mv_mat;
+
 
 uniform vec4 fog_color;
 uniform vec4 sky_color;
 uniform float zfar;
 
-uniform mat4 shadowmap_mvp_mat;
+//uniform mat4 shadowmap_mvp_mat;
 
 uniform vec4 ambient ;
 uniform vec4 diffuse ;
@@ -77,43 +79,15 @@ float random(vec3 seed, int i){
 void main (void)
 {
     // They eye is always at (0,0,0) looking down -z axis
-    // Also compute current fragment position and direction to eye
 
     const vec3 eyepos = vec3(0,0,0) ;
-    vec4 _mypos = mv_mat * myvertex ;
-    vec3 mypos = _mypos.xyz; //_mypos.xyz / _mypos.w ; // Dehomogenize current location (what is this shit?)
     vec3 eyedirn = normalize(eyepos - mypos) ;
 
-    // Compute normal, needed for shading.
-    // Simpler is vec3 normal = normalize(gl_NormalMatrix * mynormal) ;
-//        vec3 _normal = (gl_ModelViewMatrixInverseTranspose*vec4(mynormal,1.0)).xyz ;
-    // vec3 _normal = (nrm_mat * vec4(mynormal, 0.0)).xyz;
-    vec3 _normal = (mv_mat * vec4(mynormal, 0.0)).xyz;
-
-    vec3 normal = normalize(_normal) ;
-
-
     vec4 SUM = vec4(0,0,0,0) ;
-//        for (int i = 0; i < num_lights; i ++)   //Need to increase the i<1
-//        {
-//    vec4 light_cols_att;
-//    if (light_posns[i].w > 0.001 || light_posns[i].w < -0.001)
-//    {
-///                vec3 position = light_posns[i].xyz / light_posns[i].w; // dehomogenize light positio
-//        vec3 position = light_posns[i].xyz;
-//        light_cols_att = light_cols[i]*1/(pow(length(mypos - position),1)); // attenuate
-///                light_cols_att = vec4(1.0, 1.0, 1.0, 1.0);
-//        //light_cols_att = light_cols[i];
-//        // float light_dist = ((light_posns[0].x - mypos.x) * (light_posns[0].x - mypos.x) + (light_posns[0].y  - mypos.y)* (light_posns[0].y  - mypos.y)+ (light_posns[0].z  - mypos.z)* (light_posns[0].z - mypos.z));
-//        // light_cols_att = vec4(light_cols[i].r/light_dist, light_cols[i].g/light_dist, light_cols[i].b/light_dist, 1.0);
-//        lightdirection = normalize (position - mypos);
-//    }
-//    else
-//    {
+
     vec3 lightdirection = normalize(main_light_dir);
     vec4 light_cols_att = main_light_color;
-//                light_cols_att = vec4(0.0, 0.0, 0.0, 1.0);
-//    }
+
     vec3 halfangle = normalize (lightdirection + eyedirn); // compute half-angle
 
     float nDotL = dot(normal, lightdirection);
@@ -166,8 +140,6 @@ void main (void)
     }
     else
     {
-        vec4 world_pos = to_world_space_mat * myvertex;
-
         float distance_fallof = exp(-3.0*(mypos.z/zfar+1.0));
         distance_fallof = (distance_fallof-exp(-3.0))/(1.0-exp(-3.0));
         float height_fallof = exp(-abs(world_pos.y)/90.0);
