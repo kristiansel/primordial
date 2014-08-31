@@ -21,7 +21,13 @@ RenderBatch* Prop::attachBatch(std::weak_ptr<Mesh> mesh_ptr_in,
     }
 
     render_batches.push_back( RenderBatch(mesh_ptr_in,
-                                          tex_ptr_in,
+                                          tex_ptr_in, /*tex2_ptr_in*/
                                           transf_mat_in) );
     return &render_batches.back();
+}
+
+void RenderBatch::addSecondTex(std::weak_ptr<Texture> tex2_ptr_in)
+{
+    num_textures = 2;
+    tex2_ptr = tex2_ptr_in;
 }

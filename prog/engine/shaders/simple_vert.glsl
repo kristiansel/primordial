@@ -1,6 +1,6 @@
 # version 330 core
 
-varying vec2 mytexco ;
+varying vec3 mytexco ;
 
 varying vec4 shadowvertex ;
 varying vec3 mypos ; // camera space
@@ -8,17 +8,10 @@ varying vec3 normal ;  // camera space
 
 varying vec4 world_pos ; // world space
 
-
-//attribute vec3 InNormal ;
-//attribute vec4 InVertex ;
-//attribute vec2 InTexCoord ;
-//attribute vec4 bone_index ;
-//attribute vec4 bone_weight ;
-
 //
 layout(location = 0) in vec4 InVertex;
 layout(location = 1) in vec3 InNormal;
-layout(location = 2) in vec2 InTexCoord;
+layout(location = 2) in vec3 InTexCoord;
 layout(location = 3) in vec4 bone_index;
 layout(location = 4) in vec4 bone_weight;
 

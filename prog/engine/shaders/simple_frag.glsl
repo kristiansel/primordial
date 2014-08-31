@@ -1,6 +1,6 @@
 # version 330 core
 
-varying vec2 mytexco ;
+varying vec3 mytexco ;
 
 varying vec4 shadowvertex ;
 varying vec3 mypos ;
@@ -17,8 +17,9 @@ uniform vec3 main_light_dir;
 uniform vec4 main_light_color;
 
 // With texture
-uniform sampler2D tex; // the active texture
+uniform sampler2D tex; // the active texture (default)
 uniform sampler2DShadow shadow_depth; // the shadow mapping depth texture
+uniform sampler2D tex2; // the second active texture
 
 //uniform mat4[1] mv_mat;
 
@@ -131,7 +132,20 @@ void main (void)
 //    float visibility = (depthsample  <  (shadowvertex.z-bias)) ? 0.0 : 1.0;
 
     vec4 color = amb + emission + visibility * SUM ;
-    vec4 texel = texture(tex, mytexco.st);
+
+    vec4 texel;
+    if (mytexco.z > 0.01)
+    {
+        texel = mytexco.z*texture(tex2, mytexco.xy) + (1.0-mytexco.z)*texture(tex, mytexco.xy);
+    }
+    else
+    {
+        texel = texture(tex, mytexco.xy);
+    }
+    //texel = texture(tex, mytexco.xy);
+
+
+
     vec4 local_color = vec4(texel.rgb * color.rgb, texel.a);
 
     if (texel.a < 0.80)

@@ -42,6 +42,9 @@ void Shader::init(GLuint shadowmap_depth_texture)
     uniforms.shadow_depth = glGetUniformLocation(getProgramID(), "shadow_depth");
     glUniform1i(uniforms.shadow_depth, 1);   // ALWAYS CHANNEL 1
 
+    uniforms.tex2 = glGetUniformLocation(getProgramID(), "tex2");
+    glUniform1i(uniforms.tex2, 2);   // ALWAYS CHANNEL 2
+
     uniforms.bone_mat = glGetUniformLocation(getProgramID(), "bone_mat");
     uniforms.mv_mat = glGetUniformLocation(getProgramID(), "mv_mat");
     uniforms.proj_mat = glGetUniformLocation(getProgramID(), "proj_mat");
@@ -162,6 +165,7 @@ void Shader::drawProp(shared_ptr<Prop> prop, bool debug)
     {
         shared_ptr<Mesh> mesh_ptr = shared_ptr<Mesh>(rb_it->mesh_ptr);
         shared_ptr<Texture> tex_ptr = shared_ptr<Texture>(rb_it->tex_ptr);
+        shared_ptr<Texture> tex2_ptr = shared_ptr<Texture>(rb_it->tex2_ptr);
 
 
         //if (rb_it->m_instanced==false)
@@ -221,6 +225,9 @@ void Shader::drawProp(shared_ptr<Prop> prop, bool debug)
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, tex_ptr->getTBOid());
 
+        glActiveTexture(GL_TEXTURE2);
+        if (rb_it->num_textures > 1) glBindTexture(GL_TEXTURE_2D, tex2_ptr->getTBOid());
+
         // Bind vertex data
         glBindBuffer(GL_ARRAY_BUFFER, mesh_ptr->getVBOid());
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh_ptr->getIBOid());
@@ -236,7 +243,7 @@ void Shader::drawProp(shared_ptr<Prop> prop, bool debug)
 
         glVertexAttribPointer(0,       4, GL_FLOAT,    GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(0)                      );
         glVertexAttribPointer(1,       3, GL_FLOAT,    GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(normalOffset)           );
-        glVertexAttribPointer(2,    2, GL_FLOAT,    GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(texCoord0Offset)        );
+        glVertexAttribPointer(2,    NUM_TEX_COORDS, GL_FLOAT,    GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(texCoord0Offset)        );
         glVertexAttribPointer(3,   MAX_BONE_INFLUENCES, GL_INT,      GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(bone_indexOffset)       );
         glVertexAttribPointer(4,  MAX_BONE_INFLUENCES, GL_FLOAT,    GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(bone_weightOffset)      );
 

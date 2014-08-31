@@ -3,7 +3,7 @@
 Terrain::Terrain() :
     m_dimension(256),   // 256, 2048
     m_height_map(256),  // 256, 2048
-    m_heightScale(0.0110), // 0.016, 5*0.016
+    m_heightScale(0.0080), // 0.016, 5*0.016
     m_horzScale(256), // 1024, 4096
     m_centerX(0.0), // 0.0
     m_centerZ(0.0), // 0.0
@@ -74,6 +74,35 @@ void Terrain::init(PhysicsWorld* physics_world_in /*, glm::vec3 position_terr*/)
 std::vector<TerrainPatch>* Terrain::getPatches()
 {
     return &terrain_patches;
+}
+
+float Terrain::getThirdTexCo(const glm::vec3 &normal, const float &height)
+{
+    float horz_length = glm::length(glm::vec2(normal.x, normal.z)); // 0...1.0
+
+    float height_comp;
+    float height_low = 0.0;
+    float transition_length = 5.0;
+    if (height > height_low)
+    {
+        if ((height < (height_low+transition_length)))
+        {
+            height_comp = (height-height_low)/transition_length;
+        }
+        else
+        {
+            height_comp = 1.0;
+        }
+    }
+    else
+    {
+        height_comp = 0.0;
+    }
+
+    float out = std::max(horz_length, height_comp);
+
+    //std::cout << "returning"
+    return out;
 }
 
 void Terrain::subdividedQuads(Vertex* &vertices,
@@ -152,10 +181,10 @@ void Terrain::subdividedQuads(Vertex* &vertices,
             verts[2].normal = normSample(x+quad_length+x_corner, z+z_corner);
             verts[3].normal = normSample(x+quad_length+x_corner, z+quad_length+z_corner);
 
-            verts[0].tex_coords[0] = 0.0; verts[0].tex_coords[1] = 0.0;
-            verts[1].tex_coords[0] = 0.0; verts[1].tex_coords[1] = 1.0;
-            verts[2].tex_coords[0] = 1.0; verts[2].tex_coords[1] = 1.0;
-            verts[3].tex_coords[0] = 1.0; verts[3].tex_coords[1] = 0.0;
+            verts[0].tex_coords[0] = 0.0; verts[0].tex_coords[1] = 0.0; verts[0].tex_coords[2] = getThirdTexCo(verts[0].normal, verts[0].position.y);
+            verts[1].tex_coords[0] = 0.0; verts[1].tex_coords[1] = 1.0; verts[1].tex_coords[2] = getThirdTexCo(verts[1].normal, verts[1].position.y);
+            verts[2].tex_coords[0] = 1.0; verts[2].tex_coords[1] = 1.0; verts[2].tex_coords[2] = getThirdTexCo(verts[2].normal, verts[2].position.y);
+            verts[3].tex_coords[0] = 1.0; verts[3].tex_coords[1] = 0.0; verts[3].tex_coords[2] = getThirdTexCo(verts[3].normal, verts[3].position.y);
 
             for (int i = 0; i<4; i++)
             {
@@ -422,9 +451,11 @@ void Terrain::generateGraphicsPatch(glm::vec3 center, float patch_length, unsign
     //std::weak_ptr<Mesh>      mesh_ptr    = global::mesh_manager.getResptrFromKey ("simple_plane");
     std::weak_ptr<Mesh>      mesh_ptr    = std::weak_ptr<Mesh>(terrain_quad);
     std::weak_ptr<Texture>   tex_ptr     = global::tex_manager.getResptrFromKey  ("grass_equal");
+    std::weak_ptr<Texture>   tex2_ptr     = global::tex_manager.getResptrFromKey  ("rock");
 
     // attach the generated geometry to the patch-prop
-    terrain_patch->prop->attachBatch(mesh_ptr, tex_ptr);
+    auto render_batch = terrain_patch->prop->attachBatch(mesh_ptr, tex_ptr);
+    render_batch->addSecondTex(tex2_ptr);
 }
 
 
@@ -512,7 +543,7 @@ void Terrain::generateHeightMap()
 {
     double range = 8000.0; // m
 
-    //srand(23798); // removing this gives a nice one
+    srand(23798); // removing this gives a nice one
 
     // find the first (middle point) m_dimension/2
     m_height_map(m_dimension/2, m_dimension/2) = rand_range(-range, range);
@@ -988,9 +1019,10 @@ void Terrain::changeSubdLvl(unsigned int subd_lvl_in, TerrainPatch* terrain_patc
     //std::weak_ptr<Mesh>      mesh_ptr    = global::mesh_manager.getResptrFromKey ("simple_plane");
     std::weak_ptr<Mesh>      mesh_ptr    = std::weak_ptr<Mesh>(terrain_quad);
     std::weak_ptr<Texture>   tex_ptr     = global::tex_manager.getResptrFromKey  ("growth");
+    std::weak_ptr<Texture>   tex2_ptr     = global::tex_manager.getResptrFromKey  ("rock");
 
     // attach the generated geometry to the patch-prop
-    terrain_patch->prop->attachBatch(mesh_ptr, tex_ptr);
-
+    auto render_batch = terrain_patch->prop->attachBatch(mesh_ptr, tex_ptr);
+    render_batch->addSecondTex(tex2_ptr);
     //std::cout << "After change then the new subd_lvl is" << terrain_patch->subd_lvl <<"\n";
 }

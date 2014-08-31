@@ -69,6 +69,7 @@ private:
         // "sampler" uniforms
         GLuint tex;
         GLuint shadow_depth;
+        GLuint tex2;
 
         // bone matrices
         GLuint bone_mat;

@@ -16,12 +16,17 @@ struct RenderBatch
                 glm::mat4 transf_mat_in) :
                     mesh_ptr(mesh_ptr_in),
                     tex_ptr(tex_ptr_in),
+                    tex2_ptr(tex_ptr_in),
+                    num_textures(1),
                     transf_mat(transf_mat_in),
                     parent_bone(-1) {};
 
+    void addSecondTex(std::weak_ptr<Texture> tex2_ptr_in);
     // Change to shared_ptr one day
     std::weak_ptr<Mesh> mesh_ptr;      // non_owning, points to resource manager's (owner) unique_ptr
     std::weak_ptr<Texture> tex_ptr; //
+    int num_textures;
+    std::weak_ptr<Texture> tex2_ptr; //
     glm::mat4 transf_mat;
     int parent_bone;
     // BumpMap* bpm_ptr //

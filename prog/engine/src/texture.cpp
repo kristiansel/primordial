@@ -77,6 +77,7 @@ void Texture::createGL()
     errCode = glGetError();
     if (errCode != GL_NO_ERROR) {
         std::cerr << "glGetError()) != GL_NO_ERROR-----TEXTURE------\n";
+        std::cerr << "errCode: " << errCode << "\n";
 
         if (errCode == GL_INVALID_VALUE)
         {

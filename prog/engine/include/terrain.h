@@ -62,6 +62,8 @@ class Terrain
 
         int getPrefLvl(float square_distance);
 
+        float getThirdTexCo(const glm::vec3 &normal, const float &height);
+
 
 
     private:
