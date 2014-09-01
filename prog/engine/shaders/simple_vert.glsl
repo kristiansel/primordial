@@ -17,6 +17,16 @@ layout(location = 4) in vec4 bone_weight;
 
 uniform mat4 proj_mat;
 
+layout(std140) uniform GlobalUniforms
+{
+    mat4 proj_matUni;
+    vec4 fog_colorUni;
+    vec4 sky_colorUni;
+    vec4 main_light_colorUni;
+    vec3 main_light_dirUni;         // does this align?
+    float zfarUni;
+};
+
 // instanced variables
 const int MAX_INSTANCED = 50;
 uniform mat4[MAX_INSTANCED] mv_mat;
@@ -49,6 +59,6 @@ void main() {
 
     world_pos = to_world_space_mat[instanceID] * myvertex ;
 
-    gl_Position = proj_mat * mv_mat[instanceID] * myvertex ;
+    gl_Position = proj_matUni * mv_mat[instanceID] * myvertex ;
 }
 

@@ -41,11 +41,14 @@ void Renderer::init(unsigned int scr_width_in, unsigned int scr_height_in)
 //    glCullFace(GL_BACK);
  //   glEnable(GL_CULL_FACE);
 
+    // initialize uniform buffer objects
+    ubos.init();
+
     // Initialize Shadow mapping shader
     shadow_map.init();
 
     // Initialize shaders
-    main_shader.init(shadow_map.getDepthTex());
+    main_shader.init(shadow_map.getDepthTex(), ubos.getBinding());
     sky_shader.init();
 
     // Post processing init
@@ -85,6 +88,11 @@ void Renderer::draw(Scene &scene, float dt)
 
     glm::vec4 fog_color = glm::vec4(1.0, 1.0, 1.0, 1.0);
     glm::vec4 sky_color = glm::vec4(0.f/255.f, 80.f/255.f, 186.f/255.f, 1.0);
+
+    // set global uniforms data
+    glm::vec4 main_light_dir = view_mat * glm::vec4(mlight.dir, 0.0);
+    glm::vec3 main_light_dir3 = glm::vec3(main_light_dir.x, main_light_dir.y, main_light_dir.z);
+    ubos.setGlobalUniformsData({proj_mat, fog_color, sky_color, mlight.color, main_light_dir3, scene.camera->farz});
 
     // Why is this in here?
     glDisable(GL_BLEND);

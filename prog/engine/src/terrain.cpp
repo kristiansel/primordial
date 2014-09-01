@@ -3,7 +3,7 @@
 Terrain::Terrain() :
     m_dimension(256),   // 256, 2048
     m_height_map(256),  // 256, 2048
-    m_heightScale(0.0080), // 0.016, 5*0.016
+    m_heightScale(0.0060), // 0.016, 5*0.016
     m_horzScale(256), // 1024, 4096
     m_centerX(0.0), // 0.0
     m_centerZ(0.0), // 0.0
@@ -78,11 +78,11 @@ std::vector<TerrainPatch>* Terrain::getPatches()
 
 float Terrain::getThirdTexCo(const glm::vec3 &normal, const float &height)
 {
-    float horz_length = glm::length(glm::vec2(normal.x, normal.z)); // 0...1.0
+    float horz_length = pow(glm::length(glm::vec2(normal.x, normal.z)), 0.7); // 0...1.0
 
     float height_comp;
     float height_low = 0.0;
-    float transition_length = 5.0;
+    float transition_length = 10.0;
     if (height > height_low)
     {
         if ((height < (height_low+transition_length)))
@@ -127,6 +127,8 @@ void Terrain::subdividedQuads(Vertex* &vertices,
 
     vertices = new Vertex [num_verts];
     triangles = new Triangle [num_tris];
+
+    float texcoord_stride = 18.0/(float)(n_side);
 
     float quad_length = 2*half_length/n_side;
 
@@ -181,10 +183,18 @@ void Terrain::subdividedQuads(Vertex* &vertices,
             verts[2].normal = normSample(x+quad_length+x_corner, z+z_corner);
             verts[3].normal = normSample(x+quad_length+x_corner, z+quad_length+z_corner);
 
-            verts[0].tex_coords[0] = 0.0; verts[0].tex_coords[1] = 0.0; verts[0].tex_coords[2] = getThirdTexCo(verts[0].normal, verts[0].position.y);
-            verts[1].tex_coords[0] = 0.0; verts[1].tex_coords[1] = 1.0; verts[1].tex_coords[2] = getThirdTexCo(verts[1].normal, verts[1].position.y);
-            verts[2].tex_coords[0] = 1.0; verts[2].tex_coords[1] = 1.0; verts[2].tex_coords[2] = getThirdTexCo(verts[2].normal, verts[2].position.y);
-            verts[3].tex_coords[0] = 1.0; verts[3].tex_coords[1] = 0.0; verts[3].tex_coords[2] = getThirdTexCo(verts[3].normal, verts[3].position.y);
+
+            // stretch one texture over one terrain quad
+
+            verts[0].tex_coords[0] = j*texcoord_stride; verts[0].tex_coords[1] = (i+1)*texcoord_stride; verts[0].tex_coords[2] = getThirdTexCo(verts[0].normal, verts[0].position.y);
+            verts[1].tex_coords[0] = j*texcoord_stride; verts[1].tex_coords[1] = (i)*texcoord_stride; verts[1].tex_coords[2] = getThirdTexCo(verts[1].normal, verts[1].position.y);
+            verts[2].tex_coords[0] = (j+1)*texcoord_stride; verts[2].tex_coords[1] = (i)*texcoord_stride; verts[2].tex_coords[2] = getThirdTexCo(verts[2].normal, verts[2].position.y);
+            verts[3].tex_coords[0] = (j+1)*texcoord_stride; verts[3].tex_coords[1] = (i+1)*texcoord_stride; verts[3].tex_coords[2] = getThirdTexCo(verts[3].normal, verts[3].position.y);
+
+//            verts[0].tex_coords[0] = 0.0; verts[0].tex_coords[1] = 0.0; verts[0].tex_coords[2] = getThirdTexCo(verts[0].normal, verts[0].position.y);
+//            verts[1].tex_coords[0] = 0.0; verts[1].tex_coords[1] = 1.0; verts[1].tex_coords[2] = getThirdTexCo(verts[1].normal, verts[1].position.y);
+//            verts[2].tex_coords[0] = 1.0; verts[2].tex_coords[1] = 1.0; verts[2].tex_coords[2] = getThirdTexCo(verts[2].normal, verts[2].position.y);
+//            verts[3].tex_coords[0] = 1.0; verts[3].tex_coords[1] = 0.0; verts[3].tex_coords[2] = getThirdTexCo(verts[3].normal, verts[3].position.y);
 
             for (int i = 0; i<4; i++)
             {
@@ -543,7 +553,8 @@ void Terrain::generateHeightMap()
 {
     double range = 8000.0; // m
 
-    srand(23798); // removing this gives a nice one
+    //srand(23798); // removing this gives a nice one
+    srand(12345); // removing this gives a nice one
 
     // find the first (middle point) m_dimension/2
     m_height_map(m_dimension/2, m_dimension/2) = rand_range(-range, range);

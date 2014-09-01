@@ -16,6 +16,7 @@
 #include "postprocstage.h"
 #include "combinationstage.h"
 #include "textshader.h"
+#include "uniformbufferobject.h"
 
 
 class Renderer
@@ -62,6 +63,8 @@ private:
     float pix_tex_coord_offset[2];
     float kernelOffsetx[KERNEL_SIZE*KERNEL_SIZE];
     float kernelOffsety[KERNEL_SIZE*KERNEL_SIZE];
+
+    UniformBufferObject ubos;
 
     ShadowMap shadow_map;
     RenderStage render_stage;

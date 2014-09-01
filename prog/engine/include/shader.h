@@ -8,6 +8,7 @@
 #include <cstring>
 #include <string>
 #include <glm/gtx/transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 #include "prop.h"
 #include "actor.h"
@@ -27,7 +28,9 @@ public:
     explicit Shader(string vertex_shader, string fragment_shader);
     virtual ~Shader();
 
-    void init(GLuint shadowmap_depth_texture);
+    void init(GLuint shadowmap_depth_texture,
+              GLuint global_uniforms_binding);
+
     void unload();
 
     void activate(const Camera &cam_in,
@@ -91,6 +94,31 @@ private:
 
         // light model view projection matrix
         GLuint shadowmap_mvp_mat;
+
+//        struct BufferObjectData
+//        {
+//            glm::mat4 proj_matUni;
+//            glm::vec4 fog_colorUni;
+//            glm::vec4 sky_colorUni;
+//            glm::vec4 main_light_colorUni;
+//            glm::vec3 main_light_dirUni;         // does this align?
+//            float zfarUni;
+//        } bufferObjectData;
+//
+//        struct BufferObjects
+//        {
+//            struct BufferObjectInstance
+//            {
+//                GLuint ubo_id;
+//                size_t ubo_size;
+//                GLuint binding_index;
+//                GLuint block_index;
+//            } globalUniforms;
+//            // BufferObjectInstance globalUniforms2;
+//            // BufferObjectInstance globalUniforms3;
+//            // BufferObjectInstance globalUniforms4;
+//        } bufferObjects;
+        GLuint globalUniformsBlockIndex;
 
     } uniforms;
 

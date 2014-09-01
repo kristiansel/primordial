@@ -19,7 +19,7 @@ Shader::~Shader()
     unload();
 }
 
-void Shader::init(GLuint shadowmap_depth_texture)
+void Shader::init(GLuint shadowmap_depth_texture, GLuint global_uniforms_binding)
 {
     ShaderBase::load("shaders/simple_vert.glsl", "shaders/simple_frag.glsl");
 
@@ -54,6 +54,90 @@ void Shader::init(GLuint shadowmap_depth_texture)
     uniforms.fog_color = glGetUniformLocation(getProgramID(), "fog_color");
     uniforms.sky_color = glGetUniformLocation(getProgramID(), "sky_color");
     uniforms.zfar = glGetUniformLocation(getProgramID(), "zfar");
+
+//    // uniform buffer object
+//    /** GLSL:
+//    layout(std140) uniform GlobalMatrices
+//    {
+//        mat4 proj_matUni;
+//        vec4 fog_colorUni;
+//        vec4 sky_colorUni;
+//        vec4 main_light_colorUni;
+//        vec3 main_light_dirUni;         // does this align?
+//        float zfarUni;
+//    };
+//    */
+//
+//
+//    // REQUEST a block index in the Program
+//    //
+//    //
+//    //
+//    //   Program
+//    //
+//    uniforms.bufferObjects.globalUniforms.block_index =
+//        glGetUniformBlockIndex(getProgramID(), "GlobalUniforms");
+//
+//    uniforms.bufferObjects.globalUniforms.ubo_size = sizeof(glm::mat4) +
+//                                                   3*sizeof(glm::vec4) +
+//                                                   sizeof(glm::vec3) +
+//                                                   sizeof(float);
+//
+//    // REQUEST the UBO on the server
+//    //
+//    //
+//    //
+//    //   Program    UBO
+//    //
+//    glGenBuffers(1, &uniforms.bufferObjects.globalUniforms.ubo_id);
+//    glBindBuffer(GL_UNIFORM_BUFFER, uniforms.bufferObjects.globalUniforms.ubo_id);
+//    glBufferData(GL_UNIFORM_BUFFER, uniforms.bufferObjects.globalUniforms.ubo_size , NULL, GL_STREAM_DRAW);
+//    glBindBuffer(GL_UNIFORM_BUFFER, 0);
+//
+//    // CREATE a global Binding index for uniform buffer objects
+//    //
+//    //       Binding0
+//    //
+//    //   Program    UBO
+//    //
+//    uniforms.bufferObjects.globalUniforms.binding_index = 0;
+//
+//    // CONNECT the Program block index to the Binding Index
+//    //
+//    //       Binding0
+//    //       /
+//    //   Program    UBO
+//    //
+//    glUniformBlockBinding(getProgramID(), uniforms.bufferObjects.globalUniforms.block_index,
+//                                          uniforms.bufferObjects.globalUniforms.binding_index);
+//
+//    // CONNECT the UBO to the Binding Index
+//    //
+//    //       Binding0
+//    //       /     \                Finished!
+//    //   Program    UBO
+//    //
+//    glBindBufferRange(GL_UNIFORM_BUFFER, uniforms.bufferObjects.globalUniforms.binding_index,
+//    uniforms.bufferObjects.globalUniforms.ubo_id, 0, uniforms.bufferObjects.globalUniforms.ubo_size);
+
+    // global data
+    // ASSIGN a block index to "GlobalUniforms" in Program
+    //
+    //       Binding0
+    //             \
+    //   Program    UBO
+    //
+    uniforms.globalUniformsBlockIndex = glGetUniformBlockIndex(getProgramID(), "GlobalUniforms");
+
+//    // CONNECT the UBO to the Binding Index
+//    //
+//    //       Binding0
+//    //       /     \                Finished!
+//    //   Program    UBO
+//    //
+    glUniformBlockBinding(getProgramID(), uniforms.globalUniformsBlockIndex ,
+                                          global_uniforms_binding);
+
 
     glEnableVertexAttribArray(0);
     glEnableVertexAttribArray(1);
@@ -101,7 +185,10 @@ void Shader::activate(const Camera &cam_in,
 
     // Send projection matrix:
     glm::mat4 p = cam_in.getProjectionMatrix();
-    glUniformMatrix4fv(uniforms.proj_mat, 1, false, &p[0][0] );
+
+
+    /*glUniformMatrix4fv(uniforms.proj_mat, 1, false, &p[0][0] );*/
+
 
 //    std::cout << "cam_in.getProjectionMatrix():  \n" << p << "\n\n";
 //
@@ -116,13 +203,13 @@ void Shader::activate(const Camera &cam_in,
     main_light_color = main_light.color;
 
     // Send light uniforms
-    glUniform3fv(uniforms.main_light_dir, 1, &(this->main_light_dir[0]));
-    glUniform4fv(uniforms.main_light_color,  1, &(this->main_light_color[0]));
+    /*glUniform3fv(uniforms.main_light_dir, 1, &(this->main_light_dir[0]));
+    glUniform4fv(uniforms.main_light_color,  1, &(this->main_light_color[0]));*/
 
     // Fog uniforms
-    glUniform4fv(uniforms.fog_color, 1, &fog_color[0]);
+    /*glUniform4fv(uniforms.fog_color, 1, &fog_color[0]);
     glUniform4fv(uniforms.sky_color, 1, &sky_color[0]);
-    glUniform1f(uniforms.zfar, cam_in.farz);
+    glUniform1f(uniforms.zfar, cam_in.farz);*/
 
 //    // transform light to eye coordinates
 //    glm::vec4 light_pos_trans = mv * glm::vec4(1.0, 1.0, 1.0, 0.0);
@@ -135,6 +222,18 @@ void Shader::activate(const Camera &cam_in,
 //    glUniform4fv(uniforms.light_posns, 1, &(light_pos_trans[0]));
 //    glUniform4fv(uniforms.light_cols,  1, &(light_col[0]));
 
+
+    // Sending global data should be done by the renderer at the right time, not when main shader
+//    uniforms.bufferObjectData.proj_matUni = p;
+//    uniforms.bufferObjectData.fog_colorUni = fog_color;
+//    uniforms.bufferObjectData.sky_colorUni = sky_color;
+//    uniforms.bufferObjectData.main_light_colorUni = this->main_light_color;
+//    uniforms.bufferObjectData.main_light_dirUni = glm::vec3(this->main_light_dir.x, this->main_light_dir.y, this->main_light_dir.z);
+//    uniforms.bufferObjectData.zfarUni = cam_in.farz;
+//
+//    glBindBuffer(GL_UNIFORM_BUFFER, uniforms.bufferObjects.globalUniforms.ubo_id);
+//    glBufferSubData(GL_UNIFORM_BUFFER, 0, uniforms.bufferObjects.globalUniforms.ubo_size, &(uniforms.bufferObjectData.proj_matUni[0]));
+//    glBindBuffer(GL_UNIFORM_BUFFER, 0);
 
 }
 

@@ -30,6 +30,16 @@ uniform float zfar;
 
 //uniform mat4 shadowmap_mvp_mat;
 
+layout(std140) uniform GlobalUniforms
+{
+    mat4 proj_matUni;
+    vec4 fog_colorUni;
+    vec4 sky_colorUni;
+    vec4 main_light_colorUni;
+    vec3 main_light_dirUni;         // does this align?
+    float zfarUni;
+};
+
 uniform vec4 ambient ;
 uniform vec4 diffuse ;
 uniform vec4 specular ;
@@ -86,8 +96,8 @@ void main (void)
 
     vec4 SUM = vec4(0,0,0,0) ;
 
-    vec3 lightdirection = normalize(main_light_dir);
-    vec4 light_cols_att = main_light_color;
+    vec3 lightdirection = normalize(main_light_dirUni);
+    vec4 light_cols_att = main_light_colorUni;
 
     vec3 halfangle = normalize (lightdirection + eyedirn); // compute half-angle
 
@@ -148,13 +158,13 @@ void main (void)
 
     vec4 local_color = vec4(texel.rgb * color.rgb, texel.a);
 
-    if (texel.a < 0.80)
+    if (texel.a < 0.66)
     {
         discard;
     }
     else
     {
-        float distance_fallof = exp(-3.0*(mypos.z/zfar+1.0));
+        float distance_fallof = exp(-3.0*(mypos.z/zfarUni+1.0));
         distance_fallof = (distance_fallof-exp(-3.0))/(1.0-exp(-3.0));
         float height_fallof = exp(-abs(world_pos.y)/90.0);
 
@@ -165,7 +175,7 @@ void main (void)
         // Make close distance fog bluer than far away fog
         // This looks truly beautiful. Should probably pass the blue
         // as the same color as the sky
-        vec4 final_fog_color = (1.0-distance_fallof)*sky_color + distance_fallof * fog_color;
+        vec4 final_fog_color = (1.0-distance_fallof)*sky_colorUni + distance_fallof * fog_colorUni;
 
         gl_FragColor = (1.0-fog_weight) * local_color + fog_weight * final_fog_color;
     }
