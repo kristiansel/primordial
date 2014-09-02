@@ -49,7 +49,8 @@ void Renderer::init(unsigned int scr_width_in, unsigned int scr_height_in)
 
     // Initialize shaders
     main_shader.init(shadow_map.getDepthTex(), ubos.getBinding());
-    sky_shader.init();
+    grass_shader.init(shadow_map.getDepthTex(), ubos.getBinding());
+    sky_shader.init(ubos.getBinding());
 
     // Post processing init
     render_stage.init(scr_width_in, scr_height_in);
@@ -83,7 +84,7 @@ void Renderer::draw(Scene &scene, float dt)
 
     const DirLight &mlight = (*scene.main_light);
     glm::vec3 cam_dir = scene.camera->getDir();
-    glm::vec3 shadow_focus = scene.camera->pos + 12.f*glm::normalize(glm::vec3(cam_dir.x, 0.0, cam_dir.z));
+    glm::vec3 shadow_focus = scene.camera->pos + 12.f*glm::vec3(cam_dir.x, 0.0, cam_dir.z);
     glm::mat4 mlight_vp = mlight.getVPmatrix(shadow_focus);
 
     glm::vec4 fog_color = glm::vec4(1.0, 1.0, 1.0, 1.0);
@@ -132,10 +133,7 @@ void Renderer::draw(Scene &scene, float dt)
         // Set the values of the uniforms which are updated
         // per-frame and switch to main shader
         main_shader.activate(*(scene.camera),
-                             fog_color,
-                             sky_color,
-                             mlight_vp,
-                             mlight/*, plights, num_plights, scene.fog_color*/);
+                             mlight_vp);
 
         // draw
 
@@ -155,13 +153,6 @@ void Renderer::draw(Scene &scene, float dt)
             // why is this not showing...?
         }
 
-        // Should preferably draw the terrain after actors and props
-        // terrain_patches defined above
-
-
-        // remove
-        //std::terminate();
-
         // Draw actors;
         for (auto it = scene.actors.begin(); it!=scene.actors.end(); it++)
         {
@@ -171,9 +162,10 @@ void Renderer::draw(Scene &scene, float dt)
 
         //after this the bone matrices are soiled
 
-        // Draw "sky quad" following the camera
+        grass_shader.draw(*(scene.camera),
+                             mlight_vp);
 
-        // activate and draw in the same call
+        // Draw "sky quad" following the camera
         sky_shader.drawSkyQuad((*(scene.camera)), sky_color, fog_color);
 
     // Finished main drawing, post processing

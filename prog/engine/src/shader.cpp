@@ -27,8 +27,8 @@ void Shader::init(GLuint shadowmap_depth_texture, GLuint global_uniforms_binding
 //    uniforms.num_lights = glGetUniformLocation(getProgramID(),"num_lights") ;
 //    uniforms.light_posns = glGetUniformLocation(getProgramID(),"light_posns") ;
 //    uniforms.light_cols = glGetUniformLocation(getProgramID(),"light_cols") ;
-    uniforms.main_light_dir = glGetUniformLocation(getProgramID(), "main_light_dir");
-    uniforms.main_light_color = glGetUniformLocation(getProgramID(), "main_light_color");
+//    uniforms.main_light_dir = glGetUniformLocation(getProgramID(), "main_light_dir");
+//    uniforms.main_light_color = glGetUniformLocation(getProgramID(), "main_light_color");
 
     uniforms.ambient = glGetUniformLocation(getProgramID(),"ambient") ;
     uniforms.diffuse = glGetUniformLocation(getProgramID(),"diffuse") ;
@@ -47,13 +47,13 @@ void Shader::init(GLuint shadowmap_depth_texture, GLuint global_uniforms_binding
 
     uniforms.bone_mat = glGetUniformLocation(getProgramID(), "bone_mat");
     uniforms.mv_mat = glGetUniformLocation(getProgramID(), "mv_mat");
-    uniforms.proj_mat = glGetUniformLocation(getProgramID(), "proj_mat");
+    //uniforms.proj_mat = glGetUniformLocation(getProgramID(), "proj_mat");
     uniforms.to_world_space_mat = glGetUniformLocation(getProgramID(), "to_world_space_mat");
     uniforms.shadowmap_mvp_mat = glGetUniformLocation(getProgramID(), "shadowmap_mvp_mat");
 
-    uniforms.fog_color = glGetUniformLocation(getProgramID(), "fog_color");
-    uniforms.sky_color = glGetUniformLocation(getProgramID(), "sky_color");
-    uniforms.zfar = glGetUniformLocation(getProgramID(), "zfar");
+    //uniforms.fog_color = glGetUniformLocation(getProgramID(), "fog_color");
+    //uniforms.sky_color = glGetUniformLocation(getProgramID(), "sky_color");
+    //uniforms.zfar = glGetUniformLocation(getProgramID(), "zfar");
 
 //    // uniform buffer object
 //    /** GLSL:
@@ -168,10 +168,7 @@ void Shader::unload()
 }
 
 void Shader::activate(const Camera &cam_in,
-                      const glm::vec4 fog_color,
-                      const glm::vec4 sky_color,
-                      const glm::mat4 &light_mvp_mat,
-                      const DirLight &main_light)
+                      const glm::mat4 &light_mvp_mat)
 {
     // switch to main shader
     ShaderBase::switchTo();
@@ -184,7 +181,7 @@ void Shader::activate(const Camera &cam_in,
     glBindTexture(GL_TEXTURE_2D, shadowmap_depth_texture);
 
     // Send projection matrix:
-    glm::mat4 p = cam_in.getProjectionMatrix();
+    //glm::mat4 p = cam_in.getProjectionMatrix();
 
 
     /*glUniformMatrix4fv(uniforms.proj_mat, 1, false, &p[0][0] );*/
@@ -196,11 +193,11 @@ void Shader::activate(const Camera &cam_in,
 
     // Set view matrix and light matrix
     view_mat = cam_in.getViewMatrix();
-    main_light_mvp_mat = light_mvp_mat;
+    main_light_mvp_mat = light_mvp_mat; // This is used to calculate shadows (should go in the global buffer)
 
     // Update the light
-    main_light_dir = view_mat * glm::vec4(main_light.dir, 0.0);
-    main_light_color = main_light.color;
+    //main_light_dir = view_mat * glm::vec4(main_light.dir, 0.0);
+    //main_light_color = main_light.color;
 
     // Send light uniforms
     /*glUniform3fv(uniforms.main_light_dir, 1, &(this->main_light_dir[0]));

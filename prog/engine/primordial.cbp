@@ -140,6 +140,7 @@
 		<Unit filename="include/debugdrawer.h" />
 		<Unit filename="include/geometry.h" />
 		<Unit filename="include/global.h" />
+		<Unit filename="include/grassshader.h" />
 		<Unit filename="include/light.h" />
 		<Unit filename="include/master.h" />
 		<Unit filename="include/mechanics.h" />
@@ -170,6 +171,7 @@
 		<Unit filename="include/world.h" />
 		<Unit filename="include/worldobject.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="shaders/ld_tinst_vert.glsl" />
 		<Unit filename="shaders/pp_comb.frag.glsl" />
 		<Unit filename="shaders/pp_pass2.frag.glsl" />
 		<Unit filename="shaders/pp_wave.vert.glsl" />
@@ -191,6 +193,7 @@
 		<Unit filename="src/debugdrawer.cpp" />
 		<Unit filename="src/geometry.cpp" />
 		<Unit filename="src/global.cpp" />
+		<Unit filename="src/grassshader.cpp" />
 		<Unit filename="src/light.cpp" />
 		<Unit filename="src/master.cpp" />
 		<Unit filename="src/mechanics.cpp" />

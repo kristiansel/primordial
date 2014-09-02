@@ -5,10 +5,20 @@ varying vec4 myvertex ;
 uniform mat4 mv_mat;
 uniform mat4 world_mat;
 
-uniform vec4 sky_color;
-uniform vec4 fog_color;
+//uniform vec4 sky_color;
+//uniform vec4 fog_color;
 
-uniform float zfar;
+//uniform float zfar;
+
+layout(std140) uniform GlobalUniforms
+{
+    mat4 proj_matUni;
+    vec4 fog_colorUni;
+    vec4 sky_colorUni;
+    vec4 main_light_colorUni;
+    vec3 main_light_dirUni;         // does this align?
+    float zfarUni;
+};
 
 void main (void)
 {
@@ -22,7 +32,9 @@ void main (void)
     float fog_weight = exp(-abs(world_pos.y)/90.0);
     fog_weight = clamp(fog_weight, 0, 1.0);
 
-    gl_FragColor = (1.0-fog_weight) * sky_color + fog_weight * fog_color;
+    //
+
+    gl_FragColor = (1.0-fog_weight) * sky_colorUni + fog_weight * fog_colorUni;
 
     //gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);
 }

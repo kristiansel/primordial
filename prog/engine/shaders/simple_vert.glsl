@@ -15,8 +15,6 @@ layout(location = 2) in vec3 InTexCoord;
 layout(location = 3) in vec4 bone_index;
 layout(location = 4) in vec4 bone_weight;
 
-uniform mat4 proj_mat;
-
 layout(std140) uniform GlobalUniforms
 {
     mat4 proj_matUni;
@@ -53,12 +51,12 @@ void main() {
 
     vec3 mynormal = mynormal4.xyz;
 
-    shadowvertex = shadowmap_mvp_mat[instanceID] * myvertex;
+    shadowvertex = shadowmap_mvp_mat[0] * myvertex;
     mypos = (mv_mat[0] * myvertex).xyz ;
     normal = normalize( (mv_mat[0] * vec4(mynormal, 0.0) ).xyz) ;
 
-    world_pos = to_world_space_mat[instanceID] * myvertex ;
+    world_pos = to_world_space_mat[0] * myvertex ;
 
-    gl_Position = proj_matUni * mv_mat[instanceID] * myvertex ;
+    gl_Position = proj_matUni * mv_mat[0] * myvertex ;
 }
 

@@ -11,7 +11,7 @@ class SkyShader : public ShaderBase
         SkyShader();
         virtual ~SkyShader();
 
-        void init();
+        void init(GLuint global_uniforms_binding);
 
         void drawSkyQuad(   const Camera &cam_in,
                             const glm::vec4 &sky_color_in,
@@ -30,6 +30,8 @@ class SkyShader : public ShaderBase
 
             // Other parameters
             GLuint zfar;
+
+            GLuint globalUniformsBlockIndex;
 
         } uniforms;
 

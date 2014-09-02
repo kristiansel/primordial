@@ -9,6 +9,7 @@
 #include <string>
 
 #include "shader.h"
+#include "grassshader.h"
 #include "skyshader.h"
 #include "scene.h"
 #include "shadowmap.h"
@@ -49,6 +50,7 @@ protected:
 
 private:
     Shader main_shader;
+    GrassShader grass_shader;
     SkyShader sky_shader;
 
     // Have this not change with resize

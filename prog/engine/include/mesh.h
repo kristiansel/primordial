@@ -50,7 +50,6 @@ public:
 
     // Public member functions
     void fromFile(string mesh_key);
-    void fromFile2(string mesh_key);
     void fromMemory(Vertex* const &vertices_in,
                     int num_vertices_in,
                     Triangle* const &triangles_in,
@@ -73,6 +72,7 @@ public:
     void deleteGL();
 protected:
     //void geomToVRAM();
+    void fromFile2(string mesh_key);
 private:
    // string filepath;
 

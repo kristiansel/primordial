@@ -84,19 +84,19 @@ void Mechanics::init(World &world_in, float &dt_in)
 //        world->addDynamicObject("rock01", "rock_diffuse",
 //                               glm::vec3(rand()%500-250, (float)(rand()%100), rand()%500-250)); // position
     }
-
-    for (int i = 0; i<100; i++)
-    {
-        world->addStaticObject("quad", "grass1",
-                               glm::vec3(rand()%100-50, (float)(rand()%100)/100.f, rand()%100-50), // position
-                               0.3, // uniform scaling
-                               rand()%360, 90, // rotateleft and up
-                               yRelativeTo::Ground,
-                               World::NO_COLLISION);
-
-//        world->addDynamicObject("rock01", "rock_diffuse",
-//                               glm::vec3(rand()%500-250, (float)(rand()%100), rand()%500-250)); // position
-    }
+//
+//    for (int i = 0; i<100; i++)
+//    {
+//        world->addStaticObject("quad", "grass1",
+//                               glm::vec3(rand()%100-50, (float)(rand()%100)/100.f, rand()%100-50), // position
+//                               0.3, // uniform scaling
+//                               rand()%360, 90, // rotateleft and up
+//                               yRelativeTo::Ground,
+//                               World::NO_COLLISION);
+//
+////        world->addDynamicObject("rock01", "rock_diffuse",
+////                               glm::vec3(rand()%500-250, (float)(rand()%100), rand()%500-250)); // position
+//    }
 
     //world->addGrass()
 

@@ -7,7 +7,7 @@ SkyShader::SkyShader() :
 }
 
 
-void SkyShader::init()
+void SkyShader::init(GLuint global_uniforms_binding)
 {
     // get program id from shader text files
     ShaderBase::load("shaders/sky_vert.glsl", "shaders/sky_frag.glsl");
@@ -16,10 +16,10 @@ void SkyShader::init()
     uniforms.mvp_matrix = glGetUniformLocation(getProgramID(), "mv_mat");
     uniforms.world_matrix = glGetUniformLocation(getProgramID(), "world_mat");
 
-    uniforms.sky_color = glGetUniformLocation(getProgramID(), "sky_color");
-    uniforms.fog_color = glGetUniformLocation(getProgramID(), "fog_color");
+    //uniforms.sky_color = glGetUniformLocation(getProgramID(), "sky_color");
+    //uniforms.fog_color = glGetUniformLocation(getProgramID(), "fog_color");
 
-    uniforms.zfar = glGetUniformLocation(getProgramID(), "zfar");
+    //uniforms.zfar = glGetUniformLocation(getProgramID(), "zfar");
 
     { // test
         GLfloat fbo_vertices[] =
@@ -90,6 +90,24 @@ void SkyShader::init()
 //        delete [] verts;
 //        delete [] tris;
 //    }
+
+    // global data
+    // ASSIGN a block index to "GlobalUniforms" in Program
+    //
+    //       Binding0
+    //             \
+    //   Program    UBO
+    //
+    uniforms.globalUniformsBlockIndex = glGetUniformBlockIndex(getProgramID(), "GlobalUniforms");
+
+//    // CONNECT the UBO to the Binding Index
+//    //
+//    //       Binding0
+//    //       /     \                Finished!
+//    //   Program    UBO
+//    //
+    glUniformBlockBinding(getProgramID(), uniforms.globalUniformsBlockIndex ,
+                                          global_uniforms_binding);
 }
 
 void SkyShader::drawSkyQuad(const Camera &cam_in,
@@ -116,75 +134,7 @@ void SkyShader::drawSkyQuad(const Camera &cam_in,
     glm::mat4 world_mat = cam_in.getTransformMatrix() * t * s;
     glUniformMatrix4fv(uniforms.world_matrix, 1, false, &world_mat[0][0]);
 
-    glUniform4fv(uniforms.sky_color, 1, &sky_color_in[0]);
-    glUniform4fv(uniforms.fog_color, 1, &fog_color_in[0]);
 
-    glUniform1f(uniforms.zfar, cam_in.farz);
-
-//    std::cout << "farz = " << cam_in.farz << "\n";
-//    t = glm::translate( glm::mat4(1.0),
-//                                  glm::vec3(0.0, 0.0, -599.0) );
-//
-//    s = glm::scale( glm::mat4(1.0),
-//                              glm::vec3(100.0, 100.0, 100.0) );
-//
-//    mvp_mat = proj_mat * t * s;
-    glUniformMatrix4fv(uniforms.mvp_matrix, 1, false, &mvp_mat[0][0]);
-
-
-    // Checklist
-    // VBO id and IBO id same as at generation time
-    // transform matrix
-    // zfar and color
-    // state of shader...?
-
-
-//    std::cout << "proj_mat: \n" << proj_mat << "\n\n";
-//
-//    std::terminate();
-//    std::cout << "t: \n" << t << "\n\n";
-//    std::cout << "s: \n" << s << "\n\n";
-//    std::cout << "mvp_mat: \n" << mvp_mat << "\n\n";
-//    std::cout << "cam_in.aspect: \n" << cam_in.aspect << "\n\n";
-//    std::cout << "cam_in.farz: \n" << cam_in.farz << "\n\n";
-//
-//    std::cout << "vbo_id: \n" << sky_quad->getVBOid() << "\n\n";
-//    std::cout << "ibo_id: \n" << sky_quad->getIBOid() << "\n\n";
-//
-//    std::cout << "sky_quad->getTriNum(): \n" << sky_quad->getTriNum() << "\n\n";
-//
-//    std::cout << "glGetError(): \n" << ((glGetError()!=GL_NO_ERROR) ? "error" : "no error") << "\n\n";
-//
-//    std::cout << "terminating prematurely\n";
-//    std::terminate();
-
-    //if (glGetError() != GL_NO_ERROR) std::cout << "something wrong\n";
-    // Draw call
-    // Sky is not drawn on linux period...
-
-
-
-//    { // OLD
-//    // Bind vertex data
-//        glBindBuffer(GL_ARRAY_BUFFER, sky_quad->getVBOid());
-//        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, sky_quad->getIBOid());
-//
-//        // Apparently, the below is buffer specific? It needs to be here at least. Look into VAO
-//        // Or separate buffers for each attribute (corresponds better to the .obj 3d format)
-//        glVertexAttribPointer(attributes.vertex,       4, GL_FLOAT,    GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(0)                      );
-//
-//        /// Why does it have to wait for main thread not to crash here...
-//    //    std::cout << "sky_quad->getTriNum() : " <<  sky_quad->getTriNum() << std::endl;
-//    //
-//        glDrawElements(GL_TRIANGLES, 3*sky_quad->getTriNum(), GL_UNSIGNED_SHORT, BUFFER_OFFSET(0));
-//
-//    //    std::cout << "gets here\n";
-//
-//        // Not sure if this is necessary unless other code is badly written
-//        glBindBuffer(GL_ARRAY_BUFFER, 0);
-//        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-//    }
-//
     { // NEW
         // Bind vertex data
         glBindBuffer(GL_ARRAY_BUFFER, vbo_fbo_vertices);
