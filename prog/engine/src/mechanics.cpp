@@ -97,6 +97,12 @@ void Mechanics::init(World &world_in, float &dt_in)
 ////        world->addDynamicObject("rock01", "rock_diffuse",
 ////                               glm::vec3(rand()%500-250, (float)(rand()%100), rand()%500-250)); // position
 //    }
+        world->addSmallVisuals("bush",
+                             "grassing",
+                             glm::vec3(0,0,0),
+                             100.f,
+                             1.f/25.f); // 1 per 5*5 meters
+        // have to fix shadowing
 
     //world->addGrass()
 

@@ -161,6 +161,7 @@
 		<Unit filename="include/signals.h" />
 		<Unit filename="include/skeleton.h" />
 		<Unit filename="include/skyshader.h" />
+		<Unit filename="include/smallvisual.h" />
 		<Unit filename="include/sound.h" />
 		<Unit filename="include/soundemitter.h" />
 		<Unit filename="include/stats.h" />
@@ -212,6 +213,7 @@
 		<Unit filename="src/shadowmap.cpp" />
 		<Unit filename="src/skeleton.cpp" />
 		<Unit filename="src/skyshader.cpp" />
+		<Unit filename="src/smallvisual.cpp" />
 		<Unit filename="src/sound.cpp" />
 		<Unit filename="src/soundemitter.cpp" />
 		<Unit filename="src/stats.cpp" />

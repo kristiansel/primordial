@@ -8,6 +8,7 @@
 #include "terrain.h"
 #include "camera.h"
 #include "light.h"
+#include "smallvisual.h" // remove this
 
 class Scene
 {
@@ -22,6 +23,7 @@ class Scene
         // container use shared pointers
         std::list<std::shared_ptr<Prop>> props;
         std::list<std::shared_ptr<Actor>> actors;
+        std::vector<SmallVisual>* small_visuals;
 
         Terrain* terrain;
 

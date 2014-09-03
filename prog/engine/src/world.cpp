@@ -378,3 +378,42 @@ void World::addTerrain()
 
     // Physics related
 }
+
+void World::addSmallVisuals(string mesh_key,
+                             string tex_key,
+                             glm::vec3 center,
+                             float radius,
+                             float density) // #/m²
+{
+    float r_sqrd = radius*radius;
+
+    //calculate area
+    float area = 3.141592 * r_sqrd; // m²
+
+    int num = density*area;
+
+    small_visuals.push_back(SmallVisual());
+    SmallVisual &small_visual = small_visuals.back();
+
+    small_visual.mesh = std::shared_ptr<Mesh>(global::mesh_manager.getResptrFromKey(mesh_key));
+    small_visual.tex = std::shared_ptr<Texture>(global::tex_manager.getResptrFromKey(tex_key));
+
+    for (int i = 0; i<num;)
+    {
+        float x = center.x + (float)(rand()%10000)/(float)(10000)*radius*2-radius;
+        float z = center.z + (float)(rand()%10000)/(float)(10000)*radius*2-radius;
+
+        if (x*x + z*z > r_sqrd)
+        {
+            // discard
+        }
+        else
+        {
+            small_visual.positions.push_back(glm::vec4(x, terrain.ySample(x, z), z, 1.0));
+            i++;
+        }
+    }
+
+    small_visual.updated = false;
+
+}

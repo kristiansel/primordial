@@ -6,12 +6,14 @@ varying vec3 mypos ; // camera space
 varying vec3 normal ;  // camera space
 varying vec4 world_pos ; // world space
 
+uniform sampler1D worldpos_tex;
+uniform mat4 cam_matrix;
+uniform mat4 light_bias_mat;
+
 //
 layout(location = 0) in vec4 InVertex;
 layout(location = 1) in vec3 InNormal;
 layout(location = 2) in vec3 InTexCoord;
-//layout(location = 3) in vec4 bone_index;
-//layout(location = 4) in vec4 bone_weight;
 
 layout(std140) uniform GlobalUniforms
 {
@@ -23,56 +25,41 @@ layout(std140) uniform GlobalUniforms
     float zfarUni;
 };
 
-// instanced variables
-const int MAX_INSTANCED = 50;
-uniform mat4[MAX_INSTANCED] mv_mat;
-uniform mat4[MAX_INSTANCED] shadowmap_mvp_mat;
-uniform mat4[MAX_INSTANCED] to_world_space_mat;
-
-//mat4 mv_mat;
-//mat4 shadowmap_mvp_mat;
-//mat4 to_world_space_mat;
-
-//const int MAX_BONES = 100;
-//uniform mat4[MAX_BONES] bone_mat;
-
 void main() {
-int instanceID = gl_InstanceID;
+    int instanceID = gl_InstanceID;
 
 	mytexco = InTexCoord ;
-//
-//    vec4 myvertex =   (bone_weight[0]*bone_mat[int(bone_index[0])]
-//                      +bone_weight[1]*bone_mat[int(bone_index[1])]
-//                      +bone_weight[2]*bone_mat[int(bone_index[2])]
-//                      +bone_weight[3]*bone_mat[int(bone_index[3])]) * InVertex;
-//
-//    vec4 mynormal4 = (bone_weight[0]*bone_mat[int(bone_index[0])]
-//                     +bone_weight[1]*bone_mat[int(bone_index[1])]
-//                     +bone_weight[2]*bone_mat[int(bone_index[2])]
-//                     +bone_weight[3]*bone_mat[int(bone_index[3])])*vec4(InNormal.x, InNormal.y, InNormal.z, 0.0);
 
-    vec4 myvertex = InVertex;
-    vec4 mynormal4 = vec4(InNormal.x, InNormal.y, InNormal.z, 0.0);
+	vec4 worldpos_sample = texelFetch(worldpos_tex, instanceID, 0);
 
-    vec3 mynormal = mynormal4.xyz;
+	//vec4 worldpos_sample = vec4(instanceID*3.0, 0.0, 0.0, 1.0);
 
-    shadowvertex = shadowmap_mvp_mat[0] * myvertex;
-    mypos = (mv_mat[0] * myvertex).xyz ;
-    normal = normalize( (mv_mat[0] * vec4(mynormal, 0.0) ).xyz) ;
+    mat4 world_pos_matrix = mat4(
+           1.0,                 0.0,            0.0,                0.0, // first column (not row!)
+           0.0,                 1.0,            0.0,                0.0, // second column
+           0.0,                 0.0,            1.0,                0.0,  // third column
+           worldpos_sample.x, worldpos_sample.y, worldpos_sample.z, 1.0 ); // assume only translation
 
-    world_pos = to_world_space_mat[0] * myvertex ;
+	mat4 mv_matrix_calc = cam_matrix * world_pos_matrix;
+	mat4 shadow_matrix = light_bias_mat * world_pos_matrix;
 
-    //gl_Position = proj_matUni * mv_mat[0] * myvertex ;
+    world_pos = world_pos_matrix * InVertex;
+    vec4 mypos4 = mv_matrix_calc * InVertex;
+    mypos = (mypos4).xyz;
+    shadowvertex = shadow_matrix * world_pos_matrix * InVertex;
+    normal = normalize( (mv_matrix_calc * vec4(InNormal, 0.0) ).xyz) ;
 
-    mat4 trans = mat4(
-   1.0, 0.0, 0.0, 0.0, // first column (not row!)
-   0.0, 1.0, 0.0, 0.0, // second column
-   0.0, 0.0, 1.0, 0.0,  // third column
-   0.0, 0.0, -5, 1.0
-);
 
-    gl_Position = proj_matUni * trans * myvertex ;
+//    mat4 my_mat = mat4(
+//           1.0,                 0.0,            0.0,                0.0, // first column (not row!)
+//           0.0,                 1.0,            0.0,                0.0, // second column
+//           0.0,                 0.0,            1.0,                0.0,  // third column
+//           0.0,                 0.0,           -5.0,                1.0 ); // assume only translation
 
-    //gl_Position = proj_matUni * myvertex ;
+    gl_Position = proj_matUni * mypos4;
+
+    //mat4 my_fixed_mat = world_pos_matrix * my_mat;
+
+    //gl_Position = proj_matUni * my_fixed_mat * InVertex;
 }
 

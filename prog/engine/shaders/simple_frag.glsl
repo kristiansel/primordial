@@ -139,12 +139,12 @@ void main (void)
 
     vec4 local_color = vec4(texel.rgb * color.rgb, texel.a);
 
-//    if (texel.a < 0.66)
-//    {
-//        discard;
-//    }
-//    else
-//    {
+    if (texel.a < 0.66)
+    {
+        discard;
+    }
+    else
+    {
         // calculate far sky color at that position
         float fog_at_zfar_weight = exp(-abs(world_pos.y)/90.0);
         fog_at_zfar_weight = clamp(fog_at_zfar_weight, 0, 1.0);
@@ -179,5 +179,5 @@ void main (void)
         //gl_FragColor = (1.0-fog_weight) * local_color + fog_weight * final_fog_color;
 
         gl_FragColor = (1.0-distance_fallof) * local_color + distance_fallof * color_here;
-//    }
+    }
 }

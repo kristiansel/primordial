@@ -50,6 +50,20 @@ void Renderer::init(unsigned int scr_width_in, unsigned int scr_height_in)
     // Initialize shaders
     main_shader.init(shadow_map.getDepthTex(), ubos.getBinding());
     grass_shader.init(shadow_map.getDepthTex(), ubos.getBinding());
+
+    // remove this:
+//    int num = 40;
+//    int total_num = num*num;
+//    glm::vec4* test_vec = new glm::vec4 [total_num];
+//
+//    for (int i = 0; i<num; i++)
+//        for (int j = 0; j<num; j++)
+//            test_vec[i*num+j] = glm::vec4(i*3.0, 0.0, j*3.0, 1.0);
+//
+//    grass_shader.updateTransforms(total_num, &test_vec[0]);
+//
+//    delete [] test_vec;
+
     sky_shader.init(ubos.getBinding());
 
     // Post processing init
@@ -162,8 +176,22 @@ void Renderer::draw(Scene &scene, float dt)
 
         //after this the bone matrices are soiled
 
-        grass_shader.draw(*(scene.camera),
+//        grass_shader.draw(*(scene.camera),
+//                             mlight_vp);
+
+        for (auto it = scene.small_visuals->begin(); it!=scene.small_visuals->end(); it++)
+        {
+            if (!(it->updated))
+            {
+                grass_shader.updateTransforms(it->positions.size(), &(it->positions[0]));
+                it->updated = true;
+                std::cout << "updating small_visual positions";
+            }
+
+            grass_shader.extDraw((*it), *(scene.camera),
                              mlight_vp);
+
+        }
 
         // Draw "sky quad" following the camera
         sky_shader.drawSkyQuad((*(scene.camera)), sky_color, fog_color);

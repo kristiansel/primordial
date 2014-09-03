@@ -13,6 +13,7 @@
 #include "terrain.h"
 
 #include "global.h"
+#include "smallvisual.h"
 
 
 using std::list;
@@ -21,20 +22,7 @@ using std::shared_ptr;
 using std::weak_ptr;
 using std::string;
 
-class WInstObj : public Prop
-{
-public:
-    vector<RigidBody>* getRigidBodies() {return &rigid_bodies;}
-    std::string mesh_key;
-    std::string tex_key;
-protected:
-private:
-    vector<RigidBody> rigid_bodies;
-};
-
 enum class yRelativeTo {Ground, World};
-
-
 
 class World : public PhysicsWorld // Consider merging Culling functionality into World Class
 {
@@ -65,6 +53,15 @@ class World : public PhysicsWorld // Consider merging Culling functionality into
 
 
         //vector<shared_ptr<Prop>> instanced_objects;
+
+        void addSmallVisuals(string mesh_key,
+                             string tex_key,
+                             glm::vec3 center,
+                             float radius,
+                             float density);
+
+        std::vector<SmallVisual> small_visuals;
+
 
         void delCreature(list<shared_ptr<Creature>>::iterator creature_it_in);
 
