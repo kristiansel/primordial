@@ -13,6 +13,7 @@
 #include "skyshader.h"
 #include "scene.h"
 #include "shadowmap.h"
+#include "shadowinstshader.h"
 #include "renderstage.h"
 #include "postprocstage.h"
 #include "combinationstage.h"
@@ -69,6 +70,7 @@ private:
     UniformBufferObject ubos;
 
     ShadowMap shadow_map;
+    ShadowInstShader shadow_inst;
     RenderStage render_stage;
     PostProcStage blur1;
     PostProcStage blur2; // UNCOMMENTING THIS MAKES ONE OF THE HEAD VERTICES WEIRD...

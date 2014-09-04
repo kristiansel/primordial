@@ -157,6 +157,7 @@
 		<Unit filename="include/scene.h" />
 		<Unit filename="include/shader.h" />
 		<Unit filename="include/shaderbase.h" />
+		<Unit filename="include/shadowinstshader.h" />
 		<Unit filename="include/shadowmap.h" />
 		<Unit filename="include/signals.h" />
 		<Unit filename="include/skeleton.h" />
@@ -176,6 +177,7 @@
 		<Unit filename="shaders/pp_comb.frag.glsl" />
 		<Unit filename="shaders/pp_pass2.frag.glsl" />
 		<Unit filename="shaders/pp_wave.vert.glsl" />
+		<Unit filename="shaders/shadow_instsmall_vert.glsl" />
 		<Unit filename="shaders/shadow_map_frag.glsl" />
 		<Unit filename="shaders/shadow_map_vert.glsl" />
 		<Unit filename="shaders/simple_frag.glsl" />
@@ -210,6 +212,7 @@
 		<Unit filename="src/scene.cpp" />
 		<Unit filename="src/shader.cpp" />
 		<Unit filename="src/shaderbase.cpp" />
+		<Unit filename="src/shadowinstshader.cpp" />
 		<Unit filename="src/shadowmap.cpp" />
 		<Unit filename="src/skeleton.cpp" />
 		<Unit filename="src/skyshader.cpp" />

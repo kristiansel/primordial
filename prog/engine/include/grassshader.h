@@ -25,8 +25,8 @@ class GrassShader : public ShaderBase
 //        void activate(const Camera &cam_in,
 //                      const glm::mat4 &light_mvp_mat);
 
-        void draw(const Camera &cam_in,
-                    const glm::mat4 &light_mvp_mat);
+//        void draw(const Camera &cam_in,
+//                    const glm::mat4 &light_mvp_mat);
 
         void extDraw(SmallVisual &small_visual, const Camera &cam_in,
                     const glm::mat4 &light_mvp_mat);
@@ -73,14 +73,14 @@ class GrassShader : public ShaderBase
 
     } uniforms;
 
-    GLuint worldpos_tex_id;
+    //GLuint worldpos_tex_id;
 
     GLuint shadowmap_depth_texture;              // Texture
 
     // Actual data
-    Mesh mesh;
-    Texture tex;
-    int num_transforms;
+    //Mesh mesh;
+    //Texture tex;
+    //int num_transforms;
 
     bool debug;
 };

@@ -294,7 +294,7 @@ void Shader::drawProp(shared_ptr<Prop> prop, bool debug)
                         0.5, 0.5, 0.5, 1.0
                         );
 
-            glm::mat4 light_mvp_mat_refable  = biasMatrix * main_light_mvp_mat * tr * rt * sc * transf_mat;
+            glm::mat4 light_mvp_mat_refable  = biasMatrix * main_light_mvp_mat * obj_to_world_space_mat;
             glUniformMatrix4fv(uniforms.shadowmap_mvp_mat, 1, false, &light_mvp_mat_refable[0][0]);
 
         } // finished instancing

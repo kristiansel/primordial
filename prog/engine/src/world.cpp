@@ -395,6 +395,8 @@ void World::addSmallVisuals(string mesh_key,
     small_visuals.push_back(SmallVisual());
     SmallVisual &small_visual = small_visuals.back();
 
+    small_visual.init();
+
     small_visual.mesh = std::shared_ptr<Mesh>(global::mesh_manager.getResptrFromKey(mesh_key));
     small_visual.tex = std::shared_ptr<Texture>(global::tex_manager.getResptrFromKey(tex_key));
 
@@ -409,7 +411,7 @@ void World::addSmallVisuals(string mesh_key,
         }
         else
         {
-            small_visual.positions.push_back(glm::vec4(x, terrain.ySample(x, z), z, 1.0));
+            small_visual.positions.push_back(glm::vec4(x, terrain.ySample(x, z), z, 3.141592*(float)(rand()%360)/(float)(180.0)));
             i++;
         }
     }

@@ -33,11 +33,12 @@ void main() {
 	vec4 worldpos_sample = texelFetch(worldpos_tex, instanceID, 0);
 
 	//vec4 worldpos_sample = vec4(instanceID*3.0, 0.0, 0.0, 1.0);
+    float theta_z = worldpos_sample.a;
 
     mat4 world_pos_matrix = mat4(
-           1.0,                 0.0,            0.0,                0.0, // first column (not row!)
+           cos(theta_z),        0.0,            sin(theta_z),       0.0, // first column (not row!)
            0.0,                 1.0,            0.0,                0.0, // second column
-           0.0,                 0.0,            1.0,                0.0,  // third column
+           -sin(theta_z),       0.0,            cos(theta_z),       0.0,  // third column
            worldpos_sample.x, worldpos_sample.y, worldpos_sample.z, 1.0 ); // assume only translation
 
 	mat4 mv_matrix_calc = cam_matrix * world_pos_matrix;
@@ -46,7 +47,7 @@ void main() {
     world_pos = world_pos_matrix * InVertex;
     vec4 mypos4 = mv_matrix_calc * InVertex;
     mypos = (mypos4).xyz;
-    shadowvertex = shadow_matrix * world_pos_matrix * InVertex;
+    shadowvertex = shadow_matrix * InVertex;
     normal = normalize( (mv_matrix_calc * vec4(InNormal, 0.0) ).xyz) ;
 
 
