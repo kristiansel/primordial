@@ -8,7 +8,8 @@ World::World()  :
     main_light(new DirLight),
     num_point_lights(0),
     point_lights(new PointLight [MAX_NUM_POINT_LIGHTS]),
-    music(new sf::Music)
+    music(new sf::Music),
+    foliage(&terrain)
 {
 
 }
@@ -22,6 +23,7 @@ World::~World()
     delete [] point_lights;
     delete main_light;
     delete music;
+//    delete ambient;
 }
 
 list<shared_ptr<WorldObject>>::iterator World::addStaticObject(string mesh_key,
@@ -137,7 +139,18 @@ void World::startMusic(string soundKey)
     if (!music->openFromFile("assets/sound/"+soundKey))
         std::cout<<"unable to open music"<<soundKey<<"\n";
     music->play();
+    music->setLoop(true);
 }
+//
+//void World::startAmbient(string soundKey)
+//{
+////    auto weak_ptr_snd_buff = global::sound_manager.getResptrFromKey(soundKey);
+////    sf::SoundBuffer* ptr_snd_buff = shared_ptr<sf::SoundBuffer>(weak_ptr_snd_buff).get();
+//
+//    if (!ambient->openFromFile("assets/sound/"+soundKey))
+//        std::cout<<"unable to open music"<<soundKey<<"\n";
+//    ambient->play();
+//}
 
 
 //list<shared_ptr<WorldObject>>::iterator World::addDynamicObject(string mesh_key, string tex_key, glm::vec3 pos)
@@ -237,6 +250,7 @@ list<shared_ptr<Creature>>::iterator World::addCreature(string mesh_key, string 
 
     { // Construct creature
         creature->pos = pos;         // configure position
+        creature->pos.y = terrain.ySample(pos.x, pos.z) + 1.f;
 
         // attach the mesh and texture
         weak_ptr<Mesh>       mesh_ptr    = global::mesh_manager.getResptrFromKey (mesh_key);
@@ -379,43 +393,10 @@ void World::addTerrain()
     // Physics related
 }
 
-void World::addSmallVisuals(string mesh_key,
-                             string tex_key,
-                             glm::vec3 center,
-                             float radius,
-                             float density) // #/m²
+void World::updateObserver(const glm::vec3& observer_pos)
 {
-    float r_sqrd = radius*radius;
-
-    //calculate area
-    float area = 3.141592 * r_sqrd; // m²
-
-    int num = density*area;
-
-    small_visuals.push_back(SmallVisual());
-    SmallVisual &small_visual = small_visuals.back();
-
-    small_visual.init();
-
-    small_visual.mesh = std::shared_ptr<Mesh>(global::mesh_manager.getResptrFromKey(mesh_key));
-    small_visual.tex = std::shared_ptr<Texture>(global::tex_manager.getResptrFromKey(tex_key));
-
-    for (int i = 0; i<num;)
-    {
-        float x = center.x + (float)(rand()%10000)/(float)(10000)*radius*2-radius;
-        float z = center.z + (float)(rand()%10000)/(float)(10000)*radius*2-radius;
-
-        if (x*x + z*z > r_sqrd)
-        {
-            // discard
-        }
-        else
-        {
-            small_visual.positions.push_back(glm::vec4(x, terrain.ySample(x, z), z, 3.141592*(float)(rand()%360)/(float)(180.0)));
-            i++;
-        }
-    }
-
-    small_visual.updated = false;
-
+    terrain.updateObserverPosition(observer_pos);
 }
+
+
+

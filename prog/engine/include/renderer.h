@@ -45,6 +45,8 @@ public:
     void resizeWindow(int w, int h, bool real = true);
     void setPerspective(int w, int h);
 
+    void updateTime(float dt);
+
 protected:
     // Helper functions
     static glm::mat4 getModelViewMatrix(Object3d o3d_in);
@@ -80,6 +82,8 @@ private:
     void labelNumberPair(const char * label, float number, char * out);
 
     void updateKernel();
+
+    float time;
 
 };
 

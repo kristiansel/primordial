@@ -34,6 +34,7 @@ struct UniformBufferObject
         glm::vec4 main_light_colorUni;
         glm::vec3 main_light_dirUni;         // does this align?
         float zfarUni;
+        glm::vec4 wind_speed;
     } globalUniformsData;
 };
 

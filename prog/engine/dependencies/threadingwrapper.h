@@ -25,7 +25,7 @@ using Thread = boost::thread;
 using Mutex = boost::mutex;
 using LockGuard = boost::lock_guard<boost::mutex>;
 
-#endif // WINDOWS
+#endif // NOT WINDOWS
 
 // Thread initialization needs to be called on unix
 

@@ -23,6 +23,7 @@ layout(std140) uniform GlobalUniforms
     vec4 main_light_colorUni;
     vec3 main_light_dirUni;         // does this align?
     float zfarUni;
+    vec4 wind_speed;
 };
 
 // instanced variables

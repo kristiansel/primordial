@@ -14,9 +14,9 @@ class ShadowInstShader : public ShaderBase
         ShadowInstShader();
         virtual ~ShadowInstShader();
 
-        void init();
+        void init(GLuint global_uniforms_binding);
 
-        void draw(SmallVisual &small_visual, glm::mat4 &light_vp);
+        void draw(const SmallVisual &small_visual, glm::mat4 &light_vp);
 
 
     protected:
@@ -26,6 +26,10 @@ class ShadowInstShader : public ShaderBase
             GLuint worldpos_tex;
             GLuint light_mvp;
             GLuint tex;
+
+            GLuint wind_params;
+
+            GLuint globalUniformsBlockIndex;
         } uniforms;
 };
 

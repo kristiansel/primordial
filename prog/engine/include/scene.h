@@ -23,7 +23,7 @@ class Scene
         // container use shared pointers
         std::list<std::shared_ptr<Prop>> props;
         std::list<std::shared_ptr<Actor>> actors;
-        std::vector<SmallVisual>* small_visuals;
+        std::vector<SmallVisual> const * small_visuals;
 
         Terrain* terrain;
 

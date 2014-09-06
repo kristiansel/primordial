@@ -14,12 +14,14 @@ struct SmallVisual
     void init();
     void cleanUp();
 
-    void updatePositionsTex();
+    void updatePositionsTex() const;
 
     std::shared_ptr<Mesh> mesh;
     std::shared_ptr<Texture> tex;
     std::vector<glm::vec4> positions;
-    bool updated;
+    mutable bool updated;
+
+    glm::vec4 wind_params;
 
     GLuint worldpos_tex_id;
 };

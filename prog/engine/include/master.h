@@ -7,6 +7,8 @@
 #include "renderer.h"
 #include "culler.h"
 #include "threadingwrapper.h"
+#include "threadiobuffers.hpp"
+#include "backgroundmaster.h"
 
 #ifdef WINDOWS
 #include "windows.h"
@@ -39,6 +41,8 @@ private:
     void renderTasks();
 //    void testThreadTasks();
 
+    void backGroundTasks();
+
 
 
     // Secondary Methods
@@ -57,7 +61,6 @@ private:
     unsigned int scr_height_px;
 
     // Time-related
-
     sf::Clock clock;    // helper
     sf::Clock absClock; // never reset
     float     dt;       // frame time in seconds
@@ -71,6 +74,10 @@ private:
     // Thread wait flags
     bool render_thread_loaded;
     bool main_thread_loaded;
+
+    ThreadIObuffers<char, 200> main_bgr_iobuffer;
+
+    Thread back_ground;
 
     // HoopJumping required to call XInitThreads() on unix before sf::Window
     //int init_threads;

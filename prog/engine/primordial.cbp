@@ -127,9 +127,11 @@
 		<Unit filename="dependencies/packedlinkedlist.hpp" />
 		<Unit filename="dependencies/threadingwrapper.cpp" />
 		<Unit filename="dependencies/threadingwrapper.h" />
+		<Unit filename="dependencies/threadiobuffers.hpp" />
 		<Unit filename="dependencies/timeseries.hpp" />
 		<Unit filename="include/actor.h" />
 		<Unit filename="include/artificialintelligence.h" />
+		<Unit filename="include/backgroundmaster.h" />
 		<Unit filename="include/camera.h" />
 		<Unit filename="include/charactercontroller.h" />
 		<Unit filename="include/closedmap.h" />
@@ -138,6 +140,7 @@
 		<Unit filename="include/creaturesignals.h" />
 		<Unit filename="include/culler.h" />
 		<Unit filename="include/debugdrawer.h" />
+		<Unit filename="include/foliage.h" />
 		<Unit filename="include/geometry.h" />
 		<Unit filename="include/global.h" />
 		<Unit filename="include/grassshader.h" />
@@ -188,12 +191,14 @@
 		<Unit filename="shaders/text_vert.glsl" />
 		<Unit filename="src/actor.cpp" />
 		<Unit filename="src/artificialintelligence.cpp" />
+		<Unit filename="src/backgroundmaster.cpp" />
 		<Unit filename="src/camera.cpp" />
 		<Unit filename="src/charactercontroller.cpp" />
 		<Unit filename="src/combinationstage.cpp" />
 		<Unit filename="src/creature.cpp" />
 		<Unit filename="src/culler.cpp" />
 		<Unit filename="src/debugdrawer.cpp" />
+		<Unit filename="src/foliage.cpp" />
 		<Unit filename="src/geometry.cpp" />
 		<Unit filename="src/global.cpp" />
 		<Unit filename="src/grassshader.cpp" />

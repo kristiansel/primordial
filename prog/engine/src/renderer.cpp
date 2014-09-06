@@ -1,6 +1,6 @@
 #include "renderer.h"
 
-Renderer::Renderer() : settings({0, 0})
+Renderer::Renderer() : settings({0, 0}), time(0)
 {
 //    scene = nullptr;
 }
@@ -46,7 +46,7 @@ void Renderer::init(unsigned int scr_width_in, unsigned int scr_height_in)
 
     // Initialize Shadow mapping shader
     shadow_map.init();
-    shadow_inst.init();
+    shadow_inst.init(ubos.getBinding());
 
     // Initialize shaders
     main_shader.init(shadow_map.getDepthTex(), ubos.getBinding());
@@ -92,10 +92,15 @@ void Renderer::draw(Scene &scene, float dt)
     glm::vec4 fog_color = glm::vec4(1.0, 1.0, 1.0, 1.0);
     glm::vec4 sky_color = glm::vec4(0.f/255.f, 80.f/255.f, 186.f/255.f, 1.0);
 
+    //glm::vec4 sky_color = glm::vec4(186.f/255.f, 180.f/255.f, 0.f/255.f, 1.0);
+    //glm::vec4 fog_color = glm::vec4(1.0, 0.50, 0.0, 1.0);
+
+    glm::vec4 wind_speed = glm::vec4(4.0, 0.0, 4.0, time);
+
     // set global uniforms data
     glm::vec4 main_light_dir = view_mat * glm::vec4(mlight.dir, 0.0);
     glm::vec3 main_light_dir3 = glm::vec3(main_light_dir.x, main_light_dir.y, main_light_dir.z);
-    ubos.setGlobalUniformsData({proj_mat, fog_color, sky_color, mlight.color, main_light_dir3, scene.camera->farz});
+    ubos.setGlobalUniformsData({proj_mat, fog_color, sky_color, mlight.color, main_light_dir3, scene.camera->farz, wind_speed});
 
     // Why is this in here?
     glDisable(GL_BLEND);
@@ -113,11 +118,11 @@ void Renderer::draw(Scene &scene, float dt)
         // Should preferably draw the terrain after actors and props
         std::vector<TerrainPatch>* terrain_patches = scene.terrain->getPatches();
 
-//      // uncomment the below to make the terrain cast shadow
-//        for (auto it = terrain_patches->begin(); it!=terrain_patches->end(); it++)
-//        {
-//            shadow_map.drawProp(it->prop);
-//        }
+      // uncomment the below to make the terrain cast shadow
+        for (auto it = terrain_patches->begin(); it!=terrain_patches->end(); it++)
+        {
+            shadow_map.drawProp(it->prop);
+        }
 
         for (auto it = scene.actors.begin(); it!=scene.actors.end(); it++)
         {
@@ -131,7 +136,7 @@ void Renderer::draw(Scene &scene, float dt)
             {
                 //grass_shader.updateTransforms(it->positions.size(), &(it->positions[0]));
                 it->updatePositionsTex();
-                it->updated = true;
+                //it->updated = true;
                 std::cout << "updating small_visual positions";
             }
 
@@ -339,3 +344,9 @@ void Renderer::updateKernel()
         }
     }
 }
+
+void Renderer::updateTime(float dt)
+{
+    time+=dt;
+}
+

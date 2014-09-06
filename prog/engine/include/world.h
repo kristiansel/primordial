@@ -11,9 +11,9 @@
 #include "physicsworld.h"
 #include "light.h"
 #include "terrain.h"
-
+#include "foliage.h"
 #include "global.h"
-#include "smallvisual.h"
+//#include "smallvisual.h"
 
 
 using std::list;
@@ -54,13 +54,16 @@ class World : public PhysicsWorld // Consider merging Culling functionality into
 
         //vector<shared_ptr<Prop>> instanced_objects;
 
-        void addSmallVisuals(string mesh_key,
-                             string tex_key,
-                             glm::vec3 center,
-                             float radius,
-                             float density);
+//        void addSmallVisuals(string mesh_key,
+//                             string tex_key,
+//                             glm::vec4 wind_params,
+//                             glm::vec3 center,
+//                             float radius,
+//                             float density);
 
-        std::vector<SmallVisual> small_visuals;
+        //std::vector<SmallVisual> small_visuals;
+
+        Foliage foliage;
 
 
         void delCreature(list<shared_ptr<Creature>>::iterator creature_it_in);
@@ -69,12 +72,16 @@ class World : public PhysicsWorld // Consider merging Culling functionality into
 
         void addTerrain();
 
+        void updateObserver(const glm::vec3 &observer_pos);
+
 //        // Step
 //        void step(float dt_in);
 
         void startMusic(string soundKey);
         sf::Music* music;
 
+//        void startAmbient(string soundKey);
+//        sf::Sound* ambient;
 
 
         // "Physical" Contents (could with benefit be private?)

@@ -14,9 +14,9 @@ Master::Master() :
     // Start window in main thread...
     initWindow();
 
-    bool multithreaded = false;
+    bool multithreaded_rendering = false;
 
-    if (multithreaded)
+    if (multithreaded_rendering)
     {
         window.setActive(false);
 
@@ -32,6 +32,9 @@ Master::Master() :
     }
     else
     {
+        // do other multi_threading things;
+        back_ground = Thread(&Master::backGroundTasks, this);
+
         mainLoopSingleThreaded();
     }
     // Launch threads
@@ -57,6 +60,7 @@ Master::Master() :
 
     // cleanup
     cleanUp();
+
 }
 
 Master::~Master()
@@ -84,12 +88,12 @@ void Master::initWindow()
     //window.create(sf::VideoMode(scr_width_px, scr_height_px), "Primordial", sf::Style::Default, sf::ContextSettings(32, 0, 0, 4, 4));
 
 
-//    sf::VideoMode desktop_mode = sf::VideoMode::getDesktopMode();
+    //sf::VideoMode desktop_mode = sf::VideoMode::getDesktopMode();
     sf::VideoMode desktop_mode = sf::VideoMode(1400, 900);
     scr_width_px = desktop_mode.width;
     scr_height_px = desktop_mode.height;
 
-//    window.create(desktop_mode, "Primordial", sf::Style::Fullscreen, sf::ContextSettings(32, 0, 0, 4, 4));
+    //window.create(desktop_mode, "Primordial", sf::Style::Fullscreen, sf::ContextSettings(32, 0, 0, 4, 4));
     window.create(desktop_mode, "Primordial", sf::Style::Default, sf::ContextSettings(32, 0, 0, 4, 4));
 
     window.setVerticalSyncEnabled(false); // This forces frame rate to 60 FPS?
@@ -131,6 +135,7 @@ void Master::mainLoopSingleThreaded()
         culler.stage(scene, world); // stage the scene from the world THIS breaks everything since non-shared shared pointers go out of scope
 
         // draw...
+        renderer.updateTime(dt); // should probably merge this with something?
         renderer.draw(scene, dt);
 
         // draw overlay/interface
@@ -454,4 +459,10 @@ int Master::restart()
 {
     return m_restart;
 }
+
+void Master::backGroundTasks()
+{
+    BackGroundMaster(ThreadIObuffers<char, 200>::IOBuffer<1>(main_bgr_iobuffer));
+}
+
 

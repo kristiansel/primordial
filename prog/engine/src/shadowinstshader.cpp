@@ -11,7 +11,7 @@ ShadowInstShader::~ShadowInstShader()
 }
 
 
-void ShadowInstShader::init()
+void ShadowInstShader::init(GLuint global_uniforms_binding)
 {
     ShaderBase::load("shaders/shadow_instsmall_vert.glsl", "shaders/shadow_map_frag.glsl");
 
@@ -22,6 +22,26 @@ void ShadowInstShader::init()
 
     uniforms.tex = glGetUniformLocation(getProgramID(),"tex") ;
     glUniform1i(uniforms.tex, 0);            // ALWAYS CHANNEL 0
+
+    uniforms.wind_params = glGetUniformLocation(getProgramID(),"wind_params") ;
+
+    // global data
+    // ASSIGN a block index to "GlobalUniforms" in Program
+    //
+    //       Binding0
+    //             \
+    //   Program    UBO
+    //
+    uniforms.globalUniformsBlockIndex = glGetUniformBlockIndex(getProgramID(), "GlobalUniforms");
+
+//    // CONNECT the UBO to the Binding Index
+//    //
+//    //       Binding0
+//    //       /     \                Finished!
+//    //   Program    UBO
+//    //
+    glUniformBlockBinding(getProgramID(), uniforms.globalUniformsBlockIndex ,
+                                          global_uniforms_binding);
 
     // do I really need this in all shaders? maybe just once in the renderer???
     glEnableVertexAttribArray(0);
@@ -34,12 +54,14 @@ void ShadowInstShader::init()
 
 }
 
-void ShadowInstShader::draw(SmallVisual &small_visual, glm::mat4 &light_vp)
+void ShadowInstShader::draw(const SmallVisual &small_visual, glm::mat4 &light_vp)
 {
     // switch shader program to this
     ShaderBase::switchTo();
 
     glUniformMatrix4fv(uniforms.light_mvp, 1, false, &(light_vp[0][0]));
+
+    glUniform4fv(uniforms.wind_params, 1, &(small_visual.wind_params[0]));
 
     std::shared_ptr<Mesh> mesh_ptr = small_visual.mesh;
     std::shared_ptr<Texture> tex_ptr = small_visual.tex;

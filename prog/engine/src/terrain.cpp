@@ -3,7 +3,7 @@
 Terrain::Terrain() :
     m_dimension(256),   // 256, 2048
     m_height_map(256),  // 256, 2048
-    m_heightScale(0.0060), // 0.016, 5*0.016
+    m_heightScale(0.0100), // 0.016, 5*0.016
     m_horzScale(256), // 1024, 4096
     m_centerX(0.0), // 0.0
     m_centerZ(0.0), // 0.0

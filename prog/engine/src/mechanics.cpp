@@ -21,7 +21,9 @@ void Mechanics::init(World &world_in, float &dt_in)
 
     dt = &dt_in;
 
-//    world->startMusic("lost.wav");
+    //world->startMusic("lost.wav");
+    world->startMusic("wind-trees.wav");
+   // world->startAmbient("wind-trees.wav");
 
     // Set the input to control the camera
     //controlled = world->camera.get();
@@ -31,7 +33,7 @@ void Mechanics::init(World &world_in, float &dt_in)
     world->freecam->pos = glm::vec3(0.0, 1.5, 0.0);
 
     // set the main light (sun/moon)
-    world->mainLight( glm::vec3(1.0, 1.0, 1.0),         // From direction
+    world->mainLight( glm::vec3(3, 1.0, 3),         // From direction
                       glm::vec4(1.0, 1.0, 1.0, 1.0) );  // Color
 
     // add additional lights
@@ -73,17 +75,17 @@ void Mechanics::init(World &world_in, float &dt_in)
                              1.0, 0.0 ,0.0,
                              yRelativeTo::Ground);
 //
-    for (int i = 0; i<100; i++)
-    {
-        world->addStaticObject("rock01", "rock_diffuse",
-                               glm::vec3(rand()%500-250, (float)(rand()%100)/100.f, rand()%500-250), // position
-                               (((float)(rand()%1000)/1000.f)-0.5)*6.0, // uniform scaling
-                               rand()%360, (rand()%2)*180, // rotateleft and up
-                               yRelativeTo::Ground);
-
-//        world->addDynamicObject("rock01", "rock_diffuse",
-//                               glm::vec3(rand()%500-250, (float)(rand()%100), rand()%500-250)); // position
-    }
+//    for (int i = 0; i<100; i++)
+//    {
+//        world->addStaticObject("rock01", "rock_diffuse",
+//                               glm::vec3(rand()%500-250, (float)(rand()%100)/100.f, rand()%500-250), // position
+//                               (((float)(rand()%1000)/1000.f)-0.5)*6.0, // uniform scaling
+//                               rand()%360, (rand()%2)*180, // rotateleft and up
+//                               yRelativeTo::Ground);
+//
+////        world->addDynamicObject("rock01", "rock_diffuse",
+////                               glm::vec3(rand()%500-250, (float)(rand()%100), rand()%500-250)); // position
+//    }
 //
 //    for (int i = 0; i<100; i++)
 //    {
@@ -97,11 +99,19 @@ void Mechanics::init(World &world_in, float &dt_in)
 ////        world->addDynamicObject("rock01", "rock_diffuse",
 ////                               glm::vec3(rand()%500-250, (float)(rand()%100), rand()%500-250)); // position
 //    }
-        world->addSmallVisuals("spruce",
-                             "spruce",
+        world->foliage.addSmallVisuals("spruce_wbranch",
+                             "spruce_wbranch",
+                             glm::vec4(180.f, 20.f, 2.f, 0.0),
                              glm::vec3(0,0,0),
-                             200.f,
-                             1.f/25.f); // 1 per 5*5 meters
+                             100.f,
+                             1.f/(25*4.f)); // 1 per 5*5 meters
+
+        world->foliage.addSmallVisuals("grass_spring",
+                             "grass_spring",
+                             glm::vec4(10.f, 10.f, 2.f, 0.0),
+                             glm::vec3(0,0,0),
+                             20.f,
+                             1.f/1.f); // 1 per 5*5 meters
         // have to fix shadowing
 
     //world->addGrass()
@@ -301,7 +311,7 @@ void Mechanics::step(World &world_in, float dt_in)
 
     // Update the terrain (based on player position)
     if (player) world->terrain.updateObserverPosition(player->pos);
-
+    if (player) world->updateObserver(player->pos);
 
 //    float cam_dist = 5.0;
 //    world->chasecam->pos = player->pos - cam_dist * player->getLookDir();

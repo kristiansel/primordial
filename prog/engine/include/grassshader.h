@@ -28,8 +28,10 @@ class GrassShader : public ShaderBase
 //        void draw(const Camera &cam_in,
 //                    const glm::mat4 &light_mvp_mat);
 
-        void extDraw(SmallVisual &small_visual, const Camera &cam_in,
+        void extDraw(const SmallVisual &small_visual, const Camera &cam_in,
                     const glm::mat4 &light_mvp_mat);
+
+
 
     protected:
     private:
@@ -58,6 +60,9 @@ class GrassShader : public ShaderBase
         // matrices
         GLuint cam_mat;
         GLuint light_bias_mat;
+
+        GLuint wind_speed;
+        GLuint wind_params;
 
         // model view matrix
         //GLuint mv_mat;
