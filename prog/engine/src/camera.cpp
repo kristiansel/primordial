@@ -1,8 +1,8 @@
 #include "camera.h"
 
 Camera::Camera() :
-    fovy(40), // field of vertical view
-    aspect(1.6), // aspect ratio
+    fovy(40), // field of vertical view, 40
+    aspect(1920.f/1080.f), // aspect ratio, 1.6
     nearz(0.6), // near z clipping plane
     farz(600) // far z clipping plane
 {
@@ -33,6 +33,27 @@ glm::mat4 Camera::getViewProjectionMatrix() const
 
     return proj_mat * view_mat;
 }
+
+QuadFrustum Camera::get2dViewFrustum() const
+{
+    glm::mat4 this_transf = this->getTransformMatrix();
+
+    float half_angle_rad = 3.14159265*fovy/180.f/2.f;
+
+    float del_xn = aspect*nearz*tan(half_angle_rad);
+    float del_xf = aspect*farz*tan(half_angle_rad);
+
+    glm::vec4 p0 = this_transf * glm::vec4(-del_xn, 0, -nearz, 1.0);
+    glm::vec4 p1 = this_transf * glm::vec4(del_xn, 0, -nearz, 1.0);
+    glm::vec4 p2 = this_transf * glm::vec4(del_xf, 0, -farz, 1.0);
+    glm::vec4 p3 = this_transf * glm::vec4(-del_xf, 0, -farz, 1.0);
+
+
+    return QuadFrustum({p0, p1, p2, p3});
+
+
+}
+
 //
 //void Camera::moveForward(float amount)
 //{

@@ -99,12 +99,19 @@ void Mechanics::init(World &world_in, float &dt_in)
 ////        world->addDynamicObject("rock01", "rock_diffuse",
 ////                               glm::vec3(rand()%500-250, (float)(rand()%100), rand()%500-250)); // position
 //    }
-        world->foliage.addSmallVisuals("spruce_wbranch",
-                             "spruce_wbranch",
-                             glm::vec4(180.f, 20.f, 2.f, 0.0),
-                             glm::vec3(0,0,0),
-                             100.f,
-                             1.f/(25*4.f)); // 1 per 5*5 meters
+//        world->foliage.addSmallVisuals("spruce_wbranch",
+//                             "spruce_wbranch",
+//                             glm::vec4(180.f, 20.f, 2.f, 0.0),
+//                             glm::vec3(0,0,0),
+//                             200.f,
+//                             1.f/(25*4.f)); // 1 per 5*5 meters
+//
+//        world->foliage.addSmallVisuals("spruce_bb",
+//                             "spruce_bb",
+//                             glm::vec4(180.f, 20.f, 2.f, 0.0),
+//                             glm::vec3(0,0,0),
+//                             100.f,
+//                             1.f/(25*4.f)); // 1 per 5*5 meters
 
         world->foliage.addSmallVisuals("grass_spring",
                              "grass_spring",
@@ -112,6 +119,8 @@ void Mechanics::init(World &world_in, float &dt_in)
                              glm::vec3(0,0,0),
                              20.f,
                              1.f/1.f); // 1 per 5*5 meters
+
+        world->foliage.bg_thread.prepareBG_Foliage(); // prepare for "BackGround" processed foliage (i.e. separate thread)
         // have to fix shadowing
 
     //world->addGrass()

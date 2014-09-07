@@ -693,7 +693,7 @@ void Terrain::generateHeightMap()
     } // finished printing debug map
 }
 
-float Terrain::sampleHeightMap(float x, float z, float length, float center_x, float center_z)
+float Terrain::sampleHeightMap(float x, float z, float length, float center_x, float center_z) const
 {
     // find the x and z of the top left corner
     float top_left_x = center_x-length/2.0;
@@ -964,7 +964,7 @@ int Terrain::getPrefLvl(float square_distance)
 
 }
 
-float Terrain::ySample(float x, float z)
+float Terrain::ySample(float x, float z) const
 {
     return m_heightScale*sampleHeightMap(x, z, m_horzScale, m_centerX, m_centerZ);
 }

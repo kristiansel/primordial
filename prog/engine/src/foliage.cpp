@@ -49,10 +49,16 @@ void Foliage::addSmallVisuals(string mesh_key,
         }
         else
         {
-            small_visual.positions.push_back(glm::vec4(x, terrain->ySample(x, z), z, 3.141592*(float)(rand()%360)/(float)(180.0)));
+            if (i<SmallVisual::MAX_NUM_SMVIS)
+            {
+                small_visual.sm_buffer[i] = glm::vec4(x, terrain->ySample(x, z), z, 3.141592*(float)(rand()%360)/(float)(180.0));
+            }
+            //small_visual.positions.push_back(glm::vec4(x, terrain->ySample(x, z), z, 3.141592*(float)(rand()%360)/(float)(180.0)));
             i++;
         }
     }
+
+    small_visual.num_smvis = num;
 
     small_visual.updated = false;
 

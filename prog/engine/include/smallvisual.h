@@ -18,7 +18,12 @@ struct SmallVisual
 
     std::shared_ptr<Mesh> mesh;
     std::shared_ptr<Texture> tex;
-    std::vector<glm::vec4> positions;
+    //std::vector<glm::vec4> positions;
+
+    static const unsigned int MAX_NUM_SMVIS = 5000;
+    unsigned int num_smvis;
+    glm::vec4 sm_buffer[MAX_NUM_SMVIS];
+
     mutable bool updated;
 
     glm::vec4 wind_params;

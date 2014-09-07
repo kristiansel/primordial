@@ -29,7 +29,7 @@ public:
         delete [] m_data;
     }
 
-    CellType& operator()(unsigned int a, unsigned int b)
+    CellType& operator()(unsigned int a, unsigned int b) const
     {
         unsigned int a_mapped = a % m_dimension;
         unsigned int b_mapped = b % m_dimension;

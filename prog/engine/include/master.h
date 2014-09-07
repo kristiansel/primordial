@@ -10,6 +10,9 @@
 #include "threadiobuffers.hpp"
 #include "backgroundmaster.h"
 
+// move later
+#include "quadtree.hpp"
+
 #ifdef WINDOWS
 #include "windows.h"
 #endif // WINDOWS

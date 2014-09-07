@@ -38,5 +38,6 @@ void SmallVisual::updatePositionsTex() const
 {
     updated = true;
     glBindTexture(GL_TEXTURE_1D, worldpos_tex_id);
-    glTexImage1D(GL_TEXTURE_1D, 0, GL_RGBA32F, positions.size(), 0, GL_RGBA, GL_FLOAT, &(positions[0]));
+    //glTexImage1D(GL_TEXTURE_1D, 0, GL_RGBA32F, positions.size(), 0, GL_RGBA, GL_FLOAT, &(positions[0]));
+    glTexImage1D(GL_TEXTURE_1D, 0, GL_RGBA32F, num_smvis, 0, GL_RGBA, GL_FLOAT, &(sm_buffer[0]));
 }

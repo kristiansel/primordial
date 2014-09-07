@@ -145,6 +145,18 @@ void Renderer::draw(Scene &scene, float dt)
 
         }
 
+        if (!(scene.bg_visual->updated))
+        {
+            //grass_shader.updateTransforms(it->positions.size(), &(it->positions[0]));
+            scene.bg_visual->updatePositionsTex();
+            //it->updated = true;
+            std::cout << "updating small_visual positions\n";
+        }
+
+        /** shadows look bad with very thin blades of grass (flickering)*/
+        shadow_inst.draw(*scene.bg_visual, mlight_vp);
+
+
     shadow_map.deactivate();
 
     resizeWindow(settings.width, settings.height, false);
@@ -173,7 +185,6 @@ void Renderer::draw(Scene &scene, float dt)
         for (auto it = terrain_patches->begin(); it!=terrain_patches->end(); it++)
         {
             main_shader.drawProp(it->prop);
-            // why is this not showing...?
         }
 
         // Draw actors;
@@ -203,7 +214,12 @@ void Renderer::draw(Scene &scene, float dt)
             grass_shader.extDraw((*it), *(scene.camera),
                              mlight_vp);
 
+
+
         }
+
+        grass_shader.extDraw(*scene.bg_visual, *(scene.camera),
+                             mlight_vp);
 
         // Draw "sky quad" following the camera
         sky_shader.drawSkyQuad((*(scene.camera)), sky_color, fog_color);

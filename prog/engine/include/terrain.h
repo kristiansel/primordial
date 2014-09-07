@@ -29,7 +29,7 @@ class Terrain
 
         void updateObserverPosition(glm::vec3 observer_position);
 
-        float ySample(float x, float z);
+        float ySample(float x, float z) const;
         glm::vec3 normSample(float x, float z);
 
     protected:
@@ -56,7 +56,7 @@ class Terrain
 
         void updatePhysicsTerrain(glm::vec3 anchor_in);
 
-        float sampleHeightMap(float x, float z, float length, float center_x, float center_z);
+        float sampleHeightMap(float x, float z, float length, float center_x, float center_z) const;
 
         void changeSubdLvl(unsigned int subd_lvl_in, TerrainPatch* terrain_patch, int *lvldiff_nsew);
 

@@ -41,5 +41,7 @@ void Culler::stage(Scene &scene_in, World &world_in)
 
     scene_in.small_visuals = (world_in.foliage.getVisuals());
 
+    scene_in.bg_visual = &world_in.foliage.bg_thread.spruce;
+
     scene_in.terrain = &world_in.terrain;
 }

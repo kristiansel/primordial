@@ -32,6 +32,13 @@ Master::Master() :
     }
     else
     {
+
+        // initialize before launching a worker thread
+        renderer.init(scr_width_px, scr_height_px);
+
+        // Initialize the game module
+        mechanics.init(world, dt);
+
         // do other multi_threading things;
         back_ground = Thread(&Master::backGroundTasks, this);
 
@@ -89,7 +96,7 @@ void Master::initWindow()
 
 
     //sf::VideoMode desktop_mode = sf::VideoMode::getDesktopMode();
-    sf::VideoMode desktop_mode = sf::VideoMode(1400, 900);
+    sf::VideoMode desktop_mode = sf::VideoMode(1600, 900);
     scr_width_px = desktop_mode.width;
     scr_height_px = desktop_mode.height;
 
@@ -108,10 +115,6 @@ void Master::initWindow()
 void Master::mainLoopSingleThreaded()
 {
 
-    renderer.init(scr_width_px, scr_height_px);
-
- // Initialize the game module
-    mechanics.init(world, dt);
 
     float dt_smooth = dt;
 
@@ -462,7 +465,39 @@ int Master::restart()
 
 void Master::backGroundTasks()
 {
-    BackGroundMaster(ThreadIObuffers<char, 200>::IOBuffer<1>(main_bgr_iobuffer));
+    //BackGroundMaster(ThreadIObuffers<char, 200>::IOBuffer<1>(main_bgr_iobuffer));
+    QuadTree<glm::vec4, 5> qt_trees(QuadAABB({-500, 500, -500, 500}));
+
+    float range = 600.f;
+
+    // insert 500 trees
+    for (int i = 0; i<5000; i++)
+    {
+        float x = (float)(rand()%1000*range)/1000.f-range/2.f;
+        float z = (float)(rand()%1000*range)/1000.f-range/2.f;
+        qt_trees.insert(glm::vec4(x, world.terrain.ySample(x, z), z, rand()%360));
+    }
+
+
+    Foliage::BG_Thread &shr_data = world.foliage.bg_thread;
+
+    while (running)
+    {
+        // update trees based on camera
+        int i = 0;
+        qt_trees.for_all_in(world.chasecam->get2dViewFrustum(),
+        //qt_trees.for_all_in(QuadAABB({-100, 100, -100, 100}),
+                            [&] (glm::vec4 &tree_dat)
+                            {
+                                if (i<SmallVisual::MAX_NUM_SMVIS)
+                                {
+                                    shr_data.spruce.sm_buffer[i] = tree_dat;
+                                }
+                                i++;
+                            });
+        shr_data.spruce.num_smvis = i;
+        shr_data.spruce.updated = false;
+    }
 }
 
 

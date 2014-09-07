@@ -4,6 +4,8 @@
 #include "object3d.h"
 //#include "signals.h"
 
+#include "quadtree.hpp"
+
 class Camera: public Object3d //, public MoveSignalReceiver
 {
 public:
@@ -14,6 +16,8 @@ public:
     glm::mat4 getViewMatrix() const;
     glm::mat4 getProjectionMatrix() const;
     glm::mat4 getViewProjectionMatrix() const;
+
+    QuadFrustum get2dViewFrustum() const;
 //
 //    // Camera implementation of MoveSignalReceiver
 //    void moveForward(float amount);
