@@ -71,114 +71,123 @@ float random(vec3 seed, int i){
 
 void main (void)
 {
-    // They eye is always at (0,0,0) looking down -z axis
-
-    const vec3 eyepos = vec3(0,0,0) ;
-    vec3 eyedirn = normalize(eyepos - mypos) ;
-
-    vec4 SUM = vec4(0,0,0,0) ;
-
-    vec3 lightdirection = normalize(main_light_dirUni);
-    vec4 light_cols_att = main_light_colorUni;
-
-    vec3 halfangle = normalize (lightdirection + eyedirn); // compute half-angle
-
-    float nDotL = dot(normal, lightdirection);
-    float nDotH = dot(normal, halfangle);
-
-    // Implementing the homework lighting equation
-    vec4 term = light_cols_att * (diffuse * max(nDotL, 0) + specular * pow(max(nDotH, 0), shininess)) ;
-    SUM = SUM + term;
-//        }
-
-    // This should be changable
-    vec4 amb = vec4(0.05, 0.05, 0.05, 1.0);
-
-    // Shadow Mapping
-    float bias = 0.0025; // cosTheta is dot( n,l ), clamped between 0 and 1
-//    float bias = 0.001*tan(acos(nDotL));
-//    bias = clamp(bias, 0, 0.1);
-
-
-//    float visibility = 1.0;
-//    for (int i=0;i<NUM_SHADOW_SAMPLES;i++){
-//        int index = int(16.0*random(floor(myvertex.xyz*1000.0), i))%16;
-//
-//        float vis_sample = texture( shadow_depth, vec3(shadowvertex.xy + poisson_disk[index]/700.0,   (shadowvertex.z-bias) ) );
-//        visibility -= (1.0-vis_sample)*SHADOW_DECR;
+    // This didn't work... :(
+//    if(mypos.x<-0.3 && mypos.y<-0.3)
+//    {
+//        float sd_samp = texture( shadow_depth, vec3(mypos.xy + poisson_disk[i]/700.0,   (shadowvertex.z-bias) ) );
+//        gl_FragColor = vec4(sd_samp, 0.0, 0.0, 1.0);
 //    }
+//    else
+//    {
+        // They eye is always at (0,0,0) looking down -z axis
 
-    // 16 sample shadowmap... wow. Tested early jump out of loop
-    // did not work well. Consider smaller shadowmap and follow camera
-    // plus 8 samples
-    float visibility = 1.0;
-    for (int i=0;i<16;i++){
-        float vis_sample = texture( shadow_depth, vec3(shadowvertex.xy + poisson_disk[i]/700.0,   (shadowvertex.z-bias) ) );
-        visibility -= (1.0-vis_sample)*SHADOW_DECR16;
-    }
+        const vec3 eyepos = vec3(0,0,0) ;
+        vec3 eyedirn = normalize(eyepos - mypos) ;
 
-//    float visibility = texture( shadow_depth, vec3(shadowvertex.xy, shadowvertex.z-bias) );
+        vec4 SUM = vec4(0,0,0,0) ;
 
-//    float depthsample = texture( shadow_depth, vec3(shadowvertex.xy,  (shadowvertex.z-bias)/shadowvertex.w) );
-//    float visibility = (depthsample  <  shadowvertex.z) ? 0.0 : 1.0;
-//    float visibility = (depthsample  <  (shadowvertex.z-bias)) ? 0.0 : 1.0;
+        vec3 lightdirection = normalize(main_light_dirUni);
+        vec4 light_cols_att = main_light_colorUni;
 
-    vec4 color = amb + emission + visibility * SUM ;
+        vec3 halfangle = normalize (lightdirection + eyedirn); // compute half-angle
 
-    vec4 texel;
-    if (mytexco.z > 0.01)
-    {
-        texel = mytexco.z*texture(tex2, mytexco.xy) + (1.0-mytexco.z)*texture(tex, mytexco.xy);
-    }
-    else
-    {
-        texel = texture(tex, mytexco.xy);
-    }
-    //texel = texture(tex, mytexco.xy);
+        float nDotL = dot(normal, lightdirection);
+        float nDotH = dot(normal, halfangle);
 
+        // Implementing the homework lighting equation
+        vec4 term = light_cols_att * (diffuse * max(nDotL, 0) + specular * pow(max(nDotH, 0), shininess)) ;
+        SUM = SUM + term;
+    //        }
 
+        // This should be changable
+        vec4 amb = vec4(0.05, 0.05, 0.05, 1.0);
 
-    vec4 local_color = vec4(texel.rgb * color.rgb, texel.a);
-
-    if (texel.a < 0.66)
-    {
-        discard;
-    }
-    else
-    {
-        // calculate far sky color at that position
-        float fog_at_zfar_weight = exp(-abs(world_pos.y)/90.0);
-        fog_at_zfar_weight = clamp(fog_at_zfar_weight, 0, 1.0);
-        vec4 color_at_zfar =  (1.0-fog_at_zfar_weight) * sky_colorUni + fog_at_zfar_weight * fog_colorUni;
+        // Shadow Mapping
+        float bias = 0.0025; // cosTheta is dot( n,l ), clamped between 0 and 1
+    //    float bias = 0.001*tan(acos(nDotL));
+    //    bias = clamp(bias, 0, 0.1);
 
 
-        //float z_norm = (-mypos.z/zfarUni);
-        vec4 color_here = (-mypos.z/zfarUni )* color_at_zfar + (1.0-(-mypos.z/zfarUni)) * sky_colorUni;
+    //    float visibility = 1.0;
+    //    for (int i=0;i<NUM_SHADOW_SAMPLES;i++){
+    //        int index = int(16.0*random(floor(myvertex.xyz*1000.0), i))%16;
+    //
+    //        float vis_sample = texture( shadow_depth, vec3(shadowvertex.xy + poisson_disk[index]/700.0,   (shadowvertex.z-bias) ) );
+    //        visibility -= (1.0-vis_sample)*SHADOW_DECR;
+    //    }
+
+        // 16 sample shadowmap... wow. Tested early jump out of loop
+        // did not work well. Consider smaller shadowmap and follow camera
+        // plus 8 samples
+        float visibility = 1.0;
+        for (int i=0;i<16;i++){
+            float vis_sample = texture( shadow_depth, vec3(shadowvertex.xy + poisson_disk[i]/700.0,   (shadowvertex.z-bias) ) );
+            visibility -= (1.0-vis_sample)*SHADOW_DECR16;
+        }
+
+    //    float visibility = texture( shadow_depth, vec3(shadowvertex.xy, shadowvertex.z-bias) );
+
+    //    float depthsample = texture( shadow_depth, vec3(shadowvertex.xy,  (shadowvertex.z-bias)/shadowvertex.w) );
+    //    float visibility = (depthsample  <  shadowvertex.z) ? 0.0 : 1.0;
+    //    float visibility = (depthsample  <  (shadowvertex.z-bias)) ? 0.0 : 1.0;
+
+        vec4 color = amb + emission + visibility * SUM ;
+
+        vec4 texel;
+        if (mytexco.z > 0.01)
+        {
+            texel = mytexco.z*texture(tex2, mytexco.xy) + (1.0-mytexco.z)*texture(tex, mytexco.xy);
+        }
+        else
+        {
+            texel = texture(tex, mytexco.xy);
+        }
+        //texel = texture(tex, mytexco.xy);
 
 
-//
-//        float distance_fallof = exp(-3.0*(mypos.z/zfarUni+1.0));
-//        distance_fallof = (distance_fallof-exp(-3.0))/(1.0-exp(-3.0));
 
-        //float distance_fallof = 0.5*(1-cos(-mypos.z/zfarUni*3.14159265));                       // cosine
-        float distance_fallof = (exp(-3.0*(mypos.z/zfarUni+1.0))-exp(-3.0))/(1.0-exp(-3.0));     // exponential
-        //float distance_fallof = (-mypos.z/zfarUni );     // linear
-        //float distance_fallof = sqrt(-mypos.z/zfarUni );     // square root
-        //float distance_fallof = log((-mypos.z)+1)/log(zfarUni+1);     // logarithmic
+        vec4 local_color = vec4(texel.rgb * color.rgb, texel.a);
 
-        //float height_fallof = exp(-abs(world_pos.y)/90.0);
+        if (texel.a < 0.66)
+        {
+            discard;
+        }
+        else
+        {
+            // calculate far sky color at that position
+            float fog_at_zfar_weight = exp(-abs(world_pos.y)/90.0);
+            fog_at_zfar_weight = clamp(fog_at_zfar_weight, 0, 1.0);
+            vec4 color_at_zfar =  (1.0-fog_at_zfar_weight) * sky_colorUni + fog_at_zfar_weight * fog_colorUni;
 
-        //float fog_weight = height_fallof * distance_fallof  ;
 
-        //fog_weight = clamp(fog_weight, 0, 1.0);
+            //float z_norm = (-mypos.z/zfarUni);
+            vec4 color_here = (-mypos.z/zfarUni )* color_at_zfar + (1.0-(-mypos.z/zfarUni)) * sky_colorUni;
 
-        // Make close distance fog bluer than far away fog
-        // This looks truly beautiful. Should probably pass the blue
-        // as the same color as the sky
-        // vec4 final_fog_color = (1.0-distance_fallof)*sky_colorUni + distance_fallof * fog_colorUni;
 
-        //gl_FragColor = (1.0-fog_weight) * local_color + fog_weight * final_fog_color;
+    //
+    //        float distance_fallof = exp(-3.0*(mypos.z/zfarUni+1.0));
+    //        distance_fallof = (distance_fallof-exp(-3.0))/(1.0-exp(-3.0));
 
-        gl_FragColor = (1.0-distance_fallof) * local_color + distance_fallof * color_here;
-    }
+            //float distance_fallof = 0.5*(1-cos(-mypos.z/zfarUni*3.14159265));                       // cosine
+            float distance_fallof = (exp(-3.0*(mypos.z/zfarUni+1.0))-exp(-3.0))/(1.0-exp(-3.0));     // exponential
+            //float distance_fallof = (-mypos.z/zfarUni );     // linear
+            //float distance_fallof = sqrt(-mypos.z/zfarUni );     // square root
+            //float distance_fallof = log((-mypos.z)+1)/log(zfarUni+1);     // logarithmic
+
+            //float height_fallof = exp(-abs(world_pos.y)/90.0);
+
+            //float fog_weight = height_fallof * distance_fallof  ;
+
+            //fog_weight = clamp(fog_weight, 0, 1.0);
+
+            // Make close distance fog bluer than far away fog
+            // This looks truly beautiful. Should probably pass the blue
+            // as the same color as the sky
+            // vec4 final_fog_color = (1.0-distance_fallof)*sky_colorUni + distance_fallof * fog_colorUni;
+
+            //gl_FragColor = (1.0-fog_weight) * local_color + fog_weight * final_fog_color;
+
+            gl_FragColor = (1.0-distance_fallof) * local_color + distance_fallof * color_here;
+        }
+    //} // something that didn't work
 }

@@ -481,11 +481,31 @@ void Master::backGroundTasks()
 
     Foliage::BG_Thread &shr_data = world.foliage.bg_thread;
 
+//    QuadFrustum test_frust({
+//    glm::vec4(5.02758, 0.0, -2.14355, 1.0),
+//    glm::vec4(4.25256, 0.0, -2.09615, 1.0),
+//    glm::vec4(-346.631, 0.0, 614.037, 1.0),
+//    glm::vec4(428.385, 0.0, 566.634, 1.0)});
+//
+//    bool found = false;
+//    qt_trees.for_all_in(test_frust,
+//        //qt_trees.for_all_in(QuadAABB({-100, 100, -100, 100}),
+//                            [&] (glm::vec4 &tree_dat)
+//                            {
+//                                found = true;
+//                            });
+//    if (found)
+//        std::cout <<"FOUND\n";
+//    else
+//        std::cout << "NOT FOUND\n";
+//
+//    std::terminate(); // remove this;
+
     while (running)
     {
         // update trees based on camera
         int i = 0;
-        qt_trees.for_all_in(world.chasecam->get2dViewFrustum(),
+        qt_trees.for_all_in(world.chasecam->get2dViewFrustum(1.15, 0.5),
         //qt_trees.for_all_in(QuadAABB({-100, 100, -100, 100}),
                             [&] (glm::vec4 &tree_dat)
                             {
@@ -497,6 +517,11 @@ void Master::backGroundTasks()
                             });
         shr_data.spruce.num_smvis = i;
         shr_data.spruce.updated = false;
+
+//        if (i<15)
+//        {
+//            std::cout<<"something wrong\n";
+//        }
     }
 }
 

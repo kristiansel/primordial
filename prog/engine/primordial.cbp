@@ -125,6 +125,7 @@
 		<Unit filename="dependencies/helperfunctions.hpp" />
 		<Unit filename="dependencies/memstreamer.hpp" />
 		<Unit filename="dependencies/packedlinkedlist.hpp" />
+		<Unit filename="dependencies/quadtree.hpp" />
 		<Unit filename="dependencies/threadingwrapper.cpp" />
 		<Unit filename="dependencies/threadingwrapper.h" />
 		<Unit filename="dependencies/threadiobuffers.hpp" />

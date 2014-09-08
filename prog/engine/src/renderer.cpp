@@ -137,7 +137,7 @@ void Renderer::draw(Scene &scene, float dt)
                 //grass_shader.updateTransforms(it->positions.size(), &(it->positions[0]));
                 it->updatePositionsTex();
                 //it->updated = true;
-                std::cout << "updating small_visual positions";
+                //std::cout << "updating small_visual positions";
             }
 
             /** shadows look bad with very thin blades of grass (flickering)*/
@@ -150,7 +150,7 @@ void Renderer::draw(Scene &scene, float dt)
             //grass_shader.updateTransforms(it->positions.size(), &(it->positions[0]));
             scene.bg_visual->updatePositionsTex();
             //it->updated = true;
-            std::cout << "updating small_visual positions\n";
+            //std::cout << "updating small_visual positions\n";
         }
 
         /** shadows look bad with very thin blades of grass (flickering)*/

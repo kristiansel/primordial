@@ -117,7 +117,7 @@ void Mechanics::init(World &world_in, float &dt_in)
                              "grass_spring",
                              glm::vec4(10.f, 10.f, 2.f, 0.0),
                              glm::vec3(0,0,0),
-                             20.f,
+                             10.f,
                              1.f/1.f); // 1 per 5*5 meters
 
         world->foliage.bg_thread.prepareBG_Foliage(); // prepare for "BackGround" processed foliage (i.e. separate thread)
@@ -525,7 +525,12 @@ void Mechanics::func(int num_in)
         break;
     case 3:
         {
-            world->delWorldObject(worldobject_ptr_it); worldobject_ptr_it = world->worldobjects.begin();
+            //world->delWorldObject(worldobject_ptr_it); worldobject_ptr_it = world->worldobjects.begin();
+            QuadFrustum camera_frust = world->chasecam->get2dViewFrustum();
+
+            std::cout << "cam2dfrust: ";
+            for (int i = 0; i<4; i++)
+                std::cout << camera_frust.p[i].x << ", " << camera_frust.p[i].z << "\n";
         }
         break;
     case 4: // add AI

@@ -34,7 +34,7 @@ glm::mat4 Camera::getViewProjectionMatrix() const
     return proj_mat * view_mat;
 }
 
-QuadFrustum Camera::get2dViewFrustum() const
+QuadFrustum Camera::get2dViewFrustum(float scale, float depth_frac)  const
 {
     glm::mat4 this_transf = this->getTransformMatrix();
 
@@ -43,10 +43,10 @@ QuadFrustum Camera::get2dViewFrustum() const
     float del_xn = aspect*nearz*tan(half_angle_rad);
     float del_xf = aspect*farz*tan(half_angle_rad);
 
-    glm::vec4 p0 = this_transf * glm::vec4(-del_xn, 0, -nearz, 1.0);
-    glm::vec4 p1 = this_transf * glm::vec4(del_xn, 0, -nearz, 1.0);
-    glm::vec4 p2 = this_transf * glm::vec4(del_xf, 0, -farz, 1.0);
-    glm::vec4 p3 = this_transf * glm::vec4(-del_xf, 0, -farz, 1.0);
+    glm::vec4 p0 = this_transf * glm::vec4(-del_xn*scale, 0, -nearz/scale, 1.0);
+    glm::vec4 p1 = this_transf * glm::vec4(del_xn*scale, 0, -nearz/scale, 1.0);
+    glm::vec4 p2 = this_transf * glm::vec4(del_xf*scale, 0, -farz*depth_frac, 1.0);
+    glm::vec4 p3 = this_transf * glm::vec4(-del_xf*scale, 0, -farz*depth_frac, 1.0);
 
 
     return QuadFrustum({p0, p1, p2, p3});

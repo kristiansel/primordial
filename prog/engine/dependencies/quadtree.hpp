@@ -37,30 +37,122 @@ struct QuadAABB
 
 struct QuadFrustum
 {
-    glm::vec4 p0;
-    glm::vec4 p1;
-    glm::vec4 p2;
-    glm::vec4 p3;
+    glm::vec4 p[4];
 
     bool containsPoint(float x, float z)
     {
-        bool test01 = ((x - p0.x) * (p1.z - p0.z) - (p1.x - p0.x) * (z - p0.z)) >= 0;
-        bool test12 = ((x - p1.x) * (p2.z - p1.z) - (p2.x - p1.x) * (z - p1.z)) >= 0;
-        bool test23 = ((x - p2.x) * (p3.z - p2.z) - (p3.x - p2.x) * (z - p2.z)) >= 0;
-        bool test30 = ((x - p3.x) * (p0.z - p3.z) - (p0.x - p3.x) * (z - p3.z)) >= 0;
+        bool test01 = ((x - p[0].x) * (p[1].z - p[0].z) - (p[1].x - p[0].x) * (z - p[0].z)) >= 0;
+        bool test12 = ((x - p[1].x) * (p[2].z - p[1].z) - (p[2].x - p[1].x) * (z - p[1].z)) >= 0;
+        bool test23 = ((x - p[2].x) * (p[3].z - p[2].z) - (p[3].x - p[2].x) * (z - p[2].z)) >= 0;
+        bool test30 = ((x - p[3].x) * (p[0].z - p[3].z) - (p[0].x - p[3].x) * (z - p[3].z)) >= 0;
 
 
         return (test01 == test12 && test12 == test23 && test23 == test30);
     }
 
-    bool intersectsAABB(QuadAABB aabb)
+    bool intersectsAABB2(QuadAABB aabb)
     {
         return (containsPoint(aabb.x_min, aabb.z_min) || containsPoint(aabb.x_min, aabb.z_max) ||
                 containsPoint(aabb.x_max, aabb.z_min) || containsPoint(aabb.x_max, aabb.z_max)) ||
-                (aabb.containsPoint(p0.x, p0.z) || aabb.containsPoint(p1.x, p1.z) ||
-                 aabb.containsPoint(p2.x, p2.z) || aabb.containsPoint(p3.x, p3.z));
+                (aabb.containsPoint(p[0].x, p[0].z) || aabb.containsPoint(p[1].x, p[1].z) ||
+                 aabb.containsPoint(p[2].x, p[2].z) || aabb.containsPoint(p[3].x, p[3].z));
     }
 
+    bool intersectsAABB(QuadAABB aabb)
+    {
+//        std::cout << "Intersecting Quadrilaterals\n";
+
+        // convert QuadAABB to QuadFrustum
+        QuadFrustum aabb_frust = QuadFrustum({glm::vec4(aabb.x_min, 0.0, aabb.z_min, 1.0),
+                                             glm::vec4(aabb.x_min, 0.0, aabb.z_max, 1.0),
+                                             glm::vec4(aabb.x_max, 0.0, aabb.z_max, 1.0),
+                                             glm::vec4(aabb.x_max, 0.0, aabb.z_min, 1.0),});
+        for (int j = 0; j<2; j++)
+        {
+            glm::vec4 *one;
+            glm::vec4 *two;
+
+            if (j==0)
+            {
+                one = &p[0];
+                two = &aabb_frust.p[0];
+            }
+            else
+            {
+                two = &p[0];
+                one = &aabb_frust.p[0];
+            }
+
+
+            for(int i = 0; i < 4; i++) // for all frustum edges
+            {
+                glm::vec4 edge_dir = one[(i+1)%4]-one[i];
+                glm::vec4 v = glm::vec4(-edge_dir.z, 0.0, edge_dir.x, 0.0);
+
+                // find out if the axis separates the polygons
+                // the axis is a random point, say a(s) = one[i]+s*normal, now find s
+                // so if we pick one[i], then s_i = 0, find s_ip1 =
+
+//                std::cout << "Edge dir: "<<i<<" : "<<edge_dir.x<<", "<<edge_dir.z<<"\n";
+//                std::cout << "Edge norm: "<<i<<" : "<<v.x<<", "<<v.z<<"\n";
+
+                float s_dash1 = ((v.x*one[(i+2)%4].x + v.z*one[(i+2)%4].z) - (v.x*one[i].x + v.z*one[i].z))/(v.x*v.x + v.z*v.z);
+                float s_dash2 = ((v.x*one[(i+3)%4].x + v.z*one[(i+3)%4].z) - (v.x*one[i].x + v.z*one[i].z))/(v.x*v.x + v.z*v.z);
+
+                float s_first = 0.f; // per def
+                float s_other = abs(s_dash1) > abs(s_dash2) ? s_dash1 : s_dash2;
+
+                float max_s = std::max(s_first, s_other);
+                float min_s = std::min(s_first, s_other);
+//
+//                std::cout << "s1: "<<i<<" : "<<max_s<<"\n";
+//                std::cout << "s2: "<<i<<" : "<<min_s<<"\n";
+
+                float max_u = -99999;
+                float min_u = 99999;
+
+                for (int k = 0; k<4; k++)
+                {
+                    float u_dash = ((v.x*two[k].x + v.z*two[k].z) - (v.x*one[i].x + v.z*one[i].z))/(v.x*v.x + v.z*v.z);
+                    if (u_dash > max_u) max_u = u_dash;
+                    if (u_dash < min_u) min_u = u_dash;
+                }
+
+                if (min_u > max_s || min_s > max_u)
+                    return false;
+                // project all points
+
+    //            if (AxisSeparatePolygons(normal, A, B))
+    //                return false;
+            }
+        }
+        return true;
+    }
+
+protected:
+//    bool axisSeparatePolygons(Vector& Axis, Polygon A, Polygon B)
+//    {
+//        float mina, maxa;
+//        float minb, maxb;
+//
+//        CalculateInterval(Axis, A, mina, maxa);
+//        CalculateInterval(Axis, B, minb, maxb);
+//
+//        if (mina > maxb || minb > maxa)
+//            return true;
+//
+//        // find the interval overlap
+//        float d0 = maxa - minb;
+//        float d1 = maxb - mina;
+//        float depth = (d0 < d1)? d0 : d1;
+//
+//        // convert the separation axis into a push vector (re-normalise
+//        // the axis and multiply by interval overlap)
+//        float axis_length_squared = Axis dot Axis;
+//
+//        Axis *= depth / axis_length_squared;
+//        return false;
+//    }
 };
 
 template <class XZPosType, unsigned int max_contained> // must support .x, and .z members

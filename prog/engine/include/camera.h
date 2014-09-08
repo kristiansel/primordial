@@ -17,7 +17,7 @@ public:
     glm::mat4 getProjectionMatrix() const;
     glm::mat4 getViewProjectionMatrix() const;
 
-    QuadFrustum get2dViewFrustum() const;
+    QuadFrustum get2dViewFrustum(float scale = 1.0, float depth_frac = 1.0) const;
 //
 //    // Camera implementation of MoveSignalReceiver
 //    void moveForward(float amount);
