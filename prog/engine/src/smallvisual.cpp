@@ -1,8 +1,8 @@
 #include "smallvisual.h"
-SmallVisual::SmallVisual() : updated(false)
-{
-
-}
+//SmallVisual::SmallVisual() : updated(false), sv_qtree(500, -500, 500, -500)
+//{
+//
+//}
 
 SmallVisual::~SmallVisual()
 {

@@ -39,7 +39,7 @@ void Culler::stage(Scene &scene_in, World &world_in)
         scene_in.actors.push_back(creature);
     }
 
-    scene_in.small_visuals = (world_in.foliage.getVisuals());
+//    scene_in.small_visuals = (world_in.foliage.getVisuals());
 
     world_in.foliage.bg_thread.updateFoliage(*world_in.chasecam);
     scene_in.bg_visual = &world_in.foliage.bg_thread.spruce;

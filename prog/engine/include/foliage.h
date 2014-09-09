@@ -30,14 +30,14 @@ class Foliage
         Foliage(Terrain* in_terrain);
         virtual ~Foliage();
 
-        std::vector<SmallVisual> const * const getVisuals() const;
+        //std::vector<SmallVisual> const * const getVisuals() const;
 
-        void addSmallVisuals(string mesh_key,
-                             string tex_key,
-                             glm::vec4 wind_params,
-                             glm::vec3 center,
-                             float radius,
-                             float density);
+        //void addSmallVisuals(string mesh_key,
+//                             string tex_key,
+//                             glm::vec4 wind_params,
+//                             glm::vec3 center,
+//                             float radius,
+//                             float density);
 
         struct BG_Thread
         {
@@ -112,7 +112,7 @@ class Foliage
 
     protected:
     private:
-        std::vector<SmallVisual> small_visuals;
+        //std::vector<SmallVisual> small_visuals;
 
 
 

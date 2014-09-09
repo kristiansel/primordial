@@ -130,20 +130,20 @@ void Renderer::draw(Scene &scene, float dt)
         }
 
         //shadow_inst.draw
-        for (auto it = scene.small_visuals->begin(); it!=scene.small_visuals->end(); it++)
-        {
-            if (!(it->updated))
-            {
-                //grass_shader.updateTransforms(it->positions.size(), &(it->positions[0]));
-                it->updatePositionsTex();
-                //it->updated = true;
-                //std::cout << "updating small_visual positions";
-            }
-
-            /** shadows look bad with very thin blades of grass (flickering)*/
-            shadow_inst.draw((*it), mlight_vp);
-
-        }
+//        for (auto it = scene.small_visuals->begin(); it!=scene.small_visuals->end(); it++)
+//        {
+//            if (!(it->updated))
+//            {
+//                //grass_shader.updateTransforms(it->positions.size(), &(it->positions[0]));
+//                it->updatePositionsTex();
+//                //it->updated = true;
+//                //std::cout << "updating small_visual positions";
+//            }
+//
+//            /** shadows look bad with very thin blades of grass (flickering)*/
+//            shadow_inst.draw((*it), mlight_vp);
+//
+//        }
 
         if (!(scene.bg_visual->updated))
         {
@@ -217,25 +217,25 @@ void Renderer::draw(Scene &scene, float dt)
 
 //        grass_shader.draw(*(scene.camera),
 //                             mlight_vp);
-
-        for (auto it = scene.small_visuals->begin(); it!=scene.small_visuals->end(); it++)
-        {
-            /** This is set in the shadow drawing*/
-            //if (!(it->updated))
-            //{
-
-                //grass_shader.updateTransforms(it->positions.size(), &(it->positions[0]));
-                //it->updatePositionsTex();
-                //it->updated = true;
-                //std::cout << "updating small_visual positions";
-            //}
-
-            grass_shader.extDraw((*it), *(scene.camera),
-                             mlight_vp);
-
-
-
-        }
+//
+//        for (auto it = scene.small_visuals->begin(); it!=scene.small_visuals->end(); it++)
+//        {
+//            /** This is set in the shadow drawing*/
+//            //if (!(it->updated))
+//            //{
+//
+//                //grass_shader.updateTransforms(it->positions.size(), &(it->positions[0]));
+//                //it->updatePositionsTex();
+//                //it->updated = true;
+//                //std::cout << "updating small_visual positions";
+//            //}
+//
+//            grass_shader.extDraw((*it), *(scene.camera),
+//                             mlight_vp);
+//
+//
+//
+//        }
 
         grass_shader.extDraw(*scene.bg_visual, *(scene.camera),
                              mlight_vp);
