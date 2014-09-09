@@ -466,20 +466,35 @@ int Master::restart()
 void Master::backGroundTasks()
 {
     //BackGroundMaster(ThreadIObuffers<char, 200>::IOBuffer<1>(main_bgr_iobuffer));
-    QuadTree<glm::vec4, 5> qt_trees(QuadAABB({-500, 500, -500, 500}));
+    //QuadTree<glm::vec4, 5> qt_trees(QuadAABB({-500, 500, -500, 500}));
 
-    float range = 600.f;
+    Foliage::BG_Thread &shr_data = world.foliage.bg_thread;
 
-    // insert 500 trees
-    for (int i = 0; i<5000; i++)
+    float tree_range = 600;
+    float grass_range = 60;
+
     {
-        float x = (float)(rand()%1000*range)/1000.f-range/2.f;
-        float z = (float)(rand()%1000*range)/1000.f-range/2.f;
-        qt_trees.insert(glm::vec4(x, world.terrain.ySample(x, z), z, rand()%360));
+        LockGuard lock_qt_trees(shr_data.sm_mutex);
+        // insert 500 trees
+        for (int i = 0; i<5000; i++)
+        {
+            float x = (float)(rand()%1000*tree_range)/1000.f-tree_range/2.f;
+            float z = (float)(rand()%1000*tree_range)/1000.f-tree_range/2.f;
+            glm::vec4 pos = glm::vec4(x, world.terrain.ySample(x, z), z, rand()%360);
+            shr_data.qt_trees.insert(FolSpec(pos, FolSpec::Type::Tree));
+        }
+        for (int i = 0; i<1000; i++)
+        {
+            float x = (float)(rand()%1000*grass_range)/1000.f-grass_range/2.f;
+            float z = (float)(rand()%1000*grass_range)/1000.f-grass_range/2.f;
+            glm::vec4 pos = glm::vec4(x, world.terrain.ySample(x, z), z, rand()%360);
+            shr_data.qt_trees.insert(FolSpec(pos, FolSpec::Type::Grass));
+        }
     }
 
 
-    Foliage::BG_Thread &shr_data = world.foliage.bg_thread;
+
+
 
 //    QuadFrustum test_frust({
 //    glm::vec4(5.02758, 0.0, -2.14355, 1.0),
@@ -501,28 +516,28 @@ void Master::backGroundTasks()
 //
 //    std::terminate(); // remove this;
 
-    while (running)
-    {
+    //while (running)
+    //{
         // update trees based on camera
-        int i = 0;
-        qt_trees.for_all_in(world.chasecam->get2dViewFrustum(1.15, 0.5),
-        //qt_trees.for_all_in(QuadAABB({-100, 100, -100, 100}),
-                            [&] (glm::vec4 &tree_dat)
-                            {
-                                if (i<SmallVisual::MAX_NUM_SMVIS)
-                                {
-                                    shr_data.spruce.sm_buffer[i] = tree_dat;
-                                }
-                                i++;
-                            });
-        shr_data.spruce.num_smvis = i;
-        shr_data.spruce.updated = false;
+//        int i = 0;
+//        shr_data.qt_trees.for_all_in(world.chasecam->get2dViewFrustum(1.15, 0.5),
+//        //qt_trees.for_all_in(QuadAABB({-100, 100, -100, 100}),
+//                            [&] (glm::vec4 &tree_dat)
+//                            {
+//                                if (i<SmallVisual::MAX_NUM_SMVIS)
+//                                {
+//                                    shr_data.spruce.sm_buffer[i] = tree_dat;
+//                                }
+//                                i++;
+//                            });
+//        shr_data.spruce.num_smvis = i;
+//        shr_data.spruce.updated = false;
 
 //        if (i<15)
 //        {
 //            std::cout<<"something wrong\n";
 //        }
-    }
+    //}
 }
 
 

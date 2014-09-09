@@ -113,12 +113,12 @@ void Mechanics::init(World &world_in, float &dt_in)
 //                             100.f,
 //                             1.f/(25*4.f)); // 1 per 5*5 meters
 
-        world->foliage.addSmallVisuals("grass_spring",
-                             "grass_spring",
-                             glm::vec4(10.f, 10.f, 2.f, 0.0),
-                             glm::vec3(0,0,0),
-                             10.f,
-                             1.f/1.f); // 1 per 5*5 meters
+//        world->foliage.addSmallVisuals("grass_spring",
+//                             "grass_spring",
+//                             glm::vec4(10.f, 10.f, 2.f, 0.0),
+//                             glm::vec3(0,0,0),
+//                             10.f,
+//                             1.f/1.f); // 1 per 5*5 meters
 
         world->foliage.bg_thread.prepareBG_Foliage(); // prepare for "BackGround" processed foliage (i.e. separate thread)
         // have to fix shadowing

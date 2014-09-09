@@ -152,9 +152,28 @@ void Renderer::draw(Scene &scene, float dt)
             //it->updated = true;
             //std::cout << "updating small_visual positions\n";
         }
+        else
+        {
+            //std::cout << "NOT updating small_visual positions\n";
+        }
 
         /** shadows look bad with very thin blades of grass (flickering)*/
         shadow_inst.draw(*scene.bg_visual, mlight_vp);
+
+        if (!(scene.bg_visual_grass->updated))
+        {
+            //grass_shader.updateTransforms(it->positions.size(), &(it->positions[0]));
+            scene.bg_visual_grass->updatePositionsTex();
+            //it->updated = true;
+            //std::cout << "updating small_visual positions\n";
+        }
+        else
+        {
+            //std::cout << "NOT updating small_visual positions\n";
+        }
+
+        /** shadows look bad with very thin blades of grass (flickering)*/
+        shadow_inst.draw(*scene.bg_visual_grass, mlight_vp);
 
 
     shadow_map.deactivate();
@@ -219,6 +238,9 @@ void Renderer::draw(Scene &scene, float dt)
         }
 
         grass_shader.extDraw(*scene.bg_visual, *(scene.camera),
+                             mlight_vp);
+
+        grass_shader.extDraw(*scene.bg_visual_grass, *(scene.camera),
                              mlight_vp);
 
         // Draw "sky quad" following the camera

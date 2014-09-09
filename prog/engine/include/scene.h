@@ -26,6 +26,7 @@ class Scene
         std::vector<SmallVisual> const * small_visuals;
 
         SmallVisual const * bg_visual;
+        SmallVisual const * bg_visual_grass;
 
         Terrain* terrain;
 
