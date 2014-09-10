@@ -19,6 +19,7 @@
 #include "combinationstage.h"
 #include "textshader.h"
 #include "uniformbufferobject.h"
+#include "foliage.h" // this should not be here
 
 
 class Renderer

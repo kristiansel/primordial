@@ -3,26 +3,29 @@
 
 #include <memory>
 #include <vector>
+#include <string>
 #include "mesh.h"
 #include "texture.h"
 //#include "threadingwrapper.h"
 #include "quadtree.hpp"
 #include "boost/thread.hpp"
+#include "global.h"
+
 
 using Mutex = boost::mutex;
 using LockGuard = boost::lock_guard<boost::mutex>;
 
 struct SmallVisual
 {
-    SmallVisual() : sv_qtree(QuadAABB({-500.0, 500.0, -500.0, 500.0})) {}
-    SmallVisual(const SmallVisual&) : sv_mutex(), sv_qtree(QuadAABB({-500, 500, -500, 500})) {}
+    SmallVisual();
+    SmallVisual(const SmallVisual&);
     ~SmallVisual();
 
     void init();
     void cleanUp();
 
-    void init(std::string mesh_key, std::string tex_key, glm::vec4 wind_params, float draw_range);
-    void splitRange(std::string mesh_key, std::string tex_key, glm::vec4 wind_params, float draw_range);
+    void init(std::string mesh_key, std::string tex_key, glm::vec4 wind_params_in);
+    //void splitRange(std::string mesh_key, std::string tex_key, glm::vec4 wind_params, float draw_range_in);
 
     void updatePositionsTex() const;
 
@@ -34,6 +37,12 @@ struct SmallVisual
     unsigned int num_smvis;
     glm::vec4 sm_buffer[MAX_NUM_SMVIS];
 
+//    // for split range
+//    bool split_range;
+//    unsigned int num_smvis_far;
+//    glm::vec4 sm_buffer_far[MAX_NUM_SMVIS];
+//    float draw_range_far;
+
     mutable bool updated;
 
     glm::vec4 wind_params;
@@ -41,11 +50,8 @@ struct SmallVisual
     GLuint worldpos_tex_id;
 
     // spatial indexing and concurrency
-    Mutex sv_mutex;
-    QuadTree<glm::vec4, 5> sv_qtree;
-//
-//private:
-//    SmallVisual(const SmallVisual&);
+//    Mutex sv_mutex;
+//    QuadTree<glm::vec4, 5> sv_qtree;
 };
 
 

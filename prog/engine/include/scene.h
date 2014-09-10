@@ -25,8 +25,9 @@ class Scene
         std::list<std::shared_ptr<Actor>> actors;
         //std::vector<SmallVisual> const * small_visuals;
 
+//        SmallVisual const * bg_visual;
         SmallVisual const * bg_visual;
-        SmallVisual const * bg_visual_grass;
+//        SmallVisual const * bg_visual_grass;
 
         Terrain* terrain;
 

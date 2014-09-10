@@ -42,8 +42,10 @@ void Culler::stage(Scene &scene_in, World &world_in)
 //    scene_in.small_visuals = (world_in.foliage.getVisuals());
 
     world_in.foliage.bg_thread.updateFoliage(*world_in.chasecam);
-    scene_in.bg_visual = &world_in.foliage.bg_thread.spruce;
-    scene_in.bg_visual_grass = &world_in.foliage.bg_thread.grass;
+//    scene_in.bg_visual = &world_in.foliage.bg_thread.spruce;
+//    scene_in.bg_visual_grass = &world_in.foliage.bg_thread.grass;
+
+    scene_in.bg_visual = world_in.foliage.bg_thread.sm_types;
 
     scene_in.terrain = &world_in.terrain;
 }

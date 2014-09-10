@@ -11,7 +11,12 @@
 struct FolSpec
 {
     public:
-        enum class Type {Tree, Grass};
+        enum Type  {
+            Spruce = 0,
+            SpruceBB = 1,
+            GrassSpring = 2
+        };
+
         FolSpec(glm::vec4 pos_in, Type type_in) :
             pos(pos_in), type(type_in),
             x(pos.x), z(pos.z)
@@ -43,66 +48,58 @@ class Foliage
         {
             BG_Thread() : qt_trees(QuadAABB({-500, 500, -500, 500})) {};
 
-            SmallVisual spruce;
-            SmallVisual grass;
+            static const unsigned int NUM_SMALL_VISUAL_TYPES = 3;
+            SmallVisual sm_types[NUM_SMALL_VISUAL_TYPES];
+
+//            enum unsigned int Type {
+//                Spruce = 0,
+//                SpruceBB = 1,
+//                GrassSpring = 2
+//            };
+
+            // temporary storage for sm_types
+            int sm_type_counter[NUM_SMALL_VISUAL_TYPES];
 
             void prepareBG_Foliage()
             {
-                spruce.init();
+                sm_types[FolSpec::Type::Spruce].init("spruce_wbranch", "spruce_wbranch", glm::vec4(180.f, 20.f, 2.f, 0.0));
+                sm_types[FolSpec::Type::SpruceBB].init("spruce_bb", "spruce_bb", glm::vec4(180.f, 20.f, 2.f, 0.0));
+                sm_types[FolSpec::Type::GrassSpring].init("grass_spring", "grass_spring", glm::vec4(10.f, 10.f, 2.f, 0.0));
 
-                spruce.mesh = std::shared_ptr<Mesh>(global::mesh_manager.getResptrFromKey("spruce_wbranch"));
-                spruce.tex = std::shared_ptr<Texture>(global::tex_manager.getResptrFromKey("spruce_wbranch"));
-                spruce.wind_params = glm::vec4(180.f, 20.f, 2.f, 0.0);
-
-                grass.init();
-
-                grass.mesh = std::shared_ptr<Mesh>(global::mesh_manager.getResptrFromKey("grass_spring"));
-                grass.tex = std::shared_ptr<Texture>(global::tex_manager.getResptrFromKey("grass_spring"));
-                grass.wind_params = glm::vec4(10.f, 10.f, 2.f, 0.0);
             };
 
             void updateFoliage(Camera &cam)
             {
                 LockGuard lock_qt_trees(sm_mutex);
 
-                int i_tree = 0;
-                int i_grass = 0;
-
-                spruce.updated = true;  // assume that the spruce on the gfx card is up to date
-                grass.updated = true;
+                for (int i = 0; i<NUM_SMALL_VISUAL_TYPES; i++)
+                {
+                    sm_type_counter[i] = 0;
+                    sm_types[i].updated = true;
+                }
 
                 qt_trees.for_all_in(cam.get2dViewFrustum(1.15, 0.5),
                 //qt_trees.for_all_in(QuadAABB({-100, 100, -100, 100}),
                                     [&] (FolSpec &fol_dat)
                                     {
-                                        switch (fol_dat.type)
+                                        SmallVisual &sm_type = sm_types[fol_dat.type];
+                                        int &counter = sm_type_counter[fol_dat.type];
+
+                                        if (sm_type_counter[fol_dat.type]<SmallVisual::MAX_NUM_SMVIS)
                                         {
-                                            case(FolSpec::Type::Tree):
-                                            {
-                                                if (i_tree<SmallVisual::MAX_NUM_SMVIS)
-                                                {
-                                                    if (spruce.updated && spruce.sm_buffer[i_tree]!=fol_dat.pos)
-                                                    spruce.updated = false;
 
-                                                    spruce.sm_buffer[i_tree] = fol_dat.pos;
-                                                    i_tree++;
-                                                } // if (i<SmallVisual::MAX_NUM_SMVIS)
-                                            } break;
-                                            case(FolSpec::Type::Grass):
-                                            {
-                                                if (i_grass<SmallVisual::MAX_NUM_SMVIS)
-                                                {
-                                                    if (grass.updated && spruce.sm_buffer[i_grass]!=fol_dat.pos)
-                                                    grass.updated = false;
+                                            if (sm_type.updated && sm_type.sm_buffer[counter]!=fol_dat.pos)
+                                                sm_type.updated = false;
 
-                                                    grass.sm_buffer[i_grass] = fol_dat.pos;
-                                                    i_grass++;
-                                                } // if (i<SmallVisual::MAX_NUM_SMVIS)
-                                            } break;
-                                        } // switch
+                                            sm_type.sm_buffer[counter] = fol_dat.pos;
+                                            counter++;
+                                        } // if (i<SmallVisual::MAX_NUM_SMVIS)
                                     });
-                spruce.num_smvis = i_tree;
-                grass.num_smvis = i_grass;
+
+                for (int i = 0; i<NUM_SMALL_VISUAL_TYPES; i++)
+                {
+                    sm_types[i].num_smvis = sm_type_counter[i];
+                }
             }
 
             Mutex sm_mutex;

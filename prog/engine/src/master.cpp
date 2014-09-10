@@ -481,14 +481,14 @@ void Master::backGroundTasks()
             float x = (float)(rand()%1000*tree_range)/1000.f-tree_range/2.f;
             float z = (float)(rand()%1000*tree_range)/1000.f-tree_range/2.f;
             glm::vec4 pos = glm::vec4(x, world.terrain.ySample(x, z), z, rand()%360);
-            shr_data.qt_trees.insert(FolSpec(pos, FolSpec::Type::Tree));
+            shr_data.qt_trees.insert(FolSpec(pos, FolSpec::Type::Spruce));
         }
         for (int i = 0; i<1000; i++)
         {
             float x = (float)(rand()%1000*grass_range)/1000.f-grass_range/2.f;
             float z = (float)(rand()%1000*grass_range)/1000.f-grass_range/2.f;
             glm::vec4 pos = glm::vec4(x, world.terrain.ySample(x, z), z, rand()%360);
-            shr_data.qt_trees.insert(FolSpec(pos, FolSpec::Type::Grass));
+            shr_data.qt_trees.insert(FolSpec(pos, FolSpec::Type::GrassSpring));
         }
     }
 

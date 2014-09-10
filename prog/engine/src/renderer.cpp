@@ -145,35 +145,73 @@ void Renderer::draw(Scene &scene, float dt)
 //
 //        }
 
-        if (!(scene.bg_visual->updated))
+//        if (!(scene.bg_visual->updated))
+//        {
+//            //grass_shader.updateTransforms(it->positions.size(), &(it->positions[0]));
+//            scene.bg_visual->updatePositionsTex();
+//            //it->updated = true;
+//            //std::cout << "updating small_visual positions\n";
+//        }
+//        else
+//        {
+//            //std::cout << "NOT updating small_visual positions\n";
+//        }
+
+        for (int i = 0; i<Foliage::BG_Thread::NUM_SMALL_VISUAL_TYPES; i++)
         {
-            //grass_shader.updateTransforms(it->positions.size(), &(it->positions[0]));
-            scene.bg_visual->updatePositionsTex();
-            //it->updated = true;
-            //std::cout << "updating small_visual positions\n";
-        }
-        else
-        {
-            //std::cout << "NOT updating small_visual positions\n";
+            if (!(scene.bg_visual[i].updated))
+            {
+                //grass_shader.updateTransforms(it->positions.size(), &(it->positions[0]));
+                scene.bg_visual[i].updatePositionsTex();
+                //it->updated = true;
+                //std::cout << "updating small_visual positions\n";
+            }
+            else
+            {
+                //std::cout << "NOT updating small_visual positions\n";
+            }
+
+            //std::cout << "Trying to draw visual: " << i << " count = " << scene.bg_visual[i].num_smvis << "\n";
+
+            if (scene.bg_visual[i].num_smvis > 0)
+            {
+
+                shadow_inst.draw(scene.bg_visual[i], mlight_vp);
+            }
+
+
         }
 
-        /** shadows look bad with very thin blades of grass (flickering)*/
-        shadow_inst.draw(*scene.bg_visual, mlight_vp);
+//        if (!(scene.bg_visual->updated))
+//        {
+//            //grass_shader.updateTransforms(it->positions.size(), &(it->positions[0]));
+//            scene.bg_visual->updatePositionsTex();
+//            //it->updated = true;
+//            //std::cout << "updating small_visual positions\n";
+//        }
+//        else
+//        {
+//            //std::cout << "NOT updating small_visual positions\n";
+//        }
 
-        if (!(scene.bg_visual_grass->updated))
-        {
-            //grass_shader.updateTransforms(it->positions.size(), &(it->positions[0]));
-            scene.bg_visual_grass->updatePositionsTex();
-            //it->updated = true;
-            //std::cout << "updating small_visual positions\n";
-        }
-        else
-        {
-            //std::cout << "NOT updating small_visual positions\n";
-        }
 
-        /** shadows look bad with very thin blades of grass (flickering)*/
-        shadow_inst.draw(*scene.bg_visual_grass, mlight_vp);
+//        /** shadows look bad with very thin blades of grass (flickering)*/
+//        shadow_inst.draw(*scene.bg_visual, mlight_vp);
+//
+//        if (!(scene.bg_visual_grass->updated))
+//        {
+//            //grass_shader.updateTransforms(it->positions.size(), &(it->positions[0]));
+//            scene.bg_visual_grass->updatePositionsTex();
+//            //it->updated = true;
+//            //std::cout << "updating small_visual positions\n";
+//        }
+//        else
+//        {
+//            //std::cout << "NOT updating small_visual positions\n";
+//        }
+//
+//        /** shadows look bad with very thin blades of grass (flickering)*/
+//        shadow_inst.draw(*scene.bg_visual_grass, mlight_vp);
 
 
     shadow_map.deactivate();
@@ -236,12 +274,18 @@ void Renderer::draw(Scene &scene, float dt)
 //
 //
 //        }
-
-        grass_shader.extDraw(*scene.bg_visual, *(scene.camera),
+        for (int i = 0; i<Foliage::BG_Thread::NUM_SMALL_VISUAL_TYPES; i++)
+        {
+            if (scene.bg_visual[i].num_smvis > 0)
+                grass_shader.extDraw(scene.bg_visual[i], *(scene.camera),
                              mlight_vp);
+        }
 
-        grass_shader.extDraw(*scene.bg_visual_grass, *(scene.camera),
-                             mlight_vp);
+//        grass_shader.extDraw(*scene.bg_visual, *(scene.camera),
+//                             mlight_vp);
+//
+//        grass_shader.extDraw(*scene.bg_visual_grass, *(scene.camera),
+//                             mlight_vp);
 
         // Draw "sky quad" following the camera
         sky_shader.drawSkyQuad((*(scene.camera)), sky_color, fog_color);
