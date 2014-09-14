@@ -69,7 +69,7 @@ void SmallVisual::init(std::string mesh_key, std::string tex_key, glm::vec4 wind
 
     mesh = std::shared_ptr<Mesh>(global::mesh_manager.getResptrFromKey(mesh_key));
     tex = std::shared_ptr<Texture>(global::tex_manager.getResptrFromKey(tex_key));
-    wind_params = glm::vec4(180.f, 20.f, 2.f, 0.0);
+    wind_params = wind_params_in;
 }
 
 //void SmallVisual::splitRange(std::string mesh_key, std::string tex_key, glm::vec4 wind_params, float draw_range)

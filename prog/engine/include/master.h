@@ -5,7 +5,7 @@
 #include <SFML/Window.hpp>
 #include "mechanics.h"
 #include "renderer.h"
-#include "culler.h"
+//#include "culler.h"
 #include "threadingwrapper.h"
 #include "threadiobuffers.hpp"
 #include "backgroundmaster.h"
@@ -55,8 +55,8 @@ private:
     sf::Window  window;     // Input from the window signals the game mechanics
     Mechanics   mechanics;  // the game mechanics takes the input and transforms the scene
     World       world;      // struct like class - Contains the game state
-    Culler      culler;     // process oriented class, scene = culler.stage(&world)
-    Scene       scene;      // the scene is an interface between the world and the renderer
+    //Culler      culler;     // process oriented class, scene = culler.stage(&world)
+    //Scene       scene;      // the scene is an interface between the world and the renderer
     Renderer    renderer;   // the renderer draws the scene: renderer.draw(&scene)
 
     // replace by settings

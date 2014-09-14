@@ -78,7 +78,11 @@ class Foliage
                     sm_types[i].updated = true;
                 }
 
-                qt_trees.for_all_in(cam.get2dViewFrustum(1.15, 0.4),
+                QuadFrustum frust = cam.get2dViewFrustum(1.15, 0.4);
+
+                //std::cout << "cam  " << frust.p[0] << ", " << frust.p[1] << ", " << frust.p[2] << ", " << frust.p[3] << ", " << "\n";
+
+                qt_trees.for_all_in(frust,
                 //qt_trees.for_all_in(QuadAABB({-100, 100, -100, 100}),
                                     [&] (FolSpec &fol_dat)
                                     {
@@ -106,7 +110,10 @@ class Foliage
                 for (int i = 0; i<NUM_SMALL_VISUAL_TYPES; i++)
                 {
                     sm_types[i].num_smvis = sm_type_counter[i];
+                    //std::cout << "count " << i << ": " << sm_types[i].num_smvis << "\n";
                 }
+
+                //std::terminate();
             }
 
             Mutex sm_mutex;

@@ -41,6 +41,7 @@ Master::Master() :
 
         // do other multi_threading things;
         back_ground = Thread(&Master::backGroundTasks, this);
+        //backGroundTasks(); // serially
 
         mainLoopSingleThreaded();
     }
@@ -135,11 +136,11 @@ void Master::mainLoopSingleThreaded()
         // cout << "dt = " << dt << "\n";
 
         // Choose what to render (screw this)
-        culler.stage(scene, world); // stage the scene from the world THIS breaks everything since non-shared shared pointers go out of scope
+        //culler.stage(scene, world); // stage the scene from the world THIS breaks everything since non-shared shared pointers go out of scope
 
         // draw...
         renderer.updateTime(dt); // should probably merge this with something?
-        renderer.draw(scene, dt);
+        renderer.draw(world, dt);
 
         // draw overlay/interface
         renderer.drawOverlay({mechanics.getInterfaceInfo(), 1.0/dt_smooth});
@@ -230,7 +231,7 @@ void Master::renderTasks()
     while (running)
     {
         // Choose what to render
-        culler.stage(scene, world); // stage the scene from the world THIS breaks everything since non-shared shared pointers go out of scope
+        //culler.stage(scene, world); // stage the scene from the world THIS breaks everything since non-shared shared pointers go out of scope
 
         // calculate dtRender
         timeRenderNew = absClock.getElapsedTime().asSeconds();
@@ -238,7 +239,7 @@ void Master::renderTasks()
         timeRenderLast = timeRenderNew;
 
         // draw
-        renderer.draw(scene, dtRender);
+        renderer.draw(world, dtRender);
 
         // draw overlay/interface
         renderer.drawOverlay({mechanics.getInterfaceInfo(), 1.0/dtRender});

@@ -227,7 +227,7 @@ void Terrain::subdividedQuads(Vertex* &vertices,
     // stick edge vertices to neighboring patches of lower detail
     /**if (lvldiff_nsew[0] < 0)
     {
-        int skip = abs(lvldiff_nsew[0]);
+        int skip = std::abs(lvldiff_nsew[0]);
         int diff_samepos = 3;
         int diff_skip = 1+pow(2,skip+1)
         for (int start = 2; j<n_side*4; j++)
@@ -246,7 +246,7 @@ void Terrain::subdividedQuads(Vertex* &vertices,
 
     if (lvldiff_nsew[0] < 0)
     {
-        int skip = pow(2, abs(lvldiff_nsew[0])); // 2, 4, 8 etc
+        int skip = pow(2, std::abs(lvldiff_nsew[0])); // 2, 4, 8 etc
 
         int corner_offset = 1;
         int skip_vert_stride = skip*verts_per_quad;
@@ -284,7 +284,7 @@ void Terrain::subdividedQuads(Vertex* &vertices,
 
     if (lvldiff_nsew[1] < 0)
     {
-        int skip = pow(2, abs(lvldiff_nsew[1])); // 2, 4, 8 etc
+        int skip = pow(2, std::abs(lvldiff_nsew[1])); // 2, 4, 8 etc
 
         int corner_offset = verts_per_quad*(n_side-1)*n_side; // +first vertex of last row
         int skip_vert_stride = skip*verts_per_quad;
@@ -321,7 +321,7 @@ void Terrain::subdividedQuads(Vertex* &vertices,
 
     if (lvldiff_nsew[2] < 0)
     {
-        int skip = pow(2, abs(lvldiff_nsew[2])); // 2, 4, 8 etc
+        int skip = pow(2, std::abs(lvldiff_nsew[2])); // 2, 4, 8 etc
 
         int corner_offset = verts_per_quad*(n_side-1)+2; // +first vertex of last column
         int skip_vert_stride = skip*(verts_per_quad*n_side);
@@ -358,7 +358,7 @@ void Terrain::subdividedQuads(Vertex* &vertices,
 
     if (lvldiff_nsew[3] < 0)
     {
-        int skip = pow(2, abs(lvldiff_nsew[3])); // 2, 4, 8 etc
+        int skip = pow(2, std::abs(lvldiff_nsew[3])); // 2, 4, 8 etc
 
         int corner_offset = 1; // +first vertex of first column
         int skip_vert_stride = skip*(verts_per_quad*n_side);
@@ -559,7 +559,7 @@ void Terrain::generateHeightMap()
     double range = 8000.0; // m
 
     //srand(23798); // removing this gives a nice one
-    srand(12345); // removing this gives a nice one
+    //srand(12345); // removing this gives a nice one
 
     // find the first (middle point) m_dimension/2
     m_height_map(m_dimension/2, m_dimension/2) = rand_range(-range, range);
@@ -773,8 +773,8 @@ void Terrain::updateObserverPosition(glm::vec3 observer_position)
     float diff_x = observer_position.x-anchor_position.x;
     float diff_z = observer_position.z-anchor_position.z;
 
-    float abs_diff_x = abs(diff_x);
-    float abs_diff_z = abs(diff_z);
+    float abs_diff_x = std::abs(diff_x);
+    float abs_diff_z = std::abs(diff_z);
 
     float sign_x = (diff_x > 0.0) ? 1.0 : -1.0;
     float sign_z = (diff_z > 0.0) ? 1.0 : -1.0;
@@ -798,7 +798,7 @@ void Terrain::updateObserverPosition(glm::vec3 observer_position)
 
         for (auto it = terrain_patches.begin(); it<terrain_patches.end(); /*don't incr*/)
         {
-            if (abs(it->prop->pos.x-anchor_position.x) > m_patchLength*erase_distance)
+            if (std::abs(it->prop->pos.x-anchor_position.x) > m_patchLength*erase_distance)
             {
                 it = terrain_patches.erase(it);
             }
@@ -841,7 +841,7 @@ void Terrain::updateObserverPosition(glm::vec3 observer_position)
 
         for (auto it = terrain_patches.begin(); it<terrain_patches.end(); /*don't incr*/)
         {
-            if (abs(it->prop->pos.z-anchor_position.z) > m_patchLength*erase_distance)
+            if (std::abs(it->prop->pos.z-anchor_position.z) > m_patchLength*erase_distance)
             {
                 it = terrain_patches.erase(it);
             }
@@ -924,10 +924,10 @@ void Terrain::updateObserverPosition(glm::vec3 observer_position)
 //        std::cout << "\n";
         //std::cout << ">" << it->prop->pos.x/m_patchLength << ", " << it->prop->pos.z/m_patchLength << " ";
         //std::cout << "own: " << pref_lvl << ", nsew: ";
-        int sum_deviances = abs(pref_lvl-it->subd_lvl);
+        int sum_deviances = std::abs(pref_lvl-it->subd_lvl);
         for (int i = 0; i<4; i++)
         {
-            sum_deviances += abs(preflvldiff_nsew[i]-it->diff_lvl[i]);
+            sum_deviances += std::abs(preflvldiff_nsew[i]-it->diff_lvl[i]);
            // std::cout << preflvldiff_nsew[i] << " ";
         }
         //std::cout << "\n";

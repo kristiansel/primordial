@@ -58,7 +58,7 @@ struct QuadFrustum
                  aabb.containsPoint(p[2].x, p[2].z) || aabb.containsPoint(p[3].x, p[3].z));
     }
 
-    bool intersectsAABB(QuadAABB aabb)
+    bool intersectsAABB(QuadAABB aabb, bool debug = false)
     {
 //        std::cout << "Intersecting Quadrilaterals\n";
 
@@ -93,20 +93,23 @@ struct QuadFrustum
                 // the axis is a random point, say a(s) = one[i]+s*normal, now find s
                 // so if we pick one[i], then s_i = 0, find s_ip1 =
 
-//                std::cout << "Edge dir: "<<i<<" : "<<edge_dir.x<<", "<<edge_dir.z<<"\n";
-//                std::cout << "Edge norm: "<<i<<" : "<<v.x<<", "<<v.z<<"\n";
+                if (debug) std::cout << "Edge dir: "<<i<<" : "<<edge_dir.x<<", "<<edge_dir.z<<"\n";
+                if (debug) std::cout << "Edge norm: "<<i<<" : "<<v.x<<", "<<v.z<<"\n";
 
                 float s_dash1 = ((v.x*one[(i+2)%4].x + v.z*one[(i+2)%4].z) - (v.x*one[i].x + v.z*one[i].z))/(v.x*v.x + v.z*v.z);
                 float s_dash2 = ((v.x*one[(i+3)%4].x + v.z*one[(i+3)%4].z) - (v.x*one[i].x + v.z*one[i].z))/(v.x*v.x + v.z*v.z);
 
+                if (debug) std::cout << "s_dash1: "<<i<<" : "<<s_dash1<<"\n";
+                if (debug) std::cout << "s_dash2: "<<i<<" : "<<s_dash2<<"\n";
+
                 float s_first = 0.f; // per def
-                float s_other = abs(s_dash1) > abs(s_dash2) ? s_dash1 : s_dash2;
+                float s_other = std::abs(s_dash1) > std::abs(s_dash2) ? s_dash1 : s_dash2;
 
                 float max_s = std::max(s_first, s_other);
                 float min_s = std::min(s_first, s_other);
 //
-//                std::cout << "s1: "<<i<<" : "<<max_s<<"\n";
-//                std::cout << "s2: "<<i<<" : "<<min_s<<"\n";
+                if (debug) std::cout << "s1: "<<i<<" : "<<max_s<<"\n";
+                if (debug) std::cout << "s2: "<<i<<" : "<<min_s<<"\n";
 
                 float max_u = -99999;
                 float min_u = 99999;

@@ -67,27 +67,31 @@ void Renderer::init(unsigned int scr_width_in, unsigned int scr_height_in)
     resizeWindow(scr_width_in, scr_height_in);
 }
 
-void Renderer::draw(Scene &scene, float dt)
+void Renderer::draw(World &world, float dt)
 {
     // First update all animations
     // consider moving this out...
     // Or: Should update the time in animations somewhere else, then
     // in Renderer, only calculate the matrices of those in view.
     // Do this as doing blending etc
-    for (auto it = scene.actors.begin(); it!=scene.actors.end(); it++)
+
+
+
+    for (auto it = world.creatures.begin(); it!=world.creatures.end(); it++)
     {
         (*it)->updateAnim(dt);
-        // The above is not thread safe if the actor is in the process of loading
     }
 
-    // Set all things which are shared by shaders but can change in time
-    glm::mat4 view_mat = scene.camera->getViewMatrix();
-    glm::mat4 proj_mat = scene.camera->getProjectionMatrix();
-    QuadFrustum cam_fr = scene.camera->get2dViewFrustum(1.10, 1); // complete view frustum
+    world.foliage.bg_thread.updateFoliage(*world.chasecam);
 
-    const DirLight &mlight = (*scene.main_light);
-    glm::vec3 cam_dir = scene.camera->getDir();
-    glm::vec3 shadow_focus = scene.camera->pos + 12.f*glm::vec3(cam_dir.x, 0.0, cam_dir.z);
+    // Set all things which are shared by shaders but can change in time
+    glm::mat4 view_mat = world.active_cam->getViewMatrix();
+    glm::mat4 proj_mat = world.active_cam->getProjectionMatrix();
+    QuadFrustum cam_fr = world.chasecam->get2dViewFrustum(1.10, 1); // complete view frustum
+
+    const DirLight &mlight = (*world.main_light);
+    glm::vec3 cam_dir = world.active_cam->getDir();
+    glm::vec3 shadow_focus = world.active_cam->pos + 12.f*glm::vec3(cam_dir.x, 0.0, cam_dir.z);
     glm::mat4 mlight_vp = mlight.getVPmatrix(shadow_focus);
 
     glm::vec4 fog_color = glm::vec4(1.0, 1.0, 1.0, 1.0);
@@ -101,23 +105,23 @@ void Renderer::draw(Scene &scene, float dt)
     // set global uniforms data
     glm::vec4 main_light_dir = view_mat * glm::vec4(mlight.dir, 0.0);
     glm::vec3 main_light_dir3 = glm::vec3(main_light_dir.x, main_light_dir.y, main_light_dir.z);
-    ubos.setGlobalUniformsData({proj_mat, fog_color, sky_color, mlight.color, main_light_dir3, scene.camera->farz, wind_speed});
+    ubos.setGlobalUniformsData({proj_mat, fog_color, sky_color, mlight.color, main_light_dir3, world.active_cam->farz, wind_speed});
 
     // Why is this in here?
-    glDisable(GL_BLEND);
+    //glDisable(GL_BLEND);
 
     shadow_map.activate(mlight_vp);
     // shadow_map.activateDrawContent(mlight_vp);
         // Draw props (non-animated)
         shadow_map.clearBoneMatrices();
 
-        for (auto it = scene.props.begin(); it!=scene.props.end(); it++)
+        for (auto it = world.worldobjects.begin(); it!=world.worldobjects.end(); it++)
         {
             shadow_map.drawProp(*it);
         }
 
         // Should preferably draw the terrain after actors and props
-        std::vector<TerrainPatch>* terrain_patches = scene.terrain->getPatches();
+        std::vector<TerrainPatch>* terrain_patches = world.terrain.getPatches();
 
         //int i = 0;
         // uncomment the below to make the terrain cast shadow
@@ -144,7 +148,7 @@ void Renderer::draw(Scene &scene, float dt)
 
         //}
 
-        for (auto it = scene.actors.begin(); it!=scene.actors.end(); it++)
+        for (auto it = world.creatures.begin(); it!=world.creatures.end(); it++)
         {
             shadow_map.drawActor(*it);
         }
@@ -179,10 +183,10 @@ void Renderer::draw(Scene &scene, float dt)
 
         for (int i = 0; i<Foliage::BG_Thread::NUM_SMALL_VISUAL_TYPES; i++)
         {
-            if (!(scene.bg_visual[i].updated))
+            if (!(world.foliage.bg_thread.sm_types[i].updated))
             {
                 //grass_shader.updateTransforms(it->positions.size(), &(it->positions[0]));
-                scene.bg_visual[i].updatePositionsTex();
+                world.foliage.bg_thread.sm_types[i].updatePositionsTex();
                 //it->updated = true;
                 //std::cout << "updating small_visual positions\n";
             }
@@ -193,10 +197,10 @@ void Renderer::draw(Scene &scene, float dt)
 
             //std::cout << "Trying to draw visual: " << i << " count = " << scene.bg_visual[i].num_smvis << "\n";
 
-            if (scene.bg_visual[i].num_smvis > 0)
+            if (world.foliage.bg_thread.sm_types[i].num_smvis > 0)
             {
 
-                shadow_inst.draw(scene.bg_visual[i], mlight_vp);
+                shadow_inst.draw(world.foliage.bg_thread.sm_types[i], mlight_vp);
             }
 
 
@@ -244,7 +248,7 @@ void Renderer::draw(Scene &scene, float dt)
 
         // Set the values of the uniforms which are updated
         // per-frame and switch to main shader
-        main_shader.activate(*(scene.camera),
+        main_shader.activate(*(world.active_cam),
                              mlight_vp);
 
         // draw
@@ -253,22 +257,48 @@ void Renderer::draw(Scene &scene, float dt)
         // Draw props (non-animated)
         main_shader.clearBoneMatrices();
 
-        for (auto it = scene.props.begin(); it!=scene.props.end(); it++)
+        for (auto it = world.worldobjects.begin(); it!=world.worldobjects.end(); it++)
         {
             // main_shader.drawProp(&**it);
             main_shader.drawProp(*it);
         }
 
+        int i = 0;
         for (auto it = terrain_patches->begin(); it!=terrain_patches->end(); it++)
         {
-            if (cam_fr.intersectsAABB(it->world_aabb))
-            {
-                main_shader.drawProp(it->prop);
-            }
+            QuadAABB &aabb = it->world_aabb;
+//
+//            if (i==18)
+//            {
+//                std::cout << "i = " << i << "\n";
+//                std::cout << "cam  " << cam_fr.p[0] << ", " << cam_fr.p[1] << ", " << cam_fr.p[2] << ", " << cam_fr.p[3] << ", " << "\n";
+//                std::cout << "aabb " << aabb.x_min << ", " << aabb.x_max << ", " << aabb.z_min << ", " << aabb.z_max << ", " << "\n";
+//
+//                if (cam_fr.intersectsAABB(it->world_aabb, true))
+//                {
+//                    main_shader.drawProp(it->prop);
+//                    std::cout << "true\n";
+//                }
+//                else
+//                {
+//                    std::cout << "false\n";
+//                }
+//            }
+//            else
+//            {
+                if (cam_fr.intersectsAABB(it->world_aabb))
+                {
+                    main_shader.drawProp(it->prop);
+                }
+//            }
+//
+//            i++;
         }
 
+        //std::terminate();
+
         // Draw actors;
-        for (auto it = scene.actors.begin(); it!=scene.actors.end(); it++)
+        for (auto it = world.creatures.begin(); it!=world.creatures.end(); it++)
         {
             // main_shader.drawActor(&**it);
             main_shader.drawActor(*it);
@@ -299,8 +329,8 @@ void Renderer::draw(Scene &scene, float dt)
 //        }
         for (int i = 0; i<Foliage::BG_Thread::NUM_SMALL_VISUAL_TYPES; i++)
         {
-            if (scene.bg_visual[i].num_smvis > 0)
-                grass_shader.extDraw(scene.bg_visual[i], *(scene.camera),
+            if (world.foliage.bg_thread.sm_types[i].num_smvis > 0)
+                grass_shader.extDraw(world.foliage.bg_thread.sm_types[i], *(world.active_cam),
                              mlight_vp);
         }
 
@@ -311,7 +341,7 @@ void Renderer::draw(Scene &scene, float dt)
 //                             mlight_vp);
 
         // Draw "sky quad" following the camera
-        sky_shader.drawSkyQuad((*(scene.camera)), sky_color, fog_color);
+        sky_shader.drawSkyQuad((*(world.active_cam)), sky_color, fog_color);
 
     // Finished main drawing, post processing
     render_stage.deactivate();

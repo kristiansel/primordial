@@ -33,7 +33,7 @@ void Mechanics::init(World &world_in, float &dt_in)
     world->freecam->pos = glm::vec3(0.0, 1.5, 0.0);
 
     // set the main light (sun/moon)
-    world->mainLight( glm::vec3(3, 1.0, 3),         // From direction
+    world->mainLight( glm::vec3(1.5, 1.0, 1.5),         // From direction
                       glm::vec4(1.0, 1.0, 1.0, 1.0) );  // Color
 
     // add additional lights

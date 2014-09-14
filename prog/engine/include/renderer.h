@@ -11,7 +11,7 @@
 #include "shader.h"
 #include "grassshader.h"
 #include "skyshader.h"
-#include "scene.h"
+#include "world.h"
 #include "shadowmap.h"
 #include "shadowinstshader.h"
 #include "renderstage.h"
@@ -41,7 +41,7 @@ public:
     virtual ~Renderer();
 
     void init(unsigned int scr_width_in, unsigned int scr_height_in); // depends on an OpenGL context, therefore public
-    void draw(Scene &scene, float dt);
+    void draw(World &world, float dt);
     void drawOverlay(InterfaceInfo interfaceInfo);
     void resizeWindow(int w, int h, bool real = true);
     void setPerspective(int w, int h);
