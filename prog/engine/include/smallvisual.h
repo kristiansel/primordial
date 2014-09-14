@@ -11,9 +11,15 @@
 #include "boost/thread.hpp"
 #include "global.h"
 
+//#include <thread>
+//#include <mutex>
+
 
 using Mutex = boost::mutex;
 using LockGuard = boost::lock_guard<boost::mutex>;
+
+//using Mutex = std::mutex;
+//using LockGuard = std::lock_guard<std::mutex>;
 
 struct SmallVisual
 {

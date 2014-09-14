@@ -67,6 +67,7 @@ private:
         float f_max;        // N, should make this a function of strength/agi and mass
 
         btVector3 f_set;
+        btVector3 v_set;
 
         float m_halfHeight;
 

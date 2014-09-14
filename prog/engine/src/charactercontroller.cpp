@@ -4,10 +4,11 @@
 
 DynamicCharacterController::DynamicCharacterController () :
     gain(8000.0),
-    f_max(30000.0), // 20000 too low. this will only limit "getting off the ground"
+    f_max(5000.0), // 20000 too low. this will only limit "getting off the ground"
     m_halfHeight(0.0),
     on_ground(false),
     f_set(btVector3(0.0, 0.0, 0.0)),
+    v_set(btVector3(0.0, 0.0, 0.0)),
     m_footingNormal(glm::vec3(0.0, 1.0, 0.0))
 {
         m_shape = nullptr;
@@ -41,7 +42,8 @@ void DynamicCharacterController::setup (btDynamicsWorld* dynamicsWorld, btScalar
         btDefaultMotionState* myMotionState = new btDefaultMotionState(startTransform);
 
         btRigidBody::btRigidBodyConstructionInfo cInfo(mass, myMotionState, m_shape);
-        //cInfo.m_friction = 0.2f;
+//    rbInfo.m_restitution = btScalar(0.99f);
+        cInfo.m_friction = btScalar(0.0f);
         m_rigidBody = new btRigidBody(cInfo);
 
         m_rigidBody->setSleepingThresholds (0.0, 0.0);
@@ -136,7 +138,8 @@ void DynamicCharacterController::velocitySetpoint(glm::vec3 glm_v_s)
 //        //std::cout << "applying force " << f.length() << " N \n";
 //
 //        //                             cannot control y (cannot fly)
-    f_set = btVector3(glm_v_s.x, glm_v_s.y, glm_v_s.z);
+    //f_set = btVector3(glm_v_s.x, glm_v_s.y, glm_v_s.z);
+    v_set = btVector3(glm_v_s.x, glm_v_s.y, glm_v_s.z);
 
 }
 void DynamicCharacterController::applyMoveController()
@@ -144,7 +147,27 @@ void DynamicCharacterController::applyMoveController()
     // This function gets used all the time
     if (on_ground)
     {
-//        m_rigidBody->applyCentralForce(btVector3(f_set[0], 0.f, f_set[2]));
+        //float force_scale = 100.f;
+
+        // apply P(ID) controller
+        btVector3 v_meas = m_rigidBody->getLinearVelocity();
+        btVector3 v_diff = v_meas - v_set;
+
+        float gain = -10000.f;
+        btVector3 force = gain*v_diff;
+
+        // limit the force to the allowable range
+        float force_abs_mag = std::abs(force.length());
+
+        float force_rat = force_abs_mag/f_max;
+        if (force_rat > 1.f)
+        {
+            force = force/force_rat;
+        }
+
+        m_rigidBody->applyCentralForce(btVector3(force[0], 0.f, force[2]));
+
+        //m_rigidBody->applyCentralForce(btVector3(force_scale*f_set[0], 0.f, force_scale*f_set[2]));
 
         //
         //std::cout << "on ground\n";
@@ -153,15 +176,13 @@ void DynamicCharacterController::applyMoveController()
         //m_rigidBody->setLinearVelocity(btVector3(f_set[0], (m_rigidBody->getLinearVelocity())[1], f_set[2]));
 
         //float y_adj = (-m_footingNormal.x*f_set[0] - m_footingNormal.z*f_set[2])/m_footingNormal.y;
+//
+//        m_rigidBody->setLinearVelocity(btVector3(f_set[0],
+//                                                 (m_rigidBody->getLinearVelocity())[1],
+//                                                 f_set[2]));
+        //std::cout << "ON ground\n";
+    }
 
-        m_rigidBody->setLinearVelocity(btVector3(f_set[0],
-                                                 (m_rigidBody->getLinearVelocity())[1],
-                                                 f_set[2]));
-    }
-    else
-    {
-        //std::cout << "NOT on ground\n";
-    }
 }
 
 void DynamicCharacterController::setVelocityXZ(float v_x, float v_z)
@@ -249,14 +270,17 @@ void DynamicCharacterController::lunge(glm::vec3 forw)
 
 bool DynamicCharacterController::onGround()
 {
-    btVector3 vel = m_rigidBody->getLinearVelocity();
-
-    btVector3 dir = vel.normalized();
-
-    float climbing_factor = 0.16;
+//    btVector3 vel = m_rigidBody->getLinearVelocity();
+//
+//    btVector3 dir = vel.normalized();
+//
+//    float climbing_factor = 0.16;
+//
+//    m_rayStart = m_rigidBody->getCenterOfMassPosition();
+//    m_rayEnd = m_rayStart - btVector3(dir[0]*climbing_factor, m_halfHeight*(1+climbing_factor/2.0), dir[2]*climbing_factor);
 
     m_rayStart = m_rigidBody->getCenterOfMassPosition();
-    m_rayEnd = m_rayStart - btVector3(dir[0]*climbing_factor, m_halfHeight*(1+climbing_factor/2.0), dir[2]*climbing_factor);
+    m_rayEnd = m_rayStart - btVector3(0.0, m_halfHeight*(1.2), 0.0);
 
     // rayCallback
     btCollisionWorld::ClosestRayResultCallback rayCallback(m_rayStart, m_rayEnd);

@@ -13,17 +13,20 @@ using LockGuard = boost::lock_guard<boost::mutex>;
 
 //#include <thread>
 //#include <mutex>
-//
+////
 //using Thread = std::thread;
 //using Mutex = std::mutex;
 //using LockGuard = std::lock_guard<std::mutex>;
 
 
 #include <boost/thread.hpp>
+#include <boost/chrono.hpp>
 
 using Thread = boost::thread;
 using Mutex = boost::mutex;
 using LockGuard = boost::lock_guard<boost::mutex>;
+
+extern void ThreadSleep(unsigned int ms);
 
 #endif // NOT WINDOWS
 

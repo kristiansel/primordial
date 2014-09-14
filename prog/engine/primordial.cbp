@@ -13,8 +13,10 @@
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
+					<Add option="-std=c++11" />
 					<Add option="-pg" />
 					<Add option="-g" />
+					<Add option="-pthread" />
 					<Add directory="include" />
 					<Add directory="dependencies" />
 					<Add directory="/usr/include/bullet" />
@@ -141,7 +143,6 @@
 		<Unit filename="include/combinationstage.h" />
 		<Unit filename="include/creature.h" />
 		<Unit filename="include/creaturesignals.h" />
-		<Unit filename="include/culler.h" />
 		<Unit filename="include/debugdrawer.h" />
 		<Unit filename="include/foliage.h" />
 		<Unit filename="include/geometry.h" />
@@ -160,7 +161,6 @@
 		<Unit filename="include/renderstage.h" />
 		<Unit filename="include/resourcemanager.h" />
 		<Unit filename="include/rigidbody.h" />
-		<Unit filename="include/scene.h" />
 		<Unit filename="include/shader.h" />
 		<Unit filename="include/shaderbase.h" />
 		<Unit filename="include/shadowinstshader.h" />
@@ -199,7 +199,6 @@
 		<Unit filename="src/charactercontroller.cpp" />
 		<Unit filename="src/combinationstage.cpp" />
 		<Unit filename="src/creature.cpp" />
-		<Unit filename="src/culler.cpp" />
 		<Unit filename="src/debugdrawer.cpp" />
 		<Unit filename="src/foliage.cpp" />
 		<Unit filename="src/geometry.cpp" />
@@ -217,7 +216,6 @@
 		<Unit filename="src/renderer.cpp" />
 		<Unit filename="src/renderstage.cpp" />
 		<Unit filename="src/rigidbody.cpp" />
-		<Unit filename="src/scene.cpp" />
 		<Unit filename="src/shader.cpp" />
 		<Unit filename="src/shaderbase.cpp" />
 		<Unit filename="src/shadowinstshader.cpp" />
