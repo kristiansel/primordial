@@ -83,6 +83,7 @@ void Renderer::draw(Scene &scene, float dt)
     // Set all things which are shared by shaders but can change in time
     glm::mat4 view_mat = scene.camera->getViewMatrix();
     glm::mat4 proj_mat = scene.camera->getProjectionMatrix();
+    QuadFrustum cam_fr = scene.camera->get2dViewFrustum(1.10, 1); // complete view frustum
 
     const DirLight &mlight = (*scene.main_light);
     glm::vec3 cam_dir = scene.camera->getDir();
@@ -118,11 +119,30 @@ void Renderer::draw(Scene &scene, float dt)
         // Should preferably draw the terrain after actors and props
         std::vector<TerrainPatch>* terrain_patches = scene.terrain->getPatches();
 
-      // uncomment the below to make the terrain cast shadow
-        for (auto it = terrain_patches->begin(); it!=terrain_patches->end(); it++)
-        {
-            shadow_map.drawProp(it->prop);
-        }
+        //int i = 0;
+        // uncomment the below to make the terrain cast shadow
+        //for (auto it = terrain_patches->begin(); it!=terrain_patches->end(); it++)
+        //{
+//            std::cout << "patch " << i << "\n";
+//            std::cout << "aabb " << it->world_aabb.x_min << ", " << it->world_aabb.x_max << ", " << it->world_aabb.z_min << ", " << it->world_aabb.z_max << ", " << "\n";
+//            std::cout << "cam  " << cam_fr.p[0] << ", " << cam_fr.p[1] << ", " << cam_fr.p[2] << ", " << cam_fr.p[3] << ", " << "\n";
+
+
+//            if (cam_fr.intersectsAABB(it->world_aabb))
+//            {
+                //std::cout << "hit"
+
+                //shadow_map.drawProp(it->prop);
+                //it->to_render = true;
+//            }
+//            else
+//            {
+//                it->to_render = false;
+//            }
+
+            //i++;
+
+        //}
 
         for (auto it = scene.actors.begin(); it!=scene.actors.end(); it++)
         {
@@ -241,7 +261,10 @@ void Renderer::draw(Scene &scene, float dt)
 
         for (auto it = terrain_patches->begin(); it!=terrain_patches->end(); it++)
         {
-            main_shader.drawProp(it->prop);
+            if (cam_fr.intersectsAABB(it->world_aabb))
+            {
+                main_shader.drawProp(it->prop);
+            }
         }
 
         // Draw actors;

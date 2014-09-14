@@ -78,14 +78,21 @@ class Foliage
                     sm_types[i].updated = true;
                 }
 
-                qt_trees.for_all_in(cam.get2dViewFrustum(1.15, 0.5),
+                qt_trees.for_all_in(cam.get2dViewFrustum(1.15, 0.4),
                 //qt_trees.for_all_in(QuadAABB({-100, 100, -100, 100}),
                                     [&] (FolSpec &fol_dat)
                                     {
+                                        // make billboard
+                                        //FolSpec::Type this_type = fol_dat.type;
+//
+//                                        if (this_type == FolSpec::Type::Spruce)
+//                                            if (fol_dat.pos.x*fol_dat.pos.x+fol_dat.pos.z*fol_dat.pos.z > 50.0*50.0)
+//                                                this_type = FolSpec::Type::SpruceBB
+
                                         SmallVisual &sm_type = sm_types[fol_dat.type];
                                         int &counter = sm_type_counter[fol_dat.type];
 
-                                        if (sm_type_counter[fol_dat.type]<SmallVisual::MAX_NUM_SMVIS)
+                                        if (counter<SmallVisual::MAX_NUM_SMVIS)
                                         {
 
                                             if (sm_type.updated && sm_type.sm_buffer[counter]!=fol_dat.pos)

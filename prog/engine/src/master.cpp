@@ -134,7 +134,7 @@ void Master::mainLoopSingleThreaded()
 
         // cout << "dt = " << dt << "\n";
 
-        // Choose what to render
+        // Choose what to render (screw this)
         culler.stage(scene, world); // stage the scene from the world THIS breaks everything since non-shared shared pointers go out of scope
 
         // draw...
@@ -422,23 +422,7 @@ bool Master::handleInput()
         default:
             break;
         }
-
     }
-
-//    if(rmb_down)
-//    {
-//        sf::Vector2i mouse_pos = sf::Mouse::getPosition(window);
-//        int new_posx = mouse_pos.x;
-//        int new_posy = mouse_pos.y;
-//        int xoffset = new_posx - press_pos_x;
-//        int yoffset = new_posy - press_pos_y;
-//        //        cout<<" by "<<xoffset<<" and "<<yoffset;
-//
-//        mechanics.playerRotateLeftVal(-xoffset/4.0);
-//        mechanics.playerRotateUpVal(-yoffset/4.0);
-//        mouse_pos = sf::Vector2i(press_pos_x, press_pos_y);
-//        sf::Mouse::setPosition(mouse_pos, window);
-//    }
 
     if (has_focus)
     {
@@ -492,52 +476,7 @@ void Master::backGroundTasks()
         }
     }
 
-
-
-
-
-//    QuadFrustum test_frust({
-//    glm::vec4(5.02758, 0.0, -2.14355, 1.0),
-//    glm::vec4(4.25256, 0.0, -2.09615, 1.0),
-//    glm::vec4(-346.631, 0.0, 614.037, 1.0),
-//    glm::vec4(428.385, 0.0, 566.634, 1.0)});
-//
-//    bool found = false;
-//    qt_trees.for_all_in(test_frust,
-//        //qt_trees.for_all_in(QuadAABB({-100, 100, -100, 100}),
-//                            [&] (glm::vec4 &tree_dat)
-//                            {
-//                                found = true;
-//                            });
-//    if (found)
-//        std::cout <<"FOUND\n";
-//    else
-//        std::cout << "NOT FOUND\n";
-//
-//    std::terminate(); // remove this;
-
-    //while (running)
-    //{
-        // update trees based on camera
-//        int i = 0;
-//        shr_data.qt_trees.for_all_in(world.chasecam->get2dViewFrustum(1.15, 0.5),
-//        //qt_trees.for_all_in(QuadAABB({-100, 100, -100, 100}),
-//                            [&] (glm::vec4 &tree_dat)
-//                            {
-//                                if (i<SmallVisual::MAX_NUM_SMVIS)
-//                                {
-//                                    shr_data.spruce.sm_buffer[i] = tree_dat;
-//                                }
-//                                i++;
-//                            });
-//        shr_data.spruce.num_smvis = i;
-//        shr_data.spruce.updated = false;
-
-//        if (i<15)
-//        {
-//            std::cout<<"something wrong\n";
-//        }
-    //}
+    // continuously check
 }
 
 

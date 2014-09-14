@@ -5,6 +5,7 @@
 #include "global.h"
 #include "closedmap.h"
 #include "physicsworld.h"
+#include "quadtree.hpp"
 
 struct TerrainPatch
 {
@@ -15,6 +16,10 @@ struct TerrainPatch
     std::shared_ptr<Mesh> mesh;
     unsigned int subd_lvl;
     int diff_lvl[4];
+    // for culling
+    QuadAABB world_aabb;
+    bool to_render;
+
 };
 
 class Terrain

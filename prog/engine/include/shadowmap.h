@@ -67,6 +67,8 @@ class ShadowMap : public ShaderBase
         glm::mat4 light_vp_value;
         glm::mat4 clear_matrices[MAX_BONE_NUM];
 
+        unsigned int resolution;
+
 
         int triggered;
 };

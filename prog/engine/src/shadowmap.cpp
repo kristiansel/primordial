@@ -6,7 +6,8 @@ ShadowMap::ShadowMap() :
     uniforms({0}),
 //    attributes({0}),
     light_vp_value(glm::mat4(1.0)),
-    triggered(0)
+    triggered(0),
+    resolution(1024) // 1024
 {
     for (int i_cm = 0; i_cm<MAX_BONE_NUM; i_cm++)
     {
@@ -22,7 +23,7 @@ void ShadowMap::init()
 
     glGenTextures(1, &tex_depth);
     glBindTexture(GL_TEXTURE_2D, tex_depth);
-    glTexImage2D(GL_TEXTURE_2D, 0,GL_DEPTH_COMPONENT16, 1024, 1024, 0, GL_DEPTH_COMPONENT, GL_FLOAT, 0);
+    glTexImage2D(GL_TEXTURE_2D, 0,GL_DEPTH_COMPONENT16, resolution, resolution, 0, GL_DEPTH_COMPONENT, GL_FLOAT, 0);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
@@ -86,7 +87,7 @@ void ShadowMap::init()
 void ShadowMap::activate(const glm::mat4 &light_vp)
 {
     glBindFramebuffer(GL_FRAMEBUFFER, fbo);
-    glViewport(0,0,1024,1024);
+    glViewport(0,0,resolution,resolution);
 
     glClearColor(0.f, 0.f, 0.f, 0.f);
 
@@ -103,7 +104,7 @@ void ShadowMap::activate(const glm::mat4 &light_vp)
 void ShadowMap::activateDrawContent(const glm::mat4 &light_vp)
 {
     //glBindFramebuffer(GL_FRAMEBUFFER, fbo);
-    glViewport(0,0,1024,1024);
+    glViewport(0,0,resolution,resolution);
 
     // Clear the screen
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

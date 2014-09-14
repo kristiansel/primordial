@@ -445,6 +445,7 @@ void Terrain::generateGraphicsPatch(glm::vec3 center, float patch_length, unsign
 
 
 
+
      // assing the quad to the mesh;
     terrain_patches.push_back(TerrainPatch(num_subd)); // generates both new mesh and prop
     TerrainPatch* terrain_patch = &(terrain_patches.back());
@@ -455,7 +456,11 @@ void Terrain::generateGraphicsPatch(glm::vec3 center, float patch_length, unsign
     delete [] verts;
     delete [] tris;
 
+
     terrain_patch->prop->pos = glm::vec3(center.x, 0.0, center.z);
+
+    // assign an axis aligned bounding box (used for culling)
+    terrain_patch->world_aabb = QuadAABB({center.x-patch_length/2.0, center.x+patch_length/2.0, center.z-patch_length/2.0, center.z+patch_length/2.0});
 
     // get the placeholder terrain texture
     //std::weak_ptr<Mesh>      mesh_ptr    = global::mesh_manager.getResptrFromKey ("simple_plane");
@@ -1025,6 +1030,10 @@ void Terrain::changeSubdLvl(unsigned int subd_lvl_in, TerrainPatch* terrain_patc
     delete [] tris;
 
     terrain_patch->prop->pos = old_pos;
+
+    // assign an axis aligned bounding box (used for culling)
+    terrain_patch->world_aabb = QuadAABB({old_pos.x-m_patchLength/2.0, old_pos.x+m_patchLength/2.0, old_pos.z-m_patchLength/2.0, old_pos.z+m_patchLength/2.0});
+
 
     // get the placeholder terrain texture
     //std::weak_ptr<Mesh>      mesh_ptr    = global::mesh_manager.getResptrFromKey ("simple_plane");
