@@ -131,7 +131,15 @@ void ShadowMap::drawActor(shared_ptr<Actor> actor)
     // Set bones
     int num = (actor->num_pose_matrices <= MAX_BONE_NUM) ? actor->num_pose_matrices : MAX_BONE_NUM;
 
+    //glm::mat4 pose_matrices[MAX_BONE_NUM];
+
+    //actor->poseMatrices(pose_matrices);
+
+
+
     glUniformMatrix4fv(uniforms.bone_mat, num, false, &(actor->pose_matrices[0][0][0])); // <-- THIS!
+
+    //glUniformMatrix4fv(uniforms.bone_mat, num, false, &(pose_matrices[0][0][0]));
 
     drawProp(actor);
 }

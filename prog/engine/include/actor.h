@@ -36,6 +36,8 @@ class Actor : public Prop
         float getAnimDuration(int anim_index);
         void staggerAnim(float stagger_time);
 
+        bool poseMatrices(glm::mat4* mat_ptr);
+
         // debug methods;
         int getActiveAnimIndex() const;
         int getNumAnims() const;

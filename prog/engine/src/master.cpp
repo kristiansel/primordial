@@ -121,6 +121,8 @@ void Master::mainLoopSingleThreaded()
 
     resetPressPos(); // place the mouse in the middle of the screen
 
+    float dt_fixed = 1.f/60.f; // framerate fixed at 60 frames per second
+
     // run the main loop
     while (running)
     {
@@ -131,7 +133,7 @@ void Master::mainLoopSingleThreaded()
         running = handleInput();
 
         // Step the simulation
-        mechanics.step(world, dt);
+        mechanics.step(world, dt_fixed);
 
         // cout << "dt = " << dt << "\n";
 
@@ -139,8 +141,8 @@ void Master::mainLoopSingleThreaded()
         //culler.stage(scene, world); // stage the scene from the world THIS breaks everything since non-shared shared pointers go out of scope
 
         // draw...
-        renderer.updateTime(dt); // should probably merge this with something?
-        renderer.draw(world, dt);
+        renderer.updateTime(dt_fixed); // should probably merge this with something?
+        renderer.draw(world, dt_fixed);
 
         // draw overlay/interface
         renderer.drawOverlay({mechanics.getInterfaceInfo(), 1.0/dt_smooth});
@@ -156,6 +158,12 @@ void Master::mainLoopSingleThreaded()
         dt = clock.getElapsedTime().asSeconds();
 
         dt_smooth = dt_smooth*19.f/20.f + dt*1.f/20.f;
+
+        int dt_microseconds = clock.getElapsedTime().asMicroseconds();
+        ThreadSleep_micro(std::max(16667-dt_microseconds, 0));
+
+        // should replace the above threadsleep with sfml vsync, but for now it frees up resources
+        // in the cpu
 
 //        cout << "frame time = " << dt << ", FPS = " << 1.0/dt << "\n";
 //        system("PAUSE");

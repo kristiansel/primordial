@@ -234,6 +234,11 @@ void Actor::updateAnim(float dt)
     }
 }
 
+bool Actor::poseMatrices(glm::mat4* mat_ptr)
+{
+    skel_ptr->poseMatricesBlend(mat_ptr, active_anims);
+}
+
 void Actor::pauseAnim()
 {
     paused = true;

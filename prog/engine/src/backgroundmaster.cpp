@@ -52,7 +52,9 @@ void BackGroundMaster::checkAndFill(QuadAABB box, FolSpec::Type type, float scal
     // if there is none, then fill that part
 
     // first find the player's position
-    //glm::ve
+    glm::vec3 ref_position = world->chasecam->pos;
+
+
 }
 
 void BackGroundMaster::justFill(glm::vec4 center, FolSpec::Type type, float scale)
@@ -73,22 +75,18 @@ void BackGroundMaster::mainLoop()
 {
     glm::vec3 const * const someptr = &world->chasecam->pos;
 
-
     while (true)
     {
         //updateTasks();
-        test_var+=4.0;
+        //test_var+=4.0;
 
-        float something = 41241;
+        //float something = 41241;
 
-        glm::vec3 my_vec = glm::vec3(1.0, 1.0, 1.0);
-
+        //glm::vec3 my_vec = glm::vec3(1.0, 1.0, 1.0);
 
         checkAndFill(QuadAABB({0.0, 0.0, 0.0, 0.0}), FolSpec::Type::GrassSpring, 5.0);
-        //glm::vec3 ref_position = world->chasecam->pos;
 
-        ThreadSleep(10); // sleep for 1/100 second
-
+        ThreadSleep_milli(10); // sleep for 1/100 second
     }
 }
 

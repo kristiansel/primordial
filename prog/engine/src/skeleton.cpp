@@ -501,31 +501,3 @@ Skeleton::Animation::Channel::~Channel()
 }
 
 ////---------------------------------------------------
-
-
-//Skeleton::Pose::Pose() : num_transforms(0),
-//                         transforms(nullptr)
-//{
-//    // ctor
-//}
-//
-//Skeleton::Pose::~Pose()
-//{
-//    delete [] transforms;
-//}
-//
-//Skeleton::Pose::Pose(int num_transforms_in)
-//{
-//    allocate(num_transforms_in);
-//}
-//
-//Skeleton::Pose::Pose(Skeleton* skel)
-//{
-//    allocate(skel->getNumBones());
-//}
-//
-//void Skeleton::Pose::allocate(int num_transforms_in)
-//{
-//    num_transforms = num_transforms_in;
-//    transforms = new Transform [num_transforms];
-//}

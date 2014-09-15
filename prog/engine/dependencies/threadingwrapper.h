@@ -26,7 +26,8 @@ using Thread = boost::thread;
 using Mutex = boost::mutex;
 using LockGuard = boost::lock_guard<boost::mutex>;
 
-extern void ThreadSleep(unsigned int ms);
+extern void ThreadSleep_milli(unsigned int ms);
+extern void ThreadSleep_micro(unsigned int us);
 
 #endif // NOT WINDOWS
 

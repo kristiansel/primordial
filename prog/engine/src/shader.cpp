@@ -253,6 +253,18 @@ void Shader::drawActor(shared_ptr<Actor> actor)
     glUniformMatrix4fv(uniforms.bone_mat, num, false, &(actor->pose_matrices[0][0][0])); // <-- THIS!
 
     drawProp(actor);
+
+
+//    // Set bones
+//    int num = (actor->num_pose_matrices <= MAX_BONE_NUM) ? actor->num_pose_matrices : MAX_BONE_NUM;
+//
+//    glm::mat4 pose_matrices[MAX_BONE_NUM];
+//
+//    actor->poseMatrices(pose_matrices);
+//
+//    glUniformMatrix4fv(uniforms.bone_mat, num, false, &(pose_matrices[0][0][0]));
+//
+//    drawProp(actor);
 }
 
 void Shader::drawProp(shared_ptr<Prop> prop, bool debug)
