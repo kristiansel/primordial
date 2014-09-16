@@ -82,6 +82,7 @@ void TextShader::printText2D(const char* text, int x, int y, int size)
     ShaderBase::switchTo();
 
     // Bind texture
+    tex_font.makeSureInVRAM();
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, tex_font.getTBOid());
     // Set our "myTextureSampler" sampler to user Texture Unit 0

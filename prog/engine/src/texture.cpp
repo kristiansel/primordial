@@ -1,6 +1,6 @@
 #include "texture.h"
 
-Texture::Texture() : load_stage(NotLoaded), tbo_id(99999)
+Texture::Texture() : load_stage(NotLoaded), tbo_id(99999), v_ram_loaded(false)
 {
     //ctor
 }
@@ -23,7 +23,7 @@ bool Texture::fromFile(std::string filepath_in)
     }
     else
     {
-        createGL();
+        //createGL();
 
         // assuming loading went well if we get here
         return true;
@@ -36,6 +36,13 @@ GLuint Texture::getTBOid()
     return tbo_id;
 }
 
+void Texture::makeSureInVRAM()
+{
+    if (!v_ram_loaded)
+        createGL();
+}
+
+
 void Texture::deleteGL()
 {
     glBindTexture(GL_TEXTURE_2D, 0); // Really this should not be necessary
@@ -45,6 +52,7 @@ void Texture::deleteGL()
     glDeleteTextures(1, &tbo_id);
 
     load_stage = NotLoaded;
+    v_ram_loaded = false;
 }
 
 void Texture::createGL()
@@ -87,4 +95,5 @@ void Texture::createGL()
     std::cout << "creating texture buffer " << tbo_id << "\n";
 
     load_stage = Loaded;
+    v_ram_loaded = true;
 }

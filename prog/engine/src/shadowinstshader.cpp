@@ -66,6 +66,7 @@ void ShadowInstShader::draw(const SmallVisual &small_visual, glm::mat4 &light_vp
     std::shared_ptr<Mesh> mesh_ptr = small_visual.mesh;
     std::shared_ptr<Texture> tex_ptr = small_visual.tex;
 
+    tex_ptr->makeSureInVRAM(); // lazy loading to graphics card
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, tex_ptr->getTBOid());
 
@@ -73,6 +74,7 @@ void ShadowInstShader::draw(const SmallVisual &small_visual, glm::mat4 &light_vp
     glBindTexture(GL_TEXTURE_1D, small_visual.worldpos_tex_id);
 
     // Bind vertex data
+    mesh_ptr->makeSureInVRAM(); // lazy loading to graphics card
     glBindBuffer(GL_ARRAY_BUFFER, mesh_ptr->getVBOid());
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh_ptr->getIBOid());
 

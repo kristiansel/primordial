@@ -68,6 +68,9 @@ public:
     enum LoadStage {NotLoaded, LoadMePlease, Loaded};
     LoadStage getLoadStage() {return load_stage;};
 
+    bool isVRAMloaded();
+    void makeSureInVRAM();
+
     void createGL(bool debug = false);
     void deleteGL();
 protected:
@@ -93,6 +96,8 @@ private:
 
     // Current number in use by graphics card;
     LoadStage load_stage;
+
+    bool v_ram_loaded;
 
 
     // To be separated out at a later stage

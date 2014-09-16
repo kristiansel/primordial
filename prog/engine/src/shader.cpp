@@ -330,13 +330,20 @@ void Shader::drawProp(shared_ptr<Prop> prop, bool debug)
         // // glUniform4fv(uniforms.material_cols, N_INST*4, &mats.mat_cols[0][0][0]); // amb. diff. spec. emi. colors
         // // glUniform1fv(uniforms.shininess, N_INST, &mats.shiny[0][0][0]); // shininess value
 
+        tex_ptr->makeSureInVRAM(); // lazy loading to graphics card
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, tex_ptr->getTBOid());
 
+
         glActiveTexture(GL_TEXTURE2);
-        if (rb_it->num_textures > 1) glBindTexture(GL_TEXTURE_2D, tex2_ptr->getTBOid());
+        if (rb_it->num_textures > 1)
+        {
+            tex2_ptr->makeSureInVRAM(); // lazy loading to graphics card
+            glBindTexture(GL_TEXTURE_2D, tex2_ptr->getTBOid());
+        }
 
         // Bind vertex data
+        mesh_ptr->makeSureInVRAM(); // lazy loading to graphics card
         glBindBuffer(GL_ARRAY_BUFFER, mesh_ptr->getVBOid());
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh_ptr->getIBOid());
 

@@ -2,7 +2,7 @@
 
 Mesh::Mesh() : vertex_num(0), triangle_num(0)
               ,vertices(nullptr), triangles(nullptr),
-              load_stage(NotLoaded)
+              load_stage(NotLoaded), v_ram_loaded(false)
 {
     //ctor
 //    filepath = "";
@@ -47,11 +47,20 @@ void Mesh::fromFile(string mesh_key)
 {
     fromFile2(mesh_key);
 
-
-    createGL();
+    //createGL();
 
 }
 
+bool Mesh::isVRAMloaded()
+{
+    return v_ram_loaded;
+}
+
+void Mesh::makeSureInVRAM()
+{
+    if (!v_ram_loaded)
+        createGL();
+}
 
 void Mesh::fromFile2(string mesh_key)
 {
@@ -165,7 +174,7 @@ void Mesh::fromMemory(Vertex* const &vertices_in,
     memcpy(&triangles[0], &triangles_in[0], triangle_num*sizeof(Triangle));
 
     //load_stage = LoadMePlease;
-    createGL();
+    //createGL();
 }
 
 Mesh::Material Mesh::getMaterial()
@@ -236,6 +245,7 @@ void Mesh::createGL(bool debug)
 //    std::cout << "ibo_id: " << ibo_id << "\n";
 
     load_stage = Loaded;
+    v_ram_loaded = true;
 }
 
 void Mesh::deleteGL()
@@ -253,6 +263,7 @@ void Mesh::deleteGL()
         glDeleteBuffers(1, &ibo_id);
 
         load_stage = NotLoaded;
+        v_ram_loaded = false;
     }
 }
 

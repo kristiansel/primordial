@@ -21,6 +21,8 @@ class Texture
         enum LoadStage {NotLoaded, LoadMePlease, Loaded};
         LoadStage getLoadStage() {return load_stage;};
 
+        void makeSureInVRAM();
+
         void deleteGL();
         void createGL();
 
@@ -33,6 +35,7 @@ class Texture
 
 
         LoadStage load_stage;
+        bool v_ram_loaded;
 
         // This mutex is probably not needed...
         //Mutex sharedContextLoading; // To guard against buffers being bound differently in several threads

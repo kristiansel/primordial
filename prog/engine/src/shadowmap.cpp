@@ -163,10 +163,12 @@ void ShadowMap::drawProp(shared_ptr<Prop> prop)
         glUniformMatrix4fv(uniforms.light_mvp_mat, 1, false, &vertex_matrix[0][0]);
 
         // activate texture
+        tex_ptr->makeSureInVRAM(); // lazy loading to graphics card
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, tex_ptr->getTBOid());
 
         // Bind vertex data
+        mesh_ptr->makeSureInVRAM(); // lazy loading to graphics card
         glBindBuffer(GL_ARRAY_BUFFER, mesh_ptr->getVBOid());
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh_ptr->getIBOid());
 

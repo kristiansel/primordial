@@ -147,9 +147,11 @@ void GrassShader::extDraw(const SmallVisual& small_visual,
     glUniform1fv(uniforms.shininess, 1,  &(mat.shininess)      ) ;
     glUniform4fv(uniforms.emission,  1,  &(mat.emission[0])    ) ;
 
+    tex_ptr->makeSureInVRAM(); // lazy loading to graphics card
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, tex_ptr->getTBOid());
 
+    tex2_ptr->makeSureInVRAM(); // lazy loading to graphics card
     glActiveTexture(GL_TEXTURE2);
     glBindTexture(GL_TEXTURE_2D, tex2_ptr->getTBOid());
 
@@ -157,6 +159,7 @@ void GrassShader::extDraw(const SmallVisual& small_visual,
     glBindTexture(GL_TEXTURE_1D, small_visual.worldpos_tex_id);
 
     // Bind vertex data
+    mesh_ptr->makeSureInVRAM(); // lazy loading to graphics card
     glBindBuffer(GL_ARRAY_BUFFER, mesh_ptr->getVBOid());
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh_ptr->getIBOid());
 
