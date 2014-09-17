@@ -7,6 +7,7 @@
 #include "renderer.h"
 //#include "culler.h"
 #include "threadingwrapper.h"
+#include "x_init_threads.h"
 #include "threadiobuffers.hpp"
 #include "backgroundmaster.h"
 
@@ -71,7 +72,7 @@ private:
     bool running;
 
     // Threads
-    Thread render_thread;
+    PrimT::Thread render_thread;
 //    Thread test_thread;
 
     // Thread wait flags
@@ -80,7 +81,7 @@ private:
 
     ThreadIObuffers<char, 200> main_bgr_iobuffer;
 
-    Thread back_ground;
+    PrimT::Thread back_ground;
 
     // HoopJumping required to call XInitThreads() on unix before sf::Window
     //int init_threads;

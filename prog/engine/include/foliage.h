@@ -62,6 +62,10 @@ class Foliage
 
             void prepareBG_Foliage()
             {
+                // This function might cause a reallocation of mesh and texture unordered_maps. Might conflict with other initializations
+                // this will not be a problem as long as all getResource function calls come from the same thread (in the meantime add
+                // mutex to "manager class"
+
                 sm_types[FolSpec::Type::Spruce].init("spruce_wbranch", "spruce_wbranch", glm::vec4(180.f, 20.f, 2.f, 0.0));
                 sm_types[FolSpec::Type::SpruceBB].init("spruce_bb", "spruce_bb", glm::vec4(180.f, 20.f, 2.f, 0.0));
                 sm_types[FolSpec::Type::GrassSpring].init("grass_spring", "grass_spring", glm::vec4(10.f, 10.f, 2.f, 0.0));

@@ -4,6 +4,7 @@
 #include <unordered_map>
 #include <memory>
 #include <string>
+#include "threadingwrapper.h"
 
 template <class ResType> class ResourceManager
 {
@@ -25,6 +26,8 @@ public:
 protected:
 private:
     std::unordered_map<std::string, ResCounter> resources;
+
+    PrimT::Mutex res_mutex; // delete this after all "adding and deletion" of meshes and textures are done in one thread
 };
 
 // SEE DEFINITIONS FURTHER DOWN
@@ -98,6 +101,8 @@ template <class ResType> std::weak_ptr<ResType> ResourceManager<ResType>::getRes
     // Screw emplace:
     // first try to find: if not there... then see if the file can be found in file system
     // if not found, then return nullptr as skeleton ptr.
+
+    PrimT::LockGuard guard(res_mutex);
 
     auto emplace_result = resources.emplace(res_key_in, ResCounter(new_resource));
     // Type = pair<unordered_map<string, ResCounter<ResType>>::iterator, bool>

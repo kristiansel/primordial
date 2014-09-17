@@ -1,15 +1,15 @@
 #ifndef THREADWRAPPER_H
 #define THREADWRAPPER_H
 
-#ifdef WINDOWS
-
-#include <boost/thread.hpp>
-
-using Thread = boost::thread;
-using Mutex = boost::mutex;
-using LockGuard = boost::lock_guard<boost::mutex>;
-
-#else // NOT WINDOWS
+//#ifdef WINDOWS
+//
+//#include <boost/thread.hpp>
+//
+//using Thread = boost::thread;
+//using Mutex = boost::mutex;
+//using LockGuard = boost::lock_guard<boost::mutex>;
+//
+//#else // NOT WINDOWS
 
 //#include <thread>
 //#include <mutex>
@@ -22,24 +22,17 @@ using LockGuard = boost::lock_guard<boost::mutex>;
 #include <boost/thread.hpp>
 #include <boost/chrono.hpp>
 
-using Thread = boost::thread;
-using Mutex = boost::mutex;
-using LockGuard = boost::lock_guard<boost::mutex>;
+namespace PrimT
+{
+    using Thread = boost::thread;
+    using Mutex = boost::mutex;
+    using LockGuard = boost::lock_guard<boost::mutex>;
 
-extern void ThreadSleep_milli(unsigned int ms);
-extern void ThreadSleep_micro(unsigned int us);
+    extern void ThreadSleep_milli(unsigned int ms);
+    extern void ThreadSleep_micro(unsigned int us);
+};
 
-#endif // NOT WINDOWS
-
-// Thread initialization needs to be called on unix
-
-#ifdef __unix
-
-#include <X11/Xlib.h>
-
-extern int result;
-
-#endif // UNIX
+//#endif // NOT WINDOWS
 
 #endif // THREADWRAPPER_H
 

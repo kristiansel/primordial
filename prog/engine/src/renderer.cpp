@@ -75,12 +75,15 @@ void Renderer::draw(World &world, float dt)
     // in Renderer, only calculate the matrices of those in view.
     // Do this as doing blending etc
 
+    { // MUTEX
+        PrimT::LockGuard guard(world.cre_mutex);
 
-
-    for (auto it = world.creatures.begin(); it!=world.creatures.end(); it++)
-    {
-        (*it)->updateAnim(dt);
+        for (auto it = world.creatures.begin(); it!=world.creatures.end(); it++)
+        {
+            (*it)->updateAnim(dt);
+        }
     }
+
 
     world.foliage.bg_thread.updateFoliage(*world.chasecam);
 
@@ -115,10 +118,15 @@ void Renderer::draw(World &world, float dt)
         // Draw props (non-animated)
         shadow_map.clearBoneMatrices();
 
-        for (auto it = world.worldobjects.begin(); it!=world.worldobjects.end(); it++)
-        {
-            shadow_map.drawProp(*it);
+        { // MUTEX
+            PrimT::LockGuard guard(world.wob_mutex);
+
+            for (auto it = world.worldobjects.begin(); it!=world.worldobjects.end(); it++)
+            {
+                shadow_map.drawProp(*it);
+            }
         }
+
 
         // Should preferably draw the terrain after actors and props
         std::vector<TerrainPatch>* terrain_patches = world.terrain.getPatches();
@@ -147,10 +155,13 @@ void Renderer::draw(World &world, float dt)
             //i++;
 
         //}
+        { // MUTEX
+            PrimT::LockGuard guard(world.cre_mutex);
 
-        for (auto it = world.creatures.begin(); it!=world.creatures.end(); it++)
-        {
-            shadow_map.drawActor(*it);
+            for (auto it = world.creatures.begin(); it!=world.creatures.end(); it++)
+            {
+                shadow_map.drawActor(*it);
+            }
         }
 
         //shadow_inst.draw
@@ -256,11 +267,14 @@ void Renderer::draw(World &world, float dt)
 
         // Draw props (non-animated)
         main_shader.clearBoneMatrices();
+        { // MUTEX
+            PrimT::LockGuard guard(world.wob_mutex);
 
-        for (auto it = world.worldobjects.begin(); it!=world.worldobjects.end(); it++)
-        {
-            // main_shader.drawProp(&**it);
-            main_shader.drawProp(*it);
+            for (auto it = world.worldobjects.begin(); it!=world.worldobjects.end(); it++)
+            {
+                // main_shader.drawProp(&**it);
+                main_shader.drawProp(*it);
+            }
         }
 
         int i = 0;
@@ -298,10 +312,14 @@ void Renderer::draw(World &world, float dt)
         //std::terminate();
 
         // Draw actors;
-        for (auto it = world.creatures.begin(); it!=world.creatures.end(); it++)
-        {
-            // main_shader.drawActor(&**it);
-            main_shader.drawActor(*it);
+        { // MUTEX
+            PrimT::LockGuard guard(world.cre_mutex);
+
+            for (auto it = world.creatures.begin(); it!=world.creatures.end(); it++)
+            {
+                // main_shader.drawActor(&**it);
+                main_shader.drawActor(*it);
+            }
         }
 
         //after this the bone matrices are soiled

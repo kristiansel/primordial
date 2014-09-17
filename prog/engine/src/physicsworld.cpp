@@ -19,13 +19,16 @@ PhysicsWorld::PhysicsWorld()
 	dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher,overlappingPairCache,solver,collisionConfiguration);
 
     // Set gravity (have to be a little bit accurate :)
-	dynamicsWorld->setGravity(btVector3(0,-9.81,0));
+    { // MUTEX: DO NOT REALLY NEED HERE, BUT IT DOESN'T HURT
+        PrimT::LockGuard(PhysMutex::dynworld_mx);
+        dynamicsWorld->setGravity(btVector3(0,-9.81,0));
 
-	// create debug drawer
-    debugDraw = new DebugDrawer;
+        // create debug drawer
+        debugDraw = new DebugDrawer;
 
-	// attach debug draw
-	dynamicsWorld->setDebugDrawer(debugDraw);
+        // attach debug draw
+        dynamicsWorld->setDebugDrawer(debugDraw);
+	}
 }
 
 // void PhysicsWorld::addPhysicsObject(RigidBody::Collision shape, par1=0, par2=0, par3=0, par4=0)
@@ -36,7 +39,10 @@ void PhysicsWorld::addPhysicsDynamic(RigidBody* rigidbody, btCollisionShape* sha
     //btCollisionShape* colShape = new btBoxShape(btVector3(1,1,1));
     // btCollisionShape* colShape = new btSphereShape(btScalar(1.));
     btCollisionShape* colShape = shape;
-    collisionShapes.push_back(colShape);
+    {
+        PrimT::LockGuard guard(PhysMutex::col_shap_mx);
+        collisionShapes.push_back(colShape);
+    }
 
     // Create Dynamic Objects
     btTransform startTransform;
@@ -69,7 +75,10 @@ void PhysicsWorld::addPhysicsDynamic(RigidBody* rigidbody, btCollisionShape* sha
 
     rigidbody->setBody(body);
 
-    dynamicsWorld->addRigidBody(body);
+    { // MUTEX
+        PrimT::LockGuard(PhysMutex::dynworld_mx);
+        dynamicsWorld->addRigidBody(body);
+    }
 }
 
 void PhysicsWorld::addPhysicsStatic(RigidBody* rigidbody, btCollisionShape* shape)
@@ -80,15 +89,17 @@ void PhysicsWorld::addPhysicsStatic(RigidBody* rigidbody, btCollisionShape* shap
     // I think this puts the plane at -1 y?
     btCollisionShape* colShape = shape;
     shape->setLocalScaling(btVector3(rigidbody->scale.x, rigidbody->scale.y, rigidbody->scale.z) );
-    collisionShapes.push_back(colShape);
+
+    { // MUTEX
+        PrimT::LockGuard guard(PhysMutex::col_shap_mx);
+        collisionShapes.push_back(colShape); // NEED MUTEX
+    }
 
     // Create Dynamic Objects
     btTransform startTransform;
     startTransform.setIdentity();
 
     // Set scale
-
-
     btScalar	mass(0.f);
 
     //rigidbody is dynamic if and only if mass is non zero, otherwise static
@@ -119,7 +130,11 @@ void PhysicsWorld::addPhysicsStatic(RigidBody* rigidbody, btCollisionShape* shap
 
     rigidbody->setBody(body);
 
-    dynamicsWorld->addRigidBody(body);
+    { // MUTEX
+        PrimT::LockGuard(PhysMutex::dynworld_mx);
+        dynamicsWorld->addRigidBody(body);
+    }
+
 }
 
 btRigidBody* PhysicsWorld::addStaticTerrainPatch(float* height_data,
@@ -145,7 +160,10 @@ btRigidBody* PhysicsWorld::addStaticTerrainPatch(float* height_data,
 	heightfieldShape->setLocalScaling(localScaling);
 
 	// stash this shape away
-	collisionShapes.push_back(heightfieldShape);
+    { // MUTEX
+        PrimT::LockGuard guard(PhysMutex::col_shap_mx);
+        collisionShapes.push_back(heightfieldShape);
+    }
 
 	// set origin to middle of heightfield
 	btTransform tr;
@@ -168,7 +186,10 @@ btRigidBody* PhysicsWorld::addStaticTerrainPatch(float* height_data,
 
 
     btRigidBody* body = new btRigidBody(rbci);
-    dynamicsWorld->addRigidBody(body);
+    { // MUTEX:
+        PrimT::LockGuard(PhysMutex::dynworld_mx);
+        dynamicsWorld->addRigidBody(body);
+    }
 
     std::cout << "finished generating PHYSICAL terrain\n";
     std::cout << "addr of body " << body << "\n";
@@ -190,13 +211,21 @@ void PhysicsWorld::drawBulletDebug()
 {
     glClear(GL_DEPTH_BUFFER_BIT);
 
-    dynamicsWorld->debugDrawWorld();
+    { // MUTEX:
+        PrimT::LockGuard(PhysMutex::dynworld_mx);
+        dynamicsWorld->debugDrawWorld();
+    }
 }
 
 void PhysicsWorld::removePhysicsObject(RigidBody* rigidbody)
 {
    btRigidBody* body = rigidbody->getBody();
-   dynamicsWorld->removeRigidBody(body);
+
+   { // MUTEX:
+        PrimT::LockGuard(PhysMutex::dynworld_mx);
+        dynamicsWorld->removeRigidBody(body);
+   }
+
    delete body->getMotionState();
    delete body;
 }
@@ -204,7 +233,12 @@ void PhysicsWorld::removePhysicsObject(RigidBody* rigidbody)
 void PhysicsWorld::removeBtRigidBody(btRigidBody* body)
 {
    std::cout << "deleting body " << body << "\n";
-   dynamicsWorld->removeRigidBody(body);
+
+   { // MUTEX:
+        PrimT::LockGuard(PhysMutex::dynworld_mx);
+        dynamicsWorld->removeRigidBody(body);
+   }
+
    delete body->getMotionState();
    delete body;
 
@@ -213,7 +247,10 @@ void PhysicsWorld::removeBtRigidBody(btRigidBody* body)
 
 void PhysicsWorld::physicsStep(float dt_in)
 {
-    dynamicsWorld->stepSimulation(dt_in, 3, 1.f/120.f);
+    { // MUTEX:
+        PrimT::LockGuard(PhysMutex::dynworld_mx);
+        dynamicsWorld->stepSimulation(dt_in, 3, 1.f/120.f);
+    }
 
 //    //print positions of all objects
 //    for (int j=dynamicsWorld->getNumCollisionObjects()-1; j>=0 ;j--)
@@ -232,25 +269,36 @@ void PhysicsWorld::physicsStep(float dt_in)
 
 PhysicsWorld::~PhysicsWorld()
 {
-	for (int i=dynamicsWorld->getNumCollisionObjects()-1; i>=0 ;i--)
-	{
-		btCollisionObject* obj = dynamicsWorld->getCollisionObjectArray()[i];
-		btRigidBody* body = btRigidBody::upcast(obj);
-		if (body && body->getMotionState())
-		{
-			delete body->getMotionState();
-		}
-		dynamicsWorld->removeCollisionObject( obj );
-		delete obj;
-	}
+    { // MUTEX:
+        PrimT::LockGuard(PhysMutex::dynworld_mx);
+
+        for (int i=dynamicsWorld->getNumCollisionObjects()-1; i>=0 ;i--)
+        {
+            btCollisionObject* obj = dynamicsWorld->getCollisionObjectArray()[i];
+            btRigidBody* body = btRigidBody::upcast(obj);
+            if (body && body->getMotionState())
+            {
+                delete body->getMotionState();
+            }
+
+            dynamicsWorld->removeCollisionObject( obj );
+
+            delete obj;
+        } // FOR
+    } // MUTEX
 
 	//delete collision shapes
-	for (int j=0;j<collisionShapes.size();j++)
-	{
-		btCollisionShape* shape = collisionShapes[j];
-		collisionShapes[j] = 0;
-		delete shape;
-	}
+    { // MUTEX
+        PrimT::LockGuard guard(PhysMutex::col_shap_mx);
+
+        for (int j=0;j<collisionShapes.size();j++)
+        {
+            btCollisionShape* shape = collisionShapes[j];
+            collisionShapes[j] = 0;
+            delete shape;
+        }
+    }
+
 	//delete debug draw ?
 	delete debugDraw;
 
@@ -268,5 +316,6 @@ PhysicsWorld::~PhysicsWorld()
 
 	delete collisionConfiguration;
 
+    // This should not need a mutex...
 	collisionShapes.clear();
 }

@@ -43,19 +43,22 @@ void Texture::makeSureInVRAM()
 }
 
 
-void Texture::deleteGL()
+void Texture::deleteGL()                    /*THREAD: THIS MUST BE CALLED ONLY FROM GL THREAD*/
 {
-    glBindTexture(GL_TEXTURE_2D, 0); // Really this should not be necessary
+    if (v_ram_loaded)
+    {
+        glBindTexture(GL_TEXTURE_2D, 0); // Really this should not be necessary
 
-    //std::cout << "deleting texture, tbo_id: " << tbo_id << "\n";
+        //std::cout << "deleting texture, tbo_id: " << tbo_id << "\n";
 
-    glDeleteTextures(1, &tbo_id);
+        glDeleteTextures(1, &tbo_id);
 
-    load_stage = NotLoaded;
-    v_ram_loaded = false;
+        load_stage = NotLoaded;
+        v_ram_loaded = false;
+    }
 }
 
-void Texture::createGL()
+void Texture::createGL() // Should only be called from GL thread
 {
     glGenTextures(1, &tbo_id);
     //        cout<<"texture id: "<<tbo_id<<"\n";

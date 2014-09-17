@@ -44,6 +44,34 @@ void BackGroundMaster::initTasks()
 //        }
         justFill(glm::vec4(0.0, 0.0, 0.0, 1.0), FolSpec::Type::GrassSpring, 60.f/50.f);
     }
+
+
+    // take over the mechanics-job of placing thing
+    world->addStaticObject( "rock01",
+                             "rock_diffuse",
+                             glm::vec3(-8.0, 0.5, 2.0),
+                             1.0, 0.0 ,0.0,
+                             yRelativeTo::Ground);
+
+    world->addDynamicObject( "sphere",
+                             "nicewall",
+                             glm::vec3(-2.0, 10.0, -4.0),
+                             RigidBody::Sphere(1.0) );
+
+    world->addDynamicObject( "rock01",
+                             "rock_diffuse",
+                             glm::vec3(-2.0, 10.0, 8.0));
+
+    world->addDynamicObject( "axes",
+                            "tricolor",
+                            glm::vec3(0.0, 8.0, 0.0));
+
+    world->addDynamicObject( "cube",
+                             "nicewall",
+                             glm::vec3(2.0, 10.0, -4.0),
+                             RigidBody::Box(0.5f, 0.5f, 0.5f) );
+
+
 }
 
 void BackGroundMaster::checkAndFill(QuadAABB box, FolSpec::Type type, float scale)
@@ -86,7 +114,7 @@ void BackGroundMaster::mainLoop()
 
         checkAndFill(QuadAABB({0.0, 0.0, 0.0, 0.0}), FolSpec::Type::GrassSpring, 5.0);
 
-        ThreadSleep_milli(10); // sleep for 1/100 second
+        PrimT::ThreadSleep_milli(10); // sleep for 1/100 second
     }
 }
 

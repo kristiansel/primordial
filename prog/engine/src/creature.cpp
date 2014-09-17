@@ -247,7 +247,7 @@ void Creature::resolveActionRequests(float dt)
                 }
                 else
                 {
-                    std::cout << "Attack cancelled because already attacking\n";
+                    //std::cout << "Attack cancelled because already attacking\n";
                 }
 
             } break;

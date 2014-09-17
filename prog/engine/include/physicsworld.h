@@ -8,6 +8,7 @@
 #include "debugdrawer.h"
 #include "glm/glm.hpp"
 #include "GL/gl.h"
+#include "threadingwrapper.h"
 
 
 class PhysicsWorld
@@ -61,11 +62,13 @@ class PhysicsWorld
         //the default constraint solver. For parallel processing you can use a different solver (see Extras/BulletMultiThreaded)
         btSequentialImpulseConstraintSolver* solver;
 
+
+                                                                        // MUTEX'es DEFINED IN "charactercontroller.h" b/c of dependencies
         //container of physics objects
-        btDiscreteDynamicsWorld* dynamicsWorld;
+        btDiscreteDynamicsWorld* dynamicsWorld;                         //PrimT::Mutex dynworld_mx;
 
         //collision shapes
-        btAlignedObjectArray<btCollisionShape*> collisionShapes;
+        btAlignedObjectArray<btCollisionShape*> collisionShapes;        //PrimT::Mutex col_shap_mx;
 
         //debug draw class
         btIDebugDraw* debugDraw;

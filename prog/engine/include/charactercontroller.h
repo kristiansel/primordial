@@ -8,8 +8,15 @@
 #include "BulletCollision/CollisionDispatch/btGhostObject.h"
 #include "glm/glm.hpp"
 #include "geometry.h"
+#include "threadingwrapper.h"
 
 /// The following bit of code is grabbed from bullet on github
+
+namespace PhysMutex // globals...
+{
+    extern PrimT::Mutex dynworld_mx;
+    extern PrimT::Mutex col_shap_mx;
+}
 
 class DynamicCharacterController
 {

@@ -178,6 +178,8 @@
 		<Unit filename="include/uniformbufferobject.h" />
 		<Unit filename="include/world.h" />
 		<Unit filename="include/worldobject.h" />
+		<Unit filename="include/x_init_threads.cpp" />
+		<Unit filename="include/x_init_threads.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="shaders/ld_tinst_vert.glsl" />
 		<Unit filename="shaders/pp_comb.frag.glsl" />

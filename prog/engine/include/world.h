@@ -13,6 +13,7 @@
 #include "terrain.h"
 #include "foliage.h"
 #include "global.h"
+#include "threadingwrapper.h"
 //#include "smallvisual.h"
 
 
@@ -83,12 +84,12 @@ class World : public PhysicsWorld // Consider merging Culling functionality into
 //        void startAmbient(string soundKey);
 //        sf::Sound* ambient;
 
-
+        //                              Data container----------------->MUTEX
         // "Physical" Contents (could with benefit be private?)
-        list<shared_ptr<WorldObject>>    worldobjects;
-        list<shared_ptr<Creature>>       creatures;
+        list<shared_ptr<WorldObject>>    worldobjects;                  PrimT::Mutex wob_mutex;
+        list<shared_ptr<Creature>>       creatures;                     PrimT::Mutex cre_mutex;
         // list<shared_ptr<Light>>       lights; // For future
-        Terrain                          terrain;
+        Terrain                          terrain;                       //PrimT::Mutex ter_mutex;
 
 
 

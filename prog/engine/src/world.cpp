@@ -90,8 +90,8 @@ list<shared_ptr<WorldObject>>::iterator World::addStaticObject(string mesh_key,
     //weak_ptr<Mesh>      mesh_ptr    = resourcemanager.getMeshptrFromKey (mesh_key);
     //weak_ptr<Texture>   tex_ptr     = resourcemanager.getTexptrFromKey  (tex_key);
 
-    weak_ptr<Mesh>      mesh_ptr    = global::mesh_manager.getResptrFromKey (mesh_key);
-    weak_ptr<Texture>   tex_ptr     = global::tex_manager.getResptrFromKey  (tex_key);
+    weak_ptr<Mesh>      mesh_ptr    = global::mesh_manager.getResptrFromKey (mesh_key); // This is thread-safe
+    weak_ptr<Texture>   tex_ptr     = global::tex_manager.getResptrFromKey  (tex_key);  // This is thread-safe
 
     worldobject->attachBatch(mesh_ptr, tex_ptr);
 
@@ -111,19 +111,25 @@ list<shared_ptr<WorldObject>>::iterator World::addStaticObject(string mesh_key,
     if (shape!=NO_COLLISION)
     {
         if (shape)
-            addPhysicsStatic( worldobject.get(), shape);
+            addPhysicsStatic( worldobject.get(), shape); // The called function is thread safe
         else
-            addPhysicsStatic( worldobject.get(), RigidBody::ConvexHull(*(shared_ptr<Mesh>(mesh_ptr))));
+            addPhysicsStatic( worldobject.get(), RigidBody::ConvexHull(*(shared_ptr<Mesh>(mesh_ptr)))); // The called function is thread safe
     }
 
 
+    list<shared_ptr<WorldObject>>::iterator new_worldobject_it;
 
-    worldobjects.push_back(worldobject);
-   // instanced_objects.push_back(worldobject);
+    // This merits a lock:
+    { // MUTEX
+        PrimT::LockGuard guard(wob_mutex);
+        worldobjects.push_back(worldobject);
 
-    // STILL NEED TO CODE REMOVAL
+        // STILL NEED TO CODE REMOVAL
 
-    list<shared_ptr<WorldObject>>::iterator new_worldobject_it = --worldobjects.end();
+        new_worldobject_it = --worldobjects.end();
+
+    }
+
     return new_worldobject_it;
 
 //    return shared_ptr<WorldObject>(&(*new_worldobject_it)); // This results in SEGFAULT because
@@ -210,32 +216,42 @@ list<shared_ptr<WorldObject>>::iterator World::addDynamicObject(string mesh_key,
 
         // Add the collision shape if specified, if not, make a convex hull
         if (shape)
-            addPhysicsDynamic( worldobject.get(), shape);
+            addPhysicsDynamic( worldobject.get(), shape);   // The called function is thread safe
         else
-            addPhysicsDynamic( worldobject.get(), RigidBody::ConvexHull(*(shared_ptr<Mesh>(mesh_ptr))));
+            addPhysicsDynamic( worldobject.get(), RigidBody::ConvexHull(*(shared_ptr<Mesh>(mesh_ptr)))); // The called function is thread safe
     } // This should ideally go on in a worker thread
 
     // Then add it
-    worldobjects.push_back(worldobject);
+    list<shared_ptr<WorldObject>>::iterator new_worldobject_it;
 
-    // Return iterator to the newly created object
-    list<shared_ptr<WorldObject>>::iterator new_worldobject_it = --worldobjects.end();
+    { // MUTEX
+        PrimT::LockGuard guard(wob_mutex);
+        worldobjects.push_back(worldobject);
+
+
+        // Return iterator to the newly created object
+        new_worldobject_it = --worldobjects.end(); // This doesn't really need a mutex
+
+    }
     return new_worldobject_it;
 }
 
 void World::delWorldObject(list<shared_ptr<WorldObject>>::iterator worldobject_it_in)
 {
-    if (!worldobjects.empty())
+    if (!worldobjects.empty()) // const function should not require mutex
     {
         // In case another thread attempts to access the object
         // while it is being deconstructed, it must be made sure
         // that worldobjects no longer points to it
         shared_ptr<WorldObject> obj_to_del = *worldobject_it_in;
 
-        worldobjects.erase(worldobject_it_in);
+        { // MUTEX
+            PrimT::LockGuard guard(wob_mutex);
+            worldobjects.erase(worldobject_it_in);
+        }
 
         // deconstruct the object
-        removePhysicsObject( obj_to_del.get() );
+        removePhysicsObject( obj_to_del.get() ); // This called function is thread safe
 
         // The last pointer to the object goes out of scope here
         // So it should be destructed
@@ -278,10 +294,17 @@ list<shared_ptr<Creature>>::iterator World::addCreature(string mesh_key, string 
 
     // The following bit of code is a lesson learned from another thread
     // attempting to render the actor before it was completely loaded...
-    creatures.push_back(creature);
 
-    // return iterator to newly created creature
-    list<shared_ptr<Creature>>::iterator new_creature_it = --creatures.end();
+    list<shared_ptr<Creature>>::iterator new_creature_it;
+
+    { // MUTEX
+        PrimT::LockGuard guard(cre_mutex);
+        creatures.push_back(creature);
+
+        // return iterator to newly created creature
+        new_creature_it = --creatures.end();
+    }
+
     return new_creature_it;
 
     // DEBUGGING CODE
@@ -371,7 +394,11 @@ void World::delCreature(list<shared_ptr<Creature>>::iterator creature_it_in)
     {
         shared_ptr<Creature> creature_to_del = *creature_it_in;
 
-        creatures.erase(creature_it_in);  // should probably add mutex lock where these
+        { // MUTEX
+            PrimT::LockGuard guard(cre_mutex);
+
+            creatures.erase(creature_it_in);  // should probably add mutex lock where these
+        }
         // pointers are used
 
         // deconstruct the object

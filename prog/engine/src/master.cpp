@@ -21,7 +21,7 @@ Master::Master() :
         window.setActive(false);
 
         // Launch threads
-        render_thread = Thread(&Master::renderTasks, this);
+        render_thread = PrimT::Thread(&Master::renderTasks, this);
 
         // Wait for render_thread to load fully
         std::cout << "waiting for render thread\n";
@@ -40,7 +40,7 @@ Master::Master() :
         mechanics.init(world, dt);
 
         // do other multi_threading things;
-        back_ground = Thread(&Master::backGroundTasks, this);
+        back_ground = PrimT::Thread(&Master::backGroundTasks, this);
         //backGroundTasks(); // serially
 
         mainLoopSingleThreaded();
@@ -160,7 +160,7 @@ void Master::mainLoopSingleThreaded()
         dt_smooth = dt_smooth*19.f/20.f + dt*1.f/20.f;
 
         int dt_microseconds = clock.getElapsedTime().asMicroseconds();
-        ThreadSleep_micro(std::max(16667-dt_microseconds, 0));
+        PrimT::ThreadSleep_micro(std::max(16667-dt_microseconds, 0));
 
         // should replace the above threadsleep with sfml vsync, but for now it frees up resources
         // in the cpu
@@ -210,7 +210,7 @@ void Master::mainLoop()
     }
 }
 
-void Master::renderTasks()
+void Master::renderTasks()              /*THREAD: NEED TO MAKE SURE THAT THE RESOURCEMANAGERS BELONG TO RENDERING THREAD*/
 {
 //    // to be loaded from settings
 //    scr_width_px = 1400;

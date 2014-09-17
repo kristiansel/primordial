@@ -250,7 +250,8 @@ void Mesh::createGL(bool debug)
 
 void Mesh::deleteGL()
 {
-    if (load_stage==Loaded)
+    //if (load_stage==Loaded)
+    if (v_ram_loaded)                              /*THREAD: THIS MUST BE CALLED ONLY FROM GL THREAD*/
     {
         std::cout << "deleting mesh, vbo_id: " << vbo_id << "\n";
 

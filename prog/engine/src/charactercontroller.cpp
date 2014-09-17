@@ -1,5 +1,9 @@
 #include "charactercontroller.h"
 
+
+PrimT::Mutex PhysMutex::dynworld_mx;
+PrimT::Mutex PhysMutex::col_shap_mx;
+
 /// The following bit of code is grabbed from bullet on github
 
 DynamicCharacterController::DynamicCharacterController () :
@@ -50,7 +54,11 @@ void DynamicCharacterController::setup (btDynamicsWorld* dynamicsWorld, btScalar
         m_rigidBody->setAngularFactor (0.0);
         //m_rigidBody->setUserPointer(&m_hitInfo);
 
-        m_dynamicsWorld->addRigidBody (m_rigidBody, btBroadphaseProxy::CharacterFilter, btBroadphaseProxy::AllFilter);
+        { // MUTEX
+            PrimT::LockGuard(PhysMutex::dynworld_mx);
+            m_dynamicsWorld->addRigidBody (m_rigidBody, btBroadphaseProxy::CharacterFilter, btBroadphaseProxy::AllFilter);
+        }
+
     }
 
     { // Threat shape
@@ -59,7 +67,10 @@ void DynamicCharacterController::setup (btDynamicsWorld* dynamicsWorld, btScalar
         m_threat_shape = new btBoxShape (btVector3(0.30, 0.5, 0.5));
 
         btGhostPairCallback* ghostCall = new btGhostPairCallback();
-        dynamicsWorld->getBroadphase()->getOverlappingPairCache()->setInternalGhostPairCallback(ghostCall);
+        { // MUTEX
+            PrimT::LockGuard(PhysMutex::dynworld_mx);
+            dynamicsWorld->getBroadphase()->getOverlappingPairCache()->setInternalGhostPairCallback(ghostCall);
+        }
 
         m_threat_object = new btGhostObject();
 
@@ -70,7 +81,11 @@ void DynamicCharacterController::setup (btDynamicsWorld* dynamicsWorld, btScalar
         m_threat_object->setWorldTransform(trans);
         m_threat_object->setCollisionFlags(m_threat_object->getCollisionFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
         //dynamicsWorld->addCollisionObject(m_threat_object, btBroadphaseProxy::SensorTrigger, btBroadphaseProxy::AllFilter & ~btBroadphaseProxy::SensorTrigger);
-        dynamicsWorld->addCollisionObject(m_threat_object, btBroadphaseProxy::SensorTrigger, btBroadphaseProxy::CharacterFilter);
+
+        { // MUTEX
+            PrimT::LockGuard(PhysMutex::dynworld_mx);
+            dynamicsWorld->addCollisionObject(m_threat_object, btBroadphaseProxy::SensorTrigger, btBroadphaseProxy::CharacterFilter);
+        }
 
         //dynamicsWorld->addCollisionObject(m_threat_object);
     }
@@ -97,8 +112,11 @@ void DynamicCharacterController::destroy ()
 
         if (m_rigidBody)
         {
+            { // MUTEX
+                PrimT::LockGuard(PhysMutex::dynworld_mx);
                 m_dynamicsWorld->removeRigidBody (m_rigidBody);
-                delete m_rigidBody;
+            }
+            delete m_rigidBody;
         }
 
         if (m_threat_shape)
@@ -108,8 +126,11 @@ void DynamicCharacterController::destroy ()
 
         if (m_threat_object)
         {
+            { // MUTEX
+                PrimT::LockGuard(PhysMutex::dynworld_mx);
                 m_dynamicsWorld->removeCollisionObject(m_threat_object);
-                delete m_threat_object;
+            }
+            delete m_threat_object;
         }
 }
 
@@ -285,7 +306,11 @@ bool DynamicCharacterController::onGround()
     // rayCallback
     btCollisionWorld::ClosestRayResultCallback rayCallback(m_rayStart, m_rayEnd);
 
-    m_dynamicsWorld->rayTest (m_rayStart, m_rayEnd, rayCallback);
+    { // MUTEX
+        PrimT::LockGuard(PhysMutex::dynworld_mx);
+        m_dynamicsWorld->rayTest (m_rayStart, m_rayEnd, rayCallback);
+    }
+
     if (rayCallback.hasHit())
     {
         on_ground = true;
