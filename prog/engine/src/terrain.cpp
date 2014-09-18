@@ -7,12 +7,12 @@ Terrain::Terrain() :
     m_horzScale(256), // 1024, 4096
     m_centerX(0.0), // 0.0
     m_centerZ(0.0), // 0.0
-    m_patchLength(300), // 32, 96
+    m_patchLength(60), // 32, 96
     m_physicsWorld(nullptr),
     m_terrainBody(nullptr),
     m_heightData0(nullptr),
     m_corePatchDim(8), // 4, 32
-    m_numPatchSubd(7),
+    m_numPatchSubd(4),
     phys_anchor_l_sq(1024) // physics moves when distance to anchor = 32 m
 {
     //ctor
@@ -41,13 +41,13 @@ TerrainPatch::TerrainPatch(unsigned int subd_lvl_in) :
     subd_lvl = subd_lvl_in;
 }
 
-void Terrain::init(PhysicsWorld* physics_world_in /*, glm::vec3 position_terr*/)
+void Terrain::init(PhysicsWorld* physics_world_in /*, glm::vec3 position_terr*/)    // Verified TS!
 {
     std::cout << "initializing terrain...\n";
 
     m_physicsWorld = physics_world_in;
 
-    generateHeightMap();
+    generateHeightMap();    // This is not a shared resource that changes over time, should be TS
 
     anchor_position = glm::vec3(0.0, 0.0, 0.0);
     phys_anchor = glm::vec3(0.0, 0.0, 0.0);
@@ -62,18 +62,18 @@ void Terrain::init(PhysicsWorld* physics_world_in /*, glm::vec3 position_terr*/)
             float center_z = -start_offset*m_patchLength + i*m_patchLength;
 
             //generateGraphicsPatch(glm::vec3(center_x, 0.0, center_z), m_patchLength, m_numPatchSubd);
-            generateGraphicsPatch(glm::vec3(center_x, 0.0, center_z), m_patchLength, 0);
+            generateGraphicsPatch(glm::vec3(center_x, 0.0, center_z), m_patchLength, 0); // TS!
         }
     }
 
-    generatePhysicsPatch(glm::vec3(0.0, 0.0, 0.0), 2*m_patchLength, 2*pow(2, m_numPatchSubd));
+    generatePhysicsPatch(glm::vec3(0.0, 0.0, 0.0), 2*m_patchLength, 2*pow(2, m_numPatchSubd)); // Verified TS!
 
-    std::cout << "length of terrain_patches: " << terrain_patches.size() << "\n";
+    std::cout << "length of terrain_patches: " << terrain_patches.size() << "\n"; // Const function on shared resource assumed thread-safe
 }
 
 std::vector<TerrainPatch>* Terrain::getPatches()
 {
-    return &terrain_patches;
+    return &terrain_patches; // should be thread safe
 }
 
 float Terrain::getThirdTexCo(const glm::vec3 &normal, const float &height)
@@ -431,7 +431,7 @@ void Terrain::subdividedQuads(Vertex* &vertices,
 //};
 
 void Terrain::generateGraphicsPatch(glm::vec3 center, float patch_length, unsigned int num_subd)
-{
+{ // THIS FUNCTION IS INDEED USED
     Vertex* verts;
     Triangle* tris;
     int num_verts;
@@ -441,44 +441,48 @@ void Terrain::generateGraphicsPatch(glm::vec3 center, float patch_length, unsign
 //            std::cout << "num_tris: " << num_tris << "\n";
     int lvldiff_nsew[] = {0, 0, 0, 0};
 
+    // subdivideQuads is TS because it is just a process (uses no shared vars)
     subdividedQuads(verts, num_verts, tris, num_tris, patch_length/2, num_subd, lvldiff_nsew, center.x, center.z);
 
-
-
-
      // assing the quad to the mesh;
-    terrain_patches.push_back(TerrainPatch(num_subd)); // generates both new mesh and prop
-    TerrainPatch* terrain_patch = &(terrain_patches.back());
+     { // MUTEX
+        PrimT::LockGuard guard(patch_mx);
 
-    std::shared_ptr<Mesh> terrain_quad = terrain_patch->mesh;
-    terrain_quad->fromMemory(verts, num_verts, tris, num_tris);
+        terrain_patches.push_back(TerrainPatch(num_subd)); // generates both new mesh and prop
+        TerrainPatch* terrain_patch = &(terrain_patches.back());
 
-    delete [] verts;
-    delete [] tris;
+        std::shared_ptr<Mesh> terrain_quad = terrain_patch->mesh;
+        terrain_quad->fromMemory(verts, num_verts, tris, num_tris); // from outside the terrain_quad can only be
+        // accessed through terrain_patches, which is lock-guarded, so this should be TS
+
+        delete [] verts;
+        delete [] tris;
 
 
-    terrain_patch->prop->pos = glm::vec3(center.x, 0.0, center.z);
+        terrain_patch->prop->pos = glm::vec3(center.x, 0.0, center.z);
 
-    // assign an axis aligned bounding box (used for culling)
-    terrain_patch->world_aabb = QuadAABB({center.x-patch_length/2.0, center.x+patch_length/2.0, center.z-patch_length/2.0, center.z+patch_length/2.0});
+        // assign an axis aligned bounding box (used for culling)
+        terrain_patch->world_aabb = QuadAABB({center.x-patch_length/2.0, center.x+patch_length/2.0, center.z-patch_length/2.0, center.z+patch_length/2.0});
 
-    // get the placeholder terrain texture
-    //std::weak_ptr<Mesh>      mesh_ptr    = global::mesh_manager.getResptrFromKey ("simple_plane");
-    std::weak_ptr<Mesh>      mesh_ptr    = std::weak_ptr<Mesh>(terrain_quad);
-    std::weak_ptr<Texture>   tex_ptr     = global::tex_manager.getResptrFromKey  ("grass_equal");
-    std::weak_ptr<Texture>   tex2_ptr     = global::tex_manager.getResptrFromKey  ("rock");
+        // get the placeholder terrain texture
+        //std::weak_ptr<Mesh>      mesh_ptr    = global::mesh_manager.getResptrFromKey ("simple_plane");
+        std::weak_ptr<Mesh>      mesh_ptr    = std::weak_ptr<Mesh>(terrain_quad);                       //TS!
+        std::weak_ptr<Texture>   tex_ptr     = global::tex_manager.getResptrFromKey  ("grass_equal");   //TS!
+        std::weak_ptr<Texture>   tex2_ptr     = global::tex_manager.getResptrFromKey  ("rock");         //TS!
 
-    // attach the generated geometry to the patch-prop
-    auto render_batch = terrain_patch->prop->attachBatch(mesh_ptr, tex_ptr);
-    render_batch->addSecondTex(tex2_ptr);
+        // attach the generated geometry to the patch-prop
+        auto render_batch = terrain_patch->prop->attachBatch(mesh_ptr, tex_ptr); // TS: See above reasoning
+        render_batch->addSecondTex(tex2_ptr);
+     }
 }
 
 
 void Terrain::generatePhysicsPatch(glm::vec3 center, float sideLength, int num_quads)
 {
-    m_dimPhysHeights = num_quads + 1;
-    m_sidePhysHeights = sideLength;
+    m_dimPhysHeights = num_quads + 1;   // data not shared between threads
+    m_sidePhysHeights = sideLength;  // data not shared between threads
 
+     // height data shared with physics thread, but user of previous data already deleted...
     if (!m_heightData0) m_heightData0 = new float [m_dimPhysHeights*m_dimPhysHeights];
 
     float spacing = sideLength/((float)(num_quads));
@@ -506,15 +510,16 @@ void Terrain::generatePhysicsPatch(glm::vec3 center, float sideLength, int num_q
                 max_height = m_heightData0[linear_index];
 
 
-            if (i<3 && j<3)
-            {
-                //std::cout << "height_corner " << m_heightData0[i*dim + j] << "\n";
-                std::cout << "height "<< x <<", " << z << ": "<< m_heightData0[i*m_dimPhysHeights + j] << "\n";
-            }
+//            if (i<3 && j<3)
+//            {
+//                //std::cout << "height_corner " << m_heightData0[i*dim + j] << "\n";
+//                std::cout << "height "<< x <<", " << z << ": "<< m_heightData0[i*m_dimPhysHeights + j] << "\n";
+//            }
 
        }
     }
 
+    // This is thread safe! TS!
     m_terrainBody = m_physicsWorld->addStaticTerrainPatch(m_heightData0, m_dimPhysHeights, spacing, min_height, max_height, center);
 }
 
@@ -539,6 +544,8 @@ void Terrain::updatePhysicsTerrain(glm::vec3 center)
 
             if (m_heightData0[linear_index] > max_height)
                 max_height = m_heightData0[linear_index];
+
+
 
        }
     }
@@ -754,13 +761,21 @@ void Terrain::updateObserverPosition(glm::vec3 observer_position)
 
     if (phys_anchor != anchor_position) // swap physics the frame after swapping graphics
     {
-        m_physicsWorld->removeBtRigidBody(m_terrainBody);
+        { // MUTEX
+            PrimT::LockGuard guard(PhysMutex::ter_swap_mx); /*Thread: Potential deadlocking with dynworld_mx?*/
 
-        std::cout << "swapped physics\n";
+            m_physicsWorld->removeBtRigidBody(m_terrainBody); // Thread safe
 
-        phys_anchor = anchor_position; // this snaps the physics away from graphics
+            // This gap is when player can fall through the world... Should therefore disallow physics-step while
+            // this is going
 
-        generatePhysicsPatch(phys_anchor, 2*m_patchLength, 2*pow(2, m_numPatchSubd));
+            std::cout << "swapped physics\n";
+
+            phys_anchor = anchor_position; // this snaps the physics away from graphics
+
+            generatePhysicsPatch(phys_anchor, 2*m_patchLength, 2*pow(2, m_numPatchSubd)); // Thread safe
+        }
+        //updatePhysicsTerrain(phys_anchor);
     }
 //    float dist_to_phys_anchor = pow(observer_position.x-phys_anchor.x, 2) +
 //                                pow(observer_position.z-phys_anchor.z, 2);
@@ -795,18 +810,20 @@ void Terrain::updateObserverPosition(glm::vec3 observer_position)
         float erase_distance = ((float)(m_corePatchDim-1)/2.0)*1.01;
 
         // 2:
-
-        for (auto it = terrain_patches.begin(); it<terrain_patches.end(); /*don't incr*/)
-        {
-            if (std::abs(it->prop->pos.x-anchor_position.x) > m_patchLength*erase_distance)
+        { // MUTEX
+            PrimT::LockGuard guard(patch_mx);
+            for (auto it = terrain_patches.begin(); it<terrain_patches.end(); /*don't incr*/)
             {
-                it = terrain_patches.erase(it);
-            }
-            else
-            {
-                it++;
-            }
+                if (std::abs(it->prop->pos.x-anchor_position.x) > m_patchLength*erase_distance)
+                {
+                    it = terrain_patches.erase(it);
+                }
+                else
+                {
+                    it++;
+                }
 
+            }
         }
 
         // create
@@ -818,7 +835,7 @@ void Terrain::updateObserverPosition(glm::vec3 observer_position)
             float center_x = anchor_position.x + start_offset*sign_x*m_patchLength;
             float center_z = anchor_position.z + (i - start_offset)*m_patchLength;
 
-            generateGraphicsPatch(glm::vec3(center_x, 0.0, center_z), m_patchLength, 0);
+            generateGraphicsPatch(glm::vec3(center_x, 0.0, center_z), m_patchLength, 0); // TS
         }
 
         std::cout << "swapped x\n";
@@ -838,19 +855,20 @@ void Terrain::updateObserverPosition(glm::vec3 observer_position)
 
         float erase_distance = ((float)(m_corePatchDim-1)/2.0)*1.01;
 
-
-        for (auto it = terrain_patches.begin(); it<terrain_patches.end(); /*don't incr*/)
-        {
-            if (std::abs(it->prop->pos.z-anchor_position.z) > m_patchLength*erase_distance)
+         { // MUTEX
+            PrimT::LockGuard guard(patch_mx);
+            for (auto it = terrain_patches.begin(); it<terrain_patches.end(); /*don't incr*/)
             {
-                it = terrain_patches.erase(it);
+                if (std::abs(it->prop->pos.z-anchor_position.z) > m_patchLength*erase_distance)
+                {
+                    it = terrain_patches.erase(it);
+                }
+                else
+                {
+                    it++;
+                }
             }
-            else
-            {
-                it++;
-            }
-
-        }
+         }
 
         // create
         for (int j = 0; j<m_corePatchDim; j++)
@@ -860,7 +878,7 @@ void Terrain::updateObserverPosition(glm::vec3 observer_position)
             float center_x = anchor_position.x + (j - start_offset)*m_patchLength;;
             float center_z = anchor_position.z + start_offset*sign_z*m_patchLength;
 
-            generateGraphicsPatch(glm::vec3(center_x, 0.0, center_z), m_patchLength, 0);
+            generateGraphicsPatch(glm::vec3(center_x, 0.0, center_z), m_patchLength, 0); // TS
         }
 
         std::cout << "swapped z\n";
@@ -873,77 +891,75 @@ void Terrain::updateObserverPosition(glm::vec3 observer_position)
     // go through all patches, if they are wrong level change them
 
     //bool changed_terrain = false;
-    for (auto it = terrain_patches.begin(); it<terrain_patches.end(); it++)
-    {
-        float del_x = it->prop->pos.x - observer_position.x;
-        float del_z = it->prop->pos.z - observer_position.z;
-        float sq_distance = del_x*del_x + del_z*del_z;
-        //std::cout << max_dist << "\n";
-
-        int pref_lvl = getPrefLvl(sq_distance);
-
-        //std::cout << "  dist_sq = " << sq_distance << ", lvl should be " << pref_lvl << ", is " << it->subd_lvl << "\n";
-
-        // check difference in lvl of surroudning patches
-        // if lower, then account for this in subdivision
-        int preflvldiff_nsew[] = {0, 0, 0, 0};
-
-        { // north
-            float ndel_z = it->prop->pos.z - m_patchLength - observer_position.z;
-            float nsq_distance = del_x*del_x + ndel_z*ndel_z;
-
-            preflvldiff_nsew[0] = getPrefLvl(nsq_distance) - pref_lvl;
-        }
-
-        { // south
-            float sdel_z = it->prop->pos.z + m_patchLength - observer_position.z;
-            float ssq_distance = del_x*del_x + sdel_z*sdel_z;
-
-            preflvldiff_nsew[1] = getPrefLvl(ssq_distance) - pref_lvl;
-        }
-
-        { // east
-            float edel_x = it->prop->pos.x + m_patchLength - observer_position.x;
-            float esq_distance = edel_x*edel_x + del_z*del_z;
-
-            preflvldiff_nsew[2] = getPrefLvl(esq_distance) - pref_lvl;
-        }
-
-        { // west
-            float wdel_x = it->prop->pos.x - m_patchLength - observer_position.x;
-            float wsq_distance = wdel_x*wdel_x + del_z*del_z;
-
-            preflvldiff_nsew[3] = getPrefLvl(wsq_distance) - pref_lvl;
-        }
-
-//        std::cout << "level diff: ";
-//        for (int i = 0; i<4; i++)
-//        {
-//            std::cout << preflvldiff_nsew[i] << ", ";
-//        }
-//        std::cout << "\n";
-        //std::cout << ">" << it->prop->pos.x/m_patchLength << ", " << it->prop->pos.z/m_patchLength << " ";
-        //std::cout << "own: " << pref_lvl << ", nsew: ";
-        int sum_deviances = std::abs(pref_lvl-it->subd_lvl);
-        for (int i = 0; i<4; i++)
+    { // MUTEX
+        PrimT::LockGuard guard(patch_mx);
+        for (auto it = terrain_patches.begin(); it<terrain_patches.end(); it++)
         {
-            sum_deviances += std::abs(preflvldiff_nsew[i]-it->diff_lvl[i]);
-           // std::cout << preflvldiff_nsew[i] << " ";
-        }
-        //std::cout << "\n";
+            float del_x = it->prop->pos.x - observer_position.x;
+            float del_z = it->prop->pos.z - observer_position.z;
+            float sq_distance = del_x*del_x + del_z*del_z;
+            //std::cout << max_dist << "\n";
 
+            int pref_lvl = getPrefLvl(sq_distance);
 
+            //std::cout << "  dist_sq = " << sq_distance << ", lvl should be " << pref_lvl << ", is " << it->subd_lvl << "\n";
 
+            // check difference in lvl of surroudning patches
+            // if lower, then account for this in subdivision
+            int preflvldiff_nsew[] = {0, 0, 0, 0};
 
+            { // north
+                float ndel_z = it->prop->pos.z - m_patchLength - observer_position.z;
+                float nsq_distance = del_x*del_x + ndel_z*ndel_z;
 
+                preflvldiff_nsew[0] = getPrefLvl(nsq_distance) - pref_lvl;
+            }
 
-        if (sum_deviances > 0)
-        {
-            //changed_terrain = true;
-            changeSubdLvl(pref_lvl, &(*it), preflvldiff_nsew);
-            //std::cout << "remedying\n";
-        }
-    }
+            { // south
+                float sdel_z = it->prop->pos.z + m_patchLength - observer_position.z;
+                float ssq_distance = del_x*del_x + sdel_z*sdel_z;
+
+                preflvldiff_nsew[1] = getPrefLvl(ssq_distance) - pref_lvl;
+            }
+
+            { // east
+                float edel_x = it->prop->pos.x + m_patchLength - observer_position.x;
+                float esq_distance = edel_x*edel_x + del_z*del_z;
+
+                preflvldiff_nsew[2] = getPrefLvl(esq_distance) - pref_lvl;
+            }
+
+            { // west
+                float wdel_x = it->prop->pos.x - m_patchLength - observer_position.x;
+                float wsq_distance = wdel_x*wdel_x + del_z*del_z;
+
+                preflvldiff_nsew[3] = getPrefLvl(wsq_distance) - pref_lvl;
+            }
+
+    //        std::cout << "level diff: ";
+    //        for (int i = 0; i<4; i++)
+    //        {
+    //            std::cout << preflvldiff_nsew[i] << ", ";
+    //        }
+    //        std::cout << "\n";
+            //std::cout << ">" << it->prop->pos.x/m_patchLength << ", " << it->prop->pos.z/m_patchLength << " ";
+            //std::cout << "own: " << pref_lvl << ", nsew: ";
+            int sum_deviances = std::abs(pref_lvl-it->subd_lvl);
+            for (int i = 0; i<4; i++)
+            {
+                sum_deviances += std::abs(preflvldiff_nsew[i]-it->diff_lvl[i]);
+               // std::cout << preflvldiff_nsew[i] << " ";
+            }
+            //std::cout << "\n";
+
+            if (sum_deviances > 0)
+            {
+                //changed_terrain = true;
+                changeSubdLvl(pref_lvl, &(*it), preflvldiff_nsew); // This call is TS because the shared terrain patch is locked
+                //std::cout << "remedying\n";
+            }
+        } // for all patches
+    } // MUTEX
 //    if (changed_terrain==false)
 //    {
 //        std::cout << "no terrain changes\n";

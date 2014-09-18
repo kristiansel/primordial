@@ -41,8 +41,6 @@ public:
     void drawActor(shared_ptr<Actor> actor);
     void drawProp(shared_ptr<Prop> prop, bool debug = false);
 
-    // void draw(Terrain &terrain, glm::mat4 mv);
-
     // Should look into ridding me of this:
     GLuint getBoneMat() {return uniforms.bone_mat;};
 

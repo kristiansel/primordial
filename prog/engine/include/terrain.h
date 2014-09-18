@@ -6,6 +6,7 @@
 #include "closedmap.h"
 #include "physicsworld.h"
 #include "quadtree.hpp"
+#include "threadingwrapper.h"
 
 struct TerrainPatch
 {
@@ -28,14 +29,15 @@ class Terrain
         Terrain();
         virtual ~Terrain();
 
+        // init should be MADE thread safe
         void init(PhysicsWorld* physics_world_in); // Initialize the monolithic "terrain" object
 
-        std::vector<TerrainPatch>* getPatches();
+        std::vector<TerrainPatch>* getPatches(); // This function itself is assumed thread safe
 
-        void updateObserverPosition(glm::vec3 observer_position);
+        void updateObserverPosition(glm::vec3 observer_position); // This NEEDS to be thread safe
 
-        float ySample(float x, float z) const;
-        glm::vec3 normSample(float x, float z);
+        float ySample(float x, float z) const; // So  does this
+        glm::vec3 normSample(float x, float z); // and this
 
     protected:
 //        std::shared_ptr<Prop> patches_LOD2[20];
@@ -98,8 +100,9 @@ class Terrain
         glm::vec3 phys_anchor;
         float phys_anchor_l_sq;
 
-        std::vector<TerrainPatch> terrain_patches;
-
+        // Shared resource                               Mutex
+        std::vector<TerrainPatch> terrain_patches;       public: PrimT::Mutex patch_mx;
+    private:
         glm::vec3 anchor_position; // the center of the currently loaded terrain
 
         unsigned int m_corePatchDim;

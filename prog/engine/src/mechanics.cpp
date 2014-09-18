@@ -36,7 +36,8 @@ void Mechanics::init(World &world_in, float &dt_in)
     world->mainLight( glm::vec3(1.5, 1.0, 1.5),         // From direction
                       glm::vec4(1.0, 1.0, 1.0, 1.0) );  // Color
 
-    world->addTerrain();
+    /* FIX OpenGL not in BG_thread issue... */
+    world->addTerrain(); // MOVED to other thread
 
     world->foliage.bg_thread.prepareBG_Foliage(); // prepare for "BackGround" processed foliage (i.e. separate thread)
 
@@ -204,7 +205,8 @@ void Mechanics::step(World &world_in, float dt_in)
 
     // Update the terrain (based on player position)
     /* This is prime candidate work for the back_ground/builder thread*/
-    if (player) world->updateObserver(player->pos); //
+    if (player) world->updateObserver(player->pos); // MOVED to bgthread
+    /* FIX OpenGL not in BG_thread issue... */
 }
 
 string Mechanics::debugInfo()
@@ -350,7 +352,7 @@ void Mechanics::spawnPlayer(glm::vec3 pos)
         ai::Agent* aiAgent = new ai::Agent(glm::vec3(), glm::vec3(), true);
         aiWorld->addAgent(aiAgent);
 
-        player->connectAI(aiAgent, aiWorld);
+        player->connectAI(aiAgent, aiWorld); // /*Thread: What if player reassigned during this.
     }
 
 }

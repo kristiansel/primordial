@@ -20,6 +20,10 @@ BackGroundMaster::~BackGroundMaster()
 
 void BackGroundMaster::initTasks()
 {
+    // First add terrain:
+    //world->addTerrain(); // MOVED from other thread
+    /* FIX OpenGL not in this thread issue... */
+
     Foliage::BG_Thread &shr_data = world->foliage.bg_thread;
 
     float tree_range = 600;
@@ -113,6 +117,10 @@ void BackGroundMaster::mainLoop()
         //glm::vec3 my_vec = glm::vec3(1.0, 1.0, 1.0);
 
         checkAndFill(QuadAABB({0.0, 0.0, 0.0, 0.0}), FolSpec::Type::GrassSpring, 5.0);
+
+        // Use chasecam for lack of "player" ptr
+        //world->updateObserver(world->chasecam->pos); // MOVED from other thread
+        /* FIX OpenGL not in this thread issue... */
 
         PrimT::ThreadSleep_milli(10); // sleep for 1/100 second
     }

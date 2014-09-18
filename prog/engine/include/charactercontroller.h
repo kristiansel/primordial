@@ -16,6 +16,7 @@ namespace PhysMutex // globals...
 {
     extern PrimT::Mutex dynworld_mx;
     extern PrimT::Mutex col_shap_mx;
+    extern PrimT::Mutex ter_swap_mx;
 }
 
 class DynamicCharacterController

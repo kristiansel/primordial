@@ -129,7 +129,7 @@ void Renderer::draw(World &world, float dt)
 
 
         // Should preferably draw the terrain after actors and props
-        std::vector<TerrainPatch>* terrain_patches = world.terrain.getPatches();
+        std::vector<TerrainPatch>* terrain_patches = world.terrain.getPatches(); // The called function is const, assumed thread safe
 
         //int i = 0;
         // uncomment the below to make the terrain cast shadow
@@ -277,36 +277,40 @@ void Renderer::draw(World &world, float dt)
             }
         }
 
-        int i = 0;
-        for (auto it = terrain_patches->begin(); it!=terrain_patches->end(); it++)
         {
-            QuadAABB &aabb = it->world_aabb;
-//
-//            if (i==18)
-//            {
-//                std::cout << "i = " << i << "\n";
-//                std::cout << "cam  " << cam_fr.p[0] << ", " << cam_fr.p[1] << ", " << cam_fr.p[2] << ", " << cam_fr.p[3] << ", " << "\n";
-//                std::cout << "aabb " << aabb.x_min << ", " << aabb.x_max << ", " << aabb.z_min << ", " << aabb.z_max << ", " << "\n";
-//
-//                if (cam_fr.intersectsAABB(it->world_aabb, true))
-//                {
-//                    main_shader.drawProp(it->prop);
-//                    std::cout << "true\n";
-//                }
-//                else
-//                {
-//                    std::cout << "false\n";
-//                }
-//            }
-//            else
-//            {
-                if (cam_fr.intersectsAABB(it->world_aabb))
-                {
-                    main_shader.drawProp(it->prop);
-                }
-//            }
-//
-//            i++;
+            PrimT::LockGuard guard(world.terrain.patch_mx);
+
+            int i = 0;
+            for (auto it = terrain_patches->begin(); it!=terrain_patches->end(); it++)
+            {
+                QuadAABB &aabb = it->world_aabb;
+    //
+    //            if (i==18)
+    //            {
+    //                std::cout << "i = " << i << "\n";
+    //                std::cout << "cam  " << cam_fr.p[0] << ", " << cam_fr.p[1] << ", " << cam_fr.p[2] << ", " << cam_fr.p[3] << ", " << "\n";
+    //                std::cout << "aabb " << aabb.x_min << ", " << aabb.x_max << ", " << aabb.z_min << ", " << aabb.z_max << ", " << "\n";
+    //
+    //                if (cam_fr.intersectsAABB(it->world_aabb, true))
+    //                {
+    //                    main_shader.drawProp(it->prop);
+    //                    std::cout << "true\n";
+    //                }
+    //                else
+    //                {
+    //                    std::cout << "false\n";
+    //                }
+    //            }
+    //            else
+    //            {
+                    if (cam_fr.intersectsAABB(it->world_aabb))
+                    {
+                        main_shader.drawProp(it->prop);
+                    }
+    //            }
+    //
+    //            i++;
+            }
         }
 
         //std::terminate();

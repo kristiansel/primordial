@@ -3,6 +3,7 @@
 
 PrimT::Mutex PhysMutex::dynworld_mx;
 PrimT::Mutex PhysMutex::col_shap_mx;
+PrimT::Mutex PhysMutex::ter_swap_mx;
 
 /// The following bit of code is grabbed from bullet on github
 

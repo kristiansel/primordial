@@ -245,11 +245,15 @@ void PhysicsWorld::removeBtRigidBody(btRigidBody* body)
 
 }
 
-void PhysicsWorld::physicsStep(float dt_in)
+void PhysicsWorld::physicsStep(float dt_in) // TS
 {
     { // MUTEX:
-        PrimT::LockGuard(PhysMutex::dynworld_mx);
-        dynamicsWorld->stepSimulation(dt_in, 3, 1.f/120.f);
+        PrimT::LockGuard(PhysMutex::ter_swap_mx); // This elaborate structure to avoid deadlock of dynworld_mx
+        {
+            PrimT::LockGuard(PhysMutex::dynworld_mx);
+
+            dynamicsWorld->stepSimulation(dt_in, 3, 1.f/120.f);
+        }
     }
 
 //    //print positions of all objects
