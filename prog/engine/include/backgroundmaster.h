@@ -29,6 +29,9 @@ class BackGroundMaster
         void initTasks();
         void mainLoop();
 
+        void wrapUp();
+        bool finished();
+
     protected:
         void checkAndFill(QuadAABB box, FolSpec::Type, float scale);
         void justFill(glm::vec4 center, FolSpec::Type, float scale);
@@ -43,6 +46,9 @@ class BackGroundMaster
         static const int D_PATCH_NUM = 1000;
         static constexpr float D_PATCH_SCALE = 50.0; // 1000/(50*50) patch = 2 trees for each 5 square mtrs
         glm::vec4 discrete_patch[D_PATCH_NUM];
+
+        bool exit_received;
+        bool is_finished;
 };
 
 #endif // BACKGROUNDMASTER_H

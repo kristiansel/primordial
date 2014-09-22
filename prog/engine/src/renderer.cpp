@@ -8,6 +8,14 @@ Renderer::Renderer() : settings({0, 0}), time(0)
 Renderer::~Renderer()
 {
     //dtor
+    // process mesh load delete jobs
+    VboIboPair value;
+    while (Mesh::del_queue.pop(value))
+    {
+        Mesh::deleteExecute(value);
+    }
+
+    std::cout << "successfully deleted renderer\n";
 }
 
 void Renderer::init(unsigned int scr_width_in, unsigned int scr_height_in)
@@ -37,7 +45,12 @@ void Renderer::init(unsigned int scr_width_in, unsigned int scr_height_in)
 //    glEnable( GL_BLEND );
 
     // Set up culling
- //   glFrontFace(GL_CCW);
+ //   glFrontFace(GL_CCW);    // process mesh load delete jobs
+    VboIboPair value;
+    while (Mesh::del_queue.pop(value))
+    {
+        Mesh::deleteExecute(value);
+    }
 //    glCullFace(GL_BACK);
  //   glEnable(GL_CULL_FACE);
 
@@ -83,6 +96,19 @@ void Renderer::draw(World &world, float dt)
             (*it)->updateAnim(dt);
         }
     }
+
+    // process mesh load delete jobs
+    VboIboPair mesh_to_del;
+    while (Mesh::del_queue.pop(mesh_to_del))
+    {
+        Mesh::deleteExecute(mesh_to_del);
+    }
+
+//    Mesh* mesh_to_create;
+//    while (Mesh::create_queue.pop(mesh_to_create))
+//    {
+//        Mesh::createExecute(mesh_to_create);
+//    }
 
 
     world.foliage.bg_thread.updateFoliage(*world.chasecam);

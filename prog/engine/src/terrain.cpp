@@ -3,16 +3,16 @@
 Terrain::Terrain() :
     m_dimension(256),   // 256, 2048
     m_height_map(256),  // 256, 2048
-    m_heightScale(0.0100), // 0.016, 5*0.016
-    m_horzScale(256), // 1024, 4096
+    m_heightScale(1/40.f), // 0.016, 5*0.016
+    m_horzScale(1024), // 1024, 4096
     m_centerX(0.0), // 0.0
     m_centerZ(0.0), // 0.0
-    m_patchLength(60), // 32, 96
+    m_patchLength(300), // 32, 96
     m_physicsWorld(nullptr),
     m_terrainBody(nullptr),
     m_heightData0(nullptr),
     m_corePatchDim(8), // 4, 32
-    m_numPatchSubd(4),
+    m_numPatchSubd(7),
     phys_anchor_l_sq(1024) // physics moves when distance to anchor = 32 m
 {
     //ctor
@@ -149,10 +149,10 @@ void Terrain::subdividedQuads(Vertex* &vertices,
             float x = -half_length + j*quad_length;
             float z = -half_length + i*quad_length;
 
-            float sample0 = m_heightScale*sampleHeightMap(x+x_corner, z+quad_length+z_corner, m_horzScale, m_centerX, m_centerZ);
-            float sample1 = m_heightScale*sampleHeightMap(x+x_corner, z+z_corner, m_horzScale, m_centerX, m_centerZ);
-            float sample2 = m_heightScale*sampleHeightMap(x+quad_length+x_corner, z+z_corner, m_horzScale, m_centerX, m_centerZ);
-            float sample3 = m_heightScale*sampleHeightMap(x+quad_length+x_corner, z+quad_length+z_corner, m_horzScale, m_centerX, m_centerZ);
+            float sample0 = ySample(x+x_corner, z+quad_length+z_corner);
+            float sample1 = ySample(x+x_corner, z+z_corner);
+            float sample2 = ySample(x+quad_length+x_corner, z+z_corner);
+            float sample3 = ySample(x+quad_length+x_corner, z+quad_length+z_corner);
 
             if (i<0 && j<0)
             {
@@ -190,11 +190,6 @@ void Terrain::subdividedQuads(Vertex* &vertices,
             verts[1].tex_coords[0] = j*texcoord_stride; verts[1].tex_coords[1] = (i)*texcoord_stride; verts[1].tex_coords[2] = getThirdTexCo(verts[1].normal, verts[1].position.y);
             verts[2].tex_coords[0] = (j+1)*texcoord_stride; verts[2].tex_coords[1] = (i)*texcoord_stride; verts[2].tex_coords[2] = getThirdTexCo(verts[2].normal, verts[2].position.y);
             verts[3].tex_coords[0] = (j+1)*texcoord_stride; verts[3].tex_coords[1] = (i+1)*texcoord_stride; verts[3].tex_coords[2] = getThirdTexCo(verts[3].normal, verts[3].position.y);
-
-//            verts[0].tex_coords[0] = 0.0; verts[0].tex_coords[1] = 0.0; verts[0].tex_coords[2] = getThirdTexCo(verts[0].normal, verts[0].position.y);
-//            verts[1].tex_coords[0] = 0.0; verts[1].tex_coords[1] = 1.0; verts[1].tex_coords[2] = getThirdTexCo(verts[1].normal, verts[1].position.y);
-//            verts[2].tex_coords[0] = 1.0; verts[2].tex_coords[1] = 1.0; verts[2].tex_coords[2] = getThirdTexCo(verts[2].normal, verts[2].position.y);
-//            verts[3].tex_coords[0] = 1.0; verts[3].tex_coords[1] = 0.0; verts[3].tex_coords[2] = getThirdTexCo(verts[3].normal, verts[3].position.y);
 
             for (int i = 0; i<4; i++)
             {
@@ -501,7 +496,8 @@ void Terrain::generatePhysicsPatch(glm::vec3 center, float sideLength, int num_q
 
             int linear_index = i*m_dimPhysHeights + j;
 
-            m_heightData0[linear_index] = m_heightScale*sampleHeightMap(x, z, m_horzScale, m_centerX, m_centerZ);
+            //m_heightData0[linear_index] = m_heightScale*sampleHeightMap(x, z, m_horzScale, m_centerX, m_centerZ);
+            m_heightData0[linear_index] = ySample(x, z);
 
             if (m_heightData0[linear_index] < min_height)
                 min_height = m_heightData0[linear_index];
@@ -537,7 +533,8 @@ void Terrain::updatePhysicsTerrain(glm::vec3 center)
 
             int linear_index = i*m_dimPhysHeights + j;
 
-            m_heightData0[linear_index] = m_heightScale*sampleHeightMap(x, z, m_horzScale, m_centerX, m_centerZ);
+            //m_heightData0[linear_index] = m_heightScale*sampleHeightMap(x, z, m_horzScale, m_centerX, m_centerZ);
+            m_heightData0[linear_index] = ySample(x, z);
 
             if (m_heightData0[linear_index] < min_height)
                 min_height = m_heightData0[linear_index];
@@ -566,7 +563,7 @@ void Terrain::generateHeightMap()
     double range = 8000.0; // m
 
     //srand(23798); // removing this gives a nice one
-    //srand(12345); // removing this gives a nice one
+    srand(12345); // removing this gives a nice one
 
     // find the first (middle point) m_dimension/2
     m_height_map(m_dimension/2, m_dimension/2) = rand_range(-range, range);
@@ -714,11 +711,14 @@ float Terrain::sampleHeightMap(float x, float z, float length, float center_x, f
     float rel_x = x-top_left_x;
     float rel_z = z-top_left_z;
 
-    float frac_x = rel_x/length;
-    float frac_z = rel_z/length;
+//    float frac_x = rel_x/length;
+//    float frac_z = rel_z/length;
 
-    float dec_ind_x = frac_x*m_dimension;
-    float dec_ind_z = frac_z*m_dimension;
+//    float dec_ind_x = frac_x*m_dimension;
+//    float dec_ind_z = frac_z*m_dimension;
+
+    float dec_ind_x = rel_x*m_dimension/length;
+    float dec_ind_z = rel_z*m_dimension/length;
 
     int upper_x = ceil(dec_ind_x);
     int upper_z = ceil(dec_ind_z);
@@ -987,7 +987,34 @@ int Terrain::getPrefLvl(float square_distance)
 
 float Terrain::ySample(float x, float z) const
 {
-    return m_heightScale*sampleHeightMap(x, z, m_horzScale, m_centerX, m_centerZ);
+    //return m_heightScale*sampleHeightMap(x, z, m_horzScale, m_centerX, m_centerZ);
+
+    // find the x and z of the top left corner
+    float top_left_x = m_centerX-m_horzScale/2.0;
+    float top_left_z = m_centerZ-m_horzScale/2.0;
+
+    float rel_x = x-top_left_x;
+    float rel_z = z-top_left_z;
+
+    float dec_ind_x = rel_x*m_dimension/m_horzScale;
+    float dec_ind_z = rel_z*m_dimension/m_horzScale;
+
+    int upper_x = ceil(dec_ind_x);
+    int upper_z = ceil(dec_ind_z);
+    int lower_x = floor(dec_ind_x);
+    int lower_z = floor(dec_ind_z);
+
+    if (upper_x == lower_x) upper_x++;
+    if (upper_z == lower_z) upper_z++;
+
+    float tx = dec_ind_x-lower_x;
+    float tz = dec_ind_z-lower_z;
+
+    return m_heightScale*bilinear(tx, tz,
+                    m_height_map(lower_x, lower_z), m_height_map(upper_x, lower_z),
+                    m_height_map(lower_x, upper_z), m_height_map(upper_x, upper_z));
+
+
 }
 
 glm::vec3 Terrain::normSample(float x, float z)

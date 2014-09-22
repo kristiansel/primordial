@@ -8,13 +8,6 @@
 #include "sound.h"
 #include <functional>
 #include <vector>
-//
-
-typedef void(Texture::*TexMethod)();
-typedef std::vector<Texture*> TexQueue;
-
-typedef void(Mesh::*MeshMethod)();
-typedef std::vector<Mesh*> MeshQueue;
 
 // the good old dirty global variables
 namespace global
@@ -23,18 +16,6 @@ namespace global
     extern ResourceManager<Texture>   tex_manager;
     extern ResourceManager<Skeleton> skel_manager;
     extern ResourceManager<Sound>   sound_manager;
-
-//    extern std::function<TexMethod> texDelete;
-//    extern std::function<TexMethod> texCreate;
-//    extern TexQueue tex_to_create;
-//    extern TexQueue tex_to_delete;
-//    extern void execTexTasks();
-//
-//    extern std::function<MeshMethod> meshDelete;
-//    extern std::function<MeshMethod> meshCreate;
-//    extern MeshQueue mesh_to_create;
-//    extern MeshQueue mesh_to_delete;
-//    extern void execMeshTasks();
 }
 
 #endif // GLOBAL_H

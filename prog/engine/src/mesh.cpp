@@ -1,5 +1,9 @@
 #include "mesh.h"
 
+boost::lockfree::queue<VboIboPair> Mesh::del_queue(256);
+//boost::lockfree::queue<Mesh*> Mesh::create_queue(256);
+
+
 Mesh::Mesh() : vertex_num(0), triangle_num(0)
               ,vertices(nullptr), triangles(nullptr),
               load_stage(NotLoaded), v_ram_loaded(false)
@@ -205,7 +209,15 @@ void Mesh::createGL(bool debug)
     //LockGuard lock(sharedContextLoading);
 
     // clear out whatever is there (if there is anything...)
-    deleteGL(); // this will not do anything if not loaded
+    //deleteGL(); // this will not do anything if not loaded
+
+    if (v_ram_loaded)
+    {
+        Mesh::deleteExecute({vbo_id, ibo_id});
+
+        load_stage = NotLoaded;
+        v_ram_loaded = false;
+    }
 
     // debug
     if (debug)
@@ -243,9 +255,10 @@ void Mesh::createGL(bool debug)
 //    std::cout << "triangle num: " << triangle_num << "\n";
 //    std::cout << "vbo_id: " << vbo_id << "\n";
 //    std::cout << "ibo_id: " << ibo_id << "\n";
-
+//
     load_stage = Loaded;
     v_ram_loaded = true;
+//    create_queue.push(this);
 }
 
 void Mesh::deleteGL()
@@ -253,18 +266,49 @@ void Mesh::deleteGL()
     //if (load_stage==Loaded)
     if (v_ram_loaded)                              /*THREAD: THIS MUST BE CALLED ONLY FROM GL THREAD*/
     {
-        std::cout << "deleting mesh, vbo_id: " << vbo_id << "\n";
-
-        // release video RAM buffers
-        glBindBuffer(GL_ARRAY_BUFFER, 0); // do you really need this?
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-
-    //    cout << "Deleting Buffers: " << vbo_id << " & " << ibo_id << "\n";
-        glDeleteBuffers(1, &vbo_id); // is this really sufficient
-        glDeleteBuffers(1, &ibo_id);
+        std::cout << "Sending a mesh to delete\n";
+        del_queue.push({vbo_id, ibo_id});
 
         load_stage = NotLoaded;
         v_ram_loaded = false;
     }
 }
+
+void Mesh::deleteExecute(VboIboPair vbo_ibo_pair)
+{
+
+
+    // release video RAM buffers
+    glBindBuffer(GL_ARRAY_BUFFER, 0); // do you really need this?
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+    GLuint to_del_vbo_id = vbo_ibo_pair.pair_vbo_id;
+    GLuint to_del_ibo_id = vbo_ibo_pair.pair_ibo_id;
+
+    std::cout << "deleting mesh, vbo_id: " << to_del_vbo_id << "\n";
+
+//    cout << "Deleting Buffers: " << vbo_id << " & " << ibo_id << "\n";
+    glDeleteBuffers(1, &to_del_vbo_id); // is this really sufficient
+    glDeleteBuffers(1, &to_del_ibo_id);
+}
+
+//void Mesh::createExecute(Mesh* mesh_to_load)
+//{
+//    // send directly to graphics card
+//    glGenBuffers(1, &mesh_to_load->vbo_id); //must come after glewinit
+//    glBindBuffer(GL_ARRAY_BUFFER, mesh_to_load->vbo_id);
+//    glBufferData(GL_ARRAY_BUFFER, mesh_to_load->vertex_num*sizeof(Vertex), mesh_to_load->vertices, GL_STATIC_DRAW);
+//    glBindBuffer(GL_ARRAY_BUFFER, 0); // unbind buffer
+//
+//    glGenBuffers(1, &mesh_to_load->ibo_id);
+//    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh_to_load->ibo_id);
+//    glBufferData(GL_ELEMENT_ARRAY_BUFFER, mesh_to_load->triangle_num*(sizeof(Triangle)), mesh_to_load->triangles, GL_STATIC_DRAW);
+//    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+//
+//    std::cout << "loading mesh, vbo_id:" << mesh_to_load->vbo_id << "\n";
+////    std::cout << "vertex num: " << vertex_num << "\n";
+////    std::cout << "triangle num: " << triangle_num << "\n";
+////    std::cout << "vbo_id: " << vbo_id << "\n";
+////    std::cout << "ibo_id: " << ibo_id << "\n";
+//}
 

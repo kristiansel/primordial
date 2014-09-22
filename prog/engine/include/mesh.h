@@ -7,6 +7,7 @@
 #include <memory>
 #include <algorithm>
 //#include <threadingwrapper.h>
+#include <boost/lockfree/queue.hpp>
 
 #include "geometry.h"
 #include "parser.h"
@@ -27,8 +28,18 @@ using std::shared_ptr;
 
 // Object3d, consider making getter/setter pos and dir
 
+struct VboIboPair
+{
+    GLuint pair_vbo_id;
+    GLuint pair_ibo_id;
+};
+
 class Mesh : public Object3d // 3d coordinates local in Prop/Actor coordinate system
 {
+public:
+    static boost::lockfree::queue<VboIboPair> del_queue;
+    //static boost::lockfree::queue<Mesh*> create_queue;
+
 public:
     // Public subclass
     struct Material // This shouldn't belong to mesh, mesh should only be geometry
@@ -73,6 +84,10 @@ public:
 
     void createGL(bool debug = false);
     void deleteGL();
+
+    static void deleteExecute(VboIboPair vbo_ibo_pair);
+    //static void createExecute(Mesh* mesh_to_load);
+
 protected:
     //void geomToVRAM();
     void fromFile2(string mesh_key);

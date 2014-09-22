@@ -37,7 +37,7 @@ void Mechanics::init(World &world_in, float &dt_in)
                       glm::vec4(1.0, 1.0, 1.0, 1.0) );  // Color
 
     /* FIX OpenGL not in BG_thread issue... */
-    world->addTerrain(); // MOVED to other thread
+    //world->addTerrain(); // MOVED to other thread
 
     world->foliage.bg_thread.prepareBG_Foliage(); // prepare for "BackGround" processed foliage (i.e. separate thread)
 
@@ -205,7 +205,7 @@ void Mechanics::step(World &world_in, float dt_in)
 
     // Update the terrain (based on player position)
     /* This is prime candidate work for the back_ground/builder thread*/
-    if (player) world->updateObserver(player->pos); // MOVED to bgthread
+    //if (player) world->updateObserver(player->pos); // MOVED to bgthread
     /* FIX OpenGL not in BG_thread issue... */
 }
 

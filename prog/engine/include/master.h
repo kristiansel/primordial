@@ -53,12 +53,12 @@ private:
     bool handleInput();
 
     // Members
+    Renderer    renderer;   // the renderer draws the scene: renderer.draw(&scene)
     sf::Window  window;     // Input from the window signals the game mechanics
     Mechanics   mechanics;  // the game mechanics takes the input and transforms the scene
     World       world;      // struct like class - Contains the game state
-    //Culler      culler;     // process oriented class, scene = culler.stage(&world)
-    //Scene       scene;      // the scene is an interface between the world and the renderer
-    Renderer    renderer;   // the renderer draws the scene: renderer.draw(&scene)
+
+    // bottom gets deleted first (world before mechanics, so creatures can remove their own AI
 
     // replace by settings
     unsigned int scr_width_px;
@@ -74,6 +74,8 @@ private:
     // Threads
     PrimT::Thread render_thread;
 //    Thread test_thread;
+
+    BackGroundMaster bg_thread;
 
     // Thread wait flags
     bool render_thread_loaded;

@@ -9,7 +9,8 @@ Master::Master() :
     running(true),
     render_thread_loaded(false),
     main_thread_loaded(false),
-    m_restart(1)
+    m_restart(1),
+    bg_thread(&world)
 {
     // Start window in main thread...
     initWindow();
@@ -74,6 +75,17 @@ Master::Master() :
 Master::~Master()
 {
     // dtor
+
+    // let the BG_thread finish
+    bg_thread.wrapUp();
+
+    while (!bg_thread.finished())
+        ; // spin
+
+    back_ground.join();
+
+    //std::cout << "GETS HERE 2\n";
+
 }
 
 void Master::initWindow()
@@ -458,9 +470,6 @@ int Master::restart()
 
 void Master::backGroundTasks()
 {
-
-    BackGroundMaster bg_thread(&world);
-//
     bg_thread.initTasks();
 
     bg_thread.mainLoop();

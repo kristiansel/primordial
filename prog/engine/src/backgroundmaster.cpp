@@ -2,7 +2,8 @@
 
 BackGroundMaster::BackGroundMaster(World *world_in) :
     world(world_in),
-    test_var(4.0)
+    test_var(4.0),
+    exit_received(false)
 {
     //ctor
     for (int i = 0; i<D_PATCH_NUM; i++)
@@ -18,10 +19,20 @@ BackGroundMaster::~BackGroundMaster()
     //dtor
 }
 
+void BackGroundMaster::wrapUp()
+{
+    exit_received = true;
+}
+
+bool BackGroundMaster::finished()
+{
+    return is_finished;
+}
+
 void BackGroundMaster::initTasks()
 {
     // First add terrain:
-    //world->addTerrain(); // MOVED from other thread
+    world->addTerrain(); // MOVED from other thread
     /* FIX OpenGL not in this thread issue... */
 
     Foliage::BG_Thread &shr_data = world->foliage.bg_thread;
@@ -107,7 +118,7 @@ void BackGroundMaster::mainLoop()
 {
     glm::vec3 const * const someptr = &world->chasecam->pos;
 
-    while (true)
+    while (!exit_received)
     {
         //updateTasks();
         //test_var+=4.0;
@@ -119,10 +130,14 @@ void BackGroundMaster::mainLoop()
         checkAndFill(QuadAABB({0.0, 0.0, 0.0, 0.0}), FolSpec::Type::GrassSpring, 5.0);
 
         // Use chasecam for lack of "player" ptr
-        //world->updateObserver(world->chasecam->pos); // MOVED from other thread
+        world->updateObserver(world->chasecam->pos); // MOVED from other thread
         /* FIX OpenGL not in this thread issue... */
 
         PrimT::ThreadSleep_milli(10); // sleep for 1/100 second
     }
+
+    //std::cout << "GETS HERE\n";
+
+    is_finished = true;
 }
 
