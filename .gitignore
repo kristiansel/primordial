@@ -1,5 +1,4 @@
-# Compiled Object files
-*.slo
+# Compiled Object files *.slo
 *.lo
 *.o
 # *.obj the .obj extension is used for 3d geometry files
@@ -28,8 +27,11 @@
 *~
 
 # Codeblocks binary folders
-prog/engine/bin/
-prog/engine/obj/
+*bin*
+*obj*
+
+# Cachegrind files
+*cachegrind*
 
 # Blender files
 *.blend1

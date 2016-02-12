@@ -33,6 +33,7 @@ void Actor::attachSkeleton(std::weak_ptr<Skeleton> skel_ptr_in)
     auto shared_skel_ptr = std::shared_ptr<Skeleton>(skel_ptr);
 
     // Delete old matrices
+    //if (!pose_matrices) std::cout << "nullptr" << std::endl;
     delete [] pose_matrices;
 
 //    // Set num_pose_matrices
