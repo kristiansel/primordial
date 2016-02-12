@@ -1,9 +1,12 @@
 #include "mechanics.h"
 
-Mechanics::Mechanics() : speed(24.5), camTurnSpeed(80.0),
+Mechanics::Mechanics() :
+    aiWorld(nullptr),
+    speed(24.5),
+    camTurnSpeed(80.0),
     controlled(nullptr),
-    player(nullptr),
-    aiWorld(nullptr)
+    player(nullptr)
+
 {
 
 }

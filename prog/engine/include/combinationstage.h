@@ -25,7 +25,7 @@ public:
     void activate(float w0, float w1);
     void activateTextures(GLuint color0, GLuint color1);
 
-    GLuint attribute_v_coord_postproc;
+    GLint attribute_v_coord_postproc;
 
     GLuint fbo;
     GLuint fbo_texture;

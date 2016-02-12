@@ -25,8 +25,8 @@ struct RenderBatch
     // Change to shared_ptr one day
     std::weak_ptr<Mesh> mesh_ptr;      // non_owning, points to resource manager's (owner) unique_ptr
     std::weak_ptr<Texture> tex_ptr; //
-    int num_textures;
     std::weak_ptr<Texture> tex2_ptr; //
+    int num_textures;
     glm::mat4 transf_mat;
     int parent_bone;
     // BumpMap* bpm_ptr //

@@ -2,13 +2,13 @@
 
 Master::Master() :
     dt(0.0),
+    running(true),
+    render_thread_loaded(false),
+    main_thread_loaded(false),
     has_focus(true),
     rmb_down(false),
     press_pos_x(0),
     press_pos_y(0),
-    running(true),
-    render_thread_loaded(false),
-    main_thread_loaded(false),
     m_restart(1)
 {
     // Start window in main thread...
@@ -145,7 +145,7 @@ void Master::mainLoopSingleThreaded()
         renderer.draw(world, dt_fixed);
 
         // draw overlay/interface
-        renderer.drawOverlay({mechanics.getInterfaceInfo(), 1.0/dt_smooth});
+        renderer.drawOverlay({mechanics.getInterfaceInfo(), 1.0f/dt_smooth});
 //        renderer.drawOverlay(5.0);
 
         // bullet debug draw, not implemented
@@ -250,7 +250,7 @@ void Master::renderTasks()
         renderer.draw(world, dtRender);
 
         // draw overlay/interface
-        renderer.drawOverlay({mechanics.getInterfaceInfo(), 1.0/dtRender});
+        renderer.drawOverlay({mechanics.getInterfaceInfo(), 1.0f/dtRender});
 
         // end the current frame (internally swaps the front and back buffers)
         window.display();
@@ -309,9 +309,10 @@ bool Master::handleInput()
             has_focus = false;
             window.setMouseCursorVisible (true);
 
+#ifdef WINDOWS
             sf::WindowHandle window_handle = window.getSystemHandle(); // still portable
 
-#ifdef WINDOWS
+
             //running = false;
             ShowWindow(window_handle, SW_MINIMIZE);
 #endif // WINDOWS

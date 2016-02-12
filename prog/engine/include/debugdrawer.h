@@ -20,7 +20,7 @@ class DebugDrawer : public btIDebugDraw
 
         void setDebugMode (int debugMode) {};
 
-        int getDebugMode () const {};
+        int getDebugMode () const {return 0; };
 
     protected:
     private:

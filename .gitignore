@@ -28,8 +28,11 @@
 *~
 
 # Codeblocks binary folders
-prog/engine/bin/
-prog/engine/obj/
+*/bin/*
+*/obj/*
+
+# Valgrind files
+*.cachegrind.*
 
 # Blender files
 *.blend1

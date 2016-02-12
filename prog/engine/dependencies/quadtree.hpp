@@ -211,17 +211,17 @@ class QuadTree // non-owning but mutating data structure
             // |      |      |
             // |______|______|
             // V
-            children.nw = new QuadTree(QuadAABB({boundary.x_min, boundary.x_min+0.5*boundary.x_len(),
-                                                 boundary.z_min, boundary.z_min+0.5*boundary.z_len()}));
+            children.nw = new QuadTree(QuadAABB({boundary.x_min, boundary.x_min+0.5f*boundary.x_len(),
+                                                 boundary.z_min, boundary.z_min+0.5f*boundary.z_len()}));
 
-            children.ne = new QuadTree(QuadAABB({boundary.x_min+0.5*boundary.x_len(), boundary.x_max,
-                                                 boundary.z_min, boundary.z_min+0.5*boundary.z_len()}));
+            children.ne = new QuadTree(QuadAABB({boundary.x_min+0.5f*boundary.x_len(), boundary.x_max,
+                                                 boundary.z_min, boundary.z_min+0.5f*boundary.z_len()}));
 
-            children.sw = new QuadTree(QuadAABB({boundary.x_min, boundary.x_min+0.5*boundary.x_len(),
-                                                 boundary.z_min+0.5*boundary.z_len(), boundary.z_max}));
+            children.sw = new QuadTree(QuadAABB({boundary.x_min, boundary.x_min+0.5f*boundary.x_len(),
+                                                 boundary.z_min+0.5f*boundary.z_len(), boundary.z_max}));
 
-            children.se = new QuadTree(QuadAABB({boundary.x_min+0.5*boundary.x_len(), boundary.x_max,
-                                                 boundary.z_min+0.5*boundary.z_len(), boundary.z_max}));
+            children.se = new QuadTree(QuadAABB({boundary.x_min+0.5f*boundary.x_len(), boundary.x_max,
+                                                 boundary.z_min+0.5f*boundary.z_len(), boundary.z_max}));
 
             // spread this node's contained among its children
 //            for (auto it : contained)

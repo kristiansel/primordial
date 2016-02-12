@@ -179,8 +179,10 @@ TimeSeries<ValueType>::seek(float time, int hint)   // Function signature
         TimeValuePair<ValueType>* prev = &(keys[0]);
 
         if (hint < 0 || !(hint < num_keys)) // If no/bad hint is given
+        {
             float div_duration = (duration > 0.001) ? duration : 1.0; // check for divide by 0
-            hint = (int)((num_keys-1) * time / duration);  // Start search by assuming uniform distribution
+            hint = (int)((num_keys-1) * time / div_duration);  // Start search by assuming uniform distribution
+        }
             // The above guarantees that hint is maximum num_pos_keys - 1
 
     //        std::cout << "num_pos_keys = " << num_pos_keys << "\n";

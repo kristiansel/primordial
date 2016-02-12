@@ -20,7 +20,6 @@ class Actor : public Prop
 
         // Temporary for debugging:
         std::shared_ptr<Skeleton> shSkelPtr();
-
         std::shared_ptr<Skeleton> skel_ptr;
 
         void pose(int anim_index, float time);

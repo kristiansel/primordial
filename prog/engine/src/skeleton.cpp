@@ -5,13 +5,14 @@
 
 //---------------------------------------------------
 
-Skeleton::Skeleton() : num_bones(0),
-                       bones(nullptr),
-                       num_anims(0),
-                       animations(nullptr),
-                       triggered(false),
-                       num_slots(0),
-                       slots(nullptr)
+Skeleton::Skeleton() :
+    num_bones(0),
+    bones(nullptr),
+    num_anims(0),
+    animations(nullptr),
+    num_slots(0),
+    slots(nullptr),
+    triggered(false)
 {
     //ctor
 }
@@ -337,7 +338,7 @@ void Skeleton::poseMatricesBlend( glm::mat4* matrices,
                                   int bone_index,
                                   glm::mat4 parent_mat)
 {
-    bool debug = true;
+    //bool debug = true;
 //    std::cout << "anim_index = " << anim_index << "\n";
 //    std::cout << "num_anims = " << num_anims << "\n";
 //    std::cout << "num_bones = " << num_bones << "\n";

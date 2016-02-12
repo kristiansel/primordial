@@ -36,7 +36,7 @@ void UniformBufferObject::init()
     // CONNECT the UBO to the Binding Index
     //
     //       Binding0
-    //             \
+    //             |
     //             UBO
     //
     glBindBufferRange(GL_UNIFORM_BUFFER, globalUniforms.binding_index,

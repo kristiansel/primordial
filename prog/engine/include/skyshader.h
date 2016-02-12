@@ -37,7 +37,7 @@ class SkyShader : public ShaderBase
 
         struct Attributes
         {
-            GLuint vertex;
+            GLint vertex;
 
         } attributes;
 

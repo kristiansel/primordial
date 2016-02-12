@@ -33,7 +33,6 @@ class Texture
 
         GLuint tbo_id;
 
-
         LoadStage load_stage;
         bool v_ram_loaded;
 

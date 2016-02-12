@@ -70,18 +70,15 @@ private:
         btVector3 v_set;
 
         float m_halfHeight;
-
+        bool on_ground;
+        // a trick and a hack
+        glm::vec3 m_footingNormal;
 
         // temporary storage
         btVector3 m_rayStart;
         btVector3 m_rayEnd;
 
-        bool on_ground;
-
         btDynamicsWorld* m_dynamicsWorld;
-
-        // a trick and a hack
-        glm::vec3 m_footingNormal;
 
 public:
     template <typename FuncType>

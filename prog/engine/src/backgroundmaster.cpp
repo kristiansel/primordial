@@ -23,7 +23,7 @@ void BackGroundMaster::initTasks()
     Foliage::BG_Thread &shr_data = world->foliage.bg_thread;
 
     float tree_range = 600;
-    float grass_range = 60;
+    //float grass_range = 60;
 
     {
         LockGuard lock_qt_trees(shr_data.sm_mutex);
@@ -52,7 +52,7 @@ void BackGroundMaster::checkAndFill(QuadAABB box, FolSpec::Type type, float scal
     // if there is none, then fill that part
 
     // first find the player's position
-    glm::vec3 ref_position = world->chasecam->pos;
+//    glm::vec3 ref_position = world->chasecam->pos;
 
 
 }
@@ -73,7 +73,7 @@ void BackGroundMaster::justFill(glm::vec4 center, FolSpec::Type type, float scal
 
 void BackGroundMaster::mainLoop()
 {
-    glm::vec3 const * const someptr = &world->chasecam->pos;
+    //glm::vec3 const * const someptr = &world->chasecam->pos;
 
     while (true)
     {

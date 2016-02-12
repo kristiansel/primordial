@@ -17,7 +17,7 @@ public:
     PostProcStage();
     virtual ~PostProcStage();
 
-    void init(int w, int h, char* shader_path);
+    void init(int w, int h, char const *shader_path);
     void activate(int size, float* kern_x, float* kern_y);
     void resize(int w, int h);
     void drawb();
@@ -33,12 +33,12 @@ public:
     GLuint vbo_fbo_vertices;
 
     //GLuint program_postproc;
-    GLuint attribute_v_coord_postproc;
+    GLint attribute_v_coord_postproc;
 
-    GLuint uniform_fbo_depth;
-    GLuint uniform_fbo_texture;
-    GLuint uniform_kern_x;
-    GLuint uniform_kern_y;
+    GLint uniform_fbo_depth;
+    GLint uniform_fbo_texture;
+    GLint uniform_kern_x;
+    GLint uniform_kern_y;
 
 //        std::vector<GLuint> uniforms;
 //        std::vector<GLuint> attributes;

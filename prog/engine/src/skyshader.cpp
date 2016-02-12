@@ -35,9 +35,9 @@ void SkyShader::init(GLuint global_uniforms_binding)
         glBindBuffer(GL_ARRAY_BUFFER, 0);
 
         // get/enable attribs/uniforms and everything
-        char* attribute_name = "vertex";
+        char const *attribute_name = "vertex";
         attributes.vertex = glGetAttribLocation(getProgramID(), attribute_name);
-        if (attributes.vertex == -1)
+        if (attributes.vertex == -1) // wtf is this GLuint and negative int comparison????
         {
             fprintf(stderr, "Could not bind attribute %s\n", attribute_name);
     //        return 0;
@@ -91,19 +91,19 @@ void SkyShader::init(GLuint global_uniforms_binding)
 //        delete [] tris;
 //    }
 
-    // global data
-    // ASSIGN a block index to "GlobalUniforms" in Program
-    //
-    //       Binding0
-    //             \
-    //   Program    UBO
-    //
+// global data
+// ASSIGN a block index to "GlobalUniforms" in Program
+//
+//       Binding0
+//              |
+//   Program    UBO
+//
     uniforms.globalUniformsBlockIndex = glGetUniformBlockIndex(getProgramID(), "GlobalUniforms");
 
 //    // CONNECT the UBO to the Binding Index
 //    //
 //    //       Binding0
-//    //       /     \                Finished!
+//    //       /       |                Finished!
 //    //   Program    UBO
 //    //
     glUniformBlockBinding(getProgramID(), uniforms.globalUniformsBlockIndex ,

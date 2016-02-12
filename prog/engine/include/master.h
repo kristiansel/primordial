@@ -100,6 +100,7 @@ private:
     };
 
     int m_restart;
+
 };
 
 #endif // MASTER_H

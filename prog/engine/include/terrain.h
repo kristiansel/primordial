@@ -103,7 +103,6 @@ class Terrain
         glm::vec3 anchor_position; // the center of the currently loaded terrain
 
         unsigned int m_corePatchDim;
-
 };
 
 #endif // TERRAIN_H

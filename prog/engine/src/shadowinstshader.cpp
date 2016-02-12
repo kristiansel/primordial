@@ -29,7 +29,7 @@ void ShadowInstShader::init(GLuint global_uniforms_binding)
     // ASSIGN a block index to "GlobalUniforms" in Program
     //
     //       Binding0
-    //             \
+    //             |
     //   Program    UBO
     //
     uniforms.globalUniformsBlockIndex = glGetUniformBlockIndex(getProgramID(), "GlobalUniforms");
@@ -37,7 +37,7 @@ void ShadowInstShader::init(GLuint global_uniforms_binding)
 //    // CONNECT the UBO to the Binding Index
 //    //
 //    //       Binding0
-//    //       /     \                Finished!
+//    //       /     |                Finished!
 //    //   Program    UBO
 //    //
     glUniformBlockBinding(getProgramID(), uniforms.globalUniformsBlockIndex ,

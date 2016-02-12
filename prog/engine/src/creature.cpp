@@ -46,7 +46,7 @@ void Creature::resolveActionRequests(float dt)
     // Check if on ground
     bool on_ground = char_contr->onGround();
 
-    sSignal temp_prev_signal = doing.signal;
+    // sSignal temp_prev_signal = doing.signal;
 
     // decrement the time
     doing.time -=dt;
@@ -84,8 +84,8 @@ void Creature::resolveActionRequests(float dt)
                     // 00000100, 00000111 -> left                       4, 7
                     // 00001000, 00001011 -> right                      8, 11
 
-                    float forw_displ = 0.0;
-                    float left_displ = 0.0;
+                    //float forw_displ = 0.0;
+                    //float left_displ = 0.0;
 
                     float forw_speed = 0.0;
                     float left_speed = 0.0;
@@ -336,6 +336,10 @@ void Creature::resolveActionRequests(float dt)
 
                 //char_contr->jump();
             } break;
+            default:
+            {
+                // do nothing
+            }
         } // switch
     } // if signal received
     else // No signal received
@@ -382,7 +386,8 @@ void Creature::resolveActionRequests(float dt)
 
     state.prev_dirflags = state.dirflags;
 
-    // follow up on the currently doing action (could implement some generic action interface later)
+    // follow up on the currently doing action (could implement some generic
+    // action interface later)
     switch (doing.signal)
     {
         case sSignal::sMove:
@@ -510,7 +515,11 @@ void Creature::resolveActionRequests(float dt)
             }
 
         } break;
-    }
+        default:
+        {
+            // do nothing
+        }
+    } // switch
 
     char_contr->applyMoveController();
                                            // in front     up

@@ -102,7 +102,7 @@ void Mesh::fromFile2(string mesh_key)
         vertices = new Vertex [vertex_num];
         if (debug) std::cout << "num vertices: " << vertex_num << "\n";
 
-        for (int i_verts = 0; i_verts < vertex_num; i_verts++)
+        for (unsigned int i_verts = 0; i_verts < vertex_num; i_verts++)
         {
             Vertex* vert = &vertices[i_verts];
 
@@ -121,9 +121,9 @@ void Mesh::fromFile2(string mesh_key)
                 std::cout << "vID: " << i_verts << "\n"
                           << "   p(" << vert->position.x << ", " << vert->position.y << ", " << vert->position.z << ", " << vert->position.w << ")\n"
                           << "   n(" << vert->normal.x << ", " << vert->normal.y << ", " << vert->normal.z << ")\n";
-                std::cout << "   b "; for (int ibw = 0; ibw<MAX_BONE_INFLUENCES; ibw++) std::cout<<vert->bone_indices[ibw]<<"\t";
+                std::cout << "   b "; for (unsigned int ibw = 0; ibw<MAX_BONE_INFLUENCES; ibw++) std::cout<<vert->bone_indices[ibw]<<"\t";
                 std::cout << "\n";
-                std::cout << "   w "; for (int ibw = 0; ibw<MAX_BONE_INFLUENCES; ibw++) std::cout<<vert->bone_weights[ibw]<<"\t";
+                std::cout << "   w "; for (unsigned int ibw = 0; ibw<MAX_BONE_INFLUENCES; ibw++) std::cout<<vert->bone_weights[ibw]<<"\t";
                 std::cout << "\n";
             }
 
@@ -135,7 +135,7 @@ void Mesh::fromFile2(string mesh_key)
         triangles = new Triangle [triangle_num];
         if (debug) std::cout << "trinum = " << triangle_num << std::endl;
 
-        for (int i_tri = 0; i_tri<triangle_num; i_tri++)
+        for (unsigned int i_tri = 0; i_tri<triangle_num; i_tri++)
         {
             Triangle* triangle = &(triangles[i_tri]);
             reader.chomp( &(triangle->indices[0]), 3*sizeof(unsigned short));
@@ -210,10 +210,10 @@ void Mesh::createGL(bool debug)
     // debug
     if (debug)
     {
-        for (int i = 0; i<triangle_num; i++)
+        for (unsigned int i = 0; i<triangle_num; i++)
         {
             std::cout << "triangle " << i << ": \n";
-            for (int j=0; j<3; j++)
+            for (unsigned int j=0; j<3; j++)
             {
                 Vertex* vert = &(vertices[triangles[i].indices[j]]);
                 std::cout << "  vertex " << j << ": \n";

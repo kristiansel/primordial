@@ -58,7 +58,7 @@ class Foliage
 //            };
 
             // temporary storage for sm_types
-            int sm_type_counter[NUM_SMALL_VISUAL_TYPES];
+            unsigned int sm_type_counter[NUM_SMALL_VISUAL_TYPES];
 
             void prepareBG_Foliage()
             {
@@ -72,7 +72,7 @@ class Foliage
             {
                 LockGuard lock_qt_trees(sm_mutex);
 
-                for (int i = 0; i<NUM_SMALL_VISUAL_TYPES; i++)
+                for (unsigned int i = 0; i<NUM_SMALL_VISUAL_TYPES; i++)
                 {
                     sm_type_counter[i] = 0;
                     sm_types[i].updated = true;
@@ -94,7 +94,7 @@ class Foliage
 //                                                this_type = FolSpec::Type::SpruceBB
 
                                         SmallVisual &sm_type = sm_types[fol_dat.type];
-                                        int &counter = sm_type_counter[fol_dat.type];
+                                        unsigned int &counter = sm_type_counter[fol_dat.type];
 
                                         if (counter<SmallVisual::MAX_NUM_SMVIS)
                                         {
@@ -107,7 +107,7 @@ class Foliage
                                         } // if (i<SmallVisual::MAX_NUM_SMVIS)
                                     });
 
-                for (int i = 0; i<NUM_SMALL_VISUAL_TYPES; i++)
+                for (unsigned int i = 0; i<NUM_SMALL_VISUAL_TYPES; i++)
                 {
                     sm_types[i].num_smvis = sm_type_counter[i];
                     //std::cout << "count " << i << ": " << sm_types[i].num_smvis << "\n";

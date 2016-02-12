@@ -181,7 +181,7 @@ void Renderer::draw(World &world, float dt)
 //            //std::cout << "NOT updating small_visual positions\n";
 //        }
 
-        for (int i = 0; i<Foliage::BG_Thread::NUM_SMALL_VISUAL_TYPES; i++)
+        for (unsigned int i = 0; i<Foliage::BG_Thread::NUM_SMALL_VISUAL_TYPES; i++)
         {
             if (!(world.foliage.bg_thread.sm_types[i].updated))
             {
@@ -263,10 +263,10 @@ void Renderer::draw(World &world, float dt)
             main_shader.drawProp(*it);
         }
 
-        int i = 0;
+        //int i = 0;
         for (auto it = terrain_patches->begin(); it!=terrain_patches->end(); it++)
         {
-            QuadAABB &aabb = it->world_aabb;
+//            QuadAABB &aabb = it->world_aabb;
 //
 //            if (i==18)
 //            {
@@ -327,7 +327,7 @@ void Renderer::draw(World &world, float dt)
 //
 //
 //        }
-        for (int i = 0; i<Foliage::BG_Thread::NUM_SMALL_VISUAL_TYPES; i++)
+        for (unsigned int i = 0; i<Foliage::BG_Thread::NUM_SMALL_VISUAL_TYPES; i++)
         {
             if (world.foliage.bg_thread.sm_types[i].num_smvis > 0)
                 grass_shader.extDraw(world.foliage.bg_thread.sm_types[i], *(world.active_cam),

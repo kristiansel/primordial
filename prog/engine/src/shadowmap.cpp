@@ -1,13 +1,13 @@
 #include "shadowmap.h"
 
 ShadowMap::ShadowMap() :
+    uniforms{0, 0, 0},
     fbo(0),
     tex_depth(0),
-    uniforms({0}),
-//    attributes({0}),
+    //    attributes({0}),
     light_vp_value(glm::mat4(1.0)),
-    triggered(0),
-    resolution(1024) // 1024
+    resolution(1024), // 1024
+    triggered(0)
 {
     for (int i_cm = 0; i_cm<MAX_BONE_NUM; i_cm++)
     {
@@ -46,8 +46,9 @@ void ShadowMap::init()
     GLenum status;
     if ((status = glCheckFramebufferStatus(GL_FRAMEBUFFER)) != GL_FRAMEBUFFER_COMPLETE)
     {
-        fprintf(stderr, "glCheckFramebufferStatus original image: error %p", status);
-        std::cout<<"\n";
+        //fprintf(stderr, "glCheckFramebufferStatus original image: error %p", status);
+        //std::cout<<"\n";
+        std::cerr<<"glCheckFramebufferStatus original image: error " << status << std::endl;
     }
 
     glBindFramebuffer(GL_FRAMEBUFFER, 0);

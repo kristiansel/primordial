@@ -26,10 +26,10 @@ struct SignalReceiver
 
     // Change the of this class to Controllable/Observable
     // observing functions
-    virtual bool isAttacking() {std::cerr << "isAttacking observation requested, not implemented\n";};
-    virtual bool isBlocking() {std::cerr << "isBlocking observation requested, not implemented\n";};
-    virtual bool isInCombat() {std::cerr << "isInCombat observation requested, not implemented\n";};
-    virtual bool isDodging() {std::cerr << "isDodging observation requested, not implemented\n";};
+    virtual bool isAttacking() {std::cerr << "isAttacking observation requested, not implemented\n"; return false;};
+    virtual bool isBlocking() {std::cerr << "isBlocking observation requested, not implemented\n"; return false;};
+    virtual bool isInCombat() {std::cerr << "isInCombat observation requested, not implemented\n"; return false;};
+    virtual bool isDodging() {std::cerr << "isDodging observation requested, not implemented\n"; return false;};
 
     // should have something like isDoing(Action::Block) // where Action::Block is a bit flag
 };

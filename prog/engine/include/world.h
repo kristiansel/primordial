@@ -51,6 +51,13 @@ class World : public PhysicsWorld // Consider merging Culling functionality into
                                                          string tex_key,
                                                          glm::vec3 pos);
 
+        void delCreature(list<shared_ptr<Creature>>::iterator creature_it_in);
+        void mainLight(glm::vec3 dir, glm::vec4 color );
+        void addTerrain();
+        void updateObserver(const glm::vec3 &observer_pos);
+        void startMusic(string soundKey);
+//        // Step
+//        void step(float dt_in);
 
         //vector<shared_ptr<Prop>> instanced_objects;
 
@@ -63,26 +70,27 @@ class World : public PhysicsWorld // Consider merging Culling functionality into
 
         //std::vector<SmallVisual> small_visuals;
 
+        // Safe pointers are for wimps...
+        Camera *freecam;    // Owning pointer
+        Camera *chasecam;   // Owning pointer
+        Camera const *active_cam; // Non-owning pointer (points to either above) // ORDER IMPORTANT!
+
+        // lights
+        DirLight* main_light;
+        static const int MAX_NUM_POINT_LIGHTS = 5;
+        int num_point_lights;
+        PointLight* point_lights;
+
+        // music
+        sf::Music* music;
+
+        // foliage
         Foliage foliage;
 
-
-        void delCreature(list<shared_ptr<Creature>>::iterator creature_it_in);
-
-        void mainLight(glm::vec3 dir, glm::vec4 color );
-
-        void addTerrain();
-
-        void updateObserver(const glm::vec3 &observer_pos);
-
-//        // Step
-//        void step(float dt_in);
-
-        void startMusic(string soundKey);
-        sf::Music* music;
+        // Late initialized
 
 //        void startAmbient(string soundKey);
 //        sf::Sound* ambient;
-
 
         // "Physical" Contents (could with benefit be private?)
         list<shared_ptr<WorldObject>>    worldobjects;
@@ -95,17 +103,8 @@ class World : public PhysicsWorld // Consider merging Culling functionality into
         //shared_ptr<Camera> camera; // Shared pointer here, because we do not want other shared
         // pointers to accidentally delete the camera.
 
-        // Safe pointers are for wimps...
-        Camera *freecam;    // Owning pointer
-        Camera *chasecam;   // Owning pointer
-        Camera const *active_cam; // Non-owning pointer (points to either above)
 
-        DirLight* main_light;
 
-        // Point lights
-        static const int MAX_NUM_POINT_LIGHTS = 5;
-        int num_point_lights;
-        PointLight* point_lights;
 
         static constexpr btCollisionShape* NO_COLLISION = (btCollisionShape*)(-12345);
 

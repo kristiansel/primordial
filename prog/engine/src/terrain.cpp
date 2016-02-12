@@ -8,12 +8,12 @@ Terrain::Terrain() :
     m_centerX(0.0), // 0.0
     m_centerZ(0.0), // 0.0
     m_patchLength(300), // 32, 96
+    m_numPatchSubd(7),
     m_physicsWorld(nullptr),
     m_terrainBody(nullptr),
     m_heightData0(nullptr),
-    m_corePatchDim(8), // 4, 32
-    m_numPatchSubd(7),
-    phys_anchor_l_sq(1024) // physics moves when distance to anchor = 32 m
+    phys_anchor_l_sq(1024), // physics moves when distance to anchor = 32 m
+    m_corePatchDim(8) // 4, 32
 {
     //ctor
     //m_sqLODthresh = {}
@@ -26,7 +26,7 @@ Terrain::~Terrain()
 }
 
 TerrainPatch::TerrainPatch() :
-    diff_lvl({-100, -100, -100, -100})
+    diff_lvl{-100, -100, -100, -100}
 {
     prop = std::shared_ptr<Prop>(new Prop);
     mesh = std::shared_ptr<Mesh>(new Mesh);
@@ -34,7 +34,7 @@ TerrainPatch::TerrainPatch() :
 }
 
 TerrainPatch::TerrainPatch(unsigned int subd_lvl_in) :
-    diff_lvl({-100, -100, -100, -100})
+    diff_lvl{-100, -100, -100, -100}
 {
     prop = std::shared_ptr<Prop>(new Prop);
     mesh = std::shared_ptr<Mesh>(new Mesh);
@@ -196,9 +196,9 @@ void Terrain::subdividedQuads(Vertex* &vertices,
 //            verts[2].tex_coords[0] = 1.0; verts[2].tex_coords[1] = 1.0; verts[2].tex_coords[2] = getThirdTexCo(verts[2].normal, verts[2].position.y);
 //            verts[3].tex_coords[0] = 1.0; verts[3].tex_coords[1] = 0.0; verts[3].tex_coords[2] = getThirdTexCo(verts[3].normal, verts[3].position.y);
 
-            for (int i = 0; i<4; i++)
+            for (unsigned int i = 0; i<4; i++)
             {
-                for (int n_bon = 0; n_bon<MAX_BONE_INFLUENCES; n_bon++)
+                for (unsigned int n_bon = 0; n_bon<MAX_BONE_INFLUENCES; n_bon++)
                 {
                     verts[i].bone_indices[n_bon] = 0;
                     if (n_bon == 0)
@@ -457,10 +457,10 @@ void Terrain::generateGraphicsPatch(glm::vec3 center, float patch_length, unsign
     delete [] tris;
 
 
-    terrain_patch->prop->pos = glm::vec3(center.x, 0.0, center.z);
+    terrain_patch->prop->pos = glm::vec3(center.x, 0.0f, center.z);
 
     // assign an axis aligned bounding box (used for culling)
-    terrain_patch->world_aabb = QuadAABB({center.x-patch_length/2.0, center.x+patch_length/2.0, center.z-patch_length/2.0, center.z+patch_length/2.0});
+    terrain_patch->world_aabb = QuadAABB({center.x-patch_length/2.0f, center.x+patch_length/2.0f, center.z-patch_length/2.0f, center.z+patch_length/2.0f});
 
     // get the placeholder terrain texture
     //std::weak_ptr<Mesh>      mesh_ptr    = global::mesh_manager.getResptrFromKey ("simple_plane");
@@ -488,9 +488,9 @@ void Terrain::generatePhysicsPatch(glm::vec3 center, float sideLength, int num_q
     float min_height = 99999.0;
     float max_height = -99999.0;
 
-    for (int i = 0; i<m_dimPhysHeights; i++)
+    for (unsigned int i = 0; i<m_dimPhysHeights; i++)
     {
-       for (int j = 0; j<m_dimPhysHeights; j++)
+       for (unsigned int j = 0; j<m_dimPhysHeights; j++)
        {
             float x = center.x-sideLength/2.0 + j*spacing;
             float z = center.z-sideLength/2.0 + i*spacing;
@@ -523,9 +523,9 @@ void Terrain::updatePhysicsTerrain(glm::vec3 center)
     float min_height = 99999.0;
     float max_height = -99999.0;
 
-    for (int i = 0; i<m_dimPhysHeights; i++)
+    for (unsigned int i = 0; i<m_dimPhysHeights; i++)
     {
-       for (int j = 0; j<m_dimPhysHeights; j++)
+       for (unsigned int j = 0; j<m_dimPhysHeights; j++)
        {
             float x = center.x-m_sidePhysHeights/2.0 + j*m_spacingPhysHeights;
             float z = center.z-m_sidePhysHeights/2.0 + i*m_spacingPhysHeights;
@@ -593,13 +593,13 @@ void Terrain::generateHeightMap()
 
         int scale_factor = pow(2, depth);
 
-        for (int j = 0; j<num_quads; j++)
+        for (unsigned int j = 0; j<num_quads; j++)
         {
 //                std::cout << "yrow========================\n";
             // update y
             unsigned int low_y = j*length_scale;
             unsigned int high_y = (j+1)*length_scale;
-            for (int i = 0; i<num_quads; i++)
+            for (unsigned int i = 0; i<num_quads; i++)
             {
 //                    std::cout << "xrow============\n";
                 unsigned int low_x = i*length_scale;
@@ -664,9 +664,9 @@ void Terrain::generateHeightMap()
     unsigned int y_side = 46 < m_dimension? 46 : m_dimension;
 
 //        std::cout << "seed = " << m_seed << ":\n";
-    for (int j = 0; j<y_side; j++)
+    for (unsigned int j = 0; j<y_side; j++)
     {
-        for (int i = 0; i<x_side; i++)
+        for (unsigned int i = 0; i<x_side; i++)
         {
             unsigned int x_ind = int((float)(i)/(float)(x_side)*m_dimension);
             unsigned int y_ind = int((float)(j)/(float)(y_side)*m_dimension);
@@ -810,7 +810,7 @@ void Terrain::updateObserverPosition(glm::vec3 observer_position)
         }
 
         // create
-        for (int i = 0; i<m_corePatchDim; i++)
+        for (unsigned int i = 0; i<m_corePatchDim; i++)
         {
 
             float start_offset = (float)(m_corePatchDim-1)/2.0;
@@ -853,7 +853,7 @@ void Terrain::updateObserverPosition(glm::vec3 observer_position)
         }
 
         // create
-        for (int j = 0; j<m_corePatchDim; j++)
+        for (unsigned int j = 0; j<m_corePatchDim; j++)
         {
             float start_offset = (float)(m_corePatchDim-1)/2.0;
 
@@ -1032,7 +1032,7 @@ void Terrain::changeSubdLvl(unsigned int subd_lvl_in, TerrainPatch* terrain_patc
     terrain_patch->prop->pos = old_pos;
 
     // assign an axis aligned bounding box (used for culling)
-    terrain_patch->world_aabb = QuadAABB({old_pos.x-m_patchLength/2.0, old_pos.x+m_patchLength/2.0, old_pos.z-m_patchLength/2.0, old_pos.z+m_patchLength/2.0});
+    terrain_patch->world_aabb = QuadAABB({old_pos.x-m_patchLength/2.0f, old_pos.x+m_patchLength/2.0f, old_pos.z-m_patchLength/2.0f, old_pos.z+m_patchLength/2.0f});
 
 
     // get the placeholder terrain texture

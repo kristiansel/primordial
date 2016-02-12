@@ -5,10 +5,10 @@
 DynamicCharacterController::DynamicCharacterController () :
     gain(8000.0),
     f_max(5000.0), // 20000 too low. this will only limit "getting off the ground"
-    m_halfHeight(0.0),
-    on_ground(false),
     f_set(btVector3(0.0, 0.0, 0.0)),
     v_set(btVector3(0.0, 0.0, 0.0)),
+    m_halfHeight(0.0),
+    on_ground(false),
     m_footingNormal(glm::vec3(0.0, 1.0, 0.0))
 {
         m_shape = nullptr;

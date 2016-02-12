@@ -1,6 +1,9 @@
 #include "texture.h"
 
-Texture::Texture() : load_stage(NotLoaded), tbo_id(99999), v_ram_loaded(false)
+Texture::Texture() :
+    tbo_id(99999),
+    load_stage(NotLoaded),
+    v_ram_loaded(false)
 {
     //ctor
 }

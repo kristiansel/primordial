@@ -52,8 +52,7 @@ void RenderStage::init(int w, int h)
         GLenum status;
         if ((status = glCheckFramebufferStatus(GL_FRAMEBUFFER)) != GL_FRAMEBUFFER_COMPLETE)
         {
-            fprintf(stderr, "glCheckFramebufferStatus original image: error %p", status);
-            std::cout<<"\n";
+            std::cout << "glCheckFramebufferStatus original image: error " << status << std::endl;
         }
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 

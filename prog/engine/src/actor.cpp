@@ -1,13 +1,14 @@
 #include "actor.h"
 
 
-Actor::Actor() : num_pose_matrices(1),
+Actor::Actor() : skel_ptr(nullptr),
+                 num_pose_matrices(1),
                  pose_matrices(new glm::mat4(1.0)),
                  active_anim(-1),
+                 main_anim_uid(-1),
+                 m_stagger_time(0.0),
                  paused(true),
-                 speed_factor(1.0),
-                 skel_ptr(nullptr),
-                 m_stagger_time(0.0)
+                 speed_factor(1.0)
 {
     // Actors with no attached skeleton will have a default
     // identity matrix, as not to crash vertex shader
@@ -194,7 +195,7 @@ void Actor::updateAnim(float dt)
             {
                 if (parent_index<num_pose_matrices && parent_index>=0)
                 {
-                    int parent = render_batch.parent_bone;
+                    // int parent = render_batch.parent_bone;
 
                     // This code is a work-around (the price of not having a proper scene graph)
                     glm::mat4 id(1.0);
@@ -237,6 +238,7 @@ void Actor::updateAnim(float dt)
 bool Actor::poseMatrices(glm::mat4* mat_ptr)
 {
     skel_ptr->poseMatricesBlend(mat_ptr, active_anims);
+    return true;
 }
 
 void Actor::pauseAnim()
@@ -279,7 +281,7 @@ int Actor::getActiveAnimIndex() const
 
 int Actor::getNumAnims() const
 {
-    if (skel_ptr) return skel_ptr->getNumAnims();
+    return skel_ptr ? skel_ptr->getNumAnims() : 0;
 }
 
 float Actor::getAnimDuration(int anim_index)

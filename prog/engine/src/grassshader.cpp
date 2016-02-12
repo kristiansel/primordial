@@ -48,7 +48,7 @@ void GrassShader::init(GLuint shadowmap_depth_texture, GLuint global_uniforms_bi
     // ASSIGN a block index to "GlobalUniforms" in Program
     //
     //       Binding0
-    //             \
+    //             |
     //   Program    UBO
     //
     uniforms.globalUniformsBlockIndex = glGetUniformBlockIndex(getProgramID(), "GlobalUniforms");

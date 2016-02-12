@@ -54,8 +54,9 @@ void CombinationStage::init(int w, int h)
         GLenum status;
         if ((status = glCheckFramebufferStatus(GL_FRAMEBUFFER)) != GL_FRAMEBUFFER_COMPLETE)
         {
-            fprintf(stderr, "glCheckFramebufferStatus original image: error %p", status);
-            std::cout<<"\n";
+            //fprintf(stderr, "glCheckFramebufferStatus original image: error %p", status);
+            //std::cout<<"\n";
+            std::cout << "glCheckFramebufferStatus original image: error " << status << std::endl;
         }
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
@@ -77,7 +78,7 @@ void CombinationStage::init(int w, int h)
     ShaderBase::load("shaders/pp_wave.vert.glsl", "shaders/pp_comb.frag.glsl");
 
     // get/enable attribs/uniforms and everything
-    char* attribute_name = "v_coord";
+    char const *attribute_name = "v_coord";
     attribute_v_coord_postproc = glGetAttribLocation(getProgramID(), attribute_name);
     if (attribute_v_coord_postproc == -1)
     {
