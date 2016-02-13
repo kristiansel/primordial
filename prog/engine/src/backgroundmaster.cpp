@@ -4,6 +4,7 @@ BackGroundMaster::BackGroundMaster(World *world_in) :
     world(world_in),
     test_var(4.0)
 {
+    //std::cout << "is this ever called??\n";
     //ctor
     for (int i = 0; i<D_PATCH_NUM; i++)
     {
@@ -16,6 +17,7 @@ BackGroundMaster::BackGroundMaster(World *world_in) :
 BackGroundMaster::~BackGroundMaster()
 {
     //dtor
+    //std::cout << "is this ever called??\n";
 }
 
 void BackGroundMaster::initTasks()

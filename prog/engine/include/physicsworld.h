@@ -64,6 +64,9 @@ class PhysicsWorld
         //container of physics objects
         btDiscreteDynamicsWorld* dynamicsWorld;
 
+
+        btGhostPairCallback* ghostPairCallback;
+
         //collision shapes
         btAlignedObjectArray<btCollisionShape*> collisionShapes;
 

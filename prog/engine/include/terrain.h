@@ -87,11 +87,11 @@ class Terrain
         unsigned int m_numPatchSubd;
         float m_maxDistSq;
 
-        PhysicsWorld* m_physicsWorld;
-        btRigidBody* m_terrainBody;
+        PhysicsWorld* m_physicsWorld; // owned by physics
+        btRigidBody* m_terrainBody; // owned by physics
 
         unsigned int m_dimPhysHeights;
-        float* m_heightData0;
+        float* m_heightData0; // owned by this class, woops, make sure not to leak
 
         float m_spacingPhysHeights;
         float m_sidePhysHeights;

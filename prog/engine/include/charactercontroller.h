@@ -21,6 +21,7 @@ protected:
         // Threat region (for attacking)
         btCollisionShape* m_threat_shape;
         btGhostObject* m_threat_object;
+        // btGhostPairCallback* m_ghostCall;
 
 
 public:

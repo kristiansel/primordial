@@ -73,7 +73,11 @@ Master::Master() :
 
 Master::~Master()
 {
+    std::cout << "MASTER DESTRUCTOP CALLED\n";
     // dtor
+    // if (window.isOpen()) window.close(); // experimental, did not work
+    window.close();
+    //back_ground.join(); // experimental: woops deadlock....
 }
 
 void Master::initWindow()

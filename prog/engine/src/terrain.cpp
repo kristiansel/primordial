@@ -23,6 +23,7 @@ Terrain::Terrain() :
 Terrain::~Terrain()
 {
     //dtor
+    if (m_heightData0) delete [] m_heightData0; // how does this check out ordering-wise?
 }
 
 TerrainPatch::TerrainPatch() :
@@ -78,7 +79,7 @@ std::vector<TerrainPatch>* Terrain::getPatches()
 
 float Terrain::getThirdTexCo(const glm::vec3 &normal, const float &height)
 {
-    float horz_length = pow(glm::length(glm::vec2(normal.x, normal.z)), 0.7); // 0...1.0
+    float horz_length = pow(glm::length(glm::vec2(normal.x, normal.z)), 0.7f); // 0...1.0
 
     float height_comp;
     float height_low = 0.0;

@@ -28,11 +28,8 @@
 *~
 
 # Codeblocks binary folders
-*/bin/*
-*/obj/*
-
-# Valgrind files
-*.cachegrind.*
+bin
+obj
 
 # Blender files
 *.blend1
@@ -40,6 +37,11 @@
 
 # Valgrind results
 *ValgrindOut*
+*cachegrind*
+*memcheck*
+
+# gprof output files
+gmon.out
 
 # Collada files
 *.dae

@@ -16,10 +16,13 @@ DynamicCharacterController::DynamicCharacterController () :
 
         m_threat_shape = nullptr;
         m_threat_object = nullptr;
+
+//        m_ghostCall = nullptr;
 }
 
 DynamicCharacterController::~DynamicCharacterController ()
 {
+    destroy();
 }
 
 void DynamicCharacterController::setup (btDynamicsWorld* dynamicsWorld, btScalar height, btScalar radius, glm::vec3 pos, btScalar mass)
@@ -58,8 +61,8 @@ void DynamicCharacterController::setup (btDynamicsWorld* dynamicsWorld, btScalar
         // 2x2x2 m box;
         m_threat_shape = new btBoxShape (btVector3(0.30, 0.5, 0.5));
 
-        btGhostPairCallback* ghostCall = new btGhostPairCallback();
-        dynamicsWorld->getBroadphase()->getOverlappingPairCache()->setInternalGhostPairCallback(ghostCall);
+        //m_ghostCall = new btGhostPairCallback(); // why is this even here?
+        //dynamicsWorld->getBroadphase()->getOverlappingPairCache()->setInternalGhostPairCallback(m_ghostCall); // why?
 
         m_threat_object = new btGhostObject();
 
@@ -90,27 +93,37 @@ void DynamicCharacterController::updateThreatRegionTransf(glm::vec3 pos, glm::qu
 
 void DynamicCharacterController::destroy ()
 {
-        if (m_shape)
-        {
-                delete m_shape;
-        }
 
-        if (m_rigidBody)
-        {
-                m_dynamicsWorld->removeRigidBody (m_rigidBody);
-                delete m_rigidBody;
-        }
+    if (m_shape)
+    {
+            delete m_shape;
+            m_shape = nullptr;
+    }
 
-        if (m_threat_shape)
-        {
-                delete m_threat_shape;
-        }
+    if (m_rigidBody)
+    {
+            auto motionState = m_rigidBody->getMotionState(); // experimental
+            if (motionState) delete motionState; // experimental: works fine..
 
-        if (m_threat_object)
-        {
-                m_dynamicsWorld->removeCollisionObject(m_threat_object);
-                delete m_threat_object;
-        }
+            m_dynamicsWorld->removeRigidBody (m_rigidBody);
+            delete m_rigidBody;
+            m_rigidBody = nullptr;
+    }
+
+    if (m_threat_shape)
+    {
+            delete m_threat_shape;
+            m_threat_shape = nullptr;
+    }
+
+    //if (m_ghostCall) delete m_ghostCall;
+
+    if (m_threat_object)
+    {
+            m_dynamicsWorld->removeCollisionObject(m_threat_object);
+            delete m_threat_object;
+            m_threat_object = nullptr;
+    }
 }
 
 void DynamicCharacterController::setVelocity(glm::vec3 v)

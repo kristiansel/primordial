@@ -21,6 +21,10 @@ PhysicsWorld::PhysicsWorld()
     // Set gravity (have to be a little bit accurate :)
 	dynamicsWorld->setGravity(btVector3(0,-9.81,0));
 
+	// ghost collision callback
+    ghostPairCallback = new btGhostPairCallback(); // needed for hit-testing "non-physics" shapes
+    dynamicsWorld->getBroadphase()->getOverlappingPairCache()->setInternalGhostPairCallback(ghostPairCallback); // why?
+
 	// create debug drawer
     debugDraw = new DebugDrawer;
 
@@ -58,7 +62,6 @@ void PhysicsWorld::addPhysicsDynamic(RigidBody* rigidbody, btCollisionShape* sha
 
     // Set starting translation
     startTransform.setOrigin(btVector3(rigidbody->pos.x, rigidbody->pos.y, rigidbody->pos.z));
-
 
     //using motionstate is recommended, it provides interpolation capabilities, and only synchronizes 'active' objects
     btDefaultMotionState* myMotionState = new btDefaultMotionState(startTransform);
@@ -253,6 +256,9 @@ PhysicsWorld::~PhysicsWorld()
 	}
 	//delete debug draw ?
 	delete debugDraw;
+
+	// delete ghost pair callback
+	delete ghostPairCallback;
 
 	//delete dynamics world
 	delete dynamicsWorld;
