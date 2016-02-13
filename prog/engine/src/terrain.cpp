@@ -556,7 +556,7 @@ double rand_range(double a, double b)
 }
 
 void Terrain::generateHeightMap()
-{
+{ //UNINITCOND azb stack allocated, check local variables: PASS 1: Trivial -->
     double range = 8000.0; // m
 
     //srand(23798); // removing this gives a nice one
@@ -640,7 +640,7 @@ void Terrain::generateHeightMap()
     }
 
     // adjust water lvl
-    float av_height;
+    float av_height = 0.f; // oh fudge... this one was causing UNINITCOND before
     float num_cells = m_dimension*m_dimension;
 
     for (int i = 0; i<m_dimension; i++)

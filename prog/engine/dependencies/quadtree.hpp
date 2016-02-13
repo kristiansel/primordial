@@ -39,6 +39,8 @@ struct QuadFrustum
 {
     glm::vec4 p[4];
 
+    //QuadFrustum() : p{glm::vec4(0.0f), glm::vec4(0.0f), glm::vec4(0.0f), glm::vec4(0.0f)} {};
+
     bool containsPoint(float x, float z)
     {
         bool test01 = ((x - p[0].x) * (p[1].z - p[0].z) - (p[1].x - p[0].x) * (z - p[0].z)) >= 0;

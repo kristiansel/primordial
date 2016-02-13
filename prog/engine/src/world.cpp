@@ -246,7 +246,7 @@ list<shared_ptr<Creature>>::iterator World::addCreature(string mesh_key, string 
 //shared_ptr<Creature> World::addCreature(string mesh_key, string tex_key, glm::vec3 pos, glm::vec3 dir)
 {
     // create a blank creature
-    shared_ptr<Creature> creature = shared_ptr<Creature>(new Creature);
+    shared_ptr<Creature> creature = shared_ptr<Creature>(new Creature); //VALGRIND: UNINITCOND aza heap allocated
 
     { // Construct creature
         creature->pos = pos;         // configure position

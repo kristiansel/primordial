@@ -14,7 +14,10 @@ Creature::Creature() :
             false//,              //moveInterrupted
             //sSignal::sNothing   //
             } ),
-    doing( {sSignal::sNothing, 0.000, false}),
+    doing( {sSignal::sNothing,
+            0.000,
+            false}),
+    candidate( {sSignal::sNothing}),
     char_contr(new DynamicCharacterController),
     snd_emitter(new SoundEmitter),
     target_creature(nullptr),
@@ -24,6 +27,12 @@ Creature::Creature() :
     //ctor
 //    signal_stack.reserve(signal_stack_capacity);
 
+    // initialize signal stack memory
+    for (unsigned int i = 0; i<SIG_REG_SIZE; i++)
+    {
+        doing.reg[i] = sSignal::sNothing;
+        candidate.reg[i] = sSignal::sNothing;
+    }
     // can not set user of the character controller here... until the char controller is initialized
 }
 

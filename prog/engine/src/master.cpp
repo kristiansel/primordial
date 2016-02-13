@@ -431,12 +431,12 @@ bool Master::handleInput()
                 break;
             default:
                 break;
-            }
+            } // key pressed
             break;
         default:
             break;
-        }
-    }
+        } // event type
+    } // while window.pollevent
 
     if (has_focus)
     {

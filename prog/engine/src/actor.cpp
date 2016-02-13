@@ -3,12 +3,13 @@
 
 Actor::Actor() : skel_ptr(nullptr),
                  num_pose_matrices(1),
-                 pose_matrices(new glm::mat4(1.0)),
+                 pose_matrices(nullptr),
                  active_anim(-1),
                  main_anim_uid(-1),
                  m_stagger_time(0.0),
                  paused(true),
-                 speed_factor(1.0)
+                 speed_factor(1.0),
+                 uid_gen{1}
 {
     // Actors with no attached skeleton will have a default
     // identity matrix, as not to crash vertex shader
@@ -34,7 +35,7 @@ void Actor::attachSkeleton(std::weak_ptr<Skeleton> skel_ptr_in)
     auto shared_skel_ptr = std::shared_ptr<Skeleton>(skel_ptr);
 
     // Delete old matrices
-    delete [] pose_matrices;
+    if (pose_matrices) delete [] pose_matrices;
 
 //    // Set num_pose_matrices
 //    num_pose_matrices = shared_skel_ptr->getNumBones();
@@ -156,7 +157,7 @@ void Actor::updateAnim(float dt)
 
             float weight_change = advance_time/blend_time; // 1.0 * fraction of blend_time
 
-            if (anim.uid == main_anim_uid) // It is the main active animation
+            if (anim.uid == main_anim_uid) // It is the main active animation : VALGRIND: UNINITCOND aza used
             {
                 // increase blend weight
                 float new_weight = anim.blend_weight + weight_change;

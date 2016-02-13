@@ -77,7 +77,7 @@ class Actor : public Prop
         // Of course blending together different times
         struct ClipUIDgenerator
         {
-            int uid; // no need to initialize (do not care about value)
+            int uid; // no need to initialize (do not care about value) <--- oh sh** valgrind cares...
             int getClipUID()
             {
                 // increment val and return it
