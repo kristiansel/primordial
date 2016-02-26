@@ -86,7 +86,7 @@ void BackGroundMaster::mainLoop()
 
         //glm::vec3 my_vec = glm::vec3(1.0, 1.0, 1.0);
 
-        checkAndFill(QuadAABB({0.0, 0.0, 0.0, 0.0}), FolSpec::Type::GrassSpring, 5.0);
+        //checkAndFill(QuadAABB({0.0, 0.0, 0.0, 0.0}), FolSpec::Type::GrassSpring, 5.0);
 
         ThreadSleep_milli(10); // sleep for 1/100 second
     }

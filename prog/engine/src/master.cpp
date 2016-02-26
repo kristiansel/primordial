@@ -43,7 +43,14 @@ Master::Master() :
         back_ground = Thread(&Master::backGroundTasks, this);
         //backGroundTasks(); // serially
 
+        // enter the main loop
         mainLoopSingleThreaded();
+
+        // this point is reached when an exit signal has been received
+        // join background threads
+        back_ground.join(); //
+
+
     }
     // Launch threads
     // render_thread = Thread(&Master::renderTasks, this);
@@ -468,7 +475,7 @@ void Master::backGroundTasks()
 //
     bg_thread.initTasks();
 
-    bg_thread.mainLoop();
+    //bg_thread.mainLoop();
 }
 
 
