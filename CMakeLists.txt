@@ -16,21 +16,21 @@ set(CMAKE_DEBUG_POSTFIX "_d")
 set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_BINARY_DIR}/dist")
 
 # Find SFML
-find_package(SFML REQUIRED)
+find_package(SFML 2 REQUIRED system window graphics audio)
 
 if(NOT SFML_FOUND)
 	message(SEND_ERROR "Failed to find SFML.")
 endif()
 
 # Find OpenGL
-find_package(GL REQUIRED)
+find_package(OpenGL REQUIRED)
 
-if(NOT GL_FOUND)
+if(NOT OPENGL_FOUND)
 	message(SEND_ERROR "Failed to find OpenGL.")
 endif()
 
 # Find GLEW
-find_package(GlEW REQUIRED)
+find_package(GLEW REQUIRED)
 
 if(NOT GLEW_FOUND)
 	message(SEND_ERROR "Failed to find GLEW.")
@@ -50,9 +50,7 @@ if(NOT X11_FOUND)
         message(SEND_ERROR "Failed to find X11.")
 endif()
 
-# Find Boost
-find_package(Boost REQUIRED)
-
+find_package( Boost 1.40 COMPONENTS system thread REQUIRED )
 if(NOT Boost_FOUND)
         message(SEND_ERROR "Failed to find Boost.")
 endif()
@@ -114,7 +112,6 @@ set(HDRS
 )
  
 set(SRCS
-    ./prog/tools/primordial_asset_importer/main.cpp
     ./prog/engine/main.cpp
     ./prog/engine/dependencies/glerrorcodes.cpp
     ./prog/engine/dependencies/threadingwrapper.cpp
@@ -160,19 +157,48 @@ set(SRCS
     ./prog/engine/src/prop.cpp
 )
 
+include_directories(
+    ${SFML_INCLUDE_DIRS}
+    ${GL_INCLUDE_DIRS}
+    ${GLEW_INCLUDE_DIRS}
+    ${BULLET_INCLUDE_DIRS}
+    ${X11_INCLUDE_DIRS}
+    ${Boost_INCLUDE_DIRS}
+    ./prog/engine/include/
+    ./prog/engine/dependencies/
+    ./prog/engine/src/
+)
+
 add_executable(Primordial WIN32 ${HDRS} ${SRCS})
 
-set_target_properties(AncientWorldSim PROPERTIES DEBUG_POSTFIX _d)
+set_target_properties(Primordial PROPERTIES DEBUG_POSTFIX _d)
 
-# message(STATUS "BULLET_INCLUDE_DIRS:         " ${BULLET_INCLUDE_DIRS})
+# message(STATUS "=====DEBUG MESSAGES======")
+# message(STATUS "SFML_LIBRARIES:         " ${SFML_LIBRARIES})
+
+message(STATUS "====INCLUDE DIRS====")
+message(STATUS "SFML_INCLUDE_DIRS:         " ${SFML_INCLUDE_DIRS})
+message(STATUS "OPENGL_INCLUDE_DIRS:         " ${OPENGL_INCLUDE_DIRS})
+message(STATUS "GLEW_INCLUDE_DIRS:         " ${GLEW_INCLUDE_DIRS})
+message(STATUS "BULLET_INCLUDE_DIRS:         " ${BULLET_INCLUDE_DIRS})
+message(STATUS "X11_INCLUDE_DIRS:         " ${X11_INCLUDE_DIRS})
+message(STATUS "BOOST_INCLUDE_DIRS:         " ${BOOST_INCLUDE_DIRS})
+
+message(STATUS "=====LIBRARIES======")
+message(STATUS "SFML_LIBRARIES:         " ${SFML_LIBRARIES})
+message(STATUS "OPENGL_LIBRARIES:         " ${OPENGL_LIBRARIES})
+message(STATUS "GLEW_LIBRARIES:         " ${GLEW_LIBRARIES})
+message(STATUS "BULLET_LIBRARIES:         " ${BULLET_LIBRARIES})
+message(STATUS "X11_LIBRARIES:         " ${X11_LIBRARIES})
+message(STATUS "Boost_LIBRARIES:         " ${Boost_LIBRARIES})
 
 target_link_libraries(Primordial
-	${SFML_LIBRARIES}
-	${GL_LIBRARIES}
-	${GLEW_LIBRARIES}
-	${Bullet_LIBRARIES}
+        ${SFML_LIBRARIES}
+        ${OPENGL_LIBRARIES}
+        ${GLEW_LIBRARIES}
+        ${BULLET_LIBRARIES}
 	${X11_LIBRARIES}
-	${BOOST_LIBRARIES}
+        ${Boost_LIBRARIES}
 )
 
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/dist/bin)
@@ -181,10 +207,14 @@ if(MINGW OR UNIX)
 	set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/dist/bin)
 endif(MINGW OR UNIX)
 
-if(UNIX)
+# copy assets to binary output directiry
+file(COPY ./prog/engine/assets DESTINATION ${PROJECT_BINARY_DIR}/dist/bin)
+file(COPY ./prog/engine/shaders DESTINATION ${PROJECT_BINARY_DIR}/dist/bin)
+
+#if(UNIX)
  
-	install(TARGETS AncientWorldSim
-		RUNTIME DESTINATION bin
-		CONFIGURATIONS All)
+#        install(TARGETS Primordial
+#		RUNTIME DESTINATION bin
+#		CONFIGURATIONS All)
    
-endif(UNIX)
+#endif(UNIX)

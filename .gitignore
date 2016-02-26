@@ -31,6 +31,9 @@
 bin
 obj
 
+# qtCreator user file
+CMakeLists.txt.user
+
 # Blender files
 *.blend1
 *.blend2
