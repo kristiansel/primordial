@@ -66,7 +66,7 @@ class Foliage
                 sm_types[FolSpec::Type::SpruceBB].init("spruce_bb", "spruce_bb", glm::vec4(180.f, 20.f, 2.f, 0.0));
                 sm_types[FolSpec::Type::GrassSpring].init("grass_spring", "grass_spring", glm::vec4(10.f, 10.f, 2.f, 0.0));
 
-            };
+            }
 
             void updateFoliage(Camera &cam)
             {
@@ -84,28 +84,29 @@ class Foliage
 
                 qt_trees.for_all_in(frust,
                 //qt_trees.for_all_in(QuadAABB({-100, 100, -100, 100}),
-                                    [&] (FolSpec &fol_dat)
-                                    {
-                                        // make billboard
-                                        //FolSpec::Type this_type = fol_dat.type;
-//
-//                                        if (this_type == FolSpec::Type::Spruce)
-//                                            if (fol_dat.pos.x*fol_dat.pos.x+fol_dat.pos.z*fol_dat.pos.z > 50.0*50.0)
-//                                                this_type = FolSpec::Type::SpruceBB
+                    [&] (FolSpec &fol_dat)
+                    {
+                        // make billboard
+                        //FolSpec::Type this_type = fol_dat.type;
+    //
+    //                                        if (this_type == FolSpec::Type::Spruce)
+    //                                            if (fol_dat.pos.x*fol_dat.pos.x+fol_dat.pos.z*fol_dat.pos.z > 50.0*50.0)
+    //                                                this_type = FolSpec::Type::SpruceBB
 
-                                        SmallVisual &sm_type = sm_types[fol_dat.type];
-                                        unsigned int &counter = sm_type_counter[fol_dat.type];
+                        SmallVisual &sm_type = sm_types[fol_dat.type];
+                        unsigned int &counter = sm_type_counter[fol_dat.type];
 
-                                        if (counter<SmallVisual::MAX_NUM_SMVIS)
-                                        {
+                        if (counter<SmallVisual::MAX_NUM_SMVIS)
+                        {
 
-                                            if (sm_type.updated && sm_type.sm_buffer[counter]!=fol_dat.pos)
-                                                sm_type.updated = false;
+                            if (sm_type.updated && sm_type.sm_buffer[counter]!=fol_dat.pos)
+                                sm_type.updated = false;
 
-                                            sm_type.sm_buffer[counter] = fol_dat.pos;
-                                            counter++;
-                                        } // if (i<SmallVisual::MAX_NUM_SMVIS)
-                                    });
+                            sm_type.sm_buffer[counter] = fol_dat.pos;
+                            counter++;
+                        } // if (i<SmallVisual::MAX_NUM_SMVIS)
+                    }
+                );
 
                 for (unsigned int i = 0; i<NUM_SMALL_VISUAL_TYPES; i++)
                 {

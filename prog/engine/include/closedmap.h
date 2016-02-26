@@ -37,9 +37,9 @@ public:
         return m_data[a_mapped*m_dimension+b_mapped];
     }
 
-    CellType* getDataPtr() {return m_data;};
-    unsigned int getSizeExp() {return m_size_exponent;};
-    unsigned int getDimension() {return m_dimension;};
+    CellType* getDataPtr() {return m_data;}
+    unsigned int getSizeExp() {return m_size_exponent;}
+    unsigned int getDimension() {return m_dimension;}
 
 private:
     unsigned int m_size_exponent;

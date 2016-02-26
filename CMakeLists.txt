@@ -169,7 +169,9 @@ include_directories(
     ./prog/engine/src/
 )
 
-add_executable(Primordial WIN32 ${HDRS} ${SRCS})
+file(GLOB RES_FILES ./prog/engine/shaders/*.glsl)
+
+add_executable(Primordial WIN32 ${RES_FILES} ${HDRS} ${SRCS})
 
 set_target_properties(Primordial PROPERTIES DEBUG_POSTFIX _d)
 
